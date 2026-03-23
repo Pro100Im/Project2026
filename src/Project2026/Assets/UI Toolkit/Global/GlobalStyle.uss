@@ -1,0 +1,58 @@
+.button {
+    translate: 0 -5%;
+    width: 400px;
+    height: 120px;
+    background-color: rgb(0, 0, 0);
+    background-size: 109% 109%;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-left-color: rgba(43, 35, 35, 0.71);
+    border-right-color: rgba(43, 35, 35, 0.71);
+    border-top-color: rgba(43, 35, 35, 0.71);
+    border-bottom-color: rgba(43, 35, 35, 0.71);
+    -unity-background-scale-mode: stretch-to-fill;
+    background-image: url("project://database/Assets/Sources/GUI_Parts/Gui_parts/button.png?fileID=2800000&guid=485cd2ab0486a8e4aaa55e94ec27c6b6&type=3#button");
+    opacity: 1;
+}
+
+.commonText {
+    color: rgb(82, 24, 7);
+    font-size: 40px;
+    -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Fonts/CinzelDecorative-Bold.ttf?fileID=12800000&guid=73f748e5ebb9da540ae333228798f23c&type=3#CinzelDecorative-Bold");
+    -unity-text-outline-color: rgb(214, 183, 152);
+    -unity-text-outline-width: 1.5px;
+    -unity-font-style: normal;
+    text-overflow: clip;
+}
+
+.margin {
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.titleText {
+    color: rgb(82, 24, 7);
+    font-size: 170px;
+    -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Fonts/CinzelDecorative-Bold.ttf?fileID=12800000&guid=73f748e5ebb9da540ae333228798f23c&type=3#CinzelDecorative-Bold");
+    -unity-text-outline-color: rgb(214, 183, 152);
+    -unity-text-outline-width: 2px;
+}
+
+.hide {
+    opacity: 0;
+    visibility: visible;
+}

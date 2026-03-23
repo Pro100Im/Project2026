@@ -1,0 +1,19 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Global/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=f0b50401ae793a440bdbacc20d05f547&amp;type=3#GlobalStyle"/>
+    <ui:VisualElement name="Canvas" picking-mode="Ignore" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sources/GUI_Parts/Gui_parts/mid_background.png?fileID=-1227662341&amp;guid=f203f165ae401fe46ada0ed50d07149c&amp;type=3#mid_background_0&quot;); justify-content: center; align-items: center; align-content: auto; transition-duration: 0.5s; transition-property: opacity; transition-delay: 0s; transition-timing-function: linear; -unity-background-image-tint-color: rgb(156, 156, 156); align-self: stretch;">
+        <ui:Label text="Hero Battle" name="Title" picking-mode="Ignore" class="text titleText" style="-unity-font-style: bold; align-content: auto; -unity-text-align: upper-center; align-self: center; -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/CinzelDecorative-Bold.ttf?fileID=12800000&amp;guid=73f748e5ebb9da540ae333228798f23c&amp;type=3#CinzelDecorative-Bold&quot;); top: 100px; position: absolute;"/>
+        <ui:VisualElement name="MainMenu" picking-mode="Ignore" class="hide" style="flex-grow: 0; width: 800px; height: 800px; align-items: center; justify-content: flex-start; align-content: auto; align-self: center; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px; position: absolute; top: auto; left: auto; right: auto; bottom: auto; transition-property: opacity; transition-duration: 0.3s;">
+            <ui:VisualElement name="ButtonContainer" picking-mode="Ignore" style="flex-grow: 1; align-self: stretch; align-items: center; justify-content: center; padding-top: 70px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px; margin-top: 0; margin-bottom: 0; align-content: auto; margin-right: 0; margin-left: 0;">
+                <ui:Button text="QuickPlay" name="QuickPlayButton" picking-mode="Ignore" class="margin commonText button" style="top: 50px; background-size: 109% 109%;"/>
+                <ui:Button text="Exit" name="ExitButton" picking-mode="Ignore" class="margin commonText button" style="top: 50px; background-size: 109% 109%;"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="SearchingPopUp" picking-mode="Ignore" class="hide" style="flex-grow: 0; width: 570px; height: 250px; justify-content: center; align-self: center; align-content: center; background-image: none; align-items: center; color: rgb(192, 175, 175); position: absolute; transition-duration: 0.3s; transition-property: opacity;">
+            <ui:Label picking-mode="Ignore" text="Searching..." class="text commonText" style="justify-content: center; align-items: center; align-self: auto; align-content: center;"/>
+            <ui:Button text="Cancel" name="CancelButton" picking-mode="Ignore" class="button commonText" style="position: absolute; bottom: -155px; background-size: 109% 109%;"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="Intro" picking-mode="Ignore" style="flex-grow: 1; align-self: stretch; align-content: center; justify-content: center; align-items: stretch; transition-property: opacity; transition-duration: 0.3s;">
+            <ui:Label text="PRESS ANY BUTTON" picking-mode="Ignore" class="commonText" style="align-self: stretch; align-content: center; align-items: center; justify-content: center; bottom: -300px; position: relative;"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:src/HeroArena/Assets/Sources/Character_Elf/Mesh.meta
+guid: 57c986f4cb26e954c866dd85e4c5921a
+folderAsset: yes
+timeCreated: 1521389040
+licenseType: Store
+========
+guid: 4680dd60fc414a8489651ebc550967a1
+folderAsset: yes
+>>>>>>>> feature/Vcontainer2:src/HeroArena/Assets/Settings/DI.meta
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
