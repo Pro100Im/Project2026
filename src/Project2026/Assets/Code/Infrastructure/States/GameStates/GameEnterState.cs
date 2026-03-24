@@ -70,7 +70,7 @@ namespace Code.Infrastructure.States.GameStates
         {
             reader.ReadValueSafe(out ulong playerId);
 
-            _playerFactory.CreatePlayer(playerId);
+            _playerFactory.CreatePlayer(playerId, _entities.count);
 
             var entity = CreateInputEntity.Empty();
 

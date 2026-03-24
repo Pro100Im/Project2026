@@ -6,23 +6,21 @@ namespace Code.Game.Features.Spawn.Registrars
 {
     public class PlayerSpawnPointsRegistrar : EntityComponentRegistrar
     {
-        [SerializeField] private Vector3Int[] _spawnPos;
+        [SerializeField] private Vector3Int[] _playersSpawnPos;
+        [Space]
         [SerializeField] private Tilemap _tilemap;
-
-        private Vector3[] _points;
 
         public override void RegisterComponents()
         {
-            _points = new Vector3[_spawnPos.Length];
+            var points = new Vector3[_playersSpawnPos.Length];
 
-            for(var i = 0; i < _spawnPos.Length; i++)
+            for(var i = 0; i < _playersSpawnPos.Length; i++)
             {
-                _points[i] = _tilemap.GetCellCenterWorld(_spawnPos[i]);
+                points[i] = _tilemap.GetCellCenterWorld(_playersSpawnPos[i]);
             }
 
-            Entity.AddSpawnPositions(_points);
+            Entity.AddSpawnPositions(points);
             Entity.isForPlayer = true;
-            Entity.isFreePoint = true;
         }
 
         public override void UnregisterComponents()
@@ -34,9 +32,9 @@ namespace Code.Game.Features.Spawn.Registrars
         {
             if (_tilemap != null)
             {
-                for (var i = 0; i < _spawnPos.Length; i++)
+                for (var i = 0; i < _playersSpawnPos.Length; i++)
                 {
-                    var pos = _tilemap.GetCellCenterWorld(_spawnPos[i]);
+                    var pos = _tilemap.GetCellCenterWorld(_playersSpawnPos[i]);
 
                     Gizmos.color = Color.red;
                     Gizmos.DrawWireCube(pos, _tilemap.cellSize);

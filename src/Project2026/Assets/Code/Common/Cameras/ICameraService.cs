@@ -6,6 +6,6 @@ namespace Code.Common.Cameras
     {
         Camera GetCamera();
 
-        void SetActiveCamera(ulong index);
+        void SetActiveCamera(int index);
     }
 }

@@ -39,16 +39,14 @@ namespace Code.Game.Features.Player.Systems
 
         private void PlayerSpawnPosMessageHandler(ulong senderClientId, FastBufferReader reader)
         {
-            reader.ReadValueSafe(out float posX);
-            reader.ReadValueSafe(out float posY);
-            reader.ReadValueSafe(out float posZ);
+            reader.ReadValueSafe(out Vector3 pos);
             reader.ReadValueSafe(out ulong clientID);
             reader.ReadValueSafe(out ulong objectID);
 
             var entity = CreateGameEntity.Empty();
             entity.AddClientId(clientID);
             entity.AddObjectId(objectID);
-            entity.AddSpawnPosition(new Vector3(posX, posY ,posZ));
+            entity.AddSpawnPosition(pos);
             entity.isSpawnRequsted = true;
         }
 

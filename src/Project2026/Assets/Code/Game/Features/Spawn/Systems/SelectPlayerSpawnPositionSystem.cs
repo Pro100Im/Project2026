@@ -34,11 +34,11 @@ namespace Code.Game.Features.Player.Systems
                 {
                     var clientId = player.clientId.Value;
                     var objectId = player.objectId.Value;
-                    var pointPos = point.spawnPositions.Value[clientId];
+                    var pointPos = point.spawnPositions.Value[player.playerAreaNumber.Value];
 
-                    var totalSize = sizeof(float) + sizeof(float) + sizeof(float) + sizeof(ulong) + sizeof(ulong);
+                    var totalSize = sizeof(float) * 3 + sizeof(ulong) + sizeof(ulong);
                     using var builder = new NetworkMessageBuilder(totalSize);
-                    var writer = builder.Write(pointPos.x).Write(pointPos.y).Write(pointPos.z).Write(clientId).Write(objectId).Build();
+                    var writer = builder.Write(pointPos).Write(clientId).Write(objectId).Build();
 
                     NetworkManager.Singleton.CustomMessagingManager.SendNamedMessage(
                         RequestTypes.ReceiveSpawnPosition.ToString(),

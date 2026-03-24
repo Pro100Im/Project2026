@@ -13,7 +13,7 @@ namespace Code.Common.Cameras
 
         public Camera GetCamera() => _camera;
 
-        public void SetActiveCamera(ulong index)
+        public void SetActiveCamera(int index)
         {
             for (var i = 0; i < _cinemachineCameras.Length; i++)
                 _cinemachineCameras[i].Priority = _unActiveCameraIndex;
