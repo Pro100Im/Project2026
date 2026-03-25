@@ -1,10 +1,8 @@
-﻿using Code.Common.Network;
-using Code.Common.UI;
+﻿using Code.Common.UI;
 using Code.Common.UI.Transition;
 using Code.Infrastructure.Loading;
 using Cysharp.Threading.Tasks;
 using System;
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -29,18 +27,16 @@ namespace Code.Meta.UI.MainMenu
         private Button _cancelSearchingButton;
 
         private ISceneLoader _sceneLoader;
-        private INetworkConnectionService _networkConnectionService;
         private TransitionScreen _transitionScreen;
         private UIService _uIService;
 
         public IObserver<InputControl> OnAnyButton { get; private set; }
 
         [Inject]
-        private void Construct(ISceneLoader sceneLoader, INetworkConnectionService networkConnectionService, TransitionScreen transitionScreen, UIService uIService)
+        private void Construct(ISceneLoader sceneLoader, TransitionScreen transitionScreen, UIService uIService)
         {
             _sceneLoader = sceneLoader;
             _transitionScreen = transitionScreen;
-            _networkConnectionService = networkConnectionService;
             _uIService = uIService;
         }
 
@@ -54,13 +50,13 @@ namespace Code.Meta.UI.MainMenu
             _mainMenu = root.Q<VisualElement>("MainMenu");
 
             _quickMatchButton = root.Q<Button>("QuickPlayButton");
-            _quickMatchButton.clickable.clicked += QuickMatch;
+            _quickMatchButton.clickable.clicked += EnterNetworkBattleLoadingState;
 
             _exitButton = root.Q<Button>("ExitButton");
             _exitButton.clickable.clicked += Exit;
 
-            _cancelSearchingButton = root.Q<Button>("CancelButton");
-            _cancelSearchingButton.clickable.clicked += CancleQuickMatch;
+            //_cancelSearchingButton = root.Q<Button>("CancelButton");
+            //_cancelSearchingButton.clickable.clicked += EnterNetworkBattleLoadingState;
 
             _pressAnyBtn.actionTriggered += OnAnyButtonPress;
             _pressAnyBtn.Enable();
@@ -68,8 +64,6 @@ namespace Code.Meta.UI.MainMenu
 
         private void Start()
         {
-            NetworkManager.Singleton.OnServerStarted += EnterNetworkBattleLoadingState;
-
             _transitionScreen.Hide().AsTask();
         }
 
@@ -94,32 +88,28 @@ namespace Code.Meta.UI.MainMenu
 
             await _transitionScreen.Show();
 
-            _sceneLoader.NetworkLoad(_gameSceneName);       
+            _sceneLoader.Load(_gameSceneName);       
         }
 
-        private void QuickMatch()
-        {
-            _uIService.Hide(_mainMenu).AsTask();
-            _quickMatchButton.pickingMode = PickingMode.Ignore;
-            _exitButton.pickingMode = PickingMode.Ignore;
+        //private void QuickMatch()
+        //{
+        //    _uIService.Hide(_mainMenu).AsTask();
+        //    _quickMatchButton.pickingMode = PickingMode.Ignore;
+        //    _exitButton.pickingMode = PickingMode.Ignore;
 
-            _uIService.Show(_searchingPopUp).AsTask();
-            _cancelSearchingButton.pickingMode = PickingMode.Position;
+        //    _uIService.Show(_searchingPopUp).AsTask();
+        //    _cancelSearchingButton.pickingMode = PickingMode.Position;
+        //}
 
-            _networkConnectionService.QuickMatch();
-        }
+        //private void CancleQuickMatch()
+        //{
+        //    _uIService.Show(_mainMenu).AsTask();
+        //    _quickMatchButton.pickingMode = PickingMode.Position;
+        //    _exitButton.pickingMode = PickingMode.Position;
 
-        private void CancleQuickMatch()
-        {
-            _networkConnectionService.CancelSerching();
-
-            _uIService.Show(_mainMenu).AsTask();
-            _quickMatchButton.pickingMode = PickingMode.Position;
-            _exitButton.pickingMode = PickingMode.Position;
-
-            _uIService.Hide(_searchingPopUp).AsTask();
-            _cancelSearchingButton.pickingMode = PickingMode.Ignore;
-        }
+        //    _uIService.Hide(_searchingPopUp).AsTask();
+        //    _cancelSearchingButton.pickingMode = PickingMode.Ignore;
+        //}
 
         private void Exit()
         {
@@ -128,12 +118,9 @@ namespace Code.Meta.UI.MainMenu
 
         private void OnDestroy()
         {
-            if(NetworkManager.Singleton)
-                NetworkManager.Singleton.OnServerStarted -= EnterNetworkBattleLoadingState;
-
-            _quickMatchButton.clickable.clicked -= QuickMatch;
+            _quickMatchButton.clickable.clicked -= EnterNetworkBattleLoadingState;
             _exitButton.clickable.clicked -= Exit;
-            _cancelSearchingButton.clickable.clicked -= CancleQuickMatch;
+            //_cancelSearchingButton.clickable.clicked -= EnterNetworkBattleLoadingState;
         }
     }
 }

@@ -8,21 +8,15 @@
 //------------------------------------------------------------------------------
 public static class NetworkComponentsLookup {
 
-    public const int ClientId = 0;
-    public const int LocalPlayer = 1;
-    public const int ObjectId = 2;
 
-    public const int TotalComponents = 3;
+
+    public const int TotalComponents = 0;
 
     public static readonly string[] componentNames = {
-        "ClientId",
-        "LocalPlayer",
-        "ObjectId"
+
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(Code.Game.Features.Network.ClientId),
-        typeof(Code.Game.Features.Network.LocalPlayer),
-        typeof(Code.Game.Features.Network.ObjectId)
+
     };
 }

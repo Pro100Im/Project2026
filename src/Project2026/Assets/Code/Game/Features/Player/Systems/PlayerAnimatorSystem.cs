@@ -1,6 +1,4 @@
 using Entitas;
-using Unity.Netcode;
-using UnityEngine;
 
 namespace Code.Game.Features.Player.Systems
 {
@@ -13,7 +11,7 @@ namespace Code.Game.Features.Player.Systems
             _players = gameContext.GetGroup(GameMatcher
                 .AllOf(
                 GameMatcher.Player,
-                GameMatcher.ClientId,
+                GameMatcher.Player,
                 GameMatcher.PlayerAnimator,
                 GameMatcher.CurrentSpeed,
                 GameMatcher.MaxRunSpeed));
@@ -23,9 +21,6 @@ namespace Code.Game.Features.Player.Systems
         {
             foreach (var player in _players)
             {
-                if (player.clientId.Value != NetworkManager.Singleton.LocalClientId)
-                    continue;
-
                 var dir = player.direction.Value * (player.currentSpeed.Value / player.maxRunSpeed.Value);
 
                 var normalizedSpeed = dir.normalized;

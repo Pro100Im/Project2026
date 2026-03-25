@@ -23,7 +23,6 @@ namespace Code.Game.Features.Spawn.Registrars
             }
 
             Entity.AddSpawnPositions(positions);
-            Entity.AddPlayerAreaNumber(_areaNumber);
             Entity.isForPlayer = false;
         }
 

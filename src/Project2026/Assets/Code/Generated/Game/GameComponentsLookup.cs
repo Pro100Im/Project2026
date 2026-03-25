@@ -29,19 +29,16 @@ public static class GameComponentsLookup {
     public const int RotationAlignedAlongDirection = 18;
     public const int RotationAlignedAlongTarget = 19;
     public const int Speed = 20;
-    public const int ClientId = 21;
-    public const int ObjectId = 22;
-    public const int PlayerAnimator = 23;
-    public const int PlayerAreaNumber = 24;
-    public const int Player = 25;
-    public const int ForPlayer = 26;
-    public const int FreePoint = 27;
-    public const int SpawnPosition = 28;
-    public const int SpawnPositions = 29;
-    public const int SpawnRequsted = 30;
-    public const int WaitingToSpawn = 31;
+    public const int PlayerAnimator = 21;
+    public const int Player = 22;
+    public const int ForPlayer = 23;
+    public const int FreePoint = 24;
+    public const int SpawnPosition = 25;
+    public const int SpawnPositions = 26;
+    public const int SpawnRequsted = 27;
+    public const int WaitingToSpawn = 28;
 
-    public const int TotalComponents = 32;
+    public const int TotalComponents = 29;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -65,10 +62,7 @@ public static class GameComponentsLookup {
         "RotationAlignedAlongDirection",
         "RotationAlignedAlongTarget",
         "Speed",
-        "ClientId",
-        "ObjectId",
         "PlayerAnimator",
-        "PlayerAreaNumber",
         "Player",
         "ForPlayer",
         "FreePoint",
@@ -100,10 +94,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Movement.RotationAlignedAlongDirection),
         typeof(Code.Game.Features.Movement.RotationAlignedAlongTarget),
         typeof(Code.Game.Features.Movement.Speed),
-        typeof(Code.Game.Features.Network.ClientId),
-        typeof(Code.Game.Features.Network.ObjectId),
         typeof(Code.Game.Features.Player.PlayerAnimatorComponent),
-        typeof(Code.Game.Features.Player.PlayerAreaNumber),
         typeof(Code.Game.Features.Player.PlayerComponent),
         typeof(Code.Game.Features.Spawn.SpawnComponents.ForPlayer),
         typeof(Code.Game.Features.Spawn.SpawnComponents.FreePoint),
