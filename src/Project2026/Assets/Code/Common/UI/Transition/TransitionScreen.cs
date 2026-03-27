@@ -26,11 +26,13 @@ namespace Code.Common.UI.Transition
 
         public async UniTask Show()
         {
+            await UniTask.WaitForEndOfFrame();
             await _uIService.Show(_canvas);
         }
 
         public async UniTask Hide()
         {
+            await UniTask.WaitForEndOfFrame();
             await _uIService.Hide(_canvas);
         }
     }

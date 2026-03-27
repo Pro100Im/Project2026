@@ -1,0 +1,5 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Canvas" style="flex-grow: 1; align-items: center; justify-content: center; align-self: stretch; align-content: stretch;">
+        <ui:Button text="Button" name="StartWaveButton" style="align-self: center; justify-content: center; align-items: center; translate: 851px 479px; transform-origin: right bottom;"/>
+    </ui:VisualElement>
+</ui:UXML>

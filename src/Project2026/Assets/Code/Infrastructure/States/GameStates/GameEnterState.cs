@@ -4,7 +4,6 @@ using Code.Game.Features.Player.Factory;
 using Code.Infrastructure.States.StateInfrastructure;
 using Code.Infrastructure.States.StateMachine;
 using Cysharp.Threading.Tasks;
-using Entitas;
 using UnityEngine;
 
 namespace Code.Infrastructure.States.GameStates
@@ -13,7 +12,6 @@ namespace Code.Infrastructure.States.GameStates
     {
         private readonly IGameStateMachine _stateMachine;
         private readonly IPlayerFactory _playerFactory;
-        private readonly IGroup<GameEntity> _entities;
 
         private readonly TransitionScreen _transitionScreen;
 
@@ -27,10 +25,12 @@ namespace Code.Infrastructure.States.GameStates
 
         public override void Enter()
         {
+            CreatePlayer();
 
+            _stateMachine.Enter<GameLoopState>();
         }
 
-        private void CreatePlayerMessageHandler()
+        private void CreatePlayer()
         {
             _playerFactory.CreatePlayer();
 
@@ -40,14 +40,11 @@ namespace Code.Infrastructure.States.GameStates
             entity.AddAxisInput(Vector2.zero);
             entity.AddPointerInput(Vector2.zero);
             entity.AddPointerRay(new Ray());
-
-            _stateMachine.Enter<GameLoopState>();
-            _transitionScreen.Hide().AsTask();
         }
 
         protected override void Exit()
         {
-            
+            _transitionScreen.Hide().AsTask();
         }
     }
 }

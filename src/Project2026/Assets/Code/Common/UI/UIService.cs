@@ -19,7 +19,7 @@ namespace Code.Common.UI
             }
 
             element.RegisterCallback<TransitionEndEvent>(OnTransitionEnd);
-            element.AddToClassList("hide");
+            element.schedule.Execute(() => element.AddToClassList("hide"));
 
             await tcs.Task;
         }
@@ -38,7 +38,7 @@ namespace Code.Common.UI
             }
 
             element.RegisterCallback<TransitionEndEvent>(OnTransitionEnd);
-            element.RemoveFromClassList("hide");
+            element.schedule.Execute(() => element.RemoveFromClassList("hide"));
 
             await tcs.Task;
         }

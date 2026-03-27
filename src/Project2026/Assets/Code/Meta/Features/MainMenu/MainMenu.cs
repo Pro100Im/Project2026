@@ -18,7 +18,6 @@ namespace Code.Meta.UI.MainMenu
         [Space]
         [SerializeField] private InputActionMap _pressAnyBtn;
 
-        private VisualElement _searchingPopUp;
         private VisualElement _mainMenu;
         private VisualElement _intro;
 
@@ -46,7 +45,6 @@ namespace Code.Meta.UI.MainMenu
 
             _intro = root.Q<VisualElement>("Intro");
 
-            _searchingPopUp = root.Q<VisualElement>("SearchingPopUp");
             _mainMenu = root.Q<VisualElement>("MainMenu");
 
             _quickMatchButton = root.Q<Button>("QuickPlayButton");
@@ -54,9 +52,6 @@ namespace Code.Meta.UI.MainMenu
 
             _exitButton = root.Q<Button>("ExitButton");
             _exitButton.clickable.clicked += Exit;
-
-            //_cancelSearchingButton = root.Q<Button>("CancelButton");
-            //_cancelSearchingButton.clickable.clicked += EnterNetworkBattleLoadingState;
 
             _pressAnyBtn.actionTriggered += OnAnyButtonPress;
             _pressAnyBtn.Enable();
@@ -84,32 +79,10 @@ namespace Code.Meta.UI.MainMenu
 
         private async void EnterNetworkBattleLoadingState()
         {
-            _cancelSearchingButton.pickingMode = PickingMode.Ignore;
-
             await _transitionScreen.Show();
 
             _sceneLoader.Load(_gameSceneName);       
         }
-
-        //private void QuickMatch()
-        //{
-        //    _uIService.Hide(_mainMenu).AsTask();
-        //    _quickMatchButton.pickingMode = PickingMode.Ignore;
-        //    _exitButton.pickingMode = PickingMode.Ignore;
-
-        //    _uIService.Show(_searchingPopUp).AsTask();
-        //    _cancelSearchingButton.pickingMode = PickingMode.Position;
-        //}
-
-        //private void CancleQuickMatch()
-        //{
-        //    _uIService.Show(_mainMenu).AsTask();
-        //    _quickMatchButton.pickingMode = PickingMode.Position;
-        //    _exitButton.pickingMode = PickingMode.Position;
-
-        //    _uIService.Hide(_searchingPopUp).AsTask();
-        //    _cancelSearchingButton.pickingMode = PickingMode.Ignore;
-        //}
 
         private void Exit()
         {
@@ -120,7 +93,6 @@ namespace Code.Meta.UI.MainMenu
         {
             _quickMatchButton.clickable.clicked -= EnterNetworkBattleLoadingState;
             _exitButton.clickable.clicked -= Exit;
-            //_cancelSearchingButton.clickable.clicked -= EnterNetworkBattleLoadingState;
         }
     }
 }
