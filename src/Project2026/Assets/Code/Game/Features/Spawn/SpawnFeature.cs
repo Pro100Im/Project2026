@@ -1,4 +1,4 @@
-using Code.Game.Features.Player.Systems;
+using Code.Game.Features.Spawn.Systems;
 using Code.Infrastructure.Systems;
 
 namespace Code.Game.Features.Spawn
@@ -7,7 +7,7 @@ namespace Code.Game.Features.Spawn
     {
         public SpawnFeature(ISystemFactory systemFactory)
         {
-            //Add(systemFactory.Create<SelectPlayerSpawnPositionSystem>());
+            Add(systemFactory.Create<EnemySpawnSystem>());
         }
     }
 }

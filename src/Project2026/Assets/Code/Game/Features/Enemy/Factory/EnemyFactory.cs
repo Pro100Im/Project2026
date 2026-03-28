@@ -19,6 +19,7 @@ namespace Code.Game.Features.Enemy.Factory
             var entity = CreateGameEntity.Empty();
             entity.AddId(_identifiers.Next());
             entity.AddSpawnPosition(spawnPosition);
+            entity.isEnemy = true;
 
             var view = entityConfig.GetProperty<ViewData>();
             if (view != null)

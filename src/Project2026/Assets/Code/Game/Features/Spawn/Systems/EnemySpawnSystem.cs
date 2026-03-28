@@ -1,5 +1,6 @@
 using Code.Game.Features.Enemy.Factory;
 using Entitas;
+using System.Collections.Generic;
 
 namespace Code.Game.Features.Spawn.Systems
 {
@@ -7,6 +8,8 @@ namespace Code.Game.Features.Spawn.Systems
     {
         private readonly IGroup<GameEntity> _enemiesToSpawn;
         private readonly EnemyFactory _enemyFactory;
+
+        private readonly List<GameEntity> _buffer = new(32);
 
         public EnemySpawnSystem(GameContext gameContext, EnemyFactory enemyFactory)
         {
@@ -22,9 +25,11 @@ namespace Code.Game.Features.Spawn.Systems
 
         public void Execute()
         {
-            foreach (var enemy in _enemiesToSpawn)
+            foreach (var enemySpawn in _enemiesToSpawn.GetEntities(_buffer))
             {
-                _enemyFactory.Create(enemy.entityConfig.Value, enemy.spawnPosition.Value);
+                _enemyFactory.Create(enemySpawn.entityConfig.Value, enemySpawn.spawnPosition.Value);
+
+                enemySpawn.Destroy();
             }
         }
     }

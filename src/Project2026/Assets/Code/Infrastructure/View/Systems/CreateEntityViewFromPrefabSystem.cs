@@ -26,6 +26,9 @@ namespace Code.Infrastructure.View.Systems
             foreach (GameEntity entity in _entities.GetEntities(_buffer))
             {
                 _entityViewFactory.CreateViewForEntityFromPrefab(entity);
+
+                entity.RemoveViewPrefab();
+                entity.RemoveSpawnPosition();
             }
         }
     }
