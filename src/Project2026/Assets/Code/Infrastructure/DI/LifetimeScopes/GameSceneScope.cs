@@ -10,6 +10,7 @@ using Code.Game.Features.Player;
 using Code.Game.Features.Player.Systems;
 using Code.Game.Features.Spawn;
 using Code.Game.Features.Spawn.Systems;
+using Code.Game.Features.Wave;
 using Code.Game.Input.Service;
 using Code.Infrastructure.DI.EntryPoints;
 using Code.Infrastructure.Identifiers;
@@ -78,10 +79,12 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<GameTickFeature>(Lifetime.Singleton);
             builder.Register<GameFixedTickFeature>(Lifetime.Singleton);
 
-            builder.Register<SpawnFeature>(Lifetime.Singleton);
-            builder.Register<CreateViewFeature>(Lifetime.Singleton);
             builder.Register<InputFeature>(Lifetime.Singleton);
             builder.Register<PlayerFeature>(Lifetime.Singleton);
+
+            builder.Register<WaveFeature>(Lifetime.Singleton);
+            builder.Register<SpawnFeature>(Lifetime.Singleton);
+            builder.Register<CreateViewFeature>(Lifetime.Singleton);
             builder.Register<MovementFeature>(Lifetime.Singleton);
         }
 

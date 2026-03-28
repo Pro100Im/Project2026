@@ -1,16 +1,12 @@
-using UnityEngine;
+using Code.Game.StaticData.Configs;
+using System;
 
-public class WaveData : MonoBehaviour
+namespace Code.Game.StaticData.Data
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Serializable]
+    public class WaveData
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public float Ñooldown;
+        public EntityConfig[] EntityConfigs;
     }
 }

@@ -9,9 +9,7 @@ namespace Code.Game.Features
     {
         public GameFixedTickFeature(ISystemFactory systemFactory)
         {
-            Add(systemFactory.Create<CreateViewFeature>());
-            Add(systemFactory.Create<SpawnFeature>());
-            Add(systemFactory.Create<MovementFeature>());
+
         }
     }
 }

@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Code.Game.Features.Attack.AttackComponents.MeleeAttack meleeAttackComponent = new Code.Game.Features.Attack.AttackComponents.MeleeAttack();
+    static readonly Code.Game.Features.Attack.MeleeAttack meleeAttackComponent = new Code.Game.Features.Attack.MeleeAttack();
 
     public bool isMeleeAttack {
         get { return HasComponent(GameComponentsLookup.MeleeAttack); }

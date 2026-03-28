@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Code.Game.Features.Attack.RangeAttack rangeAttackComponent = new Code.Game.Features.Attack.RangeAttack();
+    static readonly Code.Game.Features.Wave.WaveInProgress waveInProgressComponent = new Code.Game.Features.Wave.WaveInProgress();
 
-    public bool isRangeAttack {
-        get { return HasComponent(GameComponentsLookup.RangeAttack); }
+    public bool isWaveInProgress {
+        get { return HasComponent(GameComponentsLookup.WaveInProgress); }
         set {
-            if (value != isRangeAttack) {
-                var index = GameComponentsLookup.RangeAttack;
+            if (value != isWaveInProgress) {
+                var index = GameComponentsLookup.WaveInProgress;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : rangeAttackComponent;
+                            : waveInProgressComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherRangeAttack;
+    static Entitas.IMatcher<GameEntity> _matcherWaveInProgress;
 
-    public static Entitas.IMatcher<GameEntity> RangeAttack {
+    public static Entitas.IMatcher<GameEntity> WaveInProgress {
         get {
-            if (_matcherRangeAttack == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.RangeAttack);
+            if (_matcherWaveInProgress == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.WaveInProgress);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherRangeAttack = matcher;
+                _matcherWaveInProgress = matcher;
             }
 
-            return _matcherRangeAttack;
+            return _matcherWaveInProgress;
         }
     }
 }

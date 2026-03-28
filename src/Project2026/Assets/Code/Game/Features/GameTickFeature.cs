@@ -1,6 +1,10 @@
 using Code.Game.Features.Input;
+using Code.Game.Features.Movement;
 using Code.Game.Features.Player;
+using Code.Game.Features.Spawn;
+using Code.Game.Features.Wave;
 using Code.Infrastructure.Systems;
+using Code.Infrastructure.View;
 
 namespace Code.Game.Features
 {
@@ -10,6 +14,11 @@ namespace Code.Game.Features
         {
             Add(systemFactory.Create<InputFeature>());
             Add(systemFactory.Create<PlayerFeature>());
+
+            Add(systemFactory.Create<WaveFeature>());
+            Add(systemFactory.Create<SpawnFeature>());
+            Add(systemFactory.Create<CreateViewFeature>());
+            Add(systemFactory.Create<MovementFeature>());
         }
     }
 }

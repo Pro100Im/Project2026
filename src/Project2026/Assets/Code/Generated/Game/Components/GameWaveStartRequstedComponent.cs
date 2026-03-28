@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Code.Game.Features.Attack.RangeAttack rangeAttackComponent = new Code.Game.Features.Attack.RangeAttack();
+    static readonly Code.Game.Features.Wave.WaveStartRequsted waveStartRequstedComponent = new Code.Game.Features.Wave.WaveStartRequsted();
 
-    public bool isRangeAttack {
-        get { return HasComponent(GameComponentsLookup.RangeAttack); }
+    public bool isWaveStartRequsted {
+        get { return HasComponent(GameComponentsLookup.WaveStartRequsted); }
         set {
-            if (value != isRangeAttack) {
-                var index = GameComponentsLookup.RangeAttack;
+            if (value != isWaveStartRequsted) {
+                var index = GameComponentsLookup.WaveStartRequsted;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : rangeAttackComponent;
+                            : waveStartRequstedComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherRangeAttack;
+    static Entitas.IMatcher<GameEntity> _matcherWaveStartRequsted;
 
-    public static Entitas.IMatcher<GameEntity> RangeAttack {
+    public static Entitas.IMatcher<GameEntity> WaveStartRequsted {
         get {
-            if (_matcherRangeAttack == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.RangeAttack);
+            if (_matcherWaveStartRequsted == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.WaveStartRequsted);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherRangeAttack = matcher;
+                _matcherWaveStartRequsted = matcher;
             }
 
-            return _matcherRangeAttack;
+            return _matcherWaveStartRequsted;
         }
     }
 }

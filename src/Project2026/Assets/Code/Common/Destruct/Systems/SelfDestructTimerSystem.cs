@@ -6,13 +6,13 @@ namespace Code.Common.Destruct.Systems
 {
     public class SelfDestructTimerSystem : IExecuteSystem
     {
-        private readonly ITimeService _time;
+        private readonly ITimeService _timeService;
         private readonly IGroup<GameEntity> _entities;
         private readonly List<GameEntity> _buffer = new(64);
 
         public SelfDestructTimerSystem(GameContext game, ITimeService time)
         {
-            _time = time;
+            _timeService = time;
             _entities = game.GetGroup(GameMatcher.SelfDestructTimer);
         }
 
@@ -22,7 +22,9 @@ namespace Code.Common.Destruct.Systems
             {
                 if (entity.selfDestructTimer.Value > 0)
                 {
-                    entity.ReplaceSelfDestructTimer(entity.selfDestructTimer.Value - _time.DeltaTime);
+                    var newValue = entity.selfDestructTimer.Value - _timeService.DeltaTime;
+
+                    entity.ReplaceSelfDestructTimer(newValue);
                 }
                 else
                 {

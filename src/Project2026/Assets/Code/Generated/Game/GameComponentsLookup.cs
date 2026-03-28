@@ -9,16 +9,16 @@
 public static class GameComponentsLookup {
 
     public const int Animator = 0;
-    public const int Destructed = 1;
-    public const int EntityConfig = 2;
-    public const int Id = 3;
-    public const int SelfDestructTimer = 4;
-    public const int Transform = 5;
-    public const int View = 6;
-    public const int ViewPath = 7;
-    public const int ViewPrefab = 8;
-    public const int Attack = 9;
-    public const int AttackСooldown = 10;
+    public const int Cooldown = 1;
+    public const int Destructed = 2;
+    public const int EntityConfig = 3;
+    public const int Id = 4;
+    public const int SelfDestructTimer = 5;
+    public const int Transform = 6;
+    public const int View = 7;
+    public const int ViewPath = 8;
+    public const int ViewPrefab = 9;
+    public const int Attack = 10;
     public const int MeleeAttack = 11;
     public const int RangeAttack = 12;
     public const int Enemy = 13;
@@ -33,11 +33,17 @@ public static class GameComponentsLookup {
     public const int SpawnPositions = 22;
     public const int SpawnRequsted = 23;
     public const int WaitingToSpawn = 24;
+    public const int CurrentWaveEnemies = 25;
+    public const int CurrentWaveNumber = 26;
+    public const int WaveEnemiesAlive = 27;
+    public const int WaveInProgress = 28;
+    public const int WaveStartRequsted = 29;
 
-    public const int TotalComponents = 25;
+    public const int TotalComponents = 30;
 
     public static readonly string[] componentNames = {
         "Animator",
+        "Cooldown",
         "Destructed",
         "EntityConfig",
         "Id",
@@ -47,7 +53,6 @@ public static class GameComponentsLookup {
         "ViewPath",
         "ViewPrefab",
         "Attack",
-        "AttackСooldown",
         "MeleeAttack",
         "RangeAttack",
         "Enemy",
@@ -61,11 +66,17 @@ public static class GameComponentsLookup {
         "SpawnPosition",
         "SpawnPositions",
         "SpawnRequsted",
-        "WaitingToSpawn"
+        "WaitingToSpawn",
+        "CurrentWaveEnemies",
+        "CurrentWaveNumber",
+        "WaveEnemiesAlive",
+        "WaveInProgress",
+        "WaveStartRequsted"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(Code.Game.Common.AnimatorComponent),
+        typeof(Code.Game.Common.Cooldown),
         typeof(Code.Game.Common.Destructed),
         typeof(Code.Game.Common.EntityConfigComponent),
         typeof(Code.Game.Common.Id),
@@ -74,10 +85,9 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Common.View),
         typeof(Code.Game.Common.ViewPath),
         typeof(Code.Game.Common.ViewPrefab),
-        typeof(Code.Game.Features.Attack.AttackComponents.Attack),
-        typeof(Code.Game.Features.Attack.AttackComponents.AttackСooldown),
-        typeof(Code.Game.Features.Attack.AttackComponents.MeleeAttack),
-        typeof(Code.Game.Features.Attack.AttackComponents.RangeAttack),
+        typeof(Code.Game.Features.Attack.Attack),
+        typeof(Code.Game.Features.Attack.MeleeAttack),
+        typeof(Code.Game.Features.Attack.RangeAttack),
         typeof(Code.Game.Features.Enemy.EnemyComponent),
         typeof(Code.Game.Features.Movement.Direction),
         typeof(Code.Game.Features.Movement.MovementAvailable),
@@ -85,10 +95,15 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Movement.Moving),
         typeof(Code.Game.Features.Movement.RotationAlignedAlongDirection),
         typeof(Code.Game.Features.Player.PlayerComponent),
-        typeof(Code.Game.Features.Spawn.SpawnComponents.FreePoint),
-        typeof(Code.Game.Features.Spawn.SpawnComponents.SpawnPosition),
-        typeof(Code.Game.Features.Spawn.SpawnComponents.SpawnPositions),
-        typeof(Code.Game.Features.Spawn.SpawnComponents.SpawnRequsted),
-        typeof(Code.Game.Features.Spawn.SpawnComponents.WaitingToSpawn)
+        typeof(Code.Game.Features.Spawn.FreePoint),
+        typeof(Code.Game.Features.Spawn.SpawnPosition),
+        typeof(Code.Game.Features.Spawn.SpawnPositions),
+        typeof(Code.Game.Features.Spawn.SpawnRequsted),
+        typeof(Code.Game.Features.Spawn.WaitingToSpawn),
+        typeof(Code.Game.Features.Wave.CurrentWaveEnemies),
+        typeof(Code.Game.Features.Wave.CurrentWaveNumber),
+        typeof(Code.Game.Features.Wave.WaveEnemiesAlive),
+        typeof(Code.Game.Features.Wave.WaveInProgress),
+        typeof(Code.Game.Features.Wave.WaveStartRequsted)
     };
 }

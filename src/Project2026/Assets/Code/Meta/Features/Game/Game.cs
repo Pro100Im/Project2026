@@ -31,10 +31,7 @@ namespace Code.Meta.Features.Game
         {
             var entity = CreateGameEntity.Empty();
 
-            entity.AddSpawnPosition(Vector3.one);
-            entity.AddEntityConfig(_test);
-            entity.isSpawnRequsted = true;
-            entity.isEnemy = true;
+            entity.isWaveStartRequsted = true;
         }
     }
 }

@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Code.Game.Features.Spawn.SpawnComponents.SpawnRequsted spawnRequstedComponent = new Code.Game.Features.Spawn.SpawnComponents.SpawnRequsted();
+    static readonly Code.Game.Features.Spawn.SpawnRequsted spawnRequstedComponent = new Code.Game.Features.Spawn.SpawnRequsted();
 
     public bool isSpawnRequsted {
         get { return HasComponent(GameComponentsLookup.SpawnRequsted); }

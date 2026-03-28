@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Code.Game.Features.Attack.Attack attack { get { return (Code.Game.Features.Attack.Attack)GetComponent(GameComponentsLookup.Attack); } }
-    public bool hasAttack { get { return HasComponent(GameComponentsLookup.Attack); } }
+    public Code.Game.Common.Cooldown cooldown { get { return (Code.Game.Common.Cooldown)GetComponent(GameComponentsLookup.Cooldown); } }
+    public bool hasCooldown { get { return HasComponent(GameComponentsLookup.Cooldown); } }
 
-    public void AddAttack(float newValue) {
-        var index = GameComponentsLookup.Attack;
-        var component = (Code.Game.Features.Attack.Attack)CreateComponent(index, typeof(Code.Game.Features.Attack.Attack));
+    public void AddCooldown(float newValue) {
+        var index = GameComponentsLookup.Cooldown;
+        var component = (Code.Game.Common.Cooldown)CreateComponent(index, typeof(Code.Game.Common.Cooldown));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceAttack(float newValue) {
-        var index = GameComponentsLookup.Attack;
-        var component = (Code.Game.Features.Attack.Attack)CreateComponent(index, typeof(Code.Game.Features.Attack.Attack));
+    public void ReplaceCooldown(float newValue) {
+        var index = GameComponentsLookup.Cooldown;
+        var component = (Code.Game.Common.Cooldown)CreateComponent(index, typeof(Code.Game.Common.Cooldown));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveAttack() {
-        RemoveComponent(GameComponentsLookup.Attack);
+    public void RemoveCooldown() {
+        RemoveComponent(GameComponentsLookup.Cooldown);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherAttack;
+    static Entitas.IMatcher<GameEntity> _matcherCooldown;
 
-    public static Entitas.IMatcher<GameEntity> Attack {
+    public static Entitas.IMatcher<GameEntity> Cooldown {
         get {
-            if (_matcherAttack == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Attack);
+            if (_matcherCooldown == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Cooldown);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherAttack = matcher;
+                _matcherCooldown = matcher;
             }
 
-            return _matcherAttack;
+            return _matcherCooldown;
         }
     }
 }

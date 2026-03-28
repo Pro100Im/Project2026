@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Code.Game.Features.Spawn.SpawnComponents.FreePoint freePointComponent = new Code.Game.Features.Spawn.SpawnComponents.FreePoint();
+    static readonly Code.Game.Features.Spawn.FreePoint freePointComponent = new Code.Game.Features.Spawn.FreePoint();
 
     public bool isFreePoint {
         get { return HasComponent(GameComponentsLookup.FreePoint); }
