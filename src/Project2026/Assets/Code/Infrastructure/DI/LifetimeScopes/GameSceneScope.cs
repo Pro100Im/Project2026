@@ -1,13 +1,15 @@
 using Code.Common.Cameras;
 using Code.Common.UI.Transition;
 using Code.Game.Features;
+using Code.Game.Features.Enemy.Factory;
+using Code.Game.Features.Enemy.Systems;
 using Code.Game.Features.Input;
 using Code.Game.Features.Input.Systems;
 using Code.Game.Features.Movement;
 using Code.Game.Features.Player;
-using Code.Game.Features.Player.Factory;
 using Code.Game.Features.Player.Systems;
 using Code.Game.Features.Spawn;
+using Code.Game.Features.Spawn.Systems;
 using Code.Game.Input.Service;
 using Code.Infrastructure.DI.EntryPoints;
 using Code.Infrastructure.Identifiers;
@@ -76,8 +78,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<GameTickFeature>(Lifetime.Singleton);
             builder.Register<GameFixedTickFeature>(Lifetime.Singleton);
 
-            builder.Register<CreateViewFeature>(Lifetime.Singleton);
             builder.Register<SpawnFeature>(Lifetime.Singleton);
+            builder.Register<CreateViewFeature>(Lifetime.Singleton);
             builder.Register<InputFeature>(Lifetime.Singleton);
             builder.Register<PlayerFeature>(Lifetime.Singleton);
             builder.Register<MovementFeature>(Lifetime.Singleton);
@@ -92,7 +94,9 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<EmitInputSystem>(Lifetime.Singleton);
 
             builder.Register<PlayerCameraInitSystem>(Lifetime.Singleton);
-            builder.Register<PlayerAnimatorSystem>(Lifetime.Singleton);
+
+            builder.Register<EnemyAnimatorSystem>(Lifetime.Singleton);
+            builder.Register<EnemySpawnSystem>(Lifetime.Singleton);
         }
 
         private void BindGameFactories(IContainerBuilder builder)
@@ -101,7 +105,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<ISystemFactory, SystemFactory>(Lifetime.Singleton);
 
             builder.Register<IEntityViewFactory, EntityViewFactory>(Lifetime.Singleton);
-            builder.Register<IPlayerFactory, PlayerFactory>(Lifetime.Singleton);
+            builder.Register<EnemyFactory>(Lifetime.Singleton);
         }
     }
 }

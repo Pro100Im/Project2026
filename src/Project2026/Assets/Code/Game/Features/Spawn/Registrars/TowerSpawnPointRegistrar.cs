@@ -20,7 +20,7 @@ namespace Code.Game.Features.Spawn.Registrars
             }
 
             Entity.AddSpawnPositions(points);
-            Entity.isForPlayer = true;
+            Entity.isPlayer = true;
         }
 
         public override void UnregisterComponents()

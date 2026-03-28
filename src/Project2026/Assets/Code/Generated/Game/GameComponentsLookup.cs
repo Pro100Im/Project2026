@@ -8,63 +8,55 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int Active = 0;
-    public const int CharacterController = 1;
-    public const int Damage = 2;
-    public const int Destructed = 3;
-    public const int Id = 4;
-    public const int SelfDestructTimer = 5;
-    public const int Transform = 6;
-    public const int View = 7;
-    public const int ViewPath = 8;
-    public const int ViewPrefab = 9;
-    public const int WorldPosition = 10;
-    public const int CurrentSpeed = 11;
-    public const int Direction = 12;
-    public const int LookAtPoint = 13;
-    public const int MaxRunSpeed = 14;
-    public const int MaxWalkSpeed = 15;
-    public const int MovementAvailable = 16;
+    public const int Animator = 0;
+    public const int Destructed = 1;
+    public const int EntityConfig = 2;
+    public const int Id = 3;
+    public const int SelfDestructTimer = 4;
+    public const int Transform = 5;
+    public const int View = 6;
+    public const int ViewPath = 7;
+    public const int ViewPrefab = 8;
+    public const int Attack = 9;
+    public const int AttackСooldown = 10;
+    public const int MeleeAttack = 11;
+    public const int RangeAttack = 12;
+    public const int Enemy = 13;
+    public const int Direction = 14;
+    public const int MovementAvailable = 15;
+    public const int MovementSpeed = 16;
     public const int Moving = 17;
     public const int RotationAlignedAlongDirection = 18;
-    public const int RotationAlignedAlongTarget = 19;
-    public const int Speed = 20;
-    public const int PlayerAnimator = 21;
-    public const int Player = 22;
-    public const int ForPlayer = 23;
-    public const int FreePoint = 24;
-    public const int SpawnPosition = 25;
-    public const int SpawnPositions = 26;
-    public const int SpawnRequsted = 27;
-    public const int WaitingToSpawn = 28;
+    public const int Player = 19;
+    public const int FreePoint = 20;
+    public const int SpawnPosition = 21;
+    public const int SpawnPositions = 22;
+    public const int SpawnRequsted = 23;
+    public const int WaitingToSpawn = 24;
 
-    public const int TotalComponents = 29;
+    public const int TotalComponents = 25;
 
     public static readonly string[] componentNames = {
-        "Active",
-        "CharacterController",
-        "Damage",
+        "Animator",
         "Destructed",
+        "EntityConfig",
         "Id",
         "SelfDestructTimer",
         "Transform",
         "View",
         "ViewPath",
         "ViewPrefab",
-        "WorldPosition",
-        "CurrentSpeed",
+        "Attack",
+        "AttackСooldown",
+        "MeleeAttack",
+        "RangeAttack",
+        "Enemy",
         "Direction",
-        "LookAtPoint",
-        "MaxRunSpeed",
-        "MaxWalkSpeed",
         "MovementAvailable",
+        "MovementSpeed",
         "Moving",
         "RotationAlignedAlongDirection",
-        "RotationAlignedAlongTarget",
-        "Speed",
-        "PlayerAnimator",
         "Player",
-        "ForPlayer",
         "FreePoint",
         "SpawnPosition",
         "SpawnPositions",
@@ -73,30 +65,26 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(Code.Game.Common.Active),
-        typeof(Code.Game.Common.CharacterControllerComponent),
-        typeof(Code.Game.Common.Damage),
+        typeof(Code.Game.Common.AnimatorComponent),
         typeof(Code.Game.Common.Destructed),
+        typeof(Code.Game.Common.EntityConfigComponent),
         typeof(Code.Game.Common.Id),
         typeof(Code.Game.Common.SelfDestructTimer),
         typeof(Code.Game.Common.TransformComponent),
         typeof(Code.Game.Common.View),
         typeof(Code.Game.Common.ViewPath),
         typeof(Code.Game.Common.ViewPrefab),
-        typeof(Code.Game.Common.WorldPosition),
-        typeof(Code.Game.Features.Movement.CurrentSpeed),
+        typeof(Code.Game.Features.Attack.AttackComponents.Attack),
+        typeof(Code.Game.Features.Attack.AttackComponents.AttackСooldown),
+        typeof(Code.Game.Features.Attack.AttackComponents.MeleeAttack),
+        typeof(Code.Game.Features.Attack.AttackComponents.RangeAttack),
+        typeof(Code.Game.Features.Enemy.EnemyComponent),
         typeof(Code.Game.Features.Movement.Direction),
-        typeof(Code.Game.Features.Movement.LookAtPoint),
-        typeof(Code.Game.Features.Movement.MaxRunSpeed),
-        typeof(Code.Game.Features.Movement.MaxWalkSpeed),
         typeof(Code.Game.Features.Movement.MovementAvailable),
+        typeof(Code.Game.Features.Movement.MovementSpeed),
         typeof(Code.Game.Features.Movement.Moving),
         typeof(Code.Game.Features.Movement.RotationAlignedAlongDirection),
-        typeof(Code.Game.Features.Movement.RotationAlignedAlongTarget),
-        typeof(Code.Game.Features.Movement.Speed),
-        typeof(Code.Game.Features.Player.PlayerAnimatorComponent),
         typeof(Code.Game.Features.Player.PlayerComponent),
-        typeof(Code.Game.Features.Spawn.SpawnComponents.ForPlayer),
         typeof(Code.Game.Features.Spawn.SpawnComponents.FreePoint),
         typeof(Code.Game.Features.Spawn.SpawnComponents.SpawnPosition),
         typeof(Code.Game.Features.Spawn.SpawnComponents.SpawnPositions),

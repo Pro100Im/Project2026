@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Code.Infrastructure.View.Factory
 {
     public interface IEntityViewFactory

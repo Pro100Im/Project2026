@@ -11,14 +11,14 @@ public partial class GameEntity {
     public Code.Game.Features.Movement.Direction direction { get { return (Code.Game.Features.Movement.Direction)GetComponent(GameComponentsLookup.Direction); } }
     public bool hasDirection { get { return HasComponent(GameComponentsLookup.Direction); } }
 
-    public void AddDirection(UnityEngine.Vector3 newValue) {
+    public void AddDirection(UnityEngine.Vector2 newValue) {
         var index = GameComponentsLookup.Direction;
         var component = (Code.Game.Features.Movement.Direction)CreateComponent(index, typeof(Code.Game.Features.Movement.Direction));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceDirection(UnityEngine.Vector3 newValue) {
+    public void ReplaceDirection(UnityEngine.Vector2 newValue) {
         var index = GameComponentsLookup.Direction;
         var component = (Code.Game.Features.Movement.Direction)CreateComponent(index, typeof(Code.Game.Features.Movement.Direction));
         component.Value = newValue;

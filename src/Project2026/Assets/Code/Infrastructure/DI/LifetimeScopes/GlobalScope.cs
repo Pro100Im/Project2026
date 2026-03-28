@@ -1,4 +1,3 @@
-using Code.Common.StaticData;
 using Code.Common.Time;
 using Code.Common.UI;
 using Code.Infrastructure.AssetManagement;
@@ -33,7 +32,6 @@ namespace Code.Infrastructure.DI.LifetimeScopes
         {
             builder.Register<ITimeService, UnityTimeService>(Lifetime.Singleton);
             builder.Register<ISceneLoader, SceneLoader>(Lifetime.Singleton);
-            builder.Register<IStaticDataService, StaticDataService>(Lifetime.Singleton);
 
             builder.Register<UIService>(Lifetime.Singleton);
         }
