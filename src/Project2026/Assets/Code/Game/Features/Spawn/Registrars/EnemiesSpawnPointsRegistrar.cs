@@ -14,15 +14,18 @@ namespace Code.Game.Features.Spawn.Registrars
         public override void RegisterComponents()
         {
             var positions = new Vector3[_enemiesSpawnPos.Length];
+            var sortOrders = new int[_enemiesSpawnPos.Length];
 
             for (var i = 0; i < _enemiesSpawnPos.Length; i++)
             {
                 var position = _tilemap.GetCellCenterWorld(_enemiesSpawnPos[i].Position);
 
                 positions[i] = position;
+                sortOrders[i] = _enemiesSpawnPos[i].SortOrder;
             }
 
             Entity.AddSpawnPositions(positions);
+            Entity.AddSpawnPositionSortOrders(sortOrders);
             Entity.isEnemy = true;
         }
 

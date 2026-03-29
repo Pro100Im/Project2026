@@ -27,8 +27,8 @@ namespace Code.Infrastructure.View.Systems
             {
                 _entityViewFactory.CreateViewForEntityFromPrefab(entity);
 
-                entity.RemoveViewPrefab();
                 entity.RemoveSpawnPosition();
+                entity.RemoveViewPrefab();
             }
         }
     }

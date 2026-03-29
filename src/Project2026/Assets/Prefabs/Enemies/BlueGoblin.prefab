@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -3016027265122920863}
   - component: {fileID: -8159891748829508298}
   - component: {fileID: -1974024728166227716}
+  - component: {fileID: -4034592776969640122}
   m_Layer: 0
   m_Name: BlueGoblin
   m_TagString: Untagged
@@ -74,6 +75,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Registrars.AnimatorRegistrar
   EntityView: {fileID: -3016027265122920863}
   _animator: {fileID: 1759340061393812146}
+--- !u!114 &-4034592776969640122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543715583764140608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19307bebf23240941bd30e4bf9753f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Registrars.SpriteRendererRegistrar
+  EntityView: {fileID: -3016027265122920863}
+  _spriteRenderer: {fileID: 4189863427103238046}
 --- !u!1001 &607994375398537082
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138,6 +153,11 @@ PrefabInstance:
 --- !u!95 &1759340061393812146 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1160356261127867848, guid: a24b7ff8ec2e6aa4eb9c74ac14285813, type: 3}
+  m_PrefabInstance: {fileID: 607994375398537082}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &4189863427103238046 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3626916397498700004, guid: a24b7ff8ec2e6aa4eb9c74ac14285813, type: 3}
   m_PrefabInstance: {fileID: 607994375398537082}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7288375016027637879 stripped

@@ -20,6 +20,7 @@ namespace Code.Game.Features.Spawn.Systems
             _spawnPositions = gameContext.GetGroup(GameMatcher
               .AllOf(
               GameMatcher.SpawnPositions,
+              GameMatcher.SpawnPositionSortOrders,
               GameMatcher.Enemy));
         }
 
@@ -30,10 +31,15 @@ namespace Code.Game.Features.Spawn.Systems
                 foreach (var enemySpawn in _enemies)
                 {
                     var spawnPositions = spawnPos.spawnPositions.Value;
-                    var position = spawnPositions[Random.Range(0, spawnPositions.Length)];
+                    var randomIndex = Random.Range(0, spawnPositions.Length);
+                    var position = spawnPositions[randomIndex];
+                    var order = spawnPos.spawnPositionSortOrders.Value[randomIndex];
 
                     if (!enemySpawn.hasSpawnPosition)
                         enemySpawn.AddSpawnPosition(position);
+
+                    if (!enemySpawn.hasSortOrder)
+                        enemySpawn.AddSortOrder(order);
                 }
             }
         }

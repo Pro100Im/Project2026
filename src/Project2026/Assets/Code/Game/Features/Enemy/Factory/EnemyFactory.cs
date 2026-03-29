@@ -14,11 +14,12 @@ namespace Code.Game.Features.Enemy.Factory
             _identifiers = identifiers;
         }
 
-        public GameEntity Create(EntityConfig entityConfig, Vector2 spawnPosition)
+        public GameEntity Create(EntityConfig entityConfig, Vector2 spawnPosition, int sortOrder)
         {
             var entity = CreateGameEntity.Empty();
             entity.AddId(_identifiers.Next());
             entity.AddSpawnPosition(spawnPosition);
+            entity.AddSortOrder(sortOrder);
             entity.isEnemy = true;
 
             var view = entityConfig.GetProperty<ViewData>();

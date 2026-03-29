@@ -23,10 +23,8 @@ namespace Code.Infrastructure.View.Systems
             foreach (GameEntity entity in _entities.GetEntities(_buffer))
             {
                 _entityViewFactory.CreateViewForEntity(entity);
-            }
 
-            foreach (GameEntity entity in _entities.GetEntities(_buffer))
-            {
+                entity.RemoveSpawnPosition();
                 entity.RemoveViewPath();
             }
         }

@@ -32,6 +32,9 @@ namespace Code.Game.Features.Wave.Systems
             {
                 foreach (var wave in _waves)
                 {
+                    if(wave.currentWaveNumber.Value >= _wavesConfig.WaveDatas.Length)
+                        continue;
+
                     wave.currentWaveEnemies.Value.AddRange(_wavesConfig.WaveDatas[wave.currentWaveNumber.Value].EntityConfigs);
                     wave.ReplaceCurrentWaveNumber(wave.currentWaveNumber.Value += 1);
                     wave.isWaveInProgress = true;
