@@ -1,4 +1,5 @@
 using Code.Infrastructure.View.Registrars;
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -6,8 +7,7 @@ namespace Code.Game.Features.Spawn.Registrars
 {
     public class EnemiesSpawnPointsRegistrar : EntityComponentRegistrar
     {
-        [SerializeField] private int _areaNumber;
-        [SerializeField] private Vector3Int[] _enemiesSpawnPos;
+        [SerializeField] private SpawnPosition[] _enemiesSpawnPos;
         [Space]
         [SerializeField] private Tilemap _tilemap;
 
@@ -17,7 +17,7 @@ namespace Code.Game.Features.Spawn.Registrars
 
             for (var i = 0; i < _enemiesSpawnPos.Length; i++)
             {
-                var position = _tilemap.GetCellCenterWorld(_enemiesSpawnPos[i]);
+                var position = _tilemap.GetCellCenterWorld(_enemiesSpawnPos[i].Position);
 
                 positions[i] = position;
             }
@@ -37,12 +37,19 @@ namespace Code.Game.Features.Spawn.Registrars
             {
                 for (var i = 0; i < _enemiesSpawnPos.Length; i++)
                 {
-                    var pos = _tilemap.GetCellCenterWorld(_enemiesSpawnPos[i]);
+                    var pos = _tilemap.GetCellCenterWorld(_enemiesSpawnPos[i].Position);
 
                     Gizmos.color = Color.red;
                     Gizmos.DrawWireCube(pos, _tilemap.cellSize);
                 }
             }
+        }
+
+        [Serializable]
+        private class SpawnPosition
+        {
+            [field: SerializeField] public int SortOrder { get; private set; }
+            [field: SerializeField] public Vector3Int Position { get; private set; }
         }
     }
 }

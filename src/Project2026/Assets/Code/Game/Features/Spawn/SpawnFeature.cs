@@ -7,6 +7,7 @@ namespace Code.Game.Features.Spawn
     {
         public SpawnFeature(ISystemFactory systemFactory)
         {
+            Add(systemFactory.Create<EnemySelectSpawnPosSystem>());
             Add(systemFactory.Create<EnemySpawnSystem>());
         }
     }

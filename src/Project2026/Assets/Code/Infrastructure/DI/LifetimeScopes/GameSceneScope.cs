@@ -11,7 +11,9 @@ using Code.Game.Features.Player.Systems;
 using Code.Game.Features.Spawn;
 using Code.Game.Features.Spawn.Systems;
 using Code.Game.Features.Wave;
+using Code.Game.Features.Wave.Systems;
 using Code.Game.Input.Service;
+using Code.Game.StaticData.Configs;
 using Code.Infrastructure.DI.EntryPoints;
 using Code.Infrastructure.Identifiers;
 using Code.Infrastructure.States.Factory;
@@ -21,6 +23,7 @@ using Code.Infrastructure.Systems;
 using Code.Infrastructure.View;
 using Code.Infrastructure.View.Factory;
 using Code.Infrastructure.View.Systems;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -28,10 +31,13 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 {
     public class GameSceneScope : LifetimeScope
     {
+        [SerializeField] private WavesConfig _wavesConfig;
+
         protected override void Configure(IContainerBuilder builder)
         {
             BindServices(builder);
 
+            BindGameConfigs(builder);
             BindContexts(builder);
 
             BindGameStates(builder);
@@ -98,7 +104,10 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<PlayerCameraInitSystem>(Lifetime.Singleton);
 
+            builder.Register<WaveSystem>(Lifetime.Singleton);
+
             builder.Register<EnemyAnimatorSystem>(Lifetime.Singleton);
+            builder.Register<EnemySelectSpawnPosSystem>(Lifetime.Singleton);
             builder.Register<EnemySpawnSystem>(Lifetime.Singleton);
         }
 
@@ -109,6 +118,11 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<IEntityViewFactory, EntityViewFactory>(Lifetime.Singleton);
             builder.Register<EnemyFactory>(Lifetime.Singleton);
+        }
+
+        private void BindGameConfigs(IContainerBuilder builder)
+        {
+            builder.RegisterInstance(_wavesConfig).AsSelf();
         }
     }
 }
