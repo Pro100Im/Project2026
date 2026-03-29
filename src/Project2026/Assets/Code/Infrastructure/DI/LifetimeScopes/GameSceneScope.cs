@@ -104,7 +104,9 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<PlayerCameraInitSystem>(Lifetime.Singleton);
 
-            builder.Register<WaveSystem>(Lifetime.Singleton);
+            builder.Register<WaveInitSystem>(Lifetime.Singleton);
+            builder.Register<WaveStartSystem>(Lifetime.Singleton);
+            builder.Register<WaveProgressSystem>(Lifetime.Singleton);
 
             builder.Register<EnemyAnimatorSystem>(Lifetime.Singleton);
             builder.Register<EnemySelectSpawnPosSystem>(Lifetime.Singleton);

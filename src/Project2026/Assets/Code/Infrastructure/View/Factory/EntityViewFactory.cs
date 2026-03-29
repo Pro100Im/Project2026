@@ -17,12 +17,16 @@ namespace Code.Infrastructure.View.Factory
             var viewPrefab = _assetProvider.LoadAsset<EntityBehaviour>(entity.viewPath.Value);
             var view = GameObject.Instantiate<EntityBehaviour>(viewPrefab, entity.spawnPosition.Value, Quaternion.identity, null);
 
+            view.SetEntity(entity);
+
             return view;
         }
 
         public EntityBehaviour CreateViewForEntityFromPrefab(GameEntity entity)
         {
             var view = GameObject.Instantiate<EntityBehaviour>(entity.viewPrefab.Value, entity.spawnPosition.Value, Quaternion.identity, null);
+
+            view.SetEntity(entity);
 
             return view;
         }

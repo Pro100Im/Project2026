@@ -7,7 +7,9 @@ namespace Code.Game.Features.Wave
     {
         public WaveFeature(ISystemFactory systemFactory)
         {
-            Add(systemFactory.Create<WaveSystem>());
+            Add(systemFactory.Create<WaveInitSystem>());
+            Add(systemFactory.Create<WaveStartSystem>());
+            Add(systemFactory.Create<WaveProgressSystem>());
         }
     }
 }
