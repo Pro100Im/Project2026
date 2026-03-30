@@ -6,6 +6,7 @@ using Code.Game.Features.Enemy.Systems;
 using Code.Game.Features.Input;
 using Code.Game.Features.Input.Systems;
 using Code.Game.Features.Movement;
+using Code.Game.Features.Movement.Systems;
 using Code.Game.Features.Player;
 using Code.Game.Features.Player.Systems;
 using Code.Game.Features.Spawn;
@@ -111,6 +112,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<EnemyAnimatorSystem>(Lifetime.Singleton);
             builder.Register<EnemySelectSpawnPosSystem>(Lifetime.Singleton);
             builder.Register<EnemySpawnSystem>(Lifetime.Singleton);
+
+            builder.Register<EnemiesMovementSystem>(Lifetime.Singleton);
         }
 
         private void BindGameFactories(IContainerBuilder builder)

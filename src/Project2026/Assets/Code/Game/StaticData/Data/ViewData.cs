@@ -2,8 +2,11 @@ using Code.Infrastructure.View;
 using System;
 using UnityEngine;
 
-[Serializable]
-public class ViewData : EntityProperty
+namespace Code.Game.StaticData.Data
 {
-    [field: SerializeField] public EntityBehaviour Prefab;
+    [Serializable]
+    public class ViewData : EntityProperty
+    {
+        [field: SerializeField] public EntityBehaviour Prefab { get; private set; }
+    }
 }

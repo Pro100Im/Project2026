@@ -13,11 +13,19 @@ MonoBehaviour:
   m_Name: BlueGoblinEnemyConfig
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.EntityConfig
   Properties:
-  - rid: 8869462975968968823
+  - rid: -2
+  - rid: 8869463032931287139
+  - rid: 8869463032931287140
   references:
     version: 2
     RefIds:
-    - rid: 8869462975968968823
-      type: {class: ViewData, ns: , asm: Assembly-CSharp}
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 8869463032931287139
+      type: {class: ViewData, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
-        Prefab: {fileID: -3016027265122920863, guid: d49b9c95ca2a1914d95fb1ad30f87b7b, type: 3}
+        <Prefab>k__BackingField: {fileID: -3016027265122920863, guid: d49b9c95ca2a1914d95fb1ad30f87b7b, type: 3}
+    - rid: 8869463032931287140
+      type: {class: MovementData, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Speed>k__BackingField: 1

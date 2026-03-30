@@ -47,7 +47,7 @@ namespace Code.Game.Features.Wave.Systems
                 {
                     var entityConfig = wave.currentWaveEnemies.Value[0];
                     var entity = CreateGameEntity.Empty();
-                    var newCooldown = _wavesConfig.WaveDatas[wave.currentWaveNumber.Value-1].Ñooldown;
+                    var newCooldown = _wavesConfig.WaveDatas[wave.currentWaveNumber.Value-1].Cooldown;
 
                     entity.AddEntityConfig(entityConfig);
                     entity.isSpawnRequsted = true;

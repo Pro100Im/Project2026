@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using Code.Game.StaticData.Configs;
+using Code.Game.StaticData;
 
 namespace Assets.Code.Infrastructure
 {

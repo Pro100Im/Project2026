@@ -20,8 +20,10 @@ namespace Code.Game.StaticData.Configs
 
         public void Init()
         {
-            _propertyMap = Properties?.ToDictionary(p => p.GetType(), p => p)
-                          ?? new Dictionary<Type, EntityProperty>();
+            _propertyMap = Properties?
+                .Where(p => p != null)
+                .ToDictionary(p => p.GetType(), p => p)
+                ?? new Dictionary<Type, EntityProperty>();
         }
 
         public T GetProperty<T>() where T : EntityProperty

@@ -8,4 +8,6 @@ namespace Code.Game.Features.Movement
     [Game] public class Moving : IComponent { }
     [Game] public class MovementAvailable : IComponent { }
     [Game] public class RotationAlignedAlongDirection : IComponent { }
+    [Game] public class MovementPoints : IComponent { public Vector3[] Value; }
+    [Game] public class MovementOffsets : IComponent { public float Value; }
 }

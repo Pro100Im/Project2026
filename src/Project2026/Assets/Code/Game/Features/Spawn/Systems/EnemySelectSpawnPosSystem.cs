@@ -21,6 +21,7 @@ namespace Code.Game.Features.Spawn.Systems
               .AllOf(
               GameMatcher.SpawnPositions,
               GameMatcher.SpawnPositionSortOrders,
+              GameMatcher.GateNumber,
               GameMatcher.Enemy));
         }
 
@@ -40,6 +41,9 @@ namespace Code.Game.Features.Spawn.Systems
 
                     if (!enemySpawn.hasSortOrder)
                         enemySpawn.AddSortOrder(order);
+
+                    if (!enemySpawn.hasGateNumber)
+                        enemySpawn.AddGateNumber(order);
                 }
             }
         }

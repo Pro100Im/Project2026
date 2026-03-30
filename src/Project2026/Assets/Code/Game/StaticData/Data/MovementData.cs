@@ -1,16 +1,11 @@
+using System;
 using UnityEngine;
 
-public class MovementData : MonoBehaviour
+namespace Code.Game.StaticData.Data
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Serializable]
+    public class MovementData : EntityProperty
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [field: SerializeField] public float Speed { get; private set; }
     }
 }

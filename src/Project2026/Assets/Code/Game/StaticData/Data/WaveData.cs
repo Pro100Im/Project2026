@@ -6,7 +6,7 @@ namespace Code.Game.StaticData.Data
     [Serializable]
     public class WaveData
     {
-        public float Ñooldown;
+        public float Cooldown;
         public EntityConfig[] EntityConfigs;
     }
 }

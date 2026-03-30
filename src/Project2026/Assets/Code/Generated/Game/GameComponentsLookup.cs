@@ -26,23 +26,27 @@ public static class GameComponentsLookup {
     public const int Enemy = 15;
     public const int Direction = 16;
     public const int MovementAvailable = 17;
-    public const int MovementSpeed = 18;
-    public const int Moving = 19;
-    public const int RotationAlignedAlongDirection = 20;
-    public const int Player = 21;
-    public const int FreePoint = 22;
-    public const int SpawnPosition = 23;
-    public const int SpawnPositions = 24;
-    public const int SpawnPositionSortOrders = 25;
-    public const int SpawnRequsted = 26;
-    public const int WaitingToSpawn = 27;
-    public const int CurrentWaveEnemies = 28;
-    public const int CurrentWaveNumber = 29;
-    public const int WaveEnemiesAlive = 30;
-    public const int WaveInProgress = 31;
-    public const int WaveStartRequsted = 32;
+    public const int MovementOffsets = 18;
+    public const int MovementPoints = 19;
+    public const int MovementSpeed = 20;
+    public const int Moving = 21;
+    public const int RotationAlignedAlongDirection = 22;
+    public const int Player = 23;
+    public const int FreePoint = 24;
+    public const int GateNumber = 25;
+    public const int SpawnPosition = 26;
+    public const int SpawnPositionGates = 27;
+    public const int SpawnPositions = 28;
+    public const int SpawnPositionSortOrders = 29;
+    public const int SpawnRequsted = 30;
+    public const int WaitingToSpawn = 31;
+    public const int CurrentWaveEnemies = 32;
+    public const int CurrentWaveNumber = 33;
+    public const int WaveEnemiesAlive = 34;
+    public const int WaveInProgress = 35;
+    public const int WaveStartRequsted = 36;
 
-    public const int TotalComponents = 33;
+    public const int TotalComponents = 37;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -63,12 +67,16 @@ public static class GameComponentsLookup {
         "Enemy",
         "Direction",
         "MovementAvailable",
+        "MovementOffsets",
+        "MovementPoints",
         "MovementSpeed",
         "Moving",
         "RotationAlignedAlongDirection",
         "Player",
         "FreePoint",
+        "GateNumber",
         "SpawnPosition",
+        "SpawnPositionGates",
         "SpawnPositions",
         "SpawnPositionSortOrders",
         "SpawnRequsted",
@@ -99,12 +107,16 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Enemy.EnemyComponent),
         typeof(Code.Game.Features.Movement.Direction),
         typeof(Code.Game.Features.Movement.MovementAvailable),
+        typeof(Code.Game.Features.Movement.MovementOffsets),
+        typeof(Code.Game.Features.Movement.MovementPoints),
         typeof(Code.Game.Features.Movement.MovementSpeed),
         typeof(Code.Game.Features.Movement.Moving),
         typeof(Code.Game.Features.Movement.RotationAlignedAlongDirection),
         typeof(Code.Game.Features.Player.PlayerComponent),
         typeof(Code.Game.Features.Spawn.FreePoint),
+        typeof(Code.Game.Features.Spawn.GateNumber),
         typeof(Code.Game.Features.Spawn.SpawnPosition),
+        typeof(Code.Game.Features.Spawn.SpawnPositionGates),
         typeof(Code.Game.Features.Spawn.SpawnPositions),
         typeof(Code.Game.Features.Spawn.SpawnPositionSortOrders),
         typeof(Code.Game.Features.Spawn.SpawnRequsted),

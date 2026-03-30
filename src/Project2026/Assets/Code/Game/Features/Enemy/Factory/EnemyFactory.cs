@@ -1,5 +1,6 @@
 using Code.Common.Entity;
 using Code.Game.StaticData.Configs;
+using Code.Game.StaticData.Data;
 using Code.Infrastructure.Identifiers;
 using UnityEngine;
 
@@ -20,11 +21,17 @@ namespace Code.Game.Features.Enemy.Factory
             entity.AddId(_identifiers.Next());
             entity.AddSpawnPosition(spawnPosition);
             entity.AddSortOrder(sortOrder);
+   
             entity.isEnemy = true;
+            entity.isMovementAvailable = true;
 
             var view = entityConfig.GetProperty<ViewData>();
             if (view != null)
                 entity.AddViewPrefab(view.Prefab);
+
+            var movement = entityConfig.GetProperty<MovementData>();
+            if (movement != null)
+                entity.AddMovementSpeed(movement.Speed);
 
             return entity;
         }

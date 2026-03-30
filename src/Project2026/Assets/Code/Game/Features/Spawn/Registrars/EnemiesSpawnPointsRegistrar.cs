@@ -15,6 +15,7 @@ namespace Code.Game.Features.Spawn.Registrars
         {
             var positions = new Vector3[_enemiesSpawnPos.Length];
             var sortOrders = new int[_enemiesSpawnPos.Length];
+            var gates = new int[_enemiesSpawnPos.Length];
 
             for (var i = 0; i < _enemiesSpawnPos.Length; i++)
             {
@@ -52,6 +53,7 @@ namespace Code.Game.Features.Spawn.Registrars
         private class SpawnPosition
         {
             [field: SerializeField] public int SortOrder { get; private set; }
+            [field: SerializeField] public int Gate { get; private set; }
             [field: SerializeField] public Vector3Int Position { get; private set; }
         }
     }

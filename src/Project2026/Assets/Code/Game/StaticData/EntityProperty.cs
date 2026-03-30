@@ -1,4 +1,7 @@
 using System;
 
-[Serializable]
-public abstract class EntityProperty { }
+namespace Code.Game.StaticData
+{
+    [Serializable]
+    public abstract class EntityProperty { }
+}
