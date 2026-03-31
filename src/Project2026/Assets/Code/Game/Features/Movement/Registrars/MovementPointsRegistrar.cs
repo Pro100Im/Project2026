@@ -8,6 +8,7 @@ namespace Code.Game.Features.Movement.Registrars
     {
         [SerializeField] public int _gatennumber;
         [SerializeField] private Vector3Int[] _movementPoints;
+        [SerializeField] private Vector2[] _movementOffsets;
         [Space]
         [SerializeField] private Tilemap _tilemap;
         [Space]
@@ -25,6 +26,7 @@ namespace Code.Game.Features.Movement.Registrars
             }
 
             Entity.AddMovementPoints(points);
+            Entity.AddMovementOffsets(_movementOffsets);
             Entity.AddGateNumber(_gatennumber);
             Entity.isEnemy = true;
         }

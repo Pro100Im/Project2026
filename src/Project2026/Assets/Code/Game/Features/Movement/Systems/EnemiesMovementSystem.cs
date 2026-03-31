@@ -26,6 +26,7 @@ namespace Code.Game.Features.Movement.Systems
             _movementPoints = gameContext.GetGroup(GameMatcher
               .AllOf(
               GameMatcher.MovementPoints,
+              GameMatcher.MovementOffsets,
               GameMatcher.GateNumber,
               GameMatcher.Enemy));
         }
@@ -42,16 +43,25 @@ namespace Code.Game.Features.Movement.Systems
                     if (enemy.gateNumber.Value != movementPoint.gateNumber.Value)
                         continue;
 
-                    if (Vector3.Distance(enemy.transform.Value.position, movementPoint.movementPoints.Value[enemy.movementCurrentPointIndex.Value]) <= 0)
+                    if (Vector3.Distance(enemy.transform.Value.position, movementPoint.movementPoints.Value[enemy.movementCurrentPointIndex.Value]) <= 0.5)
                     {
                         enemy.ReplaceMovementCurrentPointIndex(enemy.movementCurrentPointIndex.Value + 1);
 
                         continue;
                     }
 
+                    var index = enemy.movementCurrentPointIndex.Value;
+                    var targetPoint = movementPoint.movementPoints.Value[index];
+                    var offset = movementPoint.movementOffsets.Value[index];
+                    var offsetX = Random.Range(-offset.x, offset.x);
+                    var offsetY = Random.Range(-offset.y, offset.y);
+                    
+                    targetPoint.x += offsetX;
+                    targetPoint.y += offsetY;
+
                     enemy.transform.Value.position = Vector2.MoveTowards(
                         enemy.transform.Value.position,
-                        movementPoint.movementPoints.Value[enemy.movementCurrentPointIndex.Value],
+                        targetPoint,
                         enemy.movementSpeed.Value * _timeService.DeltaTime);
                 }
             }

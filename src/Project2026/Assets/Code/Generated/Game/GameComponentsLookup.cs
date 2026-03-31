@@ -24,30 +24,28 @@ public static class GameComponentsLookup {
     public const int MeleeAttack = 13;
     public const int RangeAttack = 14;
     public const int Enemy = 15;
-    public const int Direction = 16;
-    public const int MovementAvailable = 17;
-    public const int MovementCurrentPointIndex = 18;
-    public const int MovementOffsets = 19;
-    public const int MovementPoints = 20;
-    public const int MovementSpeed = 21;
-    public const int Moving = 22;
-    public const int RotationAlignedAlongDirection = 23;
-    public const int Player = 24;
-    public const int FreePoint = 25;
-    public const int GateNumber = 26;
-    public const int SpawnPosition = 27;
-    public const int SpawnPositionGates = 28;
-    public const int SpawnPositions = 29;
-    public const int SpawnPositionSortOrders = 30;
-    public const int SpawnRequsted = 31;
-    public const int WaitingToSpawn = 32;
-    public const int CurrentWaveEnemies = 33;
-    public const int CurrentWaveNumber = 34;
-    public const int WaveEnemiesAlive = 35;
-    public const int WaveInProgress = 36;
-    public const int WaveStartRequsted = 37;
+    public const int MovementAvailable = 16;
+    public const int MovementCurrentPointIndex = 17;
+    public const int MovementOffsets = 18;
+    public const int MovementPoints = 19;
+    public const int MovementSpeed = 20;
+    public const int RotationAlignedAlongDirection = 21;
+    public const int Player = 22;
+    public const int FreePoint = 23;
+    public const int GateNumber = 24;
+    public const int SpawnPosition = 25;
+    public const int SpawnPositionGates = 26;
+    public const int SpawnPositions = 27;
+    public const int SpawnPositionSortOrders = 28;
+    public const int SpawnRequsted = 29;
+    public const int WaitingToSpawn = 30;
+    public const int CurrentWaveEnemies = 31;
+    public const int CurrentWaveNumber = 32;
+    public const int WaveEnemiesAlive = 33;
+    public const int WaveInProgress = 34;
+    public const int WaveStartRequsted = 35;
 
-    public const int TotalComponents = 38;
+    public const int TotalComponents = 36;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -66,13 +64,11 @@ public static class GameComponentsLookup {
         "MeleeAttack",
         "RangeAttack",
         "Enemy",
-        "Direction",
         "MovementAvailable",
         "MovementCurrentPointIndex",
         "MovementOffsets",
         "MovementPoints",
         "MovementSpeed",
-        "Moving",
         "RotationAlignedAlongDirection",
         "Player",
         "FreePoint",
@@ -107,13 +103,11 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Attack.MeleeAttack),
         typeof(Code.Game.Features.Attack.RangeAttack),
         typeof(Code.Game.Features.Enemy.EnemyComponent),
-        typeof(Code.Game.Features.Movement.Direction),
         typeof(Code.Game.Features.Movement.MovementAvailable),
         typeof(Code.Game.Features.Movement.MovementCurrentPointIndex),
         typeof(Code.Game.Features.Movement.MovementOffsets),
         typeof(Code.Game.Features.Movement.MovementPoints),
         typeof(Code.Game.Features.Movement.MovementSpeed),
-        typeof(Code.Game.Features.Movement.Moving),
         typeof(Code.Game.Features.Movement.RotationAlignedAlongDirection),
         typeof(Code.Game.Features.Player.PlayerComponent),
         typeof(Code.Game.Features.Spawn.FreePoint),

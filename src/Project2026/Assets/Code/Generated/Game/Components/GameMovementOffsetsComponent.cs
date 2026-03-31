@@ -11,14 +11,14 @@ public partial class GameEntity {
     public Code.Game.Features.Movement.MovementOffsets movementOffsets { get { return (Code.Game.Features.Movement.MovementOffsets)GetComponent(GameComponentsLookup.MovementOffsets); } }
     public bool hasMovementOffsets { get { return HasComponent(GameComponentsLookup.MovementOffsets); } }
 
-    public void AddMovementOffsets(float newValue) {
+    public void AddMovementOffsets(UnityEngine.Vector2[] newValue) {
         var index = GameComponentsLookup.MovementOffsets;
         var component = (Code.Game.Features.Movement.MovementOffsets)CreateComponent(index, typeof(Code.Game.Features.Movement.MovementOffsets));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceMovementOffsets(float newValue) {
+    public void ReplaceMovementOffsets(UnityEngine.Vector2[] newValue) {
         var index = GameComponentsLookup.MovementOffsets;
         var component = (Code.Game.Features.Movement.MovementOffsets)CreateComponent(index, typeof(Code.Game.Features.Movement.MovementOffsets));
         component.Value = newValue;
