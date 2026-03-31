@@ -28,4 +28,4 @@ MonoBehaviour:
     - rid: 8869463032931287140
       type: {class: MovementData, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
-        <Speed>k__BackingField: 1
+        <Speed>k__BackingField: 0.45
