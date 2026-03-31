@@ -26,7 +26,9 @@ namespace Code.Game.Features.Movement.Systems
             _movementPoints = gameContext.GetGroup(GameMatcher
               .AllOf(
               GameMatcher.MovementPoints,
-              GameMatcher.MovementOffsets,
+              GameMatcher.MovementPointMinDistances,
+              GameMatcher.MinMovementOffsets,
+              GameMatcher.MaxMovementOffsets,
               GameMatcher.GateNumber,
               GameMatcher.Enemy));
         }
@@ -43,18 +45,20 @@ namespace Code.Game.Features.Movement.Systems
                     if (enemy.gateNumber.Value != movementPoint.gateNumber.Value)
                         continue;
 
-                    if (Vector3.Distance(enemy.transform.Value.position, movementPoint.movementPoints.Value[enemy.movementCurrentPointIndex.Value]) <= 0.5)
+                    var index = enemy.movementCurrentPointIndex.Value;
+                    var targetPoint = movementPoint.movementPoints.Value[index];
+
+                    if (Vector3.Distance(enemy.transform.Value.position, targetPoint) <= movementPoint.movementPointMinDistances.Value[index])
                     {
                         enemy.ReplaceMovementCurrentPointIndex(enemy.movementCurrentPointIndex.Value + 1);
 
                         continue;
                     }
 
-                    var index = enemy.movementCurrentPointIndex.Value;
-                    var targetPoint = movementPoint.movementPoints.Value[index];
-                    var offset = movementPoint.movementOffsets.Value[index];
-                    var offsetX = Random.Range(-offset.x, offset.x);
-                    var offsetY = Random.Range(-offset.y, offset.y);
+                    var minOffset = movementPoint.minMovementOffsets.Value[index];
+                    var maxOffset = movementPoint.maxMovementOffsets.Value[index];
+                    var offsetX = Random.Range(minOffset.x, maxOffset.x);
+                    var offsetY = Random.Range(minOffset.y, maxOffset.y);
                     
                     targetPoint.x += offsetX;
                     targetPoint.y += offsetY;
