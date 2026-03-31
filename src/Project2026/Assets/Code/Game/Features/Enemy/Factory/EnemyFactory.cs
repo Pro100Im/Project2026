@@ -15,12 +15,11 @@ namespace Code.Game.Features.Enemy.Factory
             _identifiers = identifiers;
         }
 
-        public GameEntity Create(EntityConfig entityConfig, Vector2 spawnPosition, int sortOrder)
+        public GameEntity Create(EntityConfig entityConfig, Vector2 spawnPosition)
         {
             var entity = CreateGameEntity.Empty();
             entity.AddId(_identifiers.Next());
             entity.AddSpawnPosition(spawnPosition);
-            entity.AddSortOrder(sortOrder);
    
             entity.isEnemy = true;
             entity.isMovementAvailable = true;
@@ -31,7 +30,11 @@ namespace Code.Game.Features.Enemy.Factory
 
             var movement = entityConfig.GetProperty<MovementData>();
             if (movement != null)
+            {
                 entity.AddMovementSpeed(movement.Speed);
+                entity.AddMovementCurrentPointIndex(0);
+                entity.isMovementAvailable = true;
+            }
 
             return entity;
         }

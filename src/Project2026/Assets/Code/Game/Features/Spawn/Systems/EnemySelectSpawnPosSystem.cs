@@ -21,7 +21,7 @@ namespace Code.Game.Features.Spawn.Systems
               .AllOf(
               GameMatcher.SpawnPositions,
               GameMatcher.SpawnPositionSortOrders,
-              GameMatcher.GateNumber,
+              GameMatcher.SpawnPositionGates,
               GameMatcher.Enemy));
         }
 
@@ -35,6 +35,7 @@ namespace Code.Game.Features.Spawn.Systems
                     var randomIndex = Random.Range(0, spawnPositions.Length);
                     var position = spawnPositions[randomIndex];
                     var order = spawnPos.spawnPositionSortOrders.Value[randomIndex];
+                    var gate = spawnPos.spawnPositionGates.Value[randomIndex];
 
                     if (!enemySpawn.hasSpawnPosition)
                         enemySpawn.AddSpawnPosition(position);
@@ -43,7 +44,7 @@ namespace Code.Game.Features.Spawn.Systems
                         enemySpawn.AddSortOrder(order);
 
                     if (!enemySpawn.hasGateNumber)
-                        enemySpawn.AddGateNumber(order);
+                        enemySpawn.AddGateNumber(gate);
                 }
             }
         }

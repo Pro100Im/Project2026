@@ -23,10 +23,12 @@ namespace Code.Game.Features.Spawn.Registrars
 
                 positions[i] = position;
                 sortOrders[i] = _enemiesSpawnPos[i].SortOrder;
+                gates[i] = _enemiesSpawnPos[i].Gate;
             }
 
             Entity.AddSpawnPositions(positions);
             Entity.AddSpawnPositionSortOrders(sortOrders);
+            Entity.AddSpawnPositionGates(gates);
             Entity.isEnemy = true;
         }
 

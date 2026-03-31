@@ -845,22 +845,31 @@ MonoBehaviour:
   EntityView: {fileID: 1807355290}
   _enemiesSpawnPos:
   - <SortOrder>k__BackingField: 6
+    <Gate>k__BackingField: 0
     <Position>k__BackingField: {x: -10, y: 3, z: 0}
   - <SortOrder>k__BackingField: 6
+    <Gate>k__BackingField: 0
     <Position>k__BackingField: {x: -9, y: 3, z: 0}
   - <SortOrder>k__BackingField: 6
+    <Gate>k__BackingField: 0
     <Position>k__BackingField: {x: -8, y: 3, z: 0}
   - <SortOrder>k__BackingField: 7
+    <Gate>k__BackingField: 0
     <Position>k__BackingField: {x: -10, y: 2, z: 0}
   - <SortOrder>k__BackingField: 7
+    <Gate>k__BackingField: 0
     <Position>k__BackingField: {x: -9, y: 2, z: 0}
   - <SortOrder>k__BackingField: 7
+    <Gate>k__BackingField: 1
     <Position>k__BackingField: {x: -8, y: 2, z: 0}
   - <SortOrder>k__BackingField: 8
+    <Gate>k__BackingField: 1
     <Position>k__BackingField: {x: -10, y: 1, z: 0}
   - <SortOrder>k__BackingField: 8
+    <Gate>k__BackingField: 1
     <Position>k__BackingField: {x: -9, y: 1, z: 0}
   - <SortOrder>k__BackingField: 8
+    <Gate>k__BackingField: 1
     <Position>k__BackingField: {x: -8, y: 1, z: 0}
   _tilemap: {fileID: 1787122408}
 --- !u!114 &1807355290
