@@ -1,16 +1,14 @@
+using System;
 using UnityEngine;
 
-public class AttackData : MonoBehaviour
+namespace Code.Game.StaticData.Data
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Serializable]
+    public class AttackData : EntityProperty
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [field: SerializeField] public float Damage { get; private set; }
+        [field: SerializeField] public float Range { get; private set; }
+        [field: SerializeField] public float Cooldown { get; private set; }
+        [field: SerializeField] public bool  IsMelee { get; private set; }
     }
 }

@@ -1,16 +1,12 @@
+using System;
 using UnityEngine;
 
-public class HealthData : MonoBehaviour
+namespace Code.Game.StaticData.Data
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Serializable]
+    public class HealthData : EntityProperty
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [field: SerializeField] public float Health { get; private set; }
+        [field: SerializeField] public float Regen { get; private set; }
     }
 }

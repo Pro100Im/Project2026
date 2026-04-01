@@ -21,32 +21,39 @@ public static class GameComponentsLookup {
     public const int ViewPath = 10;
     public const int ViewPrefab = 11;
     public const int Attack = 12;
-    public const int MeleeAttack = 13;
-    public const int RangeAttack = 14;
-    public const int Enemy = 15;
-    public const int MaxMovementOffsets = 16;
-    public const int MinMovementOffsets = 17;
-    public const int MovementAvailable = 18;
-    public const int MovementCurrentPointIndex = 19;
-    public const int MovementPointMinDistances = 20;
-    public const int MovementPoints = 21;
-    public const int MovementSpeed = 22;
-    public const int RotationAlignedAlongDirection = 23;
-    public const int Player = 24;
-    public const int FreePoint = 25;
-    public const int GateNumber = 26;
-    public const int SpawnPosition = 27;
-    public const int SpawnPositionGates = 28;
-    public const int SpawnPositions = 29;
-    public const int SpawnRequsted = 30;
-    public const int WaitingToSpawn = 31;
-    public const int CurrentWaveEnemies = 32;
-    public const int CurrentWaveNumber = 33;
-    public const int WaveEnemiesAlive = 34;
-    public const int WaveInProgress = 35;
-    public const int WaveStartRequsted = 36;
+    public const int Attacking = 13;
+    public const int Hitted = 14;
+    public const int MeleeAttack = 15;
+    public const int Range = 16;
+    public const int RangeAttack = 17;
+    public const int Enemy = 18;
+    public const int CurrentHealth = 19;
+    public const int Dead = 20;
+    public const int MaxHealth = 21;
+    public const int MaxMovementOffsets = 22;
+    public const int MinMovementOffsets = 23;
+    public const int MovementAvailable = 24;
+    public const int MovementCurrentPointIndex = 25;
+    public const int MovementPointMinDistances = 26;
+    public const int MovementPoints = 27;
+    public const int MovementSpeed = 28;
+    public const int Moving = 29;
+    public const int RotationAlignedAlongDirection = 30;
+    public const int Player = 31;
+    public const int FreePoint = 32;
+    public const int GateNumber = 33;
+    public const int SpawnPosition = 34;
+    public const int SpawnPositionGates = 35;
+    public const int SpawnPositions = 36;
+    public const int SpawnRequsted = 37;
+    public const int WaitingToSpawn = 38;
+    public const int CurrentWaveEnemies = 39;
+    public const int CurrentWaveNumber = 40;
+    public const int WaveEnemiesAlive = 41;
+    public const int WaveInProgress = 42;
+    public const int WaveStartRequsted = 43;
 
-    public const int TotalComponents = 37;
+    public const int TotalComponents = 44;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -62,9 +69,15 @@ public static class GameComponentsLookup {
         "ViewPath",
         "ViewPrefab",
         "Attack",
+        "Attacking",
+        "Hitted",
         "MeleeAttack",
+        "Range",
         "RangeAttack",
         "Enemy",
+        "CurrentHealth",
+        "Dead",
+        "MaxHealth",
         "MaxMovementOffsets",
         "MinMovementOffsets",
         "MovementAvailable",
@@ -72,6 +85,7 @@ public static class GameComponentsLookup {
         "MovementPointMinDistances",
         "MovementPoints",
         "MovementSpeed",
+        "Moving",
         "RotationAlignedAlongDirection",
         "Player",
         "FreePoint",
@@ -102,9 +116,15 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Common.ViewPath),
         typeof(Code.Game.Common.ViewPrefab),
         typeof(Code.Game.Features.Attack.Attack),
+        typeof(Code.Game.Features.Attack.Attacking),
+        typeof(Code.Game.Features.Attack.Hitted),
         typeof(Code.Game.Features.Attack.MeleeAttack),
+        typeof(Code.Game.Features.Attack.Range),
         typeof(Code.Game.Features.Attack.RangeAttack),
         typeof(Code.Game.Features.Enemy.EnemyComponent),
+        typeof(Code.Game.Features.Health.CurrentHealth),
+        typeof(Code.Game.Features.Health.Dead),
+        typeof(Code.Game.Features.Health.MaxHealth),
         typeof(Code.Game.Features.Movement.MaxMovementOffsets),
         typeof(Code.Game.Features.Movement.MinMovementOffsets),
         typeof(Code.Game.Features.Movement.MovementAvailable),
@@ -112,6 +132,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Movement.MovementPointMinDistances),
         typeof(Code.Game.Features.Movement.MovementPoints),
         typeof(Code.Game.Features.Movement.MovementSpeed),
+        typeof(Code.Game.Features.Movement.Moving),
         typeof(Code.Game.Features.Movement.RotationAlignedAlongDirection),
         typeof(Code.Game.Features.Player.PlayerComponent),
         typeof(Code.Game.Features.Spawn.FreePoint),

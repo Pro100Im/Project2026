@@ -1,6 +1,8 @@
 using Code.Common.Cameras;
 using Code.Common.UI.Transition;
 using Code.Game.Features;
+using Code.Game.Features.Animator;
+using Code.Game.Features.Animator.Systems;
 using Code.Game.Features.Enemy.Factory;
 using Code.Game.Features.Enemy.Systems;
 using Code.Game.Features.Input;
@@ -93,6 +95,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<SpawnFeature>(Lifetime.Singleton);
             builder.Register<CreateViewFeature>(Lifetime.Singleton);
             builder.Register<MovementFeature>(Lifetime.Singleton);
+            builder.Register<AnimatorFeature>(Lifetime.Singleton);
         }
 
         private void BindSystems(IContainerBuilder builder)
@@ -109,11 +112,12 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<WaveStartSystem>(Lifetime.Singleton);
             builder.Register<WaveProgressSystem>(Lifetime.Singleton);
 
-            builder.Register<EnemyAnimatorSystem>(Lifetime.Singleton);
             builder.Register<EnemySelectSpawnPosSystem>(Lifetime.Singleton);
             builder.Register<EnemySpawnSystem>(Lifetime.Singleton);
 
             builder.Register<EnemiesMovementSystem>(Lifetime.Singleton);
+
+            builder.Register<CharacterAnimatorSystem>(Lifetime.Singleton);
         }
 
         private void BindGameFactories(IContainerBuilder builder)

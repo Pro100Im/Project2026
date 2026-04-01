@@ -42,11 +42,15 @@ namespace Code.Game.Features.Movement.Systems
             {
                 foreach (var enemy in _enemies)
                 {
-                    if (enemy.movementCurrentPointIndex.Value >= movementPoint.movementPoints.Value.Length)
-                        continue;
-
                     if (enemy.gateNumber.Value != movementPoint.gateNumber.Value)
                         continue;
+
+                    if (enemy.movementCurrentPointIndex.Value >= movementPoint.movementPoints.Value.Length)
+                    {
+                        enemy.isMoving = false;
+
+                        continue;
+                    }
 
                     var index = enemy.movementCurrentPointIndex.Value;
                     var targetPoint = movementPoint.movementPoints.Value[index];
@@ -67,6 +71,7 @@ namespace Code.Game.Features.Movement.Systems
                         continue;
                     }
 
+                    enemy.isMoving = true;
                     enemy.transform.Value.position = Vector2.MoveTowards(
                         enemy.transform.Value.position,
                         targetPoint,

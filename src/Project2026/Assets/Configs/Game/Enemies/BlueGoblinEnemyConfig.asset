@@ -16,11 +16,25 @@ MonoBehaviour:
   - rid: -2
   - rid: 8869463032931287139
   - rid: 8869463032931287140
+  - rid: 8171215315377586296
+  - rid: 8171215315377586298
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 8171215315377586296
+      type: {class: HealthData, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Health>k__BackingField: 100
+        <Regen>k__BackingField: 0
+    - rid: 8171215315377586298
+      type: {class: AttackData, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Damage>k__BackingField: 1
+        <Range>k__BackingField: 1
+        <Cooldown>k__BackingField: 2
+        <IsMelee>k__BackingField: 1
     - rid: 8869463032931287139
       type: {class: ViewData, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
