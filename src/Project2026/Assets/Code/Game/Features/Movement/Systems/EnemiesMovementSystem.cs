@@ -1,3 +1,4 @@
+using Code.Common.Random;
 using Code.Common.Time;
 using Entitas;
 using UnityEngine;
@@ -7,13 +8,15 @@ namespace Code.Game.Features.Movement.Systems
     public class EnemiesMovementSystem : IExecuteSystem
     {
         private readonly ITimeService _timeService;
+        private readonly IRandomService _randomService;
 
         private readonly IGroup<GameEntity> _enemies;
         private readonly IGroup<GameEntity> _movementPoints;
 
-        public EnemiesMovementSystem(GameContext gameContext, ITimeService timeService)
+        public EnemiesMovementSystem(GameContext gameContext, ITimeService timeService, IRandomService randomService)
         {
             _timeService = timeService;
+            _randomService = randomService;
 
             _enemies = gameContext.GetGroup(GameMatcher
               .AllOf(
@@ -48,20 +51,21 @@ namespace Code.Game.Features.Movement.Systems
                     var index = enemy.movementCurrentPointIndex.Value;
                     var targetPoint = movementPoint.movementPoints.Value[index];
 
-                    if (Vector3.Distance(enemy.transform.Value.position, targetPoint) <= movementPoint.movementPointMinDistances.Value[index])
+                    var minOffset = movementPoint.minMovementOffsets.Value[index];
+                    var maxOffset = movementPoint.maxMovementOffsets.Value[index];
+
+                    var offsetX = _randomService.GetLocalRandom(minOffset.x, maxOffset.x, enemy.id.Value);
+                    var offsetY = _randomService.GetLocalRandom(minOffset.y, maxOffset.y, enemy.id.Value);
+                    
+                    targetPoint.x += offsetX;
+                    targetPoint.y += offsetY;
+
+                    if (Vector2.Distance(enemy.transform.Value.position, targetPoint) <= movementPoint.movementPointMinDistances.Value[index])
                     {
                         enemy.ReplaceMovementCurrentPointIndex(enemy.movementCurrentPointIndex.Value + 1);
 
                         continue;
                     }
-
-                    var minOffset = movementPoint.minMovementOffsets.Value[index];
-                    var maxOffset = movementPoint.maxMovementOffsets.Value[index];
-                    var offsetX = Random.Range(minOffset.x, maxOffset.x);
-                    var offsetY = Random.Range(minOffset.y, maxOffset.y);
-                    
-                    targetPoint.x += offsetX;
-                    targetPoint.y += offsetY;
 
                     enemy.transform.Value.position = Vector2.MoveTowards(
                         enemy.transform.Value.position,

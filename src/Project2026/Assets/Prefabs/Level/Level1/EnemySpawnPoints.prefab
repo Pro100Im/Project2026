@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3417902773519100520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8293790369465277792}
+  - component: {fileID: 6096807107413933010}
+  - component: {fileID: 3884660744364748317}
+  - component: {fileID: 5315653198331197930}
+  m_Layer: 0
+  m_Name: EnemySpawnPoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8293790369465277792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3417902773519100520}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6096807107413933010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3417902773519100520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e9e6d76a148574fa7021028a8f886a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.EntityBehaviour
+--- !u!114 &3884660744364748317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3417902773519100520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0abc3cebb78503f408f6ffec93452179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Spawn.Registrars.EnemiesSpawnPointsRegistrar
+  EntityView: {fileID: 6096807107413933010}
+  _enemiesSpawnPos:
+  - <SortOrder>k__BackingField: 6
+    <Gate>k__BackingField: 0
+    <Position>k__BackingField: {x: -10, y: 3, z: 0}
+  - <SortOrder>k__BackingField: 6
+    <Gate>k__BackingField: 0
+    <Position>k__BackingField: {x: -9, y: 3, z: 0}
+  - <SortOrder>k__BackingField: 6
+    <Gate>k__BackingField: 0
+    <Position>k__BackingField: {x: -8, y: 3, z: 0}
+  - <SortOrder>k__BackingField: 7
+    <Gate>k__BackingField: 0
+    <Position>k__BackingField: {x: -10, y: 2, z: 0}
+  - <SortOrder>k__BackingField: 7
+    <Gate>k__BackingField: 0
+    <Position>k__BackingField: {x: -9, y: 2, z: 0}
+  - <SortOrder>k__BackingField: 7
+    <Gate>k__BackingField: 1
+    <Position>k__BackingField: {x: -8, y: 2, z: 0}
+  - <SortOrder>k__BackingField: 8
+    <Gate>k__BackingField: 1
+    <Position>k__BackingField: {x: -10, y: 1, z: 0}
+  - <SortOrder>k__BackingField: 8
+    <Gate>k__BackingField: 1
+    <Position>k__BackingField: {x: -9, y: 1, z: 0}
+  - <SortOrder>k__BackingField: 8
+    <Gate>k__BackingField: 1
+    <Position>k__BackingField: {x: -8, y: 1, z: 0}
+  _tilemap: {fileID: 0}
+--- !u!114 &5315653198331197930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3417902773519100520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9267ce2d010e48444a785586d0cd3ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.SelfInitializeEntityView
+  _entityBehaviour: {fileID: 6096807107413933010}

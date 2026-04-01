@@ -11,14 +11,14 @@ public partial class GameEntity {
     public Code.Game.Features.Movement.MovementPoints movementPoints { get { return (Code.Game.Features.Movement.MovementPoints)GetComponent(GameComponentsLookup.MovementPoints); } }
     public bool hasMovementPoints { get { return HasComponent(GameComponentsLookup.MovementPoints); } }
 
-    public void AddMovementPoints(UnityEngine.Vector3[] newValue) {
+    public void AddMovementPoints(UnityEngine.Vector2[] newValue) {
         var index = GameComponentsLookup.MovementPoints;
         var component = (Code.Game.Features.Movement.MovementPoints)CreateComponent(index, typeof(Code.Game.Features.Movement.MovementPoints));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceMovementPoints(UnityEngine.Vector3[] newValue) {
+    public void ReplaceMovementPoints(UnityEngine.Vector2[] newValue) {
         var index = GameComponentsLookup.MovementPoints;
         var component = (Code.Game.Features.Movement.MovementPoints)CreateComponent(index, typeof(Code.Game.Features.Movement.MovementPoints));
         component.Value = newValue;

@@ -1,3 +1,4 @@
+using Code.Common.Random;
 using Code.Common.Time;
 using Code.Common.UI;
 using Code.Infrastructure.AssetManagement;
@@ -31,6 +32,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
         private void BindCommonServices(IContainerBuilder builder)
         {
             builder.Register<ITimeService, UnityTimeService>(Lifetime.Singleton);
+            builder.Register<IRandomService, RandomService>(Lifetime.Singleton);
             builder.Register<ISceneLoader, SceneLoader>(Lifetime.Singleton);
 
             builder.Register<UIService>(Lifetime.Singleton);

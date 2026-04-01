@@ -17,7 +17,7 @@ namespace Code.Game.Features.Movement.Registrars
         public override void RegisterComponents()
         {
             var minDistances = new float[_movementPath.Length];
-            var points = new Vector3[_movementPath.Length];
+            var points = new Vector2[_movementPath.Length];
             var minOffsets = new Vector2[_movementPath.Length];
             var maxOffsets = new Vector2[_movementPath.Length];
 
@@ -46,17 +46,30 @@ namespace Code.Game.Features.Movement.Registrars
 
         private void OnDrawGizmosSelected()
         {
-            if (_tilemap != null)
+            if (_tilemap != null && _movementPath != null)
             {
                 for (var i = 0; i < _movementPath.Length; i++)
                 {
-                    var pos = _tilemap.GetCellCenterWorld(_movementPath[i].MovementPoint);
+                    var pos = (Vector2)_tilemap.GetCellCenterWorld(_movementPath[i].MovementPoint);
 
                     Gizmos.color = _gizmoColor;
                     Gizmos.DrawWireCube(pos, _tilemap.cellSize);
+
+                    var offsetMinPos = pos + _movementPath[i].MinMovementOffset;
+                    var offsetMaxPos = pos + _movementPath[i].MaxMovementOffset;
+
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawWireSphere(offsetMinPos, 0.1f);
+
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawWireSphere(offsetMaxPos, 0.1f);
+
+                    Gizmos.color = Color.yellow;
+                    Gizmos.DrawLine(offsetMinPos, offsetMaxPos);
                 }
             }
         }
+
 
         [Serializable]
         private class MovementPath
