@@ -38,16 +38,15 @@ public static class GameComponentsLookup {
     public const int SpawnPosition = 27;
     public const int SpawnPositionGates = 28;
     public const int SpawnPositions = 29;
-    public const int SpawnPositionSortOrders = 30;
-    public const int SpawnRequsted = 31;
-    public const int WaitingToSpawn = 32;
-    public const int CurrentWaveEnemies = 33;
-    public const int CurrentWaveNumber = 34;
-    public const int WaveEnemiesAlive = 35;
-    public const int WaveInProgress = 36;
-    public const int WaveStartRequsted = 37;
+    public const int SpawnRequsted = 30;
+    public const int WaitingToSpawn = 31;
+    public const int CurrentWaveEnemies = 32;
+    public const int CurrentWaveNumber = 33;
+    public const int WaveEnemiesAlive = 34;
+    public const int WaveInProgress = 35;
+    public const int WaveStartRequsted = 36;
 
-    public const int TotalComponents = 38;
+    public const int TotalComponents = 37;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -80,7 +79,6 @@ public static class GameComponentsLookup {
         "SpawnPosition",
         "SpawnPositionGates",
         "SpawnPositions",
-        "SpawnPositionSortOrders",
         "SpawnRequsted",
         "WaitingToSpawn",
         "CurrentWaveEnemies",
@@ -121,7 +119,6 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Spawn.SpawnPosition),
         typeof(Code.Game.Features.Spawn.SpawnPositionGates),
         typeof(Code.Game.Features.Spawn.SpawnPositions),
-        typeof(Code.Game.Features.Spawn.SpawnPositionSortOrders),
         typeof(Code.Game.Features.Spawn.SpawnRequsted),
         typeof(Code.Game.Features.Spawn.WaitingToSpawn),
         typeof(Code.Game.Features.Wave.CurrentWaveEnemies),

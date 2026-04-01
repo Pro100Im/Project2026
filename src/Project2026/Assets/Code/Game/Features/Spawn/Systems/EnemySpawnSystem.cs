@@ -18,7 +18,6 @@ namespace Code.Game.Features.Spawn.Systems
               GameMatcher.SpawnRequsted,
               GameMatcher.SpawnPosition,
               GameMatcher.EntityConfig,
-              GameMatcher.SortOrder,
               GameMatcher.GateNumber,
               GameMatcher.Enemy));
 
@@ -30,7 +29,6 @@ namespace Code.Game.Features.Spawn.Systems
             foreach (var enemySpawn in _enemiesToSpawn.GetEntities(_buffer))
             {
                 var entity = _enemyFactory.Create(enemySpawn.entityConfig.Value, enemySpawn.spawnPosition.Value);
-                entity.AddSortOrder(enemySpawn.sortOrder.Value);
                 entity.AddGateNumber(enemySpawn.gateNumber.Value);
 
                 enemySpawn.Destroy();

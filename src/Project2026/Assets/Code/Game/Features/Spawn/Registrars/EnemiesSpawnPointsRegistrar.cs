@@ -14,7 +14,6 @@ namespace Code.Game.Features.Spawn.Registrars
         public override void RegisterComponents()
         {
             var positions = new Vector3[_enemiesSpawnPos.Length];
-            var sortOrders = new int[_enemiesSpawnPos.Length];
             var gates = new int[_enemiesSpawnPos.Length];
 
             for (var i = 0; i < _enemiesSpawnPos.Length; i++)
@@ -22,12 +21,10 @@ namespace Code.Game.Features.Spawn.Registrars
                 var position = _tilemap.GetCellCenterWorld(_enemiesSpawnPos[i].Position);
 
                 positions[i] = position;
-                sortOrders[i] = _enemiesSpawnPos[i].SortOrder;
                 gates[i] = _enemiesSpawnPos[i].Gate;
             }
 
             Entity.AddSpawnPositions(positions);
-            Entity.AddSpawnPositionSortOrders(sortOrders);
             Entity.AddSpawnPositionGates(gates);
             Entity.isEnemy = true;
         }

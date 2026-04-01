@@ -20,7 +20,6 @@ namespace Code.Game.Features.Spawn.Systems
             _spawnPositions = gameContext.GetGroup(GameMatcher
               .AllOf(
               GameMatcher.SpawnPositions,
-              GameMatcher.SpawnPositionSortOrders,
               GameMatcher.SpawnPositionGates,
               GameMatcher.Enemy));
         }
@@ -34,14 +33,10 @@ namespace Code.Game.Features.Spawn.Systems
                     var spawnPositions = spawnPos.spawnPositions.Value;
                     var randomIndex = Random.Range(0, spawnPositions.Length);
                     var position = spawnPositions[randomIndex];
-                    var order = spawnPos.spawnPositionSortOrders.Value[randomIndex];
                     var gate = spawnPos.spawnPositionGates.Value[randomIndex];
 
                     if (!enemySpawn.hasSpawnPosition)
                         enemySpawn.AddSpawnPosition(position);
-
-                    if (!enemySpawn.hasSortOrder)
-                        enemySpawn.AddSortOrder(order);
 
                     if (!enemySpawn.hasGateNumber)
                         enemySpawn.AddGateNumber(gate);

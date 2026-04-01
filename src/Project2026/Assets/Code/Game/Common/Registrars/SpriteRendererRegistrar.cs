@@ -10,8 +10,6 @@ namespace Code.Game.Common.Registrars
         public override void RegisterComponents()
         {
             Entity.AddSpriteRenderer(_spriteRenderer);
-
-            _spriteRenderer.sortingOrder = Entity.sortOrder.Value;
         }
 
         public override void UnregisterComponents()

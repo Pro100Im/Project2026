@@ -7,7 +7,6 @@ namespace Code.Game.Features.Spawn
     [Game] public class WaitingToSpawn : IComponent { }
     [Game] public class FreePoint : IComponent { }
     [Game] public class SpawnPositions : IComponent { public Vector3[] Value; }
-    [Game] public class SpawnPositionSortOrders : IComponent { public int[] Value; }
     [Game] public class SpawnPositionGates : IComponent { public int[] Value; }
     [Game] public class SpawnPosition : IComponent { public Vector3 Value; }
     [Game] public class GateNumber : IComponent { public int Value; }
