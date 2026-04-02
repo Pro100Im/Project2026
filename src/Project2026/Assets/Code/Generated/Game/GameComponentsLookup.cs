@@ -16,44 +16,47 @@ public static class GameComponentsLookup {
     public const int SelfDestructTimer = 5;
     public const int SortOrder = 6;
     public const int SpriteRenderer = 7;
-    public const int Transform = 8;
-    public const int View = 9;
-    public const int ViewPath = 10;
-    public const int ViewPrefab = 11;
-    public const int Attack = 12;
-    public const int Attacking = 13;
-    public const int Hitted = 14;
-    public const int MeleeAttack = 15;
-    public const int Range = 16;
-    public const int RangeAttack = 17;
-    public const int Enemy = 18;
-    public const int CurrentHealth = 19;
-    public const int Dead = 20;
-    public const int MaxHealth = 21;
-    public const int MaxMovementOffsets = 22;
-    public const int MinMovementOffsets = 23;
-    public const int MovementAvailable = 24;
-    public const int MovementCurrentPointIndex = 25;
-    public const int MovementPointMinDistances = 26;
-    public const int MovementPoints = 27;
-    public const int MovementSpeed = 28;
-    public const int Moving = 29;
-    public const int RotationAlignedAlongDirection = 30;
-    public const int Player = 31;
-    public const int FreePoint = 32;
-    public const int GateNumber = 33;
-    public const int SpawnPosition = 34;
-    public const int SpawnPositionGates = 35;
-    public const int SpawnPositions = 36;
-    public const int SpawnRequsted = 37;
-    public const int WaitingToSpawn = 38;
-    public const int CurrentWaveEnemies = 39;
-    public const int CurrentWaveNumber = 40;
-    public const int WaveEnemiesAlive = 41;
-    public const int WaveInProgress = 42;
-    public const int WaveStartRequsted = 43;
+    public const int Targetable = 8;
+    public const int TargetId = 9;
+    public const int Transform = 10;
+    public const int View = 11;
+    public const int ViewPath = 12;
+    public const int ViewPrefab = 13;
+    public const int Attack = 14;
+    public const int AttackDirection = 15;
+    public const int Attacking = 16;
+    public const int Hitted = 17;
+    public const int MeleeAttack = 18;
+    public const int Range = 19;
+    public const int RangeAttack = 20;
+    public const int Enemy = 21;
+    public const int CurrentHealth = 22;
+    public const int Dead = 23;
+    public const int MaxHealth = 24;
+    public const int MaxMovementOffsets = 25;
+    public const int MinMovementOffsets = 26;
+    public const int MovementAvailable = 27;
+    public const int MovementCurrentPointIndex = 28;
+    public const int MovementPointMinDistances = 29;
+    public const int MovementPoints = 30;
+    public const int MovementSpeed = 31;
+    public const int Moving = 32;
+    public const int RotationAlignedAlongDirection = 33;
+    public const int Player = 34;
+    public const int FreePoint = 35;
+    public const int GateNumber = 36;
+    public const int SpawnPosition = 37;
+    public const int SpawnPositionGates = 38;
+    public const int SpawnPositions = 39;
+    public const int SpawnRequsted = 40;
+    public const int WaitingToSpawn = 41;
+    public const int CurrentWaveEnemies = 42;
+    public const int CurrentWaveNumber = 43;
+    public const int WaveEnemiesAlive = 44;
+    public const int WaveInProgress = 45;
+    public const int WaveStartRequsted = 46;
 
-    public const int TotalComponents = 44;
+    public const int TotalComponents = 47;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -64,11 +67,14 @@ public static class GameComponentsLookup {
         "SelfDestructTimer",
         "SortOrder",
         "SpriteRenderer",
+        "Targetable",
+        "TargetId",
         "Transform",
         "View",
         "ViewPath",
         "ViewPrefab",
         "Attack",
+        "AttackDirection",
         "Attacking",
         "Hitted",
         "MeleeAttack",
@@ -111,11 +117,14 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Common.SelfDestructTimer),
         typeof(Code.Game.Common.SortOrder),
         typeof(Code.Game.Common.SpriteRendererComponent),
+        typeof(Code.Game.Common.Targetable),
+        typeof(Code.Game.Common.TargetId),
         typeof(Code.Game.Common.TransformComponent),
         typeof(Code.Game.Common.View),
         typeof(Code.Game.Common.ViewPath),
         typeof(Code.Game.Common.ViewPrefab),
         typeof(Code.Game.Features.Attack.Attack),
+        typeof(Code.Game.Features.Attack.AttackDirectionComponent),
         typeof(Code.Game.Features.Attack.Attacking),
         typeof(Code.Game.Features.Attack.Hitted),
         typeof(Code.Game.Features.Attack.MeleeAttack),

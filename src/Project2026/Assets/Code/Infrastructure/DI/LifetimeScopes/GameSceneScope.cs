@@ -3,8 +3,9 @@ using Code.Common.UI.Transition;
 using Code.Game.Features;
 using Code.Game.Features.Animator;
 using Code.Game.Features.Animator.Systems;
+using Code.Game.Features.Attack;
+using Code.Game.Features.Attack.Systems;
 using Code.Game.Features.Enemy.Factory;
-using Code.Game.Features.Enemy.Systems;
 using Code.Game.Features.Input;
 using Code.Game.Features.Input.Systems;
 using Code.Game.Features.Movement;
@@ -95,6 +96,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<SpawnFeature>(Lifetime.Singleton);
             builder.Register<CreateViewFeature>(Lifetime.Singleton);
             builder.Register<MovementFeature>(Lifetime.Singleton);
+            builder.Register<AttackFeature>(Lifetime.Singleton);
             builder.Register<AnimatorFeature>(Lifetime.Singleton);
         }
 
@@ -115,9 +117,11 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<EnemySelectSpawnPosSystem>(Lifetime.Singleton);
             builder.Register<EnemySpawnSystem>(Lifetime.Singleton);
 
+            builder.Register<CharacterAnimatorSystem>(Lifetime.Singleton);
+
             builder.Register<EnemiesMovementSystem>(Lifetime.Singleton);
 
-            builder.Register<CharacterAnimatorSystem>(Lifetime.Singleton);
+            builder.Register<SearchingClosestTargetSystem>(Lifetime.Singleton);
         }
 
         private void BindGameFactories(IContainerBuilder builder)

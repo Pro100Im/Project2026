@@ -23,6 +23,7 @@ namespace Code.Game.Features.Enemy.Factory
    
             entity.isEnemy = true;
             entity.isMovementAvailable = true;
+            entity.isTargetable = true;
 
             var view = entityConfig.GetProperty<ViewData>();
             if (view != null)
@@ -34,6 +35,14 @@ namespace Code.Game.Features.Enemy.Factory
                 entity.AddMovementSpeed(movement.Speed);
                 entity.AddMovementCurrentPointIndex(0);
                 entity.isMovementAvailable = true;
+            }
+
+            var attack = entityConfig.GetProperty<AttackData>();
+            if (attack != null)
+            {
+                entity.AddAttack(attack.Damage);
+                entity.AddRange(attack.Range);
+                entity.isTargetable = true;
             }
 
             return entity;

@@ -1,4 +1,5 @@
 using Code.Game.Features.Animator;
+using Code.Game.Features.Attack;
 using Code.Game.Features.Input;
 using Code.Game.Features.Movement;
 using Code.Game.Features.Player;
@@ -21,6 +22,7 @@ namespace Code.Game.Features
             Add(systemFactory.Create<CreateViewFeature>());
             Add(systemFactory.Create<AnimatorFeature>());
             Add(systemFactory.Create<MovementFeature>());
+            Add(systemFactory.Create<AttackFeature>());
         }
     }
 }

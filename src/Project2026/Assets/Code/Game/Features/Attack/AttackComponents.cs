@@ -8,4 +8,12 @@ namespace Code.Game.Features.Attack
     [Game] public class MeleeAttack : IComponent { }
     [Game] public class Attacking : IComponent { }
     [Game] public class Hitted : IComponent { }
+    [Game] public class AttackDirectionComponent : IComponent { public AttackDirection Value; }
+}
+
+public enum AttackDirection
+{
+    Up,
+    Down,
+    Side
 }

@@ -9,6 +9,8 @@ namespace Code.Game.Common
     [Game] public class Id : IComponent { [PrimaryEntityIndex] public int Value; }
     [Game] public class SortOrder : IComponent { public int Value; }
     [Game] public class Cooldown : IComponent { public float Value; }
+    [Game] public class Targetable : IComponent { }
+    [Game] public class TargetId : IComponent { public int Value; }
 
     [Game] public class EntityConfigComponent : IComponent { public EntityConfig Value; }
 
