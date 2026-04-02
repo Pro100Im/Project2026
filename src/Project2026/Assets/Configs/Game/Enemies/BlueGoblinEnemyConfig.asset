@@ -33,7 +33,8 @@ MonoBehaviour:
       data:
         <Damage>k__BackingField: 1
         <Range>k__BackingField: 1
-        <Cooldown>k__BackingField: 2
+        <Cooldown>k__BackingField: 3
+        <Duration>k__BackingField: 0.6
         <IsMelee>k__BackingField: 1
     - rid: 8869463032931287139
       type: {class: ViewData, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}

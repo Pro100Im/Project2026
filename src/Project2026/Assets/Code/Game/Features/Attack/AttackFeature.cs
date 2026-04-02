@@ -9,6 +9,8 @@ namespace Code.Game.Features.Attack
         {
             Add(systemFactory.Create<SearchingClosestTargetSystem>());
             Add(systemFactory.Create<AttackStartSystem>());
+            Add(systemFactory.Create<AttackProcessSystem>());
+            Add(systemFactory.Create<AttackEndSystem>());
         }
     }
 }

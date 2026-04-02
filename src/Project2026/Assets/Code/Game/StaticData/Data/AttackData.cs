@@ -9,6 +9,7 @@ namespace Code.Game.StaticData.Data
         [field: SerializeField] public float Damage { get; private set; }
         [field: SerializeField] public float Range { get; private set; }
         [field: SerializeField] public float Cooldown { get; private set; }
+        [field: SerializeField] public float Duration { get; private set; }
         [field: SerializeField] public bool  IsMelee { get; private set; }
     }
 }

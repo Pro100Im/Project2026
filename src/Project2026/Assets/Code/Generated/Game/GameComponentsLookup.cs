@@ -23,40 +23,44 @@ public static class GameComponentsLookup {
     public const int ViewPath = 12;
     public const int ViewPrefab = 13;
     public const int Attack = 14;
-    public const int AttackDirection = 15;
-    public const int Attacking = 16;
-    public const int Hitted = 17;
-    public const int MeleeAttack = 18;
-    public const int Range = 19;
-    public const int RangeAttack = 20;
-    public const int Enemy = 21;
-    public const int CurrentHealth = 22;
-    public const int Dead = 23;
-    public const int MaxHealth = 24;
-    public const int MaxMovementOffsets = 25;
-    public const int MinMovementOffsets = 26;
-    public const int MovementAvailable = 27;
-    public const int MovementCurrentPointIndex = 28;
-    public const int MovementPointMinDistances = 29;
-    public const int MovementPoints = 30;
-    public const int MovementSpeed = 31;
-    public const int Moving = 32;
-    public const int RotationAlignedAlongDirection = 33;
-    public const int Player = 34;
-    public const int FreePoint = 35;
-    public const int GateNumber = 36;
-    public const int SpawnPosition = 37;
-    public const int SpawnPositionGates = 38;
-    public const int SpawnPositions = 39;
-    public const int SpawnRequsted = 40;
-    public const int WaitingToSpawn = 41;
-    public const int CurrentWaveEnemies = 42;
-    public const int CurrentWaveNumber = 43;
-    public const int WaveEnemiesAlive = 44;
-    public const int WaveInProgress = 45;
-    public const int WaveStartRequsted = 46;
+    public const int AttackCooldown = 15;
+    public const int AttackCooldownRemaining = 16;
+    public const int AttackDirection = 17;
+    public const int AttackDuration = 18;
+    public const int AttackDurationRemaining = 19;
+    public const int Attacking = 20;
+    public const int Hitted = 21;
+    public const int MeleeAttack = 22;
+    public const int Range = 23;
+    public const int RangeAttack = 24;
+    public const int Enemy = 25;
+    public const int CurrentHealth = 26;
+    public const int Dead = 27;
+    public const int MaxHealth = 28;
+    public const int MaxMovementOffsets = 29;
+    public const int MinMovementOffsets = 30;
+    public const int MovementAvailable = 31;
+    public const int MovementCurrentPointIndex = 32;
+    public const int MovementPointMinDistances = 33;
+    public const int MovementPoints = 34;
+    public const int MovementSpeed = 35;
+    public const int Moving = 36;
+    public const int RotationAlignedAlongDirection = 37;
+    public const int Player = 38;
+    public const int FreePoint = 39;
+    public const int GateNumber = 40;
+    public const int SpawnPosition = 41;
+    public const int SpawnPositionGates = 42;
+    public const int SpawnPositions = 43;
+    public const int SpawnRequsted = 44;
+    public const int WaitingToSpawn = 45;
+    public const int CurrentWaveEnemies = 46;
+    public const int CurrentWaveNumber = 47;
+    public const int WaveEnemiesAlive = 48;
+    public const int WaveInProgress = 49;
+    public const int WaveStartRequsted = 50;
 
-    public const int TotalComponents = 47;
+    public const int TotalComponents = 51;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -74,7 +78,11 @@ public static class GameComponentsLookup {
         "ViewPath",
         "ViewPrefab",
         "Attack",
+        "AttackCooldown",
+        "AttackCooldownRemaining",
         "AttackDirection",
+        "AttackDuration",
+        "AttackDurationRemaining",
         "Attacking",
         "Hitted",
         "MeleeAttack",
@@ -124,7 +132,11 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Common.ViewPath),
         typeof(Code.Game.Common.ViewPrefab),
         typeof(Code.Game.Features.Attack.Attack),
+        typeof(Code.Game.Features.Attack.AttackCooldown),
+        typeof(Code.Game.Features.Attack.AttackCooldownRemaining),
         typeof(Code.Game.Features.Attack.AttackDirectionComponent),
+        typeof(Code.Game.Features.Attack.AttackDuration),
+        typeof(Code.Game.Features.Attack.AttackDurationRemaining),
         typeof(Code.Game.Features.Attack.Attacking),
         typeof(Code.Game.Features.Attack.Hitted),
         typeof(Code.Game.Features.Attack.MeleeAttack),

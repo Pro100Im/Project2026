@@ -42,6 +42,10 @@ namespace Code.Game.Features.Enemy.Factory
             {
                 entity.AddAttack(attack.Damage);
                 entity.AddRange(attack.Range);
+                entity.AddAttackCooldown(attack.Cooldown);
+                entity.AddAttackCooldownRemaining(0);
+                entity.AddAttackDuration(attack.Duration);
+                entity.AddAttackDurationRemaining(0);
                 entity.isTargetable = true;
             }
 

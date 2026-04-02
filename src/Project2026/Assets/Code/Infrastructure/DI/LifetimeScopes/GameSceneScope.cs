@@ -123,6 +123,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<SearchingClosestTargetSystem>(Lifetime.Singleton);
             builder.Register<AttackStartSystem>(Lifetime.Singleton);
+            builder.Register<AttackProcessSystem>(Lifetime.Singleton);
+            builder.Register<AttackEndSystem>(Lifetime.Singleton);
         }
 
         private void BindGameFactories(IContainerBuilder builder)
