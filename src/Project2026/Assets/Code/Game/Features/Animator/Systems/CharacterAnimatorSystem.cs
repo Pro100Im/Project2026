@@ -1,7 +1,9 @@
+using Code.Game.Features.Attack;
 using Entitas;
 
 namespace Code.Game.Features.Animator.Systems
 {
+    // to do
     public class CharacterAnimatorSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _characters;
@@ -31,6 +33,23 @@ namespace Code.Game.Features.Animator.Systems
 
                 if(character.isAttacking)
                 {
+                    switch (character.attackDirection.Value)
+                    {
+                        case AttackDirection.Side:
+                            if (!stateInfo.IsName("AttackRight"))
+                                animator.Play("AttackRight");
+                            break;
+
+                        case AttackDirection.Up:
+                            if (!stateInfo.IsName("AttackUp"))
+                                animator.Play("AttackUp");
+                            break;
+
+                        case AttackDirection.Down:
+                            if (!stateInfo.IsName("AttackDown"))
+                                animator.Play("AttackDown");
+                            break;
+                    }
 
                     continue;
                 }

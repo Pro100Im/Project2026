@@ -122,6 +122,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<EnemiesMovementSystem>(Lifetime.Singleton);
 
             builder.Register<SearchingClosestTargetSystem>(Lifetime.Singleton);
+            builder.Register<AttackStartSystem>(Lifetime.Singleton);
         }
 
         private void BindGameFactories(IContainerBuilder builder)
