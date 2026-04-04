@@ -45,7 +45,7 @@ namespace Code.Game.Features.Movement.Systems
                     if (enemy.gateNumber.Value != movementPoint.gateNumber.Value)
                         continue;
 
-                    if (enemy.movementCurrentPointIndex.Value >= movementPoint.movementPoints.Value.Length)
+                    if (enemy.movementCurrentPointIndex.Value >= movementPoint.movementPoints.Value.Length || enemy.isAttacking)
                     {
                         enemy.isMoving = false;
 

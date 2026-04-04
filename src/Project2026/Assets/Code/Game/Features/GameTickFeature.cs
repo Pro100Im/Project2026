@@ -1,5 +1,8 @@
 using Code.Game.Features.Animator;
 using Code.Game.Features.Attack;
+using Code.Game.Features.Cooldown;
+using Code.Game.Features.Damage;
+using Code.Game.Features.Duration;
 using Code.Game.Features.Input;
 using Code.Game.Features.Movement;
 using Code.Game.Features.Player;
@@ -20,9 +23,16 @@ namespace Code.Game.Features
             Add(systemFactory.Create<WaveFeature>());
             Add(systemFactory.Create<SpawnFeature>());
             Add(systemFactory.Create<CreateViewFeature>());
-            Add(systemFactory.Create<AnimatorFeature>());
+
             Add(systemFactory.Create<MovementFeature>());
+
             Add(systemFactory.Create<AttackFeature>());
+            Add(systemFactory.Create<DamageFeature>());
+
+            Add(systemFactory.Create<AnimatorFeature>());
+
+            Add(systemFactory.Create<CooldownFeature>());
+            Add(systemFactory.Create<DurationFeature>());
         }
     }
 }

@@ -5,6 +5,12 @@ using Code.Game.Features.Animator;
 using Code.Game.Features.Animator.Systems;
 using Code.Game.Features.Attack;
 using Code.Game.Features.Attack.Systems;
+using Code.Game.Features.Cooldown;
+using Code.Game.Features.Cooldown.Systems;
+using Code.Game.Features.Damage;
+using Code.Game.Features.Damage.Systems;
+using Code.Game.Features.Duration;
+using Code.Game.Features.Duration.Systems;
 using Code.Game.Features.Enemy.Factory;
 using Code.Game.Features.Input;
 using Code.Game.Features.Input.Systems;
@@ -92,12 +98,19 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<InputFeature>(Lifetime.Singleton);
             builder.Register<PlayerFeature>(Lifetime.Singleton);
 
+            builder.Register<CooldownFeature>(Lifetime.Singleton);
+            builder.Register<DurationFeature>(Lifetime.Singleton);
+
             builder.Register<WaveFeature>(Lifetime.Singleton);
             builder.Register<SpawnFeature>(Lifetime.Singleton);
             builder.Register<CreateViewFeature>(Lifetime.Singleton);
-            builder.Register<MovementFeature>(Lifetime.Singleton);
-            builder.Register<AttackFeature>(Lifetime.Singleton);
+
             builder.Register<AnimatorFeature>(Lifetime.Singleton);
+
+            builder.Register<MovementFeature>(Lifetime.Singleton);
+
+            builder.Register<AttackFeature>(Lifetime.Singleton);
+            builder.Register<DamageFeature>(Lifetime.Singleton);
         }
 
         private void BindSystems(IContainerBuilder builder)
@@ -125,6 +138,11 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<AttackStartSystem>(Lifetime.Singleton);
             builder.Register<AttackProcessSystem>(Lifetime.Singleton);
             builder.Register<AttackEndSystem>(Lifetime.Singleton);
+
+            builder.Register<ApplyDamageSystem>(Lifetime.Singleton);
+
+            builder.Register<CooldownLeftSystem>(Lifetime.Singleton);
+            builder.Register<DurationLeftSystem>(Lifetime.Singleton);
         }
 
         private void BindGameFactories(IContainerBuilder builder)

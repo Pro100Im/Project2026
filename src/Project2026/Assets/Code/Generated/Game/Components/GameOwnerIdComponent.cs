@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Code.Game.Features.Cooldown.Cooldown cooldown { get { return (Code.Game.Features.Cooldown.Cooldown)GetComponent(GameComponentsLookup.Cooldown); } }
-    public bool hasCooldown { get { return HasComponent(GameComponentsLookup.Cooldown); } }
+    public Code.Game.Common.OwnerId ownerId { get { return (Code.Game.Common.OwnerId)GetComponent(GameComponentsLookup.OwnerId); } }
+    public bool hasOwnerId { get { return HasComponent(GameComponentsLookup.OwnerId); } }
 
-    public void AddCooldown(float newValue) {
-        var index = GameComponentsLookup.Cooldown;
-        var component = (Code.Game.Features.Cooldown.Cooldown)CreateComponent(index, typeof(Code.Game.Features.Cooldown.Cooldown));
+    public void AddOwnerId(int newValue) {
+        var index = GameComponentsLookup.OwnerId;
+        var component = (Code.Game.Common.OwnerId)CreateComponent(index, typeof(Code.Game.Common.OwnerId));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceCooldown(float newValue) {
-        var index = GameComponentsLookup.Cooldown;
-        var component = (Code.Game.Features.Cooldown.Cooldown)CreateComponent(index, typeof(Code.Game.Features.Cooldown.Cooldown));
+    public void ReplaceOwnerId(int newValue) {
+        var index = GameComponentsLookup.OwnerId;
+        var component = (Code.Game.Common.OwnerId)CreateComponent(index, typeof(Code.Game.Common.OwnerId));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveCooldown() {
-        RemoveComponent(GameComponentsLookup.Cooldown);
+    public void RemoveOwnerId() {
+        RemoveComponent(GameComponentsLookup.OwnerId);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherCooldown;
+    static Entitas.IMatcher<GameEntity> _matcherOwnerId;
 
-    public static Entitas.IMatcher<GameEntity> Cooldown {
+    public static Entitas.IMatcher<GameEntity> OwnerId {
         get {
-            if (_matcherCooldown == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Cooldown);
+            if (_matcherOwnerId == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.OwnerId);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherCooldown = matcher;
+                _matcherOwnerId = matcher;
             }
 
-            return _matcherCooldown;
+            return _matcherOwnerId;
         }
     }
 }

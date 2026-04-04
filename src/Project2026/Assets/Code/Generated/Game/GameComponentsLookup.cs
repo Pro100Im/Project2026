@@ -9,10 +9,10 @@
 public static class GameComponentsLookup {
 
     public const int Animator = 0;
-    public const int Cooldown = 1;
-    public const int Destructed = 2;
-    public const int EntityConfig = 3;
-    public const int Id = 4;
+    public const int Destructed = 1;
+    public const int EntityConfig = 2;
+    public const int Id = 3;
+    public const int OwnerId = 4;
     public const int SelfDestructTimer = 5;
     public const int SortOrder = 6;
     public const int SpriteRenderer = 7;
@@ -22,52 +22,54 @@ public static class GameComponentsLookup {
     public const int View = 11;
     public const int ViewPath = 12;
     public const int ViewPrefab = 13;
-    public const int Attack = 14;
+    public const int AttackAvailable = 14;
     public const int AttackCooldown = 15;
-    public const int AttackCooldownRemaining = 16;
-    public const int AttackDirection = 17;
-    public const int AttackDuration = 18;
-    public const int AttackDurationRemaining = 19;
-    public const int Attacking = 20;
-    public const int Hitted = 21;
-    public const int MeleeAttack = 22;
-    public const int Range = 23;
-    public const int RangeAttack = 24;
-    public const int Enemy = 25;
-    public const int CurrentHealth = 26;
-    public const int Dead = 27;
-    public const int MaxHealth = 28;
-    public const int MaxMovementOffsets = 29;
-    public const int MinMovementOffsets = 30;
-    public const int MovementAvailable = 31;
-    public const int MovementCurrentPointIndex = 32;
-    public const int MovementPointMinDistances = 33;
-    public const int MovementPoints = 34;
-    public const int MovementSpeed = 35;
-    public const int Moving = 36;
-    public const int RotationAlignedAlongDirection = 37;
-    public const int Player = 38;
-    public const int FreePoint = 39;
-    public const int GateNumber = 40;
-    public const int SpawnPosition = 41;
-    public const int SpawnPositionGates = 42;
-    public const int SpawnPositions = 43;
-    public const int SpawnRequsted = 44;
-    public const int WaitingToSpawn = 45;
-    public const int CurrentWaveEnemies = 46;
-    public const int CurrentWaveNumber = 47;
-    public const int WaveEnemiesAlive = 48;
-    public const int WaveInProgress = 49;
-    public const int WaveStartRequsted = 50;
+    public const int AttackDirection = 16;
+    public const int AttackDuration = 17;
+    public const int Attacking = 18;
+    public const int Hitted = 19;
+    public const int MeleeAttack = 20;
+    public const int Range = 21;
+    public const int RangeAttack = 22;
+    public const int Cooldown = 23;
+    public const int Damage = 24;
+    public const int DamageRequest = 25;
+    public const int Duration = 26;
+    public const int Enemy = 27;
+    public const int CurrentHealth = 28;
+    public const int Dead = 29;
+    public const int MaxHealth = 30;
+    public const int MaxMovementOffsets = 31;
+    public const int MinMovementOffsets = 32;
+    public const int MovementAvailable = 33;
+    public const int MovementCurrentPointIndex = 34;
+    public const int MovementPointMinDistances = 35;
+    public const int MovementPoints = 36;
+    public const int MovementSpeed = 37;
+    public const int Moving = 38;
+    public const int RotationAlignedAlongDirection = 39;
+    public const int Player = 40;
+    public const int FreePoint = 41;
+    public const int GateNumber = 42;
+    public const int SpawnPosition = 43;
+    public const int SpawnPositionGates = 44;
+    public const int SpawnPositions = 45;
+    public const int SpawnRequsted = 46;
+    public const int WaitingToSpawn = 47;
+    public const int CurrentWaveEnemies = 48;
+    public const int CurrentWaveNumber = 49;
+    public const int WaveEnemiesAlive = 50;
+    public const int WaveInProgress = 51;
+    public const int WaveStartRequsted = 52;
 
-    public const int TotalComponents = 51;
+    public const int TotalComponents = 53;
 
     public static readonly string[] componentNames = {
         "Animator",
-        "Cooldown",
         "Destructed",
         "EntityConfig",
         "Id",
+        "OwnerId",
         "SelfDestructTimer",
         "SortOrder",
         "SpriteRenderer",
@@ -77,17 +79,19 @@ public static class GameComponentsLookup {
         "View",
         "ViewPath",
         "ViewPrefab",
-        "Attack",
+        "AttackAvailable",
         "AttackCooldown",
-        "AttackCooldownRemaining",
         "AttackDirection",
         "AttackDuration",
-        "AttackDurationRemaining",
         "Attacking",
         "Hitted",
         "MeleeAttack",
         "Range",
         "RangeAttack",
+        "Cooldown",
+        "Damage",
+        "DamageRequest",
+        "Duration",
         "Enemy",
         "CurrentHealth",
         "Dead",
@@ -118,10 +122,10 @@ public static class GameComponentsLookup {
 
     public static readonly System.Type[] componentTypes = {
         typeof(Code.Game.Common.AnimatorComponent),
-        typeof(Code.Game.Common.Cooldown),
         typeof(Code.Game.Common.Destructed),
         typeof(Code.Game.Common.EntityConfigComponent),
         typeof(Code.Game.Common.Id),
+        typeof(Code.Game.Common.OwnerId),
         typeof(Code.Game.Common.SelfDestructTimer),
         typeof(Code.Game.Common.SortOrder),
         typeof(Code.Game.Common.SpriteRendererComponent),
@@ -131,17 +135,19 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Common.View),
         typeof(Code.Game.Common.ViewPath),
         typeof(Code.Game.Common.ViewPrefab),
-        typeof(Code.Game.Features.Attack.Attack),
+        typeof(Code.Game.Features.Attack.AttackAvailable),
         typeof(Code.Game.Features.Attack.AttackCooldown),
-        typeof(Code.Game.Features.Attack.AttackCooldownRemaining),
         typeof(Code.Game.Features.Attack.AttackDirectionComponent),
         typeof(Code.Game.Features.Attack.AttackDuration),
-        typeof(Code.Game.Features.Attack.AttackDurationRemaining),
         typeof(Code.Game.Features.Attack.Attacking),
         typeof(Code.Game.Features.Attack.Hitted),
         typeof(Code.Game.Features.Attack.MeleeAttack),
         typeof(Code.Game.Features.Attack.Range),
         typeof(Code.Game.Features.Attack.RangeAttack),
+        typeof(Code.Game.Features.Cooldown.Cooldown),
+        typeof(Code.Game.Features.Damage.Damage),
+        typeof(Code.Game.Features.Damage.DamageRequest),
+        typeof(Code.Game.Features.Duration.Duration),
         typeof(Code.Game.Features.Enemy.EnemyComponent),
         typeof(Code.Game.Features.Health.CurrentHealth),
         typeof(Code.Game.Features.Health.Dead),

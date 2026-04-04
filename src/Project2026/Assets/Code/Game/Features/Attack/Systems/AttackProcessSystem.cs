@@ -14,26 +14,13 @@ namespace Code.Game.Features.Attack.Systems
 
             _attackers = gameContext.GetGroup(GameMatcher
                 .AllOf(
-                    GameMatcher.Attack,
-                    GameMatcher.AttackCooldown,
-                    GameMatcher.AttackCooldownRemaining,
-                    GameMatcher.TargetId));
+                GameMatcher.TargetId,
+                GameMatcher.Attacking));
         }
 
         public void Execute()
         {
-            foreach (var attacker in _attackers)
-            {
-                if (attacker.attackCooldownRemaining.Value > 0)
-                {
-                    attacker.ReplaceAttackCooldownRemaining(attacker.attackCooldownRemaining.Value - _timeService.DeltaTime);
-                }
 
-                if(attacker.attackCooldownRemaining.Value > 0)
-                {
-                    attacker.ReplaceAttackDurationRemaining(attacker.attackDurationRemaining.Value - _timeService.DeltaTime);
-                }
-            }
         }
     }
 }

@@ -40,13 +40,12 @@ namespace Code.Game.Features.Enemy.Factory
             var attack = entityConfig.GetProperty<AttackData>();
             if (attack != null)
             {
-                entity.AddAttack(attack.Damage);
+                entity.AddDamage(attack.Damage);
                 entity.AddRange(attack.Range);
                 entity.AddAttackCooldown(attack.Cooldown);
-                entity.AddAttackCooldownRemaining(0);
                 entity.AddAttackDuration(attack.Duration);
-                entity.AddAttackDurationRemaining(0);
                 entity.isTargetable = true;
+                entity.isAttackAvailable = true;
             }
 
             return entity;
