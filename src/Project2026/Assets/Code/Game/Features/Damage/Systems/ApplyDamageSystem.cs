@@ -1,3 +1,4 @@
+using Code.Common.Entity;
 using Entitas;
 
 namespace Code.Game.Features.Damage.Systems
@@ -11,22 +12,32 @@ namespace Code.Game.Features.Damage.Systems
             _damages = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Damage,
-                    GameMatcher.DamageRequest,
-                    GameMatcher.TargetId));
+                    GameMatcher.OwnerId,
+                    GameMatcher.TargetId,
+                    GameMatcher.DamageRequest));
         }
 
         public void Execute()
         {
             foreach (var damage in _damages)
             {
-                var target = damage.targetId.Value;
+                var targetId = damage.targetId.Value;
+                var target = GetGameEntityById.Get(targetId);
                 var damageAmount = damage.damage.Value;
 
-                //if (target.hasHealth)
-                //{
-                //    target.ReplaceHealth(target.health.Value - damageAmount);
-                //}
-                //damage.isDestroyed = true;
+                if (target.hasCurrentHealth)
+                {
+                    var newCurrentHealth = target.currentHealth.Value - damageAmount;
+
+                    if (newCurrentHealth < 0)
+                    {
+                        newCurrentHealth = 0;
+                    }
+
+                    target.ReplaceCurrentHealth(newCurrentHealth);
+                }
+
+                damage.isDestructed = true;
             }
         }
     }

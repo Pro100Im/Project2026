@@ -29,6 +29,16 @@ namespace Code.Game.Features.Attack.Systems
 
                 var entity = GetGameEntityById.Get(attack.ownerId.Value);
 
+                if(entity.isAttacking)
+                {
+                    var damage = CreateGameEntity.Empty();
+
+                    damage.AddOwnerId(attack.ownerId.Value);
+                    damage.AddTargetId(attack.targetId.Value);
+                    damage.AddDamage(attack.damage.Value);
+                    damage.isDamageRequest = true;
+                }
+
                 entity.isAttacking = false;
 
                 if (attack.cooldown.Value > 0)
@@ -36,12 +46,6 @@ namespace Code.Game.Features.Attack.Systems
 
                 entity.isAttackAvailable = true;
                 attack.isDestructed = true;
-
-                //var entity = CreateGameEntity.Empty();
-
-                //entity.isDamageRequest = true;
-                //entity.AddTargetId(attacker.targetId.Value);
-                //entity.AddDamage(attacker.attack.Value);
             }
         }
     }

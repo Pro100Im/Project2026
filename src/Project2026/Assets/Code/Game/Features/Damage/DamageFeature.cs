@@ -5,7 +5,7 @@ namespace Code.Game.Features.Damage
 {
     public class DamageFeature : Feature
     {
-        DamageFeature(ISystemFactory systemFactory)
+        public DamageFeature(ISystemFactory systemFactory)
         {
             Add(systemFactory.Create<ApplyDamageSystem>());
         }
