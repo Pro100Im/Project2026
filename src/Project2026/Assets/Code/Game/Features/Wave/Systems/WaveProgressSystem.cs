@@ -37,13 +37,7 @@ namespace Code.Game.Features.Wave.Systems
                     wave.isWaveInProgress = false;
                     wave.ReplaceCooldown(0);
                 }
-                else if (wave.cooldown.Value > 0)
-                {
-                    var newValue = wave.cooldown.Value - _timeService.DeltaTime;
-
-                    wave.ReplaceCooldown(newValue);
-                }
-                else if (wave.currentWaveEnemies.Value.Count > 0)
+                else if (wave.currentWaveEnemies.Value.Count > 0 && wave.cooldown.Value <= 0)
                 {
                     var entityConfig = wave.currentWaveEnemies.Value[0];
                     var entity = CreateGameEntity.Empty();
