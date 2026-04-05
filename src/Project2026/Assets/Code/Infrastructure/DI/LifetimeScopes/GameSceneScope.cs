@@ -1,4 +1,6 @@
 using Code.Common.Cameras;
+using Code.Common.Destruct;
+using Code.Common.Destruct.Systems;
 using Code.Common.UI.Transition;
 using Code.Game.Features;
 using Code.Game.Features.Animator;
@@ -23,6 +25,7 @@ using Code.Game.Features.Spawn.Systems;
 using Code.Game.Features.Wave;
 using Code.Game.Features.Wave.Systems;
 using Code.Game.Input.Service;
+using Code.Game.Input.Systems;
 using Code.Game.StaticData.Configs;
 using Code.Infrastructure.DI.EntryPoints;
 using Code.Infrastructure.Identifiers;
@@ -111,6 +114,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<AttackFeature>(Lifetime.Singleton);
             builder.Register<DamageFeature>(Lifetime.Singleton);
+
+            builder.Register<ProcessDestructedFeature>(Lifetime.Singleton);
         }
 
         private void BindSystems(IContainerBuilder builder)
@@ -120,6 +125,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<InitializeInputSystem>(Lifetime.Singleton);
             builder.Register<EmitInputSystem>(Lifetime.Singleton);
+            builder.Register<TearDownInputDestructedSystem>(Lifetime.Singleton);
 
             builder.Register<PlayerCameraInitSystem>(Lifetime.Singleton);
 
@@ -143,6 +149,11 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<CooldownLeftSystem>(Lifetime.Singleton);
             builder.Register<DurationLeftSystem>(Lifetime.Singleton);
+
+            builder.Register<SelfDestructTimerSystem>(Lifetime.Singleton);
+            builder.Register<MetaDestructedSystem>(Lifetime.Singleton);
+            builder.Register<GameDestructedViewSystem>(Lifetime.Singleton);
+            builder.Register<GameDestructedSystem>(Lifetime.Singleton);
         }
 
         private void BindGameFactories(IContainerBuilder builder)

@@ -3,12 +3,12 @@ using Entitas;
 
 namespace Code.Common.Destruct.Systems
 {
-    public class CleanupGameDestructedSystem : ICleanupSystem
+    public class GameDestructedSystem : ICleanupSystem
     {
         private readonly IGroup<GameEntity> _entities;
         private readonly List<GameEntity> _buffer = new(64);
 
-        public CleanupGameDestructedSystem(GameContext game) =>
+        public GameDestructedSystem(GameContext game) =>
           _entities = game.GetGroup(GameMatcher.Destructed);
 
         public void Cleanup()

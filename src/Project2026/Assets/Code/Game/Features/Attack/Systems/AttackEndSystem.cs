@@ -35,8 +35,7 @@ namespace Code.Game.Features.Attack.Systems
                     continue;
 
                 entity.isAttackAvailable = true;
-
-                attack.Destroy();
+                attack.isDestructed = true;
 
                 //var entity = CreateGameEntity.Empty();
 

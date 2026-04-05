@@ -3,12 +3,12 @@ using Entitas;
 
 namespace Code.Common.Destruct.Systems
 {
-    public class CleanupMetaDestructedSystem : ICleanupSystem
+    public class MetaDestructedSystem : ICleanupSystem
     {
         private readonly IGroup<MetaEntity> _entities;
         private readonly List<MetaEntity> _buffer = new(16);
 
-        public CleanupMetaDestructedSystem(MetaContext metaContext) =>
+        public MetaDestructedSystem(MetaContext metaContext) =>
           _entities = metaContext.GetGroup(MetaMatcher.Destructed);
 
         public void Cleanup()

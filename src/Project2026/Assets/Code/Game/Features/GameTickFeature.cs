@@ -1,3 +1,4 @@
+using Code.Common.Destruct;
 using Code.Game.Features.Animator;
 using Code.Game.Features.Attack;
 using Code.Game.Features.Cooldown;
@@ -33,6 +34,8 @@ namespace Code.Game.Features
 
             Add(systemFactory.Create<CooldownFeature>());
             Add(systemFactory.Create<DurationFeature>());
+
+            Add(systemFactory.Create<ProcessDestructedFeature>());
         }
     }
 }

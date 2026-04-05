@@ -1,4 +1,5 @@
 using Code.Game.Features.Input.Systems;
+using Code.Game.Input.Systems;
 using Code.Infrastructure.Systems;
 
 namespace Code.Game.Features.Input
@@ -9,6 +10,8 @@ namespace Code.Game.Features.Input
         {
             Add(systemFactory.Create<InitializeInputSystem>());
             Add(systemFactory.Create<EmitInputSystem>());
+
+            Add(systemFactory.Create<TearDownInputDestructedSystem>());
         }
     }
 }

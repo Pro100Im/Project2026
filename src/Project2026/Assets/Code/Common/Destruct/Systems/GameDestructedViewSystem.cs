@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Code.Common.Destruct.Systems
 {
-    public class CleanupGameDestructedViewSystem : ICleanupSystem
+    public class GameDestructedViewSystem : ICleanupSystem
     {
         private readonly IGroup<GameEntity> _entities;
 
-        public CleanupGameDestructedViewSystem(GameContext game) =>
+        public GameDestructedViewSystem(GameContext game) =>
           _entities = game.GetGroup(
             GameMatcher.AllOf(
               GameMatcher.Destructed,

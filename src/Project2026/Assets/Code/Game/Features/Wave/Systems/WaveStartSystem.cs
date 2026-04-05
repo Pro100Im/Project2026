@@ -40,7 +40,7 @@ namespace Code.Game.Features.Wave.Systems
                     wave.isWaveInProgress = true;
                 }
 
-                waveRequst.Destroy();
+                waveRequst.isDestructed = true;
             }
         }
     }

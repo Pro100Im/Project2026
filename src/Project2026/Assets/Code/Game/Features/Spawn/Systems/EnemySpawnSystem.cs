@@ -31,7 +31,7 @@ namespace Code.Game.Features.Spawn.Systems
                 var entity = _enemyFactory.Create(enemySpawn.entityConfig.Value, enemySpawn.spawnPosition.Value);
                 entity.AddGateNumber(enemySpawn.gateNumber.Value);
 
-                enemySpawn.Destroy();
+                enemySpawn.isDestructed = true;
             }
         }
     }
