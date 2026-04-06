@@ -19,50 +19,53 @@ public static class GameComponentsLookup {
     public const int Targetable = 8;
     public const int TargetId = 9;
     public const int Transform = 10;
-    public const int View = 11;
-    public const int ViewPath = 12;
-    public const int ViewPrefab = 13;
-    public const int AttackAvailable = 14;
-    public const int AttackCooldown = 15;
-    public const int AttackDirection = 16;
-    public const int AttackDuration = 17;
-    public const int Attacking = 18;
-    public const int Hitted = 19;
-    public const int MeleeAttack = 20;
-    public const int Range = 21;
-    public const int RangeAttack = 22;
-    public const int Cooldown = 23;
-    public const int Damage = 24;
-    public const int DamageRequest = 25;
-    public const int Duration = 26;
-    public const int Enemy = 27;
-    public const int CurrentHealth = 28;
-    public const int Dead = 29;
-    public const int MaxHealth = 30;
-    public const int MaxMovementOffsets = 31;
-    public const int MinMovementOffsets = 32;
-    public const int MovementAvailable = 33;
-    public const int MovementCurrentPointIndex = 34;
-    public const int MovementPointMinDistances = 35;
-    public const int MovementPoints = 36;
-    public const int MovementSpeed = 37;
-    public const int Moving = 38;
-    public const int RotationAlignedAlongDirection = 39;
-    public const int Player = 40;
-    public const int FreePoint = 41;
-    public const int GateNumber = 42;
-    public const int SpawnPosition = 43;
-    public const int SpawnPositionGates = 44;
-    public const int SpawnPositions = 45;
-    public const int SpawnRequsted = 46;
-    public const int WaitingToSpawn = 47;
-    public const int CurrentWaveEnemies = 48;
-    public const int CurrentWaveNumber = 49;
-    public const int WaveEnemiesAlive = 50;
-    public const int WaveInProgress = 51;
-    public const int WaveStartRequsted = 52;
+    public const int UIDocument = 11;
+    public const int View = 12;
+    public const int ViewPath = 13;
+    public const int ViewPrefab = 14;
+    public const int AttackAvailable = 15;
+    public const int AttackCooldown = 16;
+    public const int AttackDirection = 17;
+    public const int AttackDuration = 18;
+    public const int Attacking = 19;
+    public const int Hitted = 20;
+    public const int MeleeAttack = 21;
+    public const int Range = 22;
+    public const int RangeAttack = 23;
+    public const int Cooldown = 24;
+    public const int Damage = 25;
+    public const int DamageRequest = 26;
+    public const int Duration = 27;
+    public const int Enemy = 28;
+    public const int CurrentHealth = 29;
+    public const int Dead = 30;
+    public const int Health = 31;
+    public const int MaxHealth = 32;
+    public const int MaxMovementOffsets = 33;
+    public const int MinMovementOffsets = 34;
+    public const int MovementAvailable = 35;
+    public const int MovementCurrentPointIndex = 36;
+    public const int MovementOffset = 37;
+    public const int MovementPointMinDistances = 38;
+    public const int MovementPoints = 39;
+    public const int MovementSpeed = 40;
+    public const int Moving = 41;
+    public const int RotationAlignedAlongDirection = 42;
+    public const int Player = 43;
+    public const int FreePoint = 44;
+    public const int GateNumber = 45;
+    public const int SpawnPosition = 46;
+    public const int SpawnPositionGates = 47;
+    public const int SpawnPositions = 48;
+    public const int SpawnRequsted = 49;
+    public const int WaitingToSpawn = 50;
+    public const int CurrentWaveEnemies = 51;
+    public const int CurrentWaveNumber = 52;
+    public const int WaveEnemiesAlive = 53;
+    public const int WaveInProgress = 54;
+    public const int WaveStartRequsted = 55;
 
-    public const int TotalComponents = 53;
+    public const int TotalComponents = 56;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -76,6 +79,7 @@ public static class GameComponentsLookup {
         "Targetable",
         "TargetId",
         "Transform",
+        "UIDocument",
         "View",
         "ViewPath",
         "ViewPrefab",
@@ -95,11 +99,13 @@ public static class GameComponentsLookup {
         "Enemy",
         "CurrentHealth",
         "Dead",
+        "Health",
         "MaxHealth",
         "MaxMovementOffsets",
         "MinMovementOffsets",
         "MovementAvailable",
         "MovementCurrentPointIndex",
+        "MovementOffset",
         "MovementPointMinDistances",
         "MovementPoints",
         "MovementSpeed",
@@ -132,6 +138,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Common.Targetable),
         typeof(Code.Game.Common.TargetId),
         typeof(Code.Game.Common.TransformComponent),
+        typeof(Code.Game.Common.UIDocumentComponent),
         typeof(Code.Game.Common.View),
         typeof(Code.Game.Common.ViewPath),
         typeof(Code.Game.Common.ViewPrefab),
@@ -151,11 +158,13 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Enemy.EnemyComponent),
         typeof(Code.Game.Features.Health.CurrentHealth),
         typeof(Code.Game.Features.Health.Dead),
+        typeof(Code.Game.Features.Health.Health),
         typeof(Code.Game.Features.Health.MaxHealth),
         typeof(Code.Game.Features.Movement.MaxMovementOffsets),
         typeof(Code.Game.Features.Movement.MinMovementOffsets),
         typeof(Code.Game.Features.Movement.MovementAvailable),
         typeof(Code.Game.Features.Movement.MovementCurrentPointIndex),
+        typeof(Code.Game.Features.Movement.MovementOffset),
         typeof(Code.Game.Features.Movement.MovementPointMinDistances),
         typeof(Code.Game.Features.Movement.MovementPoints),
         typeof(Code.Game.Features.Movement.MovementSpeed),

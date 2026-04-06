@@ -4,6 +4,7 @@ using Code.Game.Features.Attack;
 using Code.Game.Features.Cooldown;
 using Code.Game.Features.Damage;
 using Code.Game.Features.Duration;
+using Code.Game.Features.Health;
 using Code.Game.Features.Input;
 using Code.Game.Features.Movement;
 using Code.Game.Features.Player;
@@ -29,6 +30,8 @@ namespace Code.Game.Features
 
             Add(systemFactory.Create<AttackFeature>());
             Add(systemFactory.Create<DamageFeature>());
+
+            Add(systemFactory.Create<HealthFeature>());
 
             Add(systemFactory.Create<AnimatorFeature>());
 

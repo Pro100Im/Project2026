@@ -1,3 +1,5 @@
+using Code.Common.Entity;
+using Code.Infrastructure.View;
 using Code.Infrastructure.View.Registrars;
 using UnityEngine;
 
@@ -6,6 +8,8 @@ namespace Code.Game.Features.Player.Registrars
     public class PlayerCastleRegistrar : EntityComponentRegistrar
     {
         [SerializeField] private int _health;
+        [SerializeField] private Vector3 _hpBarOffset;
+        [SerializeField] private EntityBehaviour _hpBar;
 
         public override void RegisterComponents()
         {
@@ -13,6 +17,13 @@ namespace Code.Game.Features.Player.Registrars
             Entity.isTargetable = true;
             Entity.AddMaxHealth(_health);
             Entity.AddCurrentHealth(_health);
+
+            var hpBar = CreateGameEntity.Empty();
+            hpBar.AddViewPrefab(_hpBar);
+            hpBar.AddSpawnPosition(transform.position + _hpBarOffset);
+            hpBar.AddMovementOffset(_hpBarOffset);
+            hpBar.AddOwnerId(Entity.id.Value);
+            hpBar.AddCurrentHealth(_health);
         }
 
         public override void UnregisterComponents()

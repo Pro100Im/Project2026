@@ -3,6 +3,7 @@ using Code.Infrastructure.View;
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Code.Game.Common
 {
@@ -17,6 +18,7 @@ namespace Code.Game.Common
     [Game] public class TransformComponent : IComponent { public Transform Value; }
     [Game] public class AnimatorComponent : IComponent { public Animator Value; }
     [Game] public class SpriteRendererComponent : IComponent { public SpriteRenderer Value; }
+    [Game] public class UIDocumentComponent : IComponent { public UIDocument Value; }
 
     [Game] public class View : IComponent { public IEntityView Value; }
     [Game] public class ViewPath : IComponent { public string Value; }

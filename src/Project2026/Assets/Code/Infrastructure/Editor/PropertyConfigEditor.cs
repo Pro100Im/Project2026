@@ -33,6 +33,7 @@ namespace Assets.Code.Infrastructure
                         EditorUtility.SetDirty(config);
                     });
                 }
+
                 menu.ShowAsContext();
             }
 
