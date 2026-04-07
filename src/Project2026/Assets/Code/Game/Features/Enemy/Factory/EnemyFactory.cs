@@ -1,7 +1,9 @@
 using Code.Common.Entity;
+using Code.Game.Features.Health;
 using Code.Game.StaticData.Configs;
 using Code.Game.StaticData.Data;
 using Code.Infrastructure.Identifiers;
+using Entitas;
 using UnityEngine;
 
 namespace Code.Game.Features.Enemy.Factory
@@ -46,6 +48,23 @@ namespace Code.Game.Features.Enemy.Factory
                 entity.AddAttackDuration(attack.Duration);
                 entity.isTargetable = true;
                 entity.isAttackAvailable = true;
+            }
+
+            var health = entityConfig.GetProperty<HealthData>();
+            if (health != null)
+            {
+                entity.AddMaxHealth(health.Health);
+                entity.AddCurrentHealth(health.Health);
+
+                var hpBar = CreateGameEntity.Empty();
+                hpBar.AddViewPrefab(health.HpBar);
+                hpBar.AddSpawnPosition((Vector3)spawnPosition + health.HpBarOffset);
+                hpBar.AddMovementOffset(health.HpBarOffset);
+                hpBar.AddOwnerId(entity.id.Value);
+                hpBar.AddTargetId(entity.id.Value);
+                hpBar.AddCurrentHealth(entity.currentHealth.Value);
+                hpBar.isAttached = true;
+                hpBar.isEnemy = true;
             }
 
             return entity;

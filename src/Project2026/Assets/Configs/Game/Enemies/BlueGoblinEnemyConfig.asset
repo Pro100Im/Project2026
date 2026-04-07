@@ -26,6 +26,8 @@ MonoBehaviour:
     - rid: 8171215315377586296
       type: {class: HealthData, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
+        <HpBar>k__BackingField: {fileID: 2238861304701913438, guid: 4a356d44723836145be75457b4a66ff9, type: 3}
+        <HpBarOffset>k__BackingField: {x: 0, y: 0.5, z: 0}
         <Health>k__BackingField: 100
         <Regen>k__BackingField: 0
     - rid: 8171215315377586298

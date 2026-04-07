@@ -143,6 +143,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<CharacterAnimatorSystem>(Lifetime.Singleton);
 
             builder.Register<EnemiesMovementSystem>(Lifetime.Singleton);
+            builder.Register<AttachPosToTargetSystem>(Lifetime.Singleton);
 
             builder.Register<SearchingClosestTargetSystem>(Lifetime.Singleton);
             builder.Register<AttackStartSystem>(Lifetime.Singleton);
