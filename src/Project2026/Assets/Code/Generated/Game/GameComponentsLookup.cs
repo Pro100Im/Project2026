@@ -39,7 +39,7 @@ public static class GameComponentsLookup {
     public const int Enemy = 28;
     public const int CurrentHealth = 29;
     public const int Dead = 30;
-    public const int Health = 31;
+    public const int HpBar = 31;
     public const int MaxHealth = 32;
     public const int MaxMovementOffsets = 33;
     public const int MinMovementOffsets = 34;
@@ -99,7 +99,7 @@ public static class GameComponentsLookup {
         "Enemy",
         "CurrentHealth",
         "Dead",
-        "Health",
+        "HpBar",
         "MaxHealth",
         "MaxMovementOffsets",
         "MinMovementOffsets",
@@ -158,7 +158,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Enemy.EnemyComponent),
         typeof(Code.Game.Features.Health.CurrentHealth),
         typeof(Code.Game.Features.Health.Dead),
-        typeof(Code.Game.Features.Health.Health),
+        typeof(Code.Game.Features.Health.HpBar),
         typeof(Code.Game.Features.Health.MaxHealth),
         typeof(Code.Game.Features.Movement.MaxMovementOffsets),
         typeof(Code.Game.Features.Movement.MinMovementOffsets),

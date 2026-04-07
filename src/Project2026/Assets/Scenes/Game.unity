@@ -367,9 +367,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Player.Registrars.PlayerCastleRegistrar
   EntityView: {fileID: 710611941}
-  _health: 1000
+  _health: 100
   _hpBarOffset: {x: 0, y: 0.3, z: 0}
-  _hpBar: {fileID: 5632324686532123464, guid: cff421d13400601408e7f9f50a0e5f09, type: 3}
+  _hpBar: {fileID: 8788269854054458802, guid: bf7e54058ccf7a54f88d8bef337de2b4, type: 3}
 --- !u!114 &710611941
 MonoBehaviour:
   m_ObjectHideFlags: 0

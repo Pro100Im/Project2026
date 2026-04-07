@@ -1,8 +1,0 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/Global/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=f0b50401ae793a440bdbacc20d05f547&amp;type=3#GlobalStyle"/>
-    <ui:VisualElement name="HpBar" style="flex-grow: 1;">
-        <ui:Image name="HpBarBack" style="background-color: rgb(82, 82, 82); position: absolute; width: 100%; height: 100%;"/>
-        <ui:Image name="HpFillBack"/>
-        <ui:Image name="HpFillFront" style="position: absolute; width: 100%; height: 100%; background-color: rgb(178, 11, 6);"/>
-    </ui:VisualElement>
-</ui:UXML>

@@ -31,7 +31,7 @@ MonoBehaviour:
     - rid: 8171215315377586298
       type: {class: AttackData, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
-        <Damage>k__BackingField: 1
+        <Damage>k__BackingField: 5
         <Range>k__BackingField: 0.1
         <Cooldown>k__BackingField: 3
         <Duration>k__BackingField: 0.6

@@ -1,6 +1,5 @@
 using Code.Common.Entity;
 using Entitas;
-using UnityEngine.UIElements;
 
 namespace Code.Game.Features.Health.Systems
 {
@@ -12,28 +11,25 @@ namespace Code.Game.Features.Health.Systems
         {
             _hpBars = gameContext.GetGroup(GameMatcher
                 .AllOf(
-                    GameMatcher.UIDocument,
+                    GameMatcher.HpBar,
                     GameMatcher.OwnerId,
                     GameMatcher.CurrentHealth));
         }
 
         public void Execute()
         {
-            foreach(var hpBar in _hpBars)
+            foreach(var hpBarEntity in _hpBars)
             {
-                var owner = GetGameEntityById.Get(hpBar.ownerId.Value);
+                var owner = GetGameEntityById.Get(hpBarEntity.ownerId.Value);
 
-                if (hpBar.currentHealth.Value == owner.currentHealth.Value)
+                if (hpBarEntity.currentHealth.Value == owner.currentHealth.Value)
                     continue;
 
                 var healthRatio = owner.currentHealth.Value / owner.maxHealth.Value;
-                var healthPercent = healthRatio * 100f;
-                var uiDocument = hpBar.uIDocument.Value;
-                var hpBarView = uiDocument.rootVisualElement.Q<Image>("HpFillFront");
+                var hpBarView = hpBarEntity.hpBar.Value;
 
-                hpBarView.style.width = Length.Percent(healthPercent);
-
-                hpBar.ReplaceCurrentHealth(owner.currentHealth.Value);
+                hpBarView.SetHp(healthRatio);
+                hpBarEntity.ReplaceCurrentHealth(owner.currentHealth.Value);
             }
         }
     }
