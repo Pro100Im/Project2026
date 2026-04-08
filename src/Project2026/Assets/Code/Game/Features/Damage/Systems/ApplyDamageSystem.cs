@@ -32,6 +32,7 @@ namespace Code.Game.Features.Damage.Systems
                     if (newCurrentHealth < 0)
                     {
                         newCurrentHealth = 0;
+                        target.isDead = true;
                     }
 
                     target.ReplaceCurrentHealth(newCurrentHealth);

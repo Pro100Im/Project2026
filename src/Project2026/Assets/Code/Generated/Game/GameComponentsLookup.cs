@@ -52,21 +52,22 @@ public static class GameComponentsLookup {
     public const int MovementSpeed = 41;
     public const int Moving = 42;
     public const int RotationAlignedAlongDirection = 43;
-    public const int Player = 44;
-    public const int FreePoint = 45;
-    public const int GateNumber = 46;
-    public const int SpawnPosition = 47;
-    public const int SpawnPositionGates = 48;
-    public const int SpawnPositions = 49;
-    public const int SpawnRequsted = 50;
-    public const int WaitingToSpawn = 51;
-    public const int CurrentWaveEnemies = 52;
-    public const int CurrentWaveNumber = 53;
-    public const int WaveEnemiesAlive = 54;
-    public const int WaveInProgress = 55;
-    public const int WaveStartRequsted = 56;
+    public const int PlayerCastle = 44;
+    public const int Player = 45;
+    public const int FreePoint = 46;
+    public const int GateNumber = 47;
+    public const int SpawnPosition = 48;
+    public const int SpawnPositionGates = 49;
+    public const int SpawnPositions = 50;
+    public const int SpawnRequsted = 51;
+    public const int WaitingToSpawn = 52;
+    public const int CurrentWaveEnemies = 53;
+    public const int CurrentWaveNumber = 54;
+    public const int WaveEnemiesAlive = 55;
+    public const int WaveInProgress = 56;
+    public const int WaveStartRequsted = 57;
 
-    public const int TotalComponents = 57;
+    public const int TotalComponents = 58;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -113,6 +114,7 @@ public static class GameComponentsLookup {
         "MovementSpeed",
         "Moving",
         "RotationAlignedAlongDirection",
+        "PlayerCastle",
         "Player",
         "FreePoint",
         "GateNumber",
@@ -173,6 +175,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Movement.MovementSpeed),
         typeof(Code.Game.Features.Movement.Moving),
         typeof(Code.Game.Features.Movement.RotationAlignedAlongDirection),
+        typeof(Code.Game.Features.Player.PlayerCastle),
         typeof(Code.Game.Features.Player.PlayerComponent),
         typeof(Code.Game.Features.Spawn.FreePoint),
         typeof(Code.Game.Features.Spawn.GateNumber),

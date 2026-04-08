@@ -8,6 +8,7 @@ namespace Code.Game.Features.Animator
         public AnimatorFeature(ISystemFactory systemFactory)
         {
             Add(systemFactory.Create<CharacterAnimatorSystem>());
+            Add(systemFactory.Create<PlayerCastleAnimatorSystem>());
         }
     }
 }

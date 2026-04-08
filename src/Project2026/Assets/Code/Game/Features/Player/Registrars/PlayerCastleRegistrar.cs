@@ -15,6 +15,7 @@ namespace Code.Game.Features.Player.Registrars
         {
             Entity.isPlayer = true;
             Entity.isTargetable = true;
+            Entity.isPlayerCastle = true;
             Entity.AddMaxHealth(_health);
             Entity.AddCurrentHealth(_health);
 
