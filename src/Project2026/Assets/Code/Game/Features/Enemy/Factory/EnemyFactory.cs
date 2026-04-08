@@ -67,7 +67,15 @@ namespace Code.Game.Features.Enemy.Factory
                 hpBar.isEnemy = true;
             }
 
-            return entity;
+            var spawnEffect = entityConfig.GetProperty<SpawnEffectData>();
+            if (spawnEffect != null)
+            {
+                var effect = CreateGameEntity.Empty();
+                effect.AddViewPrefab(spawnEffect.SpawnEffect);
+                effect.AddSpawnPosition(spawnPosition);
+            }
+
+                return entity;
         }
     }
 }

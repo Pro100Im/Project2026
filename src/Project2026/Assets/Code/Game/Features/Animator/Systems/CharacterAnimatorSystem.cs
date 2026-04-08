@@ -13,7 +13,8 @@ namespace Code.Game.Features.Animator.Systems
             _characters = gameContext.GetGroup(GameMatcher
                 .AllOf(
                 GameMatcher.View,
-                GameMatcher.Animator));
+                GameMatcher.Animator,
+                GameMatcher.Enemy));
         }
 
         public void Execute()

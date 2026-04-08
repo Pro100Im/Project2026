@@ -18,6 +18,7 @@ MonoBehaviour:
   - rid: 8869463032931287140
   - rid: 8171215315377586296
   - rid: 8171215315377586298
+  - rid: 8171215465242951762
   references:
     version: 2
     RefIds:
@@ -38,6 +39,10 @@ MonoBehaviour:
         <Cooldown>k__BackingField: 3
         <Duration>k__BackingField: 0.6
         <IsMelee>k__BackingField: 1
+    - rid: 8171215465242951762
+      type: {class: SpawnEffectData, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <SpawnEffect>k__BackingField: {fileID: 2715749001849539951, guid: f25134e451c905e4385cec3295fa45b6, type: 3}
     - rid: 8869463032931287139
       type: {class: ViewData, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
