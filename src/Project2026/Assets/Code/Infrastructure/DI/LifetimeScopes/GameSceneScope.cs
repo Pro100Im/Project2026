@@ -11,6 +11,8 @@ using Code.Game.Features.Cooldown;
 using Code.Game.Features.Cooldown.Systems;
 using Code.Game.Features.Damage;
 using Code.Game.Features.Damage.Systems;
+using Code.Game.Features.Death;
+using Code.Game.Features.Death.Systems;
 using Code.Game.Features.Duration;
 using Code.Game.Features.Duration.Systems;
 using Code.Game.Features.Enemy.Factory;
@@ -119,6 +121,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<HealthFeature>(Lifetime.Singleton);
 
+            builder.Register<DeathFeature>(Lifetime.Singleton);
+
             builder.Register<ProcessDestructedFeature>(Lifetime.Singleton);
         }
 
@@ -154,6 +158,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<ApplyDamageSystem>(Lifetime.Singleton);
 
             builder.Register<HealthBarSystem>(Lifetime.Singleton);
+
+            builder.Register<DeathSystem>(Lifetime.Singleton);
 
             builder.Register<CooldownLeftSystem>(Lifetime.Singleton);
             builder.Register<DurationLeftSystem>(Lifetime.Singleton);

@@ -3,6 +3,7 @@ using Code.Game.Features.Animator;
 using Code.Game.Features.Attack;
 using Code.Game.Features.Cooldown;
 using Code.Game.Features.Damage;
+using Code.Game.Features.Death;
 using Code.Game.Features.Duration;
 using Code.Game.Features.Health;
 using Code.Game.Features.Input;
@@ -32,6 +33,7 @@ namespace Code.Game.Features
             Add(systemFactory.Create<DamageFeature>());
 
             Add(systemFactory.Create<HealthFeature>());
+            Add(systemFactory.Create<DeathFeature>());
 
             Add(systemFactory.Create<AnimatorFeature>());
 
