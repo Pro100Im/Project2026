@@ -10,6 +10,7 @@ using Code.Game.Features.Input;
 using Code.Game.Features.Movement;
 using Code.Game.Features.Player;
 using Code.Game.Features.Spawn;
+using Code.Game.Features.Target;
 using Code.Game.Features.Wave;
 using Code.Infrastructure.Systems;
 using Code.Infrastructure.View;
@@ -29,6 +30,7 @@ namespace Code.Game.Features
 
             Add(systemFactory.Create<MovementFeature>());
 
+            Add(systemFactory.Create<TargetFeature>());
             Add(systemFactory.Create<AttackFeature>());
             Add(systemFactory.Create<DamageFeature>());
 

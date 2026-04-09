@@ -34,6 +34,7 @@ MonoBehaviour:
     - rid: 8171215315377586298
       type: {class: AttackData, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
+        <AttackHitEffect>k__BackingField: {fileID: 5303738047394165789, guid: 9636dcd3608076643878e84d75f23040, type: 3}
         <Damage>k__BackingField: 5
         <Range>k__BackingField: 0.1
         <Cooldown>k__BackingField: 3

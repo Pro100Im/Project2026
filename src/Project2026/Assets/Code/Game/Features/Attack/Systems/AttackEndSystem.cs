@@ -37,6 +37,10 @@ namespace Code.Game.Features.Attack.Systems
                     damage.AddTargetId(attack.targetId.Value);
                     damage.AddDamage(attack.damage.Value);
                     damage.isDamageRequest = true;
+
+                    //var effect = CreateGameEntity.Empty();
+                    //effect.AddViewPrefab(attack.attackHitEffect.Value);
+                    //effect.AddSpawnPosition(attack.ta);
                 }
 
                 entity.isAttacking = false;

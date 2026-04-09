@@ -1,7 +1,8 @@
+using Code.Game.Features.Attack;
 using Entitas;
 using UnityEngine;
 
-namespace Code.Game.Features.Attack.Systems
+namespace Code.Game.Features.Target.Systems
 {
     // To do
     public class SearchingClosestTargetSystem : IExecuteSystem

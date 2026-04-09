@@ -26,6 +26,8 @@ using Code.Game.Features.Player;
 using Code.Game.Features.Player.Systems;
 using Code.Game.Features.Spawn;
 using Code.Game.Features.Spawn.Systems;
+using Code.Game.Features.Target;
+using Code.Game.Features.Target.Systems;
 using Code.Game.Features.Wave;
 using Code.Game.Features.Wave.Systems;
 using Code.Game.Input.Service;
@@ -116,6 +118,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<MovementFeature>(Lifetime.Singleton);
 
+            builder.Register<TargetFeature>(Lifetime.Singleton);
             builder.Register<AttackFeature>(Lifetime.Singleton);
             builder.Register<DamageFeature>(Lifetime.Singleton);
 
@@ -151,6 +154,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<AttachPosToTargetSystem>(Lifetime.Singleton);
 
             builder.Register<SearchingClosestTargetSystem>(Lifetime.Singleton);
+
             builder.Register<AttackStartSystem>(Lifetime.Singleton);
             builder.Register<AttackProcessSystem>(Lifetime.Singleton);
             builder.Register<AttackEndSystem>(Lifetime.Singleton);

@@ -42,6 +42,7 @@ namespace Code.Game.Features.Enemy.Factory
             var attack = entityConfig.GetProperty<AttackData>();
             if (attack != null)
             {
+                entity.AddAttackHitEffect(attack.AttackHitEffect);
                 entity.AddDamage(attack.Damage);
                 entity.AddRange(attack.Range);
                 entity.AddAttackCooldown(attack.Cooldown);

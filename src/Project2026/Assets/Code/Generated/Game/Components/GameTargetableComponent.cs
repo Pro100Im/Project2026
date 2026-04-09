@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Code.Game.Common.Targetable targetableComponent = new Code.Game.Common.Targetable();
+    static readonly Code.Game.Features.Target.Targetable targetableComponent = new Code.Game.Features.Target.Targetable();
 
     public bool isTargetable {
         get { return HasComponent(GameComponentsLookup.Targetable); }

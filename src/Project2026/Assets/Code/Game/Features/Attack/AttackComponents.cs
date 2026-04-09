@@ -1,7 +1,9 @@
+using Code.Infrastructure.View;
 using Entitas;
 
 namespace Code.Game.Features.Attack
 {
+    [Game] public class AttackHitEffect : IComponent { public EntityBehaviour Value; }
     [Game] public class AttackCooldown : IComponent { public float Value; }
     [Game] public class AttackDuration : IComponent { public float Value; }
     [Game] public class Range : IComponent { public float Value; }
