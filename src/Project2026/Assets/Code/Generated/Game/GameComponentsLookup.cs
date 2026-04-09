@@ -10,11 +10,11 @@ public static class GameComponentsLookup {
 
     public const int Animator = 0;
     public const int Attached = 1;
-    public const int Destructed = 2;
-    public const int EntityConfig = 3;
-    public const int Id = 4;
-    public const int OwnerId = 5;
-    public const int SelfDestructTimer = 6;
+    public const int DelayDestruct = 2;
+    public const int Destructed = 3;
+    public const int EntityConfig = 4;
+    public const int Id = 5;
+    public const int OwnerId = 6;
     public const int SortOrder = 7;
     public const int SpriteRenderer = 8;
     public const int Targetable = 9;
@@ -72,11 +72,11 @@ public static class GameComponentsLookup {
     public static readonly string[] componentNames = {
         "Animator",
         "Attached",
+        "DelayDestruct",
         "Destructed",
         "EntityConfig",
         "Id",
         "OwnerId",
-        "SelfDestructTimer",
         "SortOrder",
         "SpriteRenderer",
         "Targetable",
@@ -133,11 +133,11 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(Code.Game.Common.AnimatorComponent),
         typeof(Code.Game.Common.Attached),
+        typeof(Code.Game.Common.DelayDestruct),
         typeof(Code.Game.Common.Destructed),
         typeof(Code.Game.Common.EntityConfigComponent),
         typeof(Code.Game.Common.Id),
         typeof(Code.Game.Common.OwnerId),
-        typeof(Code.Game.Common.SelfDestructTimer),
         typeof(Code.Game.Common.SortOrder),
         typeof(Code.Game.Common.SpriteRendererComponent),
         typeof(Code.Game.Common.Targetable),

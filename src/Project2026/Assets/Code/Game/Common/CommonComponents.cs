@@ -26,5 +26,5 @@ namespace Code.Game.Common
     [Game] public class ViewPrefab : IComponent { public EntityBehaviour Value; }
 
     [Game, Meta] public class Destructed : IComponent { }
-    [Game] public class SelfDestructTimer : IComponent { public float Value; }
+    [Game, Meta] public class DelayDestruct : IComponent { }
 }

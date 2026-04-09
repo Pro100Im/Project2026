@@ -8,15 +8,18 @@
 //------------------------------------------------------------------------------
 public static class MetaComponentsLookup {
 
-    public const int Destructed = 0;
+    public const int DelayDestruct = 0;
+    public const int Destructed = 1;
 
-    public const int TotalComponents = 1;
+    public const int TotalComponents = 2;
 
     public static readonly string[] componentNames = {
+        "DelayDestruct",
         "Destructed"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Code.Game.Common.DelayDestruct),
         typeof(Code.Game.Common.Destructed)
     };
 }

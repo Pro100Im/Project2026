@@ -164,7 +164,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<CooldownLeftSystem>(Lifetime.Singleton);
             builder.Register<DurationLeftSystem>(Lifetime.Singleton);
 
-            builder.Register<SelfDestructTimerSystem>(Lifetime.Singleton);
+            builder.Register<DelayDestructSystem>(Lifetime.Singleton);
             builder.Register<MetaDestructedSystem>(Lifetime.Singleton);
             builder.Register<GameDestructedViewSystem>(Lifetime.Singleton);
             builder.Register<GameDestructedSystem>(Lifetime.Singleton);

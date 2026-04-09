@@ -71,6 +71,7 @@ namespace Code.Game.Features.Enemy.Factory
             if (spawnEffect != null)
             {
                 var effect = CreateGameEntity.Empty();
+                effect.AddId(_identifiers.Next());
                 effect.AddViewPrefab(spawnEffect.SpawnEffect);
                 effect.AddSpawnPosition(spawnPosition);
             }

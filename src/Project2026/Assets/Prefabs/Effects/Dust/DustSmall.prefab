@@ -141,4 +141,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Registrars.SelfDestructTimerRegistrar
   EntityView: {fileID: 2715749001849539951}
-  _selfDestructTime: 0.8
+  _selfDestructDuration: 0.8
