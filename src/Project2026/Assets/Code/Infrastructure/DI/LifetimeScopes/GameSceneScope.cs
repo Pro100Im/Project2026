@@ -27,6 +27,7 @@ using Code.Game.Features.Player.Systems;
 using Code.Game.Features.Spawn;
 using Code.Game.Features.Spawn.Systems;
 using Code.Game.Features.Target;
+using Code.Game.Features.Target.Services;
 using Code.Game.Features.Target.Systems;
 using Code.Game.Features.Wave;
 using Code.Game.Features.Wave.Systems;
@@ -83,6 +84,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
         {
             builder.Register<IIdentifierService, IdentifierService>(Lifetime.Singleton);
             builder.Register<IInputService, InputService>(Lifetime.Singleton);
+            builder.Register<TargetService>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<ICameraService>().AsImplementedInterfaces().AsSelf();
             builder.RegisterComponentInHierarchy<TransitionScreen>();
         }
