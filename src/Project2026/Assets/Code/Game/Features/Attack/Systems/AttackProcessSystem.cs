@@ -12,10 +12,10 @@ namespace Code.Game.Features.Attack.Systems
         {
             _timeService = timeService;
 
-            _attackers = gameContext.GetGroup(GameMatcher
-                .AllOf(
-                GameMatcher.TargetId,
-                GameMatcher.Attacking));
+            //_attackers = gameContext.GetGroup(GameMatcher
+            //    .AllOf(
+            //    GameMatcher.TargetId,
+            //    GameMatcher.Attacking));
         }
 
         public void Execute()

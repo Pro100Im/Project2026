@@ -54,13 +54,9 @@ namespace Code.Game.Features.Attack.Systems
             var dir = closestB - closestA;
 
             if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
-            {
                 return AttackDirection.Side;
-            }
             else
-            {
                 return dir.y > 0 ? AttackDirection.Up : AttackDirection.Down;
-            }
         }
     }
 }
