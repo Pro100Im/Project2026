@@ -1,7 +1,5 @@
-using Code.Game.Features.Attack;
 using Code.Game.Features.Target.Services;
 using Entitas;
-using UnityEngine;
 
 namespace Code.Game.Features.Target.Systems
 {
@@ -45,16 +43,15 @@ namespace Code.Game.Features.Target.Systems
                     var ba = enemy.spriteRenderer.Value.bounds;
                     var bb = warrior.spriteRenderer.Value.bounds;
 
-                    var closestB = _targetService.ClosestPointAABB2D(ba.center, bb.center, bb.size);
-                    var closestA = _targetService.ClosestPointAABB2D(bb.center, ba.center, ba.size);
-                    var distance = _targetService.GetDistanceBetweenEntities(ba, bb, closestB, closestA);
+                    var closestA = _targetService.ClosestPointAABB2D(ba.center, bb.center, ba.size);
+                    var closestB = _targetService.ClosestPointAABB2D(bb.center, ba.center, bb.size);
+                    var distance = _targetService.GetDistanceBetweenEntities(ba, bb, closestA, closestB);
 
                     if (distance <= enemy.range.Value)
                     {
-                        var attackDirection = GetAttackDirection(closestB, closestA);
-
                         enemy.AddTargetId(warrior.id.Value);
-                        enemy.AddAttackDirection(attackDirection);
+                        enemy.AddAttackerPoint(closestA);
+                        enemy.AddTargetPoint(closestB);
                     }
 
                     break;
@@ -77,34 +74,19 @@ namespace Code.Game.Features.Target.Systems
                     var ba = enemy.spriteRenderer.Value.bounds;
                     var bb = warrior.spriteRenderer.Value.bounds;
 
-                    var closestB = _targetService.ClosestPointAABB2D(ba.center, bb.center, bb.size);
-                    var closestA = _targetService.ClosestPointAABB2D(bb.center, ba.center, ba.size);
-                    var distance = _targetService.GetDistanceBetweenEntities(ba, bb, closestB, closestA);
+                    var closestA = _targetService.ClosestPointAABB2D(ba.center, bb.center, ba.size);
+                    var closestB = _targetService.ClosestPointAABB2D(bb.center, ba.center, bb.size);
+                    var distance = _targetService.GetDistanceBetweenEntities(ba, bb, closestA, closestB);
 
                     if (distance <= warrior.range.Value)
-                    {
-                        var attackDirection = GetAttackDirection(closestB, closestA);
-
+                    {  
                         warrior.AddTargetId(enemy.id.Value);
-                        warrior.AddAttackDirection(attackDirection);
+                        warrior.AddAttackerPoint(closestA);
+                        warrior.AddTargetPoint(closestB);
                     }
 
                     break;
                 }
-            }
-        }
-
-        private AttackDirection GetAttackDirection(Vector2 closestA, Vector2 closestB)
-        {
-            var dir = closestB - closestA;
-
-            if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
-            {
-                return AttackDirection.Side;
-            }
-            else
-            {
-                return dir.y > 0 ? AttackDirection.Up : AttackDirection.Down;
             }
         }
     }

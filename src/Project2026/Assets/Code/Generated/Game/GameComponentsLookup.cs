@@ -26,50 +26,51 @@ public static class GameComponentsLookup {
     public const int AttackCooldown = 15;
     public const int AttackDirection = 16;
     public const int AttackDuration = 17;
-    public const int AttackHitEffect = 18;
-    public const int Attacking = 19;
-    public const int Hitted = 20;
-    public const int MeleeAttack = 21;
-    public const int Range = 22;
-    public const int RangeAttack = 23;
-    public const int Cooldown = 24;
-    public const int Damage = 25;
-    public const int DamageRequest = 26;
-    public const int Duration = 27;
-    public const int Enemy = 28;
-    public const int CurrentHealth = 29;
-    public const int Dead = 30;
-    public const int HpBar = 31;
-    public const int MaxHealth = 32;
-    public const int MaxMovementOffsets = 33;
-    public const int MinMovementOffsets = 34;
-    public const int MovementAvailable = 35;
-    public const int MovementCurrentPointIndex = 36;
-    public const int MovementOffset = 37;
-    public const int MovementPointMinDistances = 38;
-    public const int MovementPoints = 39;
-    public const int MovementSpeed = 40;
-    public const int Moving = 41;
-    public const int RotationAlignedAlongDirection = 42;
-    public const int PlayerCastle = 43;
-    public const int Player = 44;
-    public const int FreePoint = 45;
-    public const int GateNumber = 46;
-    public const int SpawnPosition = 47;
-    public const int SpawnPositionGates = 48;
-    public const int SpawnPositions = 49;
-    public const int SpawnRequsted = 50;
-    public const int WaitingToSpawn = 51;
-    public const int Targetable = 52;
-    public const int TargetId = 53;
-    public const int TargetPoint = 54;
-    public const int CurrentWaveEnemies = 55;
-    public const int CurrentWaveNumber = 56;
-    public const int WaveEnemiesAlive = 57;
-    public const int WaveInProgress = 58;
-    public const int WaveStartRequsted = 59;
+    public const int AttackerPoint = 18;
+    public const int AttackHitEffect = 19;
+    public const int Attacking = 20;
+    public const int Hitted = 21;
+    public const int MeleeAttack = 22;
+    public const int Range = 23;
+    public const int RangeAttack = 24;
+    public const int Cooldown = 25;
+    public const int Damage = 26;
+    public const int DamageRequest = 27;
+    public const int Duration = 28;
+    public const int Enemy = 29;
+    public const int CurrentHealth = 30;
+    public const int Dead = 31;
+    public const int HpBar = 32;
+    public const int MaxHealth = 33;
+    public const int MaxMovementOffsets = 34;
+    public const int MinMovementOffsets = 35;
+    public const int MovementAvailable = 36;
+    public const int MovementCurrentPointIndex = 37;
+    public const int MovementOffset = 38;
+    public const int MovementPointMinDistances = 39;
+    public const int MovementPoints = 40;
+    public const int MovementSpeed = 41;
+    public const int Moving = 42;
+    public const int RotationAlignedAlongDirection = 43;
+    public const int PlayerCastle = 44;
+    public const int Player = 45;
+    public const int FreePoint = 46;
+    public const int GateNumber = 47;
+    public const int SpawnPosition = 48;
+    public const int SpawnPositionGates = 49;
+    public const int SpawnPositions = 50;
+    public const int SpawnRequsted = 51;
+    public const int WaitingToSpawn = 52;
+    public const int Targetable = 53;
+    public const int TargetId = 54;
+    public const int TargetPoint = 55;
+    public const int CurrentWaveEnemies = 56;
+    public const int CurrentWaveNumber = 57;
+    public const int WaveEnemiesAlive = 58;
+    public const int WaveInProgress = 59;
+    public const int WaveStartRequsted = 60;
 
-    public const int TotalComponents = 60;
+    public const int TotalComponents = 61;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -90,6 +91,7 @@ public static class GameComponentsLookup {
         "AttackCooldown",
         "AttackDirection",
         "AttackDuration",
+        "AttackerPoint",
         "AttackHitEffect",
         "Attacking",
         "Hitted",
@@ -153,6 +155,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Attack.AttackCooldown),
         typeof(Code.Game.Features.Attack.AttackDirectionComponent),
         typeof(Code.Game.Features.Attack.AttackDuration),
+        typeof(Code.Game.Features.Attack.AttackerPoint),
         typeof(Code.Game.Features.Attack.AttackHitEffect),
         typeof(Code.Game.Features.Attack.Attacking),
         typeof(Code.Game.Features.Attack.Hitted),

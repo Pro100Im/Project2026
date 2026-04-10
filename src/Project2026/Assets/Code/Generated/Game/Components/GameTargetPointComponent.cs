@@ -11,14 +11,14 @@ public partial class GameEntity {
     public Code.Game.Features.Target.TargetPoint targetPoint { get { return (Code.Game.Features.Target.TargetPoint)GetComponent(GameComponentsLookup.TargetPoint); } }
     public bool hasTargetPoint { get { return HasComponent(GameComponentsLookup.TargetPoint); } }
 
-    public void AddTargetPoint(System.Numerics.Vector2 newValue) {
+    public void AddTargetPoint(UnityEngine.Vector2 newValue) {
         var index = GameComponentsLookup.TargetPoint;
         var component = (Code.Game.Features.Target.TargetPoint)CreateComponent(index, typeof(Code.Game.Features.Target.TargetPoint));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceTargetPoint(System.Numerics.Vector2 newValue) {
+    public void ReplaceTargetPoint(UnityEngine.Vector2 newValue) {
         var index = GameComponentsLookup.TargetPoint;
         var component = (Code.Game.Features.Target.TargetPoint)CreateComponent(index, typeof(Code.Game.Features.Target.TargetPoint));
         component.Value = newValue;

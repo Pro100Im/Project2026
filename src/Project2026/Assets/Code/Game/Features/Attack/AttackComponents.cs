@@ -1,5 +1,6 @@
 using Code.Infrastructure.View;
 using Entitas;
+using UnityEngine;
 
 namespace Code.Game.Features.Attack
 {
@@ -13,6 +14,7 @@ namespace Code.Game.Features.Attack
     [Game] public class AttackAvailable : IComponent { }
     [Game] public class Hitted : IComponent { }
     [Game] public class AttackDirectionComponent : IComponent { public AttackDirection Value; }
+    [Game] public class AttackerPoint : IComponent { public Vector2 Value; }
 
     public enum AttackDirection
     {
