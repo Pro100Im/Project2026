@@ -1,9 +1,8 @@
 using Code.Common.Entity;
-using Code.Game.Features.Health;
+using Code.Game.Features.Effect.Factory;
 using Code.Game.StaticData.Configs;
 using Code.Game.StaticData.Data;
 using Code.Infrastructure.Identifiers;
-using Entitas;
 using UnityEngine;
 
 namespace Code.Game.Features.Enemy.Factory
@@ -11,10 +10,12 @@ namespace Code.Game.Features.Enemy.Factory
     public class EnemyFactory
     {
         private readonly IIdentifierService _identifiers;
+        private readonly EffectFactory _effectFactory;
 
-        public EnemyFactory(IIdentifierService identifiers)
+        public EnemyFactory(IIdentifierService identifiers, EffectFactory effectFactory)
         {
             _identifiers = identifiers;
+            _effectFactory = effectFactory;
         }
 
         public GameEntity Create(EntityConfig entityConfig, Vector2 spawnPosition)
@@ -70,12 +71,7 @@ namespace Code.Game.Features.Enemy.Factory
 
             var spawnEffect = entityConfig.GetProperty<SpawnEffectData>();
             if (spawnEffect != null)
-            {
-                var effect = CreateGameEntity.Empty();
-                effect.AddId(_identifiers.Next());
-                effect.AddViewPrefab(spawnEffect.SpawnEffect);
-                effect.AddSpawnPosition(spawnPosition);
-            }
+                _effectFactory.Create(spawnEffect.SpawnEffect, spawnPosition);
 
                 return entity;
         }

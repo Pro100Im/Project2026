@@ -15,6 +15,7 @@ using Code.Game.Features.Death;
 using Code.Game.Features.Death.Systems;
 using Code.Game.Features.Duration;
 using Code.Game.Features.Duration.Systems;
+using Code.Game.Features.Effect.Factory;
 using Code.Game.Features.Enemy.Factory;
 using Code.Game.Features.Health;
 using Code.Game.Features.Health.Systems;
@@ -182,7 +183,9 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<ISystemFactory, SystemFactory>(Lifetime.Singleton);
 
             builder.Register<IEntityViewFactory, EntityViewFactory>(Lifetime.Singleton);
+
             builder.Register<EnemyFactory>(Lifetime.Singleton);
+            builder.Register<EffectFactory>(Lifetime.Singleton);
         }
 
         private void BindGameConfigs(IContainerBuilder builder)

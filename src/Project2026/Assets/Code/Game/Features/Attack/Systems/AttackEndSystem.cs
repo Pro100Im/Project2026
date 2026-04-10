@@ -1,4 +1,5 @@
 using Code.Common.Entity;
+using Code.Game.Features.Effect.Factory;
 using Entitas;
 using System.Collections.Generic;
 
@@ -6,11 +7,15 @@ namespace Code.Game.Features.Attack.Systems
 {
     public class AttackEndSystem : IExecuteSystem
     {
+        private readonly EffectFactory _effectFactory;
+
         private readonly IGroup<GameEntity> _attacks;
         private readonly List<GameEntity> _buffer = new(64);
 
-        public AttackEndSystem(GameContext gameContext)
+        public AttackEndSystem(GameContext gameContext, EffectFactory effectFactory)
         {
+            _effectFactory = effectFactory;
+
             _attacks = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Damage,
@@ -38,9 +43,7 @@ namespace Code.Game.Features.Attack.Systems
                     damage.AddDamage(attack.damage.Value);
                     damage.isDamageRequest = true;
 
-                    //var effect = CreateGameEntity.Empty();
-                    //effect.AddViewPrefab(attack.attackHitEffect.Value);
-                    //effect.AddSpawnPosition(attack.ta);
+                    _effectFactory.Create(entity.attackHitEffect.Value, entity.attackerPoint.Value);
                 }
 
                 entity.isAttacking = false;
