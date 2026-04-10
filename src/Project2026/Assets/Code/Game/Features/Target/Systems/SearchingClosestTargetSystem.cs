@@ -1,5 +1,6 @@
 using Code.Game.Features.Target.Services;
 using Entitas;
+using UnityEngine;
 
 namespace Code.Game.Features.Target.Systems
 {
@@ -43,8 +44,8 @@ namespace Code.Game.Features.Target.Systems
                     var ba = enemy.spriteRenderer.Value.bounds;
                     var bb = warrior.spriteRenderer.Value.bounds;
 
-                    var closestA = _targetService.ClosestPointAABB2D(ba.center, bb.center, ba.size);
-                    var closestB = _targetService.ClosestPointAABB2D(bb.center, ba.center, bb.size);
+                    var closestA = ba.ClosestPoint(bb.center);
+                    var closestB = bb.ClosestPoint(ba.center);
                     var distance = _targetService.GetDistanceBetweenEntities(ba, bb, closestA, closestB);
 
                     if (distance <= enemy.range.Value)
@@ -74,8 +75,8 @@ namespace Code.Game.Features.Target.Systems
                     var ba = enemy.spriteRenderer.Value.bounds;
                     var bb = warrior.spriteRenderer.Value.bounds;
 
-                    var closestA = _targetService.ClosestPointAABB2D(ba.center, bb.center, ba.size);
-                    var closestB = _targetService.ClosestPointAABB2D(bb.center, ba.center, bb.size);
+                    var closestA = ba.ClosestPoint(bb.center);
+                    var closestB = bb.ClosestPoint(ba.center);
                     var distance = _targetService.GetDistanceBetweenEntities(ba, bb, closestA, closestB);
 
                     if (distance <= warrior.range.Value)

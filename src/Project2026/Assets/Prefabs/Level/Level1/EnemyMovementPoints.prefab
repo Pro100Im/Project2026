@@ -71,8 +71,8 @@ MonoBehaviour:
     MaxMovementOffset: {x: 0, y: 0.5}
   - MinDistance: 0.1
     MovementPoint: {x: 5, y: 1, z: 0}
-    MinMovementOffset: {x: 0, y: -0.3}
-    MaxMovementOffset: {x: 0, y: 0.5}
+    MinMovementOffset: {x: -0.3, y: -0.3}
+    MaxMovementOffset: {x: -0.3, y: 0.5}
   _tilemap: {fileID: 0}
   _gizmoColor: {r: 0.9411765, g: 1, b: 1, a: 1}
 --- !u!114 &1890051351949885230
@@ -159,8 +159,8 @@ MonoBehaviour:
     MaxMovementOffset: {x: 0, y: 0.65}
   - MinDistance: 0.1
     MovementPoint: {x: 5, y: 0, z: 0}
-    MinMovementOffset: {x: 0.51, y: 0.08}
-    MaxMovementOffset: {x: -0.16, y: 0.65}
+    MinMovementOffset: {x: 0.5, y: -0.05}
+    MaxMovementOffset: {x: -0.26, y: 0.3}
   _tilemap: {fileID: 0}
   _gizmoColor: {r: 0.9528302, g: 0.91572624, b: 0.5977661, a: 1}
 --- !u!114 &7820547634615551843

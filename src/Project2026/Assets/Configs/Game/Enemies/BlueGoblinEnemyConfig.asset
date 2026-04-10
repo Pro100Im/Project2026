@@ -36,7 +36,7 @@ MonoBehaviour:
       data:
         <AttackHitEffect>k__BackingField: {fileID: 5303738047394165789, guid: 9636dcd3608076643878e84d75f23040, type: 3}
         <Damage>k__BackingField: 5
-        <Range>k__BackingField: 0.1
+        <Range>k__BackingField: 0.6
         <Cooldown>k__BackingField: 3
         <Duration>k__BackingField: 0.6
         <IsMelee>k__BackingField: 1

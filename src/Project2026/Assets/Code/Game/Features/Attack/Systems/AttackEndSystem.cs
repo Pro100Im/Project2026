@@ -43,7 +43,7 @@ namespace Code.Game.Features.Attack.Systems
                     damage.AddDamage(attack.damage.Value);
                     damage.isDamageRequest = true;
 
-                    _effectFactory.Create(entity.attackHitEffect.Value, entity.attackerPoint.Value);
+                    _effectFactory.Create(entity.attackHitEffect.Value, entity.targetPoint.Value);
                 }
 
                 entity.isAttacking = false;
