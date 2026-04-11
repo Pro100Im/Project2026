@@ -22,9 +22,16 @@ namespace Code.Game.Features.Tower.Systems
         {
             foreach (var place in _places.GetEntities(_buffer))
             {
+                place.AddDamage(10);
+                place.AddAttackDuration(0.5f);
+                place.AddAttackCooldown(1f);
+                place.AddRange(5f);
+
                 place.isTowerBuildRequest = false;
                 place.isTowerPlace = false;
                 place.isTower = true;
+                place.isMeleeAttack = false;
+                place.isAttackAvailable = true;
             }
         }
     }

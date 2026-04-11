@@ -1,6 +1,5 @@
 using Code.Game.Features.Target.Services;
 using Entitas;
-using UnityEngine;
 
 namespace Code.Game.Features.Target.Systems
 {
@@ -11,6 +10,7 @@ namespace Code.Game.Features.Target.Systems
 
         private readonly IGroup<GameEntity> _warriors;
         private readonly IGroup<GameEntity> _enemies;
+        private readonly IGroup<GameEntity> _towers;
 
         public SearchingClosestTargetSystem(GameContext gameContext, TargetService targetService)
         {
@@ -27,6 +27,12 @@ namespace Code.Game.Features.Target.Systems
                 GameMatcher.Targetable,
                 GameMatcher.SpriteRenderer,
                 GameMatcher.Player));
+
+            _towers = gameContext.GetGroup(GameMatcher
+                .AllOf(
+                GameMatcher.SpriteRenderer,
+                GameMatcher.Player,
+                GameMatcher.Tower));
         }
 
         public void Execute()
@@ -59,6 +65,37 @@ namespace Code.Game.Features.Target.Systems
                 }
             }
 
+            foreach (var tower in _towers)
+            {
+                if (tower.hasTargetId)
+                    continue;
+
+                if (!tower.hasRange)
+                    continue;
+
+                foreach (var enemy in _enemies)
+                {
+                    if (enemy.isDead)
+                        continue;
+
+                    var ba = tower.spriteRenderer.Value.bounds;
+                    var bb = enemy.spriteRenderer.Value.bounds;
+
+                    var closestA = ba.ClosestPoint(bb.center);
+                    var closestB = bb.ClosestPoint(ba.center);
+                    var distance = _targetService.GetDistanceBetweenEntities(ba, bb, closestA, closestB);
+
+                    if (distance <= tower.range.Value)
+                    {
+                        tower.AddTargetId(enemy.id.Value);
+                        tower.AddAttackerPoint(closestA);
+                        tower.AddTargetPoint(closestB);
+                    }
+
+                    break;
+                }
+            }
+
             foreach (var warrior in _warriors)
             {
                 if (warrior.hasTargetId)
@@ -80,7 +117,7 @@ namespace Code.Game.Features.Target.Systems
                     var distance = _targetService.GetDistanceBetweenEntities(ba, bb, closestA, closestB);
 
                     if (distance <= warrior.range.Value)
-                    {  
+                    {
                         warrior.AddTargetId(enemy.id.Value);
                         warrior.AddAttackerPoint(closestA);
                         warrior.AddTargetPoint(closestB);
