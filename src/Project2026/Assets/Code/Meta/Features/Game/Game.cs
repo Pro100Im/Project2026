@@ -33,5 +33,10 @@ namespace Code.Meta.Features.Game
 
             entity.isWaveStartRequsted = true;
         }
+
+        private void OnDestroy()
+        {
+            _startWaveButton.clickable.clicked -= StartWave;
+        }
     }
 }

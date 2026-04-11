@@ -64,13 +64,16 @@ public static class GameComponentsLookup {
     public const int Targetable = 53;
     public const int TargetId = 54;
     public const int TargetPoint = 55;
-    public const int CurrentWaveEnemies = 56;
-    public const int CurrentWaveNumber = 57;
-    public const int WaveEnemiesAlive = 58;
-    public const int WaveInProgress = 59;
-    public const int WaveStartRequsted = 60;
+    public const int TowerBuildRequest = 56;
+    public const int Tower = 57;
+    public const int TowerPlace = 58;
+    public const int CurrentWaveEnemies = 59;
+    public const int CurrentWaveNumber = 60;
+    public const int WaveEnemiesAlive = 61;
+    public const int WaveInProgress = 62;
+    public const int WaveStartRequsted = 63;
 
-    public const int TotalComponents = 61;
+    public const int TotalComponents = 64;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -129,6 +132,9 @@ public static class GameComponentsLookup {
         "Targetable",
         "TargetId",
         "TargetPoint",
+        "TowerBuildRequest",
+        "Tower",
+        "TowerPlace",
         "CurrentWaveEnemies",
         "CurrentWaveNumber",
         "WaveEnemiesAlive",
@@ -193,6 +199,9 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Target.Targetable),
         typeof(Code.Game.Features.Target.TargetId),
         typeof(Code.Game.Features.Target.TargetPoint),
+        typeof(Code.Game.Features.Tower.TowerBuildRequest),
+        typeof(Code.Game.Features.Tower.TowerComponent),
+        typeof(Code.Game.Features.Tower.TowerPlace),
         typeof(Code.Game.Features.Wave.CurrentWaveEnemies),
         typeof(Code.Game.Features.Wave.CurrentWaveNumber),
         typeof(Code.Game.Features.Wave.WaveEnemiesAlive),

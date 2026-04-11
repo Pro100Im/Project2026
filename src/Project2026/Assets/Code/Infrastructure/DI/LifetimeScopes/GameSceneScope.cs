@@ -30,6 +30,7 @@ using Code.Game.Features.Spawn.Systems;
 using Code.Game.Features.Target;
 using Code.Game.Features.Target.Services;
 using Code.Game.Features.Target.Systems;
+using Code.Game.Features.Tower;
 using Code.Game.Features.Wave;
 using Code.Game.Features.Wave.Systems;
 using Code.Game.Input.Service;
@@ -109,6 +110,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<InputFeature>(Lifetime.Singleton);
             builder.Register<PlayerFeature>(Lifetime.Singleton);
+
+            builder.Register<TowerFeature>(Lifetime.Singleton);
 
             builder.Register<CooldownFeature>(Lifetime.Singleton);
             builder.Register<DurationFeature>(Lifetime.Singleton);
