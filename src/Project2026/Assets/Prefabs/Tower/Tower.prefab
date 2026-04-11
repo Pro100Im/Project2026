@@ -11,8 +11,11 @@ GameObject:
   - component: {fileID: 3617163305584857236}
   - component: {fileID: 1768954670147358820}
   - component: {fileID: 3518144092183411690}
+  - component: {fileID: 7695083838553810320}
+  - component: {fileID: 8541246439880557609}
+  - component: {fileID: 1569077453563832282}
   m_Layer: 0
-  m_Name: Tower_Construction
+  m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,7 +108,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9fed9df1e0b73f4d9e6d45dc9d4d42e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Tower.Managers.TowerBuildManager
+  _tower: {fileID: 7695083838553810320}
   _doc: {fileID: 5889272363662820823}
+--- !u!114 &7695083838553810320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7357662842468826693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e9e6d76a148574fa7021028a8f886a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.EntityBehaviour
+--- !u!114 &8541246439880557609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7357662842468826693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9267ce2d010e48444a785586d0cd3ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.SelfInitializeEntityView
+  _entityBehaviour: {fileID: 7695083838553810320}
+--- !u!114 &1569077453563832282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7357662842468826693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e5510aa1afc7514f9dec503758d5a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Tower.Registrars.TowerRegistrar
+  EntityView: {fileID: 7695083838553810320}
 --- !u!1001 &4894427404741696560
 PrefabInstance:
   m_ObjectHideFlags: 0

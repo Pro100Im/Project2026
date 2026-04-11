@@ -31,6 +31,7 @@ using Code.Game.Features.Target;
 using Code.Game.Features.Target.Services;
 using Code.Game.Features.Target.Systems;
 using Code.Game.Features.Tower;
+using Code.Game.Features.Tower.Systems;
 using Code.Game.Features.Wave;
 using Code.Game.Features.Wave.Systems;
 using Code.Game.Input.Service;
@@ -149,6 +150,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<WaveInitSystem>(Lifetime.Singleton);
             builder.Register<WaveStartSystem>(Lifetime.Singleton);
             builder.Register<WaveProgressSystem>(Lifetime.Singleton);
+
+            builder.Register<TowerBuildSystem>(Lifetime.Singleton);
 
             builder.Register<EnemySelectSpawnPosSystem>(Lifetime.Singleton);
             builder.Register<EnemySpawnSystem>(Lifetime.Singleton);

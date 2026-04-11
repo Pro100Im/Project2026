@@ -22,7 +22,9 @@ namespace Code.Game.Features.Tower.Systems
         {
             foreach (var place in _places.GetEntities(_buffer))
             {
-                
+                place.isTowerBuildRequest = false;
+                place.isTowerPlace = false;
+                place.isTower = true;
             }
         }
     }
