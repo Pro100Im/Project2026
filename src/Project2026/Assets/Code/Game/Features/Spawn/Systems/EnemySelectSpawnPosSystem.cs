@@ -1,4 +1,3 @@
-using Code.Game.Features.Enemy.Factory;
 using Entitas;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ namespace Code.Game.Features.Spawn.Systems
         private readonly IGroup<GameEntity> _enemies;
         private readonly IGroup<GameEntity> _spawnPositions;
 
-        public EnemySelectSpawnPosSystem(GameContext gameContext, EnemyFactory enemyFactory)
+        public EnemySelectSpawnPosSystem(GameContext gameContext)
         {
             _enemies = gameContext.GetGroup(GameMatcher
               .AllOf(

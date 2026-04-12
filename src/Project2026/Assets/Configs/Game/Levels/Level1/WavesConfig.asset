@@ -15,11 +15,11 @@ MonoBehaviour:
   <WaveDatas>k__BackingField:
   - Cooldown: 1.2
     EntityConfigs:
-    - {fileID: 11400000, guid: 876657456f9a8fb4a87e9f9aaacdad41, type: 2}
+    - {fileID: 11400000, guid: ee4c964759f2f2f40b5eb20bd775f067, type: 2}
   - Cooldown: 1
     EntityConfigs:
-    - {fileID: 11400000, guid: 876657456f9a8fb4a87e9f9aaacdad41, type: 2}
-    - {fileID: 11400000, guid: 876657456f9a8fb4a87e9f9aaacdad41, type: 2}
-    - {fileID: 11400000, guid: 876657456f9a8fb4a87e9f9aaacdad41, type: 2}
-    - {fileID: 11400000, guid: 876657456f9a8fb4a87e9f9aaacdad41, type: 2}
-    - {fileID: 11400000, guid: 876657456f9a8fb4a87e9f9aaacdad41, type: 2}
+    - {fileID: 11400000, guid: ee4c964759f2f2f40b5eb20bd775f067, type: 2}
+    - {fileID: 11400000, guid: ee4c964759f2f2f40b5eb20bd775f067, type: 2}
+    - {fileID: 11400000, guid: ee4c964759f2f2f40b5eb20bd775f067, type: 2}
+    - {fileID: 11400000, guid: ee4c964759f2f2f40b5eb20bd775f067, type: 2}
+    - {fileID: 11400000, guid: ee4c964759f2f2f40b5eb20bd775f067, type: 2}

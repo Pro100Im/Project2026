@@ -13,42 +13,30 @@ MonoBehaviour:
   m_Name: BlueGoblinEnemyConfig
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.EntityConfig
   Properties:
-  - rid: -2
-  - rid: 8869463032931287139
-  - rid: 8869463032931287140
-  - rid: 8171215315377586296
-  - rid: 8171215315377586298
-  - rid: 8171215465242951762
+  - rid: 8171215564655034479
+  - rid: 8171215564655034480
+  - rid: 8171215564655034481
+  - rid: 8171215564655034482
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 8171215315377586296
-      type: {class: HealthData, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+    - rid: 8171215564655034479
+      type: {class: HealthProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
-        <HpBar>k__BackingField: {fileID: 2238861304701913438, guid: 4a356d44723836145be75457b4a66ff9, type: 3}
-        <HpBarOffset>k__BackingField: {x: 0, y: 0.5, z: 0}
+        <Mode>k__BackingField: 0
         <Health>k__BackingField: 100
-        <Regen>k__BackingField: 0
-    - rid: 8171215315377586298
-      type: {class: AttackData, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+    - rid: 8171215564655034480
+      type: {class: PhysicalDamageProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
-        <AttackHitEffect>k__BackingField: {fileID: 5303738047394165789, guid: 9636dcd3608076643878e84d75f23040, type: 3}
+        <Mode>k__BackingField: 0
         <Damage>k__BackingField: 5
-        <Range>k__BackingField: 0.6
-        <Cooldown>k__BackingField: 3
-        <Duration>k__BackingField: 0.6
-        <IsMelee>k__BackingField: 1
-    - rid: 8171215465242951762
-      type: {class: SpawnEffectData, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+    - rid: 8171215564655034481
+      type: {class: SpeedProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
-        <SpawnEffect>k__BackingField: {fileID: 2715749001849539951, guid: f25134e451c905e4385cec3295fa45b6, type: 3}
-    - rid: 8869463032931287139
-      type: {class: ViewData, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+        <Mode>k__BackingField: 0
+        <Speed>k__BackingField: 1
+    - rid: 8171215564655034482
+      type: {class: ViewPrefabProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
+        <Mode>k__BackingField: 0
         <Prefab>k__BackingField: {fileID: -3016027265122920863, guid: d49b9c95ca2a1914d95fb1ad30f87b7b, type: 3}
-    - rid: 8869463032931287140
-      type: {class: MovementData, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
-      data:
-        <Speed>k__BackingField: 2

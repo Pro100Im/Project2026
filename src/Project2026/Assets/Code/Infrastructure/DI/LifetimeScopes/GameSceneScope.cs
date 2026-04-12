@@ -16,7 +16,6 @@ using Code.Game.Features.Death.Systems;
 using Code.Game.Features.Duration;
 using Code.Game.Features.Duration.Systems;
 using Code.Game.Features.Effect.Factory;
-using Code.Game.Features.Enemy.Factory;
 using Code.Game.Features.Health;
 using Code.Game.Features.Health.Systems;
 using Code.Game.Features.Input;
@@ -44,7 +43,6 @@ using Code.Infrastructure.States.GameStates;
 using Code.Infrastructure.States.StateMachine;
 using Code.Infrastructure.Systems;
 using Code.Infrastructure.View;
-using Code.Infrastructure.View.Factory;
 using Code.Infrastructure.View.Systems;
 using UnityEngine;
 using VContainer;
@@ -188,9 +186,6 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<IStateFactory, StateFactory>(Lifetime.Singleton);
             builder.Register<ISystemFactory, SystemFactory>(Lifetime.Singleton);
 
-            builder.Register<IEntityViewFactory, EntityViewFactory>(Lifetime.Singleton);
-
-            builder.Register<EnemyFactory>(Lifetime.Singleton);
             builder.Register<EffectFactory>(Lifetime.Singleton);
         }
 

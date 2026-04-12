@@ -1,18 +1,16 @@
-using System.Collections.Generic;
-using Code.Infrastructure.View.Factory;
 using Entitas;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Code.Infrastructure.View.Systems
 {
     public class CreateEntityViewFromPrefabSystem : IExecuteSystem
     {
-        private readonly IEntityViewFactory _entityViewFactory;
         private readonly IGroup<GameEntity> _entities;
         private readonly List<GameEntity> _buffer = new(32);
 
-        public CreateEntityViewFromPrefabSystem(GameContext game, IEntityViewFactory entityViewFactory)
+        public CreateEntityViewFromPrefabSystem(GameContext game)
         {
-            _entityViewFactory = entityViewFactory;
             _entities = game.GetGroup(GameMatcher
               .AllOf
               (GameMatcher.ViewPrefab,
@@ -25,7 +23,9 @@ namespace Code.Infrastructure.View.Systems
         {
             foreach (GameEntity entity in _entities.GetEntities(_buffer))
             {
-                _entityViewFactory.CreateViewForEntityFromPrefab(entity);
+                var view = GameObject.Instantiate<EntityBehaviour>(entity.viewPrefab.Value, entity.spawnPosition.Value, Quaternion.identity, null);
+
+                view.SetEntity(entity);
 
                 entity.RemoveSpawnPosition();
                 entity.RemoveViewPrefab();
