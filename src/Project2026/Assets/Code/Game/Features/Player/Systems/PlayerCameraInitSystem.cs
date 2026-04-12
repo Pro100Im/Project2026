@@ -1,4 +1,4 @@
-using Code.Common.Cameras;
+using Code.Game.Common.Cameras;
 using Entitas;
 
 namespace Code.Game.Features.Player.Systems

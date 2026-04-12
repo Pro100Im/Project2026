@@ -1,5 +1,5 @@
-﻿using Code.Common.Entity;
-using Code.Common.UI.Transition;
+﻿using Code.Game.Common.Entity;
+using Code.Game.Common.UI.Transition;
 using Code.Infrastructure.States.StateInfrastructure;
 using Code.Infrastructure.States.StateMachine;
 using Cysharp.Threading.Tasks;

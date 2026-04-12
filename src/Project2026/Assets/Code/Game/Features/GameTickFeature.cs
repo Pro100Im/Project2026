@@ -1,4 +1,4 @@
-using Code.Common.Destruct;
+using Code.Game.Common.Destruct;
 using Code.Game.Features.Animator;
 using Code.Game.Features.Attack;
 using Code.Game.Features.Cooldown;

@@ -1,6 +1,6 @@
-using Code.Common.Random;
-using Code.Common.Time;
-using Code.Common.UI;
+using Code.Game.Common.Random;
+using Code.Game.Common.Time;
+using Code.Game.Common.UI;
 using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Helpers;
 using Code.Infrastructure.Loading;

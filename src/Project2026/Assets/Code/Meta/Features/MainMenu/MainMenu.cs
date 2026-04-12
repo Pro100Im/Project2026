@@ -1,5 +1,5 @@
-﻿using Code.Common.UI;
-using Code.Common.UI.Transition;
+﻿using Code.Game.Common.UI;
+using Code.Game.Common.UI.Transition;
 using Code.Infrastructure.Loading;
 using Cysharp.Threading.Tasks;
 using System;

@@ -1,5 +1,5 @@
-using Code.Common.Entity;
-using Code.Common.Time;
+using Code.Game.Common.Time;
+using Code.Game.Common.Entity;
 using Code.Game.StaticData.Configs;
 using Entitas;
 using System.Collections.Generic;

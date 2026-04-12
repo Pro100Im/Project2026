@@ -1,4 +1,4 @@
-using Code.Common.UI;
+using Code.Game.Common.UI;
 using Code.Infrastructure.View;
 using Cysharp.Threading.Tasks;
 using UnityEngine;

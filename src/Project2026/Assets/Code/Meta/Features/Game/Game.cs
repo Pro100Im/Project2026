@@ -1,4 +1,4 @@
-using Code.Common.Entity;
+using Code.Game.Common.Entity;
 using Code.Game.StaticData.Configs;
 using UnityEngine;
 using UnityEngine.UIElements;

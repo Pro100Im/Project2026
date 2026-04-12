@@ -1,4 +1,4 @@
-using Code.Common.Time;
+using Code.Game.Common.Time;
 using Entitas;
 
 namespace Code.Game.Features.Duration.Systems

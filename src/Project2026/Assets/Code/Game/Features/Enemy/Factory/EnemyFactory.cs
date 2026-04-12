@@ -1,4 +1,4 @@
-using Code.Common.Entity;
+using Code.Game.Common.Entity;
 using Code.Game.Features.Effect.Factory;
 using Code.Game.StaticData.Configs;
 using Code.Infrastructure.Identifiers;
@@ -19,7 +19,7 @@ namespace Code.Game.Features.Enemy.Factory
 
         public GameEntity Create(EntityConfig entityConfig, Vector3 spawnPosition)
         {
-            var entity = new EntityBuilder(CreateGameEntity.Empty(), entityConfig)
+            var entity = new GameEntityBuilder(CreateGameEntity.Empty(), entityConfig)
                 .WithId(_identifiers)
                 .WithSpawnPosition(spawnPosition)
                 .WithView()

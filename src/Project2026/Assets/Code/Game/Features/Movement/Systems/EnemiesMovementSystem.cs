@@ -1,5 +1,5 @@
-using Code.Common.Random;
-using Code.Common.Time;
+using Code.Game.Common.Time;
+using Code.Game.Common.Random;
 using Entitas;
 using UnityEngine;
 

@@ -1,4 +1,4 @@
-using Code.Common.Cameras;
+using Code.Game.Common.Cameras;
 using Settings.Input;
 using UnityEngine;
 using UnityEngine.InputSystem;

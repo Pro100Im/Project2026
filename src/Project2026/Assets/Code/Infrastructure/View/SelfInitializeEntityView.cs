@@ -1,4 +1,4 @@
-using Code.Common.Entity;
+using Code.Game.Common.Entity;
 using Code.Infrastructure.Identifiers;
 using UnityEngine;
 using VContainer;

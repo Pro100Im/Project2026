@@ -1,0 +1,20 @@
+using System.Collections.Generic;
+using Entitas;
+
+namespace Code.Game.Common.Destruct.Systems
+{
+    public class MetaDestructedSystem : ICleanupSystem
+    {
+        private readonly IGroup<MetaEntity> _entities;
+        private readonly List<MetaEntity> _buffer = new(16);
+
+        public MetaDestructedSystem(MetaContext metaContext) =>
+          _entities = metaContext.GetGroup(MetaMatcher.Destructed);
+
+        public void Cleanup()
+        {
+            foreach(MetaEntity entity in _entities.GetEntities(_buffer))
+                entity.Destroy();
+        }
+    }
+}

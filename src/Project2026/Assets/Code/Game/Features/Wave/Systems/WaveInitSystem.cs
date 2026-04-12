@@ -1,4 +1,4 @@
-using Code.Common.Entity;
+using Code.Game.Common.Entity;
 using Entitas;
 
 namespace Code.Game.Features.Wave.Systems

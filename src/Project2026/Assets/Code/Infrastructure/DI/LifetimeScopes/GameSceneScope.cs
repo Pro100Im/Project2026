@@ -1,7 +1,7 @@
-using Code.Common.Cameras;
-using Code.Common.Destruct;
-using Code.Common.Destruct.Systems;
-using Code.Common.UI.Transition;
+using Code.Game.Common.Cameras;
+using Code.Game.Common.Destruct;
+using Code.Game.Common.Destruct.Systems;
+using Code.Game.Common.UI.Transition;
 using Code.Game.Features;
 using Code.Game.Features.Animator;
 using Code.Game.Features.Animator.Systems;
