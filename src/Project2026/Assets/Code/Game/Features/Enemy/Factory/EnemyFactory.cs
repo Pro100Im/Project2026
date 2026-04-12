@@ -1,4 +1,5 @@
 using Code.Game.Common.Entity;
+using Code.Game.Common.Entity.EntityBuilders;
 using Code.Game.Features.Effect.Factory;
 using Code.Game.StaticData.Configs;
 using Code.Infrastructure.Identifiers;
@@ -27,10 +28,9 @@ namespace Code.Game.Features.Enemy.Factory
                 .WithAttack()
                 .WithHealth(spawnPosition)
                 .WithSpawnEffect(_effectFactory, spawnPosition)
+                .WithEnemyTag()
+                .WithTargetableTag()
                 .Build();
-
-            entity.isTargetable = true;
-            entity.isEnemy = true; 
 
             return entity;
         }

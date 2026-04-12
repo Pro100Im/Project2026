@@ -1,25 +1,46 @@
 using Code.Game.Features.Effect.Factory;
-using Code.Game.StaticData.Configs;
 using Code.Game.StaticData.Data;
 using Code.Infrastructure.Identifiers;
 using UnityEngine;
 
-namespace Code.Game.Common.Entity
+namespace Code.Game.Common.Entity.EntityBuilders
 {
-    public class GameEntityBuilder 
+    public sealed partial class GameEntityBuilder
     {
-        private readonly GameEntity _entity;
-        private readonly EntityConfig _config;
-
-        public GameEntityBuilder(GameEntity entity, EntityConfig config)
-        {
-            _entity = entity;
-            _config = config;
-        }
-
         public GameEntityBuilder WithId(IIdentifierService identifiers)
         {
             _entity.AddId(identifiers.Next());
+
+            return this;
+        }
+
+        public GameEntityBuilder WithView()
+        {
+            var view = _config.GetProperty<ViewData>();
+
+            if (view != null)
+                _entity.AddViewPrefab(view.Prefab);
+
+            return this;
+        }
+
+        public GameEntityBuilder WithTransform(Transform transform)
+        {
+            _entity.AddTransform(transform);
+
+            return this;
+        }
+
+        public GameEntityBuilder WithSpriteRenderer(SpriteRenderer spriteRenderer)
+        {
+            _entity.AddSpriteRenderer(spriteRenderer);
+
+            return this;
+        }
+
+        public GameEntityBuilder WithAnimator(Animator animator)
+        {
+            _entity.AddAnimator(animator);
 
             return this;
         }
@@ -31,12 +52,13 @@ namespace Code.Game.Common.Entity
             return this;
         }
 
-        public GameEntityBuilder WithView()
+        public GameEntityBuilder WithSpawnEffect(EffectFactory effectFactory, Vector3 spawnPos = default)
         {
-            var view = _config.GetProperty<ViewData>();
+            var position = spawnPos == default ? _entity.transform.Value.position : spawnPos;
+            var spawnEffect = _config.GetProperty<SpawnEffectData>();
 
-            if (view != null)
-                _entity.AddViewPrefab(view.Prefab);
+            if (spawnEffect != null)
+                effectFactory.Create(spawnEffect.SpawnEffect, position);
 
             return this;
         }
@@ -94,22 +116,6 @@ namespace Code.Game.Common.Entity
             }
 
             return this;
-        }
-
-        public GameEntityBuilder WithSpawnEffect(EffectFactory effectFactory, Vector3 spawnPos = default)
-        {
-            var position = spawnPos == default ? _entity.transform.Value.position : spawnPos;
-            var spawnEffect = _config.GetProperty<SpawnEffectData>();
-
-            if (spawnEffect != null)
-                effectFactory.Create(spawnEffect.SpawnEffect, position);
-
-            return this;
-        }
-
-        public GameEntity Build()
-        {
-            return _entity;
         }
     }
 }
