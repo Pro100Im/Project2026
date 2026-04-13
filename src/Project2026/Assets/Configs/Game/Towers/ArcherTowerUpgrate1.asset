@@ -18,6 +18,7 @@ MonoBehaviour:
   - rid: 8171215588330831997
   - rid: 8171215588330831998
   - rid: 8171215588330831999
+  - rid: 8171215588330832021
   references:
     version: 2
     RefIds:
@@ -48,3 +49,8 @@ MonoBehaviour:
         <Cooldown>k__BackingField: 3
         <Duration>k__BackingField: 0.6
         <IsMelee>k__BackingField: 0
+    - rid: 8171215588330832021
+      type: {class: SpriteProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <_sprite>k__BackingField: {fileID: 21300000, guid: ab80ce8c4dc2adf46a26cbde9e25e69d, type: 3}

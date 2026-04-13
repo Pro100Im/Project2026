@@ -22,6 +22,7 @@ namespace Code.Game.Common
     [Game] public class View : IComponent { public IEntityView Value; }
     [Game] public class ViewPath : IComponent { public string Value; }
     [Game] public class ViewPrefab : IComponent { public EntityBehaviour Value; }
+    [Game] public class SpriteComponent : IComponent { public Sprite Value; }
 
     [Game, Meta] public class Destructed : IComponent { }
     [Game, Meta] public class DelayDestruct : IComponent { }
