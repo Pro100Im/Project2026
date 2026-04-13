@@ -1,4 +1,5 @@
 using Code.Game.Common.Entity;
+using Code.Infrastructure.Identifiers;
 using Entitas;
 using System.Collections.Generic;
 
@@ -28,6 +29,9 @@ namespace Code.Game.Features.Spawn.Systems
                 var entity = CreateGameEntity.Empty();
                 entity.AddSpawnPosition(enemySpawn.spawnPosition.Value);
                 entity.AddGateNumber(enemySpawn.gateNumber.Value);
+                entity.AddMovementCurrentPointIndex(0);
+                entity.isMovementAvailable = true;
+                entity.isEnemy = true;
 
                 foreach(var property in enemySpawn.entityConfig.Value.Properties)
                     property.Apply(entity);

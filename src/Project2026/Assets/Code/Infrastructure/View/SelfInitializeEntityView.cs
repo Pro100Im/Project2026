@@ -1,7 +1,6 @@
 using Code.Game.Common.Entity;
 using Code.Infrastructure.Identifiers;
 using UnityEngine;
-using VContainer;
 
 namespace Code.Infrastructure.View
 {
@@ -9,14 +8,6 @@ namespace Code.Infrastructure.View
     public class SelfInitializeEntityView : MonoBehaviour
     {
         [SerializeField] private EntityBehaviour _entityBehaviour;
-
-        private IIdentifierService _identifierService;
-
-        [Inject]
-        private void Construct(IIdentifierService identifierService)
-        {
-            _identifierService = identifierService;
-        }
 
         private void OnValidate()
         {
@@ -28,7 +19,7 @@ namespace Code.Infrastructure.View
         {
             var entity = CreateGameEntity.Empty();
 
-            entity.AddId(_identifierService.Next());
+            entity.AddId(EntityIdentifier.Next());
 
             _entityBehaviour.SetEntity(entity);
         }

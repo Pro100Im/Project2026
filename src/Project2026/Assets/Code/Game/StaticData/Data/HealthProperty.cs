@@ -1,4 +1,3 @@
-using Code.Infrastructure.View;
 using System;
 using UnityEngine;
 

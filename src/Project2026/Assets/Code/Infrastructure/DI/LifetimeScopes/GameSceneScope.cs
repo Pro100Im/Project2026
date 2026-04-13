@@ -83,7 +83,6 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
         private void BindServices(IContainerBuilder builder)
         {
-            builder.Register<IIdentifierService, IdentifierService>(Lifetime.Singleton);
             builder.Register<IInputService, InputService>(Lifetime.Singleton);
             builder.Register<TargetService>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<ICameraService>().AsImplementedInterfaces().AsSelf();
