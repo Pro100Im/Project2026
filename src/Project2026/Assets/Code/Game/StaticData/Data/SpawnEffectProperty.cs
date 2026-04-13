@@ -9,12 +9,13 @@ namespace Code.Game.StaticData.Data
     public class SpawnEffectProperty : EntityProperty
     {
         [field: SerializeField] public EntityConfig SpawnEffect { get; private set; }
+        [field: SerializeField] public Vector3 SpawnEffectOffset { get; private set; }
 
         protected override void Add(GameEntity entity)
         {
             var spawnEffectEntity = CreateGameEntity.Empty();
 
-            spawnEffectEntity.AddSpawnPosition(entity.spawnPosition.Value);
+            spawnEffectEntity.AddSpawnPosition(entity.spawnPosition.Value + SpawnEffectOffset);
 
             foreach (var property in SpawnEffect.Properties)
                 property.Apply(spawnEffectEntity);

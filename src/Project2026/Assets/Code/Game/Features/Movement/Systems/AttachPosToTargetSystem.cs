@@ -1,4 +1,4 @@
-using Code.Game.Common.Entity;
+ using Code.Game.Common.Entity;
 using Entitas;
 
 namespace Code.Game.Features.Movement.Systems

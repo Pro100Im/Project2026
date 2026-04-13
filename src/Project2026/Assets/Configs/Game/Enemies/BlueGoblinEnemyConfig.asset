@@ -19,6 +19,7 @@ MonoBehaviour:
   - rid: 8171215564655034482
   - rid: 8171215567031369821
   - rid: 8171215576890605674
+  - rid: 8171215579295776848
   references:
     version: 2
     RefIds:
@@ -47,7 +48,14 @@ MonoBehaviour:
       data:
         <Mode>k__BackingField: 0
         <SpawnEffect>k__BackingField: {fileID: 11400000, guid: 66146da2da0797949afeef7485ed8aeb, type: 2}
+        <SpawnEffectOffset>k__BackingField: {x: 0, y: 0, z: 0}
     - rid: 8171215576890605674
       type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
+    - rid: 8171215579295776848
+      type: {class: HealthBarProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <HpBar>k__BackingField: {fileID: 11400000, guid: 940e7d5b532b66741ab204f744f5205b, type: 2}
+        <SpawnOffset>k__BackingField: {x: 0, y: 0.5, z: 0}
