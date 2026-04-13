@@ -1,4 +1,5 @@
 using Code.Game.Common.UI;
+using Code.Game.StaticData.Configs;
 using Code.Infrastructure.View;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace Code.Game.Features.Tower.Managers
 {
     public class TowerBuildManager : MonoBehaviour
     {
+        [SerializeField] private EntityConfig _testTowerUpgrate;
         [SerializeField] private EntityBehaviour _tower;
         [SerializeField] private UIDocument _doc;
 
@@ -69,6 +71,7 @@ namespace Code.Game.Features.Tower.Managers
             _container.pickingMode = PickingMode.Ignore;
 
             _tower.Entity.isTowerBuildRequest = true;
+            _tower.Entity.AddEntityConfig(_testTowerUpgrate);
 
             _uIService.Hide(_towerBuilds).AsTask();
         }

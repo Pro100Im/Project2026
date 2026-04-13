@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 3518144092183411690}
   - component: {fileID: 7695083838553810320}
   - component: {fileID: 8541246439880557609}
-  - component: {fileID: 1569077453563832282}
+  - component: {fileID: 2662572809283699178}
   - component: {fileID: 9153608685574237889}
+  - component: {fileID: 8753180154002075427}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -109,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9fed9df1e0b73f4d9e6d45dc9d4d42e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Tower.Managers.TowerBuildManager
+  _testTowerUpgrate: {fileID: 11400000, guid: 73f3088a3a3933840acd244ee4f29d32, type: 2}
   _tower: {fileID: 7695083838553810320}
   _doc: {fileID: 5889272363662820823}
 --- !u!114 &7695083838553810320
@@ -136,7 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.SelfInitializeEntityView
   _entityBehaviour: {fileID: 7695083838553810320}
---- !u!114 &1569077453563832282
+--- !u!114 &2662572809283699178
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,9 +147,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7357662842468826693}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e5510aa1afc7514f9dec503758d5a8d, type: 3}
+  m_Script: {fileID: 11500000, guid: 329e4c4a20c17b5489c25c1f81e979eb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Tower.Registrars.TowerRegistrar
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Registrars.TransformRegistrar
   EntityView: {fileID: 7695083838553810320}
 --- !u!114 &9153608685574237889
 MonoBehaviour:
@@ -163,6 +165,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Registrars.SpriteRendererRegistrar
   EntityView: {fileID: 7695083838553810320}
   _spriteRenderer: {fileID: 1768954670147358820}
+--- !u!114 &8753180154002075427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7357662842468826693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c89f2d5e5a8bb164fa717148d86914c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Entity.EntityConfigRegistrar
+  EntityView: {fileID: 7695083838553810320}
+  _config: {fileID: 11400000, guid: ab4da31c223527648aad2896470df7be, type: 2}
 --- !u!1001 &4894427404741696560
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -42,7 +42,7 @@ MonoBehaviour:
       type: {class: SpeedProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Speed>k__BackingField: 3
+        <Speed>k__BackingField: 1
     - rid: 8171215584738410597
       type: {class: HealthProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:

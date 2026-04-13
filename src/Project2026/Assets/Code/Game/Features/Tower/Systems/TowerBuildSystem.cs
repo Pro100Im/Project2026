@@ -15,23 +15,21 @@ namespace Code.Game.Features.Tower.Systems
                 .AllOf(
                 GameMatcher.Player,
                 GameMatcher.TowerPlace,
-                GameMatcher.TowerBuildRequest));
+                GameMatcher.TowerBuildRequest,
+                GameMatcher.EntityConfig));
         } 
 
         public void Execute()
         {
             foreach (var place in _places.GetEntities(_buffer))
             {
-                //place.AddDamage(10);
-                place.AddAttackDuration(0.5f);
-                place.AddAttackCooldown(1f);
-                place.AddRange(5f);
+                foreach (var property in place.entityConfig.Value.Properties)
+                {
+                    property.Apply(place);
+                }
 
                 place.isTowerBuildRequest = false;
-                place.isTowerPlace = false;
-                place.isTower = true;
-                place.isMeleeAttack = false;
-                place.isAttackAvailable = true;
+                place.RemoveEntityConfig();
             }
         }
     }

@@ -1,5 +1,4 @@
 using Code.Game.Common.Entity;
-using Code.Infrastructure.Identifiers;
 using UnityEngine;
 
 namespace Code.Infrastructure.View
@@ -18,8 +17,6 @@ namespace Code.Infrastructure.View
         private void Awake()
         {
             var entity = CreateGameEntity.Empty();
-
-            entity.AddId(EntityIdentifier.Next());
 
             _entityBehaviour.SetEntity(entity);
         }

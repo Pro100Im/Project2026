@@ -1,10 +1,12 @@
 using Code.Game.Common.Entity;
 using Code.Infrastructure.View;
 using Code.Infrastructure.View.Registrars;
+using System;
 using UnityEngine;
 
 namespace Code.Game.Features.Player.Registrars
 {
+    [Serializable]
     public class PlayerCastleRegistrar : EntityComponentRegistrar
     {
         [SerializeField] private int _health;

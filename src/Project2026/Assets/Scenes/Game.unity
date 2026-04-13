@@ -343,7 +343,8 @@ MonoBehaviour:
   parentReference:
     TypeName: Code.Infrastructure.DI.LifetimeScopes.GlobalScope
   autoRun: 1
-  autoInjectGameObjects: []
+  autoInjectGameObjects:
+  - {fileID: 3300921976331101556}
   _wavesConfig: {fileID: 11400000, guid: 076af5ff1e1e3ec4fa679b8e4ec6895c, type: 2}
 --- !u!4 &1085809923
 Transform:
@@ -8095,6 +8096,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 0fedb0ab8b1df1640a633e88565a3710, type: 3}
+--- !u!1 &3300921976331101556 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7357662842468826693, guid: 0fedb0ab8b1df1640a633e88565a3710, type: 3}
+  m_PrefabInstance: {fileID: 3300921976331101555}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5316705716322794324
 PrefabInstance:
   m_ObjectHideFlags: 0

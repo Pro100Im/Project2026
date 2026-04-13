@@ -16,10 +16,13 @@ namespace Code.Game.StaticData.Data
             if (entity.hasMaxHealth && entity.hasCurrentHealth && !entity.hasHpBar)
             {
                 var hpBarEntity = CreateGameEntity.Empty();
+                var spawnPos = entity.hasSpawnPosition ? entity.spawnPosition.Value + SpawnOffset : entity.transform.Value.position + SpawnOffset;
 
-                hpBarEntity.AddSpawnPosition(entity.spawnPosition.Value + SpawnOffset);
+                hpBarEntity.AddSpawnPosition(spawnPos);
                 hpBarEntity.AddTargetId(entity.id.Value);
+                hpBarEntity.AddOwnerId(entity.id.Value);
                 hpBarEntity.AddMovementOffset(SpawnOffset);
+                hpBarEntity.AddCurrentHealth(entity.currentHealth.Value);
                 hpBarEntity.isAttached = true;
 
                 foreach (var property in HpBar.Properties)

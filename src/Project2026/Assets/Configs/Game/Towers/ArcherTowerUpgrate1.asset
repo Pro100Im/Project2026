@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2652ec64a2cfac428b7546f4941961e, type: 3}
+  m_Name: ArcherTowerUpgrate1
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.EntityConfig
+  Properties:
+  - rid: 8171215588330831995
+  - rid: 8171215588330831996
+  - rid: 8171215588330831997
+  - rid: 8171215588330831998
+  - rid: 8171215588330831999
+  references:
+    version: 2
+    RefIds:
+    - rid: 8171215588330831995
+      type: {class: TowerPlaceProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 2
+    - rid: 8171215588330831996
+      type: {class: TowerProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+    - rid: 8171215588330831997
+      type: {class: SpawnEffectProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <SpawnEffect>k__BackingField: {fileID: 11400000, guid: 66146da2da0797949afeef7485ed8aeb, type: 2}
+        <SpawnEffectOffset>k__BackingField: {x: 0, y: 0, z: 0}
+    - rid: 8171215588330831998
+      type: {class: PhysicalAttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <AttackHitEffect>k__BackingField: {fileID: 11400000, guid: 042aceafa8db9b646988bfb019ada0f6, type: 2}
+    - rid: 8171215588330831999
+      type: {class: AttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Range>k__BackingField: 2
+        <Cooldown>k__BackingField: 3
+        <Duration>k__BackingField: 0.6
+        <IsMelee>k__BackingField: 0

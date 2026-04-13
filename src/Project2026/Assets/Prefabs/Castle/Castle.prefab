@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 8557654295710688039}
   - component: {fileID: 4703155045763992503}
   - component: {fileID: 7157272920023211482}
-  - component: {fileID: 2348420104109928690}
   - component: {fileID: 1628295324063624636}
   - component: {fileID: 5056715533555362795}
   - component: {fileID: 2585927612937295547}
   - component: {fileID: 4538777026281559727}
+  - component: {fileID: 8484385124261865640}
   m_Layer: 0
   m_Name: Castle
   m_TagString: Untagged
@@ -133,22 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80e9e6d76a148574fa7021028a8f886a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.EntityBehaviour
---- !u!114 &2348420104109928690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2572621606243968214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 046bc51409dc90347bdcbdaaf705261b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Player.Registrars.PlayerCastleRegistrar
-  EntityView: {fileID: 7157272920023211482}
-  _health: 100
-  _hpBarOffset: {x: 0, y: 0.3, z: 0}
-  _hpBar: {fileID: 8788269854054458802, guid: bf7e54058ccf7a54f88d8bef337de2b4, type: 3}
 --- !u!114 &1628295324063624636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +187,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.SelfInitializeEntityView
   _entityBehaviour: {fileID: 7157272920023211482}
+--- !u!114 &8484385124261865640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2572621606243968214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c89f2d5e5a8bb164fa717148d86914c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Entity.EntityConfigRegistrar
+  EntityView: {fileID: 7157272920023211482}
+  _config: {fileID: 11400000, guid: 85e13e5eb1f4a2042a3f0bb14226c672, type: 2}
 --- !u!1 &4728837408793104176
 GameObject:
   m_ObjectHideFlags: 0
