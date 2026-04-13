@@ -19,7 +19,7 @@ MonoBehaviour:
   - rid: 8171215564655034482
   - rid: 8171215567031369821
   - rid: 8171215576890605674
-  - rid: 8171215579295776848
+  - rid: 8171215579295776862
   references:
     version: 2
     RefIds:
@@ -53,7 +53,7 @@ MonoBehaviour:
       type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-    - rid: 8171215579295776848
+    - rid: 8171215579295776862
       type: {class: HealthBarProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0

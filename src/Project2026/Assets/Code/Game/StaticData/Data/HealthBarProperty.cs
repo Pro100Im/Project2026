@@ -1,9 +1,11 @@
 using Code.Game.Common.Entity;
 using Code.Game.StaticData.Configs;
+using System;
 using UnityEngine;
 
 namespace Code.Game.StaticData.Data
 {
+    [Serializable]
     public class HealthBarProperty : EntityProperty
     {
         [field: SerializeField] public EntityConfig HpBar { get; private set; }
