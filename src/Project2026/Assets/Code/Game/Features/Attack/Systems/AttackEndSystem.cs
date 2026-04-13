@@ -1,5 +1,4 @@
 using Code.Game.Common.Entity;
-using Code.Game.Features.Effect.Factory;
 using Entitas;
 using System.Collections.Generic;
 
@@ -7,18 +6,14 @@ namespace Code.Game.Features.Attack.Systems
 {
     public class AttackEndSystem : IExecuteSystem
     {
-        private readonly EffectFactory _effectFactory;
-
         private readonly IGroup<GameEntity> _attacks;
         private readonly List<GameEntity> _buffer = new(64);
 
-        public AttackEndSystem(GameContext gameContext, EffectFactory effectFactory)
+        public AttackEndSystem(GameContext gameContext)
         {
-            _effectFactory = effectFactory;
-
             _attacks = gameContext.GetGroup(GameMatcher
                 .AllOf(
-                    GameMatcher.Damage,
+                    GameMatcher.PhysicalAttackHitEffect,
                     GameMatcher.OwnerId,
                     GameMatcher.TargetId,
                     GameMatcher.Cooldown,
@@ -36,14 +31,19 @@ namespace Code.Game.Features.Attack.Systems
 
                 if(entity.isAttacking)
                 {
+                    var hitEffect = CreateGameEntity.Empty();
+
+                    hitEffect.AddSpawnPosition(entity.targetPoint.Value);
+
+                    foreach (var property in entity.physicalAttackHitEffect.Value.Properties)
+                        property.Apply(hitEffect);
+
                     var damage = CreateGameEntity.Empty();
 
                     damage.AddOwnerId(attack.ownerId.Value);
                     damage.AddTargetId(attack.targetId.Value);
-                    damage.AddDamage(attack.damage.Value);
+                    damage.AddDamage(hitEffect.damage.Value);
                     damage.isDamageRequest = true;
-
-                    _effectFactory.Create(entity.attackHitEffect.Value, entity.targetPoint.Value);
                 }
 
                 entity.isAttacking = false;

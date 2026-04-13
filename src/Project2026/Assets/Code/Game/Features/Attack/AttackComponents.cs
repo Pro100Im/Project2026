@@ -1,10 +1,10 @@
-using Code.Infrastructure.View;
+using Code.Game.StaticData.Configs;
 using Entitas;
 using UnityEngine;
 
 namespace Code.Game.Features.Attack
 {
-    [Game] public class AttackHitEffect : IComponent { public EntityBehaviour Value; }
+    [Game] public class PhysicalAttackHitEffect : IComponent { public EntityConfig Value; }
     [Game] public class AttackCooldown : IComponent { public float Value; }
     [Game] public class AttackDuration : IComponent { public float Value; }
     [Game] public class Range : IComponent { public float Value; }

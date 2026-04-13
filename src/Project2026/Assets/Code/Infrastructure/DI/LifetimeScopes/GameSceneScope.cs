@@ -15,7 +15,6 @@ using Code.Game.Features.Death;
 using Code.Game.Features.Death.Systems;
 using Code.Game.Features.Duration;
 using Code.Game.Features.Duration.Systems;
-using Code.Game.Features.Effect.Factory;
 using Code.Game.Features.Health;
 using Code.Game.Features.Health.Systems;
 using Code.Game.Features.Input;
@@ -37,7 +36,6 @@ using Code.Game.Input.Service;
 using Code.Game.Input.Systems;
 using Code.Game.StaticData.Configs;
 using Code.Infrastructure.DI.EntryPoints;
-using Code.Infrastructure.Identifiers;
 using Code.Infrastructure.States.Factory;
 using Code.Infrastructure.States.GameStates;
 using Code.Infrastructure.States.StateMachine;
@@ -184,8 +182,6 @@ namespace Code.Infrastructure.DI.LifetimeScopes
         {
             builder.Register<IStateFactory, StateFactory>(Lifetime.Singleton);
             builder.Register<ISystemFactory, SystemFactory>(Lifetime.Singleton);
-
-            builder.Register<EffectFactory>(Lifetime.Singleton);
         }
 
         private void BindGameConfigs(IContainerBuilder builder)

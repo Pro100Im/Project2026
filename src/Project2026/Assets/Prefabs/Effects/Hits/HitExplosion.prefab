@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8278021824147048416}
   - component: {fileID: 9022826759281870006}
   - component: {fileID: 5303738047394165789}
-  - component: {fileID: 4166151622689153965}
+  - component: {fileID: 6748259036647878611}
   m_Layer: 0
   m_Name: HitExplosion
   m_TagString: Untagged
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80e9e6d76a148574fa7021028a8f886a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.EntityBehaviour
---- !u!114 &4166151622689153965
+--- !u!114 &6748259036647878611
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

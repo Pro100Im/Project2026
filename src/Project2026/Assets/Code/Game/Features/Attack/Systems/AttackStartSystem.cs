@@ -12,7 +12,10 @@ namespace Code.Game.Features.Attack.Systems
         {
             _attackers = gameContext.GetGroup(GameMatcher
                 .AllOf(
+                    GameMatcher.Id,
                     GameMatcher.AttackCooldown,
+                    GameMatcher.AttackDuration,
+                    GameMatcher.Range,
                     GameMatcher.TargetId));
         }
 
@@ -41,7 +44,7 @@ namespace Code.Game.Features.Attack.Systems
 
                 var entity = CreateGameEntity.Empty();
 
-                entity.AddDamage(attacker.damage.Value);
+                entity.AddPhysicalAttackHitEffect(attacker.physicalAttackHitEffect.Value);
                 entity.AddOwnerId(attacker.id.Value);
                 entity.AddTargetId(targetId);
                 entity.AddCooldown(attacker.attackCooldown.Value);

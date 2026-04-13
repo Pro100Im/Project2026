@@ -4,18 +4,13 @@ using UnityEngine;
 namespace Code.Game.StaticData.Data
 {
     [Serializable]
-    public class PhysicalDamageProperty : EntityProperty
+    public class DamageProperty : EntityProperty
     {
-        //[field: SerializeField] public EntityBehaviour AttackHitEffect { get; private set; }
         [field: SerializeField] public float Damage { get; private set; }
-        //[field: SerializeField] public float Range { get; private set; }
-        //[field: SerializeField] public float Cooldown { get; private set; }
-        //[field: SerializeField] public float Duration { get; private set; }
-        //[field: SerializeField] public bool  IsMelee { get; private set; }
 
         protected override void Add(GameEntity entity)
         {
-            if(!entity.hasDamage)
+            if (!entity.hasDamage)
                 entity.AddDamage(Damage);
         }
 

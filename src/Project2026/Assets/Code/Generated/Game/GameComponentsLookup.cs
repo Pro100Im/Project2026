@@ -27,10 +27,10 @@ public static class GameComponentsLookup {
     public const int AttackDirection = 16;
     public const int AttackDuration = 17;
     public const int AttackerPoint = 18;
-    public const int AttackHitEffect = 19;
-    public const int Attacking = 20;
-    public const int Hitted = 21;
-    public const int MeleeAttack = 22;
+    public const int Attacking = 19;
+    public const int Hitted = 20;
+    public const int MeleeAttack = 21;
+    public const int PhysicalAttackHitEffect = 22;
     public const int Range = 23;
     public const int RangeAttack = 24;
     public const int Cooldown = 25;
@@ -95,10 +95,10 @@ public static class GameComponentsLookup {
         "AttackDirection",
         "AttackDuration",
         "AttackerPoint",
-        "AttackHitEffect",
         "Attacking",
         "Hitted",
         "MeleeAttack",
+        "PhysicalAttackHitEffect",
         "Range",
         "RangeAttack",
         "Cooldown",
@@ -162,10 +162,10 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Attack.AttackDirectionComponent),
         typeof(Code.Game.Features.Attack.AttackDuration),
         typeof(Code.Game.Features.Attack.AttackerPoint),
-        typeof(Code.Game.Features.Attack.AttackHitEffect),
         typeof(Code.Game.Features.Attack.Attacking),
         typeof(Code.Game.Features.Attack.Hitted),
         typeof(Code.Game.Features.Attack.MeleeAttack),
+        typeof(Code.Game.Features.Attack.PhysicalAttackHitEffect),
         typeof(Code.Game.Features.Attack.Range),
         typeof(Code.Game.Features.Attack.RangeAttack),
         typeof(Code.Game.Features.Cooldown.Cooldown),
