@@ -36,7 +36,7 @@ Transform:
   m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4584691878013552311}
+  - {fileID: 8279853628464422445}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1768954670147358820
@@ -110,9 +110,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9fed9df1e0b73f4d9e6d45dc9d4d42e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Tower.Managers.TowerBuildManager
+  _clickAction: {fileID: 7237098930843143402, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _testTowerUpgrate: {fileID: 11400000, guid: 73f3088a3a3933840acd244ee4f29d32, type: 2}
   _tower: {fileID: 7695083838553810320}
-  _doc: {fileID: 5889272363662820823}
+  _touchZone: {fileID: 3931036557787617849}
 --- !u!114 &7695083838553810320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,7 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Entity.EntityConfigRegistrar
   EntityView: {fileID: 7695083838553810320}
   _config: {fileID: 11400000, guid: ab4da31c223527648aad2896470df7be, type: 2}
---- !u!1001 &4894427404741696560
+--- !u!1001 &1057101487329821866
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -189,11 +190,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 81521064245829860, guid: 230e91a003609644fb3f4baec7774958, type: 3}
       propertyPath: m_Name
-      value: BuildTowerMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 81521064245829860, guid: 230e91a003609644fb3f4baec7774958, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: BuildTowerTouchZone
       objectReference: {fileID: 0}
     - target: {fileID: 8956647223900052103, guid: 230e91a003609644fb3f4baec7774958, type: 3}
       propertyPath: m_LocalPosition.x
@@ -240,19 +237,13 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 230e91a003609644fb3f4baec7774958, type: 3}
---- !u!4 &4584691878013552311 stripped
+--- !u!212 &3931036557787617849 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4046005807074352787, guid: 230e91a003609644fb3f4baec7774958, type: 3}
+  m_PrefabInstance: {fileID: 1057101487329821866}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8279853628464422445 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8956647223900052103, guid: 230e91a003609644fb3f4baec7774958, type: 3}
-  m_PrefabInstance: {fileID: 4894427404741696560}
+  m_PrefabInstance: {fileID: 1057101487329821866}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5889272363662820823 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1321412633059203559, guid: 230e91a003609644fb3f4baec7774958, type: 3}
-  m_PrefabInstance: {fileID: 4894427404741696560}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument

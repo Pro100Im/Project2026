@@ -1,9 +1,8 @@
-using Code.Game.Common.UI;
+using Code.Game.Input.Service;
 using Code.Game.StaticData.Configs;
 using Code.Infrastructure.View;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.InputSystem;
 using VContainer;
 
 namespace Code.Game.Features.Tower.Managers
@@ -12,75 +11,76 @@ namespace Code.Game.Features.Tower.Managers
     {
         [SerializeField] private EntityConfig _testTowerUpgrate;
         [SerializeField] private EntityBehaviour _tower;
-        [SerializeField] private UIDocument _doc;
+        [SerializeField] private SpriteRenderer _touchZone;
 
-        private UIService _uIService;
-
-        private VisualElement _towerBuilds;
-        private VisualElement _container;
-
-        private Button _openButton;
-        private Button _closeButton;
-        private Button _towerTestButton;
+        private IInputService _inputService;
+        private TowerUIManager _towerUIManager;
 
         [Inject]
-        private void Construct(UIService uIService)
+        public void Construct(TowerUIManager towerUIManager, IInputService inputService)
         {
-            _uIService = uIService;
+            _inputService = inputService;
+            _towerUIManager = towerUIManager;
         }
 
         private void Start()
         {
-            var root = _doc.rootVisualElement;
-
-            _towerBuilds = root.Q<VisualElement>("TowerBuilds");
-            _container = root.Q<VisualElement>("Container");
-
-            _openButton = root.Q<Button>("OpenButton");
-            _closeButton = root.Q<Button>("CloseButton");
-            _towerTestButton = root.Q<Button>("ButtonTestTower");
-
-            _openButton.clickable.clicked += Open;
-            _closeButton.clickable.clicked += Close;
-            _towerTestButton.clickable.clicked += CreateTestTower;
+            _inputService.SubscribeOnClick(OnClick);
         }
 
-        private async void Open()
+        private async void OnClick(InputAction.CallbackContext context)
         {
-            _openButton.pickingMode = PickingMode.Ignore;
+            if (!_tower.Entity.isTowerPlace)
+                return;
 
-            await _uIService.Show(_towerBuilds);
+            var point = _inputService.GetPointer();
 
-            _container.pickingMode = PickingMode.Position;
-            _closeButton.pickingMode = PickingMode.Position;
+            if (_towerUIManager.IsPointerOverUI(point))
+            {
+                Debug.Log("Pointer is over UI, ignoring click.");
+
+                return;
+            }     
+
+            var worldPos = _inputService.GetWorldPointer();
+
+            if (_touchZone.bounds.Contains(worldPos))
+            {
+                _towerUIManager.TowerTestButton.clickable.clicked -= CreateTestTower;
+                _towerUIManager.CloseButton.clickable.clicked -= Cancel;
+
+                await _towerUIManager.Open();
+
+                _towerUIManager.TowerTestButton.clickable.clicked += CreateTestTower;
+                _towerUIManager.CloseButton.clickable.clicked += Cancel;
+            }
         }
 
-        private async void Close()
+        private async void CreateTestTower()
         {
-            _closeButton.pickingMode = PickingMode.Ignore;
-            _container.pickingMode = PickingMode.Ignore;
+            _towerUIManager.TowerTestButton.clickable.clicked -= CreateTestTower;
+            _towerUIManager.CloseButton.clickable.clicked -= Cancel;
 
-            await _uIService.Hide(_towerBuilds);
+            await _towerUIManager.Close();
 
-            _openButton.pickingMode = PickingMode.Position;
-        }
-
-        private void CreateTestTower()
-        {
-            _closeButton.pickingMode = PickingMode.Ignore;
-            _container.pickingMode = PickingMode.Ignore;
+            if (!_tower.Entity.isTowerPlace)
+                return;
 
             _tower.Entity.isTowerBuildRequest = true;
             _tower.Entity.AddEntityConfig(_testTowerUpgrate);
+        }
 
-            _uIService.Hide(_towerBuilds).AsTask();
+        private void Cancel()
+        {
+            _towerUIManager.Close().AsAsyncUnitUniTask();
+
+            _towerUIManager.TowerTestButton.clickable.clicked -= CreateTestTower;
+            _towerUIManager.CloseButton.clickable.clicked -= Cancel;
         }
 
         private void OnDestroy()
         {
-            _openButton.clickable.clicked -= Open;
-            _closeButton.clickable.clicked -= Close;
-            _towerTestButton.clickable.clicked -= CreateTestTower;
+            _inputService.UnSubscribeOnClick(OnClick);
         }
     }
 }

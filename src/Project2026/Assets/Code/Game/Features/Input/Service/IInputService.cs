@@ -1,20 +1,21 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Code.Game.Input.Service
 {
     public interface IInputService
     {
-        void EnableInput();
-        void DisableInput();
+        public void SubscribeOnClick(Action<InputAction.CallbackContext> clickAction);
 
-        float GetVerticalAxis();
-        float GetHorizontalAxis();
+        public void UnSubscribeOnClick(Action<InputAction.CallbackContext> clickAction);
 
-        bool HasAxisInput();
+        public void EnableInput();
+        public void DisableInput();
 
-        Vector2 GetPointer();
-        Vector2 GetWorldPointer();
+        public Vector2 GetPointer();
+        public Vector2 GetWorldPointer();
 
-        Ray GetRayWorldPointer();
+        public Ray GetRayWorldPointer();
     }
 }

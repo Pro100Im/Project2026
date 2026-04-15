@@ -1,5 +1,4 @@
 using Code.Game.Common.Entity;
-using Code.Game.StaticData.Configs;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,7 +7,6 @@ namespace Code.Meta.Features.Game
     public class Game : MonoBehaviour
     {
         [SerializeField] private UIDocument _gameScreenDoc;
-        [SerializeField] private EntityConfig _test;
 
         private VisualElement _gameScreen;
 
