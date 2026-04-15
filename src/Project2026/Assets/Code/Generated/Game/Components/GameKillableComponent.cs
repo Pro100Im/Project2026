@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Code.Game.Features.Death.Dead deadComponent = new Code.Game.Features.Death.Dead();
+    static readonly Code.Game.Features.Death.Killable killableComponent = new Code.Game.Features.Death.Killable();
 
-    public bool isDead {
-        get { return HasComponent(GameComponentsLookup.Dead); }
+    public bool isKillable {
+        get { return HasComponent(GameComponentsLookup.Killable); }
         set {
-            if (value != isDead) {
-                var index = GameComponentsLookup.Dead;
+            if (value != isKillable) {
+                var index = GameComponentsLookup.Killable;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : deadComponent;
+                            : killableComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherDead;
+    static Entitas.IMatcher<GameEntity> _matcherKillable;
 
-    public static Entitas.IMatcher<GameEntity> Dead {
+    public static Entitas.IMatcher<GameEntity> Killable {
         get {
-            if (_matcherDead == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Dead);
+            if (_matcherKillable == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Killable);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherDead = matcher;
+                _matcherKillable = matcher;
             }
 
-            return _matcherDead;
+            return _matcherKillable;
         }
     }
 }

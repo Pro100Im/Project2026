@@ -18,7 +18,7 @@ namespace Code.Game.Features.Health.Systems
 
         public void Execute()
         {
-            foreach(var hpBarEntity in _hpBars)
+            foreach (var hpBarEntity in _hpBars)
             {
                 var owner = GetGameEntityById.Get(hpBarEntity.ownerId.Value);
 
@@ -30,6 +30,9 @@ namespace Code.Game.Features.Health.Systems
 
                 hpBarView.SetHp(healthRatio);
                 hpBarEntity.ReplaceCurrentHealth(owner.currentHealth.Value);
+
+                if (hpBarEntity.currentHealth.Value <= 0)
+                    hpBarEntity.isDestructed = true;
             }
         }
     }

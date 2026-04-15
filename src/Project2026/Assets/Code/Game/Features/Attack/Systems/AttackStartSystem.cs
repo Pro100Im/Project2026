@@ -23,7 +23,7 @@ namespace Code.Game.Features.Attack.Systems
         {
             foreach (var attacker in _attackers)
             {
-                if (!attacker.isAttackAvailable)
+                if (!attacker.isAttackAvailable || attacker.isDead)
                     continue;
 
                 var targetId = attacker.targetId.Value;

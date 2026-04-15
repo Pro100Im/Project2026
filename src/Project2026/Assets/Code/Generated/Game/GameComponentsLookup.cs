@@ -37,44 +37,46 @@ public static class GameComponentsLookup {
     public const int Cooldown = 26;
     public const int Damage = 27;
     public const int DamageRequest = 28;
-    public const int Duration = 29;
-    public const int Enemy = 30;
-    public const int CurrentHealth = 31;
-    public const int Dead = 32;
-    public const int HpBar = 33;
-    public const int MaxHealth = 34;
-    public const int MaxMovementOffsets = 35;
-    public const int MinMovementOffsets = 36;
-    public const int MovementAvailable = 37;
-    public const int MovementCurrentPointIndex = 38;
-    public const int MovementOffset = 39;
-    public const int MovementPointMinDistances = 40;
-    public const int MovementPoints = 41;
-    public const int MovementSpeed = 42;
-    public const int Moving = 43;
-    public const int RotationAlignedAlongDirection = 44;
-    public const int PlayerCastle = 45;
-    public const int Player = 46;
-    public const int FreePoint = 47;
-    public const int GateNumber = 48;
-    public const int SpawnPosition = 49;
-    public const int SpawnPositionGates = 50;
-    public const int SpawnPositions = 51;
-    public const int SpawnRequsted = 52;
-    public const int WaitingToSpawn = 53;
-    public const int Targetable = 54;
-    public const int TargetId = 55;
-    public const int TargetPoint = 56;
-    public const int TowerBuildRequest = 57;
-    public const int Tower = 58;
-    public const int TowerPlace = 59;
-    public const int CurrentWaveEnemies = 60;
-    public const int CurrentWaveNumber = 61;
-    public const int WaveEnemiesAlive = 62;
-    public const int WaveInProgress = 63;
-    public const int WaveStartRequsted = 64;
+    public const int Dead = 29;
+    public const int DeathDuration = 30;
+    public const int Killable = 31;
+    public const int Duration = 32;
+    public const int Enemy = 33;
+    public const int CurrentHealth = 34;
+    public const int HpBar = 35;
+    public const int MaxHealth = 36;
+    public const int MaxMovementOffsets = 37;
+    public const int MinMovementOffsets = 38;
+    public const int MovementAvailable = 39;
+    public const int MovementCurrentPointIndex = 40;
+    public const int MovementOffset = 41;
+    public const int MovementPointMinDistances = 42;
+    public const int MovementPoints = 43;
+    public const int MovementSpeed = 44;
+    public const int Moving = 45;
+    public const int RotationAlignedAlongDirection = 46;
+    public const int PlayerCastle = 47;
+    public const int Player = 48;
+    public const int FreePoint = 49;
+    public const int GateNumber = 50;
+    public const int SpawnPosition = 51;
+    public const int SpawnPositionGates = 52;
+    public const int SpawnPositions = 53;
+    public const int SpawnRequsted = 54;
+    public const int WaitingToSpawn = 55;
+    public const int Targetable = 56;
+    public const int TargetId = 57;
+    public const int TargetPoint = 58;
+    public const int TowerBuildRequest = 59;
+    public const int Tower = 60;
+    public const int TowerPlace = 61;
+    public const int CurrentWaveEnemies = 62;
+    public const int CurrentWaveNumber = 63;
+    public const int WaveEnemiesAlive = 64;
+    public const int WaveInProgress = 65;
+    public const int WaveStartRequsted = 66;
 
-    public const int TotalComponents = 65;
+    public const int TotalComponents = 67;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -106,10 +108,12 @@ public static class GameComponentsLookup {
         "Cooldown",
         "Damage",
         "DamageRequest",
+        "Dead",
+        "DeathDuration",
+        "Killable",
         "Duration",
         "Enemy",
         "CurrentHealth",
-        "Dead",
         "HpBar",
         "MaxHealth",
         "MaxMovementOffsets",
@@ -174,10 +178,12 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Cooldown.Cooldown),
         typeof(Code.Game.Features.Damage.Damage),
         typeof(Code.Game.Features.Damage.DamageRequest),
+        typeof(Code.Game.Features.Death.Dead),
+        typeof(Code.Game.Features.Death.DeathDuration),
+        typeof(Code.Game.Features.Death.Killable),
         typeof(Code.Game.Features.Duration.Duration),
         typeof(Code.Game.Features.Enemy.EnemyComponent),
         typeof(Code.Game.Features.Health.CurrentHealth),
-        typeof(Code.Game.Features.Health.Dead),
         typeof(Code.Game.Features.Health.HpBar),
         typeof(Code.Game.Features.Health.MaxHealth),
         typeof(Code.Game.Features.Movement.MaxMovementOffsets),

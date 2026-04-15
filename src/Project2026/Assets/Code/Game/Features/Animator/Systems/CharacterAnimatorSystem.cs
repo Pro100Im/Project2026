@@ -24,6 +24,14 @@ namespace Code.Game.Features.Animator.Systems
                 var animator = character.animator.Value;
                 var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
+                if (character.isDead)
+                {
+                    if (!stateInfo.IsName("Dead"))
+                        animator.Play("Dead");
+
+                    continue;
+                }
+
                 if (character.isMoving)
                 {
                     if (!stateInfo.IsName("Run"))
@@ -60,11 +68,6 @@ namespace Code.Game.Features.Animator.Systems
 
                     continue;
                 }
-
-                //if(character.isDead)
-                //{
-                //    continue;
-                //}
 
                 if (!stateInfo.IsName("Idle"))
                     animator.Play("Idle");
