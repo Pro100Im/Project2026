@@ -52,7 +52,8 @@ namespace Code.Game.Features.Target.Systems
 
                     var closestA = ba.ClosestPoint(bb.center);
                     var closestB = bb.ClosestPoint(ba.center);
-                    var distance = _targetService.GetDistanceBetweenEntities(ba, bb, closestA, closestB);
+
+                    var distance = _targetService.GetDistanceBetweenEntities(closestA, closestB);
 
                     if (distance <= enemy.range.Value)
                     {
@@ -83,7 +84,8 @@ namespace Code.Game.Features.Target.Systems
 
                     var closestA = ba.ClosestPoint(bb.center);
                     var closestB = bb.ClosestPoint(ba.center);
-                    var distance = _targetService.GetDistanceBetweenEntities(ba, bb, closestA, closestB);
+
+                    var distance = _targetService.GetDistanceBetweenEntities(closestA, closestB);
 
                     if (distance <= tower.range.Value)
                     {
@@ -114,7 +116,8 @@ namespace Code.Game.Features.Target.Systems
 
                     var closestA = ba.ClosestPoint(bb.center);
                     var closestB = bb.ClosestPoint(ba.center);
-                    var distance = _targetService.GetDistanceBetweenEntities(ba, bb, closestA, closestB);
+
+                    var distance = _targetService.GetDistanceBetweenEntities(closestA, closestB);
 
                     if (distance <= warrior.range.Value)
                     {

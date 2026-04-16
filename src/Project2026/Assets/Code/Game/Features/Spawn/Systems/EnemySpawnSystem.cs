@@ -1,5 +1,4 @@
 using Code.Game.Common.Entity;
-using Code.Infrastructure.Identifiers;
 using Entitas;
 using System.Collections.Generic;
 

@@ -29,6 +29,13 @@ namespace Code.Game.Features.Attack.Systems
 
                 var entity = GetGameEntityById.Get(attack.ownerId.Value);
 
+                if(!entity.hasTargetId)
+                {
+                    attack.isDestructed = true;
+
+                    continue;
+                }
+
                 if(entity.isAttacking)
                 {
                     var hitEffect = CreateGameEntity.Empty();
