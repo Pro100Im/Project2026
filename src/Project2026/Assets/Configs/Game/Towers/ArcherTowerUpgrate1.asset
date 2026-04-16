@@ -34,8 +34,8 @@ MonoBehaviour:
       type: {class: SpawnEffectProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <SpawnEffect>k__BackingField: {fileID: 11400000, guid: 66146da2da0797949afeef7485ed8aeb, type: 2}
-        <SpawnEffectOffset>k__BackingField: {x: 0, y: 0, z: 0}
+        <SpawnEffect>k__BackingField: {fileID: 11400000, guid: fdc1f4e91ba6e8540b533480e06b4730, type: 2}
+        <SpawnEffectOffset>k__BackingField: {x: 0, y: 1, z: 0}
     - rid: 8171215588330831998
       type: {class: PhysicalAttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
