@@ -31,6 +31,9 @@ namespace Code.Game.Features.Attack.Systems
 
                 if(!entity.hasTargetId)
                 {
+                    entity.isAttacking = false;
+                    entity.isAttackAvailable = true;
+
                     attack.isDestructed = true;
 
                     continue;

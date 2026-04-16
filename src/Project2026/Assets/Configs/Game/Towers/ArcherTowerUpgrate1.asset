@@ -40,13 +40,13 @@ MonoBehaviour:
       type: {class: PhysicalAttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <AttackHitEffect>k__BackingField: {fileID: 11400000, guid: 042aceafa8db9b646988bfb019ada0f6, type: 2}
+        <AttackHitEffect>k__BackingField: {fileID: 11400000, guid: 0801227ced598bd4fa883a790a2e14b0, type: 2}
     - rid: 8171215588330831999
       type: {class: AttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
         <Range>k__BackingField: 2
-        <Cooldown>k__BackingField: 3
+        <Cooldown>k__BackingField: 2
         <Duration>k__BackingField: 0.6
         <IsMelee>k__BackingField: 0
     - rid: 8171215588330832021

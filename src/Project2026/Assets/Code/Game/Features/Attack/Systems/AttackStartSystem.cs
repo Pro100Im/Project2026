@@ -23,13 +23,13 @@ namespace Code.Game.Features.Attack.Systems
         {
             foreach (var attacker in _attackers)
             {
-                if (!attacker.isAttackAvailable || attacker.isDead)
+                if (!attacker.isAttackAvailable || attacker.isDead || !attacker.hasTargetId)
                     continue;
 
                 var targetId = attacker.targetId.Value;
                 var target = GetGameEntityById.Get(targetId);
 
-                if (target == null || target.isDead)
+                if (target.isDead)
                     continue;
 
                 var attackDirection = GetAttackDirection(attacker.attackerPoint.Value, attacker.targetPoint.Value);

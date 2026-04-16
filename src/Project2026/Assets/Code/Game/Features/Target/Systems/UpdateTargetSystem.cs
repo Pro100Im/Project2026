@@ -2,7 +2,6 @@ using Code.Game.Common.Entity;
 using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Code.Game.Features.Target.Systems
 {
@@ -45,10 +44,8 @@ namespace Code.Game.Features.Target.Systems
 
                 var distance = _targetService.GetDistanceBetweenEntities(closestA, closestB);
 
-                if (distance-1 > entity.range.Value)
+                if (distance > entity.range.Value || target.isDead)
                 {
-                    //Debug.Log($"Target lost. Distance: {distance}, Range: {entity.range.Value}");
-
                     entity.RemoveTargetId();
                     entity.RemoveAttackerPoint();
                     entity.RemoveTargetPoint();

@@ -60,18 +60,15 @@ namespace Code.Game.Features.Target.Systems
                         enemy.AddTargetId(warrior.id.Value);
                         enemy.AddAttackerPoint(closestA);
                         enemy.AddTargetPoint(closestB);
-                    }
 
-                    break;
+                        break;
+                    }
                 }
             }
 
             foreach (var tower in _towers)
             {
-                if (tower.hasTargetId)
-                    continue;
-
-                if (!tower.hasRange)
+                if (tower.hasTargetId || !tower.hasRange)
                     continue;
 
                 foreach (var enemy in _enemies)
@@ -92,9 +89,9 @@ namespace Code.Game.Features.Target.Systems
                         tower.AddTargetId(enemy.id.Value);
                         tower.AddAttackerPoint(closestA);
                         tower.AddTargetPoint(closestB);
-                    }
 
-                    break;
+                        break;
+                    }
                 }
             }
 
@@ -124,9 +121,9 @@ namespace Code.Game.Features.Target.Systems
                         warrior.AddTargetId(enemy.id.Value);
                         warrior.AddAttackerPoint(closestA);
                         warrior.AddTargetPoint(closestB);
-                    }
 
-                    break;
+                        break;
+                    }
                 }
             }
         }

@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.5, y: 0.3, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8279853628464422445}
@@ -110,7 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9fed9df1e0b73f4d9e6d45dc9d4d42e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Tower.Managers.TowerBuildManager
-  _clickAction: {fileID: 7237098930843143402, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _testTowerUpgrate: {fileID: 11400000, guid: 73f3088a3a3933840acd244ee4f29d32, type: 2}
   _tower: {fileID: 7695083838553810320}
   _touchZone: {fileID: 3931036557787617849}
