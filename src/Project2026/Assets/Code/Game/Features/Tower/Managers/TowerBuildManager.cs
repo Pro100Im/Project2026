@@ -49,7 +49,9 @@ namespace Code.Game.Features.Tower.Managers
                 _towerUIManager.TowerTestButton.clickable.clicked -= CreateTestTower;
                 _towerUIManager.CloseButton.clickable.clicked -= Cancel;
 
-                await _towerUIManager.Open();
+                var screenPoint = _inputService.GetScreenPointer(transform.position);
+
+                await _towerUIManager.Open(screenPoint);
 
                 _towerUIManager.TowerTestButton.clickable.clicked += CreateTestTower;
                 _towerUIManager.CloseButton.clickable.clicked += Cancel;

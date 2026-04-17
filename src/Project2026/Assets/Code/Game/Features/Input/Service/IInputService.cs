@@ -15,6 +15,7 @@ namespace Code.Game.Input.Service
 
         public Vector2 GetPointer();
         public Vector2 GetWorldPointer();
+        public Vector2 GetScreenPointer(Vector3 pos);
 
         public Ray GetRayWorldPointer();
     }

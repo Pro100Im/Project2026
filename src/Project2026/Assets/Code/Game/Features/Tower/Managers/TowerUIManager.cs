@@ -35,8 +35,17 @@ namespace Code.Game.Features.Tower.Managers
             TowerTestButton = root.Q<Button>("ButtonTestTower");
         }
 
-        public async UniTask Open()
+        public async UniTask Open(Vector2 screenPoint)
         {
+            var root = _doc.rootVisualElement;
+
+            var localPos = new Vector2(screenPoint.x, Screen.height - screenPoint.y);
+            var clampedX = Mathf.Clamp(localPos.x, 0, root.resolvedStyle.width - _towerBuilds.resolvedStyle.width);
+            var clampedY = Mathf.Clamp(localPos.y, 0, root.resolvedStyle.height - _towerBuilds.resolvedStyle.height);
+
+            _towerBuilds.style.left = clampedX;
+            _towerBuilds.style.top = clampedY;
+
             await _uIService.Show(_towerBuilds);
 
             _container.pickingMode = PickingMode.Position;

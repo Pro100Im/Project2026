@@ -32,6 +32,14 @@ namespace Code.Game.Input.Service
             return _cameraService.GetCamera().ScreenToWorldPoint(GetPointer());
         }
 
+        public Vector2 GetScreenPointer(Vector3 pos)
+        {
+            if (Mouse.current == null)
+                return Vector2.zero;
+
+            return _cameraService.GetCamera().WorldToScreenPoint(pos);
+        }
+
         public Ray GetRayWorldPointer()
         {
             if (Mouse.current == null)
