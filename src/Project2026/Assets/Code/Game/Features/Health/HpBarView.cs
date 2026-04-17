@@ -18,7 +18,7 @@ namespace Code.Game.Features.Health
             _fill.localScale = new Vector3(_fullWidth * currentPercent, _fill.localScale.y, _fill.localScale.z);
 
             _backTween?.Kill();
-            _backTween = _backFill.DOScaleX(_fullWidth * currentPercent, _backDelaySpeed).SetEase(Ease.OutSine);
+            _backTween = _backFill.DOScaleX(_fullWidth * currentPercent, _backDelaySpeed).SetDelay(_backDelaySpeed).SetEase(Ease.InSine);
         }
 
         private void OnDestroy()
