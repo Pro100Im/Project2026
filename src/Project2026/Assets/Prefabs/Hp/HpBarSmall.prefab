@@ -330,7 +330,7 @@ MonoBehaviour:
   _fill: {fileID: 4339856375103245173}
   _backFill: {fileID: 6642217318200277342}
   _fullWidth: 0.58
-  _backDelaySpeed: 0.2
+  _backDelaySpeed: 0.3
 --- !u!114 &2238861304701913438
 MonoBehaviour:
   m_ObjectHideFlags: 0
