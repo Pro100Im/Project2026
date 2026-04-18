@@ -18,6 +18,8 @@ namespace Code.Game.Common
     [Game] public class AnimatorComponent : IComponent { public Animator Value; }
     [Game] public class SpriteRendererComponent : IComponent { public SpriteRenderer Value; }
     [Game] public class UIDocumentComponent : IComponent { public UIDocument Value; }
+    [Game] public class BoundsComponent : IComponent { public SpriteRenderer Value; }
+    [Game] public class TouchZoneComponent : IComponent { public SpriteRenderer Value; }
 
     [Game] public class View : IComponent { public IEntityView Value; }
     [Game] public class ViewPath : IComponent { public string Value; }

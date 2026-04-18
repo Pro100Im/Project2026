@@ -22,6 +22,8 @@ namespace Code.Game.Input.Service
             _newInputSystemApi.Player.PointClick.performed += clickAction;
         }
 
+        public bool WasClicked() => _newInputSystemApi.Player.PointClick.WasPerformedThisFrame();
+
         public Vector2 GetPointer() => _newInputSystemApi.Player.Point.ReadValue<Vector2>();
 
         public Vector2 GetWorldPointer()
@@ -46,11 +48,6 @@ namespace Code.Game.Input.Service
                 return new Ray();
 
             return _cameraService.GetCamera().ScreenPointToRay(GetPointer());
-        }
-
-        public void UnSubscribeOnClick(Action<InputAction.CallbackContext> clickAction)
-        {
-            _newInputSystemApi.Player.PointClick.performed -= clickAction;
         }
 
         public void EnableInput() => _newInputSystemApi.Player.Enable();

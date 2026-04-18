@@ -8,24 +8,33 @@
 //------------------------------------------------------------------------------
 public static class InputComponentsLookup {
 
-    public const int AxisInput = 0;
-    public const int Input = 1;
-    public const int PointerInput = 2;
-    public const int PointerRay = 3;
+    public const int TargetId = 0;
+    public const int AxisInput = 1;
+    public const int Input = 2;
+    public const int PointerInput = 3;
+    public const int PointerRay = 4;
+    public const int ScreenPointerInput = 5;
+    public const int WorldPointerInput = 6;
 
-    public const int TotalComponents = 4;
+    public const int TotalComponents = 7;
 
     public static readonly string[] componentNames = {
+        "TargetId",
         "AxisInput",
         "Input",
         "PointerInput",
-        "PointerRay"
+        "PointerRay",
+        "ScreenPointerInput",
+        "WorldPointerInput"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Code.Game.Features.Target.TargetId),
         typeof(Code.Game.Input.AxisInput),
         typeof(Code.Game.Input.Input),
         typeof(Code.Game.Input.PointerInput),
-        typeof(Code.Game.Input.PointerRay)
+        typeof(Code.Game.Input.PointerRay),
+        typeof(Code.Game.Input.ScreenPointerInput),
+        typeof(Code.Game.Input.WorldPointerInput)
     };
 }

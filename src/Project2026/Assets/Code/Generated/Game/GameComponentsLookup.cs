@@ -10,77 +10,80 @@ public static class GameComponentsLookup {
 
     public const int Animator = 0;
     public const int Attached = 1;
-    public const int DelayDestruct = 2;
-    public const int Destructed = 3;
-    public const int EntityConfig = 4;
-    public const int Id = 5;
-    public const int OwnerId = 6;
-    public const int SortOrder = 7;
-    public const int Sprite = 8;
-    public const int SpriteRenderer = 9;
-    public const int Transform = 10;
-    public const int UIDocument = 11;
-    public const int View = 12;
-    public const int ViewPath = 13;
-    public const int ViewPrefab = 14;
-    public const int AttackAvailable = 15;
-    public const int AttackCooldown = 16;
-    public const int AttackDirection = 17;
-    public const int AttackDuration = 18;
-    public const int AttackerPoint = 19;
-    public const int Attacking = 20;
-    public const int Hitted = 21;
-    public const int MeleeAttack = 22;
-    public const int PhysicalAttackHitEffect = 23;
-    public const int Range = 24;
-    public const int RangeAttack = 25;
-    public const int Cooldown = 26;
-    public const int Damage = 27;
-    public const int DamageRequest = 28;
-    public const int Dead = 29;
-    public const int DeathDuration = 30;
-    public const int Killable = 31;
-    public const int Duration = 32;
-    public const int Enemy = 33;
-    public const int CurrentHealth = 34;
-    public const int HpBar = 35;
-    public const int MaxHealth = 36;
-    public const int MaxMovementOffsets = 37;
-    public const int MinMovementOffsets = 38;
-    public const int MovementAvailable = 39;
-    public const int MovementCurrentPointIndex = 40;
-    public const int MovementOffset = 41;
-    public const int MovementPointMinDistances = 42;
-    public const int MovementPoints = 43;
-    public const int MovementSpeed = 44;
-    public const int Moving = 45;
-    public const int RotationAlignedAlongDirection = 46;
-    public const int PlayerCastle = 47;
-    public const int Player = 48;
-    public const int FreePoint = 49;
-    public const int GateNumber = 50;
-    public const int SpawnPosition = 51;
-    public const int SpawnPositionGates = 52;
-    public const int SpawnPositions = 53;
-    public const int SpawnRequsted = 54;
-    public const int WaitingToSpawn = 55;
-    public const int Targetable = 56;
-    public const int TargetId = 57;
-    public const int TargetPoint = 58;
-    public const int TowerBuildRequest = 59;
-    public const int Tower = 60;
-    public const int TowerPlace = 61;
-    public const int CurrentWaveEnemies = 62;
-    public const int CurrentWaveNumber = 63;
-    public const int WaveEnemiesAlive = 64;
-    public const int WaveInProgress = 65;
-    public const int WaveStartRequsted = 66;
+    public const int Bounds = 2;
+    public const int DelayDestruct = 3;
+    public const int Destructed = 4;
+    public const int EntityConfig = 5;
+    public const int Id = 6;
+    public const int OwnerId = 7;
+    public const int SortOrder = 8;
+    public const int Sprite = 9;
+    public const int SpriteRenderer = 10;
+    public const int TouchZone = 11;
+    public const int Transform = 12;
+    public const int UIDocument = 13;
+    public const int View = 14;
+    public const int ViewPath = 15;
+    public const int ViewPrefab = 16;
+    public const int AttackAvailable = 17;
+    public const int AttackCooldown = 18;
+    public const int AttackDirection = 19;
+    public const int AttackDuration = 20;
+    public const int AttackerPoint = 21;
+    public const int Attacking = 22;
+    public const int Hitted = 23;
+    public const int MeleeAttack = 24;
+    public const int PhysicalAttackHitEffect = 25;
+    public const int Range = 26;
+    public const int RangeAttack = 27;
+    public const int Cooldown = 28;
+    public const int Damage = 29;
+    public const int DamageRequest = 30;
+    public const int Dead = 31;
+    public const int DeathDuration = 32;
+    public const int Killable = 33;
+    public const int Duration = 34;
+    public const int Enemy = 35;
+    public const int CurrentHealth = 36;
+    public const int HpBar = 37;
+    public const int MaxHealth = 38;
+    public const int MaxMovementOffsets = 39;
+    public const int MinMovementOffsets = 40;
+    public const int MovementAvailable = 41;
+    public const int MovementCurrentPointIndex = 42;
+    public const int MovementOffset = 43;
+    public const int MovementPointMinDistances = 44;
+    public const int MovementPoints = 45;
+    public const int MovementSpeed = 46;
+    public const int Moving = 47;
+    public const int RotationAlignedAlongDirection = 48;
+    public const int PlayerCastle = 49;
+    public const int Player = 50;
+    public const int FreePoint = 51;
+    public const int GateNumber = 52;
+    public const int SpawnPosition = 53;
+    public const int SpawnPositionGates = 54;
+    public const int SpawnPositions = 55;
+    public const int SpawnRequsted = 56;
+    public const int WaitingToSpawn = 57;
+    public const int Targetable = 58;
+    public const int TargetId = 59;
+    public const int TargetPoint = 60;
+    public const int TowerBuildRequest = 61;
+    public const int Tower = 62;
+    public const int TowerPlace = 63;
+    public const int CurrentWaveEnemies = 64;
+    public const int CurrentWaveNumber = 65;
+    public const int WaveEnemiesAlive = 66;
+    public const int WaveInProgress = 67;
+    public const int WaveStartRequsted = 68;
 
-    public const int TotalComponents = 67;
+    public const int TotalComponents = 69;
 
     public static readonly string[] componentNames = {
         "Animator",
         "Attached",
+        "Bounds",
         "DelayDestruct",
         "Destructed",
         "EntityConfig",
@@ -89,6 +92,7 @@ public static class GameComponentsLookup {
         "SortOrder",
         "Sprite",
         "SpriteRenderer",
+        "TouchZone",
         "Transform",
         "UIDocument",
         "View",
@@ -151,6 +155,7 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(Code.Game.Common.AnimatorComponent),
         typeof(Code.Game.Common.Attached),
+        typeof(Code.Game.Common.BoundsComponent),
         typeof(Code.Game.Common.DelayDestruct),
         typeof(Code.Game.Common.Destructed),
         typeof(Code.Game.Common.EntityConfigComponent),
@@ -159,6 +164,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Common.SortOrder),
         typeof(Code.Game.Common.SpriteComponent),
         typeof(Code.Game.Common.SpriteRendererComponent),
+        typeof(Code.Game.Common.TouchZoneComponent),
         typeof(Code.Game.Common.TransformComponent),
         typeof(Code.Game.Common.UIDocumentComponent),
         typeof(Code.Game.Common.View),

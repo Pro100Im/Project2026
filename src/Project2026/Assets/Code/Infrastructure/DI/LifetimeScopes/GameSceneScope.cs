@@ -43,6 +43,7 @@ using Code.Infrastructure.States.StateMachine;
 using Code.Infrastructure.Systems;
 using Code.Infrastructure.View;
 using Code.Infrastructure.View.Systems;
+using Code.Meta.Features.Game;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -88,6 +89,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<TargetService>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<ICameraService>().AsImplementedInterfaces().AsSelf();
             builder.RegisterComponentInHierarchy<TransitionScreen>();
+            builder.RegisterComponentInHierarchy<GameScreen>();
         }
 
         private void BindStateMachine(IContainerBuilder builder)
@@ -140,6 +142,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<CreateEntityViewFromPrefabSystem>(Lifetime.Singleton);
 
             builder.Register<InitializeInputSystem>(Lifetime.Singleton);
+            builder.Register<InputClickOnEntitySystem>(Lifetime.Singleton);
             builder.Register<TearDownInputDestructedSystem>(Lifetime.Singleton);
 
             builder.Register<PlayerCameraInitSystem>(Lifetime.Singleton);

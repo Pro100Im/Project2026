@@ -25,7 +25,7 @@ namespace Code.Game.Features.Tower.Managers
 
         private void Start()
         {
-            _inputService.SubscribeOnClick(OnClick);
+            //_inputService.SubscribeOnClick(OnClick);
         }
 
         private async void OnClick(InputAction.CallbackContext context)
@@ -82,7 +82,7 @@ namespace Code.Game.Features.Tower.Managers
 
         private void OnDestroy()
         {
-            _inputService.UnSubscribeOnClick(OnClick);
+            //_inputService.UnSubscribeOnClick(OnClick);
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Code.Game.Features.Input
         public InputFeature(ISystemFactory systemFactory)
         {
             Add(systemFactory.Create<InitializeInputSystem>());
+            Add(systemFactory.Create<InputClickOnEntitySystem>());
 
             Add(systemFactory.Create<TearDownInputDestructedSystem>());
         }

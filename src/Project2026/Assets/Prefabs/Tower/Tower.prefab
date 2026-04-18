@@ -1,5 +1,96 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1119719321929606222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8279853628464422445}
+  - component: {fileID: 3931036557787617849}
+  m_Layer: 0
+  m_Name: BuildTowerTouchZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8279853628464422445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119719321929606222}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3617163305584857236}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &3931036557787617849
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119719321929606222}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 100
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
 --- !u!1 &7357662842468826693
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,12 +101,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3617163305584857236}
   - component: {fileID: 1768954670147358820}
-  - component: {fileID: 3518144092183411690}
   - component: {fileID: 7695083838553810320}
   - component: {fileID: 8541246439880557609}
   - component: {fileID: 2662572809283699178}
   - component: {fileID: 9153608685574237889}
   - component: {fileID: 8753180154002075427}
+  - component: {fileID: 7667458447140556987}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -98,21 +189,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &3518144092183411690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7357662842468826693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9fed9df1e0b73f4d9e6d45dc9d4d42e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Tower.Managers.TowerBuildManager
-  _testTowerUpgrate: {fileID: 11400000, guid: 73f3088a3a3933840acd244ee4f29d32, type: 2}
-  _tower: {fileID: 7695083838553810320}
-  _touchZone: {fileID: 3931036557787617849}
 --- !u!114 &7695083838553810320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,70 +255,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Entity.EntityConfigRegistrar
   EntityView: {fileID: 7695083838553810320}
   _config: {fileID: 11400000, guid: ab4da31c223527648aad2896470df7be, type: 2}
---- !u!1001 &1057101487329821866
-PrefabInstance:
+--- !u!114 &7667458447140556987
+MonoBehaviour:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 3617163305584857236}
-    m_Modifications:
-    - target: {fileID: 81521064245829860, guid: 230e91a003609644fb3f4baec7774958, type: 3}
-      propertyPath: m_Name
-      value: BuildTowerTouchZone
-      objectReference: {fileID: 0}
-    - target: {fileID: 8956647223900052103, guid: 230e91a003609644fb3f4baec7774958, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8956647223900052103, guid: 230e91a003609644fb3f4baec7774958, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8956647223900052103, guid: 230e91a003609644fb3f4baec7774958, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8956647223900052103, guid: 230e91a003609644fb3f4baec7774958, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8956647223900052103, guid: 230e91a003609644fb3f4baec7774958, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8956647223900052103, guid: 230e91a003609644fb3f4baec7774958, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8956647223900052103, guid: 230e91a003609644fb3f4baec7774958, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8956647223900052103, guid: 230e91a003609644fb3f4baec7774958, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8956647223900052103, guid: 230e91a003609644fb3f4baec7774958, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8956647223900052103, guid: 230e91a003609644fb3f4baec7774958, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 230e91a003609644fb3f4baec7774958, type: 3}
---- !u!212 &3931036557787617849 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 4046005807074352787, guid: 230e91a003609644fb3f4baec7774958, type: 3}
-  m_PrefabInstance: {fileID: 1057101487329821866}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &8279853628464422445 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8956647223900052103, guid: 230e91a003609644fb3f4baec7774958, type: 3}
-  m_PrefabInstance: {fileID: 1057101487329821866}
-  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7357662842468826693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d32692245215a3498a2f0ce25dc8578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Registrars.TouchZoneRegistrar
+  EntityView: {fileID: 7695083838553810320}
+  _touchZone: {fileID: 3931036557787617849}
