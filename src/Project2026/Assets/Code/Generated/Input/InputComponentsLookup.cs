@@ -8,17 +8,19 @@
 //------------------------------------------------------------------------------
 public static class InputComponentsLookup {
 
-    public const int TargetId = 0;
-    public const int AxisInput = 1;
-    public const int Input = 2;
-    public const int PointerInput = 3;
-    public const int PointerRay = 4;
-    public const int ScreenPointerInput = 5;
-    public const int WorldPointerInput = 6;
+    public const int Destructed = 0;
+    public const int TargetId = 1;
+    public const int AxisInput = 2;
+    public const int Input = 3;
+    public const int PointerInput = 4;
+    public const int PointerRay = 5;
+    public const int ScreenPointerInput = 6;
+    public const int WorldPointerInput = 7;
 
-    public const int TotalComponents = 7;
+    public const int TotalComponents = 8;
 
     public static readonly string[] componentNames = {
+        "Destructed",
         "TargetId",
         "AxisInput",
         "Input",
@@ -29,6 +31,7 @@ public static class InputComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Code.Game.Common.Destructed),
         typeof(Code.Game.Features.Target.TargetId),
         typeof(Code.Game.Input.AxisInput),
         typeof(Code.Game.Input.Input),

@@ -1,3 +1,4 @@
+using Code.Game.Common.Entity;
 using Code.Meta.Features.Game;
 using Entitas;
 using System.Collections.Generic;
@@ -25,7 +26,16 @@ namespace Code.Game.Features.Tower.Systems
         {
             foreach (var entity in entities)
             {
-                
+                var targetEntity = GetGameEntityById.Get(entity.targetId.Value);
+
+                if (targetEntity.isTowerPlace)
+                {
+                    _gameScreen.OpenTowerBuildMenu(entity.screenPointerInput.Value, targetEntity);
+
+                    entity.isDestructed = true;
+
+                    break;
+                }
             }
         }
     }

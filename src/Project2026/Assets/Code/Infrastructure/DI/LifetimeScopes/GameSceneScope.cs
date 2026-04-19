@@ -143,6 +143,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<InitializeInputSystem>(Lifetime.Singleton);
             builder.Register<InputClickOnEntitySystem>(Lifetime.Singleton);
+            builder.Register<TowerMenuSystem>(Lifetime.Singleton);
+            builder.Register<CleanUpInputDestructedSystem>(Lifetime.Singleton);
             builder.Register<TearDownInputDestructedSystem>(Lifetime.Singleton);
 
             builder.Register<PlayerCameraInitSystem>(Lifetime.Singleton);

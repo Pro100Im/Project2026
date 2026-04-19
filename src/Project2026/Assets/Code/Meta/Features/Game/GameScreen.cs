@@ -9,11 +9,11 @@ namespace Code.Meta.Features.Game
     public class GameScreen : MonoBehaviour
     {
         [SerializeField] private UIDocument _gameScreenDoc;
+        [SerializeField] private TowerMenuScreen _towerMenuScreen;
 
         private UIService _uIService;
 
         private VisualElement _root;
-        private VisualElement _gameScreen;
 
         private Button _startWaveButton;
 
@@ -26,14 +26,12 @@ namespace Code.Meta.Features.Game
         private void Awake()
         {
             _root = _gameScreenDoc.rootVisualElement;
-            _gameScreen = _root.Q<VisualElement>("GameScreen");
 
             _startWaveButton = _root.Q<Button>("StartWaveButton");
             _startWaveButton.clickable.clicked += StartWave;
-
-            //_exitButton = root.Q<Button>("ExitButton");
-            //_exitButton.clickable.clicked += Exit;
         }
+
+        public VisualElement GetRoot() => _root;
 
         public VisualElement GetVisualElement(string name) => _root.Q<VisualElement>(name);
 
@@ -44,6 +42,11 @@ namespace Code.Meta.Features.Game
             var entity = CreateGameEntity.Empty();
 
             entity.isWaveStartRequsted = true;
+        }
+
+        public void OpenTowerBuildMenu(Vector2 screenPos, GameEntity entity)
+        {
+            _towerMenuScreen.Open(screenPos, entity);
         }
 
         private void OnDestroy()

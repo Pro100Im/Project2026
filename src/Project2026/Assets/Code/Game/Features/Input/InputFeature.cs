@@ -1,4 +1,5 @@
 using Code.Game.Features.Input.Systems;
+using Code.Game.Features.Tower.Systems;
 using Code.Game.Input.Systems;
 using Code.Infrastructure.Systems;
 
@@ -10,7 +11,9 @@ namespace Code.Game.Features.Input
         {
             Add(systemFactory.Create<InitializeInputSystem>());
             Add(systemFactory.Create<InputClickOnEntitySystem>());
+            Add(systemFactory.Create<TowerMenuSystem>());
 
+            Add(systemFactory.Create<CleanUpInputDestructedSystem>());
             Add(systemFactory.Create<TearDownInputDestructedSystem>());
         }
     }
