@@ -1,5 +1,5 @@
-using Code.Game.Common.Time;
 using Code.Game.Common.Random;
+using Code.Game.Common.Time;
 using Entitas;
 using UnityEngine;
 
@@ -60,22 +60,35 @@ namespace Code.Game.Features.Movement.Systems
 
                     var offsetX = _randomService.GetLocalRandom(minOffset.x, maxOffset.x, enemy.id.Value);
                     var offsetY = _randomService.GetLocalRandom(minOffset.y, maxOffset.y, enemy.id.Value);
-                    
+
                     targetPoint.x += offsetX;
                     targetPoint.y += offsetY;
 
                     if (Vector2.Distance(enemy.transform.Value.position, targetPoint) <= movementPoint.movementPointMinDistances.Value[index])
-                    {
                         enemy.ReplaceMovementCurrentPointIndex(enemy.movementCurrentPointIndex.Value + 1);
 
-                        continue;
+                    float minDistance = 0.5f;
+                    float adjustedSpeed = enemy.movementSpeed.Value;
+
+                    foreach (var other in _enemies)
+                    {
+                        if (other == enemy) continue;
+
+                        float dist = Vector2.Distance(enemy.transform.Value.position, other.transform.Value.position);
+
+                        var toTarget = (targetPoint - (Vector2)enemy.transform.Value.position).normalized;
+                        var toOther = (other.transform.Value.position - enemy.transform.Value.position).normalized;
+
+                        if (Vector2.Dot(toTarget, toOther) > 0.2f && dist < minDistance)
+                            adjustedSpeed = Mathf.Min(0, enemy.movementSpeed.Value * 0.5f);
                     }
 
-                    enemy.isMoving = true;
+                    enemy.isMoving = adjustedSpeed > 0;
+
                     enemy.transform.Value.position = Vector2.MoveTowards(
                         enemy.transform.Value.position,
                         targetPoint,
-                        enemy.movementSpeed.Value * _timeService.DeltaTime);
+                        adjustedSpeed * _timeService.DeltaTime);
                 }
             }
         }
