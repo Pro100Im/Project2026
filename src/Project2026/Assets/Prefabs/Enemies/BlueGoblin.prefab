@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -8159891748829508298}
   - component: {fileID: -1974024728166227716}
   - component: {fileID: -4034592776969640122}
+  - component: {fileID: 715177512618367007}
   m_Layer: 0
   m_Name: BlueGoblin
   m_TagString: Untagged
@@ -89,7 +90,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Registrars.SpriteRendererRegistrar
   EntityView: {fileID: -3016027265122920863}
-  _spriteRenderer: {fileID: 1722115968394257049}
+  _spriteRenderer: {fileID: 4189863427103238046}
+--- !u!114 &715177512618367007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543715583764140608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40448fd13b363474fa0ca992040a0cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Registrars.BoundsRegistrar
+  EntityView: {fileID: -3016027265122920863}
+  _bounds: {fileID: 1722115968394257049}
 --- !u!1 &2950239696066898662
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,7 +116,7 @@ GameObject:
   - component: {fileID: 2022916091796238616}
   - component: {fileID: 1722115968394257049}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Bounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,6 +264,11 @@ PrefabInstance:
 --- !u!95 &1759340061393812146 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1160356261127867848, guid: a24b7ff8ec2e6aa4eb9c74ac14285813, type: 3}
+  m_PrefabInstance: {fileID: 607994375398537082}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &4189863427103238046 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3626916397498700004, guid: a24b7ff8ec2e6aa4eb9c74ac14285813, type: 3}
   m_PrefabInstance: {fileID: 607994375398537082}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7288375016027637879 stripped

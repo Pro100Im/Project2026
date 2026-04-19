@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6111516973161552720}
   - component: {fileID: 4571512969820553959}
   m_Layer: 0
-  m_Name: TargetZone
+  m_Name: Bounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 1093786535825034988}
   - component: {fileID: 6461390600748691509}
   - component: {fileID: 1741076379537749497}
+  - component: {fileID: 7106353570945670982}
   m_Layer: 0
   m_Name: Castle
   m_TagString: Untagged
@@ -296,7 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Registrars.SpriteRendererRegistrar
   EntityView: {fileID: 898953406703528226}
-  _spriteRenderer: {fileID: 4571512969820553959}
+  _spriteRenderer: {fileID: 3819952380102417090}
 --- !u!114 &6461390600748691509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,3 +325,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Entity.EntityConfigRegistrar
   EntityView: {fileID: 898953406703528226}
   _config: {fileID: 11400000, guid: 85e13e5eb1f4a2042a3f0bb14226c672, type: 2}
+--- !u!114 &7106353570945670982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8031770823440728121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40448fd13b363474fa0ca992040a0cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Registrars.BoundsRegistrar
+  EntityView: {fileID: 898953406703528226}
+  _bounds: {fileID: 4571512969820553959}

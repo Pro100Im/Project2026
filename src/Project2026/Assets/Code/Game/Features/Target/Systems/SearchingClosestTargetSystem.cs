@@ -19,18 +19,18 @@ namespace Code.Game.Features.Target.Systems
             _enemies = gameContext.GetGroup(GameMatcher
                 .AllOf(
                 GameMatcher.Targetable,
-                GameMatcher.SpriteRenderer,
+                GameMatcher.Bounds,
                 GameMatcher.Enemy));
 
             _warriors = gameContext.GetGroup(GameMatcher
                 .AllOf(
                 GameMatcher.Targetable,
-                GameMatcher.SpriteRenderer,
+                GameMatcher.Bounds,
                 GameMatcher.Player));
 
             _towers = gameContext.GetGroup(GameMatcher
                 .AllOf(
-                GameMatcher.SpriteRenderer,
+                GameMatcher.Bounds,
                 GameMatcher.Player,
                 GameMatcher.Tower));
         }
@@ -47,8 +47,8 @@ namespace Code.Game.Features.Target.Systems
                     if (warrior.isDead)
                         continue;
 
-                    var ba = enemy.spriteRenderer.Value.bounds;
-                    var bb = warrior.spriteRenderer.Value.bounds;
+                    var ba = enemy.bounds.Value.bounds;
+                    var bb = warrior.bounds.Value.bounds;
 
                     var closestA = ba.ClosestPoint(bb.center);
                     var closestB = bb.ClosestPoint(ba.center);
@@ -76,8 +76,8 @@ namespace Code.Game.Features.Target.Systems
                     if (enemy.isDead)
                         continue;
 
-                    var ba = tower.spriteRenderer.Value.bounds;
-                    var bb = enemy.spriteRenderer.Value.bounds;
+                    var ba = tower.bounds.Value.bounds;
+                    var bb = enemy.bounds.Value.bounds;
 
                     var closestA = ba.ClosestPoint(bb.center);
                     var closestB = bb.ClosestPoint(ba.center);
@@ -108,8 +108,8 @@ namespace Code.Game.Features.Target.Systems
                     if (enemy.isDead)
                         continue;
 
-                    var ba = enemy.spriteRenderer.Value.bounds;
-                    var bb = warrior.spriteRenderer.Value.bounds;
+                    var ba = enemy.bounds.Value.bounds;
+                    var bb = warrior.bounds.Value.bounds;
 
                     var closestA = ba.ClosestPoint(bb.center);
                     var closestB = bb.ClosestPoint(ba.center);

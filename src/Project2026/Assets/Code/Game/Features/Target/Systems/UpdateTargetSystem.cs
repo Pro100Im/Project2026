@@ -23,7 +23,7 @@ namespace Code.Game.Features.Target.Systems
                 GameMatcher.TargetId,
                 GameMatcher.TargetPoint,
                 GameMatcher.AttackerPoint,
-                GameMatcher.SpriteRenderer));
+                GameMatcher.Bounds));
         }
 
         // To do
@@ -36,8 +36,8 @@ namespace Code.Game.Features.Target.Systems
 
                 var target = GetGameEntityById.Get(entity.targetId.Value);
 
-                var ba = entity.spriteRenderer.Value.bounds;
-                var bb = target.spriteRenderer.Value.bounds;
+                var ba = entity.bounds.Value.bounds;
+                var bb = target.bounds.Value.bounds;
 
                 var closestA = ba.ClosestPoint(bb.center);
                 var closestB = bb.ClosestPoint(ba.center);
