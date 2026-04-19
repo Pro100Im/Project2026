@@ -29,7 +29,6 @@ using Code.Game.Features.Target;
 using Code.Game.Features.Target.Services;
 using Code.Game.Features.Target.Systems;
 using Code.Game.Features.Tower;
-using Code.Game.Features.Tower.Managers;
 using Code.Game.Features.Tower.Systems;
 using Code.Game.Features.Wave;
 using Code.Game.Features.Wave.Systems;
@@ -69,8 +68,6 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             BindSystems(builder);
 
             BindGameFactories(builder);
-
-            BindGameManagers(builder);
 
             builder.RegisterEntryPoint<GameWorld>();
         }
@@ -195,11 +192,6 @@ namespace Code.Infrastructure.DI.LifetimeScopes
         private void BindGameConfigs(IContainerBuilder builder)
         {
             builder.RegisterInstance(_wavesConfig).AsSelf();
-        }
-
-        private void BindGameManagers(IContainerBuilder builder)
-        {
-            builder.RegisterComponentInHierarchy<TowerUIManager>();
         }
     }
 }
