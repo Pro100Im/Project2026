@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2652ec64a2cfac428b7546f4941961e, type: 3}
+  m_Name: TestBigBlueGoblinEnemyConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.EntityConfig
+  Properties:
+  - rid: 8171215584738410588
+  - rid: 8171215584738410594
+  - rid: 8171215584738410595
+  - rid: 8171215584738410596
+  - rid: 8171215584738410597
+  - rid: 8171215584738410598
+  - rid: 8171215584738410599
+  - rid: 8171215584738410600
+  - rid: 8171215584738410616
+  - rid: 8171215631311700222
+  - rid: 8171215631311700224
+  - rid: 8171215745916338281
+  references:
+    version: 2
+    RefIds:
+    - rid: 8171215584738410588
+      type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+    - rid: 8171215584738410594
+      type: {class: ViewPrefabProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Prefab>k__BackingField: {fileID: -3016027265122920863, guid: d49b9c95ca2a1914d95fb1ad30f87b7b, type: 3}
+    - rid: 8171215584738410595
+      type: {class: TargetableProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+    - rid: 8171215584738410596
+      type: {class: SpeedProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Speed>k__BackingField: 1
+    - rid: 8171215584738410597
+      type: {class: HealthProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Health>k__BackingField: 100
+    - rid: 8171215584738410598
+      type: {class: HealthBarProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <HpBar>k__BackingField: {fileID: 11400000, guid: 940e7d5b532b66741ab204f744f5205b, type: 2}
+        <SpawnOffset>k__BackingField: {x: 0, y: 0.5, z: 0}
+    - rid: 8171215584738410599
+      type: {class: PhysicalAttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <AttackHitEffect>k__BackingField: {fileID: 11400000, guid: 042aceafa8db9b646988bfb019ada0f6, type: 2}
+    - rid: 8171215584738410600
+      type: {class: AttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Range>k__BackingField: 0.65
+        <Cooldown>k__BackingField: 3
+        <Duration>k__BackingField: 0.6
+        <IsMelee>k__BackingField: 1
+    - rid: 8171215584738410616
+      type: {class: SpawnEffectProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <SpawnEffect>k__BackingField: {fileID: 11400000, guid: 66146da2da0797949afeef7485ed8aeb, type: 2}
+        <SpawnEffectOffset>k__BackingField: {x: 0, y: 0, z: 0}
+    - rid: 8171215631311700222
+      type: {class: KillableProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+    - rid: 8171215631311700224
+      type: {class: DeathDurationProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Duration>k__BackingField: 0.8
+    - rid: 8171215745916338281
+      type: {class: UnitSizeProperty, ns: Assets.Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Size>k__BackingField: 2

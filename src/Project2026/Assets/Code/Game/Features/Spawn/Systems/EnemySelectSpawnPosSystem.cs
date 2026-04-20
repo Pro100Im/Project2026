@@ -42,17 +42,42 @@ namespace Code.Game.Features.Spawn.Systems
                         var count = 0;
                         var chosenCell = new Vector3();
                         var found = false;
+                        var unitSize = enemySpawn.unitSize.Value;
 
                         foreach (var cell in spawns.spawnMap.Value)
                         {
-                            if (!map.tilemapMovement.Value.TryGetValue(cell, out var walkable) || !walkable)
-                                continue;
+                            var canSpawn = true;
 
-                            if (map.occupancyMap.Value.ContainsKey(cell))
+                            for (int x = 0; x < unitSize; x++)
+                            {
+                                for (int y = 0; y < unitSize; y++)
+                                {
+                                    var checkCell = cell + new Vector3(x * 0.4f, y * 0.4f);
+
+                                    if (!map.tilemapMovement.Value.TryGetValue(checkCell, out var walkable) || !walkable)
+                                    {
+                                        canSpawn = false;
+
+                                        break;
+                                    }
+
+                                    if (map.occupancyMap.Value.ContainsKey(checkCell))
+                                    {
+                                        canSpawn = false;
+
+                                        break;
+                                    }
+                                }
+
+                                if (!canSpawn) 
+                                    break;
+                            }
+
+                            if (!canSpawn)
                                 continue;
 
                             count++;
- 
+
                             if (_randomService.GetGlobalRandom(0, count) == 0)
                             {
                                 chosenCell = cell;
@@ -62,6 +87,17 @@ namespace Code.Game.Features.Spawn.Systems
 
                         if (found && !enemySpawn.hasSpawnPosition)
                         {
+                            if (unitSize > 1)
+                            {
+                                var offset = new Vector3(
+                                    (unitSize - 1) * 0.4f * 0.5f,
+                                    (unitSize - 1) * 0.4f * 0.5f,
+                                    0
+                                );
+
+                                chosenCell += offset;
+                            }
+
                             enemySpawn.AddSpawnPosition(chosenCell);
                         }
                     }

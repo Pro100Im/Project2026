@@ -15,7 +15,7 @@ MonoBehaviour:
   <WaveDatas>k__BackingField:
   - Cooldown: 1.2
     EntityConfigs:
-    - {fileID: 11400000, guid: fce344918f01a66409ab07208c8c7f33, type: 2}
+    - {fileID: 11400000, guid: 50b27b2e7acf8c543b020842090872d1, type: 2}
   - Cooldown: 1
     EntityConfigs:
     - {fileID: 11400000, guid: fce344918f01a66409ab07208c8c7f33, type: 2}
