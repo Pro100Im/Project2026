@@ -89,4 +89,4 @@ MonoBehaviour:
       type: {class: UnitSizeProperty, ns: Assets.Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Size>k__BackingField: 1
+        <Size>k__BackingField: {x: 1, y: 1}

@@ -28,13 +28,18 @@ namespace Code.Game.Features.Spawn.Systems
               GameMatcher.SpawnMap,
               GameMatcher.Enemy));
 
-            _maps = gameContext.GetGroup(GameMatcher.TilemapMovement);
+            _maps = gameContext.GetGroup(GameMatcher
+              .AllOf(
+              GameMatcher.TilemapMovement,
+              GameMatcher.GridSize));
         }
 
         public void Execute()
         {
             foreach (var map in _maps)
             {
+                var gridSize = map.gridSize.Value;
+
                 foreach (var spawns in _spawnMaps)
                 {
                     foreach (var enemySpawn in _enemies)
@@ -48,11 +53,11 @@ namespace Code.Game.Features.Spawn.Systems
                         {
                             var canSpawn = true;
 
-                            for (int x = 0; x < unitSize; x++)
+                            for (int x = 0; x < unitSize.x; x++)
                             {
-                                for (int y = 0; y < unitSize; y++)
+                                for (int y = 0; y < unitSize.y; y++)
                                 {
-                                    var checkCell = cell + new Vector3(x * 0.4f, y * 0.4f);
+                                    var checkCell = cell + new Vector3(x * gridSize.x, y * gridSize.y);
 
                                     if (!map.tilemapMovement.Value.TryGetValue(checkCell, out var walkable) || !walkable)
                                     {
@@ -69,7 +74,7 @@ namespace Code.Game.Features.Spawn.Systems
                                     }
                                 }
 
-                                if (!canSpawn) 
+                                if (!canSpawn)
                                     break;
                             }
 
@@ -87,12 +92,11 @@ namespace Code.Game.Features.Spawn.Systems
 
                         if (found && !enemySpawn.hasSpawnPosition)
                         {
-                            if (unitSize > 1)
+                            if (unitSize.x > 1 || unitSize.y > 1)
                             {
                                 var offset = new Vector3(
-                                    (unitSize - 1) * 0.4f * 0.5f,
-                                    (unitSize - 1) * 0.4f * 0.5f,
-                                    0
+                                    (unitSize.x - 1) * gridSize.x * 0.5f,
+                                    (unitSize.y - 1) * gridSize.y * 0.5f
                                 );
 
                                 chosenCell += offset;

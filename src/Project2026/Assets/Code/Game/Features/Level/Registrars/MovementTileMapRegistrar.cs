@@ -27,6 +27,7 @@ namespace Code.Game.Features.Level.Registrars
                 dictionary[worldPos] = walkable;
             }
 
+            Entity.AddGridSize(_tilemap.cellSize);
             Entity.AddTilemapMovement(dictionary);
             Entity.AddOccupancyMap(new());
         }

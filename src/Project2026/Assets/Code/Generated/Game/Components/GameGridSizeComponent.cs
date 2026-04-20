@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Code.Game.Features.Unit.UnitSize unitSize { get { return (Code.Game.Features.Unit.UnitSize)GetComponent(GameComponentsLookup.UnitSize); } }
-    public bool hasUnitSize { get { return HasComponent(GameComponentsLookup.UnitSize); } }
+    public Code.Game.Features.Level.GridSize gridSize { get { return (Code.Game.Features.Level.GridSize)GetComponent(GameComponentsLookup.GridSize); } }
+    public bool hasGridSize { get { return HasComponent(GameComponentsLookup.GridSize); } }
 
-    public void AddUnitSize(UnityEngine.Vector2Int newValue) {
-        var index = GameComponentsLookup.UnitSize;
-        var component = (Code.Game.Features.Unit.UnitSize)CreateComponent(index, typeof(Code.Game.Features.Unit.UnitSize));
+    public void AddGridSize(UnityEngine.Vector3 newValue) {
+        var index = GameComponentsLookup.GridSize;
+        var component = (Code.Game.Features.Level.GridSize)CreateComponent(index, typeof(Code.Game.Features.Level.GridSize));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceUnitSize(UnityEngine.Vector2Int newValue) {
-        var index = GameComponentsLookup.UnitSize;
-        var component = (Code.Game.Features.Unit.UnitSize)CreateComponent(index, typeof(Code.Game.Features.Unit.UnitSize));
+    public void ReplaceGridSize(UnityEngine.Vector3 newValue) {
+        var index = GameComponentsLookup.GridSize;
+        var component = (Code.Game.Features.Level.GridSize)CreateComponent(index, typeof(Code.Game.Features.Level.GridSize));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveUnitSize() {
-        RemoveComponent(GameComponentsLookup.UnitSize);
+    public void RemoveGridSize() {
+        RemoveComponent(GameComponentsLookup.GridSize);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherUnitSize;
+    static Entitas.IMatcher<GameEntity> _matcherGridSize;
 
-    public static Entitas.IMatcher<GameEntity> UnitSize {
+    public static Entitas.IMatcher<GameEntity> GridSize {
         get {
-            if (_matcherUnitSize == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.UnitSize);
+            if (_matcherGridSize == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.GridSize);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherUnitSize = matcher;
+                _matcherGridSize = matcher;
             }
 
-            return _matcherUnitSize;
+            return _matcherGridSize;
         }
     }
 }
