@@ -5,8 +5,9 @@ namespace Code.Game.Features.Spawn.Systems
 {
     public class EnemySelectSpawnPosSystem : IExecuteSystem
     {
+        private readonly IGroup<GameEntity> _maps;
         private readonly IGroup<GameEntity> _enemies;
-        private readonly IGroup<GameEntity> _spawnPositions;
+        private readonly IGroup<GameEntity> _spawnMaps;
 
         public EnemySelectSpawnPosSystem(GameContext gameContext)
         {
@@ -16,29 +17,38 @@ namespace Code.Game.Features.Spawn.Systems
               GameMatcher.EntityConfig,
               GameMatcher.Enemy));
 
-            _spawnPositions = gameContext.GetGroup(GameMatcher
+            _spawnMaps = gameContext.GetGroup(GameMatcher
               .AllOf(
-              GameMatcher.SpawnPositions,
-              GameMatcher.SpawnPositionGates,
+              GameMatcher.SpawnMap,
               GameMatcher.Enemy));
+
+            _maps = gameContext.GetGroup(GameMatcher.TilemapMovement);
         }
 
         public void Execute()
         {
-            foreach(var spawnPos in _spawnPositions)
+            foreach(var map in _maps)
             {
-                foreach (var enemySpawn in _enemies)
+                foreach (var spawns in _spawnMaps)
                 {
-                    var spawnPositions = spawnPos.spawnPositions.Value;
-                    var randomIndex = Random.Range(0, spawnPositions.Length);
-                    var position = spawnPositions[randomIndex];
-                    var gate = spawnPos.spawnPositionGates.Value[randomIndex];
+                    foreach (var enemySpawn in _enemies)
+                    {
+                        foreach (var cell in spawns.spawnMap.Value)
+                        {
+                            if (!map.tilemapMovement.Value.TryGetValue(cell, out var walkable) || !walkable)
+                                continue;
 
-                    if (!enemySpawn.hasSpawnPosition)
-                        enemySpawn.AddSpawnPosition(position);
+                            if (map.occupancyMap.Value.ContainsKey(cell))
+                                continue;
 
-                    if (!enemySpawn.hasGateNumber)
-                        enemySpawn.AddGateNumber(gate);
+                            var position = new Vector3(cell.x, cell.y);
+
+                            if (!enemySpawn.hasSpawnPosition)
+                                enemySpawn.AddSpawnPosition(position);
+
+                            //map.occupancyMap.Value.Add(cell, enemySpawn.id.Value);
+                        }        
+                    }
                 }
             }
         }

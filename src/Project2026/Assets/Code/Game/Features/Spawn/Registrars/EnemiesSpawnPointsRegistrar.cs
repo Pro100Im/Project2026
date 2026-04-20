@@ -1,5 +1,5 @@
 using Code.Infrastructure.View.Registrars;
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,25 +7,18 @@ namespace Code.Game.Features.Spawn.Registrars
 {
     public class EnemiesSpawnPointsRegistrar : EntityComponentRegistrar
     {
-        [SerializeField] private SpawnPosition[] _enemiesSpawnPos;
+        [SerializeField] private Vector2Int[] _spawnPos;
         [Space]
         [SerializeField] private Tilemap _tilemap;
 
         public override void RegisterComponents()
         {
-            var positions = new Vector3[_enemiesSpawnPos.Length];
-            var gates = new int[_enemiesSpawnPos.Length];
+            var spawns = new List<Vector3>();
 
-            for (var i = 0; i < _enemiesSpawnPos.Length; i++)
-            {
-                var position = _tilemap.GetCellCenterWorld(_enemiesSpawnPos[i].Position);
+            foreach (var spawn in _spawnPos)
+                spawns.Add(_tilemap.GetCellCenterWorld(new Vector3Int(spawn.x, spawn.y)));
 
-                positions[i] = position;
-                gates[i] = _enemiesSpawnPos[i].Gate;
-            }
-
-            Entity.AddSpawnPositions(positions);
-            Entity.AddSpawnPositionGates(gates);
+            Entity.AddSpawnMap(spawns);
             Entity.isEnemy = true;
         }
 
@@ -38,22 +31,15 @@ namespace Code.Game.Features.Spawn.Registrars
         {
             if (_tilemap != null)
             {
-                for (var i = 0; i < _enemiesSpawnPos.Length; i++)
+                for (var i = 0; i < _spawnPos.Length; i++)
                 {
-                    var pos = _tilemap.GetCellCenterWorld(_enemiesSpawnPos[i].Position);
+                    var pos = _spawnPos[i];
+                    var cell = _tilemap.GetCellCenterWorld(new Vector3Int(pos.x, pos.y, 0));
 
                     Gizmos.color = Color.red;
-                    Gizmos.DrawWireCube(pos, _tilemap.cellSize);
+                    Gizmos.DrawWireCube(cell, _tilemap.cellSize);
                 }
             }
-        }
-
-        [Serializable]
-        private class SpawnPosition
-        {
-            [field: SerializeField] public int SortOrder { get; private set; }
-            [field: SerializeField] public int Gate { get; private set; }
-            [field: SerializeField] public Vector3Int Position { get; private set; }
         }
     }
 }

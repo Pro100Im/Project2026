@@ -1,16 +1,10 @@
+using Entitas;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelComponent : MonoBehaviour
+namespace Code.Game.Features.Level
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Game] public class TilemapMovement : IComponent { public Dictionary<Vector3, bool> Value; }
+    [Game] public class OccupancyMap : IComponent { public Dictionary<Vector3, int> Value; }
+    [Game] public class SpawnMap : IComponent { public List<Vector3> Value; }
 }

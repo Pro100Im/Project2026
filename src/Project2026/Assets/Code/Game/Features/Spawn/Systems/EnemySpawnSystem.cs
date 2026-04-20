@@ -17,7 +17,6 @@ namespace Code.Game.Features.Spawn.Systems
               GameMatcher.SpawnRequsted,
               GameMatcher.SpawnPosition,
               GameMatcher.EntityConfig,
-              GameMatcher.GateNumber,
               GameMatcher.Enemy));
         }
 
@@ -27,7 +26,6 @@ namespace Code.Game.Features.Spawn.Systems
             {
                 var entity = CreateGameEntity.Empty();
                 entity.AddSpawnPosition(enemySpawn.spawnPosition.Value);
-                entity.AddGateNumber(enemySpawn.gateNumber.Value);
                 entity.AddMovementCurrentPointIndex(0);
                 entity.isMovementAvailable = true;
                 entity.isEnemy = true;

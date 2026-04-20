@@ -47,38 +47,41 @@ public static class GameComponentsLookup {
     public const int CurrentHealth = 36;
     public const int HpBar = 37;
     public const int MaxHealth = 38;
-    public const int MaxMovementOffsets = 39;
-    public const int MinMovementOffsets = 40;
-    public const int MovementAvailable = 41;
-    public const int MovementCurrentPointIndex = 42;
-    public const int MovementOffset = 43;
-    public const int MovementPointMinDistances = 44;
-    public const int MovementPoints = 45;
-    public const int MovementSpeed = 46;
-    public const int Moving = 47;
-    public const int RotationAlignedAlongDirection = 48;
-    public const int PlayerCastle = 49;
-    public const int Player = 50;
-    public const int FreePoint = 51;
-    public const int GateNumber = 52;
-    public const int SpawnPosition = 53;
-    public const int SpawnPositionGates = 54;
-    public const int SpawnPositions = 55;
-    public const int SpawnRequsted = 56;
-    public const int WaitingToSpawn = 57;
-    public const int Targetable = 58;
-    public const int TargetId = 59;
-    public const int TargetPoint = 60;
-    public const int TowerBuildRequest = 61;
-    public const int Tower = 62;
-    public const int TowerPlace = 63;
-    public const int CurrentWaveEnemies = 64;
-    public const int CurrentWaveNumber = 65;
-    public const int WaveEnemiesAlive = 66;
-    public const int WaveInProgress = 67;
-    public const int WaveStartRequsted = 68;
+    public const int OccupancyMap = 39;
+    public const int SpawnMap = 40;
+    public const int TilemapMovement = 41;
+    public const int MaxMovementOffsets = 42;
+    public const int MinMovementOffsets = 43;
+    public const int MovementAvailable = 44;
+    public const int MovementCurrentPointIndex = 45;
+    public const int MovementOffset = 46;
+    public const int MovementPointMinDistances = 47;
+    public const int MovementPoints = 48;
+    public const int MovementSpeed = 49;
+    public const int Moving = 50;
+    public const int RotationAlignedAlongDirection = 51;
+    public const int PlayerCastle = 52;
+    public const int Player = 53;
+    public const int FreePoint = 54;
+    public const int GateNumber = 55;
+    public const int SpawnPosition = 56;
+    public const int SpawnPositionGates = 57;
+    public const int SpawnPositions = 58;
+    public const int SpawnRequsted = 59;
+    public const int WaitingToSpawn = 60;
+    public const int Targetable = 61;
+    public const int TargetId = 62;
+    public const int TargetPoint = 63;
+    public const int TowerBuildRequest = 64;
+    public const int Tower = 65;
+    public const int TowerPlace = 66;
+    public const int CurrentWaveEnemies = 67;
+    public const int CurrentWaveNumber = 68;
+    public const int WaveEnemiesAlive = 69;
+    public const int WaveInProgress = 70;
+    public const int WaveStartRequsted = 71;
 
-    public const int TotalComponents = 69;
+    public const int TotalComponents = 72;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -120,6 +123,9 @@ public static class GameComponentsLookup {
         "CurrentHealth",
         "HpBar",
         "MaxHealth",
+        "OccupancyMap",
+        "SpawnMap",
+        "TilemapMovement",
         "MaxMovementOffsets",
         "MinMovementOffsets",
         "MovementAvailable",
@@ -192,6 +198,9 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Health.CurrentHealth),
         typeof(Code.Game.Features.Health.HpBar),
         typeof(Code.Game.Features.Health.MaxHealth),
+        typeof(Code.Game.Features.Level.OccupancyMap),
+        typeof(Code.Game.Features.Level.SpawnMap),
+        typeof(Code.Game.Features.Level.TilemapMovement),
         typeof(Code.Game.Features.Movement.MaxMovementOffsets),
         typeof(Code.Game.Features.Movement.MinMovementOffsets),
         typeof(Code.Game.Features.Movement.MovementAvailable),
