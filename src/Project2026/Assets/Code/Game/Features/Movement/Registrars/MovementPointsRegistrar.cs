@@ -35,7 +35,6 @@ namespace Code.Game.Features.Movement.Registrars
             Entity.AddMovementPointMinDistances(minDistances);
             Entity.AddMinMovementOffsets(minOffsets);
             Entity.AddMaxMovementOffsets(maxOffsets);
-            Entity.AddGateNumber(_gatennumber);
             Entity.isEnemy = true;
         }
 

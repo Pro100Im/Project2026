@@ -16,22 +16,22 @@ namespace Code.Game.Features.Spawn.Systems
         {
             _randomService = randomService;
 
+            _maps = gameContext.GetGroup(GameMatcher
+                .AllOf(
+                GameMatcher.TilemapMovement,
+                GameMatcher.GridSize));
+
             _enemies = gameContext.GetGroup(GameMatcher
-              .AllOf(
-              GameMatcher.SpawnRequsted,
-              GameMatcher.EntityConfig,
-              GameMatcher.UnitSize,
-              GameMatcher.Enemy));
+                .AllOf(
+                GameMatcher.SpawnRequsted,
+                GameMatcher.EntityConfig,
+                GameMatcher.UnitSize,
+                GameMatcher.Enemy));
 
             _spawnMaps = gameContext.GetGroup(GameMatcher
-              .AllOf(
-              GameMatcher.SpawnMap,
-              GameMatcher.Enemy));
-
-            _maps = gameContext.GetGroup(GameMatcher
-              .AllOf(
-              GameMatcher.TilemapMovement,
-              GameMatcher.GridSize));
+                .AllOf(
+                GameMatcher.SpawnMap,
+                GameMatcher.Enemy));
         }
 
         public void Execute()
@@ -94,10 +94,7 @@ namespace Code.Game.Features.Spawn.Systems
                         {
                             if (unitSize.x > 1 || unitSize.y > 1)
                             {
-                                var offset = new Vector3(
-                                    (unitSize.x - 1) * gridSize.x * 0.5f,
-                                    (unitSize.y - 1) * gridSize.y * 0.5f
-                                );
+                                var offset = new Vector3((unitSize.x - 1) * gridSize.x * 0.5f, (unitSize.y - 1) * gridSize.y * 0.5f);
 
                                 chosenCell += offset;
                             }

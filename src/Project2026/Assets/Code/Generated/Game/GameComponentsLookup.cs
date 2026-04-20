@@ -63,27 +63,23 @@ public static class GameComponentsLookup {
     public const int RotationAlignedAlongDirection = 52;
     public const int PlayerCastle = 53;
     public const int Player = 54;
-    public const int FreePoint = 55;
-    public const int GateNumber = 56;
-    public const int SpawnPosition = 57;
-    public const int SpawnPositionGates = 58;
-    public const int SpawnPositions = 59;
-    public const int SpawnRequsted = 60;
-    public const int WaitingToSpawn = 61;
-    public const int Targetable = 62;
-    public const int TargetId = 63;
-    public const int TargetPoint = 64;
-    public const int TowerBuildRequest = 65;
-    public const int Tower = 66;
-    public const int TowerPlace = 67;
-    public const int UnitSize = 68;
-    public const int CurrentWaveEnemies = 69;
-    public const int CurrentWaveNumber = 70;
-    public const int WaveEnemiesAlive = 71;
-    public const int WaveInProgress = 72;
-    public const int WaveStartRequsted = 73;
+    public const int SpawnPosition = 55;
+    public const int SpawnRequsted = 56;
+    public const int WaitingToSpawn = 57;
+    public const int Targetable = 58;
+    public const int TargetId = 59;
+    public const int TargetPoint = 60;
+    public const int TowerBuildRequest = 61;
+    public const int Tower = 62;
+    public const int TowerPlace = 63;
+    public const int UnitSize = 64;
+    public const int CurrentWaveEnemies = 65;
+    public const int CurrentWaveNumber = 66;
+    public const int WaveEnemiesAlive = 67;
+    public const int WaveInProgress = 68;
+    public const int WaveStartRequsted = 69;
 
-    public const int TotalComponents = 74;
+    public const int TotalComponents = 70;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -141,11 +137,7 @@ public static class GameComponentsLookup {
         "RotationAlignedAlongDirection",
         "PlayerCastle",
         "Player",
-        "FreePoint",
-        "GateNumber",
         "SpawnPosition",
-        "SpawnPositionGates",
-        "SpawnPositions",
         "SpawnRequsted",
         "WaitingToSpawn",
         "Targetable",
@@ -218,11 +210,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Movement.RotationAlignedAlongDirection),
         typeof(Code.Game.Features.Player.PlayerCastle),
         typeof(Code.Game.Features.Player.PlayerComponent),
-        typeof(Code.Game.Features.Spawn.FreePoint),
-        typeof(Code.Game.Features.Spawn.GateNumber),
         typeof(Code.Game.Features.Spawn.SpawnPosition),
-        typeof(Code.Game.Features.Spawn.SpawnPositionGates),
-        typeof(Code.Game.Features.Spawn.SpawnPositions),
         typeof(Code.Game.Features.Spawn.SpawnRequsted),
         typeof(Code.Game.Features.Spawn.WaitingToSpawn),
         typeof(Code.Game.Features.Target.Targetable),

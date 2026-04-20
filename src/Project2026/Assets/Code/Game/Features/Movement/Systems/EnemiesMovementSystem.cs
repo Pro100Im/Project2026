@@ -23,7 +23,6 @@ namespace Code.Game.Features.Movement.Systems
               GameMatcher.MovementAvailable,
               GameMatcher.MovementSpeed,
               GameMatcher.MovementCurrentPointIndex,
-              GameMatcher.GateNumber,
               GameMatcher.Enemy));
 
             _movementPoints = gameContext.GetGroup(GameMatcher
@@ -32,7 +31,6 @@ namespace Code.Game.Features.Movement.Systems
               GameMatcher.MovementPointMinDistances,
               GameMatcher.MinMovementOffsets,
               GameMatcher.MaxMovementOffsets,
-              GameMatcher.GateNumber,
               GameMatcher.Enemy));
         }
 
@@ -42,9 +40,6 @@ namespace Code.Game.Features.Movement.Systems
             {
                 foreach (var enemy in _enemies)
                 {
-                    if (enemy.gateNumber.Value != movementPoint.gateNumber.Value)
-                        continue;
-
                     if (enemy.movementCurrentPointIndex.Value >= movementPoint.movementPoints.Value.Length || enemy.isAttacking || enemy.isDead)
                     {
                         enemy.isMoving = false;
