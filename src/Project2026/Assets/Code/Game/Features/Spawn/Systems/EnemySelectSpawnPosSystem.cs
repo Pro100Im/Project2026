@@ -20,6 +20,7 @@ namespace Code.Game.Features.Spawn.Systems
               .AllOf(
               GameMatcher.SpawnRequsted,
               GameMatcher.EntityConfig,
+              GameMatcher.UnitSize,
               GameMatcher.Enemy));
 
             _spawnMaps = gameContext.GetGroup(GameMatcher

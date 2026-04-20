@@ -1,23 +1,21 @@
-using Code.Game.Common.Time;
 using Code.Game.Common.Entity;
 using Code.Game.StaticData.Configs;
 using Entitas;
 using System.Collections.Generic;
+using Assets.Code.Game.StaticData.Property;
 
 namespace Code.Game.Features.Wave.Systems
 {
     public class WaveProgressSystem : IExecuteSystem
     {
         private readonly WavesConfig _wavesConfig;
-        private readonly ITimeService _timeService;
         private readonly IGroup<GameEntity> _waves;
 
         private readonly List<GameEntity> _buffer = new(5);
 
-        public WaveProgressSystem(GameContext gameContext, WavesConfig wavesConfig, ITimeService timeService)
+        public WaveProgressSystem(GameContext gameContext, WavesConfig wavesConfig)
         {
             _wavesConfig = wavesConfig;
-            _timeService = timeService;
 
             _waves = gameContext.GetGroup(GameMatcher
               .AllOf(
@@ -42,8 +40,10 @@ namespace Code.Game.Features.Wave.Systems
                     var entityConfig = wave.currentWaveEnemies.Value[0];
                     var entity = CreateGameEntity.Empty();
                     var newCooldown = _wavesConfig.WaveDatas[wave.currentWaveNumber.Value-1].Cooldown;
+                    var unitSize = entityConfig.GetProperty<UnitSizeProperty>().Size;
 
                     entity.AddEntityConfig(entityConfig);
+                    entity.AddUnitSize(unitSize);
                     entity.isSpawnRequsted = true;
                     entity.isEnemy = true;
 
