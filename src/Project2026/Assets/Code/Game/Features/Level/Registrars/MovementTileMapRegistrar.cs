@@ -17,7 +17,11 @@ namespace Code.Game.Features.Level.Registrars
             foreach (var pos in bounds.allPositionsWithin)
             {
                 var tile = _tilemap.GetTile(pos);
-                var walkable = tile != null;
+
+                if (tile == null)
+                    continue;
+
+                var walkable = true;
                 var worldPos = _tilemap.GetCellCenterWorld(pos);
 
                 dictionary[worldPos] = walkable;

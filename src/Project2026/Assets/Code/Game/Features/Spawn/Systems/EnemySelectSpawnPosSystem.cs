@@ -1,3 +1,4 @@
+using Code.Game.Common.Random;
 using Entitas;
 using UnityEngine;
 
@@ -5,12 +6,16 @@ namespace Code.Game.Features.Spawn.Systems
 {
     public class EnemySelectSpawnPosSystem : IExecuteSystem
     {
+        private readonly IRandomService _randomService;
+
         private readonly IGroup<GameEntity> _maps;
         private readonly IGroup<GameEntity> _enemies;
         private readonly IGroup<GameEntity> _spawnMaps;
 
-        public EnemySelectSpawnPosSystem(GameContext gameContext)
+        public EnemySelectSpawnPosSystem(GameContext gameContext, IRandomService randomService)
         {
+            _randomService = randomService;
+
             _enemies = gameContext.GetGroup(GameMatcher
               .AllOf(
               GameMatcher.SpawnRequsted,
@@ -27,12 +32,16 @@ namespace Code.Game.Features.Spawn.Systems
 
         public void Execute()
         {
-            foreach(var map in _maps)
+            foreach (var map in _maps)
             {
                 foreach (var spawns in _spawnMaps)
                 {
                     foreach (var enemySpawn in _enemies)
                     {
+                        var count = 0;
+                        var chosenCell = new Vector3();
+                        var found = false;
+
                         foreach (var cell in spawns.spawnMap.Value)
                         {
                             if (!map.tilemapMovement.Value.TryGetValue(cell, out var walkable) || !walkable)
@@ -41,13 +50,19 @@ namespace Code.Game.Features.Spawn.Systems
                             if (map.occupancyMap.Value.ContainsKey(cell))
                                 continue;
 
-                            var position = new Vector3(cell.x, cell.y);
+                            count++;
+ 
+                            if (_randomService.GetGlobalRandom(0, count) == 0)
+                            {
+                                chosenCell = cell;
+                                found = true;
+                            }
+                        }
 
-                            if (!enemySpawn.hasSpawnPosition)
-                                enemySpawn.AddSpawnPosition(position);
-
-                            //map.occupancyMap.Value.Add(cell, enemySpawn.id.Value);
-                        }        
+                        if (found && !enemySpawn.hasSpawnPosition)
+                        {
+                            enemySpawn.AddSpawnPosition(chosenCell);
+                        }
                     }
                 }
             }
