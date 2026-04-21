@@ -1,129 +1,59 @@
-using Code.Game.Features.Target.Services;
 using Entitas;
+using UnityEngine;
 
 namespace Code.Game.Features.Target.Systems
 {
     // To do
     public class SearchingClosestTargetSystem : IExecuteSystem
     {
-        private readonly TargetService _targetService;
-
-        private readonly IGroup<GameEntity> _warriors;
+        private readonly IGroup<GameEntity> _targets;
         private readonly IGroup<GameEntity> _enemies;
-        private readonly IGroup<GameEntity> _towers;
 
-        public SearchingClosestTargetSystem(GameContext gameContext, TargetService targetService)
+        public SearchingClosestTargetSystem(GameContext gameContext)
         {
-            _targetService = targetService;
-
             _enemies = gameContext.GetGroup(GameMatcher
                 .AllOf(
                 GameMatcher.Targetable,
-                GameMatcher.Bounds,
                 GameMatcher.Enemy));
 
-            _warriors = gameContext.GetGroup(GameMatcher
+            _targets = gameContext.GetGroup(GameMatcher
                 .AllOf(
                 GameMatcher.Targetable,
-                GameMatcher.Bounds,
                 GameMatcher.Player));
-
-            _towers = gameContext.GetGroup(GameMatcher
-                .AllOf(
-                GameMatcher.Bounds,
-                GameMatcher.Player,
-                GameMatcher.Tower));
         }
 
         public void Execute()
         {
             foreach (var enemy in _enemies)
             {
-                if (enemy.hasTargetId)
-                    continue;
+                var minDist = float.MaxValue;
+                var nearestTargetId = -1;
 
-                foreach (var warrior in _warriors)
+                foreach (var warrior in _targets)
                 {
                     if (warrior.isDead)
                         continue;
 
-                    var ba = enemy.bounds.Value.bounds;
-                    var bb = warrior.bounds.Value.bounds;
+                    var dist = Vector3.Distance(enemy.transform.Value.position, warrior.transform.Value.position);
 
-                    var closestA = ba.ClosestPoint(bb.center);
-                    var closestB = bb.ClosestPoint(ba.center);
-
-                    var distance = _targetService.GetDistanceBetweenEntities(closestA, closestB);
-
-                    if (distance <= enemy.range.Value)
+                    if (dist < minDist)
                     {
-                        enemy.AddTargetId(warrior.id.Value);
-                        enemy.AddAttackerPoint(closestA);
-                        enemy.AddTargetPoint(closestB);
-
-                        break;
+                        minDist = dist;
+                        nearestTargetId = warrior.id.Value;
                     }
                 }
-            }
 
-            foreach (var tower in _towers)
-            {
-                if (tower.hasTargetId || !tower.hasRange)
-                    continue;
-
-                foreach (var enemy in _enemies)
+                if (nearestTargetId != -1)
                 {
-                    if (enemy.isDead)
-                        continue;
-
-                    var ba = tower.bounds.Value.bounds;
-                    var bb = enemy.bounds.Value.bounds;
-
-                    var closestA = ba.ClosestPoint(bb.center);
-                    var closestB = bb.ClosestPoint(ba.center);
-
-                    var distance = _targetService.GetDistanceBetweenEntities(closestA, closestB);
-
-                    if (distance <= tower.range.Value)
-                    {
-                        tower.AddTargetId(enemy.id.Value);
-                        tower.AddAttackerPoint(closestA);
-                        tower.AddTargetPoint(closestB);
-
-                        break;
-                    }
+                    if (!enemy.hasTargetId)
+                        enemy.AddTargetId(nearestTargetId);
+                    else if(enemy.targetId.Value != nearestTargetId)
+                        enemy.ReplaceTargetId(nearestTargetId);
                 }
-            }
-
-            foreach (var warrior in _warriors)
-            {
-                if (warrior.hasTargetId)
-                    continue;
-
-                if (!warrior.hasRange)
-                    continue;
-
-                foreach (var enemy in _enemies)
+                else
                 {
-                    if (enemy.isDead)
-                        continue;
-
-                    var ba = enemy.bounds.Value.bounds;
-                    var bb = warrior.bounds.Value.bounds;
-
-                    var closestA = ba.ClosestPoint(bb.center);
-                    var closestB = bb.ClosestPoint(ba.center);
-
-                    var distance = _targetService.GetDistanceBetweenEntities(closestA, closestB);
-
-                    if (distance <= warrior.range.Value)
-                    {
-                        warrior.AddTargetId(enemy.id.Value);
-                        warrior.AddAttackerPoint(closestA);
-                        warrior.AddTargetPoint(closestB);
-
-                        break;
-                    }
+                    if (enemy.hasTargetId)
+                        enemy.RemoveTargetId();
                 }
             }
         }

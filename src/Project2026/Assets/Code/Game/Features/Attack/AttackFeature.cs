@@ -7,9 +7,9 @@ namespace Code.Game.Features.Attack
     {
         public AttackFeature(ISystemFactory systemFactory)
         {
-            Add(systemFactory.Create<AttackStartSystem>());
-            Add(systemFactory.Create<AttackProcessSystem>());
-            Add(systemFactory.Create<AttackEndSystem>());
+            //Add(systemFactory.Create<AttackStartSystem>());
+            //Add(systemFactory.Create<AttackProcessSystem>());
+            //Add(systemFactory.Create<AttackEndSystem>());
         }
     }
 }
