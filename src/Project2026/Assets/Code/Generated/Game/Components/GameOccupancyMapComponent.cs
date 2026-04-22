@@ -11,14 +11,14 @@ public partial class GameEntity {
     public Code.Game.Features.Level.OccupancyMap occupancyMap { get { return (Code.Game.Features.Level.OccupancyMap)GetComponent(GameComponentsLookup.OccupancyMap); } }
     public bool hasOccupancyMap { get { return HasComponent(GameComponentsLookup.OccupancyMap); } }
 
-    public void AddOccupancyMap(System.Collections.Generic.Dictionary<UnityEngine.Vector3, int> newValue) {
+    public void AddOccupancyMap(System.Collections.Generic.Dictionary<UnityEngine.Vector3Int, int> newValue) {
         var index = GameComponentsLookup.OccupancyMap;
         var component = (Code.Game.Features.Level.OccupancyMap)CreateComponent(index, typeof(Code.Game.Features.Level.OccupancyMap));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceOccupancyMap(System.Collections.Generic.Dictionary<UnityEngine.Vector3, int> newValue) {
+    public void ReplaceOccupancyMap(System.Collections.Generic.Dictionary<UnityEngine.Vector3Int, int> newValue) {
         var index = GameComponentsLookup.OccupancyMap;
         var component = (Code.Game.Features.Level.OccupancyMap)CreateComponent(index, typeof(Code.Game.Features.Level.OccupancyMap));
         component.Value = newValue;

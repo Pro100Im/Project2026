@@ -45,7 +45,8 @@ namespace Code.Game.Features.Spawn.Systems
                     foreach (var enemySpawn in _enemies)
                     {
                         var count = 0;
-                        var chosenCell = new Vector3();
+                        var chosenCell = new Vector3Int();
+                        var chosenWorldPos = new Vector3();
                         var found = false;
                         var unitSize = enemySpawn.unitSize.Value;
 
@@ -57,16 +58,16 @@ namespace Code.Game.Features.Spawn.Systems
                             {
                                 for (int y = 0; y < unitSize.y; y++)
                                 {
-                                    var checkCell = cell + new Vector3(x * gridSize.x, y * gridSize.y);
+                                    var checkCell = cell.Value + new Vector3(x * gridSize.x, y * gridSize.y);
 
-                                    if (!map.tilemapMovement.Value.TryGetValue(checkCell, out var walkable) || !walkable)
+                                    if (!map.tilemapMovement.Value.TryGetValue(cell.Key, out var walkable))
                                     {
                                         canSpawn = false;
 
                                         break;
                                     }
 
-                                    if (map.occupancyMap.Value.ContainsKey(checkCell))
+                                    if (map.occupancyMap.Value.ContainsKey(cell.Key))
                                     {
                                         canSpawn = false;
 
@@ -85,7 +86,8 @@ namespace Code.Game.Features.Spawn.Systems
 
                             if (_randomService.GetGlobalRandom(0, count) == 0)
                             {
-                                chosenCell = cell;
+                                chosenCell = cell.Key;
+                                chosenWorldPos = cell.Value;
                                 found = true;
                             }
                         }
@@ -96,10 +98,11 @@ namespace Code.Game.Features.Spawn.Systems
                             {
                                 var offset = new Vector3((unitSize.x - 1) * gridSize.x * 0.5f, (unitSize.y - 1) * gridSize.y * 0.5f);
 
-                                chosenCell += offset;
+                                chosenWorldPos += offset;
                             }
 
-                            enemySpawn.AddSpawnPosition(chosenCell);
+                            enemySpawn.AddCurrentCell(chosenCell);
+                            enemySpawn.AddSpawnPosition(chosenWorldPos);
                         }
                     }
                 }

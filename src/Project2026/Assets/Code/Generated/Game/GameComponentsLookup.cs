@@ -51,35 +51,37 @@ public static class GameComponentsLookup {
     public const int OccupancyMap = 40;
     public const int SpawnMap = 41;
     public const int TilemapMovement = 42;
-    public const int MaxMovementOffsets = 43;
-    public const int MinMovementOffsets = 44;
-    public const int MovementAvailable = 45;
-    public const int MovementCurrentPointIndex = 46;
-    public const int MovementOffset = 47;
-    public const int MovementPointMinDistances = 48;
-    public const int MovementPoints = 49;
-    public const int MovementSpeed = 50;
-    public const int Moving = 51;
-    public const int RotationAlignedAlongDirection = 52;
-    public const int PlayerCastle = 53;
-    public const int Player = 54;
-    public const int SpawnPosition = 55;
-    public const int SpawnRequsted = 56;
-    public const int WaitingToSpawn = 57;
-    public const int Targetable = 58;
-    public const int TargetId = 59;
-    public const int TargetPoint = 60;
-    public const int TowerBuildRequest = 61;
-    public const int Tower = 62;
-    public const int TowerPlace = 63;
-    public const int UnitSize = 64;
-    public const int CurrentWaveEnemies = 65;
-    public const int CurrentWaveNumber = 66;
-    public const int WaveEnemiesAlive = 67;
-    public const int WaveInProgress = 68;
-    public const int WaveStartRequsted = 69;
+    public const int CurrentCell = 43;
+    public const int MaxMovementOffsets = 44;
+    public const int MinMovementOffsets = 45;
+    public const int MovementAvailable = 46;
+    public const int MovementCurrentPointIndex = 47;
+    public const int MovementOffset = 48;
+    public const int MovementPointMinDistances = 49;
+    public const int MovementPoints = 50;
+    public const int MovementSpeed = 51;
+    public const int Moving = 52;
+    public const int RotationAlignedAlongDirection = 53;
+    public const int PlayerCastle = 54;
+    public const int Player = 55;
+    public const int SpawnPosition = 56;
+    public const int SpawnRequsted = 57;
+    public const int WaitingToSpawn = 58;
+    public const int Path = 59;
+    public const int Targetable = 60;
+    public const int TargetId = 61;
+    public const int TargetPoint = 62;
+    public const int TowerBuildRequest = 63;
+    public const int Tower = 64;
+    public const int TowerPlace = 65;
+    public const int UnitSize = 66;
+    public const int CurrentWaveEnemies = 67;
+    public const int CurrentWaveNumber = 68;
+    public const int WaveEnemiesAlive = 69;
+    public const int WaveInProgress = 70;
+    public const int WaveStartRequsted = 71;
 
-    public const int TotalComponents = 70;
+    public const int TotalComponents = 72;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -125,6 +127,7 @@ public static class GameComponentsLookup {
         "OccupancyMap",
         "SpawnMap",
         "TilemapMovement",
+        "CurrentCell",
         "MaxMovementOffsets",
         "MinMovementOffsets",
         "MovementAvailable",
@@ -140,6 +143,7 @@ public static class GameComponentsLookup {
         "SpawnPosition",
         "SpawnRequsted",
         "WaitingToSpawn",
+        "Path",
         "Targetable",
         "TargetId",
         "TargetPoint",
@@ -198,6 +202,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Level.OccupancyMap),
         typeof(Code.Game.Features.Level.SpawnMap),
         typeof(Code.Game.Features.Level.TilemapMovement),
+        typeof(Code.Game.Features.Movement.CurrentCell),
         typeof(Code.Game.Features.Movement.MaxMovementOffsets),
         typeof(Code.Game.Features.Movement.MinMovementOffsets),
         typeof(Code.Game.Features.Movement.MovementAvailable),
@@ -213,6 +218,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Spawn.SpawnPosition),
         typeof(Code.Game.Features.Spawn.SpawnRequsted),
         typeof(Code.Game.Features.Spawn.WaitingToSpawn),
+        typeof(Code.Game.Features.Target.Path),
         typeof(Code.Game.Features.Target.Targetable),
         typeof(Code.Game.Features.Target.TargetId),
         typeof(Code.Game.Features.Target.TargetPoint),

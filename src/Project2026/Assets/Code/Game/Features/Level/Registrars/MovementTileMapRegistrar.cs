@@ -11,7 +11,7 @@ namespace Code.Game.Features.Level.Registrars
 
         public override void RegisterComponents()
         {
-            var dictionary = new Dictionary<Vector3, bool>();
+            var dictionary = new Dictionary<Vector3Int, Vector3>();
             var bounds = _tilemap.cellBounds;
 
             foreach (var pos in bounds.allPositionsWithin)
@@ -21,10 +21,9 @@ namespace Code.Game.Features.Level.Registrars
                 if (tile == null)
                     continue;
 
-                var walkable = true;
                 var worldPos = _tilemap.GetCellCenterWorld(pos);
 
-                dictionary[worldPos] = walkable;
+                dictionary[pos] = worldPos;
             }
 
             Entity.AddGridSize(_tilemap.cellSize);

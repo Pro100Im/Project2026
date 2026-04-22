@@ -11,14 +11,14 @@ public partial class GameEntity {
     public Code.Game.Features.Level.SpawnMap spawnMap { get { return (Code.Game.Features.Level.SpawnMap)GetComponent(GameComponentsLookup.SpawnMap); } }
     public bool hasSpawnMap { get { return HasComponent(GameComponentsLookup.SpawnMap); } }
 
-    public void AddSpawnMap(System.Collections.Generic.List<UnityEngine.Vector3> newValue) {
+    public void AddSpawnMap(System.Collections.Generic.Dictionary<UnityEngine.Vector3Int, UnityEngine.Vector3> newValue) {
         var index = GameComponentsLookup.SpawnMap;
         var component = (Code.Game.Features.Level.SpawnMap)CreateComponent(index, typeof(Code.Game.Features.Level.SpawnMap));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceSpawnMap(System.Collections.Generic.List<UnityEngine.Vector3> newValue) {
+    public void ReplaceSpawnMap(System.Collections.Generic.Dictionary<UnityEngine.Vector3Int, UnityEngine.Vector3> newValue) {
         var index = GameComponentsLookup.SpawnMap;
         var component = (Code.Game.Features.Level.SpawnMap)CreateComponent(index, typeof(Code.Game.Features.Level.SpawnMap));
         component.Value = newValue;

@@ -11,14 +11,14 @@ public partial class GameEntity {
     public Code.Game.Features.Level.TilemapMovement tilemapMovement { get { return (Code.Game.Features.Level.TilemapMovement)GetComponent(GameComponentsLookup.TilemapMovement); } }
     public bool hasTilemapMovement { get { return HasComponent(GameComponentsLookup.TilemapMovement); } }
 
-    public void AddTilemapMovement(System.Collections.Generic.Dictionary<UnityEngine.Vector3, bool> newValue) {
+    public void AddTilemapMovement(System.Collections.Generic.Dictionary<UnityEngine.Vector3Int, UnityEngine.Vector3> newValue) {
         var index = GameComponentsLookup.TilemapMovement;
         var component = (Code.Game.Features.Level.TilemapMovement)CreateComponent(index, typeof(Code.Game.Features.Level.TilemapMovement));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceTilemapMovement(System.Collections.Generic.Dictionary<UnityEngine.Vector3, bool> newValue) {
+    public void ReplaceTilemapMovement(System.Collections.Generic.Dictionary<UnityEngine.Vector3Int, UnityEngine.Vector3> newValue) {
         var index = GameComponentsLookup.TilemapMovement;
         var component = (Code.Game.Features.Level.TilemapMovement)CreateComponent(index, typeof(Code.Game.Features.Level.TilemapMovement));
         component.Value = newValue;

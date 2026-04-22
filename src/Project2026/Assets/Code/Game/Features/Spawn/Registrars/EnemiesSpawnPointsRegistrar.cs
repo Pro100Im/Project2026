@@ -11,7 +11,7 @@ namespace Code.Game.Features.Spawn.Registrars
 
         public override void RegisterComponents()
         {
-            var spawns = new List<Vector3>();
+            var spawns = new Dictionary<Vector3Int, Vector3>();
             var bounds = _tilemap.cellBounds;
 
             foreach (var pos in bounds.allPositionsWithin)
@@ -23,7 +23,7 @@ namespace Code.Game.Features.Spawn.Registrars
 
                 var worldPos = _tilemap.GetCellCenterWorld(pos);
 
-                spawns.Add(worldPos);
+                spawns[pos] = worldPos;
             }
 
             Entity.AddSpawnMap(spawns);

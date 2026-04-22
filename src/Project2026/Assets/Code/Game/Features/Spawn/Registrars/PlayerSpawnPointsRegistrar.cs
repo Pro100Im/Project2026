@@ -19,7 +19,7 @@ namespace Code.Game.Features.Spawn.Registrars
             foreach (var spawn in _spawnPos)
                 spawns.Add(new Vector3(spawn.x, spawn.y));
 
-            Entity.AddSpawnMap(spawns);
+            //Entity.AddSpawnMap(spawns);
             Entity.isPlayer = true;
         }
 

@@ -29,17 +29,17 @@ namespace Code.Game.Features.Target.Systems
                 var minDist = float.MaxValue;
                 var nearestTargetId = -1;
 
-                foreach (var warrior in _targets)
+                foreach (var target in _targets)
                 {
-                    if (warrior.isDead)
+                    if (target.isDead)
                         continue;
 
-                    var dist = Vector3.Distance(enemy.transform.Value.position, warrior.transform.Value.position);
+                    var dist = Vector3.Distance(enemy.transform.Value.position, target.transform.Value.position);
 
                     if (dist < minDist)
                     {
                         minDist = dist;
-                        nearestTargetId = warrior.id.Value;
+                        nearestTargetId = target.id.Value;
                     }
                 }
 

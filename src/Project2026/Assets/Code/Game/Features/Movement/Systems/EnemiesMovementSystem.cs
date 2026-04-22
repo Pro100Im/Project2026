@@ -1,6 +1,6 @@
-using Code.Game.Common.Random;
-using Code.Game.Common.Time;
+﻿using Code.Game.Common.Time;
 using Entitas;
+using System.Linq;
 using UnityEngine;
 
 namespace Code.Game.Features.Movement.Systems
@@ -8,82 +8,73 @@ namespace Code.Game.Features.Movement.Systems
     public class EnemiesMovementSystem : IExecuteSystem
     {
         private readonly ITimeService _timeService;
-        private readonly IRandomService _randomService;
 
+        private readonly IGroup<GameEntity> _maps;
         private readonly IGroup<GameEntity> _enemies;
-        private readonly IGroup<GameEntity> _movementPoints;
 
-        public EnemiesMovementSystem(GameContext gameContext, ITimeService timeService, IRandomService randomService)
+        public EnemiesMovementSystem(GameContext gameContext, ITimeService timeService)
         {
             _timeService = timeService;
-            _randomService = randomService;
+
+            _maps = gameContext.GetGroup(GameMatcher
+                .AllOf(
+                GameMatcher.TilemapMovement,
+                GameMatcher.OccupancyMap,
+                GameMatcher.GridSize));
 
             _enemies = gameContext.GetGroup(GameMatcher
-              .AllOf(
-              GameMatcher.MovementAvailable,
-              GameMatcher.MovementSpeed,
-              GameMatcher.MovementCurrentPointIndex,
-              GameMatcher.Enemy));
-
-            _movementPoints = gameContext.GetGroup(GameMatcher
-              .AllOf(
-              GameMatcher.MovementPoints,
-              GameMatcher.MovementPointMinDistances,
-              GameMatcher.MinMovementOffsets,
-              GameMatcher.MaxMovementOffsets,
-              GameMatcher.Enemy));
+                .AllOf(
+                GameMatcher.MovementAvailable,
+                GameMatcher.MovementSpeed,
+                GameMatcher.Path,
+                GameMatcher.Enemy));
         }
 
         public void Execute()
         {
-            foreach (var movementPoint in _movementPoints)
+            foreach (var map in _maps)
             {
                 foreach (var enemy in _enemies)
                 {
-                    if (enemy.movementCurrentPointIndex.Value >= movementPoint.movementPoints.Value.Length || enemy.isAttacking || enemy.isDead)
+                    if (enemy.path.Value.Count == 0)
                     {
                         enemy.isMoving = false;
-
                         continue;
                     }
 
-                    var index = enemy.movementCurrentPointIndex.Value;
-                    var targetPoint = movementPoint.movementPoints.Value[index];
+                    var nextCellIndex = enemy.path.Value.Peek();
+                    var nextCellWorld = map.tilemapMovement.Value[nextCellIndex];
 
-                    var minOffset = movementPoint.minMovementOffsets.Value[index];
-                    var maxOffset = movementPoint.maxMovementOffsets.Value[index];
+                    var currentPos = enemy.transform.Value.position;
+                    var dir = (nextCellWorld - currentPos).normalized;
+                    var speed = enemy.movementSpeed.Value;
+                    var newPos = currentPos + dir * speed * _timeService.DeltaTime;
 
-                    var offsetX = _randomService.GetLocalRandom(minOffset.x, maxOffset.x, enemy.id.Value);
-                    var offsetY = _randomService.GetLocalRandom(minOffset.y, maxOffset.y, enemy.id.Value);
-
-                    targetPoint.x += offsetX;
-                    targetPoint.y += offsetY;
-
-                    if (Vector2.Distance(enemy.transform.Value.position, targetPoint) <= movementPoint.movementPointMinDistances.Value[index])
-                        enemy.ReplaceMovementCurrentPointIndex(enemy.movementCurrentPointIndex.Value + 1);
-
-                    float minDistance = 0.5f;
-                    float adjustedSpeed = enemy.movementSpeed.Value;
-
-                    foreach (var other in _enemies)
+                    if (Vector3.Distance(currentPos, nextCellWorld) < 0.1f)
                     {
-                        if (other == enemy) continue;
+                        enemy.path.Value.Dequeue();
+                        enemy.ReplaceCurrentCell(nextCellIndex);
 
-                        float dist = Vector2.Distance(enemy.transform.Value.position, other.transform.Value.position);
+                        foreach (var kvp in map.occupancyMap.Value.Where(kvp => kvp.Value == enemy.id.Value).ToList())
+                            map.occupancyMap.Value.Remove(kvp.Key);
 
-                        var toTarget = (targetPoint - (Vector2)enemy.transform.Value.position).normalized;
-                        var toOther = (other.transform.Value.position - enemy.transform.Value.position).normalized;
+                        for (int x = 0; x < enemy.unitSize.Value.x; x++)
+                        {
+                            for (int y = 0; y < enemy.unitSize.Value.y; y++)
+                            {
+                                var cellIndex = new Vector3Int(nextCellIndex.x + x, nextCellIndex.y + y, 0);
+                                map.occupancyMap.Value[cellIndex] = enemy.id.Value;
+                            }
+                        }
 
-                        if (Vector2.Dot(toTarget, toOther) > 0.2f && dist < minDistance)
-                            adjustedSpeed = Mathf.Min(0, enemy.movementSpeed.Value * 0.5f);
+                        if (enemy.path.Value.Count == 0)
+                        {
+                            enemy.isMoving = false;
+                        }
                     }
 
-                    enemy.isMoving = adjustedSpeed > 0;
-
-                    enemy.transform.Value.position = Vector2.MoveTowards(
-                        enemy.transform.Value.position,
-                        targetPoint,
-                        adjustedSpeed * _timeService.DeltaTime);
+                    enemy.isMoving = true;
+                    enemy.transform.Value.position = newPos;
                 }
             }
         }
