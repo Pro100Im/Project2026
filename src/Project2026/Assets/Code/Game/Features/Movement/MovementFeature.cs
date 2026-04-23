@@ -9,6 +9,7 @@ namespace Code.Game.Features.Movement
         {
             Add(systemFactory.Create<UpdateCellSystem>());
             Add(systemFactory.Create<FlowDecisionSystem>());
+            Add(systemFactory.Create<SeparationSystem>());
             Add(systemFactory.Create<MovementSystem>()); 
             Add(systemFactory.Create<AttachPosToTargetSystem>()); 
         }

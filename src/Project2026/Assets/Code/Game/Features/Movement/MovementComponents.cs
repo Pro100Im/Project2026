@@ -10,4 +10,5 @@ namespace Code.Game.Features.Movement
     [Game] public class CurrentCell : IComponent { public Vector3Int Value; }
     [Game] public class NextCell : IComponent { public Vector3Int Value; }
     [Game] public class MovementOffset : IComponent { public Vector3 Value; }
+    [Game] public class SeparationForce : IComponent { public Vector3 Value; }
 }

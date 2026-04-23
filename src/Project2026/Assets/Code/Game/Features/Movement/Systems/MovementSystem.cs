@@ -28,16 +28,12 @@ namespace Code.Game.Features.Movement.Systems
         {
             var map = _maps.GetSingleEntity();
             var flow = map.flowField.Value;
-            var tilemap = map.tilemapMovement.Value;
 
             var units = _units.GetEntities();
 
             for (int i = 0; i < units.Length; i++)
             {
                 var unit = units[i];
-                var tr = unit.transform.Value;
-
-                var pos = tr.position;
                 var cell = unit.currentCell.Value;
 
                 if (!flow.TryGetValue(cell, out var dir))
@@ -47,19 +43,12 @@ namespace Code.Game.Features.Movement.Systems
                     continue;
                 }
 
-                var desiredDir = dir;
-
-                if (desiredDir == Vector3Int.zero)
-                {
-                    unit.isMoving = false;
-
-                    continue;
-                }
-
-                var moveDir = new Vector3(desiredDir.x, desiredDir.y, 0).normalized;
+                var flowDir = new Vector3(dir.x, dir.y, 0).normalized;
+                var separation = unit.hasSeparationForce ? unit.separationForce.Value : Vector3.zero;
+                var finalDir = (flowDir + separation * 2f).normalized;
 
                 unit.isMoving = true;
-                tr.position += moveDir * unit.movementSpeed.Value * _timeService.DeltaTime;
+                unit.transform.Value.position += finalDir * unit.movementSpeed.Value * _timeService.DeltaTime;
             }
         }
     }

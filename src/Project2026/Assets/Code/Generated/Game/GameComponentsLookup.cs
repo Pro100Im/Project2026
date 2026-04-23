@@ -58,12 +58,12 @@ public static class GameComponentsLookup {
     public const int Moving = 47;
     public const int NextCell = 48;
     public const int RotationAlignedAlongDirection = 49;
-    public const int PlayerCastle = 50;
-    public const int Player = 51;
-    public const int SpawnPosition = 52;
-    public const int SpawnRequsted = 53;
-    public const int WaitingToSpawn = 54;
-    public const int MoveTarget = 55;
+    public const int SeparationForce = 50;
+    public const int PlayerCastle = 51;
+    public const int Player = 52;
+    public const int SpawnPosition = 53;
+    public const int SpawnRequsted = 54;
+    public const int WaitingToSpawn = 55;
     public const int Targetable = 56;
     public const int TargetFlow = 57;
     public const int TargetId = 58;
@@ -131,12 +131,12 @@ public static class GameComponentsLookup {
         "Moving",
         "NextCell",
         "RotationAlignedAlongDirection",
+        "SeparationForce",
         "PlayerCastle",
         "Player",
         "SpawnPosition",
         "SpawnRequsted",
         "WaitingToSpawn",
-        "MoveTarget",
         "Targetable",
         "TargetFlow",
         "TargetId",
@@ -203,12 +203,12 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Movement.Moving),
         typeof(Code.Game.Features.Movement.NextCell),
         typeof(Code.Game.Features.Movement.RotationAlignedAlongDirection),
+        typeof(Code.Game.Features.Movement.SeparationForce),
         typeof(Code.Game.Features.Player.PlayerCastle),
         typeof(Code.Game.Features.Player.PlayerComponent),
         typeof(Code.Game.Features.Spawn.SpawnPosition),
         typeof(Code.Game.Features.Spawn.SpawnRequsted),
         typeof(Code.Game.Features.Spawn.WaitingToSpawn),
-        typeof(Code.Game.Features.Target.MoveTarget),
         typeof(Code.Game.Features.Target.Targetable),
         typeof(Code.Game.Features.Target.TargetFlow),
         typeof(Code.Game.Features.Target.TargetId),
