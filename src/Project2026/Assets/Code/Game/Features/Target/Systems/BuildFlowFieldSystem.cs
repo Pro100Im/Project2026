@@ -9,17 +9,10 @@ namespace Code.Game.Features.Target.Systems
     {
         private readonly TargetService _targetService;
 
-        private readonly IGroup<GameEntity> _targets;
-
         public BuildFlowFieldSystem(GameContext gameContext, TargetService targetService)
             : base(gameContext)
         {
             _targetService = targetService;
-
-            _targets = gameContext.GetGroup(GameMatcher
-                .AllOf(
-                GameMatcher.Targetable,
-                GameMatcher.PlayerCastle));
         }
 
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
@@ -42,7 +35,6 @@ namespace Code.Game.Features.Target.Systems
                 var flow = new Dictionary<Vector3Int, Vector3Int>();
                 var queue = new Queue<Vector3Int>();
 
-
                 foreach (var goal in map.targetFlow.Value)
                 {
                     if (!tilemap.ContainsKey(goal))
@@ -62,7 +54,7 @@ namespace Code.Game.Features.Target.Systems
                         if (!tilemap.ContainsKey(n))
                             continue;
 
-                        int cost = integration[current] + 1;
+                        var cost = integration[current] + 1;
 
                         if (!integration.ContainsKey(n) || cost < integration[n])
                         {
@@ -75,8 +67,8 @@ namespace Code.Game.Features.Target.Systems
 
                 foreach (var cell in integration.Keys)
                 {
-                    Vector3Int best = cell;
-                    int bestCost = integration[cell];
+                    var best = cell;
+                    var bestCost = integration[cell];
 
                     foreach (var n in _targetService.GetCardinalNeighbors(cell))
                     {

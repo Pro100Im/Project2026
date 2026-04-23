@@ -158,8 +158,9 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<CharacterAnimatorSystem>(Lifetime.Singleton);
             builder.Register<PlayerCastleAnimatorSystem>(Lifetime.Singleton);
 
-            builder.Register<UpdateCurrentCellSystem>(Lifetime.Singleton);
-            builder.Register<FlowMovementSystem>(Lifetime.Singleton);
+            builder.Register<UpdateCellSystem>(Lifetime.Singleton);
+            builder.Register<FlowDecisionSystem>(Lifetime.Singleton);
+            builder.Register<MovementSystem>(Lifetime.Singleton);
             builder.Register<AttachPosToTargetSystem>(Lifetime.Singleton);
 
             builder.Register<BuildFlowFieldSystem>(Lifetime.Singleton);
