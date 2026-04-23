@@ -7,7 +7,7 @@ namespace Assets.Code.Game.StaticData.Property
     [Serializable]
     public class UnitSizeProperty : EntityProperty
     {
-        [field: SerializeField] public Vector2Int Size { get; private set; }
+        [field: SerializeField] public float Size { get; private set; }
 
         protected override void Add(GameEntity entity)
         {

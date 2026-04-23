@@ -7,8 +7,8 @@ namespace Code.Game.Features.Target
     {
         public TargetFeature(ISystemFactory systemFactory)
         {
+            Add(systemFactory.Create<BuildFlowFieldSystem>());
             Add(systemFactory.Create<SearchingClosestTargetSystem>());
-            Add(systemFactory.Create<PathfindingSystem>());
         }
     }
 }

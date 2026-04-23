@@ -11,14 +11,14 @@ public partial class GameEntity {
     public Code.Game.Features.Unit.UnitSize unitSize { get { return (Code.Game.Features.Unit.UnitSize)GetComponent(GameComponentsLookup.UnitSize); } }
     public bool hasUnitSize { get { return HasComponent(GameComponentsLookup.UnitSize); } }
 
-    public void AddUnitSize(UnityEngine.Vector2Int newValue) {
+    public void AddUnitSize(float newValue) {
         var index = GameComponentsLookup.UnitSize;
         var component = (Code.Game.Features.Unit.UnitSize)CreateComponent(index, typeof(Code.Game.Features.Unit.UnitSize));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceUnitSize(UnityEngine.Vector2Int newValue) {
+    public void ReplaceUnitSize(float newValue) {
         var index = GameComponentsLookup.UnitSize;
         var component = (Code.Game.Features.Unit.UnitSize)CreateComponent(index, typeof(Code.Game.Features.Unit.UnitSize));
         component.Value = newValue;

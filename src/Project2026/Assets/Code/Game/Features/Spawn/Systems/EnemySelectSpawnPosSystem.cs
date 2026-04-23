@@ -6,107 +6,93 @@ namespace Code.Game.Features.Spawn.Systems
 {
     public class EnemySelectSpawnPosSystem : IExecuteSystem
     {
-        private readonly IRandomService _randomService;
+        private readonly IRandomService _random;
 
-        private readonly IGroup<GameEntity> _maps;
         private readonly IGroup<GameEntity> _enemies;
         private readonly IGroup<GameEntity> _spawnMaps;
+        private readonly IGroup<GameEntity> _units;
 
-        public EnemySelectSpawnPosSystem(GameContext gameContext, IRandomService randomService)
+        public EnemySelectSpawnPosSystem(GameContext context, IRandomService random)
         {
-            _randomService = randomService;
+            _random = random;
 
-            _maps = gameContext.GetGroup(GameMatcher
+            _enemies = context.GetGroup(GameMatcher
                 .AllOf(
-                GameMatcher.TilemapMovement,
-                GameMatcher.GridSize));
+                    GameMatcher.SpawnRequsted,
+                    GameMatcher.Enemy,
+                    GameMatcher.UnitSize));
 
-            _enemies = gameContext.GetGroup(GameMatcher
+            _spawnMaps = context.GetGroup(GameMatcher
                 .AllOf(
-                GameMatcher.SpawnRequsted,
-                GameMatcher.EntityConfig,
-                GameMatcher.UnitSize,
-                GameMatcher.Enemy));
+                    GameMatcher.SpawnMap,
+                    GameMatcher.Enemy));
 
-            _spawnMaps = gameContext.GetGroup(GameMatcher
+            _units = context.GetGroup(GameMatcher
                 .AllOf(
-                GameMatcher.SpawnMap,
-                GameMatcher.Enemy));
+                    GameMatcher.Transform,
+                    GameMatcher.UnitSize));
         }
 
         public void Execute()
         {
-            foreach (var map in _maps)
+            foreach (var spawnMap in _spawnMaps)
             {
-                var gridSize = map.gridSize.Value;
+                var points = spawnMap.spawnMap.Value;
 
-                foreach (var spawns in _spawnMaps)
+                foreach (var enemy in _enemies)
                 {
-                    foreach (var enemySpawn in _enemies)
+                    if (enemy.hasSpawnPosition)
+                        continue;
+
+                    var radius = enemy.unitSize.Value;
+                    var count = 0;
+                    var chosenPos = Vector3.zero;
+                    var chosenCell = Vector3Int.zero;
+
+                    bool found = false;
+
+                    foreach (var kvp in points)
                     {
-                        var count = 0;
-                        var chosenCell = new Vector3Int();
-                        var chosenWorldPos = new Vector3();
-                        var found = false;
-                        var unitSize = enemySpawn.unitSize.Value;
+                        var cell = kvp.Key;
+                        var worldPos = kvp.Value;
 
-                        foreach (var cell in spawns.spawnMap.Value)
+                        if (!CanSpawnAt(worldPos, radius))
+                            continue;
+
+                        count++;
+
+                        if (_random.GetGlobalRandom(0, count) == 0)
                         {
-                            var canSpawn = true;
-
-                            for (int x = 0; x < unitSize.x; x++)
-                            {
-                                for (int y = 0; y < unitSize.y; y++)
-                                {
-                                    var checkCell = cell.Value + new Vector3(x * gridSize.x, y * gridSize.y);
-
-                                    if (!map.tilemapMovement.Value.TryGetValue(cell.Key, out var walkable))
-                                    {
-                                        canSpawn = false;
-
-                                        break;
-                                    }
-
-                                    if (map.occupancyMap.Value.ContainsKey(cell.Key))
-                                    {
-                                        canSpawn = false;
-
-                                        break;
-                                    }
-                                }
-
-                                if (!canSpawn)
-                                    break;
-                            }
-
-                            if (!canSpawn)
-                                continue;
-
-                            count++;
-
-                            if (_randomService.GetGlobalRandom(0, count) == 0)
-                            {
-                                chosenCell = cell.Key;
-                                chosenWorldPos = cell.Value;
-                                found = true;
-                            }
-                        }
-
-                        if (found && !enemySpawn.hasSpawnPosition)
-                        {
-                            if (unitSize.x > 1 || unitSize.y > 1)
-                            {
-                                var offset = new Vector3((unitSize.x - 1) * gridSize.x * 0.5f, (unitSize.y - 1) * gridSize.y * 0.5f);
-
-                                chosenWorldPos += offset;
-                            }
-
-                            enemySpawn.AddCurrentCell(chosenCell);
-                            enemySpawn.AddSpawnPosition(chosenWorldPos);
+                            chosenPos = worldPos;
+                            chosenCell = cell;
+                            found = true;
                         }
                     }
+
+                    if (!found)
+                        continue;
+
+                    enemy.AddSpawnPosition(chosenPos);
+                    enemy.AddCurrentCell(chosenCell);
                 }
             }
+        }
+
+        private bool CanSpawnAt(Vector3 pos, float radius)
+        {
+            foreach (var unit in _units)
+            {
+                var otherPos = unit.transform.Value.position;
+                var otherRadius = unit.unitSize.Value;
+
+                var dist = Vector3.Distance(pos, otherPos);
+                var minDist = radius + otherRadius;
+
+                if (dist < minDist)
+                    return false;
+            }
+
+            return true;
         }
     }
 }

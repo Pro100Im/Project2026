@@ -158,12 +158,13 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<CharacterAnimatorSystem>(Lifetime.Singleton);
             builder.Register<PlayerCastleAnimatorSystem>(Lifetime.Singleton);
 
-            builder.Register<EnemiesMovementSystem>(Lifetime.Singleton);
+            builder.Register<UpdateCurrentCellSystem>(Lifetime.Singleton);
+            builder.Register<FlowMovementSystem>(Lifetime.Singleton);
             builder.Register<AttachPosToTargetSystem>(Lifetime.Singleton);
 
+            builder.Register<BuildFlowFieldSystem>(Lifetime.Singleton);
             builder.Register<SearchingClosestTargetSystem>(Lifetime.Singleton);
             builder.Register<UpdateTargetSystem>(Lifetime.Singleton);
-            builder.Register<PathfindingSystem>(Lifetime.Singleton);
 
             builder.Register<AttackStartSystem>(Lifetime.Singleton);
             builder.Register<AttackProcessSystem>(Lifetime.Singleton);

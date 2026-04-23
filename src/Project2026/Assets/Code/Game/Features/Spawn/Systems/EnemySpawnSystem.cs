@@ -28,7 +28,6 @@ namespace Code.Game.Features.Spawn.Systems
                 var entity = CreateGameEntity.Empty();
                 entity.AddSpawnPosition(enemySpawn.spawnPosition.Value);
                 entity.AddCurrentCell(enemySpawn.currentCell.Value);
-                entity.AddMovementCurrentPointIndex(0);
                 entity.isMovementAvailable = true;
                 entity.isEnemy = true;
 
