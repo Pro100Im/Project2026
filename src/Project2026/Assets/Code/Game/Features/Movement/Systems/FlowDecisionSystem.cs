@@ -23,10 +23,7 @@ namespace Code.Game.Features.Movement.Systems
             {
                 var cell = unit.currentCell.Value;
 
-                if (!flow.TryGetValue(cell, out var dir))
-                    continue;
-
-                if (dir == Vector3Int.zero)
+                if (!flow.TryGetValue(cell, out var dir) || dir == Vector3Int.zero)
                 {
                     unit.isMoving = false;
                     continue;

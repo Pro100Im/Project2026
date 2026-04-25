@@ -160,7 +160,6 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<UpdateCellSystem>(Lifetime.Singleton);
             builder.Register<FlowDecisionSystem>(Lifetime.Singleton);
-            builder.Register<SeparationSystem>(Lifetime.Singleton);
             builder.Register<MovementSystem>(Lifetime.Singleton);
             builder.Register<AttachPosToTargetSystem>(Lifetime.Singleton);
 

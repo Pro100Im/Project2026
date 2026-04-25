@@ -1,5 +1,6 @@
 ﻿using Code.Game.Common.Time;
 using Entitas;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code.Game.Features.Movement.Systems
@@ -32,38 +33,84 @@ namespace Code.Game.Features.Movement.Systems
 
             var units = _units.GetEntities();
 
-            for (int i = 0; i < units.Length; i++)
+            // 👉 быстрый lookup занятых клеток
+            var occupied = new HashSet<Vector3Int>();
+            foreach (var u in units)
+                occupied.Add(u.currentCell.Value);
+
+            foreach (var unit in units)
             {
-                var unit = units[i];
                 var cell = unit.currentCell.Value;
 
-                if (!flow.TryGetValue(cell, out var dir))
+                if (!flow.TryGetValue(cell, out var dir) || dir == Vector3Int.zero)
+                {
+                    unit.isMoving = false;
                     continue;
+                }
 
-                var flowDir = new Vector3(dir.x, dir.y, 0).normalized;
+                // 👉 кандидаты направлений (вперёд + обход)
+                var candidates = GetMoveCandidates(cell, dir);
 
-                // 👉 мягкое separation (НЕ обязательное)
-                var sep = unit.hasSeparationForce ? unit.separationForce.Value : Vector3.zero;
+                Vector3Int chosenCell = cell;
+                bool found = false;
 
-                float sepStrength = unit.isMoving ? 0.6f : 0.1f;
+                foreach (var c in candidates)
+                {
+                    if (!tilemap.ContainsKey(c))
+                        continue;
 
-                Vector3 finalDir = (flowDir + sep * sepStrength).normalized;
+                    if (occupied.Contains(c))
+                        continue;
 
+                    chosenCell = c;
+                    found = true;
+                    break;
+                }
+
+                if (!found)
+                {
+                    // 👉 стоим, если вообще некуда идти
+                    unit.isMoving = false;
+                    continue;
+                }
+
+                var targetPos = tilemap[chosenCell];
+                var currentPos = unit.transform.Value.position;
+
+                var dirVec = (targetPos - currentPos).normalized;
                 var speed = unit.movementSpeed.Value * _timeService.DeltaTime;
 
-                var newPos = unit.transform.Value.position + finalDir * speed;
+                var newPos = currentPos + dirVec * speed;
 
                 unit.transform.Value.position = newPos;
+                unit.isMoving = true;
 
-                // 👉 обновление клетки только при реальном входе
-                var mapPos = tilemap[cell];
-
-                if (Vector3.Distance(newPos, mapPos) < 0.15f)
+                // 👉 переход в клетку
+                if (Vector3.Distance(newPos, targetPos) < 0.1f)
                 {
-                    var nextCell = cell + dir;
-                    unit.ReplaceCurrentCell(nextCell);
+                    unit.ReplaceCurrentCell(chosenCell);
                 }
             }
+        }
+
+        private List<Vector3Int> GetMoveCandidates(Vector3Int cell, Vector3Int dir)
+        {
+            var list = new List<Vector3Int>();
+
+            // вперёд
+            list.Add(cell + dir);
+
+            // вбок
+            var left = new Vector3Int(-dir.y, dir.x, 0);
+            var right = new Vector3Int(dir.y, -dir.x, 0);
+
+            list.Add(cell + left);
+            list.Add(cell + right);
+
+            // назад (редко, но спасает от тупиков)
+            list.Add(cell - dir);
+
+            return list;
         }
     }
 }
