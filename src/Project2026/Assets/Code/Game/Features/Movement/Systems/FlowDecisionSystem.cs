@@ -16,16 +16,16 @@ namespace Code.Game.Features.Movement.Systems
 
         public void Execute()
         {
-            var map = _maps.GetSingleEntity();
-            var flow = map.flowField.Value;
+            //var map = _maps.GetSingleEntity();
+            //var flow = map.flowField.Value;
 
-            foreach (var unit in _units)
-            {
-                var cell = unit.currentCell.Value;
+            //foreach (var unit in _units)
+            //{
+            //    var cell = unit.currentCell.Value;
 
-                if (!flow.TryGetValue(cell, out var dir) || dir == Vector3Int.zero)
-                    continue;
-            }
+            //    if (!flow.TryGetValue(cell, out var dir) || dir == Vector3Int.zero)
+            //        continue;
+            //}
         }
     }
 }

@@ -44,6 +44,7 @@ namespace Code.Game.Features.Movement.Systems
                 if (!flow.TryGetValue(cell, out var dir) || dir == Vector3Int.zero)
                 {
                     unit.isMoving = false;
+
                     continue;
                 }
 
