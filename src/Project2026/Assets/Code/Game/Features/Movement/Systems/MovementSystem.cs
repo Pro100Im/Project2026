@@ -8,6 +8,7 @@ namespace Code.Game.Features.Movement.Systems
     public class MovementSystem : IExecuteSystem
     {
         private readonly ITimeService _timeService;
+
         private readonly IGroup<GameEntity> _units;
         private readonly IGroup<GameEntity> _maps;
 
@@ -30,11 +31,9 @@ namespace Code.Game.Features.Movement.Systems
             var map = _maps.GetSingleEntity();
             var flow = map.flowField.Value;
             var tilemap = map.tilemapMovement.Value;
-
             var units = _units.GetEntities();
-
-            // 👉 быстрый lookup занятых клеток
             var occupied = new HashSet<Vector3Int>();
+
             foreach (var u in units)
                 occupied.Add(u.currentCell.Value);
 
@@ -48,29 +47,28 @@ namespace Code.Game.Features.Movement.Systems
                     continue;
                 }
 
-                // 👉 кандидаты направлений (вперёд + обход)
                 var candidates = GetMoveCandidates(cell, dir);
+                var chosenCell = cell;
+                var found = false;
 
-                Vector3Int chosenCell = cell;
-                bool found = false;
-
-                foreach (var c in candidates)
+                foreach (var candidate in candidates)
                 {
-                    if (!tilemap.ContainsKey(c))
+                    if (!tilemap.ContainsKey(candidate))
                         continue;
 
-                    if (occupied.Contains(c))
+                    if (occupied.Contains(candidate))
                         continue;
 
-                    chosenCell = c;
+                    chosenCell = candidate;
                     found = true;
+
                     break;
                 }
 
                 if (!found)
                 {
-                    // 👉 стоим, если вообще некуда идти
                     unit.isMoving = false;
+
                     continue;
                 }
 
@@ -85,29 +83,20 @@ namespace Code.Game.Features.Movement.Systems
                 unit.transform.Value.position = newPos;
                 unit.isMoving = true;
 
-                // 👉 переход в клетку
                 if (Vector3.Distance(newPos, targetPos) < 0.1f)
-                {
                     unit.ReplaceCurrentCell(chosenCell);
-                }
             }
         }
 
         private List<Vector3Int> GetMoveCandidates(Vector3Int cell, Vector3Int dir)
         {
             var list = new List<Vector3Int>();
-
-            // вперёд
-            list.Add(cell + dir);
-
-            // вбок
             var left = new Vector3Int(-dir.y, dir.x, 0);
             var right = new Vector3Int(dir.y, -dir.x, 0);
 
+            list.Add(cell + dir);
             list.Add(cell + left);
             list.Add(cell + right);
-
-            // назад (редко, но спасает от тупиков)
             list.Add(cell - dir);
 
             return list;

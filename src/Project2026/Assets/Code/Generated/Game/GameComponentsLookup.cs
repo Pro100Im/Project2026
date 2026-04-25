@@ -58,27 +58,26 @@ public static class GameComponentsLookup {
     public const int Moving = 47;
     public const int NextCell = 48;
     public const int RotationAlignedAlongDirection = 49;
-    public const int SeparationForce = 50;
-    public const int PlayerCastle = 51;
-    public const int Player = 52;
-    public const int SpawnPosition = 53;
-    public const int SpawnRequsted = 54;
-    public const int WaitingToSpawn = 55;
-    public const int Targetable = 56;
-    public const int TargetFlow = 57;
-    public const int TargetId = 58;
-    public const int TargetPoint = 59;
-    public const int TowerBuildRequest = 60;
-    public const int Tower = 61;
-    public const int TowerPlace = 62;
-    public const int UnitSize = 63;
-    public const int CurrentWaveEnemies = 64;
-    public const int CurrentWaveNumber = 65;
-    public const int WaveEnemiesAlive = 66;
-    public const int WaveInProgress = 67;
-    public const int WaveStartRequsted = 68;
+    public const int PlayerCastle = 50;
+    public const int Player = 51;
+    public const int SpawnPosition = 52;
+    public const int SpawnRequsted = 53;
+    public const int WaitingToSpawn = 54;
+    public const int Targetable = 55;
+    public const int TargetFlow = 56;
+    public const int TargetId = 57;
+    public const int TargetPoint = 58;
+    public const int TowerBuildRequest = 59;
+    public const int Tower = 60;
+    public const int TowerPlace = 61;
+    public const int UnitSize = 62;
+    public const int CurrentWaveEnemies = 63;
+    public const int CurrentWaveNumber = 64;
+    public const int WaveEnemiesAlive = 65;
+    public const int WaveInProgress = 66;
+    public const int WaveStartRequsted = 67;
 
-    public const int TotalComponents = 69;
+    public const int TotalComponents = 68;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -131,7 +130,6 @@ public static class GameComponentsLookup {
         "Moving",
         "NextCell",
         "RotationAlignedAlongDirection",
-        "SeparationForce",
         "PlayerCastle",
         "Player",
         "SpawnPosition",
@@ -203,7 +201,6 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Movement.Moving),
         typeof(Code.Game.Features.Movement.NextCell),
         typeof(Code.Game.Features.Movement.RotationAlignedAlongDirection),
-        typeof(Code.Game.Features.Movement.SeparationForce),
         typeof(Code.Game.Features.Player.PlayerCastle),
         typeof(Code.Game.Features.Player.PlayerComponent),
         typeof(Code.Game.Features.Spawn.SpawnPosition),

@@ -7,7 +7,6 @@ namespace Code.Game.Features.Movement
     {
         public MovementFeature(ISystemFactory systemFactory)
         {
-            Add(systemFactory.Create<UpdateCellSystem>());
             Add(systemFactory.Create<FlowDecisionSystem>());
             Add(systemFactory.Create<MovementSystem>()); 
             Add(systemFactory.Create<AttachPosToTargetSystem>()); 

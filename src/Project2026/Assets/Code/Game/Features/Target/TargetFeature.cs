@@ -7,7 +7,6 @@ namespace Code.Game.Features.Target
     {
         public TargetFeature(ISystemFactory systemFactory)
         {
-            Add(systemFactory.Create<TargetCellSystem>());
             Add(systemFactory.Create<BuildFlowFieldSystem>());
             Add(systemFactory.Create<SearchingClosestTargetSystem>());
         }
