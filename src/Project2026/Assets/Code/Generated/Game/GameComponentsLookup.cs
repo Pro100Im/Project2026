@@ -49,34 +49,37 @@ public static class GameComponentsLookup {
     public const int MaxHealth = 38;
     public const int FlowField = 39;
     public const int FlowFieldDirty = 40;
-    public const int SpawnMap = 41;
-    public const int TilemapMovement = 42;
-    public const int CurrentCell = 43;
-    public const int MovementAvailable = 44;
-    public const int MovementOffset = 45;
-    public const int MovementSpeed = 46;
-    public const int Moving = 47;
-    public const int RotationAlignedAlongDirection = 48;
-    public const int PlayerCastle = 49;
-    public const int Player = 50;
-    public const int SpawnPosition = 51;
-    public const int SpawnRequsted = 52;
-    public const int WaitingToSpawn = 53;
-    public const int Targetable = 54;
-    public const int TargetFlow = 55;
-    public const int TargetId = 56;
-    public const int TargetPoint = 57;
-    public const int TowerBuildRequest = 58;
-    public const int Tower = 59;
-    public const int TowerPlace = 60;
-    public const int UnitSize = 61;
-    public const int CurrentWaveEnemies = 62;
-    public const int CurrentWaveNumber = 63;
-    public const int WaveEnemiesAlive = 64;
-    public const int WaveInProgress = 65;
-    public const int WaveStartRequsted = 66;
+    public const int IntegrationField = 41;
+    public const int SpawnMap = 42;
+    public const int TilemapMovement = 43;
+    public const int CurrentCell = 44;
+    public const int MovementAvailable = 45;
+    public const int MovementOffset = 46;
+    public const int MovementSpeed = 47;
+    public const int Moving = 48;
+    public const int RotationAlignedAlongDirection = 49;
+    public const int PlayerCastle = 50;
+    public const int Player = 51;
+    public const int SpawnPosition = 52;
+    public const int SpawnRequsted = 53;
+    public const int WaitingToSpawn = 54;
+    public const int Targetable = 55;
+    public const int TargetCell = 56;
+    public const int TargetFlow = 57;
+    public const int TargetId = 58;
+    public const int TargetPoint = 59;
+    public const int WaitTimer = 60;
+    public const int TowerBuildRequest = 61;
+    public const int Tower = 62;
+    public const int TowerPlace = 63;
+    public const int UnitSize = 64;
+    public const int CurrentWaveEnemies = 65;
+    public const int CurrentWaveNumber = 66;
+    public const int WaveEnemiesAlive = 67;
+    public const int WaveInProgress = 68;
+    public const int WaveStartRequsted = 69;
 
-    public const int TotalComponents = 67;
+    public const int TotalComponents = 70;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -120,6 +123,7 @@ public static class GameComponentsLookup {
         "MaxHealth",
         "FlowField",
         "FlowFieldDirty",
+        "IntegrationField",
         "SpawnMap",
         "TilemapMovement",
         "CurrentCell",
@@ -134,9 +138,11 @@ public static class GameComponentsLookup {
         "SpawnRequsted",
         "WaitingToSpawn",
         "Targetable",
+        "TargetCell",
         "TargetFlow",
         "TargetId",
         "TargetPoint",
+        "WaitTimer",
         "TowerBuildRequest",
         "Tower",
         "TowerPlace",
@@ -190,6 +196,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Health.MaxHealth),
         typeof(Code.Game.Features.Level.FlowField),
         typeof(Code.Game.Features.Level.FlowFieldDirty),
+        typeof(Code.Game.Features.Level.IntegrationField),
         typeof(Code.Game.Features.Level.SpawnMap),
         typeof(Code.Game.Features.Level.TilemapMovement),
         typeof(Code.Game.Features.Movement.CurrentCell),
@@ -204,9 +211,11 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Spawn.SpawnRequsted),
         typeof(Code.Game.Features.Spawn.WaitingToSpawn),
         typeof(Code.Game.Features.Target.Targetable),
+        typeof(Code.Game.Features.Target.TargetCell),
         typeof(Code.Game.Features.Target.TargetFlow),
         typeof(Code.Game.Features.Target.TargetId),
         typeof(Code.Game.Features.Target.TargetPoint),
+        typeof(Code.Game.Features.Target.WaitTimer),
         typeof(Code.Game.Features.Tower.TowerBuildRequest),
         typeof(Code.Game.Features.Tower.TowerComponent),
         typeof(Code.Game.Features.Tower.TowerPlace),

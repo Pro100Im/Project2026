@@ -35,6 +35,7 @@ namespace Code.Game.Features.Level.Registrars
             Entity.AddTilemapMovement(dictionary);
             Entity.AddFlowField(new());
             Entity.AddTargetFlow(flowTargets);
+            Entity.AddIntegrationField(new());
             Entity.isFlowFieldDirty = true;
         }
 
@@ -42,6 +43,8 @@ namespace Code.Game.Features.Level.Registrars
         {
             Entity.RemoveTilemapMovement();
             Entity.RemoveFlowField();
+            Entity.RemoveTargetFlow();
+            Entity.RemoveIntegrationField();
             Entity.isFlowFieldDirty = false;
         }
 

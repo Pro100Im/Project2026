@@ -44,7 +44,6 @@ namespace Code.Game.Features.Target.Systems
                     integration[goal] = 0;
                 }
 
-
                 while (queue.Count > 0)
                 {
                     var current = queue.Dequeue();
@@ -63,7 +62,6 @@ namespace Code.Game.Features.Target.Systems
                         }
                     }
                 }
-
 
                 foreach (var cell in integration.Keys)
                 {
@@ -86,6 +84,7 @@ namespace Code.Game.Features.Target.Systems
                 }
 
                 map.ReplaceFlowField(flow);
+                map.ReplaceIntegrationField(integration);
                 map.isFlowFieldDirty = false;
             }
         }

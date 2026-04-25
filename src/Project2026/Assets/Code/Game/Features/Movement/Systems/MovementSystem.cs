@@ -1,6 +1,7 @@
 ﻿using Code.Game.Common.Time;
 using Entitas;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Code.Game.Features.Movement.Systems
@@ -17,13 +18,9 @@ namespace Code.Game.Features.Movement.Systems
             _timeService = timeService;
 
             _units = context.GetGroup(GameMatcher
-                .AllOf(
-                    GameMatcher.Transform,
-                    GameMatcher.MovementSpeed,
-                    GameMatcher.CurrentCell));
-
+                .AllOf(GameMatcher.Transform, GameMatcher.MovementSpeed, GameMatcher.CurrentCell));
             _maps = context.GetGroup(GameMatcher
-                .AllOf(GameMatcher.FlowField, GameMatcher.TilemapMovement));
+                .AllOf(GameMatcher.FlowField, GameMatcher.TilemapMovement, GameMatcher.TargetFlow));
         }
 
         public void Execute()
@@ -32,13 +29,17 @@ namespace Code.Game.Features.Movement.Systems
             var flow = map.flowField.Value;
             var tilemap = map.tilemapMovement.Value;
             var units = _units.GetEntities();
-            var occupied = new HashSet<Vector3Int>();
-
-            foreach (var u in units)
-                occupied.Add(u.currentCell.Value);
 
             foreach (var unit in units)
             {
+                if (unit.hasWaitTimer)
+                {
+                    unit.ReplaceWaitTimer(unit.waitTimer.Value - _timeService.DeltaTime);
+                    if (unit.waitTimer.Value <= 0)
+                        unit.RemoveWaitTimer();
+                    continue;
+                }
+
                 var cell = unit.currentCell.Value;
 
                 if (!flow.TryGetValue(cell, out var dir) || dir == Vector3Int.zero)
@@ -48,26 +49,11 @@ namespace Code.Game.Features.Movement.Systems
                     continue;
                 }
 
-                var candidates = GetMoveCandidates(cell, dir);
-                var chosenCell = cell;
-                var found = false;
+                var chosenCell = ChooseNextCell(cell, dir, tilemap, units);
 
-                foreach (var candidate in candidates)
+                if (chosenCell == cell)
                 {
-                    if (!tilemap.ContainsKey(candidate))
-                        continue;
-
-                    if (occupied.Contains(candidate))
-                        continue;
-
-                    chosenCell = candidate;
-                    found = true;
-
-                    break;
-                }
-
-                if (!found)
-                {
+                    unit.ReplaceWaitTimer(1f);
                     unit.isMoving = false;
 
                     continue;
@@ -87,6 +73,26 @@ namespace Code.Game.Features.Movement.Systems
                 if (Vector3.Distance(newPos, targetPos) < 0.1f)
                     unit.ReplaceCurrentCell(chosenCell);
             }
+        }
+
+        private Vector3Int ChooseNextCell(Vector3Int cell, Vector3Int dir, Dictionary<Vector3Int, Vector3> tilemap, GameEntity[] units)
+        {
+            var candidates = GetMoveCandidates(cell, dir);
+
+            foreach (var candidate in candidates)
+            {
+                if (!tilemap.ContainsKey(candidate))
+                    continue;
+
+                var occupied = units.Any(u => u.currentCell.Value == candidate);
+
+                if (occupied) 
+                    continue;
+
+                return candidate;
+            }
+
+            return cell;
         }
 
         private List<Vector3Int> GetMoveCandidates(Vector3Int cell, Vector3Int dir)
