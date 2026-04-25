@@ -12,23 +12,20 @@ namespace Code.Game.Features.Movement.Systems
     {
         private readonly ITimeService _timeService;
         private readonly TargetService _targetService;
-
         private readonly IGroup<GameEntity> _units;
         private readonly IGroup<GameEntity> _maps;
 
         private const float ArriveThreshold = 0.1f;
-        private const float WaitSeconds = 1f;
+        private const float WaitSeconds = 0.5f;
         private const int MinIntegrationImprovement = 1;
+
         public MovementSystem(GameContext context, ITimeService timeService, TargetService targetService)
         {
             _timeService = timeService;
             _targetService = targetService;
 
-            _units = context.GetGroup(GameMatcher
-                .AllOf(GameMatcher.Transform, GameMatcher.MovementSpeed, GameMatcher.CurrentCell));
-            _maps = context.GetGroup(GameMatcher
-                .AllOf(GameMatcher.FlowField, GameMatcher.IntegrationField, GameMatcher.TilemapMovement, GameMatcher.TargetFlow));
-
+            _units = context.GetGroup(GameMatcher.AllOf(GameMatcher.Transform, GameMatcher.MovementSpeed, GameMatcher.CurrentCell));
+            _maps = context.GetGroup(GameMatcher.AllOf(GameMatcher.FlowField, GameMatcher.IntegrationField, GameMatcher.TilemapMovement, GameMatcher.TargetFlow));
         }
 
         public void Execute()
@@ -38,16 +35,17 @@ namespace Code.Game.Features.Movement.Systems
             var integration = map.integrationField.Value;
             var tilemap = map.tilemapMovement.Value;
             var goals = map.targetFlow.Value;
-
             var units = _units.GetEntities();
 
-            var occupied = new HashSet<Vector3Int>();
+
+            var occupied = new HashSet<Vector3Int>(units.Length);
             foreach (var u in units) occupied.Add(u.currentCell.Value);
 
-            var reservedTargets = new HashSet<Vector3Int>();
 
-            var intendedSteps = new Dictionary<GameEntity, Vector3Int>();
+            var reservedTargets = new HashSet<Vector3Int>();
             var reservedSteps = new HashSet<Vector3Int>();
+            var intendedSteps = new Dictionary<GameEntity, Vector3Int>(units.Length);
+
 
             var ordered = units.OrderBy(u =>
             {
@@ -71,22 +69,22 @@ namespace Code.Game.Features.Movement.Systems
                 }
 
                 var cell = unit.currentCell.Value;
+                if (unit.hasTargetCell) continue;
 
-                if (!unit.hasTargetCell)
+                var bestTarget = FindBestTargetAroundGoals_NoAlloc(cell, integration, goals, tilemap, occupied, reservedTargets);
+                if (bestTarget != cell)
                 {
-                    var bestTarget = FindBestTargetAroundGoals(cell, integration, goals, tilemap, occupied, reservedTargets);
-                    if (bestTarget != cell)
-                    {
-                        unit.ReplaceTargetCell(bestTarget);
-                        reservedTargets.Add(bestTarget);
-                    }
-                    else
-                    {
-                        unit.ReplaceWaitTimer(WaitSeconds);
-                        unit.isMoving = false;
-                    }
+                    unit.ReplaceTargetCell(bestTarget);
+
+                    reservedTargets.Add(bestTarget);
+                }
+                else
+                {
+                    unit.ReplaceWaitTimer(WaitSeconds);
+                    unit.isMoving = false;
                 }
             }
+
 
             foreach (var unit in ordered)
             {
@@ -121,13 +119,22 @@ namespace Code.Game.Features.Movement.Systems
 
                 var currentCost = integration.TryGetValue(cell, out var cc) ? cc : int.MaxValue;
 
-                var candidates = GetMoveCandidates(cell, dir);
+
+                var forward = cell + dir;
+                var left = cell + new Vector3Int(-dir.y, dir.x, 0);
+                var right = cell + new Vector3Int(dir.y, -dir.x, 0);
+                var back = cell - dir;
+
+
+                var candArray = new[] { forward, left, right, back };
 
                 Vector3Int chosen = cell;
                 bool found = false;
 
-                foreach (var cand in candidates)
+
+                for (int i = 0; i < candArray.Length; i++)
                 {
+                    var cand = candArray[i];
                     if (!tilemap.ContainsKey(cand)) continue;
                     if (occupied.Contains(cand)) continue;
                     if (reservedSteps.Contains(cand)) continue;
@@ -151,8 +158,11 @@ namespace Code.Game.Features.Movement.Systems
                     Vector3Int bestEqual = cell;
                     bool foundEqual = false;
 
-                    foreach (var cand in candidates)
+                    var curD = Vector3.Distance(new Vector3(cell.x, cell.y, 0), new Vector3(targetCell.x, targetCell.y, 0));
+
+                    for (int i = 0; i < candArray.Length; i++)
                     {
+                        var cand = candArray[i];
                         if (!tilemap.ContainsKey(cand)) continue;
                         if (occupied.Contains(cand)) continue;
                         if (reservedSteps.Contains(cand)) continue;
@@ -161,8 +171,7 @@ namespace Code.Game.Features.Movement.Systems
                         if (candCost != currentCost) continue;
 
                         var d = Vector3.Distance(new Vector3(cand.x, cand.y, 0), new Vector3(targetCell.x, targetCell.y, 0));
-                        var curD = Vector3.Distance(new Vector3(cell.x, cell.y, 0), new Vector3(targetCell.x, targetCell.y, 0));
-                        if (d + 0.001f < curD) 
+                        if (d + 0.001f < curD)
                         {
                             bool otherPlansToOurCell = intendedSteps.Values.Any(s => s == cell);
                             if (otherPlansToOurCell) continue;
@@ -219,62 +228,43 @@ namespace Code.Game.Features.Movement.Systems
             }
         }
 
-        private Vector3Int FindBestTargetAroundGoals(Vector3Int fromCell,
-                                                    Dictionary<Vector3Int, int> integration,
-                                                    List<Vector3Int> goals,
-                                                    Dictionary<Vector3Int, Vector3> tilemap,
-                                                    HashSet<Vector3Int> occupied,
-                                                    HashSet<Vector3Int> reservedTargets)
+        private Vector3Int FindBestTargetAroundGoals_NoAlloc(Vector3Int fromCell,
+                                                             Dictionary<Vector3Int, int> integration,
+                                                             List<Vector3Int> goals,
+                                                             Dictionary<Vector3Int, Vector3> tilemap,
+                                                             HashSet<Vector3Int> occupied,
+                                                             HashSet<Vector3Int> reservedTargets)
         {
             Vector3Int best = fromCell;
             int bestCost = int.MaxValue;
-            float bestDist = float.MaxValue;
+            int bestManh = int.MaxValue;
 
             foreach (var g in goals)
             {
-                var candidates = new List<Vector3Int> { g };
-                candidates.AddRange(_targetService.GetCardinalNeighbors(g));
 
-                foreach (var c in candidates)
+                TryConsider(g);
+
+                foreach (var n in _targetService.GetCardinalNeighbors(g))
+                    TryConsider(n);
+            }
+
+            void TryConsider(Vector3Int c)
+            {
+                if (!tilemap.ContainsKey(c)) return;
+                if (occupied.Contains(c)) return;
+                if (reservedTargets.Contains(c)) return;
+                if (!integration.TryGetValue(c, out var cost)) return;
+
+                var manh = Math.Abs(c.x - fromCell.x) + Math.Abs(c.y - fromCell.y);
+                if (cost < bestCost || (cost == bestCost && manh < bestManh))
                 {
-                    if (!tilemap.ContainsKey(c)) continue;
-                    if (occupied.Contains(c)) continue;
-                    if (reservedTargets.Contains(c)) continue;
-                    if (!integration.TryGetValue(c, out var cost)) continue;
-
-                    if (cost < bestCost)
-                    {
-                        bestCost = cost;
-                        best = c;
-                        bestDist = Math.Abs(c.x - fromCell.x) + Math.Abs(c.y - fromCell.y);
-                    }
-                    else if (cost == bestCost)
-                    {
-                        var dist = Math.Abs(c.x - fromCell.x) + Math.Abs(c.y - fromCell.y);
-                        if (dist < bestDist)
-                        {
-                            best = c;
-                            bestDist = dist;
-                        }
-                    }
+                    bestCost = cost;
+                    best = c;
+                    bestManh = manh;
                 }
             }
 
             return best;
-        }
-
-        private List<Vector3Int> GetMoveCandidates(Vector3Int cell, Vector3Int dir)
-        {
-            var list = new List<Vector3Int>();
-            var left = new Vector3Int(-dir.y, dir.x, 0);
-            var right = new Vector3Int(dir.y, -dir.x, 0);
-
-            list.Add(cell + dir);
-            list.Add(cell + left);
-            list.Add(cell + right);
-            list.Add(cell - dir);
-
-            return list;
         }
     }
 }
