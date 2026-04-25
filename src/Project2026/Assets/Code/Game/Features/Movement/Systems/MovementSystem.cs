@@ -7,27 +7,28 @@ namespace Code.Game.Features.Movement.Systems
     public class MovementSystem : IExecuteSystem
     {
         private readonly ITimeService _timeService;
-
         private readonly IGroup<GameEntity> _units;
         private readonly IGroup<GameEntity> _maps;
 
-        public MovementSystem(GameContext gameContext, ITimeService timeService)
+        public MovementSystem(GameContext context, ITimeService timeService)
         {
-           _timeService = timeService;
+            _timeService = timeService;
 
-            _units = gameContext.GetGroup(GameMatcher
+            _units = context.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Transform,
                     GameMatcher.MovementSpeed,
-                    GameMatcher.NextCell));
+                    GameMatcher.CurrentCell));
 
-            _maps = gameContext.GetGroup(GameMatcher.TilemapMovement);
+            _maps = context.GetGroup(GameMatcher
+                .AllOf(GameMatcher.FlowField, GameMatcher.TilemapMovement));
         }
 
         public void Execute()
         {
             var map = _maps.GetSingleEntity();
             var flow = map.flowField.Value;
+            var tilemap = map.tilemapMovement.Value;
 
             var units = _units.GetEntities();
 
@@ -37,18 +38,31 @@ namespace Code.Game.Features.Movement.Systems
                 var cell = unit.currentCell.Value;
 
                 if (!flow.TryGetValue(cell, out var dir))
-                {
-                    unit.isMoving = false;
-
                     continue;
-                }
 
                 var flowDir = new Vector3(dir.x, dir.y, 0).normalized;
-                var separation = unit.hasSeparationForce ? unit.separationForce.Value : Vector3.zero;
-                var finalDir = (flowDir + separation * 2f).normalized;
 
-                unit.isMoving = true;
-                unit.transform.Value.position += finalDir * unit.movementSpeed.Value * _timeService.DeltaTime;
+                // 👉 мягкое separation (НЕ обязательное)
+                var sep = unit.hasSeparationForce ? unit.separationForce.Value : Vector3.zero;
+
+                float sepStrength = unit.isMoving ? 0.6f : 0.1f;
+
+                Vector3 finalDir = (flowDir + sep * sepStrength).normalized;
+
+                var speed = unit.movementSpeed.Value * _timeService.DeltaTime;
+
+                var newPos = unit.transform.Value.position + finalDir * speed;
+
+                unit.transform.Value.position = newPos;
+
+                // 👉 обновление клетки только при реальном входе
+                var mapPos = tilemap[cell];
+
+                if (Vector3.Distance(newPos, mapPos) < 0.15f)
+                {
+                    var nextCell = cell + dir;
+                    unit.ReplaceCurrentCell(nextCell);
+                }
             }
         }
     }

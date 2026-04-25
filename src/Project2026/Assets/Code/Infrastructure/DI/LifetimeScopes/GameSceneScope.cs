@@ -164,6 +164,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<MovementSystem>(Lifetime.Singleton);
             builder.Register<AttachPosToTargetSystem>(Lifetime.Singleton);
 
+            builder.Register<TargetCellSystem>(Lifetime.Singleton);
             builder.Register<BuildFlowFieldSystem>(Lifetime.Singleton);
             builder.Register<SearchingClosestTargetSystem>(Lifetime.Singleton);
             builder.Register<UpdateTargetSystem>(Lifetime.Singleton);

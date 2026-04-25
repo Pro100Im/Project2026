@@ -10,10 +10,7 @@ namespace Code.Game.Features.Movement.Systems
 
         public FlowDecisionSystem(GameContext ctx)
         {
-            _units = ctx.GetGroup(GameMatcher
-                .AllOf(GameMatcher.CurrentCell)
-                .NoneOf(GameMatcher.NextCell));
-
+            _units = ctx.GetGroup(GameMatcher.CurrentCell);
             _maps = ctx.GetGroup(GameMatcher.FlowField);
         }
 
@@ -21,21 +18,21 @@ namespace Code.Game.Features.Movement.Systems
         {
             var map = _maps.GetSingleEntity();
             var flow = map.flowField.Value;
-            var tilemap = map.tilemapMovement.Value;
 
-            foreach (var unit in _units.GetEntities())
+            foreach (var unit in _units)
             {
                 var cell = unit.currentCell.Value;
 
                 if (!flow.TryGetValue(cell, out var dir))
                     continue;
 
-                var next = cell + dir;
-
-                if (!tilemap.ContainsKey(next))
+                if (dir == Vector3Int.zero)
+                {
+                    unit.isMoving = false;
                     continue;
+                }
 
-                unit.AddNextCell(next);
+                unit.isMoving = true;
             }
         }
     }

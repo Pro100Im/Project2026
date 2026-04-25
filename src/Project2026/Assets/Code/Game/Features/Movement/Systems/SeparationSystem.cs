@@ -20,7 +20,8 @@ namespace Code.Game.Features.Movement.Systems
             {
                 var a = units[i];
                 var aPos = a.transform.Value.position;
-                var push = Vector3.zero;
+
+                Vector3 push = Vector3.zero;
 
                 for (int j = 0; j < units.Length; j++)
                 {
@@ -28,11 +29,13 @@ namespace Code.Game.Features.Movement.Systems
 
                     var b = units[j];
                     var diff = aPos - b.transform.Value.position;
-                    var dist = diff.sqrMagnitude;
 
-                    if (dist < 0.25f && dist > 0.0001f)
+                    float dist = diff.sqrMagnitude;
+
+                    if (dist < 0.5f * 0.5f && dist > 0.0001f)
                     {
-                        push += diff / dist;
+                        float inv = 1f - Mathf.Sqrt(dist) / 0.5f;
+                        push += diff.normalized * inv;
                     }
                 }
 

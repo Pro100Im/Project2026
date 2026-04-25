@@ -8,11 +8,10 @@ namespace Code.Game.Features.Movement.Systems
         private readonly IGroup<GameEntity> _units;
         private readonly IGroup<GameEntity> _maps;
 
-        public UpdateCellSystem(GameContext gameContext)
+        public UpdateCellSystem(GameContext context)
         {
-            _units = gameContext.GetGroup(GameMatcher.Transform);
-
-            _maps = gameContext.GetGroup(GameMatcher.TilemapMovement);
+            _units = context.GetGroup(GameMatcher.Transform);
+            _maps = context.GetGroup(GameMatcher.TilemapMovement);
         }
 
         public void Execute()
