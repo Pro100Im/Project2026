@@ -9,4 +9,5 @@ namespace Code.Game.Features.Movement
     [Game] public class Moving : IComponent { }
     [Game] public class CurrentCell : IComponent { public Vector3Int Value; }
     [Game] public class MovementOffset : IComponent { public Vector3 Value; }
+    [Game] public class LastDirection : IComponent { public Vector3Int Value; }
 }

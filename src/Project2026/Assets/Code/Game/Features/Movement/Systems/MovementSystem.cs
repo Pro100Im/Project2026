@@ -1,9 +1,6 @@
 ﻿using Code.Game.Common.Time;
-using Code.Game.Features.Target.Services;
 using Entitas;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Code.Game.Features.Movement.Systems
@@ -20,16 +17,22 @@ namespace Code.Game.Features.Movement.Systems
         public MovementSystem(GameContext context, ITimeService timeService)
         {
             _timeService = timeService;
-            _units = context.GetGroup(GameMatcher.AllOf(GameMatcher.Transform, GameMatcher.MovementSpeed, GameMatcher.CurrentCell));
-            _maps = context.GetGroup(GameMatcher.AllOf(GameMatcher.FlowField, GameMatcher.IntegrationField, GameMatcher.TilemapMovement));
+            _units = context.GetGroup(GameMatcher.AllOf(
+                GameMatcher.Transform,
+                GameMatcher.MovementSpeed,
+                GameMatcher.CurrentCell));
+            _maps = context.GetGroup(GameMatcher.AllOf(
+                GameMatcher.FlowField,
+                GameMatcher.IntegrationField,
+                GameMatcher.TilemapMovement));
         }
 
         public void Execute()
         {
             var map = _maps.GetSingleEntity();
-            var flow = map.flowField.Value;             // Dictionary<Vector3Int, Vector3Int>
-            var integration = map.integrationField.Value; // Dictionary<Vector3Int, int>
-            var tilemap = map.tilemapMovement.Value;    // Dictionary<Vector3Int, Vector3>
+            var flow = map.flowField.Value;
+            var integration = map.integrationField.Value;
+            var tilemap = map.tilemapMovement.Value;
             var units = _units.GetEntities();
 
             var occupied = new HashSet<Vector3Int>();
@@ -46,26 +49,25 @@ namespace Code.Game.Features.Movement.Systems
 
                 var cell = unit.currentCell.Value;
 
-                // если нет направления — стоим
                 if (!flow.TryGetValue(cell, out var dir) || dir == Vector3Int.zero)
                 {
                     unit.isMoving = false;
                     continue;
                 }
 
-                // кандидаты: вперёд по flow + соседи
                 var candidates = new[]
                 {
                 cell + dir,
                 cell + new Vector3Int(-dir.y, dir.x, 0),
                 cell + new Vector3Int(dir.y, -dir.x, 0),
-                cell - dir
-            };
+                cell - dir};
 
                 int currentCost = integration.TryGetValue(cell, out var cc) ? cc : int.MaxValue;
                 Vector3Int chosen = cell;
                 int bestCost = currentCost;
                 bool found = false;
+
+                Vector3Int lastDir = unit.hasLastDirection ? unit.lastDirection.Value : Vector3Int.zero;
 
                 foreach (var cand in candidates)
                 {
@@ -73,8 +75,10 @@ namespace Code.Game.Features.Movement.Systems
                     if (occupied.Contains(cand)) continue;
 
                     int candCost = integration.TryGetValue(cand, out var cost) ? cost : int.MaxValue;
+                    var candDir = cand - cell;
 
-                    // выбираем клетку с минимальной стоимостью (даже если она равна или чуть хуже)
+                    if (candDir == -lastDir) continue;
+
                     if (candCost < bestCost)
                     {
                         bestCost = candCost;
@@ -83,7 +87,6 @@ namespace Code.Game.Features.Movement.Systems
                     }
                     else if (!found && candCost == bestCost)
                     {
-                        // разрешаем равные — для обхода
                         chosen = cand;
                         found = true;
                     }
@@ -91,13 +94,11 @@ namespace Code.Game.Features.Movement.Systems
 
                 if (!found)
                 {
-                    // все клетки заняты → ждём
                     unit.ReplaceWaitTimer(WaitSeconds);
                     unit.isMoving = false;
                     continue;
                 }
 
-                // движение
                 var targetPos = tilemap[chosen];
                 var currentPos = unit.transform.Value.position;
                 var dirVec = (targetPos - currentPos);
@@ -114,6 +115,8 @@ namespace Code.Game.Features.Movement.Systems
                     occupied.Remove(cell);
                     occupied.Add(chosen);
                     unit.ReplaceCurrentCell(chosen);
+
+                    unit.ReplaceLastDirection(chosen - cell);
                 }
             }
         }
