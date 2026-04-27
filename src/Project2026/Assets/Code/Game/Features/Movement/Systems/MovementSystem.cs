@@ -1,6 +1,5 @@
 ﻿using Code.Game.Common.Time;
 using Entitas;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code.Game.Features.Movement.Systems
@@ -17,10 +16,12 @@ namespace Code.Game.Features.Movement.Systems
         public MovementSystem(GameContext context, ITimeService timeService)
         {
             _timeService = timeService;
+
             _units = context.GetGroup(GameMatcher.AllOf(
                 GameMatcher.Transform,
                 GameMatcher.MovementSpeed,
                 GameMatcher.CurrentCell));
+
             _maps = context.GetGroup(GameMatcher.AllOf(
                 GameMatcher.FlowField,
                 GameMatcher.IntegrationField,
@@ -33,10 +34,8 @@ namespace Code.Game.Features.Movement.Systems
             var flow = map.flowField.Value;
             var integration = map.integrationField.Value;
             var tilemap = map.tilemapMovement.Value;
+            var occupied = map.occupField.Value;
             var units = _units.GetEntities();
-
-            var occupied = new HashSet<Vector3Int>();
-            foreach (var u in units) occupied.Add(u.currentCell.Value);
 
             foreach (var unit in units)
             {
@@ -71,8 +70,11 @@ namespace Code.Game.Features.Movement.Systems
 
                 foreach (var cand in candidates)
                 {
-                    if (!tilemap.ContainsKey(cand)) continue;
-                    if (occupied.Contains(cand)) continue;
+                    if (!tilemap.ContainsKey(cand)) 
+                        continue;
+
+                    if (occupied.ContainsKey(cand)) 
+                        continue;
 
                     int candCost = integration.TryGetValue(cand, out var cost) ? cost : int.MaxValue;
                     var candDir = cand - cell;
@@ -112,8 +114,6 @@ namespace Code.Game.Features.Movement.Systems
 
                 if (Vector3.Distance(newPos, targetPos) < ArriveThreshold)
                 {
-                    occupied.Remove(cell);
-                    occupied.Add(chosen);
                     unit.ReplaceCurrentCell(chosen);
 
                     unit.ReplaceLastDirection(chosen - cell);
