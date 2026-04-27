@@ -9,13 +9,15 @@ namespace Code.Game.Features.Movement.Systems
 
         public OccupiedCellSystem(GameContext context)
         {
-            _units = context.GetGroup(GameMatcher.AllOf(
+            _units = context.GetGroup(GameMatcher
+                .AllOf(
                 GameMatcher.Transform,
                 GameMatcher.MovementSpeed,
                 GameMatcher.CurrentCell,
                 GameMatcher.Id));
 
-            _maps = context.GetGroup(GameMatcher.AllOf(
+            _maps = context.GetGroup(GameMatcher
+                .AllOf(
                 GameMatcher.TilemapMovement,
                 GameMatcher.OccupField));
         }

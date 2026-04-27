@@ -42,7 +42,10 @@ namespace Code.Game.Features.Movement.Systems
                 if (unit.hasWaitTimer)
                 {
                     unit.ReplaceWaitTimer(unit.waitTimer.Value - _timeService.DeltaTime);
-                    if (unit.waitTimer.Value <= 0) unit.RemoveWaitTimer();
+
+                    if (unit.waitTimer.Value <= 0) 
+                        unit.RemoveWaitTimer();
+
                     continue;
                 }
 
@@ -51,6 +54,7 @@ namespace Code.Game.Features.Movement.Systems
                 if (!flow.TryGetValue(cell, out var dir) || dir == Vector3Int.zero)
                 {
                     unit.isMoving = false;
+
                     continue;
                 }
 
@@ -61,12 +65,11 @@ namespace Code.Game.Features.Movement.Systems
                 cell + new Vector3Int(dir.y, -dir.x, 0),
                 cell - dir};
 
-                int currentCost = integration.TryGetValue(cell, out var cc) ? cc : int.MaxValue;
-                Vector3Int chosen = cell;
-                int bestCost = currentCost;
-                bool found = false;
-
-                Vector3Int lastDir = unit.hasLastDirection ? unit.lastDirection.Value : Vector3Int.zero;
+                var currentCost = integration.TryGetValue(cell, out var cc) ? cc : int.MaxValue;
+                var chosen = cell;
+                var bestCost = currentCost;
+                var found = false;
+                var lastDir = unit.hasLastDirection ? unit.lastDirection.Value : Vector3Int.zero;
 
                 foreach (var cand in candidates)
                 {
@@ -76,7 +79,7 @@ namespace Code.Game.Features.Movement.Systems
                     if (occupied.ContainsKey(cand)) 
                         continue;
 
-                    int candCost = integration.TryGetValue(cand, out var cost) ? cost : int.MaxValue;
+                    var candCost = integration.TryGetValue(cand, out var cost) ? cost : int.MaxValue;
                     var candDir = cand - cell;
 
                     if (candDir == -lastDir) continue;
@@ -98,6 +101,7 @@ namespace Code.Game.Features.Movement.Systems
                 {
                     unit.ReplaceWaitTimer(WaitSeconds);
                     unit.isMoving = false;
+
                     continue;
                 }
 
@@ -105,7 +109,10 @@ namespace Code.Game.Features.Movement.Systems
                 var currentPos = unit.transform.Value.position;
                 var dirVec = (targetPos - currentPos);
                 var dist = dirVec.magnitude;
-                if (dist > 0f) dirVec /= dist;
+
+                if (dist > 0f) 
+                    dirVec /= dist;
+
                 var speed = unit.movementSpeed.Value * _timeService.DeltaTime;
                 var newPos = currentPos + dirVec * speed;
 
@@ -115,7 +122,6 @@ namespace Code.Game.Features.Movement.Systems
                 if (Vector3.Distance(newPos, targetPos) < ArriveThreshold)
                 {
                     unit.ReplaceCurrentCell(chosen);
-
                     unit.ReplaceLastDirection(chosen - cell);
                 }
             }
