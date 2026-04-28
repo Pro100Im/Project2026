@@ -37,21 +37,25 @@ namespace Code.Game.Features.Target.Systems
 
             var occupancyMap = mapEntity.occupancyMap.Value;
             var tilemapMovement = mapEntity.tilemapMovement.Value;
-            var gridSize = mapEntity.gridSize.Value;
 
             foreach (var entity in _movers)
             {
+                // Пока таргет вручную, но логика та же
+                Vector3Int targetPos = new Vector3Int(6, 2);
 
-                //var targetEntity = GetGameEntityById.Get(entity.targetId.Value);
-                //if (targetEntity == null || !targetEntity.hasCurrentCell)
-                //{
-                //    if (entity.hasPath) entity.RemovePath();
-                //    continue;
-                //}
+                // ПРАВИЛО 1: Если мы уже стоим на клетке, которая "бьет" цель, 
+                // или мы часть большого юнита, который стоит рядом - СТОИМ.
+                if (IsAdjacent(entity.currentCell.Value, targetPos, entity.unitSize.Value))
+                {
+                    if (entity.hasPath) entity.RemovePath();
+                    entity.isMoving = false;
+                    continue;
+                }
 
-                Vector3Int targetPos = new Vector3Int(6, 2);/*targetEntity.currentCell.Value*/;
-
-                if (ShouldRecalculatePath(entity, targetPos, occupancyMap, gridSize))
+                // ПРАВИЛО 2: Пересчитываем путь только если:
+                // - Пути нет
+                // - Следующая клетка пути занята КЕМ-ТО ДРУГИМ
+                if (ShouldRecalculatePath(entity, targetPos, occupancyMap))
                 {
                     var pathCells = _targetService.FindPath(
                         entity.id.Value,
@@ -64,22 +68,19 @@ namespace Code.Game.Features.Target.Systems
 
                     if (pathCells != null && pathCells.Count > 0)
                     {
-
-                        var newPath = new Queue<Vector3Int>(pathCells);
-                        entity.ReplacePath(newPath);
+                        entity.ReplacePath(new Queue<Vector3Int>(pathCells));
                     }
                     else
                     {
-                        if (!IsAdjacent(entity.currentCell.Value, targetPos, entity.unitSize.Value))
-                        {
-                            if (entity.hasPath) entity.RemovePath();
-                        }
+                        // Если путь не найден (все занято вокруг цели)
+                        // Юнит должен просто стоять и ждать, а не дергаться
+                        entity.isMoving = false;
                     }
                 }
             }
         }
 
-        private bool ShouldRecalculatePath(GameEntity entity, Vector3Int targetPos, Dictionary<Vector3Int, int> occupancy, Vector2 gridSize)
+        private bool ShouldRecalculatePath(GameEntity entity, Vector3Int targetPos, Dictionary<Vector3Int, int> occupancy)
         {
             if (!entity.hasPath || entity.path.Value.Count == 0) return true;
 
@@ -97,12 +98,17 @@ namespace Code.Game.Features.Target.Systems
 
         private bool IsAdjacent(Vector3Int current, Vector3Int target, Vector2Int size)
         {
+            // Проверяем все клетки, которые занимает юнит
             for (int x = 0; x < size.x; x++)
             {
                 for (int y = 0; y < size.y; y++)
                 {
-                    var part = new Vector3Int(current.x + x, current.y + y, 0);
-                    if (Vector3Int.Distance(part, target) <= 1.5f) return true;
+                    Vector3Int partOfUnit = new Vector3Int(current.x + x, current.y + y, 0);
+
+                    // Дистанция 1.0 означает, что клетки стоят вплотную (по горизонтали/вертикали)
+                    // 1.42f включает диагонали.
+                    if (Vector3Int.Distance(partOfUnit, target) <= 1.5f)
+                        return true;
                 }
             }
             return false;

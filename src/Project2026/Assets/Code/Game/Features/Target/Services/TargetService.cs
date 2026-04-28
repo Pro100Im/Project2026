@@ -61,22 +61,16 @@ namespace Code.Game.Features.Target.Services
         }
 
         private Vector3Int FindAccessibleGoal(int unitId, Vector3Int targetCell, Vector2Int unitSize,
-            Dictionary<Vector3Int, Vector3> tilemapMovement, Dictionary<Vector3Int, int> occupancyMap)
+    Dictionary<Vector3Int, Vector3> tilemapMovement, Dictionary<Vector3Int, int> occupancyMap)
         {
-            var candidates = new List<Vector3Int>();
-            for (int x = -unitSize.x; x <= 1; x++)
-            {
-                for (int y = -unitSize.y; y <= 1; y++)
-                {
-                    candidates.Add(new Vector3Int(targetCell.x + x, targetCell.y + y, 0));
-                }
-            }
+            var neighbors = GetNeighbors(targetCell).ToList();
 
-            return candidates
-                .OrderBy(c => Vector3Int.Distance(c, targetCell))
-                .FirstOrDefault(c => CanOccupy(unitId, c, unitSize, tilemapMovement, occupancyMap, ignoreTarget: true));
+            // Сортируем соседей так, чтобы выбирать ближайшего к ТЕКУЩЕМУ положению юнита.
+            // Это заставит юнит идти по кратчайшей прямой и "затыкать" ближайшую дырку.
+            return neighbors
+                .OrderBy(n => Vector3Int.Distance(n, targetCell)) // Сначала те, кто вплотную
+                .FirstOrDefault(n => CanOccupy(unitId, n, unitSize, tilemapMovement, occupancyMap));
         }
-
         private bool CanOccupy(int unitId, Vector3Int baseCell, Vector2Int unitSize,
             Dictionary<Vector3Int, Vector3> tilemapMovement, Dictionary<Vector3Int, int> occupancyMap, bool ignoreTarget = false)
         {
