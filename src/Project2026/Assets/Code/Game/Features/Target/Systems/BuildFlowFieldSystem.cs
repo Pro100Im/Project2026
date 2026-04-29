@@ -30,14 +30,13 @@ namespace Code.Game.Features.Target.Systems
             foreach (var map in maps)
             {
                 var tilemap = map.tilemapMovement.Value;
-
                 var integration = new Dictionary<Vector3Int, int>();
                 var flow = new Dictionary<Vector3Int, Vector3Int>();
                 var queue = new Queue<Vector3Int>();
 
                 foreach (var goal in map.targetFlow.Value)
                 {
-                    if (!tilemap.ContainsKey(goal))
+                    if (!tilemap.ContainsKey(goal)) 
                         continue;
 
                     queue.Enqueue(goal);
@@ -48,16 +47,20 @@ namespace Code.Game.Features.Target.Systems
                 {
                     var current = queue.Dequeue();
 
-                    foreach (var n in _targetService.GetCardinalNeighbors(current))
+                    foreach (var n in _targetService.GetNeighbors(current))
                     {
-                        if (!tilemap.ContainsKey(n))
+                        if (!tilemap.ContainsKey(n)) 
                             continue;
 
-                        var cost = integration[current] + 1;
+                        var stepCost = GetStepCost(current, n);
+                        var newCost = integration[current] + stepCost;
 
-                        if (!integration.ContainsKey(n) || cost < integration[n])
+                        if (!integration.ContainsKey(n) || newCost < integration[n])
                         {
-                            integration[n] = cost;
+                            if (IsCuttingCorner(current, n, tilemap))
+                                continue;
+
+                            integration[n] = newCost;
                             queue.Enqueue(n);
                         }
                     }
@@ -68,10 +71,9 @@ namespace Code.Game.Features.Target.Systems
                     var best = cell;
                     var bestCost = integration[cell];
 
-                    foreach (var n in _targetService.GetCardinalNeighbors(cell))
+                    foreach (var n in _targetService.GetNeighbors(cell))
                     {
-                        if (!integration.ContainsKey(n))
-                            continue;
+                        if (!integration.ContainsKey(n)) continue;
 
                         if (integration[n] < bestCost)
                         {
@@ -87,6 +89,25 @@ namespace Code.Game.Features.Target.Systems
                 map.ReplaceIntegrationField(integration);
                 map.isFlowFieldDirty = false;
             }
+        }
+
+        private int GetStepCost(Vector3Int a, Vector3Int b)
+        {
+            return (a.x != b.x && a.y != b.y) ? 14 : 10;
+        }
+
+        private bool IsCuttingCorner(Vector3Int current, Vector3Int neighbor, Dictionary<Vector3Int, Vector3> tilemap)
+        {
+            if (current.x != neighbor.x && current.y != neighbor.y)
+            {
+                var corner1 = new Vector3Int(neighbor.x, current.y, 0);
+                var corner2 = new Vector3Int(current.x, neighbor.y, 0);
+
+                if (!tilemap.ContainsKey(corner1) || !tilemap.ContainsKey(corner2))
+                    return true;
+            }
+
+            return false;
         }
     }
 }
