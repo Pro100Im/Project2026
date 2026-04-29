@@ -28,7 +28,10 @@ namespace Code.Game.Features.Movement.Systems
             map.occupField.Value.Clear();
 
             foreach (var unit in _units)
-                map.occupField.Value[unit.currentCell.Value] = unit.id.Value;
+            {
+                if (!unit.isMoving)
+                    map.occupField.Value[unit.currentCell.Value] = unit.id.Value;
+            }
         }
     }
 }
