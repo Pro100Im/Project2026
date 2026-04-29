@@ -34,14 +34,18 @@ namespace Code.Game.Features.Movement.Systems
             var integration = map.integrationField.Value;
             var tilemap = map.tilemapMovement.Value;
             var occupied = map.occupField.Value;
+            var reserved = map.reservedField.Value;
+
             var units = _units.GetEntities();
 
             foreach (var unit in units)
             {
+                if (unit.isMoving)
+                    continue;
+
                 if (unit.hasWaitTimer)
                 {
                     unit.ReplaceWaitTimer(unit.waitTimer.Value - _timeService.DeltaTime);
-
                     if (unit.waitTimer.Value <= 0)
                         unit.RemoveWaitTimer();
 
@@ -50,17 +54,23 @@ namespace Code.Game.Features.Movement.Systems
 
                 var cell = unit.currentCell.Value;
 
-                if (!flow.TryGetValue(cell, out var dir) || dir == Vector3Int.zero)
+                if (integration.TryGetValue(cell, out var currentCellCost) && currentCellCost == 0)
                 {
+                    if (unit.hasTargetCell) unit.RemoveTargetCell();
+
                     continue;
                 }
 
-                var candidates = new[]
-                {
+
+                if (!flow.TryGetValue(cell, out var dir) || dir == Vector3Int.zero)
+                    continue;
+
+                var candidates = new[] {
                 cell + dir,
                 cell + new Vector3Int(-dir.y, dir.x, 0),
                 cell + new Vector3Int(dir.y, -dir.x, 0),
-                cell - dir};
+                cell - dir
+            };
 
                 var currentCost = integration.TryGetValue(cell, out var cc) ? cc : int.MaxValue;
                 var chosen = cell;
@@ -76,10 +86,16 @@ namespace Code.Game.Features.Movement.Systems
                     if (occupied.ContainsKey(cand))
                         continue;
 
+                    if (reserved.ContainsKey(cand))
+                        continue;
+
+                    if (reserved.TryGetValue(cand, out var resId) && resId != unit.id.Value)
+                        continue;
+
                     var candCost = integration.TryGetValue(cand, out var cost) ? cost : int.MaxValue;
                     var candDir = cand - cell;
 
-                    if (candDir == -lastDir) 
+                    if (candDir == -lastDir)
                         continue;
 
                     if (candCost < bestCost)
@@ -98,11 +114,15 @@ namespace Code.Game.Features.Movement.Systems
                 if (!found)
                 {
                     unit.ReplaceWaitTimer(WaitSeconds);
+                    unit.isMoving = false;
+
+                    unit.ReplaceTargetCell(unit.currentCell.Value);
 
                     continue;
                 }
 
                 unit.ReplaceTargetCell(chosen);
+                reserved[chosen] = unit.id.Value;
             }
         }
     }

@@ -160,6 +160,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<SelectTargetCellSystem>(Lifetime.Singleton);
             builder.Register<OccupiedCellSystem>(Lifetime.Singleton);
+            builder.Register<ReservedCellSystem>(Lifetime.Singleton);
             builder.Register<MovementSystem>(Lifetime.Singleton);
             builder.Register<AttachPosToTargetSystem>(Lifetime.Singleton);
 

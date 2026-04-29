@@ -40,6 +40,15 @@ namespace Code.Game.Features.Movement.Systems
             foreach (var unit in units)
             {
                 var targetCell = unit.targetCell.Value;
+                var currentCell = unit.currentCell.Value;
+
+                if (targetCell == currentCell)
+                {
+                    unit.isMoving = false;
+
+                    continue;
+                }
+
                 var targetPos = tilemap[targetCell];
                 var currentPos = unit.transform.Value.position;
                 var dirVec = (targetPos - currentPos);
@@ -59,7 +68,7 @@ namespace Code.Game.Features.Movement.Systems
                     unit.isMoving = false;
 
                     unit.ReplaceCurrentCell(targetCell);
-                    unit.ReplaceLastDirection(targetCell - unit.currentCell.Value);
+                    unit.ReplaceLastDirection(targetCell - currentCell);
                 }
             }
         }

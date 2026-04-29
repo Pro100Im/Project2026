@@ -37,6 +37,7 @@ namespace Code.Game.Features.Level.Registrars
             Entity.AddTargetFlow(flowTargets);
             Entity.AddIntegrationField(new());
             Entity.AddOccupField(new());
+            Entity.AddReservedField(new());
             Entity.isFlowFieldDirty = true;
         }
 
@@ -47,6 +48,7 @@ namespace Code.Game.Features.Level.Registrars
             Entity.RemoveTargetFlow();
             Entity.RemoveIntegrationField();
             Entity.RemoveOccupField();
+            Entity.RemoveReservedField();
             Entity.isFlowFieldDirty = false;
         }
 

@@ -8,6 +8,7 @@ namespace Code.Game.Features.Movement
         public MovementFeature(ISystemFactory systemFactory)
         {
             Add(systemFactory.Create<OccupiedCellSystem>());
+            Add(systemFactory.Create<ReservedCellSystem>());
             Add(systemFactory.Create<SelectTargetCellSystem>());
             Add(systemFactory.Create<MovementSystem>()); 
             Add(systemFactory.Create<AttachPosToTargetSystem>()); 

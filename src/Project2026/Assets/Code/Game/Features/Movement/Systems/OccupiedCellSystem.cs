@@ -28,7 +28,7 @@ namespace Code.Game.Features.Movement.Systems
             map.occupField.Value.Clear();
 
             foreach (var unit in _units)
-                map.occupField.Value.Add(unit.currentCell.Value, unit.id.Value);
+                map.occupField.Value[unit.currentCell.Value] = unit.id.Value;
         }
     }
 }

@@ -9,5 +9,6 @@ namespace Code.Game.Features.Level
     [Game] public class FlowField : IComponent { public Dictionary<Vector3Int, Vector3Int> Value; }
     [Game] public class IntegrationField : IComponent { public Dictionary<Vector3Int, int> Value; }
     [Game] public class OccupField : IComponent { public Dictionary<Vector3Int, int> Value; }
+    [Game] public class ReservedField : IComponent { public Dictionary<Vector3Int, int> Value; }
     [Game] public class FlowFieldDirty : IComponent { }
 }
