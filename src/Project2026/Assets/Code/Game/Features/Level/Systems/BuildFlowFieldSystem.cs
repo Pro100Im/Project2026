@@ -4,7 +4,7 @@ using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Code.Game.Features.Target.Systems
+namespace Code.Game.Features.Level.Systems
 {
     public class BuildFlowFieldSystem : ReactiveSystem<GameEntity>
     {

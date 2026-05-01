@@ -1,3 +1,4 @@
+using Code.Game.Features.Movement.Systems;
 using Code.Game.Features.Target.Systems;
 using Code.Infrastructure.Systems;
 
@@ -7,8 +8,8 @@ namespace Code.Game.Features.Target
     {
         public TargetFeature(ISystemFactory systemFactory)
         {
-            Add(systemFactory.Create<BuildFlowFieldSystem>());
-            Add(systemFactory.Create<SearchingClosestTargetSystem>());
+            Add(systemFactory.Create<SelectTargetCellSystem>());
+            Add(systemFactory.Create<CheckTargetSystem>());
         }
     }
 }

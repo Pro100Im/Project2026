@@ -7,6 +7,7 @@ using Code.Game.Features.Death;
 using Code.Game.Features.Duration;
 using Code.Game.Features.Health;
 using Code.Game.Features.Input;
+using Code.Game.Features.Level;
 using Code.Game.Features.Movement;
 using Code.Game.Features.Player;
 using Code.Game.Features.Spawn;
@@ -31,9 +32,12 @@ namespace Code.Game.Features
 
             Add(systemFactory.Create<TowerFeature>());
 
-            Add(systemFactory.Create<MovementFeature>());
+            Add(systemFactory.Create<LevelFeature>());
 
             Add(systemFactory.Create<TargetFeature>());
+
+            Add(systemFactory.Create<MovementFeature>());
+
             Add(systemFactory.Create<AttackFeature>());
             Add(systemFactory.Create<DamageFeature>());
 

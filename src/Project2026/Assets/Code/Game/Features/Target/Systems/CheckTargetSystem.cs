@@ -3,12 +3,12 @@ using Entitas;
 namespace Code.Game.Features.Target.Systems
 {
     // To do
-    public class SearchingClosestTargetSystem : IExecuteSystem
+    public class CheckTargetSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _targets;
         private readonly IGroup<GameEntity> _enemies;
 
-        public SearchingClosestTargetSystem(GameContext gameContext)
+        public CheckTargetSystem(GameContext gameContext)
         {
             _enemies = gameContext.GetGroup(GameMatcher
                 .AllOf(

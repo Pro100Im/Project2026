@@ -1,16 +1,15 @@
-using UnityEngine;
+using Code.Game.Features.Level.Systems;
+using Code.Infrastructure.Systems;
 
-public class LevelFeature : MonoBehaviour
+namespace Code.Game.Features.Level
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class LevelFeature : Feature
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public LevelFeature(ISystemFactory systemFactory)
+        {
+            Add(systemFactory.Create<BuildFlowFieldSystem>());
+            Add(systemFactory.Create<OccupiedCellSystem>());
+            Add(systemFactory.Create<ReservedCellSystem>());
+        }
     }
 }

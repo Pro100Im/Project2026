@@ -19,6 +19,8 @@ using Code.Game.Features.Health;
 using Code.Game.Features.Health.Systems;
 using Code.Game.Features.Input;
 using Code.Game.Features.Input.Systems;
+using Code.Game.Features.Level;
+using Code.Game.Features.Level.Systems;
 using Code.Game.Features.Movement;
 using Code.Game.Features.Movement.Systems;
 using Code.Game.Features.Player;
@@ -118,17 +120,20 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<SpawnFeature>(Lifetime.Singleton);
             builder.Register<CreateViewFeature>(Lifetime.Singleton);
 
-            builder.Register<AnimatorFeature>(Lifetime.Singleton);
+            builder.Register<LevelFeature>(Lifetime.Singleton);
+
+            builder.Register<TargetFeature>(Lifetime.Singleton);
 
             builder.Register<MovementFeature>(Lifetime.Singleton);
 
-            builder.Register<TargetFeature>(Lifetime.Singleton);
             builder.Register<AttackFeature>(Lifetime.Singleton);
             builder.Register<DamageFeature>(Lifetime.Singleton);
 
             builder.Register<HealthFeature>(Lifetime.Singleton);
 
             builder.Register<DeathFeature>(Lifetime.Singleton);
+
+            builder.Register<AnimatorFeature>(Lifetime.Singleton);
 
             builder.Register<ProcessDestructedFeature>(Lifetime.Singleton);
         }
@@ -158,25 +163,23 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<CharacterAnimatorSystem>(Lifetime.Singleton);
             builder.Register<PlayerCastleAnimatorSystem>(Lifetime.Singleton);
 
-            builder.Register<SelectTargetCellSystem>(Lifetime.Singleton);
+            builder.Register<BuildFlowFieldSystem>(Lifetime.Singleton);
             builder.Register<OccupiedCellSystem>(Lifetime.Singleton);
             builder.Register<ReservedCellSystem>(Lifetime.Singleton);
+
+            builder.Register<SelectTargetCellSystem>(Lifetime.Singleton);
+            builder.Register<CheckTargetSystem>(Lifetime.Singleton);
+
             builder.Register<FlipAlongMoveDirectionSystem>(Lifetime.Singleton);
             builder.Register<MovementSystem>(Lifetime.Singleton);
             builder.Register<AttachPosToTargetSystem>(Lifetime.Singleton);
-
-            builder.Register<BuildFlowFieldSystem>(Lifetime.Singleton);
-            builder.Register<SearchingClosestTargetSystem>(Lifetime.Singleton);
-            builder.Register<UpdateTargetSystem>(Lifetime.Singleton);
 
             builder.Register<AttackStartSystem>(Lifetime.Singleton);
             builder.Register<AttackProcessSystem>(Lifetime.Singleton);
             builder.Register<AttackEndSystem>(Lifetime.Singleton);
 
             builder.Register<ApplyDamageSystem>(Lifetime.Singleton);
-
             builder.Register<HealthBarSystem>(Lifetime.Singleton);
-
             builder.Register<DeathSystem>(Lifetime.Singleton);
 
             builder.Register<CooldownLeftSystem>(Lifetime.Singleton);

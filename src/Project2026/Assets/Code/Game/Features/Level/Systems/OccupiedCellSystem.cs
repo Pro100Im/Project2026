@@ -1,6 +1,6 @@
 using Entitas;
 
-namespace Code.Game.Features.Movement.Systems
+namespace Code.Game.Features.Level.Systems
 {
     public class OccupiedCellSystem : IExecuteSystem
     {

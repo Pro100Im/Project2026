@@ -3,7 +3,7 @@ using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Code.Game.Features.Movement.Systems
+namespace Code.Game.Features.Target.Systems
 {
     public class SelectTargetCellSystem : IExecuteSystem
     {
