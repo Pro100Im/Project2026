@@ -21,7 +21,6 @@ namespace Code.Game.StaticData.Data
                 hpBarEntity.AddSpawnPosition(spawnPos);
                 hpBarEntity.AddTargetId(entity.id.Value);
                 hpBarEntity.AddOwnerId(entity.id.Value);
-                hpBarEntity.AddMovementOffset(SpawnOffset);
                 hpBarEntity.AddCurrentHealth(entity.currentHealth.Value);
                 hpBarEntity.isAttached = true;
 
@@ -32,12 +31,12 @@ namespace Code.Game.StaticData.Data
 
         protected override void Remove(GameEntity entity)
         {
-            
+            // To do
         }
 
         protected override void Replace(GameEntity entity)
         {
-            
+            // To do
         }
     }
 }

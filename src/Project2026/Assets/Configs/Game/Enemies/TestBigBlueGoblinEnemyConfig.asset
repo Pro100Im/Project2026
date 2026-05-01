@@ -25,9 +25,15 @@ MonoBehaviour:
   - rid: 8171215631311700222
   - rid: 8171215631311700224
   - rid: 8171215745916338281
+  - rid: 2286602697378365526
   references:
     version: 2
     RefIds:
+    - rid: 2286602697378365526
+      type: {class: MovementOffsetProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Offset>k__BackingField: {x: 0, y: 0.3, z: 0}
     - rid: 8171215584738410588
       type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
@@ -56,7 +62,7 @@ MonoBehaviour:
       data:
         <Mode>k__BackingField: 0
         <HpBar>k__BackingField: {fileID: 11400000, guid: 940e7d5b532b66741ab204f744f5205b, type: 2}
-        <SpawnOffset>k__BackingField: {x: 0, y: 0.5, z: 0}
+        <SpawnOffset>k__BackingField: {x: 0, y: 0.7, z: 0}
     - rid: 8171215584738410599
       type: {class: PhysicalAttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:

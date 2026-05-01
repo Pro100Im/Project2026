@@ -19,8 +19,8 @@ namespace Code.Game.Features.Movement.Systems
             _units = context.GetGroup(GameMatcher.AllOf(
                 GameMatcher.Transform,
                 GameMatcher.MovementSpeed,
-                GameMatcher.CurrentCell,
-                GameMatcher.TargetCell));
+                GameMatcher.MovementOffset,
+                GameMatcher.CurrentCell));
 
             _maps = context.GetGroup(GameMatcher.AllOf(
                 GameMatcher.FlowField,
@@ -39,6 +39,13 @@ namespace Code.Game.Features.Movement.Systems
 
             foreach (var unit in units)
             {
+                if (!unit.hasTargetCell)
+                {
+                    unit.isMoving = false;
+
+                    continue;
+                }
+
                 var targetCell = unit.targetCell.Value;
                 var currentCell = unit.currentCell.Value;
 
@@ -49,7 +56,8 @@ namespace Code.Game.Features.Movement.Systems
                     continue;
                 }
 
-                var targetPos = tilemap[targetCell];
+                var movementOffset = unit.movementOffset.Value;
+                var targetPos = tilemap[targetCell] + movementOffset;
                 var currentPos = unit.transform.Value.position;
                 var dirVec = (targetPos - currentPos);
                 var dist = dirVec.magnitude;
@@ -65,8 +73,6 @@ namespace Code.Game.Features.Movement.Systems
 
                 if (Vector3.Distance(newPos, targetPos) < ArriveThreshold)
                 {
-                    unit.isMoving = false;
-
                     unit.ReplaceCurrentCell(targetCell);
                     unit.ReplaceLastDirection(targetCell - currentCell);
                 }

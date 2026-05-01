@@ -15,9 +15,15 @@ MonoBehaviour:
   Properties:
   - rid: 8171215579295776849
   - rid: 8171215579295776850
+  - rid: 2286602697378365528
   references:
     version: 2
     RefIds:
+    - rid: 2286602697378365528
+      type: {class: MovementOffsetProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Offset>k__BackingField: {x: 0, y: 0.7, z: 0}
     - rid: 8171215579295776849
       type: {class: ViewPrefabProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:

@@ -84,7 +84,8 @@ namespace Code.Game.Features.Target.Systems
                 {
                     unit.ReplaceWaitTimer(WaitSeconds);
 
-                    if (unit.hasTargetCell) unit.RemoveTargetCell();
+                    if (unit.hasTargetCell) 
+                        unit.RemoveTargetCell();
                 }
             }
         }
