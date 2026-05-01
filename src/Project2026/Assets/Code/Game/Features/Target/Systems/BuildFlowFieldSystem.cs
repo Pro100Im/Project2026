@@ -1,3 +1,4 @@
+using Code.Game.Features.Level;
 using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace Code.Game.Features.Target.Systems
                         continue;
 
                     queue.Enqueue(goal);
-                    integration[goal] = 0;
+                    integration[goal] = map.occupField.Value.ContainsKey(goal) ? 100 : 0;
                 }
 
                 while (queue.Count > 0)

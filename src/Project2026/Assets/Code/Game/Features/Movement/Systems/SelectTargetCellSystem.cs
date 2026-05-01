@@ -1,4 +1,3 @@
-using Code.Game.Common.Time;
 using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
@@ -8,28 +7,25 @@ namespace Code.Game.Features.Movement.Systems
 {
     public class SelectTargetCellSystem : IExecuteSystem
     {
-        private readonly ITimeService _timeService;
         private readonly TargetService _targetService;
         private readonly IGroup<GameEntity> _units;
         private readonly IGroup<GameEntity> _maps;
 
         private const float WaitSeconds = 0.5f;
 
-        public SelectTargetCellSystem(GameContext context, ITimeService timeService, TargetService targetService)
+        public SelectTargetCellSystem(GameContext context, TargetService targetService)
         {
-            _timeService = timeService;
             _targetService = targetService;
 
             _units = context.GetGroup(GameMatcher.AllOf(
                 GameMatcher.Transform,
-                GameMatcher.CurrentCell));
+                GameMatcher.CurrentCell,
+                GameMatcher.Id).NoneOf(GameMatcher.Moving));
 
             _maps = context.GetGroup(GameMatcher.AllOf(
                 GameMatcher.FlowField,
                 GameMatcher.IntegrationField,
-                GameMatcher.TilemapMovement,
-                GameMatcher.OccupField,
-                GameMatcher.ReservedField));
+                GameMatcher.TargetFlow));
         }
 
         public void Execute()
@@ -37,40 +33,23 @@ namespace Code.Game.Features.Movement.Systems
             var mapEntity = _maps.GetSingleEntity();
             var flow = mapEntity.flowField.Value;
             var integration = mapEntity.integrationField.Value;
-            var tilemap = mapEntity.tilemapMovement.Value;
-            var occupied = mapEntity.occupField.Value;
-            var reserved = mapEntity.reservedField.Value;
+            var targets = mapEntity.targetFlow.Value;
 
             foreach (var unit in _units.GetEntities())
             {
-                if (unit.isMoving) continue;
-
-                if (unit.hasWaitTimer)
-                {
-                    unit.ReplaceWaitTimer(unit.waitTimer.Value - _timeService.DeltaTime);
-                    if (unit.waitTimer.Value <= 0) unit.RemoveWaitTimer();
-                    continue;
-                }
-
                 var cell = unit.currentCell.Value;
 
                 if (!integration.TryGetValue(cell, out var currentCost)) 
                     continue;
 
-                if (currentCost == 0)
-                {
-                    if (unit.hasTargetCell) unit.RemoveTargetCell();
-                    continue;
-                }
-
-                if (!flow.TryGetValue(cell, out var idealDir) || idealDir == Vector3Int.zero)
+                if (!flow.TryGetValue(cell, out var idealDir) || idealDir == Vector3Int.zero) 
                     continue;
 
                 var idealStep = cell + idealDir;
                 var chosen = cell;
                 var found = false;
 
-                if (tilemap.ContainsKey(idealStep) && !occupied.ContainsKey(idealStep) && (!reserved.TryGetValue(idealStep, out var rId) || rId == unit.id.Value))
+                if (IsCellAvailable(idealStep, unit.id.Value, mapEntity))
                 {
                     chosen = idealStep;
                     found = true;
@@ -82,18 +61,12 @@ namespace Code.Game.Features.Movement.Systems
 
                     foreach (var cand in _targetService.GetNeighbors(cell))
                     {
-                        if (!tilemap.ContainsKey(cand) || occupied.ContainsKey(cand)) 
-                            continue;
-
-                        if (reserved.TryGetValue(cand, out var resId) && resId != unit.id.Value) 
-                            continue;
-
-                        if (IsCuttingCorner(cell, cand, tilemap)) 
-                            continue;
+                        if (!IsCellAvailable(cand, unit.id.Value, mapEntity)) continue;
+                        if (IsCuttingCorner(cell, cand, mapEntity.tilemapMovement.Value)) continue;
 
                         if (integration.TryGetValue(cand, out var candCost))
                         {
-                            if (candCost < bestCost)
+                            if (candCost < bestCost + 5)
                             {
                                 bestCost = candCost;
                                 chosen = cand;
@@ -103,17 +76,31 @@ namespace Code.Game.Features.Movement.Systems
                     }
                 }
 
-                if (found)
+                if (found && chosen != cell)
                 {
                     unit.ReplaceTargetCell(chosen);
-                    //reserved[chosen] = unit.id.Value;
                 }
                 else
                 {
-                    unit.ReplaceTargetCell(cell);
                     unit.ReplaceWaitTimer(WaitSeconds);
+
+                    if (unit.hasTargetCell) unit.RemoveTargetCell();
                 }
             }
+        }
+
+        private bool IsCellAvailable(Vector3Int cell, int unitId, GameEntity map)
+        {
+            if (!map.tilemapMovement.Value.ContainsKey(cell)) 
+                return false;
+
+            if (map.occupField.Value.ContainsKey(cell)) 
+                return false;
+
+            if (map.reservedField.Value.TryGetValue(cell, out var resId) && resId != unitId) 
+                return false;
+
+            return true;
         }
 
         private bool IsCuttingCorner(Vector3Int current, Vector3Int neighbor, Dictionary<Vector3Int, Vector3> tilemap)
@@ -123,8 +110,7 @@ namespace Code.Game.Features.Movement.Systems
                 var corner1 = new Vector3Int(neighbor.x, current.y, 0);
                 var corner2 = new Vector3Int(current.x, neighbor.y, 0);
 
-                if (!tilemap.ContainsKey(corner1) || !tilemap.ContainsKey(corner2))
-                    return true;
+                return !tilemap.ContainsKey(corner1) || !tilemap.ContainsKey(corner2);
             }
 
             return false;
