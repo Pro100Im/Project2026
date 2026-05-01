@@ -10,6 +10,7 @@ namespace Code.Game.Features.Movement
             Add(systemFactory.Create<OccupiedCellSystem>());
             Add(systemFactory.Create<ReservedCellSystem>());
             Add(systemFactory.Create<SelectTargetCellSystem>());
+            Add(systemFactory.Create<FlipAlongMoveDirectionSystem>());
             Add(systemFactory.Create<MovementSystem>()); 
             Add(systemFactory.Create<AttachPosToTargetSystem>()); 
         }
