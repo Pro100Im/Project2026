@@ -60,8 +60,11 @@ namespace Code.Game.Features.Target.Systems
 
                     foreach (var cand in _targetService.GetNeighbors(cell))
                     {
-                        if (!IsCellAvailable(cand, unit.id.Value, mapEntity)) continue;
-                        if (IsCuttingCorner(cell, cand, mapEntity.tilemapMovement.Value)) continue;
+                        if (!IsCellAvailable(cand, unit.id.Value, mapEntity)) 
+                            continue;
+
+                        if (IsCuttingCorner(cell, cand, mapEntity.tilemapMovement.Value)) 
+                            continue;
 
                         if (integration.TryGetValue(cand, out var candCost))
                         {

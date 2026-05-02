@@ -38,6 +38,7 @@ namespace Code.Game.Features.Level.Registrars
             Entity.AddIntegrationField(new());
             Entity.AddOccupField(new());
             Entity.AddReservedField(new());
+            Entity.AddSpawnReservedField(new());
             Entity.isFlowFieldDirty = true;
         }
 
@@ -49,6 +50,7 @@ namespace Code.Game.Features.Level.Registrars
             Entity.RemoveIntegrationField();
             Entity.RemoveOccupField();
             Entity.RemoveReservedField();
+            Entity.RemoveSpawnReservedField();
             Entity.isFlowFieldDirty = false;
         }
 

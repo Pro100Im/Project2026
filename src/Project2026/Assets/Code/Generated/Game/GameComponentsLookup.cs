@@ -53,35 +53,37 @@ public static class GameComponentsLookup {
     public const int OccupField = 42;
     public const int ReservedField = 43;
     public const int SpawnMap = 44;
-    public const int TilemapMovement = 45;
-    public const int CurrentCell = 46;
-    public const int LastDirection = 47;
-    public const int MovementAvailable = 48;
-    public const int MovementOffset = 49;
-    public const int MovementSpeed = 50;
-    public const int Moving = 51;
-    public const int PlayerCastle = 52;
-    public const int Player = 53;
-    public const int SpawnPosition = 54;
-    public const int SpawnRequsted = 55;
-    public const int WaitingToSpawn = 56;
-    public const int Targetable = 57;
-    public const int TargetCell = 58;
-    public const int TargetFlow = 59;
-    public const int TargetId = 60;
-    public const int TargetPoint = 61;
-    public const int Tower = 62;
-    public const int TowerBuildRequest = 63;
-    public const int TowerPlace = 64;
-    public const int Unit = 65;
-    public const int UnitSize = 66;
-    public const int CurrentWaveEnemies = 67;
-    public const int CurrentWaveNumber = 68;
-    public const int WaveEnemiesAlive = 69;
-    public const int WaveInProgress = 70;
-    public const int WaveStartRequsted = 71;
+    public const int SpawnReservedField = 45;
+    public const int TilemapMovement = 46;
+    public const int CurrentCell = 47;
+    public const int LastDirection = 48;
+    public const int MovementAvailable = 49;
+    public const int MovementOffset = 50;
+    public const int MovementSpeed = 51;
+    public const int Moving = 52;
+    public const int PlayerCastle = 53;
+    public const int PlayerCastleCells = 54;
+    public const int Player = 55;
+    public const int SpawnPosition = 56;
+    public const int SpawnRequsted = 57;
+    public const int WaitingToSpawn = 58;
+    public const int Targetable = 59;
+    public const int TargetCell = 60;
+    public const int TargetFlow = 61;
+    public const int TargetId = 62;
+    public const int TargetPoint = 63;
+    public const int Tower = 64;
+    public const int TowerBuildRequest = 65;
+    public const int TowerPlace = 66;
+    public const int Unit = 67;
+    public const int UnitSize = 68;
+    public const int CurrentWaveEnemies = 69;
+    public const int CurrentWaveNumber = 70;
+    public const int WaveEnemiesAlive = 71;
+    public const int WaveInProgress = 72;
+    public const int WaveStartRequsted = 73;
 
-    public const int TotalComponents = 72;
+    public const int TotalComponents = 74;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -129,6 +131,7 @@ public static class GameComponentsLookup {
         "OccupField",
         "ReservedField",
         "SpawnMap",
+        "SpawnReservedField",
         "TilemapMovement",
         "CurrentCell",
         "LastDirection",
@@ -137,6 +140,7 @@ public static class GameComponentsLookup {
         "MovementSpeed",
         "Moving",
         "PlayerCastle",
+        "PlayerCastleCells",
         "Player",
         "SpawnPosition",
         "SpawnRequsted",
@@ -204,6 +208,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Level.OccupField),
         typeof(Code.Game.Features.Level.ReservedField),
         typeof(Code.Game.Features.Level.SpawnMap),
+        typeof(Code.Game.Features.Level.SpawnReservedField),
         typeof(Code.Game.Features.Level.TilemapMovement),
         typeof(Code.Game.Features.Movement.CurrentCell),
         typeof(Code.Game.Features.Movement.LastDirection),
@@ -212,6 +217,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Movement.MovementSpeed),
         typeof(Code.Game.Features.Movement.Moving),
         typeof(Code.Game.Features.Player.PlayerCastle),
+        typeof(Code.Game.Features.Player.PlayerCastleCells),
         typeof(Code.Game.Features.Player.PlayerComponent),
         typeof(Code.Game.Features.Spawn.SpawnPosition),
         typeof(Code.Game.Features.Spawn.SpawnRequsted),
