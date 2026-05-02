@@ -8,10 +8,9 @@ namespace Code.Game.Features.Target.Systems
     public class SelectTargetCellSystem : IExecuteSystem
     {
         private readonly TargetService _targetService;
+
         private readonly IGroup<GameEntity> _units;
         private readonly IGroup<GameEntity> _maps;
-
-        private const float WaitSeconds = 0.5f;
 
         public SelectTargetCellSystem(GameContext context, TargetService targetService)
         {
@@ -39,10 +38,10 @@ namespace Code.Game.Features.Target.Systems
             {
                 var cell = unit.currentCell.Value;
 
-                if (!integration.TryGetValue(cell, out var currentCost)) 
+                if (!integration.TryGetValue(cell, out var currentCost))
                     continue;
 
-                if (!flow.TryGetValue(cell, out var idealDir) || idealDir == Vector3Int.zero) 
+                if (!flow.TryGetValue(cell, out var idealDir) || idealDir == Vector3Int.zero)
                     continue;
 
                 var idealStep = cell + idealDir;
@@ -77,28 +76,21 @@ namespace Code.Game.Features.Target.Systems
                 }
 
                 if (found && chosen != cell)
-                {
                     unit.ReplaceTargetCell(chosen);
-                }
-                else
-                {
-                    unit.ReplaceWaitTimer(WaitSeconds);
-
-                    if (unit.hasTargetCell) 
-                        unit.RemoveTargetCell();
-                }
+                else if (unit.hasTargetCell)
+                    unit.RemoveTargetCell();
             }
         }
 
         private bool IsCellAvailable(Vector3Int cell, int unitId, GameEntity map)
         {
-            if (!map.tilemapMovement.Value.ContainsKey(cell)) 
+            if (!map.tilemapMovement.Value.ContainsKey(cell))
                 return false;
 
-            if (map.occupField.Value.ContainsKey(cell)) 
+            if (map.occupField.Value.ContainsKey(cell))
                 return false;
 
-            if (map.reservedField.Value.TryGetValue(cell, out var resId) && resId != unitId) 
+            if (map.reservedField.Value.TryGetValue(cell, out var resId) && resId != unitId)
                 return false;
 
             return true;
