@@ -73,18 +73,19 @@ public static class GameComponentsLookup {
     public const int TargetPoint = 62;
     public const int TargetRecheckTimer = 63;
     public const int WaitTimer = 64;
-    public const int TowerBuildRequest = 65;
-    public const int Tower = 66;
+    public const int Tower = 65;
+    public const int TowerBuildRequest = 66;
     public const int TowerPlace = 67;
     public const int SettleTimer = 68;
-    public const int UnitSize = 69;
-    public const int CurrentWaveEnemies = 70;
-    public const int CurrentWaveNumber = 71;
-    public const int WaveEnemiesAlive = 72;
-    public const int WaveInProgress = 73;
-    public const int WaveStartRequsted = 74;
+    public const int Unit = 69;
+    public const int UnitSize = 70;
+    public const int CurrentWaveEnemies = 71;
+    public const int CurrentWaveNumber = 72;
+    public const int WaveEnemiesAlive = 73;
+    public const int WaveInProgress = 74;
+    public const int WaveStartRequsted = 75;
 
-    public const int TotalComponents = 75;
+    public const int TotalComponents = 76;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -152,10 +153,11 @@ public static class GameComponentsLookup {
         "TargetPoint",
         "TargetRecheckTimer",
         "WaitTimer",
-        "TowerBuildRequest",
         "Tower",
+        "TowerBuildRequest",
         "TowerPlace",
         "SettleTimer",
+        "Unit",
         "UnitSize",
         "CurrentWaveEnemies",
         "CurrentWaveNumber",
@@ -230,10 +232,11 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Target.TargetPoint),
         typeof(Code.Game.Features.Target.TargetRecheckTimer),
         typeof(Code.Game.Features.Target.WaitTimer),
+        typeof(Code.Game.Features.Tower.Tower),
         typeof(Code.Game.Features.Tower.TowerBuildRequest),
-        typeof(Code.Game.Features.Tower.TowerComponent),
         typeof(Code.Game.Features.Tower.TowerPlace),
         typeof(Code.Game.Features.Unit.SettleTimer),
+        typeof(Code.Game.Features.Unit.Unit),
         typeof(Code.Game.Features.Unit.UnitSize),
         typeof(Code.Game.Features.Wave.CurrentWaveEnemies),
         typeof(Code.Game.Features.Wave.CurrentWaveNumber),

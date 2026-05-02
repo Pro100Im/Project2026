@@ -1,8 +1,11 @@
-﻿using System;
-using System.Linq;
-using Code.Game.Common.Entity.ToStrings;
+﻿using Code.Game.Common.Entity.ToStrings;
+using Code.Game.Features.Health;
 using Code.Game.Features.Player;
+using Code.Game.Features.Tower;
+using Code.Game.Features.Unit;
 using Entitas;
+using System;
+using System.Linq;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
@@ -33,8 +36,16 @@ public sealed partial class GameEntity : INamedEntity
 
                 switch (component.GetType().Name)
                 {
-                    case nameof(PlayerComponent):
-                        return entityName;
+                    case nameof(Unit):
+                        return $"Unit";
+                    case nameof(Tower):
+                        return $"Tower";
+                    case nameof(TowerPlace):
+                        return $"TowerPlace";
+                    case nameof(HpBar):
+                        return $"HpBar";
+                    case nameof(PlayerCastle):
+                        return $"PlayerCastle";
                 }
             }
         }

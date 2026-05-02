@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Code.Game.Features.Tower.Tower towerComponent = new Code.Game.Features.Tower.Tower();
+    static readonly Code.Game.Features.Unit.Unit unitComponent = new Code.Game.Features.Unit.Unit();
 
-    public bool isTower {
-        get { return HasComponent(GameComponentsLookup.Tower); }
+    public bool isUnit {
+        get { return HasComponent(GameComponentsLookup.Unit); }
         set {
-            if (value != isTower) {
-                var index = GameComponentsLookup.Tower;
+            if (value != isUnit) {
+                var index = GameComponentsLookup.Unit;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : towerComponent;
+                            : unitComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherTower;
+    static Entitas.IMatcher<GameEntity> _matcherUnit;
 
-    public static Entitas.IMatcher<GameEntity> Tower {
+    public static Entitas.IMatcher<GameEntity> Unit {
         get {
-            if (_matcherTower == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Tower);
+            if (_matcherUnit == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Unit);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherTower = matcher;
+                _matcherUnit = matcher;
             }
 
-            return _matcherTower;
+            return _matcherUnit;
         }
     }
 }
