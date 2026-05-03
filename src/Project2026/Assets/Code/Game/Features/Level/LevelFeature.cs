@@ -7,8 +7,8 @@ namespace Code.Game.Features.Level
     {
         public LevelFeature(ISystemFactory systemFactory)
         {
-            Add(systemFactory.Create<BuildFlowFieldSystem>());
             Add(systemFactory.Create<OccupiedCellSystem>());
+            Add(systemFactory.Create<BuildFlowFieldSystem>());
             Add(systemFactory.Create<ReservedCellSystem>());
         }
     }
