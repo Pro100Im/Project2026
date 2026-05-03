@@ -16,25 +16,26 @@ namespace Code.Game.Features.Movement.Systems
         {
             _timeService = timeService;
 
-            _units = context.GetGroup(GameMatcher.AllOf(
+            _units = context.GetGroup(GameMatcher
+                .AllOf(
                 GameMatcher.Transform,
                 GameMatcher.MovementSpeed,
                 GameMatcher.MovementOffset,
-                GameMatcher.CurrentCell));
+                GameMatcher.CurrentCell,
+                GameMatcher.UnitSize));
 
-            _maps = context.GetGroup(GameMatcher.AllOf(
-                GameMatcher.FlowField,
-                GameMatcher.IntegrationField,
+            _maps = context.GetGroup(GameMatcher
+                .AllOf(
+                GameMatcher.FlowFields,
+                GameMatcher.IntegrationFields,
                 GameMatcher.TilemapMovement));
         }
 
         public void Execute()
         {
             var map = _maps.GetSingleEntity();
-            var flow = map.flowField.Value;
-            var integration = map.integrationField.Value;
+            var allFlows = map.flowFields.Value;
             var tilemap = map.tilemapMovement.Value;
-            var occupied = map.occupField.Value;
             var units = _units.GetEntities();
 
             foreach (var unit in units)
@@ -56,13 +57,14 @@ namespace Code.Game.Features.Movement.Systems
                     continue;
                 }
 
+
                 var movementOffset = unit.movementOffset.Value;
-                var targetPos = tilemap[targetCell] + movementOffset;
+                var targetWorldPos = tilemap[targetCell] + movementOffset;
                 var currentPos = unit.transform.Value.position;
-                var dirVec = (targetPos - currentPos);
+                var dirVec = (targetWorldPos - currentPos);
                 var dist = dirVec.magnitude;
 
-                if (dist > 0f)
+                if (dist > 0.001f)
                     dirVec /= dist;
 
                 var speed = unit.movementSpeed.Value * _timeService.DeltaTime;
@@ -71,10 +73,13 @@ namespace Code.Game.Features.Movement.Systems
                 unit.transform.Value.position = newPos;
                 unit.isMoving = true;
 
-                if (Vector3.Distance(newPos, targetPos) < ArriveThreshold)
+                if (Vector3.Distance(newPos, targetWorldPos) < ArriveThreshold)
                 {
                     unit.ReplaceCurrentCell(targetCell);
-                    unit.ReplaceLastDirection(targetCell - currentCell);
+
+                    var moveStep = targetCell - currentCell;
+
+                    unit.ReplaceLastDirection(moveStep);
                 }
             }
         }

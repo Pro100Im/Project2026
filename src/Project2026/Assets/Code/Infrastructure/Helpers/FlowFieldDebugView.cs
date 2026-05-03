@@ -8,31 +8,40 @@ namespace Code.Infrastructure.Helpers
 {
     public class FlowFieldDebugView : MonoBehaviour
     {
+        [Header("Настройки Tilemap")]
         [SerializeField] private Tilemap _tilemap;
-        [Space]
+
+        [Header("Выбор размера для отладки")]
+        [Tooltip("Введите размер юнита (напр. 1x1, 2x2), чтобы увидеть его поле")]
+        [SerializeField] private Vector2Int _debugSize = new Vector2Int(1, 1);
+
+        [Header("Визуализация")]
         [SerializeField] private bool _showVectors = true;
         [SerializeField] private bool _showCosts = true;
         [SerializeField] private float _vectorLength = 0.4f;
 
-        public Dictionary<Vector3Int, Vector3Int> CurrentFlowField;
-        public Dictionary<Vector3Int, int> CurrentIntegrationField;
-
         private void OnDrawGizmos()
         {
-            if (_tilemap == null) 
-                return;
-
-            if (!Application.isPlaying) 
+            // Не рисуем, если нет тайлмапа или игра не запущена
+            if (_tilemap == null || !Application.isPlaying)
                 return;
 
             var gameContext = Contexts.sharedInstance.game;
-            var mapEntity = gameContext.GetGroup(GameMatcher.AllOf(GameMatcher.FlowField, GameMatcher.IntegrationField)).GetSingleEntity();
 
-            if (mapEntity == null) 
+            // ВАЖНО: Теперь ищем сущность с множественными полями (FlowFields / IntegrationFields)
+            var mapEntity = gameContext.GetGroup(GameMatcher.AllOf(
+                GameMatcher.FlowFields,
+                GameMatcher.IntegrationFields)).GetSingleEntity();
+
+            if (mapEntity == null)
                 return;
 
-            var flow = mapEntity.flowField.Value;
-            var integration = mapEntity.integrationField.Value;
+            // 1. Проверяем, есть ли расчеты для выбранного размера
+            if (!mapEntity.integrationFields.Value.TryGetValue(_debugSize, out var integration))
+                return;
+
+            // Пытаемся достать векторы (они могут отсутствовать, если BFS не нашел путь)
+            mapEntity.flowFields.Value.TryGetValue(_debugSize, out var flow);
 
             foreach (var kvp in integration)
             {
@@ -40,16 +49,21 @@ namespace Code.Infrastructure.Helpers
                 int cost = kvp.Value;
                 Vector3 worldPos = _tilemap.GetCellCenterWorld(cellPos);
 
+                // 2. Рисуем стоимость (Integration Field)
                 if (_showCosts)
                 {
                     GUIStyle style = new GUIStyle();
                     style.normal.textColor = GetColorForCost(cost);
                     style.fontSize = 10;
+                    style.alignment = TextAnchor.MiddleCenter;
 
+#if UNITY_EDITOR
                     UnityEditor.Handles.Label(worldPos + Vector3.up * 0.2f, cost.ToString(), style);
+#endif
                 }
 
-                if (_showVectors && flow.TryGetValue(cellPos, out Vector3Int direction))
+                // 3. Рисуем векторы (Flow Field)
+                if (_showVectors && flow != null && flow.TryGetValue(cellPos, out Vector3Int direction))
                 {
                     if (direction != Vector3Int.zero)
                     {
@@ -57,10 +71,10 @@ namespace Code.Infrastructure.Helpers
                         Vector3 targetWorldPos = _tilemap.GetCellCenterWorld(cellPos + direction);
                         DrawArrow(worldPos, (targetWorldPos - worldPos).normalized * _vectorLength);
                     }
-                    else
+                    else if (cost == 0) // Если стоимость 0 и вектора нет — это финиш (замок)
                     {
-                        Gizmos.color = Color.yellow;
-                        Gizmos.DrawSphere(worldPos, 0.05f);
+                        Gizmos.color = Color.green;
+                        Gizmos.DrawWireCube(worldPos, Vector3.one * 0.3f);
                     }
                 }
             }
@@ -68,9 +82,8 @@ namespace Code.Infrastructure.Helpers
 
         private Color GetColorForCost(int cost)
         {
-            if (cost >= 255) return Color.red;
-            if (cost == 0) return Color.green;
-
+            if (cost >= 1000) return Color.red; // Непроходимо для данного размера
+            if (cost == 0) return Color.green;   // Цель
             return Color.white;
         }
 
@@ -78,11 +91,14 @@ namespace Code.Infrastructure.Helpers
         {
             Gizmos.DrawRay(pos, direction);
 
-            Vector3 right = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 180 + 20, 0) * Vector3.forward;
-            Vector3 left = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 180 - 20, 0) * Vector3.forward;
-
-            Gizmos.DrawRay(pos + direction, right * 0.1f);
-            Gizmos.DrawRay(pos + direction, left * 0.1f);
+            // Рисуем наконечник
+            if (direction.sqrMagnitude > 0.01f)
+            {
+                Vector3 right = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 180 + 20, 0) * Vector3.forward;
+                Vector3 left = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 180 - 20, 0) * Vector3.forward;
+                Gizmos.DrawRay(pos + direction, right * 0.1f);
+                Gizmos.DrawRay(pos + direction, left * 0.1f);
+            }
         }
     }
 }

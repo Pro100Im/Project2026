@@ -47,9 +47,9 @@ public static class GameComponentsLookup {
     public const int CurrentHealth = 36;
     public const int HpBar = 37;
     public const int MaxHealth = 38;
-    public const int FlowField = 39;
-    public const int FlowFieldDirty = 40;
-    public const int IntegrationField = 41;
+    public const int FlowFieldDirty = 39;
+    public const int FlowFields = 40;
+    public const int IntegrationFields = 41;
     public const int OccupField = 42;
     public const int ReservedField = 43;
     public const int SpawnMap = 44;
@@ -125,9 +125,9 @@ public static class GameComponentsLookup {
         "CurrentHealth",
         "HpBar",
         "MaxHealth",
-        "FlowField",
         "FlowFieldDirty",
-        "IntegrationField",
+        "FlowFields",
+        "IntegrationFields",
         "OccupField",
         "ReservedField",
         "SpawnMap",
@@ -202,9 +202,9 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Health.CurrentHealth),
         typeof(Code.Game.Features.Health.HpBar),
         typeof(Code.Game.Features.Health.MaxHealth),
-        typeof(Code.Game.Features.Level.FlowField),
         typeof(Code.Game.Features.Level.FlowFieldDirty),
-        typeof(Code.Game.Features.Level.IntegrationField),
+        typeof(Code.Game.Features.Level.FlowFields),
+        typeof(Code.Game.Features.Level.IntegrationFields),
         typeof(Code.Game.Features.Level.OccupField),
         typeof(Code.Game.Features.Level.ReservedField),
         typeof(Code.Game.Features.Level.SpawnMap),

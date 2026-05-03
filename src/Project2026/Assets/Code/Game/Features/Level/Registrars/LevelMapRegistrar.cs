@@ -33,9 +33,9 @@ namespace Code.Game.Features.Level.Registrars
                 flowTargets.Add(target);
 
             Entity.AddTilemapMovement(dictionary);
-            Entity.AddFlowField(new());
+            Entity.AddFlowFields(new());
             Entity.AddTargetFlow(flowTargets);
-            Entity.AddIntegrationField(new());
+            Entity.AddIntegrationFields(new());
             Entity.AddOccupField(new());
             Entity.AddReservedField(new());
             Entity.AddSpawnReservedField(new());
@@ -45,9 +45,9 @@ namespace Code.Game.Features.Level.Registrars
         public override void UnregisterComponents()
         {
             Entity.RemoveTilemapMovement();
-            Entity.RemoveFlowField();
+            Entity.RemoveFlowFields();
             Entity.RemoveTargetFlow();
-            Entity.RemoveIntegrationField();
+            Entity.RemoveIntegrationFields();
             Entity.RemoveOccupField();
             Entity.RemoveReservedField();
             Entity.RemoveSpawnReservedField();

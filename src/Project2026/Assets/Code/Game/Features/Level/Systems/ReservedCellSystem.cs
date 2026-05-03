@@ -1,4 +1,5 @@
 using Entitas;
+using UnityEngine;
 
 namespace Code.Game.Features.Level.Systems
 {
@@ -9,21 +10,39 @@ namespace Code.Game.Features.Level.Systems
 
         public ReservedCellSystem(GameContext context)
         {
-            _units = context.GetGroup(GameMatcher.AllOf(
+            _units = context.GetGroup(GameMatcher
+                .AllOf(
                 GameMatcher.TargetCell,
+                GameMatcher.UnitSize,
                 GameMatcher.Id));
 
-            _maps = context.GetGroup(GameMatcher.AllOf(
+            _maps = context.GetGroup(GameMatcher
+                .AllOf(
                 GameMatcher.ReservedField));
         }
 
         public void Execute()
         {
             var map = _maps.GetSingleEntity();
-            map.reservedField.Value.Clear();
+            var reservedField = map.reservedField.Value;
+
+            reservedField.Clear();
 
             foreach (var unit in _units)
-                map.reservedField.Value[unit.targetCell.Value] = unit.id.Value;
+            {
+                var targetOrigin = unit.targetCell.Value;
+                var size = unit.unitSize.Value;
+
+                for (var x = 0; x < size.x; x++)
+                {
+                    for (var y = 0; y < size.y; y++)
+                    {
+                        var cell = new Vector3Int(targetOrigin.x + x, targetOrigin.y + y, targetOrigin.z);
+
+                        reservedField[cell] = unit.id.Value;
+                    }
+                }
+            }
         }
     }
 }

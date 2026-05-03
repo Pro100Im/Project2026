@@ -1,6 +1,5 @@
 using Code.Game.Features.Target.Services;
 using Entitas;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code.Game.Features.Target.Systems
@@ -8,7 +7,6 @@ namespace Code.Game.Features.Target.Systems
     public class SelectTargetCellSystem : IExecuteSystem
     {
         private readonly TargetService _targetService;
-
         private readonly IGroup<GameEntity> _units;
         private readonly IGroup<GameEntity> _maps;
 
@@ -16,39 +14,62 @@ namespace Code.Game.Features.Target.Systems
         {
             _targetService = targetService;
 
-            _units = context.GetGroup(GameMatcher.AllOf(
+            _units = context.GetGroup(GameMatcher
+                .AllOf(
                 GameMatcher.Transform,
                 GameMatcher.CurrentCell,
-                GameMatcher.Id).NoneOf(GameMatcher.Moving));
+                GameMatcher.Id,
+                GameMatcher.UnitSize).NoneOf(GameMatcher.Moving));
 
-            _maps = context.GetGroup(GameMatcher.AllOf(
-                GameMatcher.FlowField,
-                GameMatcher.IntegrationField,
-                GameMatcher.TargetFlow));
+            _maps = context.GetGroup(GameMatcher
+                .AllOf(
+                GameMatcher.FlowFields,
+                GameMatcher.IntegrationFields,
+                GameMatcher.OccupField,
+                GameMatcher.ReservedField,
+                GameMatcher.TilemapMovement));
         }
 
         public void Execute()
         {
             var mapEntity = _maps.GetSingleEntity();
-            var flow = mapEntity.flowField.Value;
-            var integration = mapEntity.integrationField.Value;
-            var targets = mapEntity.targetFlow.Value;
+
+            if (mapEntity == null) 
+                return;
+
+            var allFlows = mapEntity.flowFields.Value;
+            var allIntegrations = mapEntity.integrationFields.Value;
 
             foreach (var unit in _units.GetEntities())
             {
                 var cell = unit.currentCell.Value;
+                var size = unit.unitSize.Value;
+                var unitId = unit.id.Value;
 
-                if (!integration.TryGetValue(cell, out var currentCost))
+                if (!allIntegrations.TryGetValue(size, out var integration) || !allFlows.TryGetValue(size, out var flow))
                     continue;
+
+                if (!integration.TryGetValue(cell, out var currentCost) || currentCost == 0)
+                {
+                    if (unit.hasTargetCell) 
+                        unit.RemoveTargetCell();
+
+                    continue;
+                }
 
                 if (!flow.TryGetValue(cell, out var idealDir) || idealDir == Vector3Int.zero)
+                {
+                    if (unit.hasTargetCell) 
+                        unit.RemoveTargetCell();
+
                     continue;
+                }
 
                 var idealStep = cell + idealDir;
                 var chosen = cell;
                 var found = false;
 
-                if (IsCellAvailable(idealStep, unit.id.Value, mapEntity))
+                if (CanFit(idealStep, size, unitId, mapEntity))
                 {
                     chosen = idealStep;
                     found = true;
@@ -60,10 +81,10 @@ namespace Code.Game.Features.Target.Systems
 
                     foreach (var cand in _targetService.GetNeighbors(cell))
                     {
-                        if (!IsCellAvailable(cand, unit.id.Value, mapEntity)) 
+                        if (!CanFit(cand, size, unitId, mapEntity))
                             continue;
 
-                        if (IsCuttingCorner(cell, cand, mapEntity.tilemapMovement.Value)) 
+                        if (IsCuttingCorner(cell, cand, size, unitId, mapEntity))
                             continue;
 
                         if (integration.TryGetValue(cand, out var candCost))
@@ -81,32 +102,45 @@ namespace Code.Game.Features.Target.Systems
                 if (found && chosen != cell)
                     unit.ReplaceTargetCell(chosen);
                 else if (unit.hasTargetCell)
-                    unit.RemoveTargetCell();
+                     unit.RemoveTargetCell();
             }
         }
 
-        private bool IsCellAvailable(Vector3Int cell, int unitId, GameEntity map)
+        private bool CanFit(Vector3Int origin, Vector2Int size, int unitId, GameEntity map)
         {
-            if (!map.tilemapMovement.Value.ContainsKey(cell))
-                return false;
+            var tilemap = map.tilemapMovement.Value;
+            var occupField = map.occupField.Value;
+            var reservedField = map.reservedField.Value;
 
-            if (map.occupField.Value.ContainsKey(cell))
-                return false;
+            for (int x = 0; x < size.x; x++)
+            {
+                for (int y = 0; y < size.y; y++)
+                {
+                    var checkPos = new Vector3Int(origin.x + x, origin.y + y, 0);
 
-            if (map.reservedField.Value.TryGetValue(cell, out var resId) && resId != unitId)
-                return false;
+                    if (!tilemap.ContainsKey(checkPos))
+                        return false;
+
+                    if (occupField.TryGetValue(checkPos, out var occId) && occId != unitId)
+                        return false;
+
+                    if (reservedField.TryGetValue(checkPos, out var resId) && resId != unitId)
+                        return false;
+                }
+            }
 
             return true;
         }
 
-        private bool IsCuttingCorner(Vector3Int current, Vector3Int neighbor, Dictionary<Vector3Int, Vector3> tilemap)
+        private bool IsCuttingCorner(Vector3Int current, Vector3Int neighbor, Vector2Int size, int unitId, GameEntity map)
         {
             if (current.x != neighbor.x && current.y != neighbor.y)
             {
                 var corner1 = new Vector3Int(neighbor.x, current.y, 0);
                 var corner2 = new Vector3Int(current.x, neighbor.y, 0);
 
-                return !tilemap.ContainsKey(corner1) || !tilemap.ContainsKey(corner2);
+                if (!CanFit(corner1, size, unitId, map) || !CanFit(corner2, size, unitId, map))
+                    return true;
             }
 
             return false;

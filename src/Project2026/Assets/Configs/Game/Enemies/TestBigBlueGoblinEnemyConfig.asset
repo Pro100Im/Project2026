@@ -47,7 +47,7 @@ MonoBehaviour:
       type: {class: ViewPrefabProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Prefab>k__BackingField: {fileID: -3016027265122920863, guid: d49b9c95ca2a1914d95fb1ad30f87b7b, type: 3}
+        <Prefab>k__BackingField: {fileID: -3016027265122920863, guid: 3b1c2021e9833334aa49a4abc7ccf6da, type: 3}
     - rid: 8171215584738410595
       type: {class: TargetableProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
@@ -100,4 +100,4 @@ MonoBehaviour:
       type: {class: UnitSizeProperty, ns: Assets.Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Size>k__BackingField: {x: 1, y: 1}
+        <Size>k__BackingField: {x: 2, y: 2}
