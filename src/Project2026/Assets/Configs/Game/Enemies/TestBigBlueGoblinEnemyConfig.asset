@@ -72,7 +72,7 @@ MonoBehaviour:
       type: {class: HealthBarProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <HpBar>k__BackingField: {fileID: 11400000, guid: 940e7d5b532b66741ab204f744f5205b, type: 2}
+        <HpBar>k__BackingField: {fileID: 11400000, guid: 0d482d67d70352f4da18aed4c558337b, type: 2}
         <SpawnOffset>k__BackingField: {x: 0, y: 0.7, z: 0}
     - rid: 8171215584738410599
       type: {class: PhysicalAttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}

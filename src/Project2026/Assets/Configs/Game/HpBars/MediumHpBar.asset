@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2652ec64a2cfac428b7546f4941961e, type: 3}
-  m_Name: SmallHpBar
+  m_Name: MediumHpBar
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.EntityConfig
   Properties:
   - rid: 8171215579295776849
@@ -23,7 +23,7 @@ MonoBehaviour:
       type: {class: MovementOffsetProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Offset>k__BackingField: {x: 0, y: 0.5, z: 0}
+        <Offset>k__BackingField: {x: 0, y: 0.7, z: 0}
     - rid: 8171215579295776849
       type: {class: ViewPrefabProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:

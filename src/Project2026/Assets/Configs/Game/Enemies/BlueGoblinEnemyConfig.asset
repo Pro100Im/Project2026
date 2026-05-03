@@ -73,7 +73,7 @@ MonoBehaviour:
       data:
         <Mode>k__BackingField: 0
         <HpBar>k__BackingField: {fileID: 11400000, guid: 940e7d5b532b66741ab204f744f5205b, type: 2}
-        <SpawnOffset>k__BackingField: {x: 0, y: 0.7, z: 0}
+        <SpawnOffset>k__BackingField: {x: 0, y: 0.5, z: 0}
     - rid: 8171215584738410599
       type: {class: PhysicalAttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
