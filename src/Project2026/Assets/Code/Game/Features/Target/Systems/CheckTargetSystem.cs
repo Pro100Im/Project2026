@@ -79,6 +79,7 @@ namespace Code.Game.Features.Target.Systems
                 if (bestTargetId != null)
                 {
                     // To do
+                    attacker.ReplaceTargetCell(attacker.currentCell.Value);
                     attacker.isAttacking = true;
                 }
             }
