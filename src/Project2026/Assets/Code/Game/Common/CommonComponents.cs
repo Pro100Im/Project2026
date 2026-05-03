@@ -11,6 +11,7 @@ namespace Code.Game.Common
     [Game] public class SortOrder : IComponent { public int Value; } 
     [Game] public class Attached: IComponent { }
     [Game] public class OwnerId : IComponent { public int Value; }
+    [Game] public class TeamComponent : IComponent { public Team Value; }
 
     [Game] public class EntityConfigComponent : IComponent { public EntityConfig Value; }
 
@@ -28,4 +29,11 @@ namespace Code.Game.Common
 
     [Game, Input, Meta] public class Destructed : IComponent { }
     [Game, Meta] public class DelayDestruct : IComponent { }
+}
+
+public enum Team
+{
+    None,
+    Player,
+    Enemy
 }

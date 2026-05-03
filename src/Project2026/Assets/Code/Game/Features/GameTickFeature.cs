@@ -38,7 +38,7 @@ namespace Code.Game.Features
 
             Add(systemFactory.Create<MovementFeature>());
 
-            Add(systemFactory.Create<AttackFeature>());
+            //Add(systemFactory.Create<AttackFeature>());
             Add(systemFactory.Create<DamageFeature>());
 
             Add(systemFactory.Create<HealthFeature>());

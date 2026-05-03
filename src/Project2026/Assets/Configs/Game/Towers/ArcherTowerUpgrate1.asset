@@ -19,9 +19,15 @@ MonoBehaviour:
   - rid: 8171215588330831998
   - rid: 8171215588330831999
   - rid: 8171215588330832021
+  - rid: 2286602737992335451
   references:
     version: 2
     RefIds:
+    - rid: 2286602737992335451
+      type: {class: TeamProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Team>k__BackingField: 1
     - rid: 8171215588330831995
       type: {class: TowerPlaceProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:

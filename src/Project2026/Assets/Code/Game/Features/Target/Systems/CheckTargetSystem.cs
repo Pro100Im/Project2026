@@ -1,60 +1,98 @@
+using Code.Game.Common.Entity;
 using Entitas;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Code.Game.Features.Target.Systems
 {
     // To do
     public class CheckTargetSystem : IExecuteSystem
     {
-        private readonly IGroup<GameEntity> _targets;
-        private readonly IGroup<GameEntity> _enemies;
+        private readonly IGroup<GameEntity> _units;
+        private readonly IGroup<GameEntity> _maps;
 
-        public CheckTargetSystem(GameContext gameContext)
+        private readonly List<GameEntity> _buffer = new(86);
+
+        public CheckTargetSystem(GameContext context)
         {
-            _enemies = gameContext.GetGroup(GameMatcher
+            _units = context.GetGroup(GameMatcher
                 .AllOf(
-                GameMatcher.Targetable,
-                GameMatcher.Enemy));
+                GameMatcher.CurrentCell,
+                GameMatcher.UnitSize,
+                GameMatcher.Range,
+                GameMatcher.Team));
 
-            _targets = gameContext.GetGroup(GameMatcher
+            _maps = context.GetGroup(GameMatcher
                 .AllOf(
-                GameMatcher.Targetable,
-                GameMatcher.Player));
+                GameMatcher.OccupField));
         }
 
         public void Execute()
         {
-            //foreach (var enemy in _enemies)
-            //{
-            //    var minDist = float.MaxValue;
-            //    var nearestTargetId = -1;
+            var map = _maps.GetSingleEntity();
+            var occupField = map.occupField.Value;
 
-            //    foreach (var target in _targets)
-            //    {
-            //        if (target.isDead)
-            //            continue;
+            foreach (var attacker in _units.GetEntities(_buffer))
+            {
+                var attackerPos = attacker.currentCell.Value;
+                var size = attacker.unitSize.Value;
+                var range = attacker.range.Value;
 
-            //        var dist = Vector3.Distance(enemy.transform.Value.position, target.transform.Value.position);
+                var sqrRange = range * range;
+                var myTeam = attacker.team.Value;
 
-            //        if (dist < minDist)
-            //        {
-            //            minDist = dist;
-            //            nearestTargetId = target.id.Value;
-            //        }
-            //    }
+                int? bestTargetId = null;
+                var closestSqrDist = float.MaxValue;
 
-            //    if (nearestTargetId != -1)
-            //    {
-            //        if (!enemy.hasTargetId)
-            //            enemy.AddTargetId(nearestTargetId);
-            //        else if(enemy.targetId.Value != nearestTargetId)
-            //            enemy.ReplaceTargetId(nearestTargetId);
-            //    }
-            //    else
-            //    {
-            //        if (enemy.hasTargetId)
-            //            enemy.RemoveTargetId();
-            //    }
-            //}
+                var iRange = Mathf.CeilToInt(range);
+
+                for (var x = -iRange; x < size.x + iRange; x++)
+                {
+                    for (var y = -iRange; y < size.y + iRange; y++)
+                    {
+                        if (x >= 0 && x < size.x && y >= 0 && y < size.y) 
+                            continue;
+
+                        var checkPos = new Vector3Int(attackerPos.x + x, attackerPos.y + y);
+
+                        if (occupField.TryGetValue(checkPos, out int entityId))
+                        {
+                            var sDist = GetSqrDistanceToCell(attackerPos, size, checkPos);
+
+                            if (sDist <= sqrRange)
+                            {
+                                var target = GetGameEntityById.Get(entityId);
+
+                                if (target != null && target.team.Value != myTeam)
+                                {
+                                    if (sDist < closestSqrDist)
+                                    {
+                                        closestSqrDist = sDist;
+                                        bestTargetId = entityId;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (bestTargetId != null)
+                {
+                    // To do
+                    attacker.isAttacking = true;
+                }
+            }
+        }
+
+        private float GetSqrDistanceToCell(Vector3Int origin, Vector2Int size, Vector3Int cell)
+        {
+            var closestX = Mathf.Clamp(cell.x, origin.x, origin.x + size.x - 1);
+            var closestY = Mathf.Clamp(cell.y, origin.y, origin.y + size.y - 1);
+
+            var dx = cell.x - closestX;
+            var dy = cell.y - closestY;
+
+            return (dx * dx) + (dy * dy);
         }
     }
 }

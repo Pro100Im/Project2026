@@ -1,5 +1,6 @@
 using Code.Game.Features.Target.Services;
 using Entitas;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code.Game.Features.Target.Systems
@@ -7,8 +8,11 @@ namespace Code.Game.Features.Target.Systems
     public class SelectTargetCellSystem : IExecuteSystem
     {
         private readonly TargetService _targetService;
+
         private readonly IGroup<GameEntity> _units;
         private readonly IGroup<GameEntity> _maps;
+
+        private readonly List<GameEntity> _buffer = new(86);
 
         public SelectTargetCellSystem(GameContext context, TargetService targetService)
         {
@@ -40,7 +44,7 @@ namespace Code.Game.Features.Target.Systems
             var allFlows = mapEntity.flowFields.Value;
             var allIntegrations = mapEntity.integrationFields.Value;
 
-            foreach (var unit in _units.GetEntities())
+            foreach (var unit in _units.GetEntities(_buffer))
             {
                 var cell = unit.currentCell.Value;
                 var size = unit.unitSize.Value;

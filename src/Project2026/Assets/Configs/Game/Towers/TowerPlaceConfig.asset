@@ -16,9 +16,15 @@ MonoBehaviour:
   - rid: 8171215588330831983
   - rid: 8171215588330831984
   - rid: 8171215588330831991
+  - rid: 2286602737992335452
   references:
     version: 2
     RefIds:
+    - rid: 2286602737992335452
+      type: {class: TeamProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Team>k__BackingField: 1
     - rid: 8171215588330831983
       type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:

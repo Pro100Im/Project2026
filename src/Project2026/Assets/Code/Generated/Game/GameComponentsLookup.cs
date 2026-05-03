@@ -19,71 +19,72 @@ public static class GameComponentsLookup {
     public const int SortOrder = 8;
     public const int Sprite = 9;
     public const int SpriteRenderer = 10;
-    public const int TouchZone = 11;
-    public const int Transform = 12;
-    public const int UIDocument = 13;
-    public const int View = 14;
-    public const int ViewPath = 15;
-    public const int ViewPrefab = 16;
-    public const int AttackAvailable = 17;
-    public const int AttackCooldown = 18;
-    public const int AttackDirection = 19;
-    public const int AttackDuration = 20;
-    public const int AttackerPoint = 21;
-    public const int Attacking = 22;
-    public const int Hitted = 23;
-    public const int MeleeAttack = 24;
-    public const int PhysicalAttackHitEffect = 25;
-    public const int Range = 26;
-    public const int RangeAttack = 27;
-    public const int Cooldown = 28;
-    public const int Damage = 29;
-    public const int DamageRequest = 30;
-    public const int Dead = 31;
-    public const int DeathDuration = 32;
-    public const int Killable = 33;
-    public const int Duration = 34;
-    public const int Enemy = 35;
-    public const int CurrentHealth = 36;
-    public const int HpBar = 37;
-    public const int MaxHealth = 38;
-    public const int FlowFieldDirty = 39;
-    public const int FlowFields = 40;
-    public const int IntegrationFields = 41;
-    public const int OccupField = 42;
-    public const int ReservedField = 43;
-    public const int SpawnMap = 44;
-    public const int SpawnReservedField = 45;
-    public const int TilemapMovement = 46;
-    public const int CurrentCell = 47;
-    public const int LastDirection = 48;
-    public const int MovementAvailable = 49;
-    public const int MovementOffset = 50;
-    public const int MovementSpeed = 51;
-    public const int Moving = 52;
-    public const int PlayerCastle = 53;
-    public const int PlayerCastleCells = 54;
-    public const int Player = 55;
-    public const int SpawnPosition = 56;
-    public const int SpawnRequsted = 57;
-    public const int WaitingToSpawn = 58;
-    public const int Targetable = 59;
-    public const int TargetCell = 60;
-    public const int TargetFlow = 61;
-    public const int TargetId = 62;
-    public const int TargetPoint = 63;
-    public const int Tower = 64;
-    public const int TowerBuildRequest = 65;
-    public const int TowerPlace = 66;
-    public const int Unit = 67;
-    public const int UnitSize = 68;
-    public const int CurrentWaveEnemies = 69;
-    public const int CurrentWaveNumber = 70;
-    public const int WaveEnemiesAlive = 71;
-    public const int WaveInProgress = 72;
-    public const int WaveStartRequsted = 73;
+    public const int Team = 11;
+    public const int TouchZone = 12;
+    public const int Transform = 13;
+    public const int UIDocument = 14;
+    public const int View = 15;
+    public const int ViewPath = 16;
+    public const int ViewPrefab = 17;
+    public const int AttackAvailable = 18;
+    public const int AttackCooldown = 19;
+    public const int AttackDirection = 20;
+    public const int AttackDuration = 21;
+    public const int AttackerPoint = 22;
+    public const int Attacking = 23;
+    public const int Hitted = 24;
+    public const int MeleeAttack = 25;
+    public const int PhysicalAttackHitEffect = 26;
+    public const int Range = 27;
+    public const int RangeAttack = 28;
+    public const int Cooldown = 29;
+    public const int Damage = 30;
+    public const int DamageRequest = 31;
+    public const int Dead = 32;
+    public const int DeathDuration = 33;
+    public const int Killable = 34;
+    public const int Duration = 35;
+    public const int Enemy = 36;
+    public const int CurrentHealth = 37;
+    public const int HpBar = 38;
+    public const int MaxHealth = 39;
+    public const int FlowFieldDirty = 40;
+    public const int FlowFields = 41;
+    public const int IntegrationFields = 42;
+    public const int OccupField = 43;
+    public const int ReservedField = 44;
+    public const int SpawnMap = 45;
+    public const int SpawnReservedField = 46;
+    public const int TilemapMovement = 47;
+    public const int CurrentCell = 48;
+    public const int LastDirection = 49;
+    public const int MovementAvailable = 50;
+    public const int MovementOffset = 51;
+    public const int MovementSpeed = 52;
+    public const int Moving = 53;
+    public const int PlayerCastle = 54;
+    public const int PlayerCastleCells = 55;
+    public const int Player = 56;
+    public const int SpawnPosition = 57;
+    public const int SpawnRequsted = 58;
+    public const int WaitingToSpawn = 59;
+    public const int Targetable = 60;
+    public const int TargetCell = 61;
+    public const int TargetFlow = 62;
+    public const int TargetId = 63;
+    public const int TargetPoint = 64;
+    public const int Tower = 65;
+    public const int TowerBuildRequest = 66;
+    public const int TowerPlace = 67;
+    public const int Unit = 68;
+    public const int UnitSize = 69;
+    public const int CurrentWaveEnemies = 70;
+    public const int CurrentWaveNumber = 71;
+    public const int WaveEnemiesAlive = 72;
+    public const int WaveInProgress = 73;
+    public const int WaveStartRequsted = 74;
 
-    public const int TotalComponents = 74;
+    public const int TotalComponents = 75;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -97,6 +98,7 @@ public static class GameComponentsLookup {
         "SortOrder",
         "Sprite",
         "SpriteRenderer",
+        "Team",
         "TouchZone",
         "Transform",
         "UIDocument",
@@ -174,6 +176,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Common.SortOrder),
         typeof(Code.Game.Common.SpriteComponent),
         typeof(Code.Game.Common.SpriteRendererComponent),
+        typeof(Code.Game.Common.TeamComponent),
         typeof(Code.Game.Common.TouchZoneComponent),
         typeof(Code.Game.Common.TransformComponent),
         typeof(Code.Game.Common.UIDocumentComponent),

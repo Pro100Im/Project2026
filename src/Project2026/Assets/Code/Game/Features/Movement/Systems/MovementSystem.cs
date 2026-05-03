@@ -40,7 +40,7 @@ namespace Code.Game.Features.Movement.Systems
 
             foreach (var unit in units)
             {
-                if (!unit.hasTargetCell)
+                if (!unit.hasTargetCell || unit.isAttacking)
                 {
                     unit.isMoving = false;
 
