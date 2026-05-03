@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace Code.Game.Features.Target.Systems
 {
-    // To do
     public class CheckTargetSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _units;
@@ -41,7 +40,8 @@ namespace Code.Game.Features.Target.Systems
                 var sqrRange = range * range;
                 var myTeam = attacker.team.Value;
 
-                int? bestTargetId = null;
+                var bestTargetId = -1;
+                var bestTargetCell = attacker.currentCell.Value;
                 var closestSqrDist = float.MaxValue;
 
                 var iRange = Mathf.CeilToInt(range);
@@ -69,6 +69,7 @@ namespace Code.Game.Features.Target.Systems
                                     {
                                         closestSqrDist = sDist;
                                         bestTargetId = entityId;
+                                        bestTargetCell = checkPos;
                                     }
                                 }
                             }
@@ -76,10 +77,10 @@ namespace Code.Game.Features.Target.Systems
                     }
                 }
 
-                if (bestTargetId != null)
+                if (bestTargetId != -1)
                 {
-                    // To do
-                    attacker.ReplaceTargetCell(attacker.currentCell.Value);
+                    attacker.ReplaceTargetCell(bestTargetCell);
+                    attacker.ReplaceTargetId(bestTargetId);
                     attacker.isAttacking = true;
                 }
             }

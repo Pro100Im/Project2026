@@ -44,7 +44,6 @@ namespace Code.Game.Features.Attack.Systems
 
                 var entity = CreateGameEntity.Empty();
 
-                entity.AddPhysicalAttackHitEffect(attacker.physicalAttackHitEffect.Value);
                 entity.AddOwnerId(attacker.id.Value);
                 entity.AddTargetId(targetId);
                 entity.AddCooldown(attacker.attackCooldown.Value);
