@@ -1,3 +1,4 @@
+using Code.Game.Common.Entity;
 using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
@@ -5,6 +6,7 @@ using UnityEngine;
 
 namespace Code.Game.Features.Target.Systems
 {
+    // to do remove magic numbs
     public class SelectTargetCellSystem : IExecuteSystem
     {
         private readonly TargetService _targetService;
@@ -12,7 +14,7 @@ namespace Code.Game.Features.Target.Systems
         private readonly IGroup<GameEntity> _units;
         private readonly IGroup<GameEntity> _maps;
 
-        private readonly List<GameEntity> _buffer = new(86);
+        private readonly List<GameEntity> _buffer = new(128);
 
         public SelectTargetCellSystem(GameContext context, TargetService targetService)
         {
@@ -20,18 +22,20 @@ namespace Code.Game.Features.Target.Systems
 
             _units = context.GetGroup(GameMatcher
                 .AllOf(
-                GameMatcher.Transform,
-                GameMatcher.CurrentCell,
-                GameMatcher.Id,
-                GameMatcher.UnitSize).NoneOf(GameMatcher.Moving));
+                    GameMatcher.Transform,
+                    GameMatcher.CurrentCell,
+                    GameMatcher.Id,
+                    GameMatcher.UnitSize,
+                    GameMatcher.Team)
+                .NoneOf(GameMatcher.Moving));
 
             _maps = context.GetGroup(GameMatcher
                 .AllOf(
-                GameMatcher.FlowFields,
-                GameMatcher.IntegrationFields,
-                GameMatcher.OccupField,
-                GameMatcher.ReservedField,
-                GameMatcher.TilemapMovement));
+                    GameMatcher.FlowFields,
+                    GameMatcher.IntegrationFields,
+                    GameMatcher.OccupField,
+                    GameMatcher.ReservedField,
+                    GameMatcher.TilemapMovement));
         }
 
         public void Execute()
@@ -49,6 +53,7 @@ namespace Code.Game.Features.Target.Systems
                 var cell = unit.currentCell.Value;
                 var size = unit.unitSize.Value;
                 var unitId = unit.id.Value;
+                var myTeam = unit.team.Value;
 
                 if (!allIntegrations.TryGetValue(size, out var integration) || !allFlows.TryGetValue(size, out var flow))
                     continue;
@@ -70,35 +75,57 @@ namespace Code.Game.Features.Target.Systems
                 }
 
                 var idealStep = cell + idealDir;
+                var bestCost = (float)currentCost;
+
+                if (!CanFit(idealStep, size, unitId, mapEntity, out int blockingId))
+                {
+                    int pushPenalty = 20;
+
+                    if (blockingId != -1)
+                    {
+                        var blockingUnit = GetGameEntityById.Get(blockingId);
+                        if (blockingUnit != null && blockingUnit.hasTeam && blockingUnit.team.Value == myTeam)
+                        {
+                            if (blockingUnit.isAttacking)
+                                pushPenalty = 100;
+                            else if (!blockingUnit.isMoving)
+                                pushPenalty = 50;
+                            else
+                                pushPenalty = 5;
+                        }
+                    }
+
+                    bestCost += pushPenalty;
+                }
+
                 var chosen = cell;
                 var found = false;
 
-                if (CanFit(idealStep, size, unitId, mapEntity))
+                foreach (var cand in _targetService.GetNeighbors(cell))
                 {
-                    chosen = idealStep;
-                    found = true;
-                }
+                    if (!CanFit(cand, size, unitId, mapEntity, out _)) 
+                        continue;
 
-                if (!found)
-                {
-                    var bestCost = currentCost;
+                    if (IsCuttingCorner(cell, cand, size, unitId, mapEntity)) 
+                        continue;
 
-                    foreach (var cand in _targetService.GetNeighbors(cell))
+                    if (integration.TryGetValue(cand, out var candCost))
                     {
-                        if (!CanFit(cand, size, unitId, mapEntity))
-                            continue;
+                        var totalCandCost = (float)candCost;
 
-                        if (IsCuttingCorner(cell, cand, size, unitId, mapEntity))
-                            continue;
-
-                        if (integration.TryGetValue(cand, out var candCost))
+                        if (unit.hasLastDirection && unit.lastDirection.Value == (cand - cell))
                         {
-                            if (candCost < bestCost + 5)
-                            {
-                                bestCost = candCost;
-                                chosen = cand;
-                                found = true;
-                            }
+                            totalCandCost -= 2.5f;
+                        }
+
+                        var jitter = (unitId % 10) * 0.1f;
+                        totalCandCost += jitter;
+
+                        if (totalCandCost < bestCost)
+                        {
+                            bestCost = totalCandCost;
+                            chosen = cand;
+                            found = true;
                         }
                     }
                 }
@@ -106,19 +133,21 @@ namespace Code.Game.Features.Target.Systems
                 if (found && chosen != cell)
                     unit.ReplaceTargetCell(chosen);
                 else if (unit.hasTargetCell)
-                     unit.RemoveTargetCell();
+                    unit.RemoveTargetCell();
             }
         }
 
-        private bool CanFit(Vector3Int origin, Vector2Int size, int unitId, GameEntity map)
+        private bool CanFit(Vector3Int origin, Vector2Int size, int unitId, GameEntity map, out int blockingEntityId)
         {
+            blockingEntityId = -1;
+
             var tilemap = map.tilemapMovement.Value;
             var occupField = map.occupField.Value;
             var reservedField = map.reservedField.Value;
 
-            for (int x = 0; x < size.x; x++)
+            for (var x = 0; x < size.x; x++)
             {
-                for (int y = 0; y < size.y; y++)
+                for (var y = 0; y < size.y; y++)
                 {
                     var checkPos = new Vector3Int(origin.x + x, origin.y + y, 0);
 
@@ -126,10 +155,18 @@ namespace Code.Game.Features.Target.Systems
                         return false;
 
                     if (occupField.TryGetValue(checkPos, out var occId) && occId != unitId)
+                    {
+                        blockingEntityId = occId;
+
                         return false;
+                    }
 
                     if (reservedField.TryGetValue(checkPos, out var resId) && resId != unitId)
+                    {
+                        blockingEntityId = resId;
+
                         return false;
+                    }
                 }
             }
 
@@ -143,7 +180,7 @@ namespace Code.Game.Features.Target.Systems
                 var corner1 = new Vector3Int(neighbor.x, current.y, 0);
                 var corner2 = new Vector3Int(current.x, neighbor.y, 0);
 
-                if (!CanFit(corner1, size, unitId, map) || !CanFit(corner2, size, unitId, map))
+                if (!CanFit(corner1, size, unitId, map, out _) || !CanFit(corner2, size, unitId, map, out _))
                     return true;
             }
 
