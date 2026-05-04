@@ -41,7 +41,7 @@ namespace Code.Game.Features.Target.Systems
                 var myTeam = attacker.team.Value;
 
                 var bestTargetId = -1;
-                var bestTargetCell = attacker.currentCell.Value;
+                var bestTargetCell = attackerPos;
                 var closestSqrDist = float.MaxValue;
 
                 var iRange = Mathf.CeilToInt(range);
@@ -79,9 +79,10 @@ namespace Code.Game.Features.Target.Systems
 
                 if (bestTargetId != -1)
                 {
+                    attacker.ReplaceAttackerPoint(map.tilemapMovement.Value[attackerPos]);
+                    attacker.ReplaceTargetPoint(map.tilemapMovement.Value[bestTargetCell]);
                     attacker.ReplaceTargetCell(bestTargetCell);
                     attacker.ReplaceTargetId(bestTargetId);
-                    attacker.isAttacking = true;
                 }
             }
         }

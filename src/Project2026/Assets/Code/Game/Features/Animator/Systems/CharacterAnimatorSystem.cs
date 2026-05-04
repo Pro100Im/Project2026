@@ -42,26 +42,23 @@ namespace Code.Game.Features.Animator.Systems
 
                 if(character.isAttacking)
                 {
-                    //switch (character.attackDirection.Value)
-                    //{
-                    //    case AttackDirection.Side:
-                    //        if (!stateInfo.IsName("AttackRight"))
-                    //            animator.Play("AttackRight");
-                    //        break;
+                    switch (character.attackDirection.Value)
+                    {
+                        case AttackDirection.Side:
+                            if (!stateInfo.IsName("AttackRight"))
+                                animator.Play("AttackRight");
+                            break;
 
-                    //    case AttackDirection.Up:
-                    //        if (!stateInfo.IsName("AttackUp"))
-                    //            animator.Play("AttackUp");
-                    //        break;
+                        case AttackDirection.Up:
+                            if (!stateInfo.IsName("AttackUp"))
+                                animator.Play("AttackUp");
+                            break;
 
-                    //    case AttackDirection.Down:
-                    //        if (!stateInfo.IsName("AttackDown"))
-                    //            animator.Play("AttackDown");
-                    //        break;
-                    //}
-
-                    if (!stateInfo.IsName("AttackRight"))
-                        animator.Play("AttackRight");
+                        case AttackDirection.Down:
+                            if (!stateInfo.IsName("AttackDown"))
+                                animator.Play("AttackDown");
+                            break;
+                    }
 
                     continue;
                 }

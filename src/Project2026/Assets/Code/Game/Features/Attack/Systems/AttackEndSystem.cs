@@ -15,7 +15,6 @@ namespace Code.Game.Features.Attack.Systems
                 .AllOf(
                     GameMatcher.PhysicalAttackHitEffect,
                     GameMatcher.OwnerId,
-                    GameMatcher.TargetId,
                     GameMatcher.Cooldown,
                     GameMatcher.Duration));
         }
@@ -50,8 +49,8 @@ namespace Code.Game.Features.Attack.Systems
 
                     var damage = CreateGameEntity.Empty();
 
-                    damage.AddOwnerId(attack.ownerId.Value);
-                    damage.AddTargetId(attack.targetId.Value);
+                    damage.AddOwnerId(entity.id.Value);
+                    damage.AddTargetId(entity.targetId.Value);
                     damage.AddDamage(hitEffect.damage.Value);
                     damage.isDamageRequest = true;
                 }

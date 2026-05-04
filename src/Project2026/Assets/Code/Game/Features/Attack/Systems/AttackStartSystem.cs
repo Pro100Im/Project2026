@@ -44,14 +44,19 @@ namespace Code.Game.Features.Attack.Systems
 
                 var entity = CreateGameEntity.Empty();
 
+                if (attacker.isMeleeAttack)
+                    entity.isMeleeAttack = true;
+                else
+                    entity.isRangeAttack = true;
+
                 entity.AddOwnerId(attacker.id.Value);
-                entity.AddTargetId(targetId);
                 entity.AddCooldown(attacker.attackCooldown.Value);
                 entity.AddDuration(attacker.attackDuration.Value);
+                entity.AddPhysicalAttackHitEffect(attacker.physicalAttackHitEffect.Value);
             }
         }
 
-        private AttackDirection GetAttackDirection(Vector2 closestA, Vector2 closestB)
+        private AttackDirection GetAttackDirection(Vector3 closestA, Vector3 closestB)
         {
             var dir = closestB - closestA;
 
