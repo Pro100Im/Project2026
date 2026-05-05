@@ -42,7 +42,7 @@ namespace Code.Game.Features.Target.Systems
         {
             var mapEntity = _maps.GetSingleEntity();
 
-            if (mapEntity == null) 
+            if (mapEntity == null)
                 return;
 
             var allFlows = mapEntity.flowFields.Value;
@@ -60,7 +60,7 @@ namespace Code.Game.Features.Target.Systems
 
                 if (!integration.TryGetValue(cell, out var currentCost) || currentCost == 0)
                 {
-                    if (unit.hasTargetCell) 
+                    if (unit.hasTargetCell)
                         unit.RemoveTargetCell();
 
                     continue;
@@ -68,7 +68,7 @@ namespace Code.Game.Features.Target.Systems
 
                 if (!flow.TryGetValue(cell, out var idealDir) || idealDir == Vector3Int.zero)
                 {
-                    if (unit.hasTargetCell) 
+                    if (unit.hasTargetCell)
                         unit.RemoveTargetCell();
 
                     continue;
@@ -101,21 +101,35 @@ namespace Code.Game.Features.Target.Systems
                 var chosen = cell;
                 var found = false;
 
+                if (CanFit(idealStep, size, unitId, mapEntity, out _))
+                {
+                    chosen = idealStep;
+                    found = true;
+                    bestCost = integration[idealStep];
+                }
+
                 foreach (var cand in _targetService.GetNeighbors(cell))
                 {
-                    if (!CanFit(cand, size, unitId, mapEntity, out _)) 
+                    if (!CanFit(cand, size, unitId, mapEntity, out _))
                         continue;
 
-                    if (IsCuttingCorner(cell, cand, size, unitId, mapEntity)) 
+                    if (IsCuttingCorner(cell, cand, size, unitId, mapEntity))
                         continue;
 
                     if (integration.TryGetValue(cand, out var candCost))
                     {
                         var totalCandCost = (float)candCost;
+                        var moveDir = cand - cell;
 
-                        if (unit.hasLastDirection && unit.lastDirection.Value == (cand - cell))
+                        if (cand == idealStep)
+                            totalCandCost -= 20.0f;
+
+                        if (unit.hasLastDirection)
                         {
-                            totalCandCost -= 2.5f;
+                            if (unit.lastDirection.Value == moveDir)
+                                totalCandCost -= 8.0f;
+                            else if (unit.lastDirection.Value == -moveDir)
+                                totalCandCost += 100.0f;
                         }
 
                         var jitter = (unitId % 10) * 0.1f;
