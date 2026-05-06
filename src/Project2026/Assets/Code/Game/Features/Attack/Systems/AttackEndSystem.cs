@@ -42,10 +42,14 @@ namespace Code.Game.Features.Attack.Systems
                 {
                     var hitEffect = CreateGameEntity.Empty();
                     var targetPoint = entity.targetPoint.Value;
-                    var movementOffset = entity.movementOffset.Value;
 
-                    targetPoint.x += movementOffset.x;
-                    targetPoint.y += movementOffset.y;
+                    if (entity.hasMovementOffset)
+                    {
+                        var movementOffset = entity.movementOffset.Value;
+
+                        targetPoint.x += movementOffset.x;
+                        targetPoint.y += movementOffset.y;
+                    }
 
                     hitEffect.AddSpawnPosition(targetPoint);
 

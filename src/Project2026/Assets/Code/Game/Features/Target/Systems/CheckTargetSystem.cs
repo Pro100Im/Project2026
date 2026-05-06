@@ -19,7 +19,8 @@ namespace Code.Game.Features.Target.Systems
                 GameMatcher.CurrentCell,
                 GameMatcher.UnitSize,
                 GameMatcher.Range,
-                GameMatcher.Team));
+                GameMatcher.Team,
+                GameMatcher.Transform));
 
             _maps = context.GetGroup(GameMatcher
                 .AllOf(
@@ -29,7 +30,12 @@ namespace Code.Game.Features.Target.Systems
         public void Execute()
         {
             var map = _maps.GetSingleEntity();
+
+            if (map == null || !map.hasOccupField || !map.hasTilemapMovement)
+                return;
+
             var occupField = map.occupField.Value;
+            var tilemapMovement = map.tilemapMovement.Value;
 
             foreach (var attacker in _units.GetEntities(_buffer))
             {
@@ -50,7 +56,7 @@ namespace Code.Game.Features.Target.Systems
                 {
                     for (var y = -iRange; y < size.y + iRange; y++)
                     {
-                        if (x >= 0 && x < size.x && y >= 0 && y < size.y) 
+                        if (x >= 0 && x < size.x && y >= 0 && y < size.y)
                             continue;
 
                         var checkPos = new Vector3Int(attackerPos.x + x, attackerPos.y + y);
@@ -63,26 +69,35 @@ namespace Code.Game.Features.Target.Systems
                             {
                                 var target = GetGameEntityById.Get(entityId);
 
-                                if (target != null && target.team.Value != myTeam)
+                                if (target != null && target.team.Value != myTeam && target.isTargetable)
                                 {
                                     if (sDist < closestSqrDist)
                                     {
                                         closestSqrDist = sDist;
                                         bestTargetId = entityId;
                                         bestTargetCell = checkPos;
+
+                                        break;
                                     }
                                 }
                             }
+                            else if (sDist > sqrRange && attacker.hasTargetId)
+                            {
+                                attacker.RemoveTargetId();
+                            }
                         }
                     }
-                }
 
-                if (bestTargetId != -1)
-                {
-                    attacker.ReplaceAttackerPoint(map.tilemapMovement.Value[attackerPos]);
-                    attacker.ReplaceTargetPoint(map.tilemapMovement.Value[bestTargetCell]);
-                    attacker.ReplaceTargetCell(bestTargetCell);
-                    attacker.ReplaceTargetId(bestTargetId);
+                    if (bestTargetId != -1)
+                    {
+                        var attackerWorldPos = attacker.transform.Value.position;
+                        var targetWorldPos = tilemapMovement[bestTargetCell];
+
+                        attacker.ReplaceAttackerPoint(attackerWorldPos);
+                        attacker.ReplaceTargetPoint(targetWorldPos);
+                        attacker.ReplaceTargetCell(bestTargetCell);
+                        attacker.ReplaceTargetId(bestTargetId);
+                    }
                 }
             }
         }

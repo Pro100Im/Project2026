@@ -199,6 +199,7 @@ GameObject:
   - component: {fileID: 8753180154002075427}
   - component: {fileID: 7667458447140556987}
   - component: {fileID: 1617053973099726546}
+  - component: {fileID: 2597235737700626872}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -376,3 +377,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Registrars.BoundsRegistrar
   EntityView: {fileID: 7695083838553810320}
   _bounds: {fileID: 3722580189642613763}
+--- !u!114 &2597235737700626872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7357662842468826693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 046bc51409dc90347bdcbdaaf705261b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Player.Registrars.CurrentCellRegistrar
+  EntityView: {fileID: 7695083838553810320}
+  _tilemap: {fileID: 0}
+  _cell: {x: 0, y: 0, z: 0}
+  _size: {x: 0, y: 0}

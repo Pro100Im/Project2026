@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 namespace Code.Game.Features.Player.Registrars
 {
     [Serializable]
-    public class PlayerCastleRegistrar : EntityComponentRegistrar
+    public class CurrentCellRegistrar : EntityComponentRegistrar
     {
         [SerializeField] private Tilemap _tilemap;
         [Space]
