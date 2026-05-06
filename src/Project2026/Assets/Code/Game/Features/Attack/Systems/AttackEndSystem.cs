@@ -41,8 +41,13 @@ namespace Code.Game.Features.Attack.Systems
                 if(entity.isAttacking)
                 {
                     var hitEffect = CreateGameEntity.Empty();
+                    var targetPoint = entity.targetPoint.Value;
+                    var movementOffset = entity.movementOffset.Value;
 
-                    hitEffect.AddSpawnPosition(entity.targetPoint.Value);
+                    targetPoint.x += movementOffset.x;
+                    targetPoint.y += movementOffset.y;
+
+                    hitEffect.AddSpawnPosition(targetPoint);
 
                     foreach (var property in entity.physicalAttackHitEffect.Value.Properties)
                         property.Apply(hitEffect);
