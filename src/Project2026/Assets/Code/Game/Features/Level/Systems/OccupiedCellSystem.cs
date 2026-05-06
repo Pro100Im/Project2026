@@ -29,7 +29,7 @@ namespace Code.Game.Features.Level.Systems
 
             foreach (var entity in _entities)
             {
-                if (entity.isMoving) 
+                if (entity.isMoving || entity.isDead) 
                     continue;
 
                 var origin = entity.currentCell.Value;

@@ -30,6 +30,9 @@ namespace Code.Game.Features.Level.Systems
 
             foreach (var unit in _units)
             {
+                if(unit.isDead)
+                    continue;
+
                 var targetOrigin = unit.targetCell.Value;
                 var size = unit.unitSize.Value;
 

@@ -84,7 +84,8 @@ namespace Code.Game.Features.Target.Systems
                     if (blockingId != -1)
                     {
                         var blockingUnit = GetGameEntityById.Get(blockingId);
-                        if (blockingUnit != null && blockingUnit.hasTeam && blockingUnit.team.Value == myTeam)
+
+                        if (blockingUnit != null && blockingUnit.hasTeam && blockingUnit.team.Value == myTeam && !blockingUnit.isDead)
                         {
                             if (blockingUnit.isAttacking)
                                 pushPenalty = 100;

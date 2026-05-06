@@ -69,7 +69,7 @@ namespace Code.Game.Features.Target.Systems
                             {
                                 var target = GetGameEntityById.Get(entityId);
 
-                                if (target != null && target.team.Value != myTeam && target.isTargetable)
+                                if (target != null && target.team.Value != myTeam && target.isTargetable && !target.isDead)
                                 {
                                     if (sDist < closestSqrDist)
                                     {
