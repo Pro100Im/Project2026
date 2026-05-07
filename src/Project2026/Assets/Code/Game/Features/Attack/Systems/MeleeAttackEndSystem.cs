@@ -4,19 +4,20 @@ using System.Collections.Generic;
 
 namespace Code.Game.Features.Attack.Systems
 {
-    public class AttackEndSystem : IExecuteSystem
+    public class MeleeAttackEndSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _attacks;
         private readonly List<GameEntity> _buffer = new(64);
 
-        public AttackEndSystem(GameContext gameContext)
+        public MeleeAttackEndSystem(GameContext gameContext)
         {
             _attacks = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.PhysicalAttackHitEffect,
                     GameMatcher.OwnerId,
                     GameMatcher.Cooldown,
-                    GameMatcher.Duration));
+                    GameMatcher.Duration,
+                    GameMatcher.MeleeAttack));
         }
 
         public void Execute()

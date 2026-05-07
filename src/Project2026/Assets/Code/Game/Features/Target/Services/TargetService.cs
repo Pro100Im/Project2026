@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Code.Game.Features.Attack;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code.Game.Features.Target.Services
@@ -16,6 +17,16 @@ namespace Code.Game.Features.Target.Services
             yield return new Vector3Int(cell.x - 1, cell.y + 1, 0);
             yield return new Vector3Int(cell.x + 1, cell.y - 1, 0);
             yield return new Vector3Int(cell.x - 1, cell.y - 1, 0);
+        }
+
+        public AttackDirection GetAttackDirection(Vector3 closestA, Vector3 closestB)
+        {
+            var dir = closestB - closestA;
+
+            if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+                return AttackDirection.Side;
+            else
+                return dir.y > 0 ? AttackDirection.Up : AttackDirection.Down;
         }
     }
 }

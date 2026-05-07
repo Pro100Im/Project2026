@@ -175,8 +175,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<AttachPosToTargetSystem>(Lifetime.Singleton);
 
             builder.Register<AttackStartSystem>(Lifetime.Singleton);
-            builder.Register<AttackProcessSystem>(Lifetime.Singleton);
-            builder.Register<AttackEndSystem>(Lifetime.Singleton);
+            builder.Register<MeleeAttackEndSystem>(Lifetime.Singleton);
 
             builder.Register<ApplyDamageSystem>(Lifetime.Singleton);
             builder.Register<HealthBarSystem>(Lifetime.Singleton);

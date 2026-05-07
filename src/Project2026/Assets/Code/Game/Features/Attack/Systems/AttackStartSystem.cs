@@ -1,15 +1,19 @@
 using Code.Game.Common.Entity;
+using Code.Game.Features.Target.Services;
 using Entitas;
-using UnityEngine;
 
 namespace Code.Game.Features.Attack.Systems
 {
     public class AttackStartSystem : IExecuteSystem
     {
+        private readonly TargetService _targetService;
+
         private readonly IGroup<GameEntity> _attackers;
 
-        public AttackStartSystem(GameContext gameContext)
+        public AttackStartSystem(GameContext gameContext, TargetService targetService)
         {
+            _targetService = targetService;
+
             _attackers = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Id,
@@ -32,7 +36,7 @@ namespace Code.Game.Features.Attack.Systems
                 if (target.isDead)
                     continue;
 
-                var attackDirection = GetAttackDirection(attacker.attackerPoint.Value, attacker.targetPoint.Value);
+                var attackDirection = _targetService.GetAttackDirection(attacker.attackerPoint.Value, attacker.targetPoint.Value);
 
                 if (attacker.hasAttackDirection)
                     attacker.ReplaceAttackDirection(attackDirection);
@@ -44,26 +48,14 @@ namespace Code.Game.Features.Attack.Systems
 
                 var entity = CreateGameEntity.Empty();
 
-                if (attacker.isMeleeAttack)
-                    entity.isMeleeAttack = true;
-                else
-                    entity.isRangeAttack = true;
-
                 entity.AddOwnerId(attacker.id.Value);
                 entity.AddCooldown(attacker.attackCooldown.Value);
                 entity.AddDuration(attacker.attackDuration.Value);
                 entity.AddPhysicalAttackHitEffect(attacker.physicalAttackHitEffect.Value);
+
+                entity.isMeleeAttack = attacker.isMeleeAttack;
+                entity.isRangeAttack = attacker.isRangeAttack;
             }
-        }
-
-        private AttackDirection GetAttackDirection(Vector3 closestA, Vector3 closestB)
-        {
-            var dir = closestB - closestA;
-
-            if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
-                return AttackDirection.Side;
-            else
-                return dir.y > 0 ? AttackDirection.Up : AttackDirection.Down;
         }
     }
 }
