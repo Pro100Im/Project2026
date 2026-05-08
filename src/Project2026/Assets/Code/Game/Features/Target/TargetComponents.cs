@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Code.Game.Features.Target
 {
     [Game] public class Targetable : IComponent { }
+    [Game] public class TargetCellRequest : IComponent { }
     [Game] [Input] public class TargetId : IComponent { public int Value; }
     [Game] public class TargetPoint : IComponent { public Vector2 Value; }
     [Game] public class TargetFlow : IComponent { public List<Vector3Int> Value; }

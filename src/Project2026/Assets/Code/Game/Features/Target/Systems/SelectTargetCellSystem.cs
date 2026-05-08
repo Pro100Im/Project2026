@@ -26,8 +26,9 @@ namespace Code.Game.Features.Target.Systems
                     GameMatcher.CurrentCell,
                     GameMatcher.Id,
                     GameMatcher.UnitSize,
-                    GameMatcher.Team)
-                .NoneOf(GameMatcher.Moving));
+                    GameMatcher.Team,
+                    GameMatcher.TargetCellRequest,
+                    GameMatcher.MovementAvailable));
 
             _maps = context.GetGroup(GameMatcher
                 .AllOf(
@@ -63,6 +64,8 @@ namespace Code.Game.Features.Target.Systems
                     if (unit.hasTargetCell)
                         unit.RemoveTargetCell();
 
+                    unit.isTargetCellRequest = false;
+
                     continue;
                 }
 
@@ -70,6 +73,8 @@ namespace Code.Game.Features.Target.Systems
                 {
                     if (unit.hasTargetCell)
                         unit.RemoveTargetCell();
+
+                    unit.isTargetCellRequest = false;
 
                     continue;
                 }
@@ -79,7 +84,7 @@ namespace Code.Game.Features.Target.Systems
 
                 if (!CanFit(idealStep, size, unitId, mapEntity, out int blockingId))
                 {
-                    int pushPenalty = 20;
+                    var pushPenalty = 20;
 
                     if (blockingId != -1)
                     {
@@ -134,6 +139,7 @@ namespace Code.Game.Features.Target.Systems
                         }
 
                         var jitter = (unitId % 10) * 0.1f;
+
                         totalCandCost += jitter;
 
                         if (totalCandCost < bestCost)
@@ -149,6 +155,8 @@ namespace Code.Game.Features.Target.Systems
                     unit.ReplaceTargetCell(chosen);
                 else if (unit.hasTargetCell)
                     unit.RemoveTargetCell();
+
+                unit.isTargetCellRequest = false;
             }
         }
 

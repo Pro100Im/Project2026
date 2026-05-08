@@ -51,12 +51,7 @@ namespace Code.Game.Features.Movement.Systems
                 var currentCell = unit.currentCell.Value;
 
                 if (targetCell == currentCell)
-                {
-                    unit.isMoving = false;
-
                     continue;
-                }
-
 
                 var movementOffset = unit.movementOffset.Value;
                 var targetWorldPos = tilemap[targetCell] + movementOffset;

@@ -14,7 +14,7 @@ namespace Code.Game.Features.Animator.Systems
                 .AllOf(
                 GameMatcher.View,
                 GameMatcher.Animator,
-                GameMatcher.Enemy));
+                GameMatcher.Unit));
         }
 
         public void Execute()

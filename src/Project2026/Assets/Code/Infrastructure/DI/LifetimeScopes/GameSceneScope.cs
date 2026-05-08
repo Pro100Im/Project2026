@@ -1,3 +1,4 @@
+using Assets.Code.Game.Features.Target.Systems;
 using Code.Game.Common.Cameras;
 using Code.Game.Common.Destruct;
 using Code.Game.Common.Destruct.Systems;
@@ -167,6 +168,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<OccupiedCellSystem>(Lifetime.Singleton);
             builder.Register<ReservedCellSystem>(Lifetime.Singleton);
 
+            builder.Register<RequestTargetCellSystem>(Lifetime.Singleton);
             builder.Register<SelectTargetCellSystem>(Lifetime.Singleton);
             builder.Register<CheckTargetSystem>(Lifetime.Singleton);
 

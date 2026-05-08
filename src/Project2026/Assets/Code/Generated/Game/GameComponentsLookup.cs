@@ -80,23 +80,24 @@ public static class GameComponentsLookup {
     public const int WaitingToSpawn = 69;
     public const int Targetable = 70;
     public const int TargetCell = 71;
-    public const int TargetFlow = 72;
-    public const int TargetId = 73;
-    public const int TargetPoint = 74;
-    public const int Tower = 75;
-    public const int TowerBuildRequest = 76;
-    public const int TowerPlace = 77;
-    public const int Unit = 78;
-    public const int UnitSize = 79;
-    public const int CurrentWaveEnemies = 80;
-    public const int CurrentWaveNumber = 81;
-    public const int WaveEnemiesAlive = 82;
-    public const int WaveInProgress = 83;
-    public const int WaveStartRequsted = 84;
-    public const int Projectile = 85;
-    public const int ProjectileConfig = 86;
+    public const int TargetCellRequest = 72;
+    public const int TargetFlow = 73;
+    public const int TargetId = 74;
+    public const int TargetPoint = 75;
+    public const int Tower = 76;
+    public const int TowerBuildRequest = 77;
+    public const int TowerPlace = 78;
+    public const int Unit = 79;
+    public const int UnitSize = 80;
+    public const int CurrentWaveEnemies = 81;
+    public const int CurrentWaveNumber = 82;
+    public const int WaveEnemiesAlive = 83;
+    public const int WaveInProgress = 84;
+    public const int WaveStartRequsted = 85;
+    public const int Projectile = 86;
+    public const int ProjectileConfig = 87;
 
-    public const int TotalComponents = 87;
+    public const int TotalComponents = 88;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -171,6 +172,7 @@ public static class GameComponentsLookup {
         "WaitingToSpawn",
         "Targetable",
         "TargetCell",
+        "TargetCellRequest",
         "TargetFlow",
         "TargetId",
         "TargetPoint",
@@ -261,6 +263,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Spawn.WaitingToSpawn),
         typeof(Code.Game.Features.Target.Targetable),
         typeof(Code.Game.Features.Target.TargetCell),
+        typeof(Code.Game.Features.Target.TargetCellRequest),
         typeof(Code.Game.Features.Target.TargetFlow),
         typeof(Code.Game.Features.Target.TargetId),
         typeof(Code.Game.Features.Target.TargetPoint),

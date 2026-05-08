@@ -1,4 +1,4 @@
-using Code.Game.Features.Movement.Systems;
+using Assets.Code.Game.Features.Target.Systems;
 using Code.Game.Features.Target.Systems;
 using Code.Infrastructure.Systems;
 
@@ -8,6 +8,7 @@ namespace Code.Game.Features.Target
     {
         public TargetFeature(ISystemFactory systemFactory)
         {
+            Add(systemFactory.Create<RequestTargetCellSystem>());
             Add(systemFactory.Create<SelectTargetCellSystem>());
             Add(systemFactory.Create<CheckTargetSystem>());
         }
