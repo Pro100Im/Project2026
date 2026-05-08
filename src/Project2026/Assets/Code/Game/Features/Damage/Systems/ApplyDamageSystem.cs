@@ -11,7 +11,7 @@ namespace Code.Game.Features.Damage.Systems
         {
             _damages = gameContext.GetGroup(GameMatcher
                 .AllOf(
-                    GameMatcher.Damage,
+                    GameMatcher.TotalDamage,
                     GameMatcher.OwnerId,
                     GameMatcher.TargetId,
                     GameMatcher.DamageRequest));
@@ -23,7 +23,7 @@ namespace Code.Game.Features.Damage.Systems
             {
                 var targetId = damage.targetId.Value;
                 var target = GetGameEntityById.Get(targetId);
-                var damageAmount = damage.damage.Value;
+                var damageAmount = damage.totalDamage.Value;
 
                 if (target.hasCurrentHealth)
                 {

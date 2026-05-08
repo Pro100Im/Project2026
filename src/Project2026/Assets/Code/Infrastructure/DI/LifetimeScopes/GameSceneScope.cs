@@ -177,7 +177,10 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<AttackStartSystem>(Lifetime.Singleton);
             builder.Register<MeleeAttackEndSystem>(Lifetime.Singleton);
 
+            builder.Register<PhysicalDamageCanculateSystem>(Lifetime.Singleton);
+            builder.Register<PhysicalDamageHitEffectSystem>(Lifetime.Singleton);
             builder.Register<ApplyDamageSystem>(Lifetime.Singleton);
+
             builder.Register<HealthBarSystem>(Lifetime.Singleton);
             builder.Register<DeathSystem>(Lifetime.Singleton);
 

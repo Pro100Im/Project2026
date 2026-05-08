@@ -7,6 +7,9 @@ namespace Code.Game.Features.Damage
     {
         public DamageFeature(ISystemFactory systemFactory)
         {
+            Add(systemFactory.Create<PhysicalDamageCanculateSystem>());
+            Add(systemFactory.Create<PhysicalDamageHitEffectSystem>());
+
             Add(systemFactory.Create<ApplyDamageSystem>());
         }
     }

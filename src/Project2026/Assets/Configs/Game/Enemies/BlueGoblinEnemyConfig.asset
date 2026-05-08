@@ -78,7 +78,8 @@ MonoBehaviour:
       type: {class: PhysicalAttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <AttackHitEffect>k__BackingField: {fileID: 11400000, guid: 042aceafa8db9b646988bfb019ada0f6, type: 2}
+        <PhysicalDamage>k__BackingField: 5
+        <PhysicalHitEffect>k__BackingField: {fileID: 11400000, guid: bef00aab0f1fb94458991e712f4b83b8, type: 2}
     - rid: 8171215584738410600
       type: {class: AttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:

@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Code.Game.Features.Damage.Damage damage { get { return (Code.Game.Features.Damage.Damage)GetComponent(GameComponentsLookup.Damage); } }
-    public bool hasDamage { get { return HasComponent(GameComponentsLookup.Damage); } }
+    public Code.Game.Features.Damage.FireDamage fireDamage { get { return (Code.Game.Features.Damage.FireDamage)GetComponent(GameComponentsLookup.FireDamage); } }
+    public bool hasFireDamage { get { return HasComponent(GameComponentsLookup.FireDamage); } }
 
-    public void AddDamage(float newValue) {
-        var index = GameComponentsLookup.Damage;
-        var component = (Code.Game.Features.Damage.Damage)CreateComponent(index, typeof(Code.Game.Features.Damage.Damage));
+    public void AddFireDamage(float newValue) {
+        var index = GameComponentsLookup.FireDamage;
+        var component = (Code.Game.Features.Damage.FireDamage)CreateComponent(index, typeof(Code.Game.Features.Damage.FireDamage));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceDamage(float newValue) {
-        var index = GameComponentsLookup.Damage;
-        var component = (Code.Game.Features.Damage.Damage)CreateComponent(index, typeof(Code.Game.Features.Damage.Damage));
+    public void ReplaceFireDamage(float newValue) {
+        var index = GameComponentsLookup.FireDamage;
+        var component = (Code.Game.Features.Damage.FireDamage)CreateComponent(index, typeof(Code.Game.Features.Damage.FireDamage));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveDamage() {
-        RemoveComponent(GameComponentsLookup.Damage);
+    public void RemoveFireDamage() {
+        RemoveComponent(GameComponentsLookup.FireDamage);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherDamage;
+    static Entitas.IMatcher<GameEntity> _matcherFireDamage;
 
-    public static Entitas.IMatcher<GameEntity> Damage {
+    public static Entitas.IMatcher<GameEntity> FireDamage {
         get {
-            if (_matcherDamage == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Damage);
+            if (_matcherFireDamage == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.FireDamage);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherDamage = matcher;
+                _matcherFireDamage = matcher;
             }
 
-            return _matcherDamage;
+            return _matcherFireDamage;
         }
     }
 }

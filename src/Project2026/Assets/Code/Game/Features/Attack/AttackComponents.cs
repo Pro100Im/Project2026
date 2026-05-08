@@ -1,10 +1,8 @@
-using Code.Game.StaticData.Configs;
 using Entitas;
 using UnityEngine;
 
 namespace Code.Game.Features.Attack
 {
-    [Game] public class PhysicalAttackHitEffect : IComponent { public EntityConfig Value; }
     [Game] public class AttackCooldown : IComponent { public float Value; }
     [Game] public class AttackDuration : IComponent { public float Value; }
     [Game] public class Range : IComponent { public float Value; }
@@ -15,6 +13,7 @@ namespace Code.Game.Features.Attack
     [Game] public class Hitted : IComponent { }
     [Game] public class AttackDirectionComponent : IComponent { public AttackDirection Value; }
     [Game] public class AttackerPoint : IComponent { public Vector2 Value; }
+    [Game] public class FirePoint : IComponent { public Vector3 Value; }
 
     public enum AttackDirection
     {

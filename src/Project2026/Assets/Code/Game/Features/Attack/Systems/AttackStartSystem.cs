@@ -51,7 +51,6 @@ namespace Code.Game.Features.Attack.Systems
                 entity.AddOwnerId(attacker.id.Value);
                 entity.AddCooldown(attacker.attackCooldown.Value);
                 entity.AddDuration(attacker.attackDuration.Value);
-                entity.AddPhysicalAttackHitEffect(attacker.physicalAttackHitEffect.Value);
 
                 entity.isMeleeAttack = attacker.isMeleeAttack;
                 entity.isRangeAttack = attacker.isRangeAttack;

@@ -13,23 +13,17 @@ MonoBehaviour:
   m_Name: TestTowerHitEffect
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.EntityConfig
   Properties:
-  - rid: 8171215579295776880
-  - rid: 8171215579295776881
-  - rid: 8171215584738410602
+  - rid: 2286602848084688979
+  - rid: 2286602848084688980
   references:
     version: 2
     RefIds:
-    - rid: 8171215579295776880
+    - rid: 2286602848084688979
       type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-    - rid: 8171215579295776881
+    - rid: 2286602848084688980
       type: {class: ViewPrefabProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
         <Prefab>k__BackingField: {fileID: 5303738047394165789, guid: 9636dcd3608076643878e84d75f23040, type: 3}
-    - rid: 8171215584738410602
-      type: {class: DamageProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
-      data:
-        <Mode>k__BackingField: 0
-        <Damage>k__BackingField: 20

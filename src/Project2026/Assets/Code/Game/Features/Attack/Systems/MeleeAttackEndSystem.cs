@@ -13,7 +13,6 @@ namespace Code.Game.Features.Attack.Systems
         {
             _attacks = gameContext.GetGroup(GameMatcher
                 .AllOf(
-                    GameMatcher.PhysicalAttackHitEffect,
                     GameMatcher.OwnerId,
                     GameMatcher.Cooldown,
                     GameMatcher.Duration,
@@ -41,27 +40,11 @@ namespace Code.Game.Features.Attack.Systems
 
                 if(entity.isAttacking)
                 {
-                    var hitEffect = CreateGameEntity.Empty();
-                    var targetPoint = entity.targetPoint.Value;
-
-                    if (entity.hasMovementOffset)
-                    {
-                        var movementOffset = entity.movementOffset.Value;
-
-                        targetPoint.x += movementOffset.x;
-                        targetPoint.y += movementOffset.y;
-                    }
-
-                    hitEffect.AddSpawnPosition(targetPoint);
-
-                    foreach (var property in entity.physicalAttackHitEffect.Value.Properties)
-                        property.Apply(hitEffect);
-
                     var damage = CreateGameEntity.Empty();
 
                     damage.AddOwnerId(entity.id.Value);
                     damage.AddTargetId(entity.targetId.Value);
-                    damage.AddDamage(hitEffect.damage.Value);
+                    damage.AddTotalDamage(0);
                     damage.isDamageRequest = true;
                 }
 
