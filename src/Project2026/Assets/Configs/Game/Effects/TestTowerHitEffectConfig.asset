@@ -10,26 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2652ec64a2cfac428b7546f4941961e, type: 3}
-  m_Name: MediumHpBar
+  m_Name: TestTowerHitEffectConfig
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.EntityConfig
   Properties:
-  - rid: 8171215579295776849
-  - rid: 8171215579295776850
-  - rid: 2286602697378365528
+  - rid: 2286602848084688979
+  - rid: 2286602848084688980
   references:
     version: 2
     RefIds:
-    - rid: 2286602697378365528
-      type: {class: MovementOffsetProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
-      data:
-        <Mode>k__BackingField: 0
-        <Offset>k__BackingField: {x: 0, y: 0.7, z: 0}
-    - rid: 8171215579295776849
-      type: {class: ViewPrefabProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
-      data:
-        <Mode>k__BackingField: 0
-        <Prefab>k__BackingField: {fileID: 2238861304701913438, guid: 4a356d44723836145be75457b4a66ff9, type: 3}
-    - rid: 8171215579295776850
+    - rid: 2286602848084688979
       type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
+    - rid: 2286602848084688980
+      type: {class: ViewPrefabProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Prefab>k__BackingField: {fileID: 5303738047394165789, guid: 9636dcd3608076643878e84d75f23040, type: 3}

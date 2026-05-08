@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2652ec64a2cfac428b7546f4941961e, type: 3}
-  m_Name: ArcherTowerUpgrate1
+  m_Name: ArcherTowerUpgrate1Config
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.EntityConfig
   Properties:
   - rid: 8171215588330831995
   - rid: 8171215588330831996
   - rid: 8171215588330831997
-  - rid: 8171215588330831998
   - rid: 8171215588330831999
   - rid: 8171215588330832021
   - rid: 2286602737992335451
+  - rid: 2286602853080629334
+  - rid: 2286602853080629335
   references:
     version: 2
     RefIds:
@@ -28,6 +29,17 @@ MonoBehaviour:
       data:
         <Mode>k__BackingField: 0
         <Team>k__BackingField: 1
+    - rid: 2286602853080629334
+      type: {class: ProjectileProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <projectile>k__BackingField: {fileID: 11400000, guid: a7172fd29b9e9b24b827c18c6f5f3d5a, type: 2}
+    - rid: 2286602853080629335
+      type: {class: PhysicalAttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <PhysicalDamage>k__BackingField: 10
+        <PhysicalHitEffect>k__BackingField: {fileID: 11400000, guid: 0801227ced598bd4fa883a790a2e14b0, type: 2}
     - rid: 8171215588330831995
       type: {class: TowerPlaceProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
@@ -42,17 +54,11 @@ MonoBehaviour:
         <Mode>k__BackingField: 0
         <SpawnEffect>k__BackingField: {fileID: 11400000, guid: fdc1f4e91ba6e8540b533480e06b4730, type: 2}
         <SpawnEffectOffset>k__BackingField: {x: 0, y: 1, z: 0}
-    - rid: 8171215588330831998
-      type: {class: PhysicalAttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
-      data:
-        <Mode>k__BackingField: 0
-        <PhysicalDamage>k__BackingField: 10
-        <PhysicalHitEffect>k__BackingField: {fileID: 11400000, guid: 0801227ced598bd4fa883a790a2e14b0, type: 2}
     - rid: 8171215588330831999
       type: {class: AttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Range>k__BackingField: 6
+        <Range>k__BackingField: 20
         <Cooldown>k__BackingField: 2
         <Duration>k__BackingField: 0.6
         <IsMelee>k__BackingField: 0

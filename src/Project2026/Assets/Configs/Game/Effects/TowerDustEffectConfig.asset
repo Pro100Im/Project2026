@@ -10,26 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2652ec64a2cfac428b7546f4941961e, type: 3}
-  m_Name: SmallHpBar
+  m_Name: TowerDustEffectConfig
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.EntityConfig
   Properties:
-  - rid: 8171215579295776849
-  - rid: 8171215579295776850
-  - rid: 2286602697378365528
+  - rid: 8171215576890605669
+  - rid: 8171215576890605675
   references:
     version: 2
     RefIds:
-    - rid: 2286602697378365528
-      type: {class: MovementOffsetProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
-      data:
-        <Mode>k__BackingField: 0
-        <Offset>k__BackingField: {x: 0, y: 0.5, z: 0}
-    - rid: 8171215579295776849
+    - rid: 8171215576890605669
       type: {class: ViewPrefabProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Prefab>k__BackingField: {fileID: 2238861304701913438, guid: 4a356d44723836145be75457b4a66ff9, type: 3}
-    - rid: 8171215579295776850
+        <Prefab>k__BackingField: {fileID: 2769651622987638512, guid: 00a798bc72654294ab284913b713d841, type: 3}
+    - rid: 8171215576890605675
       type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0

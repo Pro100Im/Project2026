@@ -178,6 +178,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<AttackStartSystem>(Lifetime.Singleton);
             builder.Register<MeleeAttackEndSystem>(Lifetime.Singleton);
+            builder.Register<RangeAttackEndSystem>(Lifetime.Singleton);
 
             builder.Register<PhysicalDamageCanculateSystem>(Lifetime.Singleton);
             builder.Register<PhysicalDamageHitEffectSystem>(Lifetime.Singleton);

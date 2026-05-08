@@ -95,9 +95,8 @@ public static class GameComponentsLookup {
     public const int WaveInProgress = 84;
     public const int WaveStartRequsted = 85;
     public const int Projectile = 86;
-    public const int ProjectileConfig = 87;
 
-    public const int TotalComponents = 88;
+    public const int TotalComponents = 87;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -186,8 +185,7 @@ public static class GameComponentsLookup {
         "WaveEnemiesAlive",
         "WaveInProgress",
         "WaveStartRequsted",
-        "Projectile",
-        "ProjectileConfig"
+        "Projectile"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -277,7 +275,6 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Wave.WaveEnemiesAlive),
         typeof(Code.Game.Features.Wave.WaveInProgress),
         typeof(Code.Game.Features.Wave.WaveStartRequsted),
-        typeof(Projectile),
-        typeof(ProjectileConfig)
+        typeof(Projectile)
     };
 }

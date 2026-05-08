@@ -9,6 +9,7 @@ namespace Code.Game.Features.Attack
         {
             Add(systemFactory.Create<AttackStartSystem>());
             Add(systemFactory.Create<MeleeAttackEndSystem>());
+            Add(systemFactory.Create<RangeAttackEndSystem>());
         }
     }
 }

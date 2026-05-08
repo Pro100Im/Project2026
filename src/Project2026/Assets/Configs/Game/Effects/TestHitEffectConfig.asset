@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2652ec64a2cfac428b7546f4941961e, type: 3}
-  m_Name: TowerDustEffect
+  m_Name: TestHitEffectConfig
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.EntityConfig
   Properties:
-  - rid: 8171215576890605669
-  - rid: 8171215576890605675
+  - rid: 2286602848084688981
+  - rid: 2286602848084688982
   references:
     version: 2
     RefIds:
-    - rid: 8171215576890605669
-      type: {class: ViewPrefabProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
-      data:
-        <Mode>k__BackingField: 0
-        <Prefab>k__BackingField: {fileID: 2769651622987638512, guid: 00a798bc72654294ab284913b713d841, type: 3}
-    - rid: 8171215576890605675
+    - rid: 2286602848084688981
       type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
+    - rid: 2286602848084688982
+      type: {class: ViewPrefabProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Prefab>k__BackingField: {fileID: 5303738047394165789, guid: 9636dcd3608076643878e84d75f23040, type: 3}

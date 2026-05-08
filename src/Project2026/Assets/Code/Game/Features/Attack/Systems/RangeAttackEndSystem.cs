@@ -35,7 +35,7 @@ namespace Code.Game.Features.Attack.Systems
                     continue; 
                 }
 
-                if (owner.hasTargetId && owner.isAttacking && owner.hasProjectileConfig)
+                if (owner.hasTargetId && owner.isAttacking && owner.hasProjectile)
                     CreateProjectile(owner);
 
                 owner.isAttacking = false;
@@ -51,7 +51,7 @@ namespace Code.Game.Features.Attack.Systems
 
             projectile.AddSpawnPosition(owner.firePoint.Value);
 
-            foreach (var property in owner.projectileConfig.Value.Properties)
+            foreach (var property in owner.projectile.Value.Properties)
                 property.Apply(projectile);
         }
     }
