@@ -167,6 +167,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<BuildFlowFieldSystem>(Lifetime.Singleton);
             builder.Register<OccupiedCellSystem>(Lifetime.Singleton);
             builder.Register<ReservedCellSystem>(Lifetime.Singleton);
+            builder.Register<UpdateSpatialHashSystem>(Lifetime.Singleton);
 
             builder.Register<RequestTargetCellSystem>(Lifetime.Singleton);
             builder.Register<SelectTargetCellSystem>(Lifetime.Singleton);

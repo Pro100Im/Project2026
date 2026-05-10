@@ -7,42 +7,40 @@ namespace Code.Game.Features.Target.Systems
 {
     public class CheckTargetSystem : IExecuteSystem
     {
-        private readonly IGroup<GameEntity> _units;
+        private readonly IGroup<GameEntity> _attackers;
         private readonly IGroup<GameEntity> _maps;
-
-        private readonly List<GameEntity> _buffer = new(86);
+        private readonly List<GameEntity> _buffer = new(128);
 
         public CheckTargetSystem(GameContext context)
         {
-            _units = context.GetGroup(GameMatcher
-                .AllOf(
+            _attackers = context.GetGroup(GameMatcher.AllOf(
                 GameMatcher.CurrentCell,
                 GameMatcher.UnitSize,
                 GameMatcher.Range,
                 GameMatcher.Team,
-                GameMatcher.Transform));
+                GameMatcher.Transform,
+                GameMatcher.Id));
 
-            _maps = context.GetGroup(GameMatcher
-                .AllOf(
-                GameMatcher.OccupField));
+            _maps = context.GetGroup(GameMatcher.AllOf(
+                GameMatcher.SpatialHash,
+                GameMatcher.TilemapMovement));
         }
 
         public void Execute()
         {
-            var map = _maps.GetSingleEntity();
+            var mapEntity = _maps.GetSingleEntity();
 
-            if (map == null || !map.hasOccupField || !map.hasTilemapMovement)
+            if (mapEntity == null) 
                 return;
 
-            var occupField = map.occupField.Value;
-            var tilemapMovement = map.tilemapMovement.Value;
+            var spatialHash = mapEntity.spatialHash.Value;
+            var tilemapMovement = mapEntity.tilemapMovement.Value;
 
-            foreach (var attacker in _units.GetEntities(_buffer))
+            foreach (var attacker in _attackers.GetEntities(_buffer))
             {
                 var attackerPos = attacker.currentCell.Value;
                 var size = attacker.unitSize.Value;
                 var range = attacker.range.Value;
-
                 var sqrRange = range * range;
                 var myTeam = attacker.team.Value;
 
@@ -56,48 +54,50 @@ namespace Code.Game.Features.Target.Systems
                 {
                     for (var y = -iRange; y < size.y + iRange; y++)
                     {
-                        if (x >= 0 && x < size.x && y >= 0 && y < size.y)
-                            continue;
+                        if (x >= 0 && x < size.x && y >= 0 && y < size.y) continue;
 
-                        var checkPos = new Vector3Int(attackerPos.x + x, attackerPos.y + y);
+                        var checkPos = new Vector3Int(attackerPos.x + x, attackerPos.y + y, 0);
+                        var checkPos2D = new Vector2Int(checkPos.x, checkPos.y);
 
-                        if (occupField.TryGetValue(checkPos, out int entityId))
+                        if (spatialHash.TryGetValue(checkPos2D, out var potentialTargets))
                         {
-                            var sDist = GetSqrDistanceToCell(attackerPos, size, checkPos);
-
-                            if (sDist <= sqrRange)
+                            foreach (var targetId in potentialTargets)
                             {
-                                var target = GetGameEntityById.Get(entityId);
+                                if (targetId == attacker.id.Value) continue;
+
+                                var target = GetGameEntityById.Get(targetId);
 
                                 if (target != null && target.team.Value != myTeam && target.isTargetable && !target.isDead)
                                 {
-                                    if (sDist < closestSqrDist)
+                                    var sDist = GetSqrDistanceToCell(attackerPos, size, checkPos);
+
+                                    if (sDist <= sqrRange && sDist < closestSqrDist)
                                     {
                                         closestSqrDist = sDist;
-                                        bestTargetId = entityId;
+                                        bestTargetId = targetId;
                                         bestTargetCell = checkPos;
-
-                                        break;
                                     }
                                 }
                             }
-                            else if (sDist > sqrRange && attacker.hasTargetId)
-                            {
-                                attacker.RemoveTargetId();
-                            }
                         }
                     }
+                }
 
-                    if (bestTargetId != -1)
+                if (bestTargetId != -1)
+                {
+                    var attackerWorldPos = attacker.transform.Value.position;
+
+                    if (tilemapMovement.TryGetValue(bestTargetCell, out var targetWorldPos))
                     {
-                        var attackerWorldPos = attacker.transform.Value.position;
-                        var targetWorldPos = tilemapMovement[bestTargetCell];
-
                         attacker.ReplaceAttackerPoint(attackerWorldPos);
                         attacker.ReplaceTargetPoint(targetWorldPos);
                         attacker.ReplaceTargetCell(bestTargetCell);
                         attacker.ReplaceTargetId(bestTargetId);
                     }
+                }
+                else if (attacker.hasTargetId)
+                {
+                    attacker.RemoveTargetId();
                 }
             }
         }
@@ -106,7 +106,6 @@ namespace Code.Game.Features.Target.Systems
         {
             var closestX = Mathf.Clamp(cell.x, origin.x, origin.x + size.x - 1);
             var closestY = Mathf.Clamp(cell.y, origin.y, origin.y + size.y - 1);
-
             var dx = cell.x - closestX;
             var dy = cell.y - closestY;
 
