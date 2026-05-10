@@ -7,6 +7,7 @@ namespace Code.Game.Features.Movement.Systems
     public class GridMovementSystem : IExecuteSystem
     {
         private readonly ITimeService _timeService;
+
         private readonly IGroup<GameEntity> _units;
         private readonly IGroup<GameEntity> _maps;
 
@@ -43,7 +44,13 @@ namespace Code.Game.Features.Movement.Systems
             {
                 if (!unit.hasTargetCell || unit.isAttacking || unit.hasTargetId || unit.isDead)
                 {
-                    unit.isMoving = false;
+                    if (unit.isMoving)
+                    {
+                        unit.isMoving = false;
+
+                        if (unit.hasVelocity)
+                            unit.RemoveVelocity();
+                    }
 
                     continue;
                 }
@@ -66,6 +73,7 @@ namespace Code.Game.Features.Movement.Systems
                 var speed = unit.movementSpeed.Value * _timeService.DeltaTime;
                 var newPos = currentPos + dirVec * speed;
 
+                unit.ReplaceVelocity(dirVec * unit.movementSpeed.Value);
                 unit.transform.Value.position = newPos;
                 unit.isMoving = true;
 

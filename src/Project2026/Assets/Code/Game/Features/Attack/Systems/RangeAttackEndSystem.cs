@@ -1,16 +1,22 @@
 using Code.Game.Common.Entity;
+using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Code.Game.Features.Attack.Systems
 {
     public class RangeAttackEndSystem : IExecuteSystem
     {
+        private readonly TargetService _targetService;
+
         private readonly IGroup<GameEntity> _rangeAttacks;
         private readonly List<GameEntity> _buffer = new(64);
 
-        public RangeAttackEndSystem(GameContext gameContext)
+        public RangeAttackEndSystem(GameContext gameContext, TargetService targetService)
         {
+            _targetService = targetService;
+
             _rangeAttacks = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.OwnerId,
@@ -57,12 +63,21 @@ namespace Code.Game.Features.Attack.Systems
 
             projectile.AddOwnerId(owner.id.Value);
             projectile.AddSpawnPosition(owner.firePoint.Value);
-            projectile.AddAttackerPoint(owner.attackerPoint.Value);
-            projectile.AddTargetPoint(owner.targetPoint.Value);
+            projectile.AddAttackerPoint(owner.firePoint.Value);
             projectile.isMovementAvailable = true;
 
             foreach (var property in owner.projectile.Value.Properties)
                 property.Apply(projectile);
+
+            var target = GetGameEntityById.Get(owner.targetId.Value);
+            var targetPos = owner.targetPoint.Value;
+            var targetVel = target.hasVelocity ? target.velocity.Value : Vector3.zero;
+            var projSpeed = projectile.movementSpeed.Value;
+            var interceptPoint = _targetService.GetInterceptPoint(owner.attackerPoint.Value, projSpeed, targetPos, targetVel);
+            var totalDistance = Vector3.Distance(owner.firePoint.Value, interceptPoint);
+
+            projectile.AddTargetPoint(interceptPoint);
+            projectile.AddTotalDistance(totalDistance);
         }
     }
 }

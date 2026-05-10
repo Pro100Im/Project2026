@@ -28,5 +28,36 @@ namespace Code.Game.Features.Target.Services
             else
                 return dir.y > 0 ? AttackDirection.Up : AttackDirection.Down;
         }
+
+        public Vector3 GetInterceptPoint(Vector3 shooterPos, float projectileSpeed, Vector3 targetPos, Vector3 targetVelocity)
+        {
+            var relativePosition = targetPos - shooterPos;
+            var relativeVelocity = targetVelocity;
+
+            var a = Vector3.Dot(relativeVelocity, relativeVelocity) - (projectileSpeed * projectileSpeed);
+            var b = 2f * Vector3.Dot(relativeVelocity, relativePosition);
+            var c = Vector3.Dot(relativePosition, relativePosition);
+
+            var determinant = b * b - 4f * a * c;
+
+            if (determinant > 0)
+            {
+                var t1 = (-b + Mathf.Sqrt(determinant)) / (2f * a);
+                var t2 = (-b - Mathf.Sqrt(determinant)) / (2f * a);
+                var t = 0f;
+
+                if (t1 > 0 && t2 > 0) 
+                    t = Mathf.Min(t1, t2);
+                else if (t1 > 0) 
+                    t = t1;
+                else if (t2 > 0) 
+                    t = t2;
+
+                if (t > 0)
+                    return targetPos + targetVelocity * t;
+            }
+
+            return targetPos;
+        }
     }
 }

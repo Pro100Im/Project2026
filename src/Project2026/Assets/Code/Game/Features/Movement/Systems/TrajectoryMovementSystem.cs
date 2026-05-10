@@ -26,6 +26,7 @@ namespace Code.Game.Features.Movement.Systems
                 GameMatcher.TrajectoryPathProgress,
                 GameMatcher.Trajectory,
                 GameMatcher.Transform,
+                GameMatcher.TotalDistance,
                 GameMatcher.MovementAvailable));
         }
 
@@ -37,7 +38,7 @@ namespace Code.Game.Features.Movement.Systems
                 var end = entity.targetPoint.Value;
                 var trajectory = entity.trajectory.Value;
                 var arcHeight = entity.trajectoryArcHeight.Value;
-                var totalDist = Vector3.Distance(start, end);
+                var totalDist = entity.totalDistance.Value;
 
                 if (totalDist <= 0.001f)
                     continue;
