@@ -10,14 +10,14 @@ namespace Code.Game.Features.Level.Systems
 
         public OccupiedCellSystem(GameContext context)
         {
-            _entities = context.GetGroup(GameMatcher.AllOf(
+            _entities = context.GetGroup(GameMatcher
+                .AllOf(
                 GameMatcher.CurrentCell,
                 GameMatcher.UnitSize,
                 GameMatcher.Id));
 
-            _maps = context.GetGroup(GameMatcher.AllOf(
-                GameMatcher.TilemapMovement,
-                GameMatcher.OccupField));
+            _maps = context.GetGroup(GameMatcher
+                .AllOf(GameMatcher.OccupField));
         }
 
         public void Execute()

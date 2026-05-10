@@ -54,7 +54,8 @@ namespace Code.Game.Features.Target.Systems
                 {
                     for (var y = -iRange; y < size.y + iRange; y++)
                     {
-                        if (x >= 0 && x < size.x && y >= 0 && y < size.y) continue;
+                        if (x >= 0 && x < size.x && y >= 0 && y < size.y) 
+                            continue;
 
                         var checkPos = new Vector3Int(attackerPos.x + x, attackerPos.y + y, 0);
                         var checkPos2D = new Vector2Int(checkPos.x, checkPos.y);
@@ -63,7 +64,8 @@ namespace Code.Game.Features.Target.Systems
                         {
                             foreach (var targetId in potentialTargets)
                             {
-                                if (targetId == attacker.id.Value) continue;
+                                if (targetId == attacker.id.Value) 
+                                    continue;
 
                                 var target = GetGameEntityById.Get(targetId);
 
