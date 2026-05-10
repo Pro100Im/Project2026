@@ -14,8 +14,11 @@ namespace Code.Game.StaticData.Property
             if (!entity.isTrajectoryMovement)
                 entity.isTrajectoryMovement = true;
 
-            if (!entity.hasTrajectoryArcHeight)
-                entity.AddTrajectoryArcHeight(ArcHeight);
+            if (!entity.hasTrajectoryBaseArcHeight)
+                entity.AddTrajectoryBaseArcHeight(ArcHeight);
+
+            if (!entity.hasTrajectoryCurrentArcHeight)
+                entity.AddTrajectoryCurrentArcHeight(ArcHeight);
 
             if (!entity.hasTrajectory)
                 entity.AddTrajectory(Trajectory);
@@ -29,8 +32,11 @@ namespace Code.Game.StaticData.Property
             if (entity.isTrajectoryMovement)
                 entity.isTrajectoryMovement = false;
 
-            if (entity.hasTrajectoryArcHeight)
-                entity.RemoveTrajectoryArcHeight();
+            if (entity.hasTrajectoryBaseArcHeight)
+                entity.RemoveTrajectoryBaseArcHeight();
+
+            if (entity.hasTrajectoryCurrentArcHeight)
+                entity.RemoveTrajectoryCurrentArcHeight();
 
             if (entity.hasTrajectory)
                 entity.RemoveTrajectory();
@@ -41,8 +47,11 @@ namespace Code.Game.StaticData.Property
 
         protected override void Replace(GameEntity entity)
         {
-            if (entity.hasTrajectoryArcHeight)
-                entity.ReplaceTrajectoryArcHeight(ArcHeight);
+            if (entity.hasTrajectoryBaseArcHeight)
+                entity.ReplaceTrajectoryBaseArcHeight(ArcHeight);
+
+            if (entity.hasTrajectoryCurrentArcHeight)
+                entity.ReplaceTrajectoryCurrentArcHeight(ArcHeight);
 
             if (entity.hasTrajectory)
                 entity.ReplaceTrajectory(Trajectory);

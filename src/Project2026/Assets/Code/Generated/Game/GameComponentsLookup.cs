@@ -77,35 +77,36 @@ public static class GameComponentsLookup {
     public const int Moving = 66;
     public const int TotalDistance = 67;
     public const int Trajectory = 68;
-    public const int TrajectoryArcHeight = 69;
-    public const int TrajectoryMovement = 70;
-    public const int TrajectoryPathProgress = 71;
-    public const int Velocity = 72;
-    public const int PlayerCastle = 73;
-    public const int PlayerCastleCells = 74;
-    public const int Player = 75;
-    public const int SpawnPosition = 76;
-    public const int SpawnRequsted = 77;
-    public const int WaitingToSpawn = 78;
-    public const int Targetable = 79;
-    public const int TargetCell = 80;
-    public const int TargetCellRequest = 81;
-    public const int TargetFlow = 82;
-    public const int TargetId = 83;
-    public const int TargetPoint = 84;
-    public const int Tower = 85;
-    public const int TowerBuildRequest = 86;
-    public const int TowerPlace = 87;
-    public const int Unit = 88;
-    public const int UnitSize = 89;
-    public const int CurrentWaveEnemies = 90;
-    public const int CurrentWaveNumber = 91;
-    public const int WaveEnemiesAlive = 92;
-    public const int WaveInProgress = 93;
-    public const int WaveStartRequsted = 94;
-    public const int Projectile = 95;
+    public const int TrajectoryBaseArcHeight = 69;
+    public const int TrajectoryCurrentArcHeight = 70;
+    public const int TrajectoryMovement = 71;
+    public const int TrajectoryPathProgress = 72;
+    public const int Velocity = 73;
+    public const int PlayerCastle = 74;
+    public const int PlayerCastleCells = 75;
+    public const int Player = 76;
+    public const int SpawnPosition = 77;
+    public const int SpawnRequsted = 78;
+    public const int WaitingToSpawn = 79;
+    public const int Targetable = 80;
+    public const int TargetCell = 81;
+    public const int TargetCellRequest = 82;
+    public const int TargetFlow = 83;
+    public const int TargetId = 84;
+    public const int TargetPoint = 85;
+    public const int Tower = 86;
+    public const int TowerBuildRequest = 87;
+    public const int TowerPlace = 88;
+    public const int Unit = 89;
+    public const int UnitSize = 90;
+    public const int CurrentWaveEnemies = 91;
+    public const int CurrentWaveNumber = 92;
+    public const int WaveEnemiesAlive = 93;
+    public const int WaveInProgress = 94;
+    public const int WaveStartRequsted = 95;
+    public const int Projectile = 96;
 
-    public const int TotalComponents = 96;
+    public const int TotalComponents = 97;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -177,7 +178,8 @@ public static class GameComponentsLookup {
         "Moving",
         "TotalDistance",
         "Trajectory",
-        "TrajectoryArcHeight",
+        "TrajectoryBaseArcHeight",
+        "TrajectoryCurrentArcHeight",
         "TrajectoryMovement",
         "TrajectoryPathProgress",
         "Velocity",
@@ -276,7 +278,8 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Movement.Moving),
         typeof(Code.Game.Features.Movement.TotalDistance),
         typeof(Code.Game.Features.Movement.Trajectory),
-        typeof(Code.Game.Features.Movement.TrajectoryArcHeight),
+        typeof(Code.Game.Features.Movement.TrajectoryBaseArcHeight),
+        typeof(Code.Game.Features.Movement.TrajectoryCurrentArcHeight),
         typeof(Code.Game.Features.Movement.TrajectoryMovement),
         typeof(Code.Game.Features.Movement.TrajectoryPathProgress),
         typeof(Code.Game.Features.Movement.Velocity),

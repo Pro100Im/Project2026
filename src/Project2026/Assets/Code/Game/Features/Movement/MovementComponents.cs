@@ -13,7 +13,8 @@ namespace Code.Game.Features.Movement
     [Game] public class LastDirection : IComponent { public Vector3Int Value; }
     [Game] public class Velocity : IComponent { public Vector3 Value; }
     [Game] public class Trajectory : IComponent { public AnimationCurve Value; }
-    [Game] public class TrajectoryArcHeight : IComponent { public float Value; }
+    [Game] public class TrajectoryBaseArcHeight : IComponent { public float Value; }
+    [Game] public class TrajectoryCurrentArcHeight : IComponent { public float Value; }
     [Game] public class TrajectoryPathProgress : IComponent { public float Value; }
     [Game] public class TotalDistance: IComponent { public float Value; }
 }

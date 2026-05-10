@@ -1,10 +1,10 @@
 using Code.Game.Common.Entity;
 using Code.Game.Features.Target.Services;
 using Entitas;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// To do remove magic numbs
 namespace Code.Game.Features.Attack.Systems
 {
     public class RangeAttackEndSystem : IExecuteSystem
@@ -77,9 +77,13 @@ namespace Code.Game.Features.Attack.Systems
             var projSpeed = projectile.movementSpeed.Value;
             var interceptPoint = _targetService.GetInterceptPoint(owner.attackerPoint.Value, projSpeed, targetPos, targetVel);
             var totalDistance = Vector3.Distance(owner.firePoint.Value, interceptPoint);
+            var baseArcHeight = projectile.trajectoryBaseArcHeight.Value;
+            var distanceFactor = Mathf.Clamp01(totalDistance / 10f);
+            var dynamicArcHeight = baseArcHeight * distanceFactor;
 
             projectile.AddTargetPoint(interceptPoint);
             projectile.AddTotalDistance(totalDistance);
+            projectile.ReplaceTrajectoryCurrentArcHeight(dynamicArcHeight);
         }
     }
 }

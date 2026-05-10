@@ -22,7 +22,7 @@ namespace Code.Game.Features.Movement.Systems
                 GameMatcher.AttackerPoint,
                 GameMatcher.TargetPoint,
                 GameMatcher.TrajectoryMovement,
-                GameMatcher.TrajectoryArcHeight,
+                GameMatcher.TrajectoryCurrentArcHeight,
                 GameMatcher.TrajectoryPathProgress,
                 GameMatcher.Trajectory,
                 GameMatcher.Transform,
@@ -37,7 +37,7 @@ namespace Code.Game.Features.Movement.Systems
                 var start = entity.attackerPoint.Value;
                 var end = entity.targetPoint.Value;
                 var trajectory = entity.trajectory.Value;
-                var arcHeight = entity.trajectoryArcHeight.Value;
+                var arcHeight = entity.trajectoryCurrentArcHeight.Value;
                 var totalDist = entity.totalDistance.Value;
 
                 if (totalDist <= 0.001f)
