@@ -15,6 +15,7 @@ namespace Code.Game.Features.Level.Systems
                 GameMatcher.TargetCell,
                 GameMatcher.UnitSize,
                 GameMatcher.MovementAvailable,
+                GameMatcher.GridMovement,
                 GameMatcher.Id));
 
             _maps = context.GetGroup(GameMatcher

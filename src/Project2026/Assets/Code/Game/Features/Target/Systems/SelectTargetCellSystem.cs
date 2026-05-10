@@ -28,7 +28,8 @@ namespace Code.Game.Features.Target.Systems
                     GameMatcher.UnitSize,
                     GameMatcher.Team,
                     GameMatcher.TargetCellRequest,
-                    GameMatcher.MovementAvailable));
+                    GameMatcher.MovementAvailable,
+                    GameMatcher.GridMovement));
 
             _maps = context.GetGroup(GameMatcher
                 .AllOf(

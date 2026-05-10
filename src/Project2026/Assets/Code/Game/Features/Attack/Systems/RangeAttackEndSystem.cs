@@ -23,24 +23,30 @@ namespace Code.Game.Features.Attack.Systems
         {
             foreach (var attack in _rangeAttacks.GetEntities(_buffer))
             {
-                if (attack.duration.Value > 0) 
+                if (attack.duration.Value > 0)
                     continue;
 
-                var owner = GetGameEntityById.Get(attack.ownerId.Value);
+                var entity = GetGameEntityById.Get(attack.ownerId.Value);
 
-                if (owner == null) 
-                { 
-                    attack.isDestructed = true; 
+                if (!entity.hasTargetId)
+                {
+                    entity.isAttacking = false;
+                    entity.isAttackAvailable = true;
 
-                    continue; 
+                    attack.isDestructed = true;
+
+                    continue;
                 }
 
-                if (owner.hasTargetId && owner.isAttacking && owner.hasProjectile)
-                    CreateProjectile(owner);
+                if (entity.isAttacking)
+                    CreateProjectile(entity);
 
-                owner.isAttacking = false;
-                owner.isAttackAvailable = true;
+                entity.isAttacking = false;
 
+                if (attack.cooldown.Value > 0)
+                    continue;
+
+                entity.isAttackAvailable = true;
                 attack.isDestructed = true;
             }
         }
@@ -49,7 +55,11 @@ namespace Code.Game.Features.Attack.Systems
         {
             var projectile = CreateGameEntity.Empty();
 
+            projectile.AddOwnerId(owner.id.Value);
             projectile.AddSpawnPosition(owner.firePoint.Value);
+            projectile.AddAttackerPoint(owner.attackerPoint.Value);
+            projectile.AddTargetPoint(owner.targetPoint.Value);
+            projectile.isMovementAvailable = true;
 
             foreach (var property in owner.projectile.Value.Properties)
                 property.Apply(projectile);

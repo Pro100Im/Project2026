@@ -8,8 +8,9 @@ namespace Code.Game.Features.Movement
         public MovementFeature(ISystemFactory systemFactory)
         {
             Add(systemFactory.Create<FlipAlongMoveDirectionSystem>());
-            Add(systemFactory.Create<MovementSystem>()); 
-            Add(systemFactory.Create<AttachPosToTargetSystem>()); 
+            Add(systemFactory.Create<GridMovementSystem>()); 
+            Add(systemFactory.Create<AttachPosToTargetSystem>());
+            Add(systemFactory.Create<TrajectoryMovementSystem>());
         }
     }
 }

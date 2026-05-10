@@ -174,8 +174,9 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<CheckTargetSystem>(Lifetime.Singleton);
 
             builder.Register<FlipAlongMoveDirectionSystem>(Lifetime.Singleton);
-            builder.Register<MovementSystem>(Lifetime.Singleton);
+            builder.Register<GridMovementSystem>(Lifetime.Singleton);
             builder.Register<AttachPosToTargetSystem>(Lifetime.Singleton);
+            builder.Register<TrajectoryMovementSystem>(Lifetime.Singleton);
 
             builder.Register<AttackStartSystem>(Lifetime.Singleton);
             builder.Register<MeleeAttackEndSystem>(Lifetime.Singleton);

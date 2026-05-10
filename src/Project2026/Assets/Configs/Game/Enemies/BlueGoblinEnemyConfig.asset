@@ -28,6 +28,7 @@ MonoBehaviour:
   - rid: 2286602697378365525
   - rid: 2286602697378365558
   - rid: 2286602737992335449
+  - rid: 2286602889171828874
   references:
     version: 2
     RefIds:
@@ -45,6 +46,10 @@ MonoBehaviour:
       data:
         <Mode>k__BackingField: 0
         <Team>k__BackingField: 2
+    - rid: 2286602889171828874
+      type: {class: GridMovementProperty, ns: Assets.Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
     - rid: 8171215584738410588
       type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:

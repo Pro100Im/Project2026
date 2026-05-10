@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3536482463686298414}
   - component: {fileID: 3191986427106568959}
   - component: {fileID: 5362460055802186138}
+  - component: {fileID: -7551903593818625875}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -60,6 +61,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Registrars.SpriteRendererRegistrar
   EntityView: {fileID: 3191986427106568959}
   _spriteRenderer: {fileID: 5135478008644222311}
+--- !u!114 &-7551903593818625875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534861453095771380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 329e4c4a20c17b5489c25c1f81e979eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Registrars.TransformRegistrar
+  EntityView: {fileID: 3191986427106568959}
 --- !u!1 &1259808791185630313
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +102,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3536482463686298414}
@@ -201,7 +215,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_MaskInteraction: 0
-  m_Time: 0.5
+  m_Time: 0.3
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -211,9 +225,18 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.11999512
+        value: 0.09331747
         inSlope: 0
         outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.716712
+        value: 0.025024869
+        inSlope: -0.09079505
+        outSlope: -0.09079505
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334

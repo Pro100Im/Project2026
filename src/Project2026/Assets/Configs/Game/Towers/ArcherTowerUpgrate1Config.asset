@@ -33,7 +33,7 @@ MonoBehaviour:
       type: {class: ProjectileProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <projectile>k__BackingField: {fileID: 11400000, guid: a7172fd29b9e9b24b827c18c6f5f3d5a, type: 2}
+        <Projectile>k__BackingField: {fileID: 11400000, guid: a7172fd29b9e9b24b827c18c6f5f3d5a, type: 2}
     - rid: 2286602853080629335
       type: {class: PhysicalAttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:

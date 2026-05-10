@@ -19,7 +19,8 @@ namespace Assets.Code.Game.Features.Target.Systems
                     GameMatcher.Id,
                     GameMatcher.UnitSize,
                     GameMatcher.Team,
-                    GameMatcher.MovementAvailable)
+                    GameMatcher.MovementAvailable,
+                    GameMatcher.GridMovement)
                 .NoneOf(
                     GameMatcher.TargetCellRequest));
         }

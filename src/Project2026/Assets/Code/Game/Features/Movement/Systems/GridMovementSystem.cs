@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Code.Game.Features.Movement.Systems
 {
-    public class MovementSystem : IExecuteSystem
+    public class GridMovementSystem : IExecuteSystem
     {
         private readonly ITimeService _timeService;
         private readonly IGroup<GameEntity> _units;
@@ -12,7 +12,7 @@ namespace Code.Game.Features.Movement.Systems
 
         private const float ArriveThreshold = 0.1f;
 
-        public MovementSystem(GameContext context, ITimeService timeService)
+        public GridMovementSystem(GameContext context, ITimeService timeService)
         {
             _timeService = timeService;
 
@@ -22,7 +22,8 @@ namespace Code.Game.Features.Movement.Systems
                 GameMatcher.MovementSpeed,
                 GameMatcher.MovementOffset,
                 GameMatcher.CurrentCell,
-                GameMatcher.UnitSize));
+                GameMatcher.UnitSize,
+                GameMatcher.GridMovement));
 
             _maps = context.GetGroup(GameMatcher
                 .AllOf(
