@@ -85,28 +85,29 @@ public static class GameComponentsLookup {
     public const int PlayerCastle = 74;
     public const int PlayerCastleCells = 75;
     public const int Player = 76;
-    public const int SpawnPosition = 77;
-    public const int SpawnRequsted = 78;
-    public const int WaitingToSpawn = 79;
-    public const int Targetable = 80;
-    public const int TargetCell = 81;
-    public const int TargetCellRequest = 82;
-    public const int TargetFlow = 83;
-    public const int TargetId = 84;
-    public const int TargetPoint = 85;
-    public const int Tower = 86;
-    public const int TowerBuildRequest = 87;
-    public const int TowerPlace = 88;
-    public const int Unit = 89;
-    public const int UnitSize = 90;
-    public const int CurrentWaveEnemies = 91;
-    public const int CurrentWaveNumber = 92;
-    public const int WaveEnemiesAlive = 93;
-    public const int WaveInProgress = 94;
-    public const int WaveStartRequsted = 95;
-    public const int Projectile = 96;
+    public const int PhysicalResistance = 77;
+    public const int SpawnPosition = 78;
+    public const int SpawnRequsted = 79;
+    public const int WaitingToSpawn = 80;
+    public const int Targetable = 81;
+    public const int TargetCell = 82;
+    public const int TargetCellRequest = 83;
+    public const int TargetFlow = 84;
+    public const int TargetId = 85;
+    public const int TargetPoint = 86;
+    public const int Tower = 87;
+    public const int TowerBuildRequest = 88;
+    public const int TowerPlace = 89;
+    public const int Unit = 90;
+    public const int UnitSize = 91;
+    public const int CurrentWaveEnemies = 92;
+    public const int CurrentWaveNumber = 93;
+    public const int WaveEnemiesAlive = 94;
+    public const int WaveInProgress = 95;
+    public const int WaveStartRequsted = 96;
+    public const int Projectile = 97;
 
-    public const int TotalComponents = 97;
+    public const int TotalComponents = 98;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -186,6 +187,7 @@ public static class GameComponentsLookup {
         "PlayerCastle",
         "PlayerCastleCells",
         "Player",
+        "PhysicalResistance",
         "SpawnPosition",
         "SpawnRequsted",
         "WaitingToSpawn",
@@ -286,6 +288,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Player.PlayerCastle),
         typeof(Code.Game.Features.Player.PlayerCastleCells),
         typeof(Code.Game.Features.Player.PlayerComponent),
+        typeof(Code.Game.Features.Resistance.PhysicalResistance),
         typeof(Code.Game.Features.Spawn.SpawnPosition),
         typeof(Code.Game.Features.Spawn.SpawnRequsted),
         typeof(Code.Game.Features.Spawn.WaitingToSpawn),

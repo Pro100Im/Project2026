@@ -28,7 +28,8 @@ namespace Code.Game.Features.Damage.Systems
                     continue;
 
                 var target = GetGameEntityById.Get(damage.targetId.Value);
-                var resistPercent = /*target.physicalResist.Value*/0 / 100f;
+                var resistance = target.hasPhysicalResistance ? target.physicalResistance.Value : 0;
+                var resistPercent = resistance / 100f;
 
                 resistPercent = Mathf.Clamp(resistPercent, 0f, 1f);
 

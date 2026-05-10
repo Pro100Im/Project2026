@@ -1,16 +1,6 @@
-using UnityEngine;
+using Entitas;
 
-public class ResistanceComponents : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+namespace Code.Game.Features.Resistance
+{ 
+    [Game] public class PhysicalResistance : IComponent { public int Value; }
 }

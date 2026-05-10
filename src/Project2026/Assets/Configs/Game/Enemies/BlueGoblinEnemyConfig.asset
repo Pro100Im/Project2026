@@ -29,6 +29,7 @@ MonoBehaviour:
   - rid: 2286602697378365558
   - rid: 2286602737992335449
   - rid: 2286602889171828874
+  - rid: 2286602901821587540
   references:
     version: 2
     RefIds:
@@ -50,6 +51,11 @@ MonoBehaviour:
       type: {class: GridMovementProperty, ns: Assets.Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
+    - rid: 2286602901821587540
+      type: {class: PhysicalResistanceProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Resistance>k__BackingField: 5
     - rid: 8171215584738410588
       type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
