@@ -1,6 +1,7 @@
 using Code.Game.Common.Entity;
 using Code.Game.Features.Target.Services;
 using Entitas;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -62,6 +63,7 @@ namespace Code.Game.Features.Attack.Systems
             var projectile = CreateGameEntity.Empty();
 
             projectile.AddOwnerId(owner.id.Value);
+            projectile.AddTargetId(owner.targetId.Value);
             projectile.AddSpawnPosition(owner.firePoint.Value);
             projectile.AddAttackerPoint(owner.firePoint.Value);
             projectile.isMovementAvailable = true;

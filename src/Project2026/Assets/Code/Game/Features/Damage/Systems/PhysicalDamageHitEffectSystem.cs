@@ -1,6 +1,5 @@
 using Code.Game.Common.Entity;
 using Entitas;
-using UnityEngine;
 
 namespace Code.Game.Features.Damage.Systems
 {
@@ -14,6 +13,7 @@ namespace Code.Game.Features.Damage.Systems
                 .AllOf(
                     GameMatcher.OwnerId,
                     GameMatcher.TargetId,
+                    GameMatcher.TargetPoint,
                     GameMatcher.DamageRequest));
         }
 
@@ -27,7 +27,7 @@ namespace Code.Game.Features.Damage.Systems
                     continue;
 
                 var hitEffect = CreateGameEntity.Empty();
-                var targetPoint = attacker.targetPoint.Value;
+                var targetPoint = damage.targetPoint.Value;
 
                 if (attacker.hasMovementOffset)
                 {

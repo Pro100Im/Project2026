@@ -44,6 +44,7 @@ namespace Code.Game.Features.Attack.Systems
 
                     damage.AddOwnerId(entity.id.Value);
                     damage.AddTargetId(entity.targetId.Value);
+                    damage.AddTargetPoint(entity.targetPoint.Value);
                     damage.AddTotalDamage(0);
                     damage.isDamageRequest = true;
                 }

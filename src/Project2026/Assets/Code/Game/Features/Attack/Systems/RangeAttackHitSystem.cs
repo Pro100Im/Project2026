@@ -1,0 +1,44 @@
+using Code.Game.Common.Entity;
+using Entitas;
+using System.Collections.Generic;
+
+namespace Code.Game.Features.Attack.Systems
+{
+    public class RangeAttackHitSystem : IExecuteSystem
+    {
+        private readonly IGroup<GameEntity> _attacks;
+        private readonly List<GameEntity> _buffer = new(64);
+
+        public RangeAttackHitSystem(GameContext gameContext)
+        {
+            _attacks = gameContext.GetGroup(GameMatcher
+                .AllOf(
+                    GameMatcher.OwnerId,
+                    GameMatcher.TrajectoryPathProgress));
+        }
+
+        public void Execute()
+        {
+            foreach (var attack in _attacks.GetEntities(_buffer))
+            {
+                if (attack.trajectoryPathProgress.Value < 1)
+                    continue;
+
+                var target = GetGameEntityById.Get(attack.targetId.Value);
+
+                if (!target.isDead)
+                {
+                    var damage = CreateGameEntity.Empty();
+
+                    damage.AddOwnerId(attack.ownerId.Value);
+                    damage.AddTargetId(attack.targetId.Value);
+                    damage.AddTargetPoint(attack.targetPoint.Value);
+                    damage.AddTotalDamage(0);
+                    damage.isDamageRequest = true;
+                }
+                
+                attack.isDestructed = true;
+            }
+        }
+    }
+}
