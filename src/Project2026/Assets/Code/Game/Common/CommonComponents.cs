@@ -21,6 +21,7 @@ namespace Code.Game.Common
     [Game] public class UIDocumentComponent : IComponent { public UIDocument Value; }
     [Game] public class BoundsComponent : IComponent { public SpriteRenderer Value; }
     [Game] public class TouchZoneComponent : IComponent { public SpriteRenderer Value; }
+    [Game] public class LineRendererComponent : IComponent { public LineRenderer Value; }
 
     [Game] public class View : IComponent { public IEntityView Value; }
     [Game] public class ViewPath : IComponent { public string Value; }

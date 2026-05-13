@@ -33,6 +33,8 @@ namespace Code.Game.Features.Input.Systems
                 if (!_gameScreen.IsPointerOverUI(pointer))
                 {
                     var worldPos = _inputService.GetWorldPointer();
+                    var entityClick = CreateInputEntity.Empty();
+                    entityClick.isInput = true;
 
                     foreach (var entity in _entities)
                     {
@@ -40,11 +42,9 @@ namespace Code.Game.Features.Input.Systems
                             continue;
 
                         var screenPoint = _inputService.GetScreenPointer(entity.transform.Value.position);
-                        var entityClick = CreateInputEntity.Empty();
 
-                        entityClick.isInput = true;
-                        entityClick.AddTargetId(entity.id.Value);
                         entityClick.AddScreenPointerInput(screenPoint);
+                        entityClick.AddTargetId(entity.id.Value);
 
                         break;
                     }

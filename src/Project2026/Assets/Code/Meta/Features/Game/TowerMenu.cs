@@ -6,7 +6,7 @@ using VContainer;
 
 namespace Code.Meta.Features.Game
 {
-    public class TowerMenuScreen : MonoBehaviour
+    public class TowerMenu : MonoBehaviour
     {
         [SerializeField] private EntityConfig _testTowerUpgrate;
 

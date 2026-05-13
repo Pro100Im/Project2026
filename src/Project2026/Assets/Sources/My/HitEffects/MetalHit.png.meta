@@ -1,0 +1,444 @@
+fileFormatVersion: 2
+guid: 1e4c83ebc156f474f8e4f2c9797b8715
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8621182619603239594
+    second: MetalHit_0
+  - first:
+      213: 3723168526111739809
+    second: MetalHit_1
+  - first:
+      213: 5322002449935281816
+    second: MetalHit_2
+  - first:
+      213: -3697617825406792910
+    second: MetalHit_3
+  - first:
+      213: 8092307150016275314
+    second: MetalHit_4
+  - first:
+      213: 2081078772845263536
+    second: MetalHit_5
+  - first:
+      213: -5506678736843586538
+    second: MetalHit_6
+  - first:
+      213: -4875136195950837091
+    second: MetalHit_7
+  - first:
+      213: 3749972639731530810
+    second: MetalHit_8
+  - first:
+      213: 1318298438345660420
+    second: MetalHit_9
+  - first:
+      213: 8728411248587193654
+    second: MetalHit_10
+  - first:
+      213: -5820536299736969712
+    second: MetalHit_11
+  - first:
+      213: 2537418177837474186
+    second: MetalHit_12
+  - first:
+      213: 256510538872867205
+    second: MetalHit_13
+  - first:
+      213: 2992729645175112308
+    second: MetalHit_14
+  - first:
+      213: 689605322872049283
+    second: MetalHit_15
+  - first:
+      213: 5068998852391296915
+    second: MetalHit_16
+  - first:
+      213: 7663974717874424820
+    second: MetalHit_17
+  - first:
+      213: -5998420620626661591
+    second: MetalHit_18
+  - first:
+      213: -3146061582628893784
+    second: MetalHit_19
+  - first:
+      213: 4622109743043737956
+    second: MetalHit_20
+  - first:
+      213: -3185395598648711106
+    second: MetalHit_21
+  - first:
+      213: -7488481420437285839
+    second: MetalHit_22
+  - first:
+      213: -7167707148098799580
+    second: MetalHit_23
+  - first:
+      213: 2676533931687746386
+    second: MetalHit_24
+  - first:
+      213: 9196549369219835259
+    second: MetalHit_25
+  - first:
+      213: 973876568654738709
+    second: MetalHit_26
+  - first:
+      213: -1340442189457928525
+    second: MetalHit_27
+  - first:
+      213: 2970790266633982581
+    second: MetalHit_28
+  - first:
+      213: -6021199660463163601
+    second: MetalHit_29
+  - first:
+      213: -521360804158476051
+    second: MetalHit_30
+  - first:
+      213: -4658537335490698320
+    second: MetalHit_31
+  - first:
+      213: 2974006183508966988
+    second: MetalHit_32
+  - first:
+      213: 8776537816884453002
+    second: MetalHit_33
+  - first:
+      213: -7984283939969624771
+    second: MetalHit_34
+  - first:
+      213: -6202252383583598155
+    second: MetalHit_35
+  - first:
+      213: 5376640879834942824
+    second: MetalHit_36
+  - first:
+      213: -4409907532150258607
+    second: MetalHit_37
+  - first:
+      213: 4202294361336031170
+    second: MetalHit_38
+  - first:
+      213: -4462596749331780538
+    second: MetalHit_39
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MetalHit_0
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 414
+        width: 254
+        height: 212
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa209316ae794a770800000000000000
+      internalID: 8621182619603239594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MetalHit_1
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 413
+        width: 254
+        height: 212
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1af0ecd5c0a5ba330800000000000000
+      internalID: 3723168526111739809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MetalHit_2
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 491
+        width: 58
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89ea622f70d8bd940800000000000000
+      internalID: 5322002449935281816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MetalHit_3
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 407
+        width: 243
+        height: 212
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23bc979bd2c6facc0800000000000000
+      internalID: -3697617825406792910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MetalHit_4
+      rect:
+        serializedVersion: 2
+        x: 937
+        y: 407
+        width: 243
+        height: 212
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 273e2126a76ad4070800000000000000
+      internalID: 8092307150016275314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MetalHit_5
+      rect:
+        serializedVersion: 2
+        x: 1112
+        y: 407
+        width: 243
+        height: 212
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ba3c0d2e1a71ec10800000000000000
+      internalID: 2081078772845263536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MetalHit_6
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 407
+        width: 243
+        height: 212
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 614cd3e4dd85493b0800000000000000
+      internalID: -5506678736843586538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: ab5a6786a6f23d84fa8b0d12aea50f4d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      MetalHit_0: 8621182619603239594
+      MetalHit_1: 3723168526111739809
+      MetalHit_10: 8728411248587193654
+      MetalHit_11: -5820536299736969712
+      MetalHit_12: 2537418177837474186
+      MetalHit_13: 256510538872867205
+      MetalHit_14: 2992729645175112308
+      MetalHit_15: 689605322872049283
+      MetalHit_16: 5068998852391296915
+      MetalHit_17: 7663974717874424820
+      MetalHit_18: -5998420620626661591
+      MetalHit_19: -3146061582628893784
+      MetalHit_2: 5322002449935281816
+      MetalHit_20: 4622109743043737956
+      MetalHit_21: -3185395598648711106
+      MetalHit_22: -7488481420437285839
+      MetalHit_23: -7167707148098799580
+      MetalHit_24: 2676533931687746386
+      MetalHit_25: 9196549369219835259
+      MetalHit_26: 973876568654738709
+      MetalHit_27: -1340442189457928525
+      MetalHit_28: 2970790266633982581
+      MetalHit_29: -6021199660463163601
+      MetalHit_3: -3697617825406792910
+      MetalHit_30: -521360804158476051
+      MetalHit_31: -4658537335490698320
+      MetalHit_32: 2974006183508966988
+      MetalHit_33: 8776537816884453002
+      MetalHit_34: -7984283939969624771
+      MetalHit_35: -6202252383583598155
+      MetalHit_36: 5376640879834942824
+      MetalHit_37: -4409907532150258607
+      MetalHit_38: 4202294361336031170
+      MetalHit_39: -4462596749331780538
+      MetalHit_4: 8092307150016275314
+      MetalHit_5: 2081078772845263536
+      MetalHit_6: -5506678736843586538
+      MetalHit_7: -4875136195950837091
+      MetalHit_8: 3749972639731530810
+      MetalHit_9: 1318298438345660420
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

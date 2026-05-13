@@ -9,7 +9,7 @@ namespace Code.Meta.Features.Game
     public class GameScreen : MonoBehaviour
     {
         [SerializeField] private UIDocument _gameScreenDoc;
-        [SerializeField] private TowerMenuScreen _towerMenuScreen;
+        [SerializeField] private TowerMenu _towerMenuScreen;
 
         private UIService _uIService;
 
@@ -47,6 +47,11 @@ namespace Code.Meta.Features.Game
         public void OpenTowerBuildMenu(Vector2 screenPos, GameEntity entity)
         {
             _towerMenuScreen.Open(screenPos, entity);
+        }
+
+        public void CloseTowerBuildMenu()
+        {
+            _towerMenuScreen.Close();
         }
 
         private void OnDestroy()

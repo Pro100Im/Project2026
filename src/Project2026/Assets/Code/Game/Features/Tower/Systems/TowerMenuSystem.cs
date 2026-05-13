@@ -2,6 +2,7 @@ using Code.Game.Common.Entity;
 using Code.Meta.Features.Game;
 using Entitas;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Code.Game.Features.Tower.Systems
 {
@@ -9,33 +10,69 @@ namespace Code.Game.Features.Tower.Systems
     {
         private readonly GameScreen _gameScreen;
 
-        public TowerMenuSystem(InputContext inputContext, GameScreen gameScreen)
-            : base(inputContext) => _gameScreen = gameScreen;
+        private readonly IGroup<GameEntity> _towers;
+
+        public TowerMenuSystem(InputContext inputContext, GameContext gameContext, GameScreen gameScreen)
+            : base(inputContext)
+        {
+            _gameScreen = gameScreen;
+
+            _towers = gameContext.GetGroup(GameMatcher
+                .AllOf(
+                GameMatcher.Player,
+                GameMatcher.Tower,
+                GameMatcher.LineRenderer,
+                GameMatcher.EntityConfig));
+        }
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context) =>
             context.CreateCollector(InputMatcher
                 .AllOf(
-                InputMatcher.Input,
-                InputMatcher.TargetId,
-                InputMatcher.ScreenPointerInput
+                InputMatcher.Input
                 ));
 
-        protected override bool Filter(InputEntity entity) => entity.isInput && entity.hasTargetId && entity.hasScreenPointerInput;
+        protected override bool Filter(InputEntity entity) => entity.isInput;
 
         protected override void Execute(List<InputEntity> entities)
         {
             foreach (var entity in entities)
             {
-                var targetEntity = GetGameEntityById.Get(entity.targetId.Value);
-
-                if (targetEntity.isTowerPlace)
+                if (entity.hasTargetId)
                 {
-                    _gameScreen.OpenTowerBuildMenu(entity.screenPointerInput.Value, targetEntity);
+                    var targetEntity = GetGameEntityById.Get(entity.targetId.Value);
+
+                    if (targetEntity.isTowerPlace)
+                    {
+                        _gameScreen.OpenTowerBuildMenu(entity.screenPointerInput.Value, targetEntity);
+
+
+                    }
+
+                    foreach (var tower in _towers)
+                    {
+                        if (tower.id.Value != entity.targetId.Value)
+                        {
+
+                        }
+
+
+                        if (targetEntity.isTower && targetEntity.hasRange)
+                        {
+
+
+
+                        }
+                    }
 
                     entity.isDestructed = true;
-
-                    break;
                 }
+                else
+                {
+                    Debug.Log("Close menu");
+                    _gameScreen.CloseTowerBuildMenu();
+                }
+
+                entity.isDestructed = true;
             }
         }
     }
