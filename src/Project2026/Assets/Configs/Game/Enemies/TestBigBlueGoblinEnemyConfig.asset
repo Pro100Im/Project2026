@@ -37,7 +37,7 @@ MonoBehaviour:
       type: {class: MovementOffsetProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Offset>k__BackingField: {x: 0.1, y: 0.5, z: 0}
+        <Offset>k__BackingField: {x: 0.5, y: 0.5, z: 0}
     - rid: 2286602697378365559
       type: {class: UnitProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
