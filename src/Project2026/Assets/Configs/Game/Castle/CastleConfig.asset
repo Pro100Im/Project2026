@@ -46,7 +46,7 @@ MonoBehaviour:
       type: {class: HealthProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Health>k__BackingField: 100
+        <Health>k__BackingField: 200
     - rid: 8171215588330831960
       type: {class: HealthBarProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:

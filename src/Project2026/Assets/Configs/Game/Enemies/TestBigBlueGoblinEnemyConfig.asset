@@ -95,7 +95,7 @@ MonoBehaviour:
       type: {class: AttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Range>k__BackingField: 1.5
+        <Range>k__BackingField: 3
         <Cooldown>k__BackingField: 5
         <Duration>k__BackingField: 0.6
         <IsMelee>k__BackingField: 1
