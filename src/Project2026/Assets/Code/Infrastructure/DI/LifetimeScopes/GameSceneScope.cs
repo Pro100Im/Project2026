@@ -185,6 +185,10 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<PhysicalDamageCanculateSystem>(Lifetime.Singleton);
             builder.Register<PhysicalDamageHitEffectSystem>(Lifetime.Singleton);
+
+            builder.Register<FrostDamageCanculateSystem>(Lifetime.Singleton);
+            builder.Register<FrostDamageHitEffectSystem>(Lifetime.Singleton);
+
             builder.Register<ApplyDamageSystem>(Lifetime.Singleton);
 
             builder.Register<HealthBarSystem>(Lifetime.Singleton);

@@ -14,7 +14,7 @@ namespace Code.Game.Features.Damage
 
     [Game] public class PhysicalDamageHitEffect : IComponent { public EntityConfig Value; }
     [Game] public class FireDamageHitEffect : IComponent { public EntityConfig Value; }
-    [Game] public class FrostDamagekHitEffect : IComponent { public EntityConfig Value; }
+    [Game] public class FrostDamageHitEffect : IComponent { public EntityConfig Value; }
     [Game] public class LightningDamageHitEffect : IComponent { public EntityConfig Value; }
-    [Game] public class ChaosDamagekHitEffect : IComponent { public EntityConfig Value; }
+    [Game] public class ChaosDamageHitEffect : IComponent { public EntityConfig Value; }
 }

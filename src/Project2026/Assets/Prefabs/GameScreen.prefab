@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39deee6052837c4dbe9dd667a4f917b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Meta.Features.Game.TowerMenuScreen
-  _testTowerUpgrate: {fileID: 11400000, guid: 73f3088a3a3933840acd244ee4f29d32, type: 2}
+  _archerTowerUpgrade: {fileID: 11400000, guid: 73f3088a3a3933840acd244ee4f29d32, type: 2}
+  _iceTowerUpgrade: {fileID: 11400000, guid: dfe9c98c526e0c14a93a301602b65e37, type: 2}
 --- !u!1 &7233587024386251885
 GameObject:
   m_ObjectHideFlags: 0

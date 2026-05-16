@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2652ec64a2cfac428b7546f4941961e, type: 3}
+  m_Name: FrostTowerUpgrate1Config
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.EntityConfig
+  Properties:
+  - rid: 8171215588330831995
+  - rid: 8171215588330831996
+  - rid: 8171215588330831997
+  - rid: 8171215588330831999
+  - rid: 8171215588330832021
+  - rid: 2286602737992335451
+  - rid: 2286602853080629334
+  - rid: 2286603035550154836
+  references:
+    version: 2
+    RefIds:
+    - rid: 2286602737992335451
+      type: {class: TeamProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Team>k__BackingField: 1
+    - rid: 2286602853080629334
+      type: {class: ProjectileProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Projectile>k__BackingField: {fileID: 11400000, guid: 2707c903302e7bc449a1fffd47dd1db1, type: 2}
+    - rid: 2286603035550154836
+      type: {class: FrostAttackProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Damage>k__BackingField: 10
+        <HitEffect>k__BackingField: {fileID: 11400000, guid: ecb29bdf7923cd245ac387b206994f80, type: 2}
+    - rid: 8171215588330831995
+      type: {class: TowerPlaceProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 2
+    - rid: 8171215588330831996
+      type: {class: TowerProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+    - rid: 8171215588330831997
+      type: {class: SpawnEffectProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <SpawnEffect>k__BackingField: {fileID: 11400000, guid: fdc1f4e91ba6e8540b533480e06b4730, type: 2}
+        <SpawnEffectOffset>k__BackingField: {x: 0, y: 1, z: 0}
+    - rid: 8171215588330831999
+      type: {class: AttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Range>k__BackingField: 6
+        <Cooldown>k__BackingField: 2.5
+        <Duration>k__BackingField: 0.6
+        <IsMelee>k__BackingField: 0
+    - rid: 8171215588330832021
+      type: {class: SpriteProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <_sprite>k__BackingField: {fileID: 21300000, guid: 0d67a555e52611044a53081f5313cec5, type: 3}

@@ -10,6 +10,9 @@ namespace Code.Game.Features.Damage
             Add(systemFactory.Create<PhysicalDamageCanculateSystem>());
             Add(systemFactory.Create<PhysicalDamageHitEffectSystem>());
 
+            Add(systemFactory.Create<FrostDamageCanculateSystem>());
+            Add(systemFactory.Create<FrostDamageHitEffectSystem>());
+
             Add(systemFactory.Create<ApplyDamageSystem>());
         }
     }

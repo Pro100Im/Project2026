@@ -41,12 +41,12 @@ public static class GameComponentsLookup {
     public const int RangeHit = 30;
     public const int Cooldown = 31;
     public const int ChaosDamage = 32;
-    public const int ChaosDamagekHitEffect = 33;
+    public const int ChaosDamageHitEffect = 33;
     public const int DamageRequest = 34;
     public const int FireDamage = 35;
     public const int FireDamageHitEffect = 36;
     public const int FrostDamage = 37;
-    public const int FrostDamagekHitEffect = 38;
+    public const int FrostDamageHitEffect = 38;
     public const int LightningDamage = 39;
     public const int LightningDamageHitEffect = 40;
     public const int PhysicalDamage = 41;
@@ -86,29 +86,30 @@ public static class GameComponentsLookup {
     public const int PlayerCastle = 75;
     public const int PlayerCastleCells = 76;
     public const int Player = 77;
-    public const int PhysicalResistance = 78;
-    public const int SpawnPosition = 79;
-    public const int SpawnRequsted = 80;
-    public const int WaitingToSpawn = 81;
-    public const int Targetable = 82;
-    public const int TargetCell = 83;
-    public const int TargetCellRequest = 84;
-    public const int TargetFlow = 85;
-    public const int TargetId = 86;
-    public const int TargetPoint = 87;
-    public const int Tower = 88;
-    public const int TowerBuildRequest = 89;
-    public const int TowerPlace = 90;
-    public const int Unit = 91;
-    public const int UnitSize = 92;
-    public const int CurrentWaveEnemies = 93;
-    public const int CurrentWaveNumber = 94;
-    public const int WaveEnemiesAlive = 95;
-    public const int WaveInProgress = 96;
-    public const int WaveStartRequsted = 97;
-    public const int Projectile = 98;
+    public const int FrostResistance = 78;
+    public const int PhysicalResistance = 79;
+    public const int SpawnPosition = 80;
+    public const int SpawnRequsted = 81;
+    public const int WaitingToSpawn = 82;
+    public const int Targetable = 83;
+    public const int TargetCell = 84;
+    public const int TargetCellRequest = 85;
+    public const int TargetFlow = 86;
+    public const int TargetId = 87;
+    public const int TargetPoint = 88;
+    public const int Tower = 89;
+    public const int TowerBuildRequest = 90;
+    public const int TowerPlace = 91;
+    public const int Unit = 92;
+    public const int UnitSize = 93;
+    public const int CurrentWaveEnemies = 94;
+    public const int CurrentWaveNumber = 95;
+    public const int WaveEnemiesAlive = 96;
+    public const int WaveInProgress = 97;
+    public const int WaveStartRequsted = 98;
+    public const int Projectile = 99;
 
-    public const int TotalComponents = 99;
+    public const int TotalComponents = 100;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -144,12 +145,12 @@ public static class GameComponentsLookup {
         "RangeHit",
         "Cooldown",
         "ChaosDamage",
-        "ChaosDamagekHitEffect",
+        "ChaosDamageHitEffect",
         "DamageRequest",
         "FireDamage",
         "FireDamageHitEffect",
         "FrostDamage",
-        "FrostDamagekHitEffect",
+        "FrostDamageHitEffect",
         "LightningDamage",
         "LightningDamageHitEffect",
         "PhysicalDamage",
@@ -189,6 +190,7 @@ public static class GameComponentsLookup {
         "PlayerCastle",
         "PlayerCastleCells",
         "Player",
+        "FrostResistance",
         "PhysicalResistance",
         "SpawnPosition",
         "SpawnRequsted",
@@ -246,12 +248,12 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Attack.RangeHit),
         typeof(Code.Game.Features.Cooldown.Cooldown),
         typeof(Code.Game.Features.Damage.ChaosDamage),
-        typeof(Code.Game.Features.Damage.ChaosDamagekHitEffect),
+        typeof(Code.Game.Features.Damage.ChaosDamageHitEffect),
         typeof(Code.Game.Features.Damage.DamageRequest),
         typeof(Code.Game.Features.Damage.FireDamage),
         typeof(Code.Game.Features.Damage.FireDamageHitEffect),
         typeof(Code.Game.Features.Damage.FrostDamage),
-        typeof(Code.Game.Features.Damage.FrostDamagekHitEffect),
+        typeof(Code.Game.Features.Damage.FrostDamageHitEffect),
         typeof(Code.Game.Features.Damage.LightningDamage),
         typeof(Code.Game.Features.Damage.LightningDamageHitEffect),
         typeof(Code.Game.Features.Damage.PhysicalDamage),
@@ -291,6 +293,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Player.PlayerCastle),
         typeof(Code.Game.Features.Player.PlayerCastleCells),
         typeof(Code.Game.Features.Player.PlayerComponent),
+        typeof(Code.Game.Features.Resistance.FrostResistance),
         typeof(Code.Game.Features.Resistance.PhysicalResistance),
         typeof(Code.Game.Features.Spawn.SpawnPosition),
         typeof(Code.Game.Features.Spawn.SpawnRequsted),
