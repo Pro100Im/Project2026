@@ -15,6 +15,7 @@ namespace Code.Game.Features.Attack
     [Game] public class AttackerPoint : IComponent { public Vector2 Value; }
     [Game] public class FirePoint : IComponent { public Vector3 Value; }
     [Game] public class RangeHit : IComponent { }
+    [Game] public class AreaAttack : IComponent { public float Value; }
 
     public enum AttackDirection
     {

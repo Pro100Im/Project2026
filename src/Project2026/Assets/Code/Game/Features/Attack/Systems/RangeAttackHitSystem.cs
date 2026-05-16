@@ -14,6 +14,7 @@ namespace Code.Game.Features.Attack.Systems
             _attacks = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.OwnerId,
+                    GameMatcher.TargetId,
                     GameMatcher.TrajectoryPathProgress));
         }
 
@@ -21,7 +22,7 @@ namespace Code.Game.Features.Attack.Systems
         {
             foreach (var attack in _attacks.GetEntities(_buffer))
             {
-                if (attack.trajectoryPathProgress.Value < 1)
+                if (attack.hasAreaAttack || attack.trajectoryPathProgress.Value < 1)
                     continue;
 
                 var target = GetGameEntityById.Get(attack.targetId.Value);
@@ -35,6 +36,7 @@ namespace Code.Game.Features.Attack.Systems
                     damage.AddTargetPoint(attack.targetPoint.Value);
                     damage.AddTotalDamage(0);
                     damage.isDamageRequest = true;
+                    damage.isDamageEffectRequest = true;
                 }
                 
                 attack.isDestructed = true;

@@ -10,11 +10,12 @@ namespace Code.Game.Features.Damage.Systems
         public PhysicalDamageHitEffectSystem(GameContext gameContext)
         {
             _damages = gameContext.GetGroup(GameMatcher
-                .AllOf(
-                    GameMatcher.OwnerId,
-                    GameMatcher.TargetId,
-                    GameMatcher.TargetPoint,
-                    GameMatcher.DamageRequest));
+            .AllOf(
+                GameMatcher.OwnerId,
+                GameMatcher.TargetId,
+                GameMatcher.TargetPoint,
+                GameMatcher.DamageRequest,
+                GameMatcher.DamageEffectRequest));
         }
 
         public void Execute()

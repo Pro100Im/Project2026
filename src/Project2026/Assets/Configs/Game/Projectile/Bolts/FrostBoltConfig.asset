@@ -17,6 +17,7 @@ MonoBehaviour:
   - rid: 2286602853080629325
   - rid: 2286602853080629326
   - rid: 2286602893353287759
+  - rid: 2286603035550154854
   references:
     version: 2
     RefIds:
@@ -72,3 +73,8 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
+    - rid: 2286603035550154854
+      type: {class: AreaAttackProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Area>k__BackingField: 3

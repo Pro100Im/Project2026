@@ -66,6 +66,7 @@ namespace Code.Game.Features.Attack.Systems
             projectile.AddTargetId(owner.targetId.Value);
             projectile.AddSpawnPosition(owner.firePoint.Value);
             projectile.AddAttackerPoint(owner.firePoint.Value);
+            projectile.AddTeam(owner.team.Value);
             projectile.isMovementAvailable = true;
 
             foreach (var property in owner.projectile.Value.Properties)

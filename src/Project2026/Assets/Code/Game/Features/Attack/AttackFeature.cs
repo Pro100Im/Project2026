@@ -11,6 +11,7 @@ namespace Code.Game.Features.Attack
             Add(systemFactory.Create<MeleeAttackEndSystem>());
             Add(systemFactory.Create<RangeAttackEndSystem>());
             Add(systemFactory.Create<RangeAttackHitSystem>());
+            Add(systemFactory.Create<RangeAreaAttackHitSystem>());
         }
     }
 }

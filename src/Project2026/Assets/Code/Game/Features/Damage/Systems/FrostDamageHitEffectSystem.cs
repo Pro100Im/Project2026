@@ -14,7 +14,8 @@ namespace Code.Game.Features.Damage.Systems
                     GameMatcher.OwnerId,
                     GameMatcher.TargetId,
                     GameMatcher.TargetPoint,
-                    GameMatcher.DamageRequest));
+                    GameMatcher.DamageRequest,
+                    GameMatcher.DamageEffectRequest));
         }
 
         public void Execute()

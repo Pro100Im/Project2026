@@ -47,6 +47,7 @@ namespace Code.Game.Features.Attack.Systems
                     damage.AddTargetPoint(entity.targetPoint.Value);
                     damage.AddTotalDamage(0);
                     damage.isDamageRequest = true;
+                    damage.isDamageEffectRequest = true;
                 }
 
                 entity.isAttacking = false;
