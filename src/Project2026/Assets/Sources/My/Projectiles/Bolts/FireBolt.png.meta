@@ -1,0 +1,1300 @@
+fileFormatVersion: 2
+guid: cde0dc09b8d48364fb9fd85fe833634f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2958205174592878507
+    second: FireBolt_0
+  - first:
+      213: -6026814506873949711
+    second: FireBolt_1
+  - first:
+      213: 1448336106657362547
+    second: FireBolt_2
+  - first:
+      213: 659384890586099894
+    second: FireBolt_3
+  - first:
+      213: -6196664818681994320
+    second: FireBolt_4
+  - first:
+      213: -6983557739616505146
+    second: FireBolt_5
+  - first:
+      213: -8302562030617035058
+    second: FireBolt_6
+  - first:
+      213: 588586078126377857
+    second: FireBolt_7
+  - first:
+      213: -687606530168563233
+    second: FireBolt_8
+  - first:
+      213: -2091823711381449188
+    second: FireBolt_9
+  - first:
+      213: -2521205073297452697
+    second: FireBolt_10
+  - first:
+      213: -5167675498369384013
+    second: FireBolt_11
+  - first:
+      213: -5537812261956370603
+    second: FireBolt_12
+  - first:
+      213: 6656140656103043295
+    second: FireBolt_13
+  - first:
+      213: 7033684316567891313
+    second: FireBolt_14
+  - first:
+      213: -6136328921341230944
+    second: FireBolt_15
+  - first:
+      213: -8409541130040600814
+    second: FireBolt_16
+  - first:
+      213: -7790963323979986542
+    second: FireBolt_17
+  - first:
+      213: 1084229160107517345
+    second: FireBolt_18
+  - first:
+      213: -8381174994789257641
+    second: FireBolt_19
+  - first:
+      213: -71027205922892980
+    second: FireBolt_20
+  - first:
+      213: 5656862786780483617
+    second: FireBolt_21
+  - first:
+      213: -9140072270628381445
+    second: FireBolt_22
+  - first:
+      213: 58518469175284880
+    second: FireBolt_23
+  - first:
+      213: 2957191247364852460
+    second: FireBolt_24
+  - first:
+      213: -5770873909282406751
+    second: FireBolt_25
+  - first:
+      213: -2423082163201883138
+    second: FireBolt_26
+  - first:
+      213: -7441107903628529959
+    second: FireBolt_27
+  - first:
+      213: -1140024277363801868
+    second: FireBolt_28
+  - first:
+      213: -8221052329632931453
+    second: FireBolt_29
+  - first:
+      213: 3126020816345322460
+    second: FireBolt_30
+  - first:
+      213: 3873226429776249564
+    second: FireBolt_31
+  - first:
+      213: -9203114246338954932
+    second: FireBolt_32
+  - first:
+      213: 5675065632557559424
+    second: FireBolt_33
+  - first:
+      213: 6504469694054295890
+    second: FireBolt_34
+  - first:
+      213: -3184672216288018140
+    second: FireBolt_35
+  - first:
+      213: -4626498709477703433
+    second: FireBolt_36
+  - first:
+      213: 3865331845549466491
+    second: FireBolt_37
+  - first:
+      213: -4658610029531850078
+    second: FireBolt_38
+  - first:
+      213: -7754230826322190556
+    second: FireBolt_39
+  - first:
+      213: -3329364696192160688
+    second: FireBolt_40
+  - first:
+      213: 5361373218953188347
+    second: FireBolt_41
+  - first:
+      213: -1592086715882612045
+    second: FireBolt_42
+  - first:
+      213: -4998177016278575914
+    second: FireBolt_43
+  - first:
+      213: 6078013802715458529
+    second: FireBolt_44
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 1000
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FireBolt_0
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 739
+        width: 12
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5584ba3211852f6d0800000000000000
+      internalID: -2958205174592878507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_1
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 740
+        width: 13
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f17b9e23247c5ca0800000000000000
+      internalID: -6026814506873949711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_2
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 754
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3723fa0f306891410800000000000000
+      internalID: 1448336106657362547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_3
+      rect:
+        serializedVersion: 2
+        x: 439
+        y: 744
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b0f4ad701b962900800000000000000
+      internalID: 659384890586099894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_4
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 731
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b3ac42cd26010aa0800000000000000
+      internalID: -6196664818681994320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_5
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 722
+        width: 38
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c27abd7c3b651f90800000000000000
+      internalID: -6983557739616505146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_6
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 703
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecefc6f62df57cc80800000000000000
+      internalID: -8302562030617035058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_7
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 727
+        width: 19
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18b867a6be31b2800800000000000000
+      internalID: 588586078126377857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_8
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 718
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd9501001812576f0800000000000000
+      internalID: -687606530168563233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_9
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 728
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c169e5eda6958f2e0800000000000000
+      internalID: -2091823711381449188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_10
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 722
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76151300851e20dd0800000000000000
+      internalID: -2521205073297452697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_11
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 728
+        width: 14
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b10435838ab848b0800000000000000
+      internalID: -5167675498369384013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_12
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 724
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55fb94d961db523b0800000000000000
+      internalID: -5537812261956370603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_13
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 725
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd0be0639ac5f5c50800000000000000
+      internalID: 6656140656103043295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_14
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 714
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17de34fae9aac9160800000000000000
+      internalID: 7033684316567891313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_15
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 279
+        width: 613
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a000829b5167daa0800000000000000
+      internalID: -6136328921341230944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_16
+      rect:
+        serializedVersion: 2
+        x: 439
+        y: 710
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21794ebd5ee4b4b80800000000000000
+      internalID: -8409541130040600814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_17
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 712
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29983189220f0e390800000000000000
+      internalID: -7790963323979986542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_18
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 716
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a524573da4fb0f00800000000000000
+      internalID: 1084229160107517345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_19
+      rect:
+        serializedVersion: 2
+        x: 683
+        y: 710
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75e23336fb510bb80800000000000000
+      internalID: -8381174994789257641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_20
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 568
+        width: 22
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c43d39de129a30ff0800000000000000
+      internalID: -71027205922892980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_21
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 555
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1205d25bbb6318e40800000000000000
+      internalID: 5656862786780483617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_22
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 534
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfc1ccf22b0f72180800000000000000
+      internalID: -9140072270628381445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_23
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 497
+        width: 28
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0941ef7dc36efc000800000000000000
+      internalID: 58518469175284880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_24
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 507
+        width: 20
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cea831885cd0a0920800000000000000
+      internalID: 2957191247364852460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_25
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 495
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aef6a141ccb9efa0800000000000000
+      internalID: -5770873909282406751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_26
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 505
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef344c05c9b7f5ed0800000000000000
+      internalID: -2423082163201883138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_27
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 471
+        width: 15
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9deaedc49cfdbb890800000000000000
+      internalID: -7441107903628529959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_28
+      rect:
+        serializedVersion: 2
+        x: 799
+        y: 467
+        width: 28
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f0c868b5f1dd20f0800000000000000
+      internalID: -1140024277363801868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_29
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 423
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 381e4549674f8ed80800000000000000
+      internalID: -8221052329632931453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_30
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 429
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd35dbebe5bd16b20800000000000000
+      internalID: 3126020816345322460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_31
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 300
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd2c779aae670c530800000000000000
+      internalID: 3873226429776249564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_32
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 299
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4931a76a58f74080800000000000000
+      internalID: -9203114246338954932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_33
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 280
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08eee910022e1ce40800000000000000
+      internalID: 5675065632557559424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_34
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 300
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 259666e79b4844a50800000000000000
+      internalID: 6504469694054295890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_35
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 302
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 421c81e0e75cdc3d0800000000000000
+      internalID: -3184672216288018140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_36
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 283
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f047cb9fef5bcfb0800000000000000
+      internalID: -4626498709477703433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_37
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 288
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b732bf885da64a530800000000000000
+      internalID: 3865331845549466491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_38
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 279
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2aa9eaa4cda495fb0800000000000000
+      internalID: -4658610029531850078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_39
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 284
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42f9eaaa520736490800000000000000
+      internalID: -7754230826322190556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_40
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 283
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05c6db3d278bbc1d0800000000000000
+      internalID: -3329364696192160688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_41
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 287
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf35fff698c676a40800000000000000
+      internalID: 5361373218953188347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_42
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 271
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bad2303195c7e9e0800000000000000
+      internalID: -1592086715882612045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_43
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 270
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d491343c78e2aab0800000000000000
+      internalID: -4998177016278575914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBolt_44
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 271
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1eba6c2d951795450800000000000000
+      internalID: 6078013802715458529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      FireBolt_0: -2958205174592878507
+      FireBolt_1: -6026814506873949711
+      FireBolt_10: -2521205073297452697
+      FireBolt_11: -5167675498369384013
+      FireBolt_12: -5537812261956370603
+      FireBolt_13: 6656140656103043295
+      FireBolt_14: 7033684316567891313
+      FireBolt_15: -6136328921341230944
+      FireBolt_16: -8409541130040600814
+      FireBolt_17: -7790963323979986542
+      FireBolt_18: 1084229160107517345
+      FireBolt_19: -8381174994789257641
+      FireBolt_2: 1448336106657362547
+      FireBolt_20: -71027205922892980
+      FireBolt_21: 5656862786780483617
+      FireBolt_22: -9140072270628381445
+      FireBolt_23: 58518469175284880
+      FireBolt_24: 2957191247364852460
+      FireBolt_25: -5770873909282406751
+      FireBolt_26: -2423082163201883138
+      FireBolt_27: -7441107903628529959
+      FireBolt_28: -1140024277363801868
+      FireBolt_29: -8221052329632931453
+      FireBolt_3: 659384890586099894
+      FireBolt_30: 3126020816345322460
+      FireBolt_31: 3873226429776249564
+      FireBolt_32: -9203114246338954932
+      FireBolt_33: 5675065632557559424
+      FireBolt_34: 6504469694054295890
+      FireBolt_35: -3184672216288018140
+      FireBolt_36: -4626498709477703433
+      FireBolt_37: 3865331845549466491
+      FireBolt_38: -4658610029531850078
+      FireBolt_39: -7754230826322190556
+      FireBolt_4: -6196664818681994320
+      FireBolt_40: -3329364696192160688
+      FireBolt_41: 5361373218953188347
+      FireBolt_42: -1592086715882612045
+      FireBolt_43: -4998177016278575914
+      FireBolt_44: 6078013802715458529
+      FireBolt_5: -6983557739616505146
+      FireBolt_6: -8302562030617035058
+      FireBolt_7: 588586078126377857
+      FireBolt_8: -687606530168563233
+      FireBolt_9: -2091823711381449188
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -88,30 +88,31 @@ public static class GameComponentsLookup {
     public const int PlayerCastle = 77;
     public const int PlayerCastleCells = 78;
     public const int Player = 79;
-    public const int FrostResistance = 80;
-    public const int PhysicalResistance = 81;
-    public const int SpawnPosition = 82;
-    public const int SpawnRequsted = 83;
-    public const int WaitingToSpawn = 84;
-    public const int Targetable = 85;
-    public const int TargetCell = 86;
-    public const int TargetCellRequest = 87;
-    public const int TargetFlow = 88;
-    public const int TargetId = 89;
-    public const int TargetPoint = 90;
-    public const int Tower = 91;
-    public const int TowerBuildRequest = 92;
-    public const int TowerPlace = 93;
-    public const int Unit = 94;
-    public const int UnitSize = 95;
-    public const int CurrentWaveEnemies = 96;
-    public const int CurrentWaveNumber = 97;
-    public const int WaveEnemiesAlive = 98;
-    public const int WaveInProgress = 99;
-    public const int WaveStartRequsted = 100;
-    public const int Projectile = 101;
+    public const int FireResistance = 80;
+    public const int FrostResistance = 81;
+    public const int PhysicalResistance = 82;
+    public const int SpawnPosition = 83;
+    public const int SpawnRequsted = 84;
+    public const int WaitingToSpawn = 85;
+    public const int Targetable = 86;
+    public const int TargetCell = 87;
+    public const int TargetCellRequest = 88;
+    public const int TargetFlow = 89;
+    public const int TargetId = 90;
+    public const int TargetPoint = 91;
+    public const int Tower = 92;
+    public const int TowerBuildRequest = 93;
+    public const int TowerPlace = 94;
+    public const int Unit = 95;
+    public const int UnitSize = 96;
+    public const int CurrentWaveEnemies = 97;
+    public const int CurrentWaveNumber = 98;
+    public const int WaveEnemiesAlive = 99;
+    public const int WaveInProgress = 100;
+    public const int WaveStartRequsted = 101;
+    public const int Projectile = 102;
 
-    public const int TotalComponents = 102;
+    public const int TotalComponents = 103;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -194,6 +195,7 @@ public static class GameComponentsLookup {
         "PlayerCastle",
         "PlayerCastleCells",
         "Player",
+        "FireResistance",
         "FrostResistance",
         "PhysicalResistance",
         "SpawnPosition",
@@ -299,6 +301,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Player.PlayerCastle),
         typeof(Code.Game.Features.Player.PlayerCastleCells),
         typeof(Code.Game.Features.Player.PlayerComponent),
+        typeof(Code.Game.Features.Resistance.FireResistance),
         typeof(Code.Game.Features.Resistance.FrostResistance),
         typeof(Code.Game.Features.Resistance.PhysicalResistance),
         typeof(Code.Game.Features.Spawn.SpawnPosition),

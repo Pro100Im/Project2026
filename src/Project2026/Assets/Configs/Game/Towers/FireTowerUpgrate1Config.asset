@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2652ec64a2cfac428b7546f4941961e, type: 3}
-  m_Name: FrostTowerUpgrate1Config
+  m_Name: FireTowerUpgrate1Config
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.EntityConfig
   Properties:
   - rid: 8171215588330831995
@@ -20,7 +20,7 @@ MonoBehaviour:
   - rid: 8171215588330832021
   - rid: 2286602737992335451
   - rid: 2286602853080629334
-  - rid: 2286603035550154836
+  - rid: 2286603056206053663
   references:
     version: 2
     RefIds:
@@ -33,13 +33,13 @@ MonoBehaviour:
       type: {class: ProjectileProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Projectile>k__BackingField: {fileID: 11400000, guid: 2707c903302e7bc449a1fffd47dd1db1, type: 2}
-    - rid: 2286603035550154836
-      type: {class: FrostAttackProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+        <Projectile>k__BackingField: {fileID: 11400000, guid: 3add360f7ec3c904d9338a8890bf7950, type: 2}
+    - rid: 2286603056206053663
+      type: {class: FireAttackProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Damage>k__BackingField: 10
-        <HitEffect>k__BackingField: {fileID: 11400000, guid: ecb29bdf7923cd245ac387b206994f80, type: 2}
+        <Damage>k__BackingField: 20
+        <HitEffect>k__BackingField: {fileID: 11400000, guid: 3c295d148209973419938951cd307d8a, type: 2}
     - rid: 8171215588330831995
       type: {class: TowerPlaceProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
@@ -59,11 +59,11 @@ MonoBehaviour:
       data:
         <Mode>k__BackingField: 0
         <Range>k__BackingField: 6
-        <Cooldown>k__BackingField: 2.5
+        <Cooldown>k__BackingField: 2
         <Duration>k__BackingField: 0.6
         <IsMelee>k__BackingField: 0
     - rid: 8171215588330832021
       type: {class: SpriteProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <_sprite>k__BackingField: {fileID: 21300000, guid: 50be9874157e73c48826d4aa57ee7430, type: 3}
+        <_sprite>k__BackingField: {fileID: 21300000, guid: 0db966170b89d524a8810049fd2dce08, type: 3}

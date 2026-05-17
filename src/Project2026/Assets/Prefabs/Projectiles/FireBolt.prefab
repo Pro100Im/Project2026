@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5362460055802186138}
   - component: {fileID: -7551903593818625875}
   m_Layer: 0
-  m_Name: FrostBolt
+  m_Name: FireBolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,7 +102,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3536482463686298414}
@@ -156,12 +156,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: dcf28639e4c2081459f776553125a010, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cde0dc09b8d48364fb9fd85fe833634f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.7066667, y: 1.7066667}
+  m_Size: {x: 0.984375, y: 0.21875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -224,8 +224,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.0015640259
-        value: 0.12664267
+        time: 0
+        value: 0.09331747
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -255,8 +255,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.40143287, g: 0.5859521, b: 0.9150943, a: 0}
-      key1: {r: 0.6, g: 0.7921569, b: 0.9137255, a: 0.44313726}
+      key0: {r: 0.9960785, g: 0.40784317, b: 0, a: 0}
+      key1: {r: 0.9960785, g: 0.86666673, b: 0.03529412, a: 0.44313726}
       key2: {r: 0, g: 0, b: 0, a: 0.9574492}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -272,8 +272,8 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 7517
-      atime2: 58596
+      atime1: 6361
+      atime2: 56090
       atime3: 65535
       atime4: 0
       atime5: 0

@@ -10,6 +10,7 @@ namespace Code.Meta.Features.Game
     {
         [SerializeField] private EntityConfig _archerTowerUpgrade;
         [SerializeField] private EntityConfig _iceTowerUpgrade;
+        [SerializeField] private EntityConfig _fireTowerUpgrade;
 
         private GameScreen _gameScreen;
         private UIService _uIService;
@@ -20,6 +21,7 @@ namespace Code.Meta.Features.Game
         private Button _closeBuildMenuButton;
         private Button _archerTowerButton;
         private Button _iceTowerButton;
+        private Button _fireTowerButton;
 
         private GameEntity _currentTowerEntity;
 
@@ -38,9 +40,11 @@ namespace Code.Meta.Features.Game
             _closeBuildMenuButton = _gameScreen.GetButton("CloseButton");
             _archerTowerButton = _gameScreen.GetButton("ArcherTower");
             _iceTowerButton = _gameScreen.GetButton("IceTower");
+            _fireTowerButton = _gameScreen.GetButton("FireTower");
 
             _archerTowerButton.clickable.clicked += CreateArcherTower;
             _iceTowerButton.clickable.clicked += CreateIceTower;
+            _fireTowerButton.clickable.clicked += CreateFireTower;
 
             _closeBuildMenuButton.clickable.clicked += Close;
         }
@@ -55,6 +59,7 @@ namespace Code.Meta.Features.Game
             _towersContainer.pickingMode = PickingMode.Position;
             _archerTowerButton.pickingMode = PickingMode.Position;
             _iceTowerButton.pickingMode = PickingMode.Position;
+            _fireTowerButton.pickingMode = PickingMode.Position;
 
             _closeBuildMenuButton.pickingMode = PickingMode.Position;
         }
@@ -68,6 +73,7 @@ namespace Code.Meta.Features.Game
             _towersContainer.pickingMode = PickingMode.Ignore;
             _archerTowerButton.pickingMode = PickingMode.Ignore;
             _iceTowerButton.pickingMode = PickingMode.Ignore;
+            _fireTowerButton.pickingMode = PickingMode.Ignore;
 
             _uIService.Hide(_towerBuildMenu).AsAsyncUnitUniTask();
         }
@@ -94,12 +100,24 @@ namespace Code.Meta.Features.Game
             Close();
         }
 
+        private void CreateFireTower()
+        {
+            if (_currentTowerEntity != null)
+            {
+                _currentTowerEntity.isTowerBuildRequest = true;
+                _currentTowerEntity.AddEntityConfig(_fireTowerUpgrade);
+            }
+
+            Close();
+        }
+
         private void OnDestroy()
         {
             _closeBuildMenuButton.clickable.clicked -= Close;
 
             _archerTowerButton.clickable.clicked -= CreateArcherTower;
             _iceTowerButton.clickable.clicked -= CreateIceTower;
+            _fireTowerButton.clickable.clicked -= CreateFireTower;
         }
     }
 }

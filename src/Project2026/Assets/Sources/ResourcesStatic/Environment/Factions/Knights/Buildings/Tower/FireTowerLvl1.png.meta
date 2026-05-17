@@ -1,0 +1,1326 @@
+fileFormatVersion: 2
+guid: 0db966170b89d524a8810049fd2dce08
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8877008918137329614
+    second: FireTowerLvl1 (1)_0
+  - first:
+      213: 4578281072568541298
+    second: FireTowerLvl1 (1)_1
+  - first:
+      213: 1200228893179259967
+    second: FireTowerLvl1 (1)_2
+  - first:
+      213: 1670179242812465821
+    second: FireTowerLvl1 (1)_3
+  - first:
+      213: 8772435446115096247
+    second: FireTowerLvl1 (1)_4
+  - first:
+      213: 2349760800941852007
+    second: FireTowerLvl1 (1)_5
+  - first:
+      213: -2318635655335318547
+    second: FireTowerLvl1 (1)_6
+  - first:
+      213: 9086343192779513352
+    second: FireTowerLvl1 (1)_7
+  - first:
+      213: -1824491940751173533
+    second: FireTowerLvl1 (1)_8
+  - first:
+      213: 8436634005844367069
+    second: FireTowerLvl1 (1)_9
+  - first:
+      213: 7429903347642946355
+    second: FireTowerLvl1 (1)_10
+  - first:
+      213: 6268671567532350867
+    second: FireTowerLvl1 (1)_11
+  - first:
+      213: -6551082847624069916
+    second: FireTowerLvl1 (1)_12
+  - first:
+      213: -1200614057203600986
+    second: FireTowerLvl1 (1)_13
+  - first:
+      213: 6725516344459907785
+    second: FireTowerLvl1 (1)_14
+  - first:
+      213: -1708462317080111130
+    second: FireTowerLvl1 (1)_15
+  - first:
+      213: 6841826276693888556
+    second: FireTowerLvl1 (1)_16
+  - first:
+      213: -7607770934970699237
+    second: FireTowerLvl1 (1)_17
+  - first:
+      213: 8015580598619802717
+    second: FireTowerLvl1 (1)_18
+  - first:
+      213: -806578345971896907
+    second: FireTowerLvl1 (1)_19
+  - first:
+      213: -402462444529884346
+    second: FireTowerLvl1 (1)_20
+  - first:
+      213: -3254383421558424189
+    second: FireTowerLvl1 (1)_21
+  - first:
+      213: -8305160309262658670
+    second: FireTowerLvl1 (1)_22
+  - first:
+      213: -2951562525933472948
+    second: FireTowerLvl1 (1)_23
+  - first:
+      213: 2543349224064342773
+    second: FireTowerLvl1 (1)_24
+  - first:
+      213: 8131090178768758194
+    second: FireTowerLvl1 (1)_25
+  - first:
+      213: 7508507810622491291
+    second: FireTowerLvl1 (1)_26
+  - first:
+      213: 7044854355116247359
+    second: FireTowerLvl1 (1)_27
+  - first:
+      213: -3473910437303342119
+    second: FireTowerLvl1 (1)_28
+  - first:
+      213: 6376959319735186939
+    second: FireTowerLvl1 (1)_29
+  - first:
+      213: 3964262602896138680
+    second: FireTowerLvl1 (1)_30
+  - first:
+      213: -225315166666123817
+    second: FireTowerLvl1 (1)_31
+  - first:
+      213: 877433667140642911
+    second: FireTowerLvl1 (1)_32
+  - first:
+      213: 793747284421547249
+    second: FireTowerLvl1 (1)_33
+  - first:
+      213: 8708204545008613089
+    second: FireTowerLvl1 (1)_34
+  - first:
+      213: -336956993482744333
+    second: FireTowerLvl1 (1)_35
+  - first:
+      213: 4563297642913659590
+    second: FireTowerLvl1 (1)_36
+  - first:
+      213: -6734894040326776161
+    second: FireTowerLvl1 (1)_37
+  - first:
+      213: 3563725379774000333
+    second: FireTowerLvl1 (1)_38
+  - first:
+      213: -6081420614873128660
+    second: FireTowerLvl1 (1)_39
+  - first:
+      213: -4193677748381004124
+    second: FireTowerLvl1 (1)_40
+  - first:
+      213: -6533208097174773567
+    second: FireTowerLvl1 (1)_41
+  - first:
+      213: 6634986799016262073
+    second: FireTowerLvl1 (1)_42
+  - first:
+      213: -6502106404097414614
+    second: FireTowerLvl1 (1)_43
+  - first:
+      213: -8560330806562235111
+    second: FireTowerLvl1 (1)_44
+  - first:
+      213: 7243265697591653916
+    second: FireTowerLvl1 (1)_45
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 600
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 256
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_0
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 1272
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 238237edb678ec480800000000000000
+      internalID: -8877008918137329614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_1
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 1231
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 270a754f062598f30800000000000000
+      internalID: 4578281072568541298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_2
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 1261
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3c2c1bb1d118a010800000000000000
+      internalID: 1200228893179259967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_3
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 1250
+        width: 13
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d92611f1c2bad2710800000000000000
+      internalID: 1670179242812465821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_4
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 147
+        width: 684
+        height: 1098
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b65cb45f83fdb970800000000000000
+      internalID: 8772435446115096247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_5
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 141
+        width: 6
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 765c647bff60c9020800000000000000
+      internalID: 2349760800941852007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_6
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 124
+        width: 43
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: debee28f72d82dfd0800000000000000
+      internalID: -2318635655335318547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_7
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 67
+        width: 150
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80e59e80efc291e70800000000000000
+      internalID: 9086343192779513352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_8
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 145
+        width: 26
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36896f71f3a1ea6e0800000000000000
+      internalID: -1824491940751173533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_9
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 141
+        width: 14
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd6955adde1f41570800000000000000
+      internalID: 8436634005844367069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_10
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 124
+        width: 18
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3335eb7bab15c1760800000000000000
+      internalID: 7429903347642946355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_11
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 124
+        width: 18
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39d5b5ce39bcef650800000000000000
+      internalID: 6268671567532350867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_12
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 118
+        width: 13
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ec7635fbd0e515a0800000000000000
+      internalID: -6551082847624069916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_13
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 90
+        width: 96
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a1f90840ef865fe0800000000000000
+      internalID: -1200614057203600986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_14
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 134
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c2dd926b75d55d50800000000000000
+      internalID: 6725516344459907785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_15
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 129
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e79c4e03925a48e0800000000000000
+      internalID: -1708462317080111130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_16
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 129
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2ec545cfbc03fe50800000000000000
+      internalID: 6841826276693888556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_17
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 113
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b12b78074a4cb6690800000000000000
+      internalID: -7607770934970699237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_18
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 89
+        width: 31
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5c0f3906101d3f60800000000000000
+      internalID: 8015580598619802717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_19
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 124
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bda2dc84457ec4f0800000000000000
+      internalID: -806578345971896907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_20
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 119
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6436c5ef98a2a6af0800000000000000
+      internalID: -402462444529884346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_21
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 113
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38df613458b16d2d0800000000000000
+      internalID: -3254383421558424189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_22
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 107
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 293d9bb83b42ebc80800000000000000
+      internalID: -8305160309262658670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_23
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 102
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c43716d4581f907d0800000000000000
+      internalID: -2951562525933472948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_24
+      rect:
+        serializedVersion: 2
+        x: 439
+        y: 107
+        width: 18
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fade10e4aacb4320800000000000000
+      internalID: 2543349224064342773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_25
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 111
+        width: 20
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b5ed2eef6f67d070800000000000000
+      internalID: 8131090178768758194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_26
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 95
+        width: 31
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9a466d6214933860800000000000000
+      internalID: 7508507810622491291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_27
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 79
+        width: 25
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f394113f5b954c160800000000000000
+      internalID: 7044854355116247359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_28
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 84
+        width: 58
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9db2303ecd03acfc0800000000000000
+      internalID: -3473910437303342119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_29
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 96
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf5bee7f6b28f7850800000000000000
+      internalID: 6376959319735186939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_30
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 90
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b16df175d3e30730800000000000000
+      internalID: 3964262602896138680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_31
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 73
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d59b58bc058fdcf0800000000000000
+      internalID: -225315166666123817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_32
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 73
+        width: 9
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f58e2eb75454d2c00800000000000000
+      internalID: 877433667140642911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_33
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 78
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f4906123f4f30b00800000000000000
+      internalID: 793747284421547249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_34
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 78
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e63ea845e1c9d870800000000000000
+      internalID: 8708204545008613089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_35
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 77
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fd90e25663e25bf0800000000000000
+      internalID: -336956993482744333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_36
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 78
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cafe326707145f30800000000000000
+      internalID: 4563297642913659590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_37
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 84
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9a5d66ad89d882a0800000000000000
+      internalID: -6734894040326776161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_38
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 55
+        width: 59
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcc297af955e47130800000000000000
+      internalID: 3563725379774000333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_39
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 73
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c21efb8eb247a9ba0800000000000000
+      internalID: -6081420614873128660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_40
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 61
+        width: 31
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ae4a419e401dc5c0800000000000000
+      internalID: -4193677748381004124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_41
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 68
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c0213c99d16555a0800000000000000
+      internalID: -6533208097174773567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_42
+      rect:
+        serializedVersion: 2
+        x: 439
+        y: 73
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b935cc0755341c50800000000000000
+      internalID: 6634986799016262073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_43
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 61
+        width: 25
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2a2bf3dca0e3c5a0800000000000000
+      internalID: -6502106404097414614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_44
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 61
+        width: 35
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91d560b6c78933980800000000000000
+      internalID: -8560330806562235111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireTowerLvl1 (1)_45
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 55
+        width: 82
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c16f8b686cf358460800000000000000
+      internalID: 7243265697591653916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      FireTowerLvl1 (1)_0: -8877008918137329614
+      FireTowerLvl1 (1)_1: 4578281072568541298
+      FireTowerLvl1 (1)_10: 7429903347642946355
+      FireTowerLvl1 (1)_11: 6268671567532350867
+      FireTowerLvl1 (1)_12: -6551082847624069916
+      FireTowerLvl1 (1)_13: -1200614057203600986
+      FireTowerLvl1 (1)_14: 6725516344459907785
+      FireTowerLvl1 (1)_15: -1708462317080111130
+      FireTowerLvl1 (1)_16: 6841826276693888556
+      FireTowerLvl1 (1)_17: -7607770934970699237
+      FireTowerLvl1 (1)_18: 8015580598619802717
+      FireTowerLvl1 (1)_19: -806578345971896907
+      FireTowerLvl1 (1)_2: 1200228893179259967
+      FireTowerLvl1 (1)_20: -402462444529884346
+      FireTowerLvl1 (1)_21: -3254383421558424189
+      FireTowerLvl1 (1)_22: -8305160309262658670
+      FireTowerLvl1 (1)_23: -2951562525933472948
+      FireTowerLvl1 (1)_24: 2543349224064342773
+      FireTowerLvl1 (1)_25: 8131090178768758194
+      FireTowerLvl1 (1)_26: 7508507810622491291
+      FireTowerLvl1 (1)_27: 7044854355116247359
+      FireTowerLvl1 (1)_28: -3473910437303342119
+      FireTowerLvl1 (1)_29: 6376959319735186939
+      FireTowerLvl1 (1)_3: 1670179242812465821
+      FireTowerLvl1 (1)_30: 3964262602896138680
+      FireTowerLvl1 (1)_31: -225315166666123817
+      FireTowerLvl1 (1)_32: 877433667140642911
+      FireTowerLvl1 (1)_33: 793747284421547249
+      FireTowerLvl1 (1)_34: 8708204545008613089
+      FireTowerLvl1 (1)_35: -336956993482744333
+      FireTowerLvl1 (1)_36: 4563297642913659590
+      FireTowerLvl1 (1)_37: -6734894040326776161
+      FireTowerLvl1 (1)_38: 3563725379774000333
+      FireTowerLvl1 (1)_39: -6081420614873128660
+      FireTowerLvl1 (1)_4: 8772435446115096247
+      FireTowerLvl1 (1)_40: -4193677748381004124
+      FireTowerLvl1 (1)_41: -6533208097174773567
+      FireTowerLvl1 (1)_42: 6634986799016262073
+      FireTowerLvl1 (1)_43: -6502106404097414614
+      FireTowerLvl1 (1)_44: -8560330806562235111
+      FireTowerLvl1 (1)_45: 7243265697591653916
+      FireTowerLvl1 (1)_5: 2349760800941852007
+      FireTowerLvl1 (1)_6: -2318635655335318547
+      FireTowerLvl1 (1)_7: 9086343192779513352
+      FireTowerLvl1 (1)_8: -1824491940751173533
+      FireTowerLvl1 (1)_9: 8436634005844367069
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

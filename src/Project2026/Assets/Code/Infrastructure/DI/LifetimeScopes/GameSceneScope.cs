@@ -190,6 +190,9 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<FrostDamageCanculateSystem>(Lifetime.Singleton);
             builder.Register<FrostDamageHitEffectSystem>(Lifetime.Singleton);
 
+            builder.Register<FireDamageCanculateSystem>(Lifetime.Singleton);
+            builder.Register<FireDamageHitEffectSystem>(Lifetime.Singleton);
+
             builder.Register<ApplyDamageSystem>(Lifetime.Singleton);
 
             builder.Register<HealthBarSystem>(Lifetime.Singleton);

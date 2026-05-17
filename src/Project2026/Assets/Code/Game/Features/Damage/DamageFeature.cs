@@ -13,6 +13,9 @@ namespace Code.Game.Features.Damage
             Add(systemFactory.Create<FrostDamageCanculateSystem>());
             Add(systemFactory.Create<FrostDamageHitEffectSystem>());
 
+            Add(systemFactory.Create<FireDamageCanculateSystem>());
+            Add(systemFactory.Create<FireDamageHitEffectSystem>());
+
             Add(systemFactory.Create<ApplyDamageSystem>());
         }
     }

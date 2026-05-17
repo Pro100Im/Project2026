@@ -21,6 +21,8 @@ MonoBehaviour:
   - rid: 8171215588330831980
   - rid: 2286602737992335447
   - rid: 2286602901821587542
+  - rid: 2286603056206053554
+  - rid: 2286603056206053670
   references:
     version: 2
     RefIds:
@@ -31,6 +33,16 @@ MonoBehaviour:
         <Team>k__BackingField: 1
     - rid: 2286602901821587542
       type: {class: PhysicalResistanceProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Resistance>k__BackingField: 10
+    - rid: 2286603056206053554
+      type: {class: FrostResistanceProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Resistance>k__BackingField: 10
+    - rid: 2286603056206053670
+      type: {class: FireResistanceProperty, ns: Assets.Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
         <Resistance>k__BackingField: 10
