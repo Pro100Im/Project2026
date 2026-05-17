@@ -10,13 +10,12 @@ namespace Code.Game.Features.Attack.Systems
         private readonly IGroup<GameEntity> _maps;
         private readonly IGroup<GameEntity> _attacks;
 
-        private readonly List<GameEntity> _buffer = new(64);
+        private readonly List<GameEntity> _attackBuffer = new(64);
         private readonly HashSet<int> _checkedTargets = new(128);
 
         public RangeAreaAttackHitSystem(GameContext gameContext)
         {
             _maps = gameContext.GetGroup(GameMatcher.AllOf(GameMatcher.SpatialHash));
-
             _attacks = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.OwnerId,
@@ -29,12 +28,17 @@ namespace Code.Game.Features.Attack.Systems
         public void Execute()
         {
             var mapEntity = _maps.GetSingleEntity();
-            if (mapEntity == null) return;
+
+            if (mapEntity == null) 
+                return;
 
             var spatialHash = mapEntity.spatialHash.Value;
+            var attacks = _attacks.GetEntities(_attackBuffer);
 
-            foreach (var attack in _attacks)
+            for (int i = 0; i < attacks.Count; i++)
             {
+                var attack = attacks[i];
+
                 if (attack.trajectoryPathProgress.Value < 1)
                     continue;
 
@@ -48,7 +52,7 @@ namespace Code.Game.Features.Attack.Systems
         {
             var mainTarget = GetGameEntityById.Get(attack.targetId.Value);
 
-            if (mainTarget == null || mainTarget.isDead) 
+            if (mainTarget == null || mainTarget.isDead)
                 return;
 
             CreateDamageRequest(attack, mainTarget.id.Value, attack.targetPoint.Value)
@@ -71,13 +75,14 @@ namespace Code.Game.Features.Attack.Systems
 
                     if (spatialHash.TryGetValue(checkPos, out var cellUnits))
                     {
-                        foreach (var unitId in cellUnits)
+                        for (int j = 0; j < cellUnits.Count; j++)
                         {
+                            var unitId = cellUnits[j];
+
                             if (unitId == attack.ownerId.Value || !_checkedTargets.Add(unitId))
                                 continue;
 
                             var other = GetGameEntityById.Get(unitId);
-
                             if (other == null || other.isDead || other.team.Value == attack.team.Value)
                                 continue;
 

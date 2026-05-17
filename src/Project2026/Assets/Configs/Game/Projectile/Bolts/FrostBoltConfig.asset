@@ -77,4 +77,4 @@ MonoBehaviour:
       type: {class: AreaAttackProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Area>k__BackingField: 3
+        <Area>k__BackingField: 2
