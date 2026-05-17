@@ -9,8 +9,9 @@ namespace Code.Game.Features.Target.Systems
     {
         private readonly IGroup<GameEntity> _attackers;
         private readonly IGroup<GameEntity> _maps;
-        private readonly List<GameEntity> _buffer = new(128);
-        private readonly HashSet<int> _processedTargets = new(128);
+
+        private readonly List<GameEntity> _buffer = new(256);
+        private readonly HashSet<int> _processedTargets = new(256);
 
         public CheckTargetSystem(GameContext context)
         {
@@ -34,9 +35,11 @@ namespace Code.Game.Features.Target.Systems
                 return;
 
             var spatialHash = mapEntity.spatialHash.Value;
+            var attackers = _attackers.GetEntities(_buffer);
 
-            foreach (var attacker in _attackers.GetEntities(_buffer))
+            for (var i = 0; i < attackers.Count; i++)
             {
+                var attacker = attackers[i];
                 var attackerWorldPos = attacker.transform.Value.position;
                 var range = attacker.range.Value;
                 var sqrRange = range * range;
@@ -59,8 +62,10 @@ namespace Code.Game.Features.Target.Systems
 
                         if (spatialHash.TryGetValue(checkPos, out var potentialTargets))
                         {
-                            foreach (var targetId in potentialTargets)
+                            for (var j = 0; j < potentialTargets.Count; j++)
                             {
+                                var targetId = potentialTargets[j];
+
                                 if (targetId == attacker.id.Value || !_processedTargets.Add(targetId))
                                     continue;
 

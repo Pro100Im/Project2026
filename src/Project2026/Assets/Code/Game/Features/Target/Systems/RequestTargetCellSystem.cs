@@ -8,7 +8,7 @@ namespace Assets.Code.Game.Features.Target.Systems
     {
         private readonly IGroup<GameEntity> _units;
 
-        private readonly List<GameEntity> _buffer = new(128);
+        private readonly List<GameEntity> _buffer = new(256);
 
         public RequestTargetCellSystem(GameContext context, TargetService targetService)
         {
@@ -27,14 +27,16 @@ namespace Assets.Code.Game.Features.Target.Systems
 
         public void Execute()
         {
-            foreach (var unit in _units.GetEntities(_buffer))
+            var units = _units.GetEntities(_buffer);
+
+            for (var i = 0; i < units.Count; i++)
             {
+                var unit = units[i];
+
                 if (!unit.isTargetCellRequest)
                 {
                     if (!unit.hasTargetCell || unit.targetCell.Value == unit.currentCell.Value)
-                    {
                         unit.isTargetCellRequest = true;
-                    }
                 }
             }
         }

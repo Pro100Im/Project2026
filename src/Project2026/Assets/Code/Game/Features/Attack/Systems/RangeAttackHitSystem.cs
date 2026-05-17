@@ -7,7 +7,7 @@ namespace Code.Game.Features.Attack.Systems
     public class RangeAttackHitSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _attacks;
-        private readonly List<GameEntity> _buffer = new(64);
+        private readonly List<GameEntity> _attacksBuffer = new(86);
 
         public RangeAttackHitSystem(GameContext gameContext)
         {
@@ -20,8 +20,12 @@ namespace Code.Game.Features.Attack.Systems
 
         public void Execute()
         {
-            foreach (var attack in _attacks.GetEntities(_buffer))
+            var attacks = _attacks.GetEntities(_attacksBuffer);
+
+            for (var i = 0; i < attacks.Count; i++)
             {
+                var attack = attacks[i];
+
                 if (attack.hasAreaAttack || attack.trajectoryPathProgress.Value < 1)
                     continue;
 

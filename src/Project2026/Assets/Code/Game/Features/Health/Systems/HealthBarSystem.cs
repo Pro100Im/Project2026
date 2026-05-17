@@ -1,11 +1,14 @@
 using Code.Game.Common.Entity;
 using Entitas;
+using System.Collections.Generic;
 
 namespace Code.Game.Features.Health.Systems
 {
     public class HealthBarSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _hpBars;
+
+        private readonly List<GameEntity> _hpBarsBuffer = new(512);
 
         public HealthBarSystem(GameContext gameContext)
         {
@@ -18,8 +21,11 @@ namespace Code.Game.Features.Health.Systems
 
         public void Execute()
         {
-            foreach (var hpBarEntity in _hpBars)
+            var hpBars = _hpBars.GetEntities(_hpBarsBuffer);
+
+            for (var i = 0; i < hpBars.Count; i++)
             {
+                var hpBarEntity = hpBars[i];
                 var owner = GetGameEntityById.Get(hpBarEntity.ownerId.Value);
 
                 if (hpBarEntity.currentHealth.Value == owner.currentHealth.Value)

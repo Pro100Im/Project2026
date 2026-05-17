@@ -1,11 +1,14 @@
 using Code.Game.Common.Entity;
 using Entitas;
+using System.Collections.Generic;
 
 namespace Code.Game.Features.Damage.Systems
 {
     public class ApplyDamageSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _damages;
+
+        private readonly List<GameEntity> _damagesBuffer = new(86);
 
         public ApplyDamageSystem(GameContext gameContext)
         {
@@ -19,8 +22,11 @@ namespace Code.Game.Features.Damage.Systems
 
         public void Execute()
         {
-            foreach (var damage in _damages)
+            var damages = _damages.GetEntities(_damagesBuffer);
+
+            for (var i = 0; i < damages.Count; i++)
             {
+                var damage = damages[i];
                 var targetId = damage.targetId.Value;
                 var target = GetGameEntityById.Get(targetId);
                 var damageAmount = damage.totalDamage.Value;

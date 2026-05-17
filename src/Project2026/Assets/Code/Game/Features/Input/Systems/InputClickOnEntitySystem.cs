@@ -2,6 +2,7 @@ using Code.Game.Common.Entity;
 using Code.Game.Input.Service;
 using Code.Meta.Features.Game;
 using Entitas;
+using System.Collections.Generic;
 
 namespace Code.Game.Features.Input.Systems
 {
@@ -11,6 +12,8 @@ namespace Code.Game.Features.Input.Systems
         private readonly GameScreen _gameScreen;
 
         private readonly IGroup<GameEntity> _entities;
+
+        private readonly List<GameEntity> _entitiesBuffer = new(16);
 
         public InputClickOnEntitySystem(GameContext gameContext, IInputService inputService, GameScreen gameScreen)
         {
@@ -34,10 +37,14 @@ namespace Code.Game.Features.Input.Systems
                 {
                     var worldPos = _inputService.GetWorldPointer();
                     var entityClick = CreateInputEntity.Empty();
+                    var entities = _entities.GetEntities(_entitiesBuffer);
+
                     entityClick.isInput = true;
 
-                    foreach (var entity in _entities)
+                    for (var i = 0; i < entities.Count; i++)
                     {
+                        var entity = entities[i];
+
                         if (!entity.touchZone.Value.bounds.Contains(worldPos))
                             continue;
 

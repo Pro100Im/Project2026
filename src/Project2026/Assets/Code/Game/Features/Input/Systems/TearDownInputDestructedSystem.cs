@@ -6,6 +6,7 @@ namespace Code.Game.Input.Systems
     public class TearDownInputDestructedSystem : ITearDownSystem
     {
         private readonly IGroup<InputEntity> _entities;
+
         private readonly List<InputEntity> _buffer = new(16);
 
         public TearDownInputDestructedSystem(InputContext inputContext) =>
@@ -13,8 +14,10 @@ namespace Code.Game.Input.Systems
 
         public void TearDown()
         {
-            foreach (InputEntity entity in _entities.GetEntities(_buffer))
-                entity.Destroy();
+            var entities = _entities.GetEntities(_buffer);
+
+            for (var i = 0; i < entities.Count; i++)
+                entities[i].Destroy();
         }
     }
 }

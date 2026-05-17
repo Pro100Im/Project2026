@@ -1,16 +1,19 @@
 using Entitas;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code.Game.Features.Level.Systems
 {
     public class OccupiedCellSystem : IExecuteSystem
     {
-        private readonly IGroup<GameEntity> _entities;
+        private readonly IGroup<GameEntity> _cells;
         private readonly IGroup<GameEntity> _maps;
+
+        private readonly List<GameEntity> _cellsBuffer = new(512);
 
         public OccupiedCellSystem(GameContext context)
         {
-            _entities = context.GetGroup(GameMatcher
+            _cells = context.GetGroup(GameMatcher
                 .AllOf(
                 GameMatcher.CurrentCell,
                 GameMatcher.UnitSize,
@@ -23,13 +26,20 @@ namespace Code.Game.Features.Level.Systems
         public void Execute()
         {
             var map = _maps.GetSingleEntity();
+
+            if (map == null)
+                return;
+
             var occupField = map.occupField.Value;
+            var cells = _cells.GetEntities(_cellsBuffer);
 
             occupField.Clear();
 
-            foreach (var entity in _entities)
+            for (var i = 0; i < cells.Count; i++)
             {
-                if (entity.isMoving || entity.isDead) 
+                var entity = cells[i];
+
+                if (entity.isMoving || entity.isDead)
                     continue;
 
                 var origin = entity.currentCell.Value;

@@ -12,24 +12,30 @@ namespace Code.Game.Features.Spawn.Systems
         private readonly IGroup<GameEntity> _spawnMaps;
         private readonly IGroup<GameEntity> _maps;
 
+        private readonly List<GameEntity> _spawnMapsBuffer = new(8);
+        private readonly List<GameEntity> _enemiesBuffer = new(124);
+
         public EnemySelectSpawnPosSystem(GameContext context, IRandomService random)
         {
             _random = random;
 
-            _enemies = context.GetGroup(GameMatcher.AllOf(
-                GameMatcher.SpawnRequsted,
-                GameMatcher.Enemy,
-                GameMatcher.UnitSize));
+            _enemies = context.GetGroup(GameMatcher
+                .AllOf(
+                    GameMatcher.SpawnRequsted,
+                    GameMatcher.Enemy,
+                    GameMatcher.UnitSize));
 
-            _spawnMaps = context.GetGroup(GameMatcher.AllOf(
-                GameMatcher.SpawnMap,
-                GameMatcher.Enemy));
+            _spawnMaps = context.GetGroup(GameMatcher
+                .AllOf(
+                    GameMatcher.SpawnMap,
+                    GameMatcher.Enemy));
 
-            _maps = context.GetGroup(GameMatcher.AllOf(
-                GameMatcher.OccupField,
-                GameMatcher.ReservedField,
-                GameMatcher.SpawnReservedField,
-                GameMatcher.TilemapMovement));
+            _maps = context.GetGroup(GameMatcher
+                .AllOf(
+                    GameMatcher.OccupField,
+                    GameMatcher.ReservedField,
+                    GameMatcher.SpawnReservedField,
+                    GameMatcher.TilemapMovement));
         }
 
         public void Execute()
@@ -43,16 +49,22 @@ namespace Code.Game.Features.Spawn.Systems
             var reservedField = map.reservedField.Value;
             var spawnReservedField = map.spawnReservedField.Value;
             var tilemap = map.tilemapMovement.Value;
+            var spawnMaps = _spawnMaps.GetEntities(_spawnMapsBuffer);
 
             spawnReservedField.Clear();
 
-            foreach (var spawnMap in _spawnMaps)
+            for ( var i = 0; i < spawnMaps.Count; i++)
             {
+                var spawnMap = spawnMaps[i];
                 var points = spawnMap.spawnMap.Value;
+                var enemies = _enemies.GetEntities(_enemiesBuffer);
 
-                foreach (var enemy in _enemies)
+                for (var j = 0; j < enemies.Count; j++)
                 {
-                    if (enemy.hasSpawnPosition) continue;
+                    var enemy = enemies[j];
+
+                    if (enemy.hasSpawnPosition) 
+                        continue;
 
                     var size = enemy.unitSize.Value;
                     var count = 0;

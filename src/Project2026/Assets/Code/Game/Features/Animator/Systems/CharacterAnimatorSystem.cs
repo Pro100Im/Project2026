@@ -1,5 +1,6 @@
 using Code.Game.Features.Attack;
 using Entitas;
+using System.Collections.Generic;
 
 namespace Code.Game.Features.Animator.Systems
 {
@@ -7,6 +8,8 @@ namespace Code.Game.Features.Animator.Systems
     public class CharacterAnimatorSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _characters;
+
+        private readonly List<GameEntity> _charactersBuffer = new(512);
 
         public CharacterAnimatorSystem(GameContext gameContext)
         {
@@ -19,8 +22,11 @@ namespace Code.Game.Features.Animator.Systems
 
         public void Execute()
         {
-            foreach (var character in _characters)
+            var characters = _characters.GetEntities(_charactersBuffer);
+
+            for (var i = 0; i < characters.Count; i++)
             {
+                var character = characters[i];
                 var animator = character.animator.Value;
                 var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 

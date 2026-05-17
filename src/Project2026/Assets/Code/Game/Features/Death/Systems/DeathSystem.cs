@@ -1,24 +1,29 @@
 using Entitas;
+using System.Collections.Generic;
 
 namespace Code.Game.Features.Death.Systems
 {
     public class DeathSystem : IExecuteSystem
     {
-        private readonly IGroup<GameEntity> _entities;
+        private readonly IGroup<GameEntity> _deaths;
+
+        private readonly List<GameEntity> _deathsBuffer = new(86);
 
         public DeathSystem(GameContext gameContext)
         {
-            _entities = gameContext.GetGroup(GameMatcher.CurrentHealth);
+            _deaths = gameContext.GetGroup(GameMatcher.CurrentHealth);
         }
 
         public void Execute()
         {
-            foreach (var entity in _entities)
+            var deaths = _deaths.GetEntities(_deathsBuffer);
+
+            for (var i = 0; i < deaths.Count; i++)
             {
+                var entity = deaths[i];
+
                 if(!entity.isDead && entity.currentHealth.Value <= 0)
-                {
                     entity.isDead = true;
-                }
             }
         }
     }

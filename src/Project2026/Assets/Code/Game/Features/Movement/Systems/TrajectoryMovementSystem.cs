@@ -1,5 +1,6 @@
 using Code.Game.Common.Time;
 using Entitas;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code.Game.Features.Movement.Systems
@@ -9,6 +10,8 @@ namespace Code.Game.Features.Movement.Systems
         private readonly ITimeService _timeService;
 
         private readonly IGroup<GameEntity> _entities;
+
+        private readonly List<GameEntity> _entitiesBuffer = new(86);
 
         public TrajectoryMovementSystem(GameContext context, ITimeService timeService)
         {
@@ -32,8 +35,11 @@ namespace Code.Game.Features.Movement.Systems
 
         public void Execute()
         {
-            foreach (var entity in _entities)
+            var entities = _entities.GetEntities(_entitiesBuffer);
+
+            for (var i = 0; i < entities.Count; i++)
             {
+                var entity = entities[i];
                 var start = entity.attackerPoint.Value;
                 var end = entity.targetPoint.Value;
                 var trajectory = entity.trajectory.Value;

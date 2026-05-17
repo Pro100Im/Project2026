@@ -1,10 +1,13 @@
 using Entitas;
+using System.Collections.Generic;
 
 namespace Code.Game.Features.Movement.Systems
 {
     public class FlipAlongMoveDirectionSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _units;
+
+        private readonly List<GameEntity> _unitsBuffer = new(512);
 
         public FlipAlongMoveDirectionSystem(GameContext context)
         {
@@ -17,14 +20,17 @@ namespace Code.Game.Features.Movement.Systems
 
         public void Execute()
         {
-            foreach (var unit in _units)
+            var units = _units.GetEntities(_unitsBuffer);
+
+            for (var i = 0; i < units.Count; i++)
             {
+                var unit = units[i];
                 var dx = unit.targetCell.Value.x - unit.currentCell.Value.x;
 
                 if (dx == 0) 
                     continue;
 
-                bool shouldFlipX = dx < 0;
+                var shouldFlipX = dx < 0;
 
                 if (unit.spriteRenderer.Value.flipX != shouldFlipX)
                     unit.spriteRenderer.Value.flipX = shouldFlipX;

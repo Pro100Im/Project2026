@@ -12,6 +12,8 @@ namespace Code.Game.Features.Tower.Systems
 
         private readonly IGroup<GameEntity> _towers;
 
+        private readonly List<GameEntity> _towersBuffer = new(16);
+
         public TowerMenuSystem(InputContext inputContext, GameContext gameContext, GameScreen gameScreen)
             : base(inputContext)
         {
@@ -35,8 +37,10 @@ namespace Code.Game.Features.Tower.Systems
 
         protected override void Execute(List<InputEntity> entities)
         {
-            foreach (var entity in entities)
+            for (var i = 0; i < entities.Count; i++)
             {
+                var entity = entities[i];
+
                 if (entity.hasTargetId)
                 {
                     var targetEntity = GetGameEntityById.Get(entity.targetId.Value);
@@ -48,21 +52,24 @@ namespace Code.Game.Features.Tower.Systems
 
                     }
 
-                    foreach (var tower in _towers)
-                    {
-                        if (tower.id.Value != entity.targetId.Value)
-                        {
+                    //var towers = _towers.GetEntities(_towersBuffer);
 
-                        }
+                    //for (var j = 0; j < towers.Count; j++)
+                    //{
+                    //    var tower = towers[j];
+
+                    //    if (tower.id.Value != entity.targetId.Value)
+                    //    {
+
+                    //    }
+
+                    //    if (targetEntity.isTower && targetEntity.hasRange)
+                    //    {
 
 
-                        if (targetEntity.isTower && targetEntity.hasRange)
-                        {
 
-
-
-                        }
-                    }
+                    //    }
+                    //}
 
                     entity.isDestructed = true;
                 }

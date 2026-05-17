@@ -1,5 +1,6 @@
 ﻿using Code.Game.Common.Time;
 using Entitas;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code.Game.Features.Movement.Systems
@@ -12,6 +13,8 @@ namespace Code.Game.Features.Movement.Systems
         private readonly IGroup<GameEntity> _maps;
 
         private const float ArriveThreshold = 0.1f;
+
+        private readonly List<GameEntity> _unitsBuffer = new(512);
 
         public GridMovementSystem(GameContext context, ITimeService timeService)
         {
@@ -36,12 +39,18 @@ namespace Code.Game.Features.Movement.Systems
         public void Execute()
         {
             var map = _maps.GetSingleEntity();
+
+            if(map == null)
+                return;
+
             var allFlows = map.flowFields.Value;
             var tilemap = map.tilemapMovement.Value;
-            var units = _units.GetEntities();
+            var units = _units.GetEntities(_unitsBuffer);
 
-            foreach (var unit in units)
+            for (var i = 0; i < units.Count; i++)
             {
+                var unit = units[i];
+
                 if (!unit.hasTargetCell || unit.isAttacking || unit.hasTargetId || unit.isDead)
                 {
                     if (unit.isMoving)

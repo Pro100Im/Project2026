@@ -1,4 +1,5 @@
 using Entitas;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code.Game.Features.Level.Systems
@@ -7,6 +8,8 @@ namespace Code.Game.Features.Level.Systems
     {
         private readonly IGroup<GameEntity> _units;
         private readonly IGroup<GameEntity> _maps;
+
+        private readonly List<GameEntity> _unitsBuffer = new(512);
 
         public ReservedCellSystem(GameContext context)
         {
@@ -26,13 +29,20 @@ namespace Code.Game.Features.Level.Systems
         public void Execute()
         {
             var map = _maps.GetSingleEntity();
+
+            if (map == null)
+                return;
+
             var reservedField = map.reservedField.Value;
+            var units = _units.GetEntities(_unitsBuffer);
 
             reservedField.Clear();
 
-            foreach (var unit in _units)
+            for (var i = 0; i < units.Count; i++)
             {
-                if(unit.isDead)
+                var unit = units[i];
+
+                if (unit.isDead)
                     continue;
 
                 var targetOrigin = unit.targetCell.Value;

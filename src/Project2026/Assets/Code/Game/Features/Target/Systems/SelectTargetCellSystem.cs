@@ -49,9 +49,11 @@ namespace Code.Game.Features.Target.Systems
 
             var allFlows = mapEntity.flowFields.Value;
             var allIntegrations = mapEntity.integrationFields.Value;
+            var units = _units.GetEntities(_buffer);
 
-            foreach (var unit in _units.GetEntities(_buffer))
+            for (var i = 0; i < units.Count; i++)
             {
+                var unit = units[i];
                 var cell = unit.currentCell.Value;
                 var size = unit.unitSize.Value;
                 var unitId = unit.id.Value;
@@ -115,8 +117,12 @@ namespace Code.Game.Features.Target.Systems
                     bestCost = integration[idealStep];
                 }
 
-                foreach (var cand in _targetService.GetNeighbors(cell))
+                var neighbors = _targetService.GetNeighbors(cell);
+
+                for (var j = 0; j < neighbors.Count; j++)
                 {
+                    var cand = neighbors[j];
+
                     if (!CanFit(cand, size, unitId, mapEntity, out _))
                         continue;
 

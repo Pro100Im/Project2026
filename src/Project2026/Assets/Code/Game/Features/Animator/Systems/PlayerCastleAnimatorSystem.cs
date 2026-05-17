@@ -17,14 +17,16 @@ namespace Code.Game.Features.Animator.Systems
 
         public void Execute()
         {
-            foreach (var castle in _castles)
-            {
-                var animator = castle.animator.Value;
-                var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            var castle = _castles.GetSingleEntity();
 
-                if (castle.isDead && !stateInfo.IsName("CastleDestroy"))
-                    animator.Play("CastleDestroy");
-            }
+            if(castle == null)
+                return;
+
+            var animator = castle.animator.Value;
+            var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+            if (castle.isDead && !stateInfo.IsName("CastleDestroy"))
+                animator.Play("CastleDestroy");
         }
     }
 }

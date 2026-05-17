@@ -27,8 +27,9 @@ namespace Code.Game.Features.Level.Systems
 
         protected override void Execute(List<GameEntity> maps)
         {
-            foreach (var map in maps)
+            for (int i = 0; i < maps.Count; i++)
             {
+                var map = maps[i];
                 var tilemap = map.tilemapMovement.Value;
                 var occupField = map.occupField.Value;
                 var goals = map.targetFlow.Value;
@@ -71,8 +72,9 @@ namespace Code.Game.Features.Level.Systems
         {
             var queue = new Queue<Vector3Int>();
 
-            foreach (var goal in goals)
+            for (var i = 0; i < goals.Count; i++)
             {
+                var goal = goals[i];
                 for (int x = -(size.x - 1); x <= 0; x++)
                 {
                     for (int y = -(size.y - 1); y <= 0; y++)
@@ -94,9 +96,12 @@ namespace Code.Game.Features.Level.Systems
             while (queue.Count > 0)
             {
                 var current = queue.Dequeue();
+                var neighbors = _targetService.GetNeighbors(current);
 
-                foreach (var n in _targetService.GetNeighbors(current))
+                for (var i = 0; i < neighbors.Count; i++)
                 {
+                    var n = neighbors[i];
+ 
                     if (integration.ContainsKey(n)) 
                         continue;
 

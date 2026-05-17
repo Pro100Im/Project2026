@@ -10,12 +10,13 @@ namespace Code.Game.Features.Attack.Systems
         private readonly IGroup<GameEntity> _maps;
         private readonly IGroup<GameEntity> _attacks;
 
-        private readonly List<GameEntity> _attackBuffer = new(64);
+        private readonly List<GameEntity> _attacksBuffer = new(86);
         private readonly HashSet<int> _checkedTargets = new(128);
 
         public RangeAreaAttackHitSystem(GameContext gameContext)
         {
             _maps = gameContext.GetGroup(GameMatcher.AllOf(GameMatcher.SpatialHash));
+
             _attacks = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.OwnerId,
@@ -33,7 +34,7 @@ namespace Code.Game.Features.Attack.Systems
                 return;
 
             var spatialHash = mapEntity.spatialHash.Value;
-            var attacks = _attacks.GetEntities(_attackBuffer);
+            var attacks = _attacks.GetEntities(_attacksBuffer);
 
             for (int i = 0; i < attacks.Count; i++)
             {

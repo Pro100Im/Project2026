@@ -11,7 +11,7 @@ namespace Code.Game.Features.Wave.Systems
         private readonly WavesConfig _wavesConfig;
         private readonly IGroup<GameEntity> _waves;
 
-        private readonly List<GameEntity> _buffer = new(5);
+        private readonly List<GameEntity> _buffer = new(16);
 
         public WaveProgressSystem(GameContext gameContext, WavesConfig wavesConfig)
         {
@@ -28,8 +28,12 @@ namespace Code.Game.Features.Wave.Systems
 
         public void Execute()
         {
-            foreach (var wave in _waves.GetEntities(_buffer))
+            var waves = _waves.GetEntities(_buffer);
+
+            for (var i = 0; i < waves.Count; i++)
             {
+                var wave = waves[i];
+
                 if (wave.currentWaveEnemies.Value.Count == 0 && wave.waveEnemiesAlive.Value == 0)
                 {
                     wave.isWaveInProgress = false;

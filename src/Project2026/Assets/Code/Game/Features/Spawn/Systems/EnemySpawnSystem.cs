@@ -8,7 +8,7 @@ namespace Code.Game.Features.Spawn.Systems
     {
         private readonly IGroup<GameEntity> _enemiesToSpawn;
 
-        private readonly List<GameEntity> _buffer = new(32);
+        private readonly List<GameEntity> _buffer = new(124);
 
         public EnemySpawnSystem(GameContext gameContext)
         {
@@ -23,9 +23,13 @@ namespace Code.Game.Features.Spawn.Systems
 
         public void Execute()
         {
-            foreach (var enemySpawn in _enemiesToSpawn.GetEntities(_buffer))
+            var enemiesToSpawn = _enemiesToSpawn.GetEntities(_buffer);
+
+            for (var i = 0; i < enemiesToSpawn.Count; i++)
             {
+                var enemySpawn = enemiesToSpawn[i];
                 var entity = CreateGameEntity.Empty();
+
                 entity.AddSpawnPosition(enemySpawn.spawnPosition.Value);
                 entity.AddCurrentCell(enemySpawn.currentCell.Value);
                 entity.isMovementAvailable = true;

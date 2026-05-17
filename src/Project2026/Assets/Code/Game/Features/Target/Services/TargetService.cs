@@ -6,17 +6,22 @@ namespace Code.Game.Features.Target.Services
 {
     public class TargetService
     {
-        public IEnumerable<Vector3Int> GetNeighbors(Vector3Int cell)
-        {
-            yield return new Vector3Int(cell.x + 1, cell.y, 0);
-            yield return new Vector3Int(cell.x - 1, cell.y, 0);
-            yield return new Vector3Int(cell.x, cell.y + 1, 0);
-            yield return new Vector3Int(cell.x, cell.y - 1, 0);
+        private readonly List<Vector3Int> _neighborsBuffer = new(8);
 
-            yield return new Vector3Int(cell.x + 1, cell.y + 1, 0);
-            yield return new Vector3Int(cell.x - 1, cell.y + 1, 0);
-            yield return new Vector3Int(cell.x + 1, cell.y - 1, 0);
-            yield return new Vector3Int(cell.x - 1, cell.y - 1, 0);
+        public List<Vector3Int> GetNeighbors(Vector3Int cell)
+        {
+            _neighborsBuffer.Clear();
+
+            _neighborsBuffer.Add(new Vector3Int(cell.x + 1, cell.y, 0));
+            _neighborsBuffer.Add(new Vector3Int(cell.x - 1, cell.y, 0));
+            _neighborsBuffer.Add(new Vector3Int(cell.x, cell.y + 1, 0));
+            _neighborsBuffer.Add(new Vector3Int(cell.x, cell.y - 1, 0));
+            _neighborsBuffer.Add(new Vector3Int(cell.x + 1, cell.y + 1, 0));
+            _neighborsBuffer.Add(new Vector3Int(cell.x - 1, cell.y + 1, 0));
+            _neighborsBuffer.Add(new Vector3Int(cell.x + 1, cell.y - 1, 0));
+            _neighborsBuffer.Add(new Vector3Int(cell.x - 1, cell.y - 1, 0));
+
+            return _neighborsBuffer;
         }
 
         public AttackDirection GetAttackDirection(Vector3 closestA, Vector3 closestB)

@@ -8,9 +8,10 @@ namespace Code.Game.Features.Wave.Systems
     {
         private readonly WavesConfig _wavesConfig;
         private readonly IGroup<GameEntity> _waves;
-        private readonly IGroup<GameEntity> _waveRequsts;
+        private readonly IGroup<GameEntity> _waveRequests;
 
-        private readonly List<GameEntity> _buffer = new(5);
+        private readonly List<GameEntity> _waveRequestsBuffer = new(16);
+        private readonly List<GameEntity> _waveBuffer = new(16);
 
         public WaveStartSystem(GameContext gameContext, WavesConfig wavesConfig)
         {
@@ -23,16 +24,23 @@ namespace Code.Game.Features.Wave.Systems
               GameMatcher.Cooldown,
               GameMatcher.CurrentWaveEnemies));
 
-            _waveRequsts = gameContext.GetGroup(GameMatcher.WaveStartRequsted);
+            _waveRequests = gameContext.GetGroup(GameMatcher.WaveStartRequsted);
         }
 
         public void Execute()
         {
-            foreach (var waveRequst in _waveRequsts.GetEntities(_buffer))
+            var waveRequsts = _waveRequests.GetEntities(_waveRequestsBuffer);
+
+            for (var i = 0; i < waveRequsts.Count; i++)
             {
-                foreach (var wave in _waves)
+                var waveRequst = waveRequsts[i];
+                var waves = _waves.GetEntities(_waveBuffer);
+
+                for (var j = 0; j < waves.Count; j++)
                 {
-                    if(wave.currentWaveNumber.Value >= _wavesConfig.WaveDatas.Length)
+                    var wave = waves[j];
+
+                    if (wave.currentWaveNumber.Value >= _wavesConfig.WaveDatas.Length)
                         continue;
 
                     wave.currentWaveEnemies.Value.AddRange(_wavesConfig.WaveDatas[wave.currentWaveNumber.Value].EntityConfigs);

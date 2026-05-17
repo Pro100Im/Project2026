@@ -1,5 +1,6 @@
 using Code.Game.Common.Entity;
 using Entitas;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code.Game.Features.Damage.Systems
@@ -7,6 +8,8 @@ namespace Code.Game.Features.Damage.Systems
     public class FrostDamageCanculateSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _damages;
+
+        private readonly List<GameEntity> _damagesBuffer = new(86);
 
         public FrostDamageCanculateSystem(GameContext gameContext)
         {
@@ -20,8 +23,11 @@ namespace Code.Game.Features.Damage.Systems
 
         public void Execute()
         {
-            foreach (var damage in _damages)
+            var damages = _damages.GetEntities(_damagesBuffer);
+
+            for (var i = 0; i < damages.Count; i++)
             {
+                var damage = damages[i];
                 var attacker = GetGameEntityById.Get(damage.ownerId.Value);
 
                 if (!attacker.hasFrostDamage)

@@ -1,30 +1,34 @@
 using Code.Game.Common.Time;
 using Entitas;
+using System.Collections.Generic;
 
 namespace Code.Game.Features.Cooldown.Systems
 {
     public class CooldownLeftSystem : IExecuteSystem
     {
         private readonly ITimeService _timeService;
+
         private readonly IGroup<GameEntity> _cooldowns;
+
+        private readonly List<GameEntity> _cooldownsBuffer = new(86);
 
         public CooldownLeftSystem(GameContext gameContext, ITimeService timeService)
         {
             _timeService = timeService;
 
-            _cooldowns = gameContext.GetGroup(GameMatcher
-                .AllOf(
-                    GameMatcher.Cooldown));
+            _cooldowns = gameContext.GetGroup(GameMatcher.Cooldown);
         }
 
         public void Execute()
         {
-            foreach (var entity in _cooldowns)
+            var cooldowns = _cooldowns.GetEntities(_cooldownsBuffer);
+
+            for (var i = 0; i < cooldowns.Count; i++)
             {
+                var entity = cooldowns[i];
+
                 if (entity.cooldown.Value > 0)
-                {
                     entity.ReplaceCooldown(entity.cooldown.Value - _timeService.DeltaTime);
-                }
             }
         }
     }

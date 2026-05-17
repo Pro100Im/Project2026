@@ -12,7 +12,7 @@ namespace Code.Game.Features.Attack.Systems
         private readonly TargetService _targetService;
 
         private readonly IGroup<GameEntity> _rangeAttacks;
-        private readonly List<GameEntity> _buffer = new(64);
+        private readonly List<GameEntity> _attacksBuffer = new(86);
 
         public RangeAttackEndSystem(GameContext gameContext, TargetService targetService)
         {
@@ -28,8 +28,12 @@ namespace Code.Game.Features.Attack.Systems
 
         public void Execute()
         {
-            foreach (var attack in _rangeAttacks.GetEntities(_buffer))
+            var attacks = _rangeAttacks.GetEntities(_attacksBuffer);
+
+            for (var i = 0; i < attacks.Count; i++)
             {
+                var attack = attacks[i];
+
                 if (attack.duration.Value > 0)
                     continue;
 

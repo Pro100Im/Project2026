@@ -35,16 +35,19 @@ namespace Code.Game.Features.Level.Systems
             foreach (var list in hash.Values)
                 list.Clear();
 
-            foreach (var e in _targetables.GetEntities(_buffer))
+            var targetables = _targetables.GetEntities(_buffer);
+
+            for (var i = 0; i < targetables.Count; i++)
             {
-                var pos = e.currentCell.Value;
-                var size = e.hasUnitSize ? e.unitSize.Value : Vector2Int.one;
-                var id = e.id.Value;
+                var target = targetables[i];
+                var pos = target.currentCell.Value;
+                var size = target.hasUnitSize ? target.unitSize.Value : Vector2Int.one;
+                var id = target.id.Value;
 
                 AddUnitToHash(hash, pos, size, id);
 
-                if (e.hasTargetCell && !e.isDead)
-                    AddUnitToHash(hash, e.targetCell.Value, size, id);
+                if (target.hasTargetCell && !target.isDead)
+                    AddUnitToHash(hash, target.targetCell.Value, size, id);
             }
         }
 

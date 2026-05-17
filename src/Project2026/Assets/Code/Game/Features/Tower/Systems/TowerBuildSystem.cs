@@ -7,24 +7,30 @@ namespace Code.Game.Features.Tower.Systems
     {
         private readonly IGroup<GameEntity> _places;
 
-        private readonly List<GameEntity> _buffer = new(32);
+        private readonly List<GameEntity> _buffer = new(16);
 
         public TowerBuildSystem(GameContext gameContext)
         {
             _places = gameContext.GetGroup(GameMatcher
                 .AllOf(
-                GameMatcher.Player,
-                GameMatcher.TowerPlace,
-                GameMatcher.TowerBuildRequest,
-                GameMatcher.EntityConfig));
-        } 
+                    GameMatcher.Player,
+                    GameMatcher.TowerPlace,
+                    GameMatcher.TowerBuildRequest,
+                    GameMatcher.EntityConfig));
+        }
 
         public void Execute()
         {
-            foreach (var place in _places.GetEntities(_buffer))
+            var places = _places.GetEntities(_buffer);
+
+            for (var i = 0; i < places.Count; i++)
             {
-                foreach (var property in place.entityConfig.Value.Properties)
+                var place = places[i];
+
+                for (var j = 0; j < place.entityConfig.Value.Properties.Length; j++)
                 {
+                    var property = place.entityConfig.Value.Properties[j];
+
                     property.Apply(place);
                 }
 

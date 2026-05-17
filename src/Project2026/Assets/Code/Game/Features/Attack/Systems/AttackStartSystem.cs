@@ -1,6 +1,7 @@
 using Code.Game.Common.Entity;
 using Code.Game.Features.Target.Services;
 using Entitas;
+using System.Collections.Generic;
 
 namespace Code.Game.Features.Attack.Systems
 {
@@ -9,6 +10,8 @@ namespace Code.Game.Features.Attack.Systems
         private readonly TargetService _targetService;
 
         private readonly IGroup<GameEntity> _attackers;
+
+        private readonly List<GameEntity> _attacksBuffer = new(86);
 
         public AttackStartSystem(GameContext gameContext, TargetService targetService)
         {
@@ -25,8 +28,12 @@ namespace Code.Game.Features.Attack.Systems
 
         public void Execute()
         {
-            foreach (var attacker in _attackers)
+            var attackers = _attackers.GetEntities(_attacksBuffer);
+
+            for (var i = 0; i < attackers.Count; i++)
             {
+                var attacker = attackers[i];
+
                 if (!attacker.isAttackAvailable || attacker.isDead || !attacker.hasTargetId)
                     continue;
 
