@@ -29,13 +29,11 @@ namespace Code.Game.Features.Attack.Systems
         public void Execute()
         {
             var mapEntity = _maps.GetSingleEntity();
-
-            if (mapEntity == null)
-                return;
+            if (mapEntity == null) return;
 
             var spatialHash = mapEntity.spatialHash.Value;
 
-            foreach (var attack in _attacks.GetEntities(_buffer))
+            foreach (var attack in _attacks)
             {
                 if (attack.trajectoryPathProgress.Value < 1)
                     continue;
@@ -48,71 +46,63 @@ namespace Code.Game.Features.Attack.Systems
 
         private void ApplySplashDamage(GameEntity attack, Dictionary<Vector2Int, List<int>> spatialHash)
         {
-            var target = GetGameEntityById.Get(attack.targetId.Value);
+            var mainTarget = GetGameEntityById.Get(attack.targetId.Value);
 
-            if (!target.isDead)
-            {
-                var damage = CreateGameEntity.Empty();
+            if (mainTarget == null || mainTarget.isDead) 
+                return;
 
-                damage.AddOwnerId(attack.ownerId.Value);
-                damage.AddTargetId(attack.targetId.Value);
-                damage.AddTargetPoint(attack.targetPoint.Value);
-                damage.AddTotalDamage(0);
-                damage.isDamageRequest = true;
-                damage.isDamageEffectRequest = true;
-            }
+            CreateDamageRequest(attack, mainTarget.id.Value, attack.targetPoint.Value)
+                .isDamageEffectRequest = true;
 
-            var impactPoint = attack.targetPoint.Value;
             var splashRadius = attack.areaAttack.Value;
             var sqrSplash = splashRadius * splashRadius;
-
-            var centerCellX = Mathf.RoundToInt(impactPoint.x);
-            var centerCellY = Mathf.RoundToInt(impactPoint.y);
-            var iRadius = Mathf.CeilToInt(splashRadius);
+            var impactPos = attack.targetPoint.Value;
+            var originCell = mainTarget.currentCell.Value;
+            var searchRange = Mathf.CeilToInt(splashRadius);
 
             _checkedTargets.Clear();
+            _checkedTargets.Add(mainTarget.id.Value);
 
-            for (var x = -iRadius; x <= iRadius; x++)
+            for (var x = -searchRange; x <= searchRange; x++)
             {
-                for (var y = -iRadius; y <= iRadius; y++)
+                for (var y = -searchRange; y <= searchRange; y++)
                 {
-                    var checkPos = new Vector2Int(centerCellX + x, centerCellY + y);
+                    var checkPos = new Vector2Int(originCell.x + x, originCell.y + y);
 
-                    if (spatialHash.TryGetValue(checkPos, out var potentialTargets))
+                    if (spatialHash.TryGetValue(checkPos, out var cellUnits))
                     {
-                        foreach (var targetId in potentialTargets)
+                        foreach (var unitId in cellUnits)
                         {
-                            if (targetId == attack.ownerId.Value || targetId == attack.targetId.Value || _checkedTargets.Contains(targetId))
+                            if (unitId == attack.ownerId.Value || !_checkedTargets.Add(unitId))
                                 continue;
 
-                            var otherTarget = GetGameEntityById.Get(targetId);
+                            var other = GetGameEntityById.Get(unitId);
 
-                            if (otherTarget != null && otherTarget.team.Value != attack.team.Value && !otherTarget.isDead && otherTarget.isTargetable && otherTarget.hasBounds)
-                            {
-                                _checkedTargets.Add(targetId);
+                            if (other == null || other.isDead || other.team.Value == attack.team.Value)
+                                continue;
 
-                                var targetBounds = otherTarget.bounds.Value.bounds;
-                                var closestPoint = targetBounds.ClosestPoint(impactPoint);
+                            var otherPos = other.hasTransform ? other.transform.Value.position : (Vector3)other.currentCell.Value;
+                            var distSqr = (otherPos - (Vector3)impactPos).sqrMagnitude;
 
-                                var dx = impactPoint.x - closestPoint.x;
-                                var dy = impactPoint.y - closestPoint.y;
-                                var sDist = (dx * dx) + (dy * dy);
-
-                                if (sDist <= sqrSplash)
-                                {
-                                    var damage = CreateGameEntity.Empty();
-
-                                    damage.AddOwnerId(attack.ownerId.Value);
-                                    damage.AddTargetId(targetId);
-                                    damage.AddTargetPoint(closestPoint);
-                                    damage.AddTotalDamage(0);
-                                    damage.isDamageRequest = true;
-                                }
-                            }
+                            if (distSqr <= sqrSplash)
+                                CreateDamageRequest(attack, unitId, otherPos);
                         }
                     }
                 }
             }
+        }
+
+        private GameEntity CreateDamageRequest(GameEntity attack, int targetId, Vector3 hitPoint)
+        {
+            var damage = CreateGameEntity.Empty();
+
+            damage.AddOwnerId(attack.ownerId.Value);
+            damage.AddTargetId(targetId);
+            damage.AddTargetPoint(hitPoint);
+            damage.AddTotalDamage(0);
+            damage.isDamageRequest = true;
+
+            return damage;
         }
     }
 }

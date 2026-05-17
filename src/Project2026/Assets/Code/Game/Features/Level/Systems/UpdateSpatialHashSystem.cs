@@ -9,13 +9,15 @@ namespace Code.Game.Features.Level.Systems
         private readonly IGroup<GameEntity> _targetables;
         private readonly IGroup<GameEntity> _maps;
 
+        private readonly List<GameEntity> _buffer = new(512);
+
         public UpdateSpatialHashSystem(GameContext context)
         {
             _targetables = context.GetGroup(GameMatcher
                 .AllOf(
-                GameMatcher.CurrentCell,
-                GameMatcher.Targetable,
-                GameMatcher.Id)
+                    GameMatcher.CurrentCell,
+                    GameMatcher.Targetable,
+                    GameMatcher.Id)
                 .NoneOf(GameMatcher.Dead));
 
             _maps = context.GetGroup(GameMatcher.SpatialHash);
@@ -31,11 +33,9 @@ namespace Code.Game.Features.Level.Systems
             var hash = map.spatialHash.Value;
 
             foreach (var list in hash.Values)
-            {
                 list.Clear();
-            }
 
-            foreach (var e in _targetables)
+            foreach (var e in _targetables.GetEntities(_buffer))
             {
                 var pos = e.currentCell.Value;
                 var size = e.hasUnitSize ? e.unitSize.Value : Vector2Int.one;
@@ -43,7 +43,7 @@ namespace Code.Game.Features.Level.Systems
 
                 AddUnitToHash(hash, pos, size, id);
 
-                if (e.hasTargetCell && e.isMoving)
+                if (e.hasTargetCell && !e.isDead)
                     AddUnitToHash(hash, e.targetCell.Value, size, id);
             }
         }
@@ -56,10 +56,14 @@ namespace Code.Game.Features.Level.Systems
                 {
                     var cell = new Vector2Int(origin.x + x, origin.y + y);
 
-                    if (!hash.ContainsKey(cell))
-                        hash[cell] = new List<int>(8);
+                    if (!hash.TryGetValue(cell, out var list))
+                    {
+                        list = new List<int>(4);
 
-                    hash[cell].Add(id);
+                        hash[cell] = list;
+                    }
+
+                    list.Add(id);
                 }
             }
         }
