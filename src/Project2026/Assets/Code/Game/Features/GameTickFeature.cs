@@ -4,6 +4,7 @@ using Code.Game.Features.Attack;
 using Code.Game.Features.Cooldown;
 using Code.Game.Features.Damage;
 using Code.Game.Features.Death;
+using Code.Game.Features.Debaffs;
 using Code.Game.Features.Duration;
 using Code.Game.Features.Health;
 using Code.Game.Features.Input;
@@ -33,6 +34,8 @@ namespace Code.Game.Features
             Add(systemFactory.Create<TowerFeature>());
 
             Add(systemFactory.Create<LevelFeature>());
+
+            Add(systemFactory.Create<DebuffFeature>());
 
             Add(systemFactory.Create<TargetFeature>());
 

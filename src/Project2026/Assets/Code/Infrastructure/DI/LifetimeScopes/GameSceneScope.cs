@@ -14,6 +14,8 @@ using Code.Game.Features.Damage;
 using Code.Game.Features.Damage.Systems;
 using Code.Game.Features.Death;
 using Code.Game.Features.Death.Systems;
+using Code.Game.Features.Debaffs;
+using Code.Game.Features.Debaffs.Systems;
 using Code.Game.Features.Duration;
 using Code.Game.Features.Duration.Systems;
 using Code.Game.Features.Health;
@@ -123,6 +125,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<LevelFeature>(Lifetime.Singleton);
 
+            builder.Register<DebuffFeature>(Lifetime.Singleton);
+
             builder.Register<TargetFeature>(Lifetime.Singleton);
 
             builder.Register<MovementFeature>(Lifetime.Singleton);
@@ -168,6 +172,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<OccupiedCellSystem>(Lifetime.Singleton);
             builder.Register<ReservedCellSystem>(Lifetime.Singleton);
             builder.Register<UpdateSpatialHashSystem>(Lifetime.Singleton);
+
+            builder.Register<ChillSystem>(Lifetime.Singleton);
 
             builder.Register<RequestTargetCellSystem>(Lifetime.Singleton);
             builder.Register<SelectTargetCellSystem>(Lifetime.Singleton);

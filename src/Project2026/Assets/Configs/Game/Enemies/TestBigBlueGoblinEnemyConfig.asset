@@ -19,7 +19,6 @@ MonoBehaviour:
   - rid: 8171215584738410596
   - rid: 8171215584738410597
   - rid: 8171215584738410598
-  - rid: 8171215584738410599
   - rid: 8171215584738410600
   - rid: 8171215584738410616
   - rid: 8171215631311700222
@@ -32,6 +31,7 @@ MonoBehaviour:
   - rid: 2286602901821587541
   - rid: 2286603056206053668
   - rid: 2286603056206053669
+  - rid: 2286603060194836481
   references:
     version: 2
     RefIds:
@@ -68,6 +68,12 @@ MonoBehaviour:
       data:
         <Mode>k__BackingField: 0
         <Resistance>k__BackingField: 5
+    - rid: 2286603060194836481
+      type: {class: FireAttackProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Damage>k__BackingField: 7
+        <HitEffect>k__BackingField: {fileID: 11400000, guid: bef00aab0f1fb94458991e712f4b83b8, type: 2}
     - rid: 8171215584738410588
       type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
@@ -97,12 +103,6 @@ MonoBehaviour:
         <Mode>k__BackingField: 0
         <HpBar>k__BackingField: {fileID: 11400000, guid: 0d482d67d70352f4da18aed4c558337b, type: 2}
         <SpawnOffset>k__BackingField: {x: 0, y: 0.7, z: 0}
-    - rid: 8171215584738410599
-      type: {class: PhysicalAttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
-      data:
-        <Mode>k__BackingField: 0
-        <PhysicalDamage>k__BackingField: 7
-        <PhysicalHitEffect>k__BackingField: {fileID: 11400000, guid: bef00aab0f1fb94458991e712f4b83b8, type: 2}
     - rid: 8171215584738410600
       type: {class: AttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
