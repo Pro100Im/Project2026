@@ -1,7 +1,6 @@
 using Code.Game.Common.Entity;
 using Entitas;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Code.Game.Features.Effect.Systems
 {
@@ -31,7 +30,7 @@ namespace Code.Game.Features.Effect.Systems
                 var effectEntity = GetGameEntityById.Get(effectRequest.ownerId.Value);
                 var targetEntity = GetGameEntityById.Get(effectRequest.targetId.Value);
 
-                if (targetEntity.isDead || !effectEntity.hasChillEffect)
+                if (effectEntity == null || targetEntity == null || !effectEntity.hasChillEffect || targetEntity.isDead)
                     continue;
 
                 var entity = CreateGameEntity.Empty();
