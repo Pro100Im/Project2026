@@ -12,12 +12,18 @@ namespace Code.Game.StaticData.Data
         {
             if(!entity.hasMovementSpeed)
                 entity.AddMovementSpeed(Speed);
+
+            if(!entity.hasMovementSpeedBonus)
+                entity.AddMovementSpeedBonus(1f);
         }
 
         protected override void Remove(GameEntity entity)
         {
             if(entity.hasMovementSpeed)
                 entity.RemoveMovementSpeed();
+
+            if(entity.hasMovementSpeedBonus)
+                entity.RemoveMovementSpeedBonus();
         }
 
         protected override void Replace(GameEntity entity)

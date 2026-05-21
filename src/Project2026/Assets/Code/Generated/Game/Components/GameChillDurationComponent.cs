@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Code.Game.Features.Debaffs.ChillDuration chillDuration { get { return (Code.Game.Features.Debaffs.ChillDuration)GetComponent(GameComponentsLookup.ChillDuration); } }
+    public Code.Game.Features.Effect.ChillDuration chillDuration { get { return (Code.Game.Features.Effect.ChillDuration)GetComponent(GameComponentsLookup.ChillDuration); } }
     public bool hasChillDuration { get { return HasComponent(GameComponentsLookup.ChillDuration); } }
 
     public void AddChillDuration(float newValue) {
         var index = GameComponentsLookup.ChillDuration;
-        var component = (Code.Game.Features.Debaffs.ChillDuration)CreateComponent(index, typeof(Code.Game.Features.Debaffs.ChillDuration));
+        var component = (Code.Game.Features.Effect.ChillDuration)CreateComponent(index, typeof(Code.Game.Features.Effect.ChillDuration));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
     public void ReplaceChillDuration(float newValue) {
         var index = GameComponentsLookup.ChillDuration;
-        var component = (Code.Game.Features.Debaffs.ChillDuration)CreateComponent(index, typeof(Code.Game.Features.Debaffs.ChillDuration));
+        var component = (Code.Game.Features.Effect.ChillDuration)CreateComponent(index, typeof(Code.Game.Features.Effect.ChillDuration));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }

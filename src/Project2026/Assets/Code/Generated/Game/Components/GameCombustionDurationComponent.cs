@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Code.Game.Features.Debaffs.CombustionDuration combustionDuration { get { return (Code.Game.Features.Debaffs.CombustionDuration)GetComponent(GameComponentsLookup.CombustionDuration); } }
+    public Code.Game.Features.Effect.CombustionDuration combustionDuration { get { return (Code.Game.Features.Effect.CombustionDuration)GetComponent(GameComponentsLookup.CombustionDuration); } }
     public bool hasCombustionDuration { get { return HasComponent(GameComponentsLookup.CombustionDuration); } }
 
     public void AddCombustionDuration(float newValue) {
         var index = GameComponentsLookup.CombustionDuration;
-        var component = (Code.Game.Features.Debaffs.CombustionDuration)CreateComponent(index, typeof(Code.Game.Features.Debaffs.CombustionDuration));
+        var component = (Code.Game.Features.Effect.CombustionDuration)CreateComponent(index, typeof(Code.Game.Features.Effect.CombustionDuration));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
     public void ReplaceCombustionDuration(float newValue) {
         var index = GameComponentsLookup.CombustionDuration;
-        var component = (Code.Game.Features.Debaffs.CombustionDuration)CreateComponent(index, typeof(Code.Game.Features.Debaffs.CombustionDuration));
+        var component = (Code.Game.Features.Effect.CombustionDuration)CreateComponent(index, typeof(Code.Game.Features.Effect.CombustionDuration));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }

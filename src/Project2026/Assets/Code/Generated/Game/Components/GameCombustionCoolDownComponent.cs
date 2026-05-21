@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Code.Game.Features.Debaffs.CombustionCoolDown combustionCoolDown { get { return (Code.Game.Features.Debaffs.CombustionCoolDown)GetComponent(GameComponentsLookup.CombustionCoolDown); } }
+    public Code.Game.Features.Effect.CombustionCoolDown combustionCoolDown { get { return (Code.Game.Features.Effect.CombustionCoolDown)GetComponent(GameComponentsLookup.CombustionCoolDown); } }
     public bool hasCombustionCoolDown { get { return HasComponent(GameComponentsLookup.CombustionCoolDown); } }
 
     public void AddCombustionCoolDown(float newValue) {
         var index = GameComponentsLookup.CombustionCoolDown;
-        var component = (Code.Game.Features.Debaffs.CombustionCoolDown)CreateComponent(index, typeof(Code.Game.Features.Debaffs.CombustionCoolDown));
+        var component = (Code.Game.Features.Effect.CombustionCoolDown)CreateComponent(index, typeof(Code.Game.Features.Effect.CombustionCoolDown));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
     public void ReplaceCombustionCoolDown(float newValue) {
         var index = GameComponentsLookup.CombustionCoolDown;
-        var component = (Code.Game.Features.Debaffs.CombustionCoolDown)CreateComponent(index, typeof(Code.Game.Features.Debaffs.CombustionCoolDown));
+        var component = (Code.Game.Features.Effect.CombustionCoolDown)CreateComponent(index, typeof(Code.Game.Features.Effect.CombustionCoolDown));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }

@@ -6,6 +6,7 @@ using Code.Game.Features.Damage;
 using Code.Game.Features.Death;
 using Code.Game.Features.Debaffs;
 using Code.Game.Features.Duration;
+using Code.Game.Features.Effect;
 using Code.Game.Features.Health;
 using Code.Game.Features.Input;
 using Code.Game.Features.Level;
@@ -31,11 +32,11 @@ namespace Code.Game.Features
             Add(systemFactory.Create<SpawnFeature>());
             Add(systemFactory.Create<CreateViewFeature>());
 
+            Add(systemFactory.Create<DebuffFeature>());
+
             Add(systemFactory.Create<TowerFeature>());
 
             Add(systemFactory.Create<LevelFeature>());
-
-            Add(systemFactory.Create<DebuffFeature>());
 
             Add(systemFactory.Create<TargetFeature>());
 
@@ -46,6 +47,8 @@ namespace Code.Game.Features
 
             Add(systemFactory.Create<HealthFeature>());
             Add(systemFactory.Create<DeathFeature>());
+
+            Add(systemFactory.Create<EffectFeature>());
 
             Add(systemFactory.Create<AnimatorFeature>());
 

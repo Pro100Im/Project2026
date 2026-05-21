@@ -108,6 +108,13 @@ namespace Code.Game.Features.Attack.Systems
             damage.AddTotalDamage(0);
             damage.isDamageRequest = true;
 
+            var damageEffect = CreateGameEntity.Empty();
+
+            damageEffect.AddOwnerId(attack.id.Value);
+            damageEffect.AddTargetId(targetId);
+            damageEffect.AddTargetPoint(hitPoint);
+            damageEffect.isEffectCheckRequest = true;
+
             return damage;
         }
     }

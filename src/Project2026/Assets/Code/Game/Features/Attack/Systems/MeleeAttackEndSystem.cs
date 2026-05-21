@@ -53,6 +53,14 @@ namespace Code.Game.Features.Attack.Systems
                     damage.AddTotalDamage(0);
                     damage.isDamageRequest = true;
                     damage.isDamageEffectRequest = true;
+
+                    // to do check
+                    var damageEffect = CreateGameEntity.Empty();
+
+                    damageEffect.AddOwnerId(entity.id.Value);
+                    damageEffect.AddTargetId(entity.targetId.Value);
+                    damageEffect.AddTargetPoint(entity.targetPoint.Value);
+                    damageEffect.isEffectCheckRequest = true;
                 }
 
                 entity.isAttacking = false;

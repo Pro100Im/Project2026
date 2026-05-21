@@ -6,15 +6,17 @@ namespace Code.Game.Common.Destruct.Systems
     public class GameDestructedSystem : ICleanupSystem
     {
         private readonly IGroup<GameEntity> _entities;
-        private readonly List<GameEntity> _buffer = new(64);
+        private readonly List<GameEntity> _entitiesBuffer = new(64);
 
         public GameDestructedSystem(GameContext game) =>
           _entities = game.GetGroup(GameMatcher.Destructed);
 
         public void Cleanup()
         {
-            foreach (GameEntity entity in _entities.GetEntities(_buffer))
-                entity.Destroy();
+            var entities = _entities.GetEntities(_entitiesBuffer);
+
+            for (var i = 0; i < entities.Count; i++)
+                entities[i].Destroy();
         }
     }
 }

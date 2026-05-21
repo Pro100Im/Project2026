@@ -21,6 +21,7 @@ MonoBehaviour:
   - rid: 2286602737992335451
   - rid: 2286602853080629334
   - rid: 2286603035550154836
+  - rid: 2286603081204367468
   references:
     version: 2
     RefIds:
@@ -40,6 +41,13 @@ MonoBehaviour:
         <Mode>k__BackingField: 0
         <Damage>k__BackingField: 10
         <HitEffect>k__BackingField: {fileID: 11400000, guid: ecb29bdf7923cd245ac387b206994f80, type: 2}
+    - rid: 2286603081204367468
+      type: {class: ChillEffectProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Duration>k__BackingField: 5
+        <IsStackable>k__BackingField: 0
+        <Config>k__BackingField: {fileID: 11400000, guid: 0e19685fc35a27c469bdf0caa8ed832a, type: 2}
     - rid: 8171215588330831995
       type: {class: TowerPlaceProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:

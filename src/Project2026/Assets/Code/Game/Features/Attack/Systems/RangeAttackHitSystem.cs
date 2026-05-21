@@ -13,6 +13,7 @@ namespace Code.Game.Features.Attack.Systems
         {
             _attacks = gameContext.GetGroup(GameMatcher
                 .AllOf(
+                    GameMatcher.Id,
                     GameMatcher.OwnerId,
                     GameMatcher.TargetId,
                     GameMatcher.TrajectoryPathProgress));
@@ -41,8 +42,16 @@ namespace Code.Game.Features.Attack.Systems
                     damage.AddTotalDamage(0);
                     damage.isDamageRequest = true;
                     damage.isDamageEffectRequest = true;
+
+                    // to do check
+                    var damageEffect = CreateGameEntity.Empty();
+
+                    damageEffect.AddOwnerId(attack.id.Value);
+                    damageEffect.AddTargetId(attack.targetId.Value);
+                    damageEffect.AddTargetPoint(attack.targetPoint.Value);
+                    damageEffect.isEffectCheckRequest = true;
                 }
-                
+
                 attack.isDestructed = true;
             }
         }

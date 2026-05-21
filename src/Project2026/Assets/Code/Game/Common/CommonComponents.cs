@@ -9,7 +9,7 @@ namespace Code.Game.Common
 {
     [Game] public class Id : IComponent { [PrimaryEntityIndex] public int Value; }
     [Game] public class SortOrder : IComponent { public int Value; } 
-    [Game] public class Attached: IComponent { }
+    [Game] public class Attached : IComponent { }
     [Game] public class OwnerId : IComponent { public int Value; }
     [Game] public class TeamComponent : IComponent { public Team Value; }
 

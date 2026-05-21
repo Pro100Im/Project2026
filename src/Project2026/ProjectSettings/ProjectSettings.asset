@@ -792,11 +792,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: b0b49e2e-4af4-41ca-89ab-3bea28a25416
+  cloudProjectId: c179485d-b464-4da1-b0cc-351654f133ab
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Project2026
-  organizationId: pro100elite
+  projectName: Hero Guys
+  organizationId: grif-studio-ltd
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

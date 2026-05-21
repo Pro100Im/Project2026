@@ -11,6 +11,8 @@ namespace Code.Game.Features.Movement
             Add(systemFactory.Create<GridMovementSystem>()); 
             Add(systemFactory.Create<AttachPosToTargetSystem>());
             Add(systemFactory.Create<TrajectoryMovementSystem>());
+
+            Add(systemFactory.Create<MovementSpeedBonusCleanUpSystem>());
         }
     }
 }

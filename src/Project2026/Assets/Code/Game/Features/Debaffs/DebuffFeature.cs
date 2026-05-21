@@ -7,7 +7,7 @@ namespace Code.Game.Features.Debaffs
     {
         public DebuffFeature(ISystemFactory systemFactory)
         {
-            Add(systemFactory.Create<ChillSystem>());
+            Add(systemFactory.Create<MoveSlowingDownSystem>());
         }
     }
 }

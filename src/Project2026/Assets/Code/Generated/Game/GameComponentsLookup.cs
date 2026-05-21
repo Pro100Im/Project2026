@@ -59,67 +59,73 @@ public static class GameComponentsLookup {
     public const int Killable = 48;
     public const int ApplyDebuffRequest = 49;
     public const int AttackSlowingDown = 50;
-    public const int ChillCoolDown = 51;
-    public const int ChillDuration = 52;
-    public const int CombustionCoolDown = 53;
-    public const int CombustionDuration = 54;
-    public const int MoveSlowingDown = 55;
-    public const int Duration = 56;
-    public const int Enemy = 57;
-    public const int CurrentHealth = 58;
-    public const int HpBar = 59;
-    public const int MaxHealth = 60;
-    public const int FlowFieldDirty = 61;
-    public const int FlowFields = 62;
-    public const int IntegrationFields = 63;
-    public const int OccupField = 64;
-    public const int ReservedField = 65;
-    public const int SpatialHash = 66;
-    public const int SpawnMap = 67;
-    public const int SpawnReservedField = 68;
-    public const int TilemapMovement = 69;
-    public const int CurrentCell = 70;
-    public const int GridMovement = 71;
-    public const int LastDirection = 72;
-    public const int MovementAvailable = 73;
-    public const int MovementOffset = 74;
-    public const int MovementSpeed = 75;
-    public const int Moving = 76;
-    public const int TotalDistance = 77;
-    public const int Trajectory = 78;
-    public const int TrajectoryBaseArcHeight = 79;
-    public const int TrajectoryCurrentArcHeight = 80;
-    public const int TrajectoryMovement = 81;
-    public const int TrajectoryPathProgress = 82;
-    public const int Velocity = 83;
-    public const int PlayerCastle = 84;
-    public const int PlayerCastleCells = 85;
-    public const int Player = 86;
-    public const int FireResistance = 87;
-    public const int FrostResistance = 88;
-    public const int PhysicalResistance = 89;
-    public const int SpawnPosition = 90;
-    public const int SpawnRequsted = 91;
-    public const int WaitingToSpawn = 92;
-    public const int Targetable = 93;
-    public const int TargetCell = 94;
-    public const int TargetCellRequest = 95;
-    public const int TargetFlow = 96;
-    public const int TargetId = 97;
-    public const int TargetPoint = 98;
-    public const int Tower = 99;
-    public const int TowerBuildRequest = 100;
-    public const int TowerPlace = 101;
-    public const int Unit = 102;
-    public const int UnitSize = 103;
-    public const int CurrentWaveEnemies = 104;
-    public const int CurrentWaveNumber = 105;
-    public const int WaveEnemiesAlive = 106;
-    public const int WaveInProgress = 107;
-    public const int WaveStartRequsted = 108;
-    public const int Projectile = 109;
+    public const int ChillDebuff = 51;
+    public const int MoveSlowingDown = 52;
+    public const int Duration = 53;
+    public const int ChillDuration = 54;
+    public const int ChillEffect = 55;
+    public const int CombustionCoolDown = 56;
+    public const int CombustionDuration = 57;
+    public const int CombustionEffect = 58;
+    public const int Effect = 59;
+    public const int EffectCheckRequest = 60;
+    public const int Stackable = 61;
+    public const int Enemy = 62;
+    public const int CurrentHealth = 63;
+    public const int HpBar = 64;
+    public const int MaxHealth = 65;
+    public const int FlowFieldDirty = 66;
+    public const int FlowFields = 67;
+    public const int IntegrationFields = 68;
+    public const int OccupField = 69;
+    public const int ReservedField = 70;
+    public const int SpatialHash = 71;
+    public const int SpawnMap = 72;
+    public const int SpawnReservedField = 73;
+    public const int TilemapMovement = 74;
+    public const int CurrentCell = 75;
+    public const int GridMovement = 76;
+    public const int LastDirection = 77;
+    public const int MovementAvailable = 78;
+    public const int MovementOffset = 79;
+    public const int MovementSpeed = 80;
+    public const int MovementSpeedBonus = 81;
+    public const int Moving = 82;
+    public const int TotalDistance = 83;
+    public const int Trajectory = 84;
+    public const int TrajectoryBaseArcHeight = 85;
+    public const int TrajectoryCurrentArcHeight = 86;
+    public const int TrajectoryMovement = 87;
+    public const int TrajectoryPathProgress = 88;
+    public const int Velocity = 89;
+    public const int PlayerCastle = 90;
+    public const int PlayerCastleCells = 91;
+    public const int Player = 92;
+    public const int FireResistance = 93;
+    public const int FrostResistance = 94;
+    public const int PhysicalResistance = 95;
+    public const int SpawnPosition = 96;
+    public const int SpawnRequsted = 97;
+    public const int WaitingToSpawn = 98;
+    public const int Targetable = 99;
+    public const int TargetCell = 100;
+    public const int TargetCellRequest = 101;
+    public const int TargetFlow = 102;
+    public const int TargetId = 103;
+    public const int TargetPoint = 104;
+    public const int Tower = 105;
+    public const int TowerBuildRequest = 106;
+    public const int TowerPlace = 107;
+    public const int Unit = 108;
+    public const int UnitSize = 109;
+    public const int CurrentWaveEnemies = 110;
+    public const int CurrentWaveNumber = 111;
+    public const int WaveEnemiesAlive = 112;
+    public const int WaveInProgress = 113;
+    public const int WaveStartRequsted = 114;
+    public const int Projectile = 115;
 
-    public const int TotalComponents = 110;
+    public const int TotalComponents = 116;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -173,12 +179,17 @@ public static class GameComponentsLookup {
         "Killable",
         "ApplyDebuffRequest",
         "AttackSlowingDown",
-        "ChillCoolDown",
-        "ChillDuration",
-        "CombustionCoolDown",
-        "CombustionDuration",
+        "ChillDebuff",
         "MoveSlowingDown",
         "Duration",
+        "ChillDuration",
+        "ChillEffect",
+        "CombustionCoolDown",
+        "CombustionDuration",
+        "CombustionEffect",
+        "Effect",
+        "EffectCheckRequest",
+        "Stackable",
         "Enemy",
         "CurrentHealth",
         "HpBar",
@@ -198,6 +209,7 @@ public static class GameComponentsLookup {
         "MovementAvailable",
         "MovementOffset",
         "MovementSpeed",
+        "MovementSpeedBonus",
         "Moving",
         "TotalDistance",
         "Trajectory",
@@ -286,12 +298,17 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Death.Killable),
         typeof(Code.Game.Features.Debaffs.ApplyDebuffRequest),
         typeof(Code.Game.Features.Debaffs.AttackSlowingDown),
-        typeof(Code.Game.Features.Debaffs.ChillCoolDown),
-        typeof(Code.Game.Features.Debaffs.ChillDuration),
-        typeof(Code.Game.Features.Debaffs.CombustionCoolDown),
-        typeof(Code.Game.Features.Debaffs.CombustionDuration),
+        typeof(Code.Game.Features.Debaffs.ChillDebuff),
         typeof(Code.Game.Features.Debaffs.MoveSlowingDown),
         typeof(Code.Game.Features.Duration.Duration),
+        typeof(Code.Game.Features.Effect.ChillDuration),
+        typeof(Code.Game.Features.Effect.ChillEffect),
+        typeof(Code.Game.Features.Effect.CombustionCoolDown),
+        typeof(Code.Game.Features.Effect.CombustionDuration),
+        typeof(Code.Game.Features.Effect.CombustionEffect),
+        typeof(Code.Game.Features.Effect.Effect),
+        typeof(Code.Game.Features.Effect.EffectCheckRequest),
+        typeof(Code.Game.Features.Effect.Stackable),
         typeof(Code.Game.Features.Enemy.EnemyComponent),
         typeof(Code.Game.Features.Health.CurrentHealth),
         typeof(Code.Game.Features.Health.HpBar),
@@ -311,6 +328,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Movement.MovementAvailable),
         typeof(Code.Game.Features.Movement.MovementOffset),
         typeof(Code.Game.Features.Movement.MovementSpeed),
+        typeof(Code.Game.Features.Movement.MovementSpeedBonus),
         typeof(Code.Game.Features.Movement.Moving),
         typeof(Code.Game.Features.Movement.TotalDistance),
         typeof(Code.Game.Features.Movement.Trajectory),

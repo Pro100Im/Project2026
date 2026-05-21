@@ -4,6 +4,7 @@ using UnityEngine;
 namespace Code.Game.Features.Movement
 {
     [Game] public class MovementSpeed : IComponent { public float Value; }
+    [Game] public class MovementSpeedBonus : IComponent { public float Value; }
     [Game] public class MovementAvailable : IComponent { }
     [Game] public class GridMovement : IComponent { }
     [Game] public class TrajectoryMovement : IComponent { }

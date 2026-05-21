@@ -18,6 +18,8 @@ using Code.Game.Features.Debaffs;
 using Code.Game.Features.Debaffs.Systems;
 using Code.Game.Features.Duration;
 using Code.Game.Features.Duration.Systems;
+using Code.Game.Features.Effect;
+using Code.Game.Features.Effect.Systems;
 using Code.Game.Features.Health;
 using Code.Game.Features.Health.Systems;
 using Code.Game.Features.Input;
@@ -135,8 +137,9 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<DamageFeature>(Lifetime.Singleton);
 
             builder.Register<HealthFeature>(Lifetime.Singleton);
-
             builder.Register<DeathFeature>(Lifetime.Singleton);
+
+            builder.Register<EffectFeature>(Lifetime.Singleton);
 
             builder.Register<AnimatorFeature>(Lifetime.Singleton);
 
@@ -173,7 +176,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<ReservedCellSystem>(Lifetime.Singleton);
             builder.Register<UpdateSpatialHashSystem>(Lifetime.Singleton);
 
-            builder.Register<ChillSystem>(Lifetime.Singleton);
+            builder.Register<MoveSlowingDownSystem>(Lifetime.Singleton);
 
             builder.Register<RequestTargetCellSystem>(Lifetime.Singleton);
             builder.Register<SelectTargetCellSystem>(Lifetime.Singleton);
@@ -183,6 +186,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<GridMovementSystem>(Lifetime.Singleton);
             builder.Register<AttachPosToTargetSystem>(Lifetime.Singleton);
             builder.Register<TrajectoryMovementSystem>(Lifetime.Singleton);
+            builder.Register<MovementSpeedBonusCleanUpSystem>(Lifetime.Singleton);
 
             builder.Register<AttackStartSystem>(Lifetime.Singleton);
             builder.Register<MeleeAttackEndSystem>(Lifetime.Singleton);
@@ -203,6 +207,9 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<HealthBarSystem>(Lifetime.Singleton);
             builder.Register<DeathSystem>(Lifetime.Singleton);
+
+            builder.Register<ApplyChillEffectSystem>(Lifetime.Singleton);
+            builder.Register<ChillEffectEndSystem>(Lifetime.Singleton);
 
             builder.Register<CooldownLeftSystem>(Lifetime.Singleton);
             builder.Register<DurationLeftSystem>(Lifetime.Singleton);

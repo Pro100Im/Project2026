@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2652ec64a2cfac428b7546f4941961e, type: 3}
+  m_Name: ChillEffect
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.EntityConfig
+  Properties:
+  - rid: 2286603069984866382
+  - rid: 2286603069984866383
+  - rid: 2286603081204367464
+  - rid: 2286603105874477135
+  - rid: 2286603115984584792
+  references:
+    version: 2
+    RefIds:
+    - rid: 2286603069984866382
+      type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+    - rid: 2286603069984866383
+      type: {class: ViewPrefabProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Prefab>k__BackingField: {fileID: 2715749001849539951, guid: 642780ff7c5567742912f9124a3799aa, type: 3}
+    - rid: 2286603081204367464
+      type: {class: MoveSlowingDownProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <MoveSlowingDown>k__BackingField: 0.3
+    - rid: 2286603105874477135
+      type: {class: ChillDurationProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Duration>k__BackingField: 2
+    - rid: 2286603115984584792
+      type: {class: MovementOffsetProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Offset>k__BackingField: {x: 0, y: -0.2, z: 0}
