@@ -1,3 +1,4 @@
+using Assets.Code.Game.Features.Debaffs.Systems;
 using Assets.Code.Game.Features.Target.Systems;
 using Code.Game.Common.Cameras;
 using Code.Game.Common.Destruct;
@@ -177,6 +178,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<UpdateSpatialHashSystem>(Lifetime.Singleton);
 
             builder.Register<MoveSlowingDownSystem>(Lifetime.Singleton);
+            builder.Register<CombustionSystem>(Lifetime.Singleton);
 
             builder.Register<RequestTargetCellSystem>(Lifetime.Singleton);
             builder.Register<SelectTargetCellSystem>(Lifetime.Singleton);
@@ -210,6 +212,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<ApplyChillEffectSystem>(Lifetime.Singleton);
             builder.Register<ChillEffectEndSystem>(Lifetime.Singleton);
+            builder.Register<ApplyCombustionEffectSystem>(Lifetime.Singleton);
+            builder.Register<CombustionEffectEndSystem>(Lifetime.Singleton);
 
             builder.Register<CooldownLeftSystem>(Lifetime.Singleton);
             builder.Register<DurationLeftSystem>(Lifetime.Singleton);

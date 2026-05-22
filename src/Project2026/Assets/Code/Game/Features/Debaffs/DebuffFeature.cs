@@ -1,3 +1,4 @@
+using Assets.Code.Game.Features.Debaffs.Systems;
 using Code.Game.Features.Debaffs.Systems;
 using Code.Infrastructure.Systems;
 
@@ -8,6 +9,7 @@ namespace Code.Game.Features.Debaffs
         public DebuffFeature(ISystemFactory systemFactory)
         {
             Add(systemFactory.Create<MoveSlowingDownSystem>());
+            Add(systemFactory.Create<CombustionSystem>());
         }
     }
 }
