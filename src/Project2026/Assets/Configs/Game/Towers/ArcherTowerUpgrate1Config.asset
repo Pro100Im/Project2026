@@ -38,7 +38,7 @@ MonoBehaviour:
       type: {class: PhysicalAttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <PhysicalDamage>k__BackingField: 25
+        <PhysicalDamage>k__BackingField: 20
         <PhysicalHitEffect>k__BackingField: {fileID: 11400000, guid: 0801227ced598bd4fa883a790a2e14b0, type: 2}
     - rid: 8171215588330831995
       type: {class: TowerPlaceProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
@@ -58,8 +58,8 @@ MonoBehaviour:
       type: {class: AttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Range>k__BackingField: 6
-        <Cooldown>k__BackingField: 2
+        <Range>k__BackingField: 7
+        <Cooldown>k__BackingField: 1.5
         <Duration>k__BackingField: 0.6
         <IsMelee>k__BackingField: 0
     - rid: 8171215588330832021

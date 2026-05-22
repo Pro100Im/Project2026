@@ -38,7 +38,7 @@ MonoBehaviour:
       type: {class: FireAttackProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Damage>k__BackingField: 20
+        <Damage>k__BackingField: 15
         <HitEffect>k__BackingField: {fileID: 11400000, guid: 3c295d148209973419938951cd307d8a, type: 2}
     - rid: 8171215588330831995
       type: {class: TowerPlaceProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
