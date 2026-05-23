@@ -165,6 +165,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<WaveProgressSystem>(Lifetime.Singleton);
 
             builder.Register<TowerBuildSystem>(Lifetime.Singleton);
+            builder.Register<TowerUpgradeSystem>(Lifetime.Singleton);
 
             builder.Register<EnemySelectSpawnPosSystem>(Lifetime.Singleton);
             builder.Register<EnemySpawnSystem>(Lifetime.Singleton);

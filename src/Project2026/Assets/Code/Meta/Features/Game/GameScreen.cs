@@ -46,13 +46,24 @@ namespace Code.Meta.Features.Game
 
         public void OpenTowerBuildMenu(Vector2 screenPos, GameEntity entity)
         {
-            _towerMenuScreen.Open(screenPos, entity);
+            _towerMenuScreen.OpenTowerBuildMenu(screenPos, entity);
         }
 
         public void CloseTowerBuildMenu()
         {
-            _towerMenuScreen.Close();
+            _towerMenuScreen.CloseTowerBuilds();
         }
+
+        public void OpenTowerUpgradeMenu(Vector2 screenPos, GameEntity entity)
+        {
+            _towerMenuScreen.OpenTowerUpgradeMenu(screenPos, entity);
+        }
+
+        public void CloseTowerUpgradeMenu()
+        {
+            _towerMenuScreen.CloseTowerUpgrades();
+        }
+
 
         private void OnDestroy()
         {

@@ -2,7 +2,6 @@ using Code.Game.Common.Entity;
 using Code.Meta.Features.Game;
 using Entitas;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Code.Game.Features.Tower.Systems
 {
@@ -10,21 +9,10 @@ namespace Code.Game.Features.Tower.Systems
     {
         private readonly GameScreen _gameScreen;
 
-        private readonly IGroup<GameEntity> _towers;
-
-        private readonly List<GameEntity> _towersBuffer = new(16);
-
         public TowerMenuSystem(InputContext inputContext, GameContext gameContext, GameScreen gameScreen)
             : base(inputContext)
         {
             _gameScreen = gameScreen;
-
-            _towers = gameContext.GetGroup(GameMatcher
-                .AllOf(
-                GameMatcher.Player,
-                GameMatcher.Tower,
-                GameMatcher.LineRenderer,
-                GameMatcher.EntityConfig));
         }
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context) =>
@@ -35,6 +23,7 @@ namespace Code.Game.Features.Tower.Systems
 
         protected override bool Filter(InputEntity entity) => entity.isInput;
 
+        // To do improve
         protected override void Execute(List<InputEntity> entities)
         {
             for (var i = 0; i < entities.Count; i++)
@@ -47,36 +36,23 @@ namespace Code.Game.Features.Tower.Systems
 
                     if (targetEntity.isTowerPlace)
                     {
+                        _gameScreen.CloseTowerUpgradeMenu();
                         _gameScreen.OpenTowerBuildMenu(entity.screenPointerInput.Value, targetEntity);
-
-
                     }
+                    else if (targetEntity.isTower)
+                    {
+                        _gameScreen.CloseTowerBuildMenu();
 
-                    //var towers = _towers.GetEntities(_towersBuffer);
-
-                    //for (var j = 0; j < towers.Count; j++)
-                    //{
-                    //    var tower = towers[j];
-
-                    //    if (tower.id.Value != entity.targetId.Value)
-                    //    {
-
-                    //    }
-
-                    //    if (targetEntity.isTower && targetEntity.hasRange)
-                    //    {
-
-
-
-                    //    }
-                    //}
+                        if(targetEntity.hasTowerUpgradePrice)
+                            _gameScreen.OpenTowerUpgradeMenu(entity.screenPointerInput.Value, targetEntity);
+                    }
 
                     entity.isDestructed = true;
                 }
                 else
                 {
-                    Debug.Log("Close menu");
                     _gameScreen.CloseTowerBuildMenu();
+                    _gameScreen.CloseTowerUpgradeMenu();
                 }
 
                 entity.isDestructed = true;

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2652ec64a2cfac428b7546f4941961e, type: 3}
+  m_Name: FireTowerUpgrate2Config
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.EntityConfig
+  Properties:
+  - rid: 2286603194387136869
+  - rid: 2286603194387136870
+  - rid: 2286603194387136871
+  - rid: 2286603194387136873
+  - rid: 2286603194387136874
+  - rid: 2286603194387136878
+  references:
+    version: 2
+    RefIds:
+    - rid: 2286603194387136869
+      type: {class: SpawnEffectProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <SpawnEffect>k__BackingField: {fileID: 11400000, guid: fdc1f4e91ba6e8540b533480e06b4730, type: 2}
+        <SpawnEffectOffset>k__BackingField: {x: 0, y: 0, z: 0}
+    - rid: 2286603194387136870
+      type: {class: SpriteProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 1
+        <_sprite>k__BackingField: {fileID: 21300000, guid: e5e7519958806a34c9d610bc638dccaa, type: 3}
+    - rid: 2286603194387136871
+      type: {class: AttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 1
+        <Range>k__BackingField: 7
+        <Cooldown>k__BackingField: 2
+        <Duration>k__BackingField: 0.6
+        <IsMelee>k__BackingField: 0
+    - rid: 2286603194387136873
+      type: {class: FireAttackProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 1
+        <Damage>k__BackingField: 20
+        <HitEffect>k__BackingField: {fileID: 11400000, guid: 3c295d148209973419938951cd307d8a, type: 2}
+    - rid: 2286603194387136874
+      type: {class: ProjectileProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 1
+        <Projectile>k__BackingField: {fileID: 11400000, guid: 3add360f7ec3c904d9338a8890bf7950, type: 2}
+    - rid: 2286603194387136878
+      type: {class: TowerUpgradeProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 2
+        <Prices>k__BackingField: 
+        <Upgrades>k__BackingField: []
