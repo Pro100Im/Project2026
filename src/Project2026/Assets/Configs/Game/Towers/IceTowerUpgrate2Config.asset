@@ -37,21 +37,21 @@ MonoBehaviour:
       type: {class: AttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 1
-        <Range>k__BackingField: 7
-        <Cooldown>k__BackingField: 2
+        <Range>k__BackingField: 6
+        <Cooldown>k__BackingField: 2.5
         <Duration>k__BackingField: 0.6
         <IsMelee>k__BackingField: 0
     - rid: 2286603194387136873
       type: {class: FireAttackProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 1
-        <Damage>k__BackingField: 20
-        <HitEffect>k__BackingField: {fileID: 11400000, guid: b0a8bfcf69e8e7247a0d71e831057189, type: 2}
+        <Damage>k__BackingField: 10
+        <HitEffect>k__BackingField: {fileID: 11400000, guid: ecb29bdf7923cd245ac387b206994f80, type: 2}
     - rid: 2286603194387136874
       type: {class: ProjectileProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 1
-        <Projectile>k__BackingField: {fileID: 11400000, guid: 8a46ddabd3678da4f9a19e32a089ba00, type: 2}
+        <Projectile>k__BackingField: {fileID: 11400000, guid: 1baa7031fcfc3c94b928eda101a4c590, type: 2}
     - rid: 2286603194387136878
       type: {class: TowerUpgradeProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:

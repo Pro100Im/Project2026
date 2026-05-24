@@ -1,18 +1,18 @@
 using Code.Game.Common.Entity;
-using Code.Meta.Features.Game;
+using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
 
-namespace Code.Game.Features.Tower.Systems
+namespace Code.Game.Features.Unit.Systems
 {
-    public class TowerMenuSystem : ReactiveSystem<InputEntity>
+    public class UnitRangeViewSystem : ReactiveSystem<InputEntity>
     {
-        private readonly GameScreen _gameScreen;
+        private RangeViewService _rangeViewService;
 
-        public TowerMenuSystem(InputContext inputContext, GameScreen gameScreen)
+        public UnitRangeViewSystem(InputContext inputContext, RangeViewService rangeViewService)
             : base(inputContext)
         {
-            _gameScreen = gameScreen;
+            _rangeViewService = rangeViewService;
         }
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context) =>
@@ -23,7 +23,6 @@ namespace Code.Game.Features.Tower.Systems
 
         protected override bool Filter(InputEntity entity) => entity.isInput;
 
-        // To do improve
         protected override void Execute(List<InputEntity> entities)
         {
             for (var i = 0; i < entities.Count; i++)
@@ -34,25 +33,21 @@ namespace Code.Game.Features.Tower.Systems
                 {
                     var targetEntity = GetGameEntityById.Get(entity.targetId.Value);
 
-                    if (targetEntity.isTowerPlace)
+                    if (targetEntity.hasRange && targetEntity.hasTransform)
                     {
-                        _gameScreen.CloseTowerUpgradeMenu();
-                        _gameScreen.OpenTowerBuildMenu(entity.screenPointerInput.Value, targetEntity);
-                    }
-                    else if (targetEntity.isTower)
-                    {
-                        _gameScreen.CloseTowerBuildMenu();
+                        var pos = targetEntity.transform.Value.position;
 
-                        if(targetEntity.hasTowerUpgradePrice)
-                            _gameScreen.OpenTowerUpgradeMenu(entity.screenPointerInput.Value, targetEntity);
+                        if(targetEntity.hasUnitAnchorPoint)
+                            pos += targetEntity.unitAnchorPoint.Value;
+
+                        _rangeViewService.ShowRangeView(pos, targetEntity.range.Value);
                     }
 
                     entity.isDestructed = true;
                 }
                 else
                 {
-                    _gameScreen.CloseTowerBuildMenu();
-                    _gameScreen.CloseTowerUpgradeMenu();
+                    _rangeViewService.HideRangeView();
                 }
 
                 entity.isDestructed = true;

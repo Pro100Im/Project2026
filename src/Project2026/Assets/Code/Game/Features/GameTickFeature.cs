@@ -15,6 +15,7 @@ using Code.Game.Features.Player;
 using Code.Game.Features.Spawn;
 using Code.Game.Features.Target;
 using Code.Game.Features.Tower;
+using Code.Game.Features.Unit;
 using Code.Game.Features.Wave;
 using Code.Infrastructure.Systems;
 using Code.Infrastructure.View;
@@ -35,6 +36,8 @@ namespace Code.Game.Features
             Add(systemFactory.Create<DebuffFeature>());
 
             Add(systemFactory.Create<TowerFeature>());
+
+            Add(systemFactory.Create<UnitFeature>());
 
             Add(systemFactory.Create<LevelFeature>());
 

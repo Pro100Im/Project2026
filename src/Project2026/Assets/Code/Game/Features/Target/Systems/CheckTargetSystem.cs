@@ -31,7 +31,7 @@ namespace Code.Game.Features.Target.Systems
         {
             var mapEntity = _maps.GetSingleEntity();
 
-            if (mapEntity == null) 
+            if (mapEntity == null)
                 return;
 
             var spatialHash = mapEntity.spatialHash.Value;
@@ -40,9 +40,15 @@ namespace Code.Game.Features.Target.Systems
             for (var i = 0; i < attackers.Count; i++)
             {
                 var attacker = attackers[i];
-                var attackerWorldPos = attacker.transform.Value.position;
+                var basePos = attacker.transform.Value.position;
+                var attackOriginPos = basePos;
+
+                if (attacker.hasUnitAnchorPoint)
+                    attackOriginPos += attacker.unitAnchorPoint.Value;
+
                 var range = attacker.range.Value;
-                var sqrRange = range * range;
+                var physicalRange = range * 0.4f;
+                var sqrRange = physicalRange * physicalRange;
                 var myTeam = attacker.team.Value;
                 var attackerCell = attacker.currentCell.Value;
 
@@ -74,10 +80,9 @@ namespace Code.Game.Features.Target.Systems
                                 if (target != null && target.team.Value != myTeam && target.isTargetable && !target.isDead && target.hasBounds)
                                 {
                                     var targetBounds = target.bounds.Value.bounds;
-                                    var closestPoint = targetBounds.ClosestPoint(attackerWorldPos);
-
-                                    var dx = attackerWorldPos.x - closestPoint.x;
-                                    var dy = attackerWorldPos.y - closestPoint.y;
+                                    var closestPoint = targetBounds.ClosestPoint(attackOriginPos);
+                                    var dx = attackOriginPos.x - closestPoint.x;
+                                    var dy = attackOriginPos.y - closestPoint.y;
                                     var sDist = (dx * dx) + (dy * dy);
 
                                     if (sDist <= sqrRange && sDist < closestSqrDist)
@@ -94,7 +99,7 @@ namespace Code.Game.Features.Target.Systems
 
                 if (bestTargetId != -1)
                 {
-                    attacker.ReplaceAttackerPoint(attackerWorldPos);
+                    attacker.ReplaceAttackerPoint(attackOriginPos);
                     attacker.ReplaceTargetPoint(bestTargetPoint);
                     attacker.ReplaceTargetId(bestTargetId);
 

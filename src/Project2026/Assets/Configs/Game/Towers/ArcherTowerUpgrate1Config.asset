@@ -22,6 +22,7 @@ MonoBehaviour:
   - rid: 2286602853080629334
   - rid: 2286602853080629335
   - rid: 2286603206300008532
+  - rid: 2286603216724688993
   references:
     version: 2
     RefIds:
@@ -50,6 +51,11 @@ MonoBehaviour:
         - {fileID: 21300000, guid: 3497f8226f551ed428f26885c673bb7b, type: 3}
         <Upgrades>k__BackingField:
         - {fileID: 11400000, guid: 19c13ad7104e13e4ebc4d9c7d710b758, type: 2}
+    - rid: 2286603216724688993
+      type: {class: UnitAnchorPointProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <AnchorPoint>k__BackingField: {x: 0, y: -0.6, z: 0}
     - rid: 8171215588330831995
       type: {class: TowerPlaceProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:

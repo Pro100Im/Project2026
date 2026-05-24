@@ -38,6 +38,8 @@ using Code.Game.Features.Target.Services;
 using Code.Game.Features.Target.Systems;
 using Code.Game.Features.Tower;
 using Code.Game.Features.Tower.Systems;
+using Code.Game.Features.Unit;
+using Code.Game.Features.Unit.Systems;
 using Code.Game.Features.Wave;
 using Code.Game.Features.Wave.Systems;
 using Code.Game.Input.Service;
@@ -95,6 +97,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.RegisterComponentInHierarchy<ICameraService>().AsImplementedInterfaces().AsSelf();
             builder.RegisterComponentInHierarchy<TransitionScreen>();
             builder.RegisterComponentInHierarchy<GameScreen>();
+            builder.RegisterComponentInHierarchy<RangeViewService>();
         }
 
         private void BindStateMachine(IContainerBuilder builder)
@@ -118,6 +121,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<PlayerFeature>(Lifetime.Singleton);
 
             builder.Register<TowerFeature>(Lifetime.Singleton);
+            builder.Register<UnitFeature>(Lifetime.Singleton);
 
             builder.Register<CooldownFeature>(Lifetime.Singleton);
             builder.Register<DurationFeature>(Lifetime.Singleton);
@@ -166,6 +170,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<TowerBuildSystem>(Lifetime.Singleton);
             builder.Register<TowerUpgradeSystem>(Lifetime.Singleton);
+
+            builder.Register<UnitRangeViewSystem>(Lifetime.Singleton);
 
             builder.Register<EnemySelectSpawnPosSystem>(Lifetime.Singleton);
             builder.Register<EnemySpawnSystem>(Lifetime.Singleton);

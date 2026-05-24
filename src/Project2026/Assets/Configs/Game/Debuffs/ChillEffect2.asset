@@ -34,12 +34,12 @@ MonoBehaviour:
       type: {class: MoveSlowingDownProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <MoveSlowingDown>k__BackingField: 0.3
+        <MoveSlowingDown>k__BackingField: 0.5
     - rid: 2286603105874477135
       type: {class: ChillDurationProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Duration>k__BackingField: 2
+        <Duration>k__BackingField: 3
     - rid: 2286603115984584792
       type: {class: MovementOffsetProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
