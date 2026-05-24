@@ -45,9 +45,10 @@ MonoBehaviour:
       type: {class: TowerUpgradeProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Prices>k__BackingField: 0a000000
+        <Prices>k__BackingField: 0a0000000c000000
         <Upgrades>k__BackingField:
         - {fileID: 11400000, guid: 217d5f74bd069d74f8190a49755b580e, type: 2}
+        - {fileID: 11400000, guid: 626cbe556802baa4ea8e179d41bf649f, type: 2}
     - rid: 8171215588330831995
       type: {class: TowerPlaceProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
