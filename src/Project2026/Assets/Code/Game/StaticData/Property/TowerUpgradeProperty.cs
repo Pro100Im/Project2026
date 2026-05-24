@@ -8,6 +8,7 @@ namespace Code.Game.StaticData.Property
     public class TowerUpgradeProperty : EntityProperty
     {
         [field: SerializeField] public int[] Prices { get; private set; }
+        [field: SerializeField] public Sprite[] UpgradeIcons { get; private set; }
         [field: SerializeField] public EntityConfig[] Upgrades { get; private set; }
 
         protected override void Add(GameEntity entity)
@@ -17,6 +18,9 @@ namespace Code.Game.StaticData.Property
 
             if (!entity.hasTowerUpgrade)
                 entity.AddTowerUpgrade(Upgrades);
+
+            if (!entity.hasTowerUpgradeIcon)
+                entity.AddTowerUpgradeIcon(UpgradeIcons);
         }
 
         protected override void Remove(GameEntity entity)
@@ -26,6 +30,9 @@ namespace Code.Game.StaticData.Property
 
             if (entity.hasTowerUpgrade)
                 entity.RemoveTowerUpgrade();
+
+            if (entity.hasTowerUpgradeIcon) 
+                entity.RemoveTowerUpgradeIcon();
         }
 
         protected override void Replace(GameEntity entity)
@@ -35,6 +42,9 @@ namespace Code.Game.StaticData.Property
 
             if (entity.hasTowerUpgrade)
                 entity.ReplaceTowerUpgrade(Upgrades);
+
+            if (entity.hasTowerUpgradeIcon)
+                entity.ReplaceTowerUpgradeIcon(UpgradeIcons);
         }
     }
 }

@@ -46,6 +46,9 @@ MonoBehaviour:
       data:
         <Mode>k__BackingField: 0
         <Prices>k__BackingField: 0a0000000c000000
+        <UpgradeIcons>k__BackingField:
+        - {fileID: 21300000, guid: e5e7519958806a34c9d610bc638dccaa, type: 3}
+        - {fileID: 21300000, guid: 5b0a5f63d007dbd419c08ff4f18d45b7, type: 3}
         <Upgrades>k__BackingField:
         - {fileID: 11400000, guid: 217d5f74bd069d74f8190a49755b580e, type: 2}
         - {fileID: 11400000, guid: 626cbe556802baa4ea8e179d41bf649f, type: 2}

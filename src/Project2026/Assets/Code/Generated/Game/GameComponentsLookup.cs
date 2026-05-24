@@ -118,19 +118,20 @@ public static class GameComponentsLookup {
     public const int TowerBuildRequest = 107;
     public const int TowerPlace = 108;
     public const int TowerUpgrade = 109;
-    public const int TowerUpgradePrice = 110;
-    public const int TowerUpgradeRequest = 111;
-    public const int Unit = 112;
-    public const int UnitIcon = 113;
-    public const int UnitSize = 114;
-    public const int CurrentWaveEnemies = 115;
-    public const int CurrentWaveNumber = 116;
-    public const int WaveEnemiesAlive = 117;
-    public const int WaveInProgress = 118;
-    public const int WaveStartRequsted = 119;
-    public const int Projectile = 120;
+    public const int TowerUpgradeIcon = 110;
+    public const int TowerUpgradePrice = 111;
+    public const int TowerUpgradeRequest = 112;
+    public const int Unit = 113;
+    public const int UnitIcon = 114;
+    public const int UnitSize = 115;
+    public const int CurrentWaveEnemies = 116;
+    public const int CurrentWaveNumber = 117;
+    public const int WaveEnemiesAlive = 118;
+    public const int WaveInProgress = 119;
+    public const int WaveStartRequsted = 120;
+    public const int Projectile = 121;
 
-    public const int TotalComponents = 121;
+    public const int TotalComponents = 122;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -243,6 +244,7 @@ public static class GameComponentsLookup {
         "TowerBuildRequest",
         "TowerPlace",
         "TowerUpgrade",
+        "TowerUpgradeIcon",
         "TowerUpgradePrice",
         "TowerUpgradeRequest",
         "Unit",
@@ -367,6 +369,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Tower.TowerBuildRequest),
         typeof(Code.Game.Features.Tower.TowerPlace),
         typeof(Code.Game.Features.Tower.TowerUpgrade),
+        typeof(Code.Game.Features.Tower.TowerUpgradeIcon),
         typeof(Code.Game.Features.Tower.TowerUpgradePrice),
         typeof(Code.Game.Features.Tower.TowerUpgradeRequest),
         typeof(Code.Game.Features.Unit.Unit),

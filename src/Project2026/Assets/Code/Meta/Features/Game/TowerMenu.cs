@@ -30,6 +30,9 @@ namespace Code.Meta.Features.Game
         private Button _towerUpgrade1Button;
         private Button _towerUpgrade2Button;
 
+        private Image _towerUpgradeIcon1;
+        private Image _towerUpgradeIcon2;
+
         private GameEntity _currentTowerEntity;
 
         [Inject]
@@ -60,6 +63,9 @@ namespace Code.Meta.Features.Game
             _towerUpgrade1Button = _gameScreen.GetButton("TowerUpgrade1");
             _towerUpgrade2Button = _gameScreen.GetButton("TowerUpgrade2");
             _towerUpgradesCloseButton = _gameScreen.GetButton("TowerUpgradesCloseButton");
+
+            _towerUpgradeIcon1 = _gameScreen.GetImage("UpgradeIcon1");
+            _towerUpgradeIcon2 = _gameScreen.GetImage("UpgradeIcon2");
 
             _towerUpgrade1Button.clickable.clicked += UpgradeTower1;
             _towerUpgrade2Button.clickable.clicked += UpgradeTower2;
@@ -96,7 +102,7 @@ namespace Code.Meta.Features.Game
 
         private void CreateArcherTower()
         {
-            if(_currentTowerEntity != null)
+            if (_currentTowerEntity != null)
             {
                 _currentTowerEntity.isTowerBuildRequest = true;
                 _currentTowerEntity.AddEntityConfig(_archerTowerUpgrade);
@@ -131,16 +137,21 @@ namespace Code.Meta.Features.Game
         {
             _currentTowerEntity = entity;
 
-            if(entity.towerUpgrade.Value.Length > 1)
+            if (entity.towerUpgrade.Value.Length > 1)
             {
+                _towerUpgradeIcon1.sprite = entity.towerUpgradeIcon.Value[0];
                 _uIService.Show(_towerUpgrade1Button).AsAsyncUnitUniTask();
                 _towerUpgrade1Button.pickingMode = PickingMode.Position;
 
+                _towerUpgradeIcon2.sprite = entity.towerUpgradeIcon.Value[1];
                 _uIService.Show(_towerUpgrade2Button).AsAsyncUnitUniTask();
                 _towerUpgrade2Button.pickingMode = PickingMode.Position;
             }
             else
             {
+                _towerUpgrade2Button.pickingMode = PickingMode.Ignore;
+                _uIService.Hide(_towerUpgrade2Button).AsAsyncUnitUniTask();
+                _towerUpgradeIcon1.sprite = entity.towerUpgradeIcon.Value[0];
                 _uIService.Show(_towerUpgrade1Button).AsAsyncUnitUniTask();
                 _towerUpgrade1Button.pickingMode = PickingMode.Position;
             }

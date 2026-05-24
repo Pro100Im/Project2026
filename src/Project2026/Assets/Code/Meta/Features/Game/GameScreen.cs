@@ -36,6 +36,7 @@ namespace Code.Meta.Features.Game
         public VisualElement GetVisualElement(string name) => _root.Q<VisualElement>(name);
 
         public Button GetButton(string name) => _root.Q<Button>(name);
+        public Image GetImage(string name) => _root.Q<Image>(name);
 
         private void StartWave()
         {
