@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2652ec64a2cfac428b7546f4941961e, type: 3}
-  m_Name: FireTowerUpgrate2.1Config
+  m_Name: ArcherTowerUpgrate2Config
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.EntityConfig
   Properties:
   - rid: 2286603194387136869
@@ -32,26 +32,26 @@ MonoBehaviour:
       type: {class: SpriteProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 1
-        <_sprite>k__BackingField: {fileID: 21300000, guid: 5b0a5f63d007dbd419c08ff4f18d45b7, type: 3}
+        <_sprite>k__BackingField: {fileID: 21300000, guid: 3497f8226f551ed428f26885c673bb7b, type: 3}
     - rid: 2286603194387136871
       type: {class: AttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 1
-        <Range>k__BackingField: 7
-        <Cooldown>k__BackingField: 2
+        <Range>k__BackingField: 8
+        <Cooldown>k__BackingField: 1.5
         <Duration>k__BackingField: 0.6
         <IsMelee>k__BackingField: 0
     - rid: 2286603194387136873
       type: {class: FireAttackProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 1
-        <Damage>k__BackingField: 15
-        <HitEffect>k__BackingField: {fileID: 11400000, guid: b5258218e3d4b1545bc38e5eeb64fc75, type: 2}
+        <Damage>k__BackingField: 25
+        <HitEffect>k__BackingField: {fileID: 11400000, guid: 0801227ced598bd4fa883a790a2e14b0, type: 2}
     - rid: 2286603194387136874
       type: {class: ProjectileProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 1
-        <Projectile>k__BackingField: {fileID: 11400000, guid: 830d67a8dfe8ef544bd1550d375e180c, type: 2}
+        <Projectile>k__BackingField: {fileID: 11400000, guid: a7172fd29b9e9b24b827c18c6f5f3d5a, type: 2}
     - rid: 2286603194387136878
       type: {class: TowerUpgradeProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:

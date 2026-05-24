@@ -26,4 +26,4 @@ MonoBehaviour:
       type: {class: ViewPrefabProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Prefab>k__BackingField: {fileID: 5303738047394165789, guid: 9636dcd3608076643878e84d75f23040, type: 3}
+        <Prefab>k__BackingField: {fileID: 5303738047394165789, guid: 9ecafce2f1a8180458ab52f797eb3bf4, type: 3}

@@ -46,7 +46,7 @@ MonoBehaviour:
       data:
         <Mode>k__BackingField: 1
         <Damage>k__BackingField: 20
-        <HitEffect>k__BackingField: {fileID: 11400000, guid: 3c295d148209973419938951cd307d8a, type: 2}
+        <HitEffect>k__BackingField: {fileID: 11400000, guid: b0a8bfcf69e8e7247a0d71e831057189, type: 2}
     - rid: 2286603194387136874
       type: {class: ProjectileProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:

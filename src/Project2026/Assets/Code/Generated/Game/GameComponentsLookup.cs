@@ -121,15 +121,16 @@ public static class GameComponentsLookup {
     public const int TowerUpgradePrice = 110;
     public const int TowerUpgradeRequest = 111;
     public const int Unit = 112;
-    public const int UnitSize = 113;
-    public const int CurrentWaveEnemies = 114;
-    public const int CurrentWaveNumber = 115;
-    public const int WaveEnemiesAlive = 116;
-    public const int WaveInProgress = 117;
-    public const int WaveStartRequsted = 118;
-    public const int Projectile = 119;
+    public const int UnitIcon = 113;
+    public const int UnitSize = 114;
+    public const int CurrentWaveEnemies = 115;
+    public const int CurrentWaveNumber = 116;
+    public const int WaveEnemiesAlive = 117;
+    public const int WaveInProgress = 118;
+    public const int WaveStartRequsted = 119;
+    public const int Projectile = 120;
 
-    public const int TotalComponents = 120;
+    public const int TotalComponents = 121;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -245,6 +246,7 @@ public static class GameComponentsLookup {
         "TowerUpgradePrice",
         "TowerUpgradeRequest",
         "Unit",
+        "UnitIcon",
         "UnitSize",
         "CurrentWaveEnemies",
         "CurrentWaveNumber",
@@ -368,6 +370,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Tower.TowerUpgradePrice),
         typeof(Code.Game.Features.Tower.TowerUpgradeRequest),
         typeof(Code.Game.Features.Unit.Unit),
+        typeof(Code.Game.Features.Unit.UnitIcon),
         typeof(Code.Game.Features.Unit.UnitSize),
         typeof(Code.Game.Features.Wave.CurrentWaveEnemies),
         typeof(Code.Game.Features.Wave.CurrentWaveNumber),

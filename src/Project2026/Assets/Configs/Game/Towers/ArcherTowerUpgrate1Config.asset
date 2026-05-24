@@ -21,6 +21,7 @@ MonoBehaviour:
   - rid: 2286602737992335451
   - rid: 2286602853080629334
   - rid: 2286602853080629335
+  - rid: 2286603206300008532
   references:
     version: 2
     RefIds:
@@ -40,6 +41,13 @@ MonoBehaviour:
         <Mode>k__BackingField: 0
         <PhysicalDamage>k__BackingField: 20
         <PhysicalHitEffect>k__BackingField: {fileID: 11400000, guid: 0801227ced598bd4fa883a790a2e14b0, type: 2}
+    - rid: 2286603206300008532
+      type: {class: TowerUpgradeProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Prices>k__BackingField: 0a000000
+        <Upgrades>k__BackingField:
+        - {fileID: 11400000, guid: 19c13ad7104e13e4ebc4d9c7d710b758, type: 2}
     - rid: 8171215588330831995
       type: {class: TowerPlaceProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:

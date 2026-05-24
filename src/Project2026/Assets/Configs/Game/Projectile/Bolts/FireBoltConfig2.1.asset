@@ -17,7 +17,6 @@ MonoBehaviour:
   - rid: 2286602853080629325
   - rid: 2286602853080629326
   - rid: 2286602893353287759
-  - rid: 2286603150203027567
   - rid: 2286603206300008448
   references:
     version: 2
@@ -74,11 +73,6 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-    - rid: 2286603150203027567
-      type: {class: CombustionEffectProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
-      data:
-        <Mode>k__BackingField: 0
-        <Config>k__BackingField: {fileID: 11400000, guid: 627b622d3659ba348bb523693cfef421, type: 2}
     - rid: 2286603206300008448
       type: {class: AreaAttackProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
