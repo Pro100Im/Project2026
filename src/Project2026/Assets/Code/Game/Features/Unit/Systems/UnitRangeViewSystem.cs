@@ -23,6 +23,7 @@ namespace Code.Game.Features.Unit.Systems
 
         protected override bool Filter(InputEntity entity) => entity.isInput;
 
+        // TO DO
         protected override void Execute(List<InputEntity> entities)
         {
             for (var i = 0; i < entities.Count; i++)
@@ -35,12 +36,22 @@ namespace Code.Game.Features.Unit.Systems
 
                     if (targetEntity.hasRange && targetEntity.hasTransform)
                     {
-                        var pos = targetEntity.transform.Value.position;
+                        if (targetEntity.isTargetSelected)
+                        {
+                            targetEntity.isTargetSelected = false;
+                            _rangeViewService.HideRangeView();
+                        }
+                        else
+                        {
+                            var pos = targetEntity.transform.Value.position;
 
-                        if(targetEntity.hasUnitAnchorPoint)
-                            pos += targetEntity.unitAnchorPoint.Value;
+                            if (targetEntity.hasUnitAnchorPoint)
+                                pos += targetEntity.unitAnchorPoint.Value;
 
-                        _rangeViewService.ShowRangeView(pos, targetEntity.range.Value);
+                            targetEntity.isTargetSelected = true;
+
+                            _rangeViewService.ShowRangeView(pos, targetEntity.range.Value);
+                        }  
                     }
 
                     entity.isDestructed = true;

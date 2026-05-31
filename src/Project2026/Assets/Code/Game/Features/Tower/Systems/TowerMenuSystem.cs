@@ -1,18 +1,18 @@
 using Code.Game.Common.Entity;
-using Code.Meta.Features.Game;
 using Entitas;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Code.Game.Features.Tower.Systems
 {
     public class TowerMenuSystem : ReactiveSystem<InputEntity>
     {
-        private readonly GameScreen _gameScreen;
+        private readonly IGroup<MetaEntity> _towerMenu;
 
-        public TowerMenuSystem(InputContext inputContext, GameScreen gameScreen)
+        public TowerMenuSystem(InputContext inputContext, MetaContext metaContext)
             : base(inputContext)
         {
-            _gameScreen = gameScreen;
+            _towerMenu = metaContext.GetGroup(MetaMatcher.TowerMenu);
         }
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context) =>
@@ -26,33 +26,79 @@ namespace Code.Game.Features.Tower.Systems
         // To do improve
         protected override void Execute(List<InputEntity> entities)
         {
+            var menuEntity = _towerMenu.GetSingleEntity();
+
+            if (menuEntity == null)
+            {
+                Debug.LogWarning("_towerMenu == null");
+
+                return;
+            }
+
+
             for (var i = 0; i < entities.Count; i++)
             {
                 var entity = entities[i];
 
                 if (entity.hasTargetId)
                 {
+                    Debug.LogWarning("entity.hasTargetId");
+
                     var targetEntity = GetGameEntityById.Get(entity.targetId.Value);
 
                     if (targetEntity.isTowerPlace)
                     {
-                        _gameScreen.CloseTowerUpgradeMenu();
-                        _gameScreen.OpenTowerBuildMenu(entity.screenPointerInput.Value, targetEntity);
+                        if (menuEntity.isTowerOpenUpgradeMenu)
+                            menuEntity.towerMenu.Value.CloseTowerUpgrades();
+
+                        if (menuEntity.isTowerOpenBuildMenu && menuEntity.targetId.Value == targetEntity.id.Value)
+                        {
+                            menuEntity.isTowerOpenBuildMenu = false;
+                            menuEntity.towerMenu.Value.CloseTowerBuilds();
+                        }
+                        else
+                        {
+                            menuEntity.ReplaceTargetId(targetEntity.id.Value);
+                            menuEntity.isTowerOpenBuildMenu = true;
+                            menuEntity.towerMenu.Value.OpenTowerBuildMenu(entity.screenPointerInput.Value, targetEntity);
+                        }
                     }
                     else if (targetEntity.isTower)
                     {
-                        _gameScreen.CloseTowerBuildMenu();
+                        if (menuEntity.isTowerOpenBuildMenu)
+                            menuEntity.towerMenu.Value.CloseTowerBuilds();
 
-                        if(targetEntity.hasTowerUpgradePrice)
-                            _gameScreen.OpenTowerUpgradeMenu(entity.screenPointerInput.Value, targetEntity);
+                        if (menuEntity.isTowerOpenUpgradeMenu && menuEntity.targetId.Value == targetEntity.id.Value)
+                        {
+                            menuEntity.isTowerOpenUpgradeMenu = false;
+                            menuEntity.towerMenu.Value.CloseTowerUpgrades();
+                        }
+                        else
+                        {
+                            menuEntity.ReplaceTargetId(targetEntity.id.Value);
+                            menuEntity.isTowerOpenUpgradeMenu = true;
+                            menuEntity.towerMenu.Value.OpenTowerUpgradeMenu(entity.screenPointerInput.Value, targetEntity);
+                        }
                     }
 
                     entity.isDestructed = true;
                 }
                 else
                 {
-                    _gameScreen.CloseTowerBuildMenu();
-                    _gameScreen.CloseTowerUpgradeMenu();
+                    if (menuEntity.isTowerOpenBuildMenu)
+                    {
+                        menuEntity.towerMenu.Value.CloseTowerBuilds();
+                        menuEntity.isTowerOpenBuildMenu = false;
+                    }
+
+                    if (menuEntity.isTowerOpenUpgradeMenu) 
+                    { 
+                        menuEntity.towerMenu.Value.CloseTowerUpgrades();
+                        menuEntity.isTowerOpenUpgradeMenu= false;
+                    }
+
+                    if (menuEntity.hasTargetId)
+                        menuEntity.RemoveTargetId();
                 }
 
                 entity.isDestructed = true;

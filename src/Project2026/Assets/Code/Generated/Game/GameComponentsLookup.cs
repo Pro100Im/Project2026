@@ -114,25 +114,26 @@ public static class GameComponentsLookup {
     public const int TargetFlow = 103;
     public const int TargetId = 104;
     public const int TargetPoint = 105;
-    public const int Tower = 106;
-    public const int TowerBuildRequest = 107;
-    public const int TowerPlace = 108;
-    public const int TowerUpgrade = 109;
-    public const int TowerUpgradeIcon = 110;
-    public const int TowerUpgradePrice = 111;
-    public const int TowerUpgradeRequest = 112;
-    public const int Unit = 113;
-    public const int UnitAnchorPoint = 114;
-    public const int UnitIcon = 115;
-    public const int UnitSize = 116;
-    public const int CurrentWaveEnemies = 117;
-    public const int CurrentWaveNumber = 118;
-    public const int WaveEnemiesAlive = 119;
-    public const int WaveInProgress = 120;
-    public const int WaveStartRequsted = 121;
-    public const int Projectile = 122;
+    public const int TargetSelected = 106;
+    public const int Tower = 107;
+    public const int TowerBuildRequest = 108;
+    public const int TowerPlace = 109;
+    public const int TowerUpgrade = 110;
+    public const int TowerUpgradeIcon = 111;
+    public const int TowerUpgradePrice = 112;
+    public const int TowerUpgradeRequest = 113;
+    public const int Unit = 114;
+    public const int UnitAnchorPoint = 115;
+    public const int UnitIcon = 116;
+    public const int UnitSize = 117;
+    public const int CurrentWaveEnemies = 118;
+    public const int CurrentWaveNumber = 119;
+    public const int WaveEnemiesAlive = 120;
+    public const int WaveInProgress = 121;
+    public const int WaveStartRequsted = 122;
+    public const int Projectile = 123;
 
-    public const int TotalComponents = 123;
+    public const int TotalComponents = 124;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -241,6 +242,7 @@ public static class GameComponentsLookup {
         "TargetFlow",
         "TargetId",
         "TargetPoint",
+        "TargetSelected",
         "Tower",
         "TowerBuildRequest",
         "TowerPlace",
@@ -367,6 +369,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Target.TargetFlow),
         typeof(Code.Game.Features.Target.TargetId),
         typeof(Code.Game.Features.Target.TargetPoint),
+        typeof(Code.Game.Features.Target.TargetSelected),
         typeof(Code.Game.Features.Tower.Tower),
         typeof(Code.Game.Features.Tower.TowerBuildRequest),
         typeof(Code.Game.Features.Tower.TowerPlace),

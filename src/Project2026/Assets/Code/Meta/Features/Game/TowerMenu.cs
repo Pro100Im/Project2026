@@ -1,3 +1,4 @@
+using Code.Game.Common.Entity;
 using Code.Game.Common.UI;
 using Code.Game.Features.Target.Services;
 using Code.Game.StaticData.Configs;
@@ -73,6 +74,9 @@ namespace Code.Meta.Features.Game
             _towerUpgrade1Button.clickable.clicked += UpgradeTower1;
             _towerUpgrade2Button.clickable.clicked += UpgradeTower2;
             _towerUpgradesCloseButton.clickable.clicked += CloseTowerUpgrades;
+
+            var entity = CreateMetaEntity.Empty();
+            entity.AddTowerMenu(this);
         }
 
         public void OpenTowerBuildMenu(Vector2 screenPos, GameEntity entity)
