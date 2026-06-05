@@ -59,7 +59,7 @@ namespace Code.Meta.Features.Game
             _archerTowerButton.clickable.clicked += CreateArcherTower;
             _iceTowerButton.clickable.clicked += CreateIceTower;
             _fireTowerButton.clickable.clicked += CreateFireTower;
-            _towerBuildsCloseButton.clickable.clicked += CloseTowerBuilds;
+            _towerBuildsCloseButton.clickable.clicked += CloseRequest;
 
             _towerUpgradeMenu = _gameScreen.GetVisualElement("TowerUpgradeMenu");
             _towerUpgradesContainer = _gameScreen.GetVisualElement("TowerUpgradesContainer");
@@ -73,7 +73,7 @@ namespace Code.Meta.Features.Game
 
             _towerUpgrade1Button.clickable.clicked += UpgradeTower1;
             _towerUpgrade2Button.clickable.clicked += UpgradeTower2;
-            _towerUpgradesCloseButton.clickable.clicked += CloseTowerUpgrades;
+            _towerUpgradesCloseButton.clickable.clicked += CloseRequest;
 
             var entity = CreateMetaEntity.Empty();
             entity.AddTowerMenu(this);
@@ -92,6 +92,16 @@ namespace Code.Meta.Features.Game
             _iceTowerButton.pickingMode = PickingMode.Position;
             _fireTowerButton.pickingMode = PickingMode.Position;
             _towerBuildsCloseButton.pickingMode = PickingMode.Position;
+        }
+
+        private void CloseRequest()
+        {
+            if(_currentTowerEntity != null)
+            {
+                var entityClick = CreateInputEntity.Empty();
+                entityClick.AddTargetId(_currentTowerEntity.id.Value);
+                entityClick.isInput = true;
+            }
         }
 
         public void CloseTowerBuilds()
@@ -117,7 +127,8 @@ namespace Code.Meta.Features.Game
             }
 
             _rangeViewService.HideRangeView();
-            CloseTowerBuilds();
+
+            CloseRequest();
         }
 
         private void CreateIceTower()
@@ -129,7 +140,8 @@ namespace Code.Meta.Features.Game
             }
 
             _rangeViewService.HideRangeView();
-            CloseTowerBuilds();
+
+            CloseRequest();
         }
 
         private void CreateFireTower()
@@ -141,7 +153,8 @@ namespace Code.Meta.Features.Game
             }
 
             _rangeViewService.HideRangeView();
-            CloseTowerBuilds();
+
+            CloseRequest();
         }
 
         public void OpenTowerUpgradeMenu(Vector2 screenPos, GameEntity entity)
@@ -199,7 +212,8 @@ namespace Code.Meta.Features.Game
                 _currentTowerEntity.AddTowerUpgradeRequest(1);
 
             _rangeViewService.HideRangeView();
-            CloseTowerUpgrades();
+
+            CloseRequest();
         }
 
         private void UpgradeTower1()
@@ -208,7 +222,8 @@ namespace Code.Meta.Features.Game
                 _currentTowerEntity.AddTowerUpgradeRequest(0);
 
             _rangeViewService.HideRangeView();
-            CloseTowerUpgrades();
+
+            CloseRequest();
         }
 
         private void OnDestroy()
@@ -216,11 +231,11 @@ namespace Code.Meta.Features.Game
             _archerTowerButton.clickable.clicked -= CreateArcherTower;
             _iceTowerButton.clickable.clicked -= CreateIceTower;
             _fireTowerButton.clickable.clicked -= CreateFireTower;
-            _towerBuildsCloseButton.clickable.clicked -= CloseTowerBuilds;
+            _towerBuildsCloseButton.clickable.clicked -= CloseRequest;
 
             _towerUpgrade1Button.clickable.clicked -= UpgradeTower1;
             _towerUpgrade2Button.clickable.clicked -= UpgradeTower2;
-            _towerUpgradesCloseButton.clickable.clicked -= CloseTowerUpgrades;
+            _towerUpgradesCloseButton.clickable.clicked -= CloseRequest;
         }
     }
 }

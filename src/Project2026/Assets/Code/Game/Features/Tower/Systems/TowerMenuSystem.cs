@@ -35,7 +35,6 @@ namespace Code.Game.Features.Tower.Systems
                 return;
             }
 
-
             for (var i = 0; i < entities.Count; i++)
             {
                 var entity = entities[i];
@@ -73,11 +72,19 @@ namespace Code.Game.Features.Tower.Systems
                             menuEntity.isTowerOpenUpgradeMenu = false;
                             menuEntity.towerMenu.Value.CloseTowerUpgrades();
                         }
-                        else
+                        else if (targetEntity.hasTowerUpgrade)
                         {
                             menuEntity.ReplaceTargetId(targetEntity.id.Value);
                             menuEntity.isTowerOpenUpgradeMenu = true;
                             menuEntity.towerMenu.Value.OpenTowerUpgradeMenu(entity.screenPointerInput.Value, targetEntity);
+                        }
+                        else if (menuEntity.isTowerOpenUpgradeMenu)
+                        {
+                            menuEntity.towerMenu.Value.CloseTowerUpgrades();
+                            menuEntity.isTowerOpenUpgradeMenu = false;
+
+                            if (menuEntity.hasTargetId)
+                                menuEntity.RemoveTargetId();
                         }
                     }
 
@@ -91,10 +98,10 @@ namespace Code.Game.Features.Tower.Systems
                         menuEntity.isTowerOpenBuildMenu = false;
                     }
 
-                    if (menuEntity.isTowerOpenUpgradeMenu) 
-                    { 
+                    if (menuEntity.isTowerOpenUpgradeMenu)
+                    {
                         menuEntity.towerMenu.Value.CloseTowerUpgrades();
-                        menuEntity.isTowerOpenUpgradeMenu= false;
+                        menuEntity.isTowerOpenUpgradeMenu = false;
                     }
 
                     if (menuEntity.hasTargetId)
