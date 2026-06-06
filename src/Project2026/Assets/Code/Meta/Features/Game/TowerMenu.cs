@@ -74,9 +74,6 @@ namespace Code.Meta.Features.Game
             _towerUpgrade1Button.clickable.clicked += UpgradeTower1;
             _towerUpgrade2Button.clickable.clicked += UpgradeTower2;
             _towerUpgradesCloseButton.clickable.clicked += CloseRequest;
-
-            var entity = CreateMetaEntity.Empty();
-            entity.AddTowerMenu(this);
         }
 
         public void OpenTowerBuildMenu(Vector2 screenPos, GameEntity entity)

@@ -1,7 +1,6 @@
 using Code.Game.Common.Entity;
 using Entitas;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Code.Game.Features.Tower.Systems
 {
@@ -23,17 +22,12 @@ namespace Code.Game.Features.Tower.Systems
 
         protected override bool Filter(InputEntity entity) => entity.isInput;
 
-        // To do improve
         protected override void Execute(List<InputEntity> entities)
         {
             var menuEntity = _towerMenu.GetSingleEntity();
 
             if (menuEntity == null)
-            {
-                Debug.LogWarning("_towerMenu == null");
-
                 return;
-            }
 
             for (var i = 0; i < entities.Count; i++)
             {
@@ -41,8 +35,6 @@ namespace Code.Game.Features.Tower.Systems
 
                 if (entity.hasTargetId)
                 {
-                    Debug.LogWarning("entity.hasTargetId");
-
                     var targetEntity = GetGameEntityById.Get(entity.targetId.Value);
 
                     if (targetEntity.isTowerPlace)
