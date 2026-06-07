@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8692962745719394331}
   - component: {fileID: 4248104263003592455}
-  - component: {fileID: 4160570481173483563}
+  - component: {fileID: 8651415872943132341}
   m_Layer: 0
   m_Name: RangeViewService
   m_TagString: Untagged
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &4160570481173483563
+--- !u!114 &8651415872943132341
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,8 +101,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2157196515250577825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1df47ffc36bc24740ad38c3f812e0507, type: 3}
+  m_Script: {fileID: 11500000, guid: e748292ca069d164099e0756f8e7bc2a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Target.Services.RangeViewService
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Target.Services.UnitRangeView
   _rangeView: {fileID: 4248104263003592455}
   _cellSize: 0.4
+  _opacity: 0.6

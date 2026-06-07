@@ -35,9 +35,9 @@ namespace Code.Game.Features
 
             Add(systemFactory.Create<DebuffFeature>());
 
-            Add(systemFactory.Create<TowerFeature>());
-
             Add(systemFactory.Create<UnitFeature>());
+
+            Add(systemFactory.Create<TowerFeature>());
 
             Add(systemFactory.Create<LevelFeature>());
 

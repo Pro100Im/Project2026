@@ -1,3 +1,4 @@
+using Code.Game.Features.Target.Services;
 using Entitas;
 using UnityEngine;
 
@@ -10,4 +11,5 @@ namespace Code.Game.Features.Unit
 
     [Meta] public class UnitRangeShowed : IComponent { }
     [Meta] public class UnitSelectedView : IComponent { }
+    [Meta] public class UnitRangeViewComponent : IComponent { public UnitRangeView Value; }
 }

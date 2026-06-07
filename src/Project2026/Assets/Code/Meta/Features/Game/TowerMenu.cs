@@ -1,6 +1,5 @@
 using Code.Game.Common.Entity;
 using Code.Game.Common.UI;
-using Code.Game.Features.Target.Services;
 using Code.Game.StaticData.Configs;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -16,7 +15,6 @@ namespace Code.Meta.Features.Game
 
         private GameScreen _gameScreen;
         private UIService _uIService;
-        private RangeViewService _rangeViewService;
 
         private VisualElement _towerBuildMenu;
         private VisualElement _towerBuildsContainer;
@@ -39,11 +37,10 @@ namespace Code.Meta.Features.Game
         private GameEntity _currentTowerEntity;
 
         [Inject]
-        public void Construct(UIService uIService, GameScreen gameScreen, RangeViewService rangeViewService)
+        public void Construct(UIService uIService, GameScreen gameScreen)
         {
             _gameScreen = gameScreen;
             _uIService = uIService;
-            _rangeViewService = rangeViewService;
         }
 
         private void Start()
@@ -111,7 +108,6 @@ namespace Code.Meta.Features.Game
             _fireTowerButton.pickingMode = PickingMode.Ignore;
             _towerBuildsCloseButton.pickingMode = PickingMode.Ignore;
 
-            _rangeViewService.HideRangeView();
             _uIService.Hide(_towerBuildMenu).AsAsyncUnitUniTask();
         }
 
@@ -122,8 +118,6 @@ namespace Code.Meta.Features.Game
                 _currentTowerEntity.isTowerBuildRequest = true;
                 _currentTowerEntity.AddEntityConfig(_archerTowerUpgrade);
             }
-
-            _rangeViewService.HideRangeView();
 
             CloseRequest();
         }
@@ -136,8 +130,6 @@ namespace Code.Meta.Features.Game
                 _currentTowerEntity.AddEntityConfig(_iceTowerUpgrade);
             }
 
-            _rangeViewService.HideRangeView();
-
             CloseRequest();
         }
 
@@ -148,8 +140,6 @@ namespace Code.Meta.Features.Game
                 _currentTowerEntity.isTowerBuildRequest = true;
                 _currentTowerEntity.AddEntityConfig(_fireTowerUpgrade);
             }
-
-            _rangeViewService.HideRangeView();
 
             CloseRequest();
         }
@@ -196,8 +186,6 @@ namespace Code.Meta.Features.Game
             _towerUpgrade2Button.pickingMode = PickingMode.Ignore;
             _towerUpgradesCloseButton.pickingMode = PickingMode.Ignore;
 
-            _rangeViewService.HideRangeView();
-
             _uIService.Hide(_towerUpgradeMenu).AsAsyncUnitUniTask();
             _uIService.Hide(_towerUpgrade1Button).AsAsyncUnitUniTask();
             _uIService.Hide(_towerUpgrade2Button).AsAsyncUnitUniTask();
@@ -208,8 +196,6 @@ namespace Code.Meta.Features.Game
             if (_currentTowerEntity != null)
                 _currentTowerEntity.AddTowerUpgradeRequest(1);
 
-            _rangeViewService.HideRangeView();
-
             CloseRequest();
         }
 
@@ -217,8 +203,6 @@ namespace Code.Meta.Features.Game
         {
             if (_currentTowerEntity != null)
                 _currentTowerEntity.AddTowerUpgradeRequest(0);
-
-            _rangeViewService.HideRangeView();
 
             CloseRequest();
         }

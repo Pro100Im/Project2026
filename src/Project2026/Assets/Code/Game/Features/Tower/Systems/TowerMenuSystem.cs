@@ -74,13 +74,8 @@ namespace Code.Game.Features.Tower.Systems
                         {
                             menuEntity.towerMenu.Value.CloseTowerUpgrades();
                             menuEntity.isTowerOpenUpgradeMenu = false;
-
-                            if (menuEntity.hasTargetId)
-                                menuEntity.RemoveTargetId();
                         }
                     }
-
-                    entity.isDestructed = true;
                 }
                 else
                 {
@@ -95,9 +90,6 @@ namespace Code.Game.Features.Tower.Systems
                         menuEntity.towerMenu.Value.CloseTowerUpgrades();
                         menuEntity.isTowerOpenUpgradeMenu = false;
                     }
-
-                    if (menuEntity.hasTargetId)
-                        menuEntity.RemoveTargetId();
                 }
 
                 entity.isDestructed = true;

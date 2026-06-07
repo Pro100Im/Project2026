@@ -7,7 +7,7 @@ namespace Code.Game.Features.Unit
     {
         public UnitFeature(ISystemFactory systemFactory)
         {
-            //Add(systemFactory.Create<UnitRangeViewSystem>());
+            Add(systemFactory.Create<UnitRangeViewSystem>());
         }
     }
 }

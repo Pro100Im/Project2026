@@ -7,6 +7,7 @@ namespace Code.Game.Features.Tower
     {
         public TowerFeature(ISystemFactory systemFactory)
         {
+            Add(systemFactory.Create<TowerMenuSystem>());
             Add(systemFactory.Create<TowerBuildSystem>());
             Add(systemFactory.Create<TowerUpgradeSystem>());
         }

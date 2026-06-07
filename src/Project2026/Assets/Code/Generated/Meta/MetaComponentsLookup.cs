@@ -15,9 +15,10 @@ public static class MetaComponentsLookup {
     public const int TowerOpenBuildMenu = 4;
     public const int TowerOpenUpgradeMenu = 5;
     public const int UnitRangeShowed = 6;
-    public const int UnitSelectedView = 7;
+    public const int UnitRangeView = 7;
+    public const int UnitSelectedView = 8;
 
-    public const int TotalComponents = 8;
+    public const int TotalComponents = 9;
 
     public static readonly string[] componentNames = {
         "DelayDestruct",
@@ -27,6 +28,7 @@ public static class MetaComponentsLookup {
         "TowerOpenBuildMenu",
         "TowerOpenUpgradeMenu",
         "UnitRangeShowed",
+        "UnitRangeView",
         "UnitSelectedView"
     };
 
@@ -38,6 +40,7 @@ public static class MetaComponentsLookup {
         typeof(Code.Game.Features.Tower.TowerOpenBuildMenu),
         typeof(Code.Game.Features.Tower.TowerOpenUpgradeMenu),
         typeof(Code.Game.Features.Unit.UnitRangeShowed),
+        typeof(Code.Game.Features.Unit.UnitRangeViewComponent),
         typeof(Code.Game.Features.Unit.UnitSelectedView)
     };
 }

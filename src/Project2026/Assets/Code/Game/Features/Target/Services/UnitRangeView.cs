@@ -1,9 +1,10 @@
+using Code.Game.Common.Entity;
 using DG.Tweening;
 using UnityEngine;
 
 namespace Code.Game.Features.Target.Services
 {
-    public class RangeViewService : MonoBehaviour
+    public class UnitRangeView : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _rangeView;
         [SerializeField] private float _cellSize = 0.4f;
@@ -11,6 +12,12 @@ namespace Code.Game.Features.Target.Services
 
         private Tween _fadeTween;
         private Tween _scaleTween;
+
+        private void Awake()
+        {
+            var entity = CreateMetaEntity.Empty();
+            entity.AddUnitRangeView(this);
+        }
 
         public void ShowRangeView(Vector3 position, float range)
         {
@@ -36,10 +43,7 @@ namespace Code.Game.Features.Target.Services
             _scaleTween?.Kill();
 
             _scaleTween = _rangeView.transform.DOScale(Vector3.zero, 0.2f).SetEase(Ease.InQuad);
-            _fadeTween = _rangeView.DOFade(0f, 0.2f).OnComplete(() =>
-            {
-                _rangeView.gameObject.SetActive(false);
-            });
+            _fadeTween = _rangeView.DOFade(0f, 0.2f);
         }
     }
 }

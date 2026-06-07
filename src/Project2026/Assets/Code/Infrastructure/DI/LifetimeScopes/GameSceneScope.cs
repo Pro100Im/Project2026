@@ -97,7 +97,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.RegisterComponentInHierarchy<ICameraService>().AsImplementedInterfaces().AsSelf();
             builder.RegisterComponentInHierarchy<TransitionScreen>();
             builder.RegisterComponentInHierarchy<GameScreen>();
-            builder.RegisterComponentInHierarchy<RangeViewService>();
+            builder.RegisterComponentInHierarchy<Game.Features.Target.Services.UnitRangeView>();
         }
 
         private void BindStateMachine(IContainerBuilder builder)

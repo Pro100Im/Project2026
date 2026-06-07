@@ -1,5 +1,4 @@
 using Code.Game.Common.Entity;
-using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
 
@@ -7,12 +6,12 @@ namespace Code.Game.Features.Unit.Systems
 {
     public class UnitRangeViewSystem : ReactiveSystem<InputEntity>
     {
-        private RangeViewService _rangeViewService;
+        private readonly IGroup<MetaEntity> _rangeView;
 
-        public UnitRangeViewSystem(InputContext inputContext, RangeViewService rangeViewService)
+        public UnitRangeViewSystem(InputContext inputContext, MetaContext metaContext)
             : base(inputContext)
         {
-            _rangeViewService = rangeViewService;
+            _rangeView = metaContext.GetGroup(MetaMatcher.UnitRangeView);
         }
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context) =>
@@ -23,9 +22,13 @@ namespace Code.Game.Features.Unit.Systems
 
         protected override bool Filter(InputEntity entity) => entity.isInput;
 
-        // TO DO
         protected override void Execute(List<InputEntity> entities)
         {
+            var rangeView = _rangeView.GetSingleEntity();
+
+            if (rangeView == null)
+                return;
+
             for (var i = 0; i < entities.Count; i++)
             {
                 var entity = entities[i];
@@ -34,31 +37,27 @@ namespace Code.Game.Features.Unit.Systems
                 {
                     var targetEntity = GetGameEntityById.Get(entity.targetId.Value);
 
-                    if (targetEntity.hasRange && targetEntity.hasTransform)
+                    if (rangeView.isUnitRangeShowed && (rangeView.hasTargetId && rangeView.targetId.Value == targetEntity.id.Value || !targetEntity.hasRange))
                     {
-                        if (targetEntity.isTargetSelected)
-                        {
-                            targetEntity.isTargetSelected = false;
-                            _rangeViewService.HideRangeView();
-                        }
-                        else
-                        {
-                            var pos = targetEntity.transform.Value.position;
-
-                            if (targetEntity.hasUnitAnchorPoint)
-                                pos += targetEntity.unitAnchorPoint.Value;
-
-                            targetEntity.isTargetSelected = true;
-
-                            _rangeViewService.ShowRangeView(pos, targetEntity.range.Value);
-                        }  
+                        rangeView.unitRangeView.Value.HideRangeView();
+                        rangeView.isUnitRangeShowed = false;
                     }
+                    else if (targetEntity.hasRange && targetEntity.hasTransform)
+                    {
+                        var pos = targetEntity.transform.Value.position;
 
-                    entity.isDestructed = true;
+                        if (targetEntity.hasUnitAnchorPoint)
+                            pos += targetEntity.unitAnchorPoint.Value;
+
+                        rangeView.unitRangeView.Value.ShowRangeView(pos, targetEntity.range.Value);
+                        rangeView.ReplaceTargetId(targetEntity.id.Value);
+                        rangeView.isUnitRangeShowed = true;
+                    }
                 }
-                else
+                else if(rangeView.isUnitRangeShowed)
                 {
-                    _rangeViewService.HideRangeView();
+                    rangeView.unitRangeView.Value.HideRangeView();
+                    rangeView.isUnitRangeShowed = false;
                 }
 
                 entity.isDestructed = true;
