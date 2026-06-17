@@ -96,6 +96,8 @@ namespace Code.Meta.Features.Game
                 entityClick.AddTargetId(_currentTowerEntity.id.Value);
                 entityClick.isInput = true;
             }
+
+            _currentTowerEntity = null;
         }
 
         public void CloseTowerBuilds()

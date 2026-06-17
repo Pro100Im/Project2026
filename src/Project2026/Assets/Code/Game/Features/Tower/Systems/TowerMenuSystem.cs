@@ -40,7 +40,10 @@ namespace Code.Game.Features.Tower.Systems
                     if (targetEntity.isTowerPlace)
                     {
                         if (menuEntity.isTowerOpenUpgradeMenu)
+                        {
+                            menuEntity.isTowerOpenUpgradeMenu = false;
                             menuEntity.towerMenu.Value.CloseTowerUpgrades();
+                        }
 
                         if (menuEntity.isTowerOpenBuildMenu && menuEntity.targetId.Value == targetEntity.id.Value)
                         {
@@ -57,7 +60,10 @@ namespace Code.Game.Features.Tower.Systems
                     else if (targetEntity.isTower)
                     {
                         if (menuEntity.isTowerOpenBuildMenu)
+                        {
+                            menuEntity.isTowerOpenBuildMenu = false;
                             menuEntity.towerMenu.Value.CloseTowerBuilds();
+                        }
 
                         if (menuEntity.isTowerOpenUpgradeMenu && menuEntity.targetId.Value == targetEntity.id.Value)
                         {

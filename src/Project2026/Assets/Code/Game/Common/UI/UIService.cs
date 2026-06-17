@@ -1,5 +1,7 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,28 +11,36 @@ namespace Code.Game.Common.UI
     {
         private List<VisualElement> _visualElements = new();
 
+        private Dictionary<VisualElement, CancellationTokenSource> _activeTransitions = new();
+
         public async UniTask Hide(VisualElement element)
         {
-            var tcs = new UniTaskCompletionSource();
+            if (element.ClassListContains("hide")) 
+                return;
 
-            void OnTransitionEnd(TransitionEndEvent evt)
-            {
-                if (evt.stylePropertyNames.Contains("opacity"))
-                {
-                    element.UnregisterCallback<TransitionEndEvent>(OnTransitionEnd);
-                    tcs.TrySetResult();
-                }
-            }
-
-            element.RegisterCallback<TransitionEndEvent>(OnTransitionEnd);
-            element.schedule.Execute(() => element.AddToClassList("hide"));
-
-            await tcs.Task;
+            await PlayTransition(element, true);
         }
 
         public async UniTask Show(VisualElement element)
         {
+            if (!element.ClassListContains("hide")) 
+                return;
+
+            await PlayTransition(element, false);
+        }
+
+        private async UniTask PlayTransition(VisualElement element, bool isHiding)
+        {
+            if (_activeTransitions.TryGetValue(element, out var existingCts))
+            {
+                existingCts.Cancel();
+                existingCts.Dispose();
+            }
+
+            var cts = new CancellationTokenSource();
             var tcs = new UniTaskCompletionSource();
+
+            _activeTransitions[element] = cts;
 
             void OnTransitionEnd(TransitionEndEvent evt)
             {
@@ -42,9 +52,36 @@ namespace Code.Game.Common.UI
             }
 
             element.RegisterCallback<TransitionEndEvent>(OnTransitionEnd);
-            element.schedule.Execute(() => element.RemoveFromClassList("hide"));
 
-            await tcs.Task;
+            element.schedule.Execute(() =>
+            {
+                if (isHiding) 
+                    element.AddToClassList("hide");
+                else 
+                    element.RemoveFromClassList("hide");
+            });
+
+            try
+            {
+                await tcs.Task.AttachExternalCancellation(cts.Token).Timeout(TimeSpan.FromSeconds(0.5f));
+            }
+            catch (OperationCanceledException)
+            {
+                element.UnregisterCallback<TransitionEndEvent>(OnTransitionEnd);
+            }
+            catch (TimeoutException)
+            {
+                element.UnregisterCallback<TransitionEndEvent>(OnTransitionEnd);
+            }
+            finally
+            {
+                if (_activeTransitions.TryGetValue(element, out var currentCts) && currentCts == cts)
+                {
+                    _activeTransitions.Remove(element);
+
+                    cts.Dispose();
+                }
+            }
         }
 
         public void MoveToScreenToPos(Vector2 screenPos, VisualElement root, VisualElement movementElement)
