@@ -87,7 +87,7 @@ namespace Code.Game.Features.Attack.Systems
                             if (other == null || other.isDead || other.team.Value == attack.team.Value)
                                 continue;
 
-                            var otherPos = other.hasTransform ? other.transform.Value.position : (Vector3)other.currentCell.Value;
+                            var otherPos = other.hasWoldPos ? other.woldPos.Value : (Vector3)other.currentCell.Value;
                             var distSqr = (otherPos - (Vector3)impactPos).sqrMagnitude;
 
                             if (distSqr <= sqrSplash)

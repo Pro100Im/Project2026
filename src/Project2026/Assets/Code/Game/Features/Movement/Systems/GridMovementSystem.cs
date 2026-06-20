@@ -74,7 +74,7 @@ namespace Code.Game.Features.Movement.Systems
 
                 var movementOffset = unit.movementOffset.Value;
                 var targetWorldPos = tilemap[targetCell] + movementOffset;
-                var currentPos = unit.transform.Value.position;
+                var currentPos = unit.woldPos.Value;
                 var dirVec = (targetWorldPos - currentPos);
                 var dist = dirVec.magnitude;
 
@@ -85,6 +85,7 @@ namespace Code.Game.Features.Movement.Systems
                 var newPos = currentPos + dirVec * speed;
 
                 unit.ReplaceVelocity(dirVec * unit.movementSpeed.Value);
+                unit.ReplaceWoldPos(newPos);
                 unit.transform.Value.position = newPos;
                 unit.isMoving = true;
 

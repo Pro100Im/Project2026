@@ -6,6 +6,7 @@ namespace Code.Game.Common.Registrars
     {
         public override void RegisterComponents()
         {
+            Entity.AddWoldPos(transform.position);
             Entity.AddTransform(transform);
         }
 
@@ -13,6 +14,9 @@ namespace Code.Game.Common.Registrars
         {
             if (Entity.hasTransform)
                 Entity.RemoveTransform();
+
+            if(Entity.hasWoldPos)
+                Entity.RemoveWoldPos();
         }
     }
 }

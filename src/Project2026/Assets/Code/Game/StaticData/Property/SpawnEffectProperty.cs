@@ -14,7 +14,7 @@ namespace Code.Game.StaticData.Data
         protected override void Add(GameEntity entity)
         {
             var spawnEffectEntity = CreateGameEntity.Empty();
-            var spawnPos = entity.hasSpawnPosition ? entity.spawnPosition.Value + SpawnEffectOffset : entity.transform.Value.position + SpawnEffectOffset;
+            var spawnPos = entity.hasSpawnPosition ? entity.spawnPosition.Value + SpawnEffectOffset : entity.woldPos.Value + SpawnEffectOffset;
 
             spawnEffectEntity.AddSpawnPosition(spawnPos);
 

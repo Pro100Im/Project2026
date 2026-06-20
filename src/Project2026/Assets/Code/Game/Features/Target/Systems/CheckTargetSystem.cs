@@ -40,7 +40,7 @@ namespace Code.Game.Features.Target.Systems
             for (var i = 0; i < attackers.Count; i++)
             {
                 var attacker = attackers[i];
-                var basePos = attacker.transform.Value.position;
+                var basePos = attacker.woldPos.Value;
                 var attackOriginPos = basePos;
 
                 if (attacker.hasUnitAnchorPoint)

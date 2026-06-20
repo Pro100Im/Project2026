@@ -71,6 +71,7 @@ namespace Code.Game.Features.Movement.Systems
                     entity.transform.Value.rotation = Quaternion.Euler(0, 0, angle);
                 }
 
+                entity.ReplaceWoldPos(currentPos);
                 entity.transform.Value.position = currentPos;
             }
         }

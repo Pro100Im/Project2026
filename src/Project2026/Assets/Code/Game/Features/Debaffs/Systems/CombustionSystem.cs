@@ -41,7 +41,7 @@ namespace Assets.Code.Game.Features.Debaffs.Systems
 
                     damage.AddOwnerId(effect.id.Value);
                     damage.AddTargetId(effect.targetId.Value);
-                    damage.AddTargetPoint(targetEntity.transform.Value.position);
+                    damage.AddTargetPoint(targetEntity.woldPos.Value);
                     damage.AddTotalDamage(0);
                     damage.isDamageRequest = true;
                     //damage.isDamageEffectRequest = true;

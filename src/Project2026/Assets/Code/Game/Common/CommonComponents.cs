@@ -12,6 +12,7 @@ namespace Code.Game.Common
     [Game] public class Attached : IComponent { }
     [Game] public class OwnerId : IComponent { public int Value; }
     [Game] public class TeamComponent : IComponent { public Team Value; }
+    [Game] public class WoldPosComponent : IComponent { public Vector3 Value; }
 
     [Game] public class EntityConfigComponent : IComponent { public EntityConfig Value; }
 

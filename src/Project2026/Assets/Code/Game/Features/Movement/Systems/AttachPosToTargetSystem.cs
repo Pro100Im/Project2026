@@ -29,7 +29,7 @@ namespace Code.Game.Features.Movement.Systems
                 var targetEntity = GetGameEntityById.Get(follower.targetId.Value);
 
                 if (targetEntity.isMoving)
-                    follower.transform.Value.position = targetEntity.transform.Value.position + follower.movementOffset.Value;
+                    follower.transform.Value.position = targetEntity.woldPos.Value + follower.movementOffset.Value;
             }
         }
     }

@@ -48,7 +48,7 @@ namespace Code.Game.Features.Input.Systems
                         if (!entity.touchZone.Value.bounds.Contains(worldPos))
                             continue;
 
-                        var screenPoint = _inputService.GetScreenPointer(entity.transform.Value.position);
+                        var screenPoint = _inputService.GetScreenPointer(entity.woldPos.Value);
 
                         entityClick.AddScreenPointerInput(screenPoint);
                         entityClick.AddTargetId(entity.id.Value);

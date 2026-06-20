@@ -16,7 +16,7 @@ namespace Code.Game.StaticData.Data
             if (entity.hasMaxHealth && entity.hasCurrentHealth && !entity.hasHpBar)
             {
                 var hpBarEntity = CreateGameEntity.Empty();
-                var spawnPos = entity.hasSpawnPosition ? entity.spawnPosition.Value + SpawnOffset : entity.transform.Value.position + SpawnOffset;
+                var spawnPos = entity.hasSpawnPosition ? entity.spawnPosition.Value + SpawnOffset : entity.woldPos.Value + SpawnOffset;
 
                 hpBarEntity.AddSpawnPosition(spawnPos);
                 hpBarEntity.AddTargetId(entity.id.Value);

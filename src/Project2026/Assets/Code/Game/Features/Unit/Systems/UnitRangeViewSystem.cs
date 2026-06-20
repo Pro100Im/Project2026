@@ -44,7 +44,7 @@ namespace Code.Game.Features.Unit.Systems
                     }
                     else if (targetEntity.hasRange && targetEntity.hasTransform)
                     {
-                        var pos = targetEntity.transform.Value.position;
+                        var pos = targetEntity.woldPos.Value;
 
                         if (targetEntity.hasUnitAnchorPoint)
                             pos += targetEntity.unitAnchorPoint.Value;
