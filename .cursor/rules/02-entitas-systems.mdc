@@ -1,0 +1,69 @@
+---
+description: Entitas system authoring conventions
+globs: src/**/Code/**/*System.cs
+alwaysApply: false
+---
+
+# Entitas Systems
+
+## Структура системы
+
+```csharp
+public class AttackStartSystem : IExecuteSystem
+{
+    private readonly IGroup<GameEntity> _attackers;            // группа — readonly поле
+    private readonly List<GameEntity>   _buffer = new(86);    // буфер с начальной ёмкостью
+
+    public AttackStartSystem(GameContext gameContext, TargetService targetService)
+    {
+        _attackers = gameContext.GetGroup(GameMatcher        // группа создаётся в конструкторе
+            .AllOf(
+                GameMatcher.Id,
+                GameMatcher.AttackCooldown,
+                GameMatcher.Range));
+    }
+
+    public void Execute()
+    {
+        var attackers = _attackers.GetEntities(_buffer);
+
+        for (var i = 0; i < attackers.Count; i++)
+        {
+            var attacker = attackers[i];
+
+            if (!attacker.isAttackAvailable || attacker.isDead)  // guard clause → continue
+                continue;
+
+            attacker.isAttacking     = true;
+            attacker.isAttackAvailable = false;
+        }
+    }
+}
+```
+
+## Правила
+- Группа и буфер — `readonly` поля, инициализируются в конструкторе.
+- Буфер — `List<T>` с начальной ёмкостью `new(N)`, не `new List<T>()`.
+- Итерация по буферу — **индексный `for`**, не `foreach`.
+- Зависимости через конструктор (VContainer resolves).
+- Guard clauses с `continue`, не вложенный `if`.
+- `IExecuteSystem` — основной. Используй `IInitializeSystem`, `ICleanupSystem`, `ITearDownSystem` только по необходимости.
+
+## Feature — порядок систем важен
+```csharp
+public class AttackFeature : Feature
+{
+    public AttackFeature(ISystemFactory systems)
+    {
+        Add(systems.Create<AttackStartSystem>());     // порядок = порядок выполнения
+        Add(systems.Create<MeleeAttackEndSystem>());
+    }
+}
+```
+
+## Регистрация в LifetimeScope
+Каждую систему И каждую Feature регистрировать отдельно:
+```csharp
+builder.Register<AttackFeature>(Lifetime.Singleton);
+builder.Register<AttackStartSystem>(Lifetime.Singleton);
+```

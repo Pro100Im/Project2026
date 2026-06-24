@@ -1,0 +1,37 @@
+---
+description: Project overview — stack, architecture, folder conventions
+alwaysApply: true
+---
+
+# Project2026 — 2D Tower Defense
+
+## Stack
+- **Unity 6000.4.7f1** · 2D · StandaloneWindows64
+- **Entitas** ECS (contexts: `Game`, `Input`, `Meta`, `Network`)
+- **VContainer** — dependency injection (`LifetimeScope`)
+- **DOTween + UniTask** — tweens and async
+- **Jenny (Roslyn)** — code generation for Entitas component API
+
+## Folder layout
+
+```
+Assets/Code/
+  Game/
+    Features/[Feature]/       ← одна фича = компоненты + фича + системы + реджистрары
+      [Feature]Components.cs
+      [Feature]Feature.cs
+      Systems/
+      Registrars/
+    Common/                   ← shared utilities (CreateGameEntity, GetGameEntityById, …)
+    StaticData/               ← EntityConfig, EntityProperty, конкретные property
+  Infrastructure/             ← DI scopes, state machine, view layer
+  Meta/                       ← meta-game фичи
+  Generated/                  ← ТОЛЬКО авто-сгенерированный код (Jenny) — не трогать вручную
+Jenny/                        ← Jenny generator + JennyRoslyn.properties + bat-файлы
+```
+
+## Key patterns
+- `EntityProperty` → `EntityConfig` (ScriptableObject) — данные сущностей в инспекторе
+- `EntityComponentRegistrar` — связывает Unity-объекты с Entitas-сущностями
+- `Feature : Feature` — группирует системы, задаёт порядок выполнения
+- `ISystemFactory` / VContainer resolve — все системы создаются через DI

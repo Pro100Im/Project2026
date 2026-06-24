@@ -1,0 +1,45 @@
+---
+description: Entitas component authoring conventions
+globs: src/**/Code/**/*.cs
+alwaysApply: false
+---
+
+# Entitas Components
+
+## Один файл на фичу — `[Feature]Components.cs`
+Все компоненты фичи в одном файле, в одном namespace.
+
+```csharp
+// ✅ Code/Game/Features/Attack/AttackComponents.cs
+namespace Code.Game.Features.Attack
+{
+    [Game] public class AttackCooldown : IComponent { public float Value; }
+    [Game] public class Attacking       : IComponent { }          // флаг — без Value
+    [Game] public class Range           : IComponent { public float Value; }
+}
+```
+
+## Атрибут контекста
+`[Game]` / `[Input]` / `[Meta]` / `[Network]` — всегда указывай явно.
+
+## Флаговые компоненты
+Пустые (нет полей) → генерируют `entity.isXxx` API.
+
+## Value компоненты
+Одно публичное поле `Value` нужного типа → генерируют `entity.AddXxx / ReplaceXxx / RemoveXxx / hasXxx`.
+
+## Суффикс "Component"
+Добавляй только при конфликте имён с Unity/C# типами:
+```csharp
+[Meta] public class TowerMenuComponent  : IComponent { public TowerMenu Value; }  // ✅ конфликт
+[Game] public class Tower               : IComponent { }                           // ✅ без суффикса
+```
+
+## Enum в том же файле
+Если enum используется только компонентами этой фичи — объявляй рядом:
+```csharp
+public enum AttackDirection { Up, Down, Side }
+```
+
+## ЗАПРЕЩЕНО редактировать
+Всё внутри `Assets/Code/Generated/` — авто-сгенерировано Jenny. Не редактировать вручную.

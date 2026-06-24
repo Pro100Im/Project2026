@@ -1,0 +1,53 @@
+---
+description: EntityProperty and EntityConfig pattern for static data
+globs: src/**/Code/Game/StaticData/**/*.cs
+alwaysApply: false
+---
+
+# Static Data — EntityProperty / EntityConfig
+
+## EntityProperty — применение данных к сущности
+```csharp
+// Code/Game/StaticData/Property/AttackProperty.cs
+[Serializable]
+public class AttackProperty : EntityProperty
+{
+    [field: SerializeField] public float Range    { get; private set; }
+    [field: SerializeField] public float Cooldown { get; private set; }
+    [field: SerializeField] public bool  IsMelee  { get; private set; }
+
+    protected override void Add(GameEntity entity)
+    {
+        if (!entity.hasRange)         entity.AddRange(Range);
+        if (!entity.hasAttackCooldown) entity.AddAttackCooldown(Cooldown);
+        entity.isMeleeAttack = IsMelee;
+        entity.isRangeAttack = !IsMelee;
+    }
+
+    protected override void Replace(GameEntity entity)
+    {
+        if (entity.hasRange)         entity.ReplaceRange(Range);
+        if (entity.hasAttackCooldown) entity.ReplaceAttackCooldown(Cooldown);
+    }
+
+    protected override void Remove(GameEntity entity)
+    {
+        if (entity.hasRange)         entity.RemoveRange();
+        if (entity.hasAttackCooldown) entity.RemoveAttackCooldown();
+        entity.isMeleeAttack = false;
+        entity.isRangeAttack = false;
+    }
+}
+```
+
+## Правила
+- `[Serializable]` обязателен — нужен для `[SerializeReference]` в EntityConfig.
+- `[field: SerializeField]` — для авто-свойств.
+- `{ get; private set; }` — только get, данные неизменяемы после десериализации.
+- Все три метода (`Add`, `Replace`, `Remove`) — реализовывать всегда.
+- Проверяй `has` перед `Add`, не добавляй дубликаты.
+- Файл размещать в `Code/Game/StaticData/Property/`.
+
+## EntityConfig
+ScriptableObject с массивом `EntityProperty[]` (через `[SerializeReference]`).
+Инициализировать прототип врага/башни через набор property в инспекторе.

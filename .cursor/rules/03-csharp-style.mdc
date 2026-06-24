@@ -1,0 +1,59 @@
+---
+description: C# code style for this project
+globs: src/**/*.cs
+alwaysApply: false
+---
+
+# C# Code Style
+
+## Переменные и поля
+```csharp
+private readonly IGroup<GameEntity> _places;     // private → _camelCase
+private readonly List<GameEntity>   _buffer = new(16);
+
+var entity   = CreateGameEntity.Empty();          // var для локальных переменных
+var healthRatio = owner.currentHealth.Value / owner.maxHealth.Value;
+```
+
+## Entitas API — Add / Replace / Remove / is / has
+```csharp
+// флаговые компоненты
+entity.isAttacking       = true;
+entity.isAttackAvailable = false;
+
+// value компоненты — проверка перед Add
+if (!entity.hasRange)   entity.AddRange(10f);
+else                    entity.ReplaceRange(10f);
+entity.RemoveRange();
+
+// guard clause
+if (attacker.isDead || !attacker.hasTargetId)
+    continue;
+```
+
+## Итерация по группам Entitas
+```csharp
+// ✅ индексный for с буфером
+var items = _group.GetEntities(_buffer);
+for (var i = 0; i < items.Count; i++)
+{
+    var item = items[i];
+}
+
+// ❌ foreach по группе без буфера — небезопасно при модификации
+```
+
+## Именование
+| Что | Стиль | Пример |
+|---|---|---|
+| private field | `_camelCase` | `_targetService` |
+| local var | `camelCase` | `healthRatio` |
+| method | `PascalCase` | `RegisterComponents` |
+| class / component | `PascalCase` | `AttackCooldown` |
+| bool property | `Is` / `Has` prefix | `IsMelee` |
+
+## Прочее
+- Нет `new List<T>()` — используй `new(capacity)`.
+- Нет явного типа там где тип очевиден — используй `var`.
+- Нет `using static` — используй полные имена или локальные переменные.
+- Порядок методов в классе: конструктор → публичные → приватные.

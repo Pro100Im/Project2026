@@ -1,0 +1,40 @@
+---
+description: Jenny code generation workflow — when and how to run
+alwaysApply: true
+---
+
+# Jenny Code Generation
+
+## Когда запускать
+После любого изменения в `[Feature]Components.cs` — добавил / удалил / переименовал компонент.
+
+## Как запустить
+```bat
+cd E:\Projects\Project2026\Jenny
+Jenny-Gen.bat
+```
+Или напрямую:
+```bat
+dotnet .\Jenny\Jenny.Generator.Cli.dll gen JennyRoslyn.properties -v
+```
+
+## Конфиг: `Jenny/JennyRoslyn.properties`
+| Параметр | Значение |
+|---|---|
+| Контексты | `Game, Input, Meta, Network` |
+| Источник | `Assembly-CSharp.csproj` |
+| Вывод | `Assets/Code/` |
+| IgnoreNamespaces | `true` |
+
+## Правила
+- `Assets/Code/Generated/` — **только авто-генерат**. Никогда не редактировать вручную.
+- После генерации проверить консоль Unity на ошибки компиляции.
+- `Jenny-Auto-Import.bat` — запустить если нужно обновить `.csproj` (новые файлы вне генератора).
+- Компоненты без атрибута контекста (`[Game]` и т.д.) — **не попадают в генерацию**.
+
+## Добавление нового компонента — чеклист
+1. Открыть `[Feature]Components.cs` (или создать новый файл)
+2. Добавить компонент с нужным контекстным атрибутом
+3. Запустить `Jenny-Gen.bat`
+4. Дождаться компиляции в Unity
+5. Использовать сгенерированный API в системах
