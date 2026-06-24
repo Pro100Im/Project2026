@@ -33,11 +33,8 @@ namespace Assets.Code.Game.Features.Target.Systems
             {
                 var unit = units[i];
 
-                if (!unit.isTargetCellRequest)
-                {
-                    if (!unit.hasTargetCell || unit.targetCell.Value == unit.currentCell.Value)
-                        unit.isTargetCellRequest = true;
-                }
+                if (!unit.hasTargetCell || unit.targetCell.Value == unit.currentCell.Value)
+                    unit.isTargetCellRequest = true;
             }
         }
     }

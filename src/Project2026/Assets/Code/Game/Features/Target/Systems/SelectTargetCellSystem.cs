@@ -160,8 +160,8 @@ namespace Code.Game.Features.Target.Systems
 
                 if (found && chosen != cell)
                     unit.ReplaceTargetCell(chosen);
-                else if (unit.hasTargetCell)
-                    unit.RemoveTargetCell();
+                else
+                    unit.ReplaceTargetCell(cell);
 
                 unit.isTargetCellRequest = false;
             }

@@ -45,7 +45,6 @@ namespace Code.Game.Features.Movement.Systems
             if(map == null)
                 return;
 
-            var allFlows = map.flowFields.Value;
             var tilemap = map.tilemapMovement.Value;
             var units = _units.GetEntities(_unitsBuffer);
 
@@ -70,7 +69,17 @@ namespace Code.Game.Features.Movement.Systems
                 var currentCell = unit.currentCell.Value;
 
                 if (targetCell == currentCell)
+                {
+                    if (unit.isMoving)
+                    {
+                        unit.isMoving = false;
+
+                        if (unit.hasVelocity)
+                            unit.RemoveVelocity();
+                    }
+
                     continue;
+                }
 
                 var movementOffset = unit.movementOffset.Value;
                 var targetWorldPos = tilemap[targetCell] + movementOffset;

@@ -41,9 +41,9 @@ namespace Code.Game.Features
 
             Add(systemFactory.Create<LevelFeature>());
 
-            Add(systemFactory.Create<TargetFeature>());
-
             Add(systemFactory.Create<MovementFeature>());
+
+            Add(systemFactory.Create<TargetFeature>());
 
             Add(systemFactory.Create<AttackFeature>());
             Add(systemFactory.Create<DamageFeature>());
