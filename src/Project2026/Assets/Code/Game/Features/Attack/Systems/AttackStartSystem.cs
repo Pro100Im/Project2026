@@ -2,6 +2,7 @@ using Code.Game.Common.Entity;
 using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Code.Game.Features.Attack.Systems
 {
@@ -43,6 +44,12 @@ namespace Code.Game.Features.Attack.Systems
                 if (target.isDead)
                     continue;
 
+                if (attacker.isRangeAttack && !TryFireProjectile(attacker, target))
+                    continue;
+
+                if (attacker.isMeleeAttack)
+                    CreateMeleeDamage(attacker);
+
                 var attackDirection = _targetService.GetAttackDirection(attacker.attackerPoint.Value, attacker.targetPoint.Value);
 
                 if (attacker.hasAttackDirection)
@@ -62,6 +69,65 @@ namespace Code.Game.Features.Attack.Systems
                 entity.isMeleeAttack = attacker.isMeleeAttack;
                 entity.isRangeAttack = attacker.isRangeAttack;
             }
+        }
+
+        private bool TryFireProjectile(GameEntity owner, GameEntity target)
+        {
+            var projectile = CreateGameEntity.Empty();
+
+            projectile.AddOwnerId(owner.id.Value);
+            projectile.AddTargetId(owner.targetId.Value);
+            projectile.AddSpawnPosition(owner.firePoint.Value);
+            projectile.AddAttackerPoint(owner.firePoint.Value);
+            projectile.AddTeam(owner.team.Value);
+            projectile.isMovementAvailable = true;
+
+            foreach (var property in owner.projectile.Value.Properties)
+                property.Apply(projectile);
+
+            var targetVel = target.hasVelocity ? target.velocity.Value : Vector3.zero;
+            var projSpeed = projectile.movementSpeed.Value;
+            var interceptPoint = _targetService.GetInterceptPoint(owner.attackerPoint.Value, projSpeed, owner.targetPoint.Value, targetVel);
+
+            var physicalRange = TargetService.GetPhysicalRange(owner.range.Value);
+            var dx = interceptPoint.x - owner.attackerPoint.Value.x;
+            var dy = interceptPoint.y - owner.attackerPoint.Value.y;
+
+            if ((dx * dx) + (dy * dy) > physicalRange * physicalRange)
+            {
+                projectile.isDestructed = true;
+                return false;
+            }
+
+            var totalDistance = Vector3.Distance(owner.firePoint.Value, interceptPoint);
+            var baseArcHeight = projectile.trajectoryBaseArcHeight.Value;
+            var distanceFactor = Mathf.Clamp01(totalDistance / 10f);
+            var dynamicArcHeight = baseArcHeight * distanceFactor;
+
+            projectile.AddTargetPoint(interceptPoint);
+            projectile.AddTotalDistance(totalDistance);
+            projectile.ReplaceTrajectoryCurrentArcHeight(dynamicArcHeight);
+
+            return true;
+        }
+
+        private void CreateMeleeDamage(GameEntity attacker)
+        {
+            var damage = CreateGameEntity.Empty();
+
+            damage.AddOwnerId(attacker.id.Value);
+            damage.AddTargetId(attacker.targetId.Value);
+            damage.AddTargetPoint(attacker.targetPoint.Value);
+            damage.AddTotalDamage(0);
+            damage.isDamageRequest = true;
+            damage.isDamageEffectRequest = true;
+
+            var damageEffect = CreateGameEntity.Empty();
+
+            damageEffect.AddOwnerId(attacker.id.Value);
+            damageEffect.AddTargetId(attacker.targetId.Value);
+            damageEffect.AddTargetPoint(attacker.targetPoint.Value);
+            damageEffect.isEffectCheckRequest = true;
         }
     }
 }

@@ -33,36 +33,6 @@ namespace Code.Game.Features.Attack.Systems
 
                 var entity = GetGameEntityById.Get(attack.ownerId.Value);
 
-                if(!entity.hasTargetId)
-                {
-                    entity.isAttacking = false;
-                    entity.isAttackAvailable = true;
-
-                    attack.isDestructed = true;
-
-                    continue;
-                }
-
-                if(entity.isAttacking)
-                {
-                    var damage = CreateGameEntity.Empty();
-
-                    damage.AddOwnerId(entity.id.Value);
-                    damage.AddTargetId(entity.targetId.Value);
-                    damage.AddTargetPoint(entity.targetPoint.Value);
-                    damage.AddTotalDamage(0);
-                    damage.isDamageRequest = true;
-                    damage.isDamageEffectRequest = true;
-
-                    // to do check
-                    var damageEffect = CreateGameEntity.Empty();
-
-                    damageEffect.AddOwnerId(entity.id.Value);
-                    damageEffect.AddTargetId(entity.targetId.Value);
-                    damageEffect.AddTargetPoint(entity.targetPoint.Value);
-                    damageEffect.isEffectCheckRequest = true;
-                }
-
                 entity.isAttacking = false;
 
                 if (attack.cooldown.Value > 0)
