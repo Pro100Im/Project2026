@@ -28,7 +28,7 @@ MonoBehaviour:
       type: {class: SpeedProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Speed>k__BackingField: 5
+        <Speed>k__BackingField: 4
     - rid: 2286602853080629326
       type: {class: ViewPrefabProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
@@ -38,7 +38,7 @@ MonoBehaviour:
       type: {class: TrajectoryProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <ArcHeight>k__BackingField: 2
+        <ArcHeight>k__BackingField: 4
         <Trajectory>k__BackingField:
           serializedVersion: 2
           m_Curve:
