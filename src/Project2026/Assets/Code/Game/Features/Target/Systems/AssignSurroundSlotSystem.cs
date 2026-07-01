@@ -1,4 +1,5 @@
 using Code.Game.Common.Entity;
+using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,7 @@ namespace Code.Game.Features.Target.Systems
                 .AllOf(
                     GameMatcher.GridMovement,
                     GameMatcher.CurrentCell,
+                    GameMatcher.Transform,
                     GameMatcher.Id,
                     GameMatcher.Team,
                     GameMatcher.Range,
@@ -58,10 +60,21 @@ namespace Code.Game.Features.Target.Systems
                 var myTeam = unit.team.Value;
                 var size = unit.unitSize.Value;
                 var range = unit.range.Value;
-                var iRange = Mathf.CeilToInt(range);
+                var unitOriginPos = unit.woldPos.Value;
+
+                if (unit.hasUnitAnchorPoint)
+                    unitOriginPos += unit.unitAnchorPoint.Value;
+
+                var physicalRange = TargetService.GetPhysicalRange(range);
+                var sqrPhysicalRange = physicalRange * physicalRange;
+                var iRange = Mathf.CeilToInt(TargetService.GetEffectiveRange(range));
 
                 var bestTargetId = -1;
-                var bestTargetCell = Vector3Int.zero;
+                GameEntity bestTarget = null;
+                var bestMinX = 0;
+                var bestMinY = 0;
+                var bestMaxX = 0;
+                var bestMaxY = 0;
                 var closestSqrDist = float.MaxValue;
 
                 _processedTargets.Clear();
@@ -90,30 +103,34 @@ namespace Code.Game.Features.Target.Systems
                             if (!target.hasCurrentCell)
                                 continue;
 
-                            var targetCell = target.currentCell.Value;
-                            var dx = targetCell.x - unitCell.x;
-                            var dy = targetCell.y - unitCell.y;
-                            var chebyshev = Mathf.Max(Mathf.Abs(dx), Mathf.Abs(dy));
+                            GetFootprint(target, out var minX, out var minY, out var maxX, out var maxY);
 
-                            if (chebyshev > range)
-                                continue;
-
+                            var targetPoint = TargetService.GetClosestPoint(target, unitOriginPos);
+                            var dx = unitOriginPos.x - targetPoint.x;
+                            var dy = unitOriginPos.y - targetPoint.y;
                             var sDist = (dx * dx) + (dy * dy);
+
+                            if (sDist > sqrPhysicalRange)
+                                continue;
 
                             if (sDist < closestSqrDist)
                             {
                                 closestSqrDist = sDist;
                                 bestTargetId = targetId;
-                                bestTargetCell = targetCell;
+                                bestTarget = target;
+                                bestMinX = minX;
+                                bestMinY = minY;
+                                bestMaxX = maxX;
+                                bestMaxY = maxY;
                             }
                         }
                     }
                 }
 
-                if (bestTargetId == -1)
+                if (bestTargetId == -1 || bestTarget == null)
                     continue;
 
-                if (!TryPickSlot(unitCell, bestTargetCell, range, size, unitId, mapEntity, tilemap, surroundField, out var slot))
+                if (!TryPickSlot(unitCell, bestTarget, bestMinX, bestMinY, bestMaxX, bestMaxY, range, size, unitId, mapEntity, tilemap, surroundField, out var slot))
                     continue;
 
                 surroundField[slot] = unitId;
@@ -122,9 +139,18 @@ namespace Code.Game.Features.Target.Systems
             }
         }
 
+        private static void GetFootprint(GameEntity target, out int minX, out int minY, out int maxX, out int maxY)
+        {
+            TargetService.GetFootprint(target, out minX, out minY, out maxX, out maxY);
+        }
+
         private bool TryPickSlot(
             Vector3Int unitCell,
-            Vector3Int targetCell,
+            GameEntity target,
+            int minX,
+            int minY,
+            int maxX,
+            int maxY,
             float range,
             Vector2Int size,
             int unitId,
@@ -135,23 +161,41 @@ namespace Code.Game.Features.Target.Systems
         {
             bestSlot = default;
             var bestDist = int.MaxValue;
-            var maxRing = Mathf.CeilToInt(range);
+            var maxRing = TargetService.GetSurroundMaxRing(range);
+            var physicalRange = TargetService.GetPhysicalRange(range);
+            var sqrPhysicalRange = physicalRange * physicalRange;
             var found = false;
 
             _candidates.Clear();
 
             for (var ring = 1; ring <= maxRing; ring++)
             {
-                for (var dx = -ring; dx <= ring; dx++)
+                var oMinX = minX - ring;
+                var oMaxX = maxX + ring;
+                var oMinY = minY - ring;
+                var oMaxY = maxY + ring;
+
+                _candidates.Clear();
+
+                for (var x = oMinX; x <= oMaxX; x++)
                 {
-                    for (var dy = -ring; dy <= ring; dy++)
+                    for (var y = oMinY; y <= oMaxY; y++)
                     {
-                        if (Mathf.Max(Mathf.Abs(dx), Mathf.Abs(dy)) != ring)
+                        var onBorder = x == oMinX || x == oMaxX || y == oMinY || y == oMaxY;
+
+                        if (!onBorder)
                             continue;
 
-                        var candidate = new Vector3Int(targetCell.x + dx, targetCell.y + dy, 0);
+                        var candidate = new Vector3Int(x, y, 0);
 
-                        if (!tilemap.ContainsKey(candidate))
+                        if (!tilemap.TryGetValue(candidate, out var candidateWorldPos))
+                            continue;
+
+                        var targetPoint = TargetService.GetClosestPoint(target, candidateWorldPos);
+                        var dx = candidateWorldPos.x - targetPoint.x;
+                        var dy = candidateWorldPos.y - targetPoint.y;
+
+                        if ((dx * dx) + (dy * dy) > sqrPhysicalRange)
                             continue;
 
                         if (surroundField.TryGetValue(candidate, out var ownerId) && ownerId != unitId)
@@ -163,6 +207,9 @@ namespace Code.Game.Features.Target.Systems
                         _candidates.Add(candidate);
                     }
                 }
+
+                if (_candidates.Count > 0)
+                    break;
             }
 
             for (var i = 0; i < _candidates.Count; i++)

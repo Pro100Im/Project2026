@@ -1,4 +1,5 @@
 using Code.Game.Common.Entity;
+using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,10 +48,10 @@ namespace Code.Game.Features.Target.Systems
                     attackOriginPos += attacker.unitAnchorPoint.Value;
 
                 var range = attacker.range.Value;
-                var physicalRange = range * 0.4f;
-                var sqrRange = physicalRange * physicalRange;
                 var myTeam = attacker.team.Value;
                 var attackerCell = attacker.currentCell.Value;
+                var physicalRange = TargetService.GetPhysicalRange(range);
+                var sqrPhysicalRange = physicalRange * physicalRange;
 
                 var bestTargetId = -1;
                 var bestTargetPoint = Vector3.zero;
@@ -58,7 +59,7 @@ namespace Code.Game.Features.Target.Systems
 
                 _processedTargets.Clear();
 
-                var iRange = Mathf.CeilToInt(range);
+                var iRange = Mathf.CeilToInt(TargetService.GetEffectiveRange(range));
 
                 for (var x = -iRange; x <= iRange; x++)
                 {
@@ -77,19 +78,25 @@ namespace Code.Game.Features.Target.Systems
 
                                 var target = GetGameEntityById.Get(targetId);
 
-                                if (target != null && target.team.Value != myTeam && target.isTargetable && !target.isDead && target.hasBounds)
+                                if (target != null && target.team.Value != myTeam && target.isTargetable && !target.isDead)
                                 {
-                                    var targetBounds = target.bounds.Value.bounds;
-                                    var closestPoint = targetBounds.ClosestPoint(attackOriginPos);
-                                    var dx = attackOriginPos.x - closestPoint.x;
-                                    var dy = attackOriginPos.y - closestPoint.y;
+                                    if (!target.hasCurrentCell)
+                                        continue;
+
+                                    var targetPoint = TargetService.GetClosestPoint(target, attackOriginPos);
+
+                                    var dx = attackOriginPos.x - targetPoint.x;
+                                    var dy = attackOriginPos.y - targetPoint.y;
                                     var sDist = (dx * dx) + (dy * dy);
 
-                                    if (sDist <= sqrRange && sDist < closestSqrDist)
+                                    if (sDist > sqrPhysicalRange)
+                                        continue;
+
+                                    if (sDist < closestSqrDist)
                                     {
                                         closestSqrDist = sDist;
                                         bestTargetId = targetId;
-                                        bestTargetPoint = closestPoint;
+                                        bestTargetPoint = targetPoint;
                                     }
                                 }
                             }

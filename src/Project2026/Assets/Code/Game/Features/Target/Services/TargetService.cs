@@ -1,4 +1,5 @@
 ﻿using Code.Game.Features.Attack;
+using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,39 @@ namespace Code.Game.Features.Target.Services
 {
     public class TargetService
     {
+        public const float CellSize = 0.4f;
+
+        private const float MinEffectiveRange = 1.5f;
+
         private readonly List<Vector3Int> _neighborsBuffer = new(8);
+
+        public static void GetFootprint(GameEntity target, out int minX, out int minY, out int maxX, out int maxY)
+        {
+            var origin = target.currentCell.Value;
+            var footprintSize = target.hasUnitSize ? target.unitSize.Value : Vector2Int.one;
+
+            minX = origin.x;
+            minY = origin.y;
+            maxX = origin.x + footprintSize.x - 1;
+            maxY = origin.y + footprintSize.y - 1;
+        }
+
+        public static float GetEffectiveRange(float range)
+        {
+            return Mathf.Max(range, MinEffectiveRange);
+        }
+
+        public static float GetPhysicalRange(float range) => GetEffectiveRange(range) * CellSize;
+
+        public static Vector2 GetClosestPoint(GameEntity target, Vector2 fromPoint) =>
+            target.hasBounds
+                ? (Vector2)target.bounds.Value.bounds.ClosestPoint(fromPoint)
+                : (Vector2)target.woldPos.Value;
+
+        public static int GetSurroundMaxRing(float range)
+        {
+            return Mathf.CeilToInt(GetEffectiveRange(range));
+        }
 
         public List<Vector3Int> GetNeighbors(Vector3Int cell)
         {

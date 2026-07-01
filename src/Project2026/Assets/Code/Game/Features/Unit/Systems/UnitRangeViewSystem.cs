@@ -1,4 +1,5 @@
 using Code.Game.Common.Entity;
+using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
 
@@ -49,7 +50,7 @@ namespace Code.Game.Features.Unit.Systems
                         if (targetEntity.hasUnitAnchorPoint)
                             pos += targetEntity.unitAnchorPoint.Value;
 
-                        rangeView.unitRangeView.Value.ShowRangeView(pos, targetEntity.range.Value);
+                        rangeView.unitRangeView.Value.ShowRangeView(pos, TargetService.GetEffectiveRange(targetEntity.range.Value));
                         rangeView.ReplaceTargetId(targetEntity.id.Value);
                         rangeView.isUnitRangeShowed = true;
                     }
