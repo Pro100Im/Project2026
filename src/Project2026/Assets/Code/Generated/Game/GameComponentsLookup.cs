@@ -84,57 +84,60 @@ public static class GameComponentsLookup {
     public const int SpatialHash = 73;
     public const int SpawnMap = 74;
     public const int SpawnReservedField = 75;
-    public const int TilemapMovement = 76;
-    public const int CurrentCell = 77;
-    public const int GridMovement = 78;
-    public const int LastDirection = 79;
-    public const int MovementAvailable = 80;
-    public const int MovementOffset = 81;
-    public const int MovementSpeed = 82;
-    public const int MovementSpeedBonus = 83;
-    public const int Moving = 84;
-    public const int TotalDistance = 85;
-    public const int Trajectory = 86;
-    public const int TrajectoryBaseArcHeight = 87;
-    public const int TrajectoryCurrentArcHeight = 88;
-    public const int TrajectoryMovement = 89;
-    public const int TrajectoryPathProgress = 90;
-    public const int Velocity = 91;
-    public const int PlayerCastle = 92;
-    public const int PlayerCastleCells = 93;
-    public const int Player = 94;
-    public const int FireResistance = 95;
-    public const int FrostResistance = 96;
-    public const int PhysicalResistance = 97;
-    public const int SpawnPosition = 98;
-    public const int SpawnRequsted = 99;
-    public const int WaitingToSpawn = 100;
-    public const int Targetable = 101;
-    public const int TargetCell = 102;
-    public const int TargetCellRequest = 103;
-    public const int TargetFlow = 104;
-    public const int TargetId = 105;
-    public const int TargetPoint = 106;
-    public const int TargetSelected = 107;
-    public const int Tower = 108;
-    public const int TowerBuildRequest = 109;
-    public const int TowerPlace = 110;
-    public const int TowerUpgrade = 111;
-    public const int TowerUpgradeIcon = 112;
-    public const int TowerUpgradePrice = 113;
-    public const int TowerUpgradeRequest = 114;
-    public const int Unit = 115;
-    public const int UnitAnchorPoint = 116;
-    public const int UnitIcon = 117;
-    public const int UnitSize = 118;
-    public const int CurrentWaveEnemies = 119;
-    public const int CurrentWaveNumber = 120;
-    public const int WaveEnemiesAlive = 121;
-    public const int WaveInProgress = 122;
-    public const int WaveStartRequsted = 123;
-    public const int Projectile = 124;
+    public const int SurroundField = 76;
+    public const int TilemapMovement = 77;
+    public const int CurrentCell = 78;
+    public const int GridMovement = 79;
+    public const int LastDirection = 80;
+    public const int MovementAvailable = 81;
+    public const int MovementOffset = 82;
+    public const int MovementSpeed = 83;
+    public const int MovementSpeedBonus = 84;
+    public const int Moving = 85;
+    public const int TotalDistance = 86;
+    public const int Trajectory = 87;
+    public const int TrajectoryBaseArcHeight = 88;
+    public const int TrajectoryCurrentArcHeight = 89;
+    public const int TrajectoryMovement = 90;
+    public const int TrajectoryPathProgress = 91;
+    public const int Velocity = 92;
+    public const int PlayerCastle = 93;
+    public const int PlayerCastleCells = 94;
+    public const int Player = 95;
+    public const int FireResistance = 96;
+    public const int FrostResistance = 97;
+    public const int PhysicalResistance = 98;
+    public const int SpawnPosition = 99;
+    public const int SpawnRequsted = 100;
+    public const int WaitingToSpawn = 101;
+    public const int SurroundSlot = 102;
+    public const int SurroundTargetId = 103;
+    public const int Targetable = 104;
+    public const int TargetCell = 105;
+    public const int TargetCellRequest = 106;
+    public const int TargetFlow = 107;
+    public const int TargetId = 108;
+    public const int TargetPoint = 109;
+    public const int TargetSelected = 110;
+    public const int Tower = 111;
+    public const int TowerBuildRequest = 112;
+    public const int TowerPlace = 113;
+    public const int TowerUpgrade = 114;
+    public const int TowerUpgradeIcon = 115;
+    public const int TowerUpgradePrice = 116;
+    public const int TowerUpgradeRequest = 117;
+    public const int Unit = 118;
+    public const int UnitAnchorPoint = 119;
+    public const int UnitIcon = 120;
+    public const int UnitSize = 121;
+    public const int CurrentWaveEnemies = 122;
+    public const int CurrentWaveNumber = 123;
+    public const int WaveEnemiesAlive = 124;
+    public const int WaveInProgress = 125;
+    public const int WaveStartRequsted = 126;
+    public const int Projectile = 127;
 
-    public const int TotalComponents = 125;
+    public const int TotalComponents = 128;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -213,6 +216,7 @@ public static class GameComponentsLookup {
         "SpatialHash",
         "SpawnMap",
         "SpawnReservedField",
+        "SurroundField",
         "TilemapMovement",
         "CurrentCell",
         "GridMovement",
@@ -238,6 +242,8 @@ public static class GameComponentsLookup {
         "SpawnPosition",
         "SpawnRequsted",
         "WaitingToSpawn",
+        "SurroundSlot",
+        "SurroundTargetId",
         "Targetable",
         "TargetCell",
         "TargetCellRequest",
@@ -341,6 +347,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Level.SpatialHash),
         typeof(Code.Game.Features.Level.SpawnMap),
         typeof(Code.Game.Features.Level.SpawnReservedField),
+        typeof(Code.Game.Features.Level.SurroundField),
         typeof(Code.Game.Features.Level.TilemapMovement),
         typeof(Code.Game.Features.Movement.CurrentCell),
         typeof(Code.Game.Features.Movement.GridMovement),
@@ -366,6 +373,8 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Spawn.SpawnPosition),
         typeof(Code.Game.Features.Spawn.SpawnRequsted),
         typeof(Code.Game.Features.Spawn.WaitingToSpawn),
+        typeof(Code.Game.Features.Target.SurroundSlot),
+        typeof(Code.Game.Features.Target.SurroundTargetId),
         typeof(Code.Game.Features.Target.Targetable),
         typeof(Code.Game.Features.Target.TargetCell),
         typeof(Code.Game.Features.Target.TargetCellRequest),

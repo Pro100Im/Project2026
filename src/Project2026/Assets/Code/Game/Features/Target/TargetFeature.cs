@@ -8,9 +8,11 @@ namespace Code.Game.Features.Target
     {
         public TargetFeature(ISystemFactory systemFactory)
         {
+            Add(systemFactory.Create<ReleaseSurroundSlotSystem>());
+            Add(systemFactory.Create<AssignSurroundSlotSystem>());
+            Add(systemFactory.Create<CheckTargetSystem>());
             Add(systemFactory.Create<RequestTargetCellSystem>());
             Add(systemFactory.Create<SelectTargetCellSystem>());
-            Add(systemFactory.Create<CheckTargetSystem>());
         }
     }
 }

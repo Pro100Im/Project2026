@@ -59,6 +59,12 @@ namespace Code.Game.Features.Target.Systems
                 var unitId = unit.id.Value;
                 var myTeam = unit.team.Value;
 
+                if (unit.hasSurroundSlot)
+                {
+                    SelectSurroundSlotCell(unit, cell, size, unitId, mapEntity);
+                    continue;
+                }
+
                 if (!allIntegrations.TryGetValue(size, out var integration) || !allFlows.TryGetValue(size, out var flow))
                     continue;
 
@@ -165,6 +171,74 @@ namespace Code.Game.Features.Target.Systems
 
                 unit.isTargetCellRequest = false;
             }
+        }
+
+        private void SelectSurroundSlotCell(GameEntity unit, Vector3Int cell, Vector2Int size, int unitId, GameEntity mapEntity)
+        {
+            var slot = unit.surroundSlot.Value;
+
+            if (cell == slot)
+            {
+                unit.ReplaceTargetCell(cell);
+                unit.isTargetCellRequest = false;
+
+                return;
+            }
+
+            var bestDist = ChebyshevDistance(cell, slot);
+            var bestCost = float.MaxValue;
+            var chosen = cell;
+            var found = false;
+            var neighbors = _targetService.GetNeighbors(cell);
+
+            for (var j = 0; j < neighbors.Count; j++)
+            {
+                var cand = neighbors[j];
+
+                if (!CanFit(cand, size, unitId, mapEntity, out _))
+                    continue;
+
+                if (IsCuttingCorner(cell, cand, size, unitId, mapEntity))
+                    continue;
+
+                var candDist = ChebyshevDistance(cand, slot);
+
+                if (candDist > bestDist)
+                    continue;
+
+                var moveDir = cand - cell;
+                var totalCost = (float)candDist;
+
+                if (unit.hasLastDirection)
+                {
+                    if (unit.lastDirection.Value == moveDir)
+                        totalCost -= 0.5f;
+                    else if (unit.lastDirection.Value == -moveDir)
+                        totalCost += 10.0f;
+                }
+
+                totalCost += (unitId % 10) * 0.01f;
+
+                if (candDist < bestDist || (candDist == bestDist && totalCost < bestCost))
+                {
+                    bestDist = candDist;
+                    bestCost = totalCost;
+                    chosen = cand;
+                    found = true;
+                }
+            }
+
+            if (found && chosen != cell)
+                unit.ReplaceTargetCell(chosen);
+            else
+                unit.ReplaceTargetCell(cell);
+
+            unit.isTargetCellRequest = false;
+        }
+
+        private static int ChebyshevDistance(Vector3Int a, Vector3Int b)
+        {
+            return Mathf.Max(Mathf.Abs(a.x - b.x), Mathf.Abs(a.y - b.y));
         }
 
         private bool CanFit(Vector3Int origin, Vector2Int size, int unitId, GameEntity map, out int blockingEntityId)

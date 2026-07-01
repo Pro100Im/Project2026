@@ -34,7 +34,7 @@ namespace Code.Game.Features.Attack.Systems
             {
                 var attacker = attackers[i];
 
-                if (!attacker.isAttackAvailable || attacker.isDead || !attacker.hasTargetId)
+                if (!attacker.isAttackAvailable || attacker.isDead || !attacker.hasTargetId || attacker.isMoving)
                     continue;
 
                 var targetId = attacker.targetId.Value;

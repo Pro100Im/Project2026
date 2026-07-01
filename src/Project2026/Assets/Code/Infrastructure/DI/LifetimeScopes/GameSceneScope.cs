@@ -187,6 +187,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<MoveSlowingDownSystem>(Lifetime.Singleton);
             builder.Register<CombustionSystem>(Lifetime.Singleton);
 
+            builder.Register<ReleaseSurroundSlotSystem>(Lifetime.Singleton);
+            builder.Register<AssignSurroundSlotSystem>(Lifetime.Singleton);
             builder.Register<RequestTargetCellSystem>(Lifetime.Singleton);
             builder.Register<SelectTargetCellSystem>(Lifetime.Singleton);
             builder.Register<CheckTargetSystem>(Lifetime.Singleton);

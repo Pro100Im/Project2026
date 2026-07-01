@@ -102,9 +102,6 @@ namespace Code.Game.Features.Target.Systems
                     attacker.ReplaceAttackerPoint(attackOriginPos);
                     attacker.ReplaceTargetPoint(bestTargetPoint);
                     attacker.ReplaceTargetId(bestTargetId);
-
-                    if (attacker.hasTargetCell)
-                        attacker.RemoveTargetCell();
                 }
                 else if (attacker.hasTargetId)
                 {

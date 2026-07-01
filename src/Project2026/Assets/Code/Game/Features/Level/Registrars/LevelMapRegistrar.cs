@@ -40,6 +40,7 @@ namespace Code.Game.Features.Level.Registrars
             Entity.AddReservedField(new());
             Entity.AddSpawnReservedField(new());
             Entity.AddSpatialHash(new());
+            Entity.AddSurroundField(new());
             Entity.isFlowFieldDirty = true;
         }
 
@@ -53,6 +54,7 @@ namespace Code.Game.Features.Level.Registrars
             Entity.RemoveReservedField();
             Entity.RemoveSpawnReservedField();
             Entity.RemoveSpatialHash();
+            Entity.RemoveSurroundField();
             Entity.isFlowFieldDirty = false;
         }
 
