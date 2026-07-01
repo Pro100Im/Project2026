@@ -47,9 +47,6 @@ namespace Code.Game.Features.Attack.Systems
                 if (attacker.isRangeAttack && !TryFireProjectile(attacker, target))
                     continue;
 
-                if (attacker.isMeleeAttack)
-                    CreateMeleeDamage(attacker);
-
                 var attackDirection = _targetService.GetAttackDirection(attacker.attackerPoint.Value, attacker.targetPoint.Value);
 
                 if (attacker.hasAttackDirection)
@@ -109,25 +106,6 @@ namespace Code.Game.Features.Attack.Systems
             projectile.ReplaceTrajectoryCurrentArcHeight(dynamicArcHeight);
 
             return true;
-        }
-
-        private void CreateMeleeDamage(GameEntity attacker)
-        {
-            var damage = CreateGameEntity.Empty();
-
-            damage.AddOwnerId(attacker.id.Value);
-            damage.AddTargetId(attacker.targetId.Value);
-            damage.AddTargetPoint(attacker.targetPoint.Value);
-            damage.AddTotalDamage(0);
-            damage.isDamageRequest = true;
-            damage.isDamageEffectRequest = true;
-
-            var damageEffect = CreateGameEntity.Empty();
-
-            damageEffect.AddOwnerId(attacker.id.Value);
-            damageEffect.AddTargetId(attacker.targetId.Value);
-            damageEffect.AddTargetPoint(attacker.targetPoint.Value);
-            damageEffect.isEffectCheckRequest = true;
         }
     }
 }
