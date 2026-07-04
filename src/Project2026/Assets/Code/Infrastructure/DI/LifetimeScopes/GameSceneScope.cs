@@ -51,6 +51,7 @@ using Code.Infrastructure.States.GameStates;
 using Code.Infrastructure.States.StateMachine;
 using Code.Infrastructure.Systems;
 using Code.Infrastructure.View;
+using Code.Infrastructure.View.Pool;
 using Code.Infrastructure.View.Systems;
 using Code.Meta.Features.Game;
 using UnityEngine;
@@ -93,6 +94,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
         private void BindServices(IContainerBuilder builder)
         {
             builder.Register<IInputService, InputService>(Lifetime.Singleton);
+            builder.Register<IEntityViewPool, EntityViewPoolService>(Lifetime.Singleton);
             builder.Register<TargetService>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<ICameraService>().AsImplementedInterfaces().AsSelf();
             builder.RegisterComponentInHierarchy<TransitionScreen>();

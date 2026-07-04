@@ -1,20 +1,26 @@
+using Code.Infrastructure.View;
+using Code.Infrastructure.View.Pool;
 using Entitas;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Code.Game.Common.Destruct.Systems
 {
     public class GameDestructedViewSystem : ICleanupSystem
     {
+        private readonly IEntityViewPool _pool;
         private readonly IGroup<GameEntity> _entities;
 
         private readonly List<GameEntity> _entitiesBuffer = new(64);
 
-        public GameDestructedViewSystem(GameContext game) =>
-          _entities = game.GetGroup(
-            GameMatcher.AllOf(
-              GameMatcher.Destructed,
-              GameMatcher.View));
+        public GameDestructedViewSystem(GameContext game, IEntityViewPool pool)
+        {
+            _pool = pool;
+
+            _entities = game.GetGroup(
+              GameMatcher.AllOf(
+                GameMatcher.Destructed,
+                GameMatcher.View));
+        }
 
         public void Cleanup()
         {
@@ -26,7 +32,7 @@ namespace Code.Game.Common.Destruct.Systems
 
                 entity.view.Value.ReleaseEntity();
 
-                Object.Destroy(entity.view.Value.GameObject);
+                _pool.Release((EntityBehaviour)entity.view.Value);
             }
         }
     }
