@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4447435418071865669}
   - component: {fileID: 7260230358904753697}
+  - component: {fileID: 5678901234567890123}
+  - component: {fileID: 5678901234567890124}
   - component: {fileID: 4245613680657649297}
   m_Layer: 0
   m_Name: TowerMenuScreen
@@ -48,6 +50,31 @@ MonoBehaviour:
   _archerTowerUpgrade: {fileID: 11400000, guid: 73f3088a3a3933840acd244ee4f29d32, type: 2}
   _iceTowerUpgrade: {fileID: 11400000, guid: dfe9c98c526e0c14a93a301602b65e37, type: 2}
   _fireTowerUpgrade: {fileID: 11400000, guid: 9bc3c24ddfc42204b9d3d59f88d6955d, type: 2}
+--- !u!114 &5678901234567890123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686554603850505932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c3d4e5f6478910a1b2c3d4e5f67802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.MetaEntityBehaviour
+--- !u!114 &5678901234567890124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686554603850505932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bdea3e31a9f4a228d50cfc2014fc9e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.MetaSelfInitializeEntityView
+  _entityBehaviour: {fileID: 5678901234567890123}
 --- !u!114 &4245613680657649297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749e769ed72efd849aad39db36dadff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Tower.Registrars.TowerMenuRegistrar
+  EntityView: {fileID: 5678901234567890123}
   _towerMenu: {fileID: 7260230358904753697}
 --- !u!1 &7233587024386251885
 GameObject:

@@ -1,32 +1,12 @@
-﻿using Code.Infrastructure.View.Registrars;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Code.Infrastructure.View
 {
-    public class EntityBehaviour : MonoBehaviour, IEntityView
+    public class EntityBehaviour : EntityBehaviourBase<GameEntity>, IEntityView
     {
-        private GameEntity _entity;
-
-        public GameEntity Entity => _entity;
         public GameObject GameObject => gameObject;
 
-        public void SetEntity(GameEntity entity)
-        {
-            _entity = entity;
-            _entity.AddView(this);
-            _entity.Retain(this);
-
-            foreach(IEntityComponentRegistrar registrar in GetComponentsInChildren<IEntityComponentRegistrar>())
-                registrar.RegisterComponents();
-        }
-
-        public void ReleaseEntity()
-        {
-            foreach(IEntityComponentRegistrar registrar in GetComponentsInChildren<IEntityComponentRegistrar>())
-                registrar.UnregisterComponents();
-
-            _entity.Release(this);
-            _entity = null;
-        }
+        protected override void OnEntityBound(GameEntity entity) =>
+            entity.AddView(this);
     }
 }

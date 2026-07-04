@@ -1,29 +1,23 @@
 using Code.Game.Common.Entity;
+using Code.Infrastructure.View.Registrars;
 using Code.Meta.Features.Game;
 using UnityEngine;
 
 namespace Code.Game.Features.Tower.Registrars
 {
-    public class TowerMenuRegistrar : MonoBehaviour
+    public class TowerMenuRegistrar : MetaEntityComponentRegistrar
     {
         [SerializeField] private TowerMenu _towerMenu;
 
-        private void Awake()
+        public override void RegisterComponents()
         {
-            var entity = CreateMetaEntity.Empty();
-            entity.AddTowerMenu(_towerMenu);
+            Entity.AddTowerMenu(_towerMenu);
         }
 
-        //public override void RegisterComponents()
-        //{
-        //    var entity = CreateMetaEntity.Empty();
-        //    entity.AddTowerMenu(_towerMenu);
-        //}
-
-        //public override void UnregisterComponents()
-        //{
-        //    //Entity.isPlayer = false;
-        //    //Entity.isTowerPlace = false;
-        //}
+        public override void UnregisterComponents()
+        {
+            if(Entity.hasTowerMenu)
+                Entity.RemoveTowerMenu();
+        }
     }
 }
