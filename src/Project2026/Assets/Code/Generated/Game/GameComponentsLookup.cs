@@ -73,71 +73,74 @@ public static class GameComponentsLookup {
     public const int EffectCheckRequest = 62;
     public const int Stackable = 63;
     public const int Enemy = 64;
-    public const int CurrentHealth = 65;
-    public const int HpBar = 66;
-    public const int MaxHealth = 67;
-    public const int FlowFieldDirty = 68;
-    public const int FlowFields = 69;
-    public const int IntegrationFields = 70;
-    public const int OccupField = 71;
-    public const int ReservedField = 72;
-    public const int SpatialHash = 73;
-    public const int SpawnMap = 74;
-    public const int SpawnReservedField = 75;
-    public const int SurroundField = 76;
-    public const int TilemapMovement = 77;
-    public const int CurrentCell = 78;
-    public const int GridMovement = 79;
-    public const int LastDirection = 80;
-    public const int MovementAvailable = 81;
-    public const int MovementOffset = 82;
-    public const int MovementSpeed = 83;
-    public const int MovementSpeedBonus = 84;
-    public const int Moving = 85;
-    public const int TotalDistance = 86;
-    public const int Trajectory = 87;
-    public const int TrajectoryBaseArcHeight = 88;
-    public const int TrajectoryCurrentArcHeight = 89;
-    public const int TrajectoryMovement = 90;
-    public const int TrajectoryPathProgress = 91;
-    public const int Velocity = 92;
-    public const int PlayerCastle = 93;
-    public const int PlayerCastleCells = 94;
-    public const int Player = 95;
-    public const int FireResistance = 96;
-    public const int FrostResistance = 97;
-    public const int PhysicalResistance = 98;
-    public const int SpawnPosition = 99;
-    public const int SpawnRequsted = 100;
-    public const int WaitingToSpawn = 101;
-    public const int SurroundSlot = 102;
-    public const int SurroundTargetId = 103;
-    public const int Targetable = 104;
-    public const int TargetCell = 105;
-    public const int TargetCellRequest = 106;
-    public const int TargetFlow = 107;
-    public const int TargetId = 108;
-    public const int TargetPoint = 109;
-    public const int TargetSelected = 110;
-    public const int Tower = 111;
-    public const int TowerBuildRequest = 112;
-    public const int TowerPlace = 113;
-    public const int TowerUpgrade = 114;
-    public const int TowerUpgradeIcon = 115;
-    public const int TowerUpgradePrice = 116;
-    public const int TowerUpgradeRequest = 117;
-    public const int Unit = 118;
-    public const int UnitAnchorPoint = 119;
-    public const int UnitIcon = 120;
-    public const int UnitSize = 121;
-    public const int CurrentWaveEnemies = 122;
-    public const int CurrentWaveNumber = 123;
-    public const int WaveEnemiesAlive = 124;
-    public const int WaveInProgress = 125;
-    public const int WaveStartRequsted = 126;
-    public const int Projectile = 127;
+    public const int Exchequer = 65;
+    public const int ExchequerCapacity = 66;
+    public const int ExchequerType = 67;
+    public const int CurrentHealth = 68;
+    public const int HpBar = 69;
+    public const int MaxHealth = 70;
+    public const int FlowFieldDirty = 71;
+    public const int FlowFields = 72;
+    public const int IntegrationFields = 73;
+    public const int OccupField = 74;
+    public const int ReservedField = 75;
+    public const int SpatialHash = 76;
+    public const int SpawnMap = 77;
+    public const int SpawnReservedField = 78;
+    public const int SurroundField = 79;
+    public const int TilemapMovement = 80;
+    public const int CurrentCell = 81;
+    public const int GridMovement = 82;
+    public const int LastDirection = 83;
+    public const int MovementAvailable = 84;
+    public const int MovementOffset = 85;
+    public const int MovementSpeed = 86;
+    public const int MovementSpeedBonus = 87;
+    public const int Moving = 88;
+    public const int TotalDistance = 89;
+    public const int Trajectory = 90;
+    public const int TrajectoryBaseArcHeight = 91;
+    public const int TrajectoryCurrentArcHeight = 92;
+    public const int TrajectoryMovement = 93;
+    public const int TrajectoryPathProgress = 94;
+    public const int Velocity = 95;
+    public const int PlayerCastle = 96;
+    public const int PlayerCastleCells = 97;
+    public const int Player = 98;
+    public const int FireResistance = 99;
+    public const int FrostResistance = 100;
+    public const int PhysicalResistance = 101;
+    public const int SpawnPosition = 102;
+    public const int SpawnRequsted = 103;
+    public const int WaitingToSpawn = 104;
+    public const int SurroundSlot = 105;
+    public const int SurroundTargetId = 106;
+    public const int Targetable = 107;
+    public const int TargetCell = 108;
+    public const int TargetCellRequest = 109;
+    public const int TargetFlow = 110;
+    public const int TargetId = 111;
+    public const int TargetPoint = 112;
+    public const int TargetSelected = 113;
+    public const int Tower = 114;
+    public const int TowerBuildRequest = 115;
+    public const int TowerPlace = 116;
+    public const int TowerUpgrade = 117;
+    public const int TowerUpgradeIcon = 118;
+    public const int TowerUpgradePrice = 119;
+    public const int TowerUpgradeRequest = 120;
+    public const int Unit = 121;
+    public const int UnitAnchorPoint = 122;
+    public const int UnitIcon = 123;
+    public const int UnitSize = 124;
+    public const int CurrentWaveEnemies = 125;
+    public const int CurrentWaveNumber = 126;
+    public const int WaveEnemiesAlive = 127;
+    public const int WaveInProgress = 128;
+    public const int WaveStartRequsted = 129;
+    public const int Projectile = 130;
 
-    public const int TotalComponents = 128;
+    public const int TotalComponents = 131;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -205,6 +208,9 @@ public static class GameComponentsLookup {
         "EffectCheckRequest",
         "Stackable",
         "Enemy",
+        "Exchequer",
+        "ExchequerCapacity",
+        "ExchequerType",
         "CurrentHealth",
         "HpBar",
         "MaxHealth",
@@ -336,6 +342,9 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Effect.EffectCheckRequest),
         typeof(Code.Game.Features.Effect.Stackable),
         typeof(Code.Game.Features.Enemy.EnemyComponent),
+        typeof(Code.Game.Features.Exchequer.Exchequer),
+        typeof(Code.Game.Features.Exchequer.ExchequerCapacity),
+        typeof(Code.Game.Features.Exchequer.ExchequerTypeComponent),
         typeof(Code.Game.Features.Health.CurrentHealth),
         typeof(Code.Game.Features.Health.HpBar),
         typeof(Code.Game.Features.Health.MaxHealth),

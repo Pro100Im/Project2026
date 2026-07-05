@@ -9,7 +9,6 @@ namespace Code.Meta.Features.Game
     public class GameScreen : MonoBehaviour
     {
         [SerializeField] private UIDocument _gameScreenDoc;
-        [SerializeField] private TowerMenu _towerMenuScreen;
 
         private UIService _uIService;
 
@@ -37,6 +36,7 @@ namespace Code.Meta.Features.Game
 
         public Button GetButton(string name) => _root.Q<Button>(name);
         public Image GetImage(string name) => _root.Q<Image>(name);
+        public Label GetLabel(string name) => _root.Q<Label>(name);
 
         private void StartWave()
         {
@@ -44,36 +44,15 @@ namespace Code.Meta.Features.Game
 
             entity.isWaveStartRequsted = true;
         }
-
-        public void OpenTowerBuildMenu(Vector2 screenPos, GameEntity entity)
+        public bool IsPointerOverUI(Vector2 screenPos)
         {
-            _towerMenuScreen.OpenTowerBuildMenu(screenPos, entity);
+            return _uIService.IsPointerOverUI(screenPos, _root);
         }
-
-        public void CloseTowerBuildMenu()
-        {
-            _towerMenuScreen.CloseTowerBuilds();
-        }
-
-        public void OpenTowerUpgradeMenu(Vector2 screenPos, GameEntity entity)
-        {
-            _towerMenuScreen.OpenTowerUpgradeMenu(screenPos, entity);
-        }
-
-        public void CloseTowerUpgradeMenu()
-        {
-            _towerMenuScreen.CloseTowerUpgrades();
-        }
-
 
         private void OnDestroy()
         {
             _startWaveButton.clickable.clicked -= StartWave;
         }
 
-        public bool IsPointerOverUI(Vector2 screenPos)
-        {
-            return _uIService.IsPointerOverUI(screenPos, _root);
-        }
     }
 }

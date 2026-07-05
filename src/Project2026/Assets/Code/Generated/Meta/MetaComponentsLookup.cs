@@ -10,19 +10,23 @@ public static class MetaComponentsLookup {
 
     public const int DelayDestruct = 0;
     public const int Destructed = 1;
-    public const int TargetId = 2;
-    public const int TowerMenu = 3;
-    public const int TowerOpenBuildMenu = 4;
-    public const int TowerOpenUpgradeMenu = 5;
-    public const int UnitRangeShowed = 6;
-    public const int UnitRangeView = 7;
-    public const int UnitSelectedView = 8;
+    public const int Exchequer = 2;
+    public const int ExchequerCapacity = 3;
+    public const int TargetId = 4;
+    public const int TowerMenu = 5;
+    public const int TowerOpenBuildMenu = 6;
+    public const int TowerOpenUpgradeMenu = 7;
+    public const int UnitRangeShowed = 8;
+    public const int UnitRangeView = 9;
+    public const int UnitSelectedView = 10;
 
-    public const int TotalComponents = 9;
+    public const int TotalComponents = 11;
 
     public static readonly string[] componentNames = {
         "DelayDestruct",
         "Destructed",
+        "Exchequer",
+        "ExchequerCapacity",
         "TargetId",
         "TowerMenu",
         "TowerOpenBuildMenu",
@@ -35,6 +39,8 @@ public static class MetaComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(Code.Game.Common.DelayDestruct),
         typeof(Code.Game.Common.Destructed),
+        typeof(Code.Game.Features.Exchequer.Exchequer),
+        typeof(Code.Game.Features.Exchequer.ExchequerCapacity),
         typeof(Code.Game.Features.Target.TargetId),
         typeof(Code.Game.Features.Tower.TowerMenuComponent),
         typeof(Code.Game.Features.Tower.TowerOpenBuildMenu),
