@@ -32,7 +32,7 @@ namespace Code.Game.Features.Exchequer.Systems
             for (var i = 0; i < entities.Count; i++)
             {
                 newValue += entities[i].exchequerGoldChangeRequest.Value;
-                entities[i].isDestructed = true;
+                //entities[i].isDestructed = true;
             }
 
             exchequer.ReplaceExchequerGoldCapacity(newValue);

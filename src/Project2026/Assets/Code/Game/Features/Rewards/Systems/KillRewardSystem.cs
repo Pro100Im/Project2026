@@ -29,6 +29,9 @@ namespace Code.Game.Features.Rewards.Systems
             {
                 var reward = rewards[i];
                 var entity = CreateGameEntity.Empty();
+                var spawnPos = reward.hasSpawnPosition ? reward.spawnPosition.Value : reward.woldPos.Value;
+
+                entity.AddSpawnPosition(spawnPos);
 
                 for (var j = 0; j < reward.reward.Value.Properties.Length; j++)
                 {
