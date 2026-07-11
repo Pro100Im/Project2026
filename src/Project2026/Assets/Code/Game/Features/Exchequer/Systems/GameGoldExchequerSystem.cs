@@ -30,10 +30,7 @@ namespace Code.Game.Features.Exchequer.Systems
             var newValue = exchequer.exchequerGoldCapacity.Value;
 
             for (var i = 0; i < entities.Count; i++)
-            {
                 newValue += entities[i].exchequerGoldChangeRequest.Value;
-                //entities[i].isDestructed = true;
-            }
 
             exchequer.ReplaceExchequerGoldCapacity(newValue);
             exchequer.gameExchequer.Value.SetGold(newValue);
