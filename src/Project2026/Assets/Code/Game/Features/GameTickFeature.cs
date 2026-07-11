@@ -7,11 +7,13 @@ using Code.Game.Features.Death;
 using Code.Game.Features.Debaffs;
 using Code.Game.Features.Duration;
 using Code.Game.Features.Effect;
+using Code.Game.Features.Exchequer;
 using Code.Game.Features.Health;
 using Code.Game.Features.Input;
 using Code.Game.Features.Level;
 using Code.Game.Features.Movement;
 using Code.Game.Features.Player;
+using Code.Game.Features.Rewards;
 using Code.Game.Features.Spawn;
 using Code.Game.Features.Target;
 using Code.Game.Features.Tower;
@@ -50,6 +52,10 @@ namespace Code.Game.Features
 
             Add(systemFactory.Create<HealthFeature>());
             Add(systemFactory.Create<DeathFeature>());
+
+            Add(systemFactory.Create<RewardFeature>());
+
+            Add(systemFactory.Create<GameExchequerFeature>());
 
             Add(systemFactory.Create<EffectFeature>());
 

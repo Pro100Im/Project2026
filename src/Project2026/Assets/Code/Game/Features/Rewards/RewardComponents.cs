@@ -1,16 +1,7 @@
-using UnityEngine;
+using Code.Game.StaticData.Configs;
+using Entitas;
 
-public class RewardComponents : MonoBehaviour
+namespace Code.Game.Features.Rewards
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Game] [Meta] public struct Reward : IComponent { public EntityConfig Value; }
 }

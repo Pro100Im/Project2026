@@ -10,23 +10,33 @@ public static class MetaComponentsLookup {
 
     public const int DelayDestruct = 0;
     public const int Destructed = 1;
-    public const int Exchequer = 2;
-    public const int ExchequerCapacity = 3;
-    public const int TargetId = 4;
-    public const int TowerMenu = 5;
-    public const int TowerOpenBuildMenu = 6;
-    public const int TowerOpenUpgradeMenu = 7;
-    public const int UnitRangeShowed = 8;
-    public const int UnitRangeView = 9;
-    public const int UnitSelectedView = 10;
+    public const int ExchequerGoldCapacity = 2;
+    public const int ExchequerGoldChangeRequest = 3;
+    public const int ExchequerManaChangeRequest = 4;
+    public const int ExchequerMealCapacity = 5;
+    public const int ExchequerMealChangeRequest = 6;
+    public const int GameExchequer = 7;
+    public const int Reward = 8;
+    public const int TargetId = 9;
+    public const int TowerMenu = 10;
+    public const int TowerOpenBuildMenu = 11;
+    public const int TowerOpenUpgradeMenu = 12;
+    public const int UnitRangeShowed = 13;
+    public const int UnitRangeView = 14;
+    public const int UnitSelectedView = 15;
 
-    public const int TotalComponents = 11;
+    public const int TotalComponents = 16;
 
     public static readonly string[] componentNames = {
         "DelayDestruct",
         "Destructed",
-        "Exchequer",
-        "ExchequerCapacity",
+        "ExchequerGoldCapacity",
+        "ExchequerGoldChangeRequest",
+        "ExchequerManaChangeRequest",
+        "ExchequerMealCapacity",
+        "ExchequerMealChangeRequest",
+        "GameExchequer",
+        "Reward",
         "TargetId",
         "TowerMenu",
         "TowerOpenBuildMenu",
@@ -39,8 +49,13 @@ public static class MetaComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(Code.Game.Common.DelayDestruct),
         typeof(Code.Game.Common.Destructed),
-        typeof(Code.Game.Features.Exchequer.Exchequer),
-        typeof(Code.Game.Features.Exchequer.ExchequerCapacity),
+        typeof(Code.Game.Features.Exchequer.ExchequerGoldCapacity),
+        typeof(Code.Game.Features.Exchequer.ExchequerGoldChangeRequest),
+        typeof(Code.Game.Features.Exchequer.ExchequerManaChangeRequest),
+        typeof(Code.Game.Features.Exchequer.ExchequerMealCapacity),
+        typeof(Code.Game.Features.Exchequer.ExchequerMealChangeRequest),
+        typeof(Code.Game.Features.Exchequer.GameExchequer),
+        typeof(Code.Game.Features.Rewards.Reward),
         typeof(Code.Game.Features.Target.TargetId),
         typeof(Code.Game.Features.Tower.TowerMenuComponent),
         typeof(Code.Game.Features.Tower.TowerOpenBuildMenu),

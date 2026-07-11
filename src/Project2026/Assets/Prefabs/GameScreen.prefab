@@ -9,7 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7331010246951210151}
-  - component: {fileID: 758278845550416350}
+  - component: {fileID: 6343993040223468091}
+  - component: {fileID: 4605429170542480131}
+  - component: {fileID: 7574193790645885336}
+  - component: {fileID: 5171135505108696753}
   m_Layer: 0
   m_Name: GameExchequerScore
   m_TagString: Untagged
@@ -32,7 +35,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 37443703770885465}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &758278845550416350
+--- !u!114 &6343993040223468091
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +44,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 4933473282176414999}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c45a5bdbf327d0a41b3d71c9dcd1f216, type: 3}
+  m_Script: {fileID: 11500000, guid: d8b30b8020b692e4297a000e2a9de229, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Code.Meta.Features.Game.GameExchequerScore
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Exchequer.GameExchequerView
+--- !u!114 &4605429170542480131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4933473282176414999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e9e6d76a148574fa7021028a8f886a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.EntityBehaviour
+--- !u!114 &7574193790645885336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4933473282176414999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91000b786247f214a819d2f2d99b9f0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Exchequer.Registrars.GameExchequerRegistrar
+  EntityView: {fileID: 4605429170542480131}
+  _gameExchequerView: {fileID: 6343993040223468091}
+--- !u!114 &5171135505108696753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4933473282176414999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9267ce2d010e48444a785586d0cd3ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.SelfInitializeEntityView
+  _entityBehaviour: {fileID: 4605429170542480131}
 --- !u!1 &5686554603850505932
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,9 +8,10 @@ namespace Code.Game.Features.Effect
         public EffectFeature(ISystemFactory systemFactory)
         {
             Add(systemFactory.Create<ApplyChillEffectSystem>());
-            Add(systemFactory.Create<ChillEffectEndSystem>());
-
             Add(systemFactory.Create<ApplyCombustionEffectSystem>());
+            Add(systemFactory.Create<EffectCheckRequestCleanupSystem>());
+
+            Add(systemFactory.Create<ChillEffectEndSystem>());
             Add(systemFactory.Create<CombustionEffectEndSystem>());
         }
     }

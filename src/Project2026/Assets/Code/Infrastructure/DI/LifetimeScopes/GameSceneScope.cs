@@ -21,6 +21,8 @@ using Code.Game.Features.Duration;
 using Code.Game.Features.Duration.Systems;
 using Code.Game.Features.Effect;
 using Code.Game.Features.Effect.Systems;
+using Code.Game.Features.Exchequer;
+using Code.Game.Features.Exchequer.Systems;
 using Code.Game.Features.Health;
 using Code.Game.Features.Health.Systems;
 using Code.Game.Features.Input;
@@ -31,6 +33,8 @@ using Code.Game.Features.Movement;
 using Code.Game.Features.Movement.Systems;
 using Code.Game.Features.Player;
 using Code.Game.Features.Player.Systems;
+using Code.Game.Features.Rewards;
+using Code.Game.Features.Rewards.Systems;
 using Code.Game.Features.Spawn;
 using Code.Game.Features.Spawn.Systems;
 using Code.Game.Features.Target;
@@ -146,6 +150,9 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<HealthFeature>(Lifetime.Singleton);
             builder.Register<DeathFeature>(Lifetime.Singleton);
 
+            builder.Register<RewardFeature>(Lifetime.Singleton);
+            builder.Register<GameExchequerFeature>(Lifetime.Singleton);
+
             builder.Register<EffectFeature>(Lifetime.Singleton);
 
             builder.Register<AnimatorFeature>(Lifetime.Singleton);
@@ -220,14 +227,18 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<HealthBarSystem>(Lifetime.Singleton);
             builder.Register<DeathSystem>(Lifetime.Singleton);
+            builder.Register<KillRewardSystem>(Lifetime.Singleton);
 
             builder.Register<ApplyChillEffectSystem>(Lifetime.Singleton);
-            builder.Register<ChillEffectEndSystem>(Lifetime.Singleton);
             builder.Register<ApplyCombustionEffectSystem>(Lifetime.Singleton);
+            builder.Register<EffectCheckRequestCleanupSystem>(Lifetime.Singleton);
+            builder.Register<ChillEffectEndSystem>(Lifetime.Singleton);
             builder.Register<CombustionEffectEndSystem>(Lifetime.Singleton);
 
             builder.Register<CooldownLeftSystem>(Lifetime.Singleton);
             builder.Register<DurationLeftSystem>(Lifetime.Singleton);
+
+            builder.Register<GameGoldExchequerSystem>(Lifetime.Singleton);
 
             builder.Register<DelayDestructSystem>(Lifetime.Singleton);
             builder.Register<MetaDestructedSystem>(Lifetime.Singleton);

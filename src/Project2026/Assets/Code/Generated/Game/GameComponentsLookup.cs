@@ -73,74 +73,79 @@ public static class GameComponentsLookup {
     public const int EffectCheckRequest = 62;
     public const int Stackable = 63;
     public const int Enemy = 64;
-    public const int Exchequer = 65;
-    public const int ExchequerCapacity = 66;
-    public const int ExchequerType = 67;
-    public const int CurrentHealth = 68;
-    public const int HpBar = 69;
-    public const int MaxHealth = 70;
-    public const int FlowFieldDirty = 71;
-    public const int FlowFields = 72;
-    public const int IntegrationFields = 73;
-    public const int OccupField = 74;
-    public const int ReservedField = 75;
-    public const int SpatialHash = 76;
-    public const int SpawnMap = 77;
-    public const int SpawnReservedField = 78;
-    public const int SurroundField = 79;
-    public const int TilemapMovement = 80;
-    public const int CurrentCell = 81;
-    public const int GridMovement = 82;
-    public const int LastDirection = 83;
-    public const int MovementAvailable = 84;
-    public const int MovementOffset = 85;
-    public const int MovementSpeed = 86;
-    public const int MovementSpeedBonus = 87;
-    public const int Moving = 88;
-    public const int TotalDistance = 89;
-    public const int Trajectory = 90;
-    public const int TrajectoryBaseArcHeight = 91;
-    public const int TrajectoryCurrentArcHeight = 92;
-    public const int TrajectoryMovement = 93;
-    public const int TrajectoryPathProgress = 94;
-    public const int Velocity = 95;
-    public const int PlayerCastle = 96;
-    public const int PlayerCastleCells = 97;
-    public const int Player = 98;
-    public const int FireResistance = 99;
-    public const int FrostResistance = 100;
-    public const int PhysicalResistance = 101;
-    public const int SpawnPosition = 102;
-    public const int SpawnRequsted = 103;
-    public const int WaitingToSpawn = 104;
-    public const int SurroundSlot = 105;
-    public const int SurroundTargetId = 106;
-    public const int Targetable = 107;
-    public const int TargetCell = 108;
-    public const int TargetCellRequest = 109;
-    public const int TargetFlow = 110;
-    public const int TargetId = 111;
-    public const int TargetPoint = 112;
-    public const int TargetSelected = 113;
-    public const int Tower = 114;
-    public const int TowerBuildRequest = 115;
-    public const int TowerPlace = 116;
-    public const int TowerUpgrade = 117;
-    public const int TowerUpgradeIcon = 118;
-    public const int TowerUpgradePrice = 119;
-    public const int TowerUpgradeRequest = 120;
-    public const int Unit = 121;
-    public const int UnitAnchorPoint = 122;
-    public const int UnitIcon = 123;
-    public const int UnitSize = 124;
-    public const int CurrentWaveEnemies = 125;
-    public const int CurrentWaveNumber = 126;
-    public const int WaveEnemiesAlive = 127;
-    public const int WaveInProgress = 128;
-    public const int WaveStartRequsted = 129;
-    public const int Projectile = 130;
+    public const int ExchequerGoldCapacity = 65;
+    public const int ExchequerGoldChangeRequest = 66;
+    public const int ExchequerManaCapacity = 67;
+    public const int ExchequerManaChangeRequest = 68;
+    public const int ExchequerMealCapacity = 69;
+    public const int ExchequerMealChangeRequest = 70;
+    public const int GameExchequer = 71;
+    public const int CurrentHealth = 72;
+    public const int HpBar = 73;
+    public const int MaxHealth = 74;
+    public const int FlowFieldDirty = 75;
+    public const int FlowFields = 76;
+    public const int IntegrationFields = 77;
+    public const int OccupField = 78;
+    public const int ReservedField = 79;
+    public const int SpatialHash = 80;
+    public const int SpawnMap = 81;
+    public const int SpawnReservedField = 82;
+    public const int SurroundField = 83;
+    public const int TilemapMovement = 84;
+    public const int CurrentCell = 85;
+    public const int GridMovement = 86;
+    public const int LastDirection = 87;
+    public const int MovementAvailable = 88;
+    public const int MovementOffset = 89;
+    public const int MovementSpeed = 90;
+    public const int MovementSpeedBonus = 91;
+    public const int Moving = 92;
+    public const int TotalDistance = 93;
+    public const int Trajectory = 94;
+    public const int TrajectoryBaseArcHeight = 95;
+    public const int TrajectoryCurrentArcHeight = 96;
+    public const int TrajectoryMovement = 97;
+    public const int TrajectoryPathProgress = 98;
+    public const int Velocity = 99;
+    public const int PlayerCastle = 100;
+    public const int PlayerCastleCells = 101;
+    public const int Player = 102;
+    public const int FireResistance = 103;
+    public const int FrostResistance = 104;
+    public const int PhysicalResistance = 105;
+    public const int Reward = 106;
+    public const int SpawnPosition = 107;
+    public const int SpawnRequsted = 108;
+    public const int WaitingToSpawn = 109;
+    public const int SurroundSlot = 110;
+    public const int SurroundTargetId = 111;
+    public const int Targetable = 112;
+    public const int TargetCell = 113;
+    public const int TargetCellRequest = 114;
+    public const int TargetFlow = 115;
+    public const int TargetId = 116;
+    public const int TargetPoint = 117;
+    public const int TargetSelected = 118;
+    public const int Tower = 119;
+    public const int TowerBuildRequest = 120;
+    public const int TowerPlace = 121;
+    public const int TowerUpgrade = 122;
+    public const int TowerUpgradeIcon = 123;
+    public const int TowerUpgradePrice = 124;
+    public const int TowerUpgradeRequest = 125;
+    public const int Unit = 126;
+    public const int UnitAnchorPoint = 127;
+    public const int UnitIcon = 128;
+    public const int UnitSize = 129;
+    public const int CurrentWaveEnemies = 130;
+    public const int CurrentWaveNumber = 131;
+    public const int WaveEnemiesAlive = 132;
+    public const int WaveInProgress = 133;
+    public const int WaveStartRequsted = 134;
+    public const int Projectile = 135;
 
-    public const int TotalComponents = 131;
+    public const int TotalComponents = 136;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -208,9 +213,13 @@ public static class GameComponentsLookup {
         "EffectCheckRequest",
         "Stackable",
         "Enemy",
-        "Exchequer",
-        "ExchequerCapacity",
-        "ExchequerType",
+        "ExchequerGoldCapacity",
+        "ExchequerGoldChangeRequest",
+        "ExchequerManaCapacity",
+        "ExchequerManaChangeRequest",
+        "ExchequerMealCapacity",
+        "ExchequerMealChangeRequest",
+        "GameExchequer",
         "CurrentHealth",
         "HpBar",
         "MaxHealth",
@@ -245,6 +254,7 @@ public static class GameComponentsLookup {
         "FireResistance",
         "FrostResistance",
         "PhysicalResistance",
+        "Reward",
         "SpawnPosition",
         "SpawnRequsted",
         "WaitingToSpawn",
@@ -342,9 +352,13 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Effect.EffectCheckRequest),
         typeof(Code.Game.Features.Effect.Stackable),
         typeof(Code.Game.Features.Enemy.EnemyComponent),
-        typeof(Code.Game.Features.Exchequer.Exchequer),
-        typeof(Code.Game.Features.Exchequer.ExchequerCapacity),
-        typeof(Code.Game.Features.Exchequer.ExchequerTypeComponent),
+        typeof(Code.Game.Features.Exchequer.ExchequerGoldCapacity),
+        typeof(Code.Game.Features.Exchequer.ExchequerGoldChangeRequest),
+        typeof(Code.Game.Features.Exchequer.ExchequerManaCapacity),
+        typeof(Code.Game.Features.Exchequer.ExchequerManaChangeRequest),
+        typeof(Code.Game.Features.Exchequer.ExchequerMealCapacity),
+        typeof(Code.Game.Features.Exchequer.ExchequerMealChangeRequest),
+        typeof(Code.Game.Features.Exchequer.GameExchequer),
         typeof(Code.Game.Features.Health.CurrentHealth),
         typeof(Code.Game.Features.Health.HpBar),
         typeof(Code.Game.Features.Health.MaxHealth),
@@ -379,6 +393,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Resistance.FireResistance),
         typeof(Code.Game.Features.Resistance.FrostResistance),
         typeof(Code.Game.Features.Resistance.PhysicalResistance),
+        typeof(Code.Game.Features.Rewards.Reward),
         typeof(Code.Game.Features.Spawn.SpawnPosition),
         typeof(Code.Game.Features.Spawn.SpawnRequsted),
         typeof(Code.Game.Features.Spawn.WaitingToSpawn),

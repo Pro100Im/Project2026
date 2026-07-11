@@ -2,16 +2,12 @@ using Entitas;
 
 namespace Code.Game.Features.Exchequer
 {
-    [Game, Meta] public struct Exchequer : IComponent { };
+    [Game, Meta] public struct GameExchequer : IComponent { public GameExchequerView Value; };
+    [Game, Meta] public struct ExchequerGoldChangeRequest : IComponent { public int Value; };
+    [Game, Meta] public struct ExchequerMealChangeRequest : IComponent { public int Value; };
+    [Game, Meta] public struct ExchequerManaChangeRequest : IComponent { public int Value; };
 
-    [Game, Meta] public struct ExchequerCapacity : IComponent { public int Value; }
-
-    [Game] public struct ExchequerTypeComponent : IComponent { public GameExchequerType Value; }
-
-    public enum GameExchequerType
-    {
-        Gold,
-        Meal,
-        Mana
-    } 
+    [Game, Meta] public struct ExchequerGoldCapacity : IComponent { public int Value; }
+    [Game, Meta] public struct ExchequerMealCapacity : IComponent { public int Value; }
+    [Game] public struct ExchequerManaCapacity : IComponent { public int Value; }
 }
