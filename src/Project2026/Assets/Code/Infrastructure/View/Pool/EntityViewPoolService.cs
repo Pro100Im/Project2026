@@ -70,8 +70,20 @@ namespace Code.Infrastructure.View.Pool
         private void OnRelease(EntityBehaviour view)
         {
             view.transform.DOKill();
+            ResetVisualEffects(view);
             view.gameObject.SetActive(false);
             view.transform.SetParent(_root, false);
+        }
+
+        private static void ResetVisualEffects(EntityBehaviour view)
+        {
+            var trails = view.GetComponentsInChildren<TrailRenderer>(true);
+            for (var i = 0; i < trails.Length; i++)
+                trails[i].Clear();
+
+            var particles = view.GetComponentsInChildren<ParticleSystem>(true);
+            for (var i = 0; i < particles.Length; i++)
+                particles[i].Clear(true);
         }
 
         private void OnDestroy(EntityBehaviour view)

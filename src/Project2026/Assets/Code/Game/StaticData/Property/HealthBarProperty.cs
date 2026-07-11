@@ -21,7 +21,7 @@ namespace Code.Game.StaticData.Data
                 hpBarEntity.AddSpawnPosition(spawnPos);
                 hpBarEntity.AddTargetId(entity.id.Value);
                 hpBarEntity.AddOwnerId(entity.id.Value);
-                hpBarEntity.AddCurrentHealth(entity.currentHealth.Value);
+                hpBarEntity.AddCurrentHealth(-1f); // sentinel: forces HealthBarSystem to sync the view on its first tick
                 hpBarEntity.isAttached = true;
 
                 foreach (var property in HpBar.Properties)
