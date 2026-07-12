@@ -38,6 +38,7 @@ MonoBehaviour:
       data:
         <Mode>k__BackingField: 1
         <Range>k__BackingField: 7
+        <DetectionRange>k__BackingField: 7
         <Cooldown>k__BackingField: 2
         <Duration>k__BackingField: 0.6
         <IsMelee>k__BackingField: 0
@@ -57,4 +58,5 @@ MonoBehaviour:
       data:
         <Mode>k__BackingField: 2
         <Prices>k__BackingField: 
+        <UpgradeIcons>k__BackingField: []
         <Upgrades>k__BackingField: []

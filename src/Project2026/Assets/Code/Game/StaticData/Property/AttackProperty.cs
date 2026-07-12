@@ -7,14 +7,20 @@ namespace Code.Game.StaticData.Data
     public class AttackProperty : EntityProperty
     {
         [field: SerializeField] public float Range { get; private set; }
+        [field: SerializeField] public float DetectionRange { get; private set; }
         [field: SerializeField] public float Cooldown { get; private set; }
         [field: SerializeField] public float Duration { get; private set; }
         [field: SerializeField] public bool IsMelee { get; private set; }
 
         protected override void Add(GameEntity entity)
         {
+            var detection = DetectionRange > 0f ? DetectionRange : Range;
+
             if (!entity.hasRange)
                 entity.AddRange(Range);
+
+            if (!entity.hasDetectionRange)
+                entity.AddDetectionRange(detection);
 
             if (!entity.hasAttackCooldown)
                 entity.AddAttackCooldown(Cooldown);
@@ -32,6 +38,9 @@ namespace Code.Game.StaticData.Data
             if (entity.hasRange)
                 entity.RemoveRange();
 
+            if (entity.hasDetectionRange)
+                entity.RemoveDetectionRange();
+
             if (entity.hasAttackCooldown)
                 entity.RemoveAttackCooldown();
 
@@ -45,8 +54,15 @@ namespace Code.Game.StaticData.Data
 
         protected override void Replace(GameEntity entity)
         {
+            var detection = DetectionRange > 0f ? DetectionRange : Range;
+
             if (entity.hasRange)
                 entity.ReplaceRange(Range);
+
+            if (entity.hasDetectionRange)
+                entity.ReplaceDetectionRange(detection);
+            else
+                entity.AddDetectionRange(detection);
 
             if (entity.hasAttackCooldown)
                 entity.ReplaceAttackCooldown(Cooldown);

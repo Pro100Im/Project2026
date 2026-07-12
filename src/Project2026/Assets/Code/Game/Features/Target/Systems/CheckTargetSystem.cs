@@ -20,6 +20,7 @@ namespace Code.Game.Features.Target.Systems
                 GameMatcher.Id,
                 GameMatcher.Team,
                 GameMatcher.Range,
+                GameMatcher.DetectionRange,
                 GameMatcher.Transform,
                 GameMatcher.CurrentCell));
 
@@ -47,7 +48,7 @@ namespace Code.Game.Features.Target.Systems
                 if (attacker.hasUnitAnchorPoint)
                     attackOriginPos += attacker.unitAnchorPoint.Value;
 
-                var range = attacker.range.Value;
+                var range = attacker.detectionRange.Value;
                 var myTeam = attacker.team.Value;
                 var attackerCell = attacker.currentCell.Value;
                 var physicalRange = TargetService.GetPhysicalRange(range);

@@ -114,6 +114,7 @@ MonoBehaviour:
       data:
         <Mode>k__BackingField: 0
         <Range>k__BackingField: 1.5
+        <DetectionRange>k__BackingField: 3
         <Cooldown>k__BackingField: 3
         <Duration>k__BackingField: 0.6
         <IsMelee>k__BackingField: 1

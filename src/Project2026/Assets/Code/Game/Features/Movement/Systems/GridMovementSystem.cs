@@ -53,7 +53,7 @@ namespace Code.Game.Features.Movement.Systems
                 var unit = units[i];
 
                 if (!unit.hasTargetCell || unit.isAttacking || unit.isDead
-                    || (unit.hasTargetId && (!unit.hasSurroundSlot || (unit.hasSurroundSlot && unit.currentCell.Value == unit.surroundSlot.Value))))
+                    || (unit.hasSurroundSlot && unit.currentCell.Value == unit.surroundSlot.Value))
                 {
                     if (unit.isMoving)
                     {

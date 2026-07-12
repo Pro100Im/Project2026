@@ -6,6 +6,7 @@ namespace Code.Game.Features.Attack
     [Game] public class AttackCooldown : IComponent { public float Value; }
     [Game] public class AttackDuration : IComponent { public float Value; }
     [Game] public class Range : IComponent { public float Value; }
+    [Game] public class DetectionRange : IComponent { public float Value; }
     [Game] public class RangeAttack : IComponent { }
     [Game] public class MeleeAttack : IComponent { }
     [Game] public class Attacking : IComponent { }

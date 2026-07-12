@@ -44,6 +44,16 @@ namespace Code.Game.Features.Attack.Systems
                 if (target.isDead)
                     continue;
 
+                if (attacker.isMeleeAttack)
+                {
+                    var physicalRange = TargetService.GetPhysicalRange(attacker.range.Value);
+                    var dx = attacker.attackerPoint.Value.x - attacker.targetPoint.Value.x;
+                    var dy = attacker.attackerPoint.Value.y - attacker.targetPoint.Value.y;
+
+                    if ((dx * dx) + (dy * dy) > physicalRange * physicalRange)
+                        continue;
+                }
+
                 if (attacker.isRangeAttack && !TryFireProjectile(attacker, target))
                     continue;
 

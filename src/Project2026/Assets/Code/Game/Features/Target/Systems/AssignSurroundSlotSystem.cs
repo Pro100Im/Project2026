@@ -8,12 +8,26 @@ namespace Code.Game.Features.Target.Systems
 {
     public class AssignSurroundSlotSystem : IExecuteSystem
     {
+        private const int MaxTargetCandidates = 8;
+
         private readonly IGroup<GameEntity> _units;
         private readonly IGroup<GameEntity> _maps;
 
         private readonly List<GameEntity> _buffer = new(256);
         private readonly HashSet<int> _processedTargets = new(256);
         private readonly List<Vector3Int> _candidates = new(64);
+        private readonly List<TargetCandidate> _targetCandidates = new(MaxTargetCandidates);
+
+        private struct TargetCandidate
+        {
+            public int TargetId;
+            public GameEntity Target;
+            public int MinX;
+            public int MinY;
+            public int MaxX;
+            public int MaxY;
+            public float SqrDist;
+        }
 
         public AssignSurroundSlotSystem(GameContext context)
         {
@@ -25,6 +39,7 @@ namespace Code.Game.Features.Target.Systems
                     GameMatcher.Id,
                     GameMatcher.Team,
                     GameMatcher.Range,
+                    GameMatcher.DetectionRange,
                     GameMatcher.UnitSize,
                     GameMatcher.MovementAvailable)
                 .NoneOf(
@@ -60,23 +75,17 @@ namespace Code.Game.Features.Target.Systems
                 var myTeam = unit.team.Value;
                 var size = unit.unitSize.Value;
                 var range = unit.range.Value;
+                var detectionRange = unit.detectionRange.Value;
                 var unitOriginPos = unit.woldPos.Value;
 
                 if (unit.hasUnitAnchorPoint)
                     unitOriginPos += unit.unitAnchorPoint.Value;
 
-                var physicalRange = TargetService.GetPhysicalRange(range);
-                var sqrPhysicalRange = physicalRange * physicalRange;
-                var iRange = Mathf.CeilToInt(TargetService.GetEffectiveRange(range));
+                var physicalDetectionRange = TargetService.GetPhysicalRange(detectionRange);
+                var sqrPhysicalDetectionRange = physicalDetectionRange * physicalDetectionRange;
+                var iRange = Mathf.CeilToInt(TargetService.GetEffectiveRange(detectionRange));
 
-                var bestTargetId = -1;
-                GameEntity bestTarget = null;
-                var bestMinX = 0;
-                var bestMinY = 0;
-                var bestMaxX = 0;
-                var bestMaxY = 0;
-                var closestSqrDist = float.MaxValue;
-
+                _targetCandidates.Clear();
                 _processedTargets.Clear();
 
                 for (var x = -iRange; x <= iRange; x++)
@@ -110,32 +119,73 @@ namespace Code.Game.Features.Target.Systems
                             var dy = unitOriginPos.y - targetPoint.y;
                             var sDist = (dx * dx) + (dy * dy);
 
-                            if (sDist > sqrPhysicalRange)
+                            if (sDist > sqrPhysicalDetectionRange)
                                 continue;
 
-                            if (sDist < closestSqrDist)
+                            TryInsertCandidate(new TargetCandidate
                             {
-                                closestSqrDist = sDist;
-                                bestTargetId = targetId;
-                                bestTarget = target;
-                                bestMinX = minX;
-                                bestMinY = minY;
-                                bestMaxX = maxX;
-                                bestMaxY = maxY;
-                            }
+                                TargetId = targetId,
+                                Target = target,
+                                MinX = minX,
+                                MinY = minY,
+                                MaxX = maxX,
+                                MaxY = maxY,
+                                SqrDist = sDist
+                            });
                         }
                     }
                 }
 
-                if (bestTargetId == -1 || bestTarget == null)
-                    continue;
+                for (var c = 0; c < _targetCandidates.Count; c++)
+                {
+                    var candidate = _targetCandidates[c];
 
-                if (!TryPickSlot(unitCell, bestTarget, bestMinX, bestMinY, bestMaxX, bestMaxY, range, size, unitId, mapEntity, tilemap, surroundField, out var slot))
-                    continue;
+                    if (!TryPickSlot(
+                            unitCell,
+                            candidate.Target,
+                            candidate.MinX,
+                            candidate.MinY,
+                            candidate.MaxX,
+                            candidate.MaxY,
+                            range,
+                            size,
+                            unitId,
+                            mapEntity,
+                            tilemap,
+                            surroundField,
+                            out var slot))
+                        continue;
 
-                surroundField[slot] = unitId;
-                unit.AddSurroundSlot(slot);
-                unit.AddSurroundTargetId(bestTargetId);
+                    surroundField[slot] = unitId;
+                    unit.AddSurroundSlot(slot);
+                    unit.AddSurroundTargetId(candidate.TargetId);
+                    break;
+                }
+            }
+        }
+
+        private void TryInsertCandidate(TargetCandidate candidate)
+        {
+            var insertIndex = _targetCandidates.Count;
+
+            for (var i = 0; i < _targetCandidates.Count; i++)
+            {
+                if (candidate.SqrDist < _targetCandidates[i].SqrDist)
+                {
+                    insertIndex = i;
+                    break;
+                }
+            }
+
+            if (insertIndex >= MaxTargetCandidates)
+                return;
+
+            if (_targetCandidates.Count < MaxTargetCandidates)
+                _targetCandidates.Insert(insertIndex, candidate);
+            else
+            {
+                _targetCandidates.RemoveAt(MaxTargetCandidates - 1);
+                _targetCandidates.Insert(insertIndex, candidate);
             }
         }
 
