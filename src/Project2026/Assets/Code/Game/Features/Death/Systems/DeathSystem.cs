@@ -1,3 +1,4 @@
+using Code.Game.Common.Entity;
 using Entitas;
 using System.Collections.Generic;
 
@@ -22,8 +23,18 @@ namespace Code.Game.Features.Death.Systems
             {
                 var entity = deaths[i];
 
-                if(!entity.isDead && entity.currentHealth.Value <= 0)
+                if (!entity.isDead && entity.currentHealth.Value <= 0)
+                {
                     entity.isDead = true;
+
+                    if (entity.hasDeathDuration && entity.hasId)
+                    {
+                        var destructTimer = CreateGameEntity.Empty();
+                        destructTimer.AddTargetId(entity.id.Value);
+                        destructTimer.AddDuration(entity.deathDuration.Value);
+                        destructTimer.isDelayDestruct = true;
+                    }
+                }
             }
         }
     }

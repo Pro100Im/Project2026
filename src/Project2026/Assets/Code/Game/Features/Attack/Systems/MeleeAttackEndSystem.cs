@@ -33,6 +33,12 @@ namespace Code.Game.Features.Attack.Systems
 
                 var entity = GetGameEntityById.Get(attack.ownerId.Value);
 
+                if (entity == null)
+                {
+                    attack.isDestructed = true;
+                    continue;
+                }
+
                 if (!entity.hasTargetId)
                 {
                     entity.isAttacking = false;
