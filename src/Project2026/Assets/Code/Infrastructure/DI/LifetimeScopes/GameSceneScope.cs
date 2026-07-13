@@ -184,6 +184,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<EnemySelectSpawnPosSystem>(Lifetime.Singleton);
             builder.Register<EnemySpawnSystem>(Lifetime.Singleton);
+            builder.Register<PlayerSelectSpawnPosSystem>(Lifetime.Singleton);
+            builder.Register<PlayerSpawnSystem>(Lifetime.Singleton);
 
             builder.Register<CharacterAnimatorSystem>(Lifetime.Singleton);
             builder.Register<PlayerCastleAnimatorSystem>(Lifetime.Singleton);
