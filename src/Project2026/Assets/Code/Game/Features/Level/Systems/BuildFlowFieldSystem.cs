@@ -32,8 +32,6 @@ namespace Code.Game.Features.Level.Systems
                 var map = maps[i];
                 var tilemap = map.tilemapMovement.Value;
                 var occupField = map.occupField.Value;
-                var goals = map.targetFlow.Value;
-                var goalsSet = new HashSet<Vector3Int>(goals);
 
                 var sizesToGenerate = new List<Vector2Int>
                 {
@@ -43,27 +41,51 @@ namespace Code.Game.Features.Level.Systems
                     new Vector2Int(3, 3)
                 };
 
-                var allIntegrations = map.integrationFields.Value;
-                var allFlows = map.flowFields.Value;
+                GenerateFields(
+                    sizesToGenerate,
+                    map.targetFlow.Value,
+                    tilemap,
+                    occupField,
+                    map.integrationFields.Value,
+                    map.flowFields.Value);
 
-                foreach (var size in sizesToGenerate)
-                {
-                    if (!allIntegrations.ContainsKey(size)) 
-                        allIntegrations[size] = new Dictionary<Vector3Int, int>();
-
-                    if (!allFlows.ContainsKey(size)) 
-                        allFlows[size] = new Dictionary<Vector3Int, Vector3Int>();
-
-                    var integration = allIntegrations[size];
-                    var flow = allFlows[size];
-
-                    integration.Clear();
-                    flow.Clear();
-
-                    GenerateForSize(size, goals, goalsSet, tilemap, occupField, integration, flow);
-                }
+                GenerateFields(
+                    sizesToGenerate,
+                    map.defenseFlow.Value,
+                    tilemap,
+                    occupField,
+                    map.defenseIntegrationFields.Value,
+                    map.defenseFlowFields.Value);
 
                 map.isFlowFieldDirty = false;
+            }
+        }
+
+        private void GenerateFields(
+            List<Vector2Int> sizesToGenerate,
+            List<Vector3Int> goals,
+            Dictionary<Vector3Int, Vector3> tilemap,
+            Dictionary<Vector3Int, int> occupField,
+            Dictionary<Vector2Int, Dictionary<Vector3Int, int>> allIntegrations,
+            Dictionary<Vector2Int, Dictionary<Vector3Int, Vector3Int>> allFlows)
+        {
+            var goalsSet = new HashSet<Vector3Int>(goals);
+
+            foreach (var size in sizesToGenerate)
+            {
+                if (!allIntegrations.ContainsKey(size))
+                    allIntegrations[size] = new Dictionary<Vector3Int, int>();
+
+                if (!allFlows.ContainsKey(size))
+                    allFlows[size] = new Dictionary<Vector3Int, Vector3Int>();
+
+                var integration = allIntegrations[size];
+                var flow = allFlows[size];
+
+                integration.Clear();
+                flow.Clear();
+
+                GenerateForSize(size, goals, goalsSet, tilemap, occupField, integration, flow);
             }
         }
 

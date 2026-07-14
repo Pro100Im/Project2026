@@ -9,12 +9,12 @@ namespace Code.Game.Features.Level.Registrars
     {
         [SerializeField] private Tilemap _tilemap;
         [Space]
-        [SerializeField] private Vector3Int[] _flowTargets;
+        [SerializeField] private Tilemap _flowTargets;
+        [SerializeField] private Tilemap _defenseTargets;
 
         public override void RegisterComponents()
         {
             var dictionary = new Dictionary<Vector3Int, Vector3>();
-            var flowTargets = new List<Vector3Int>();
             var bounds = _tilemap.cellBounds;
 
             foreach (var pos in bounds.allPositionsWithin)
@@ -29,13 +29,16 @@ namespace Code.Game.Features.Level.Registrars
                 dictionary[pos] = worldPos;
             }
 
-            foreach(var target in _flowTargets)
-                flowTargets.Add(target);
+            var flowTargets = CollectTileCells(_flowTargets);
+            var defenseTargets = CollectTileCells(_defenseTargets);
 
             Entity.AddTilemapMovement(dictionary);
             Entity.AddFlowFields(new());
             Entity.AddTargetFlow(flowTargets);
             Entity.AddIntegrationFields(new());
+            Entity.AddDefenseFlowFields(new());
+            Entity.AddDefenseFlow(defenseTargets);
+            Entity.AddDefenseIntegrationFields(new());
             Entity.AddOccupField(new());
             Entity.AddReservedField(new());
             Entity.AddSpawnReservedField(new());
@@ -50,6 +53,9 @@ namespace Code.Game.Features.Level.Registrars
             Entity.RemoveFlowFields();
             Entity.RemoveTargetFlow();
             Entity.RemoveIntegrationFields();
+            Entity.RemoveDefenseFlowFields();
+            Entity.RemoveDefenseFlow();
+            Entity.RemoveDefenseIntegrationFields();
             Entity.RemoveOccupField();
             Entity.RemoveReservedField();
             Entity.RemoveSpawnReservedField();
@@ -58,18 +64,47 @@ namespace Code.Game.Features.Level.Registrars
             Entity.isFlowFieldDirty = false;
         }
 
+        private static List<Vector3Int> CollectTileCells(Tilemap tilemap)
+        {
+            var cells = new List<Vector3Int>();
+
+            if (tilemap == null)
+                return cells;
+
+            var bounds = tilemap.cellBounds;
+
+            foreach (var pos in bounds.allPositionsWithin)
+            {
+                if (tilemap.GetTile(pos) == null)
+                    continue;
+
+                cells.Add(pos);
+            }
+
+            return cells;
+        }
+
         private void OnDrawGizmosSelected()
         {
-            if (_tilemap != null && _flowTargets != null)
-            {
-                for (var i = 0; i < _flowTargets.Length; i++)
-                {
-                    var pos = _flowTargets[i];
-                    var cell = _tilemap.GetCellCenterWorld(new Vector3Int(pos.x, pos.y, 0));
+            DrawTargetGizmos(_flowTargets, Color.red);
+            DrawTargetGizmos(_defenseTargets, Color.blue);
+        }
 
-                    Gizmos.color = Color.red;
-                    Gizmos.DrawWireCube(cell, _tilemap.cellSize);
-                }
+        private static void DrawTargetGizmos(Tilemap tilemap, Color color)
+        {
+            if (tilemap == null)
+                return;
+
+            Gizmos.color = color;
+            var bounds = tilemap.cellBounds;
+
+            foreach (var pos in bounds.allPositionsWithin)
+            {
+                if (tilemap.GetTile(pos) == null)
+                    continue;
+
+                var cell = tilemap.GetCellCenterWorld(pos);
+                Gizmos.DrawWireCube(cell, tilemap.cellSize);
             }
         }
     }

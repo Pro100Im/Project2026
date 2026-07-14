@@ -35,6 +35,8 @@ namespace Code.Game.Features.Target.Systems
                 .AllOf(
                     GameMatcher.FlowFields,
                     GameMatcher.IntegrationFields,
+                    GameMatcher.DefenseFlowFields,
+                    GameMatcher.DefenseIntegrationFields,
                     GameMatcher.OccupField,
                     GameMatcher.ReservedField,
                     GameMatcher.TilemapMovement));
@@ -47,8 +49,6 @@ namespace Code.Game.Features.Target.Systems
             if (mapEntity == null)
                 return;
 
-            var allFlows = mapEntity.flowFields.Value;
-            var allIntegrations = mapEntity.integrationFields.Value;
             var units = _units.GetEntities(_buffer);
 
             for (var i = 0; i < units.Count; i++)
@@ -64,6 +64,10 @@ namespace Code.Game.Features.Target.Systems
                     SelectSurroundSlotCell(unit, cell, size, unitId, mapEntity);
                     continue;
                 }
+
+                var useDefenseFlow = myTeam == Team.Player;
+                var allFlows = useDefenseFlow ? mapEntity.defenseFlowFields.Value : mapEntity.flowFields.Value;
+                var allIntegrations = useDefenseFlow ? mapEntity.defenseIntegrationFields.Value : mapEntity.integrationFields.Value;
 
                 if (!allIntegrations.TryGetValue(size, out var integration) || !allFlows.TryGetValue(size, out var flow))
                     continue;

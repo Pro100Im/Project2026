@@ -11,6 +11,7 @@ namespace Code.Game.Features.Target
     [Game] [Input] [Meta] public class TargetId : IComponent { public int Value; }
     [Game] public class TargetPoint : IComponent { public Vector2 Value; }
     [Game] public class TargetFlow : IComponent { public List<Vector3Int> Value; }
+    [Game] public class DefenseFlow : IComponent { public List<Vector3Int> Value; }
     [Game] public class TargetCell : IComponent { public Vector3Int Value; }
     [Game] public class SurroundSlot : IComponent { public Vector3Int Value; }
     [Game] public class SurroundTargetId : IComponent { public int Value; }
