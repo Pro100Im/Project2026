@@ -38,6 +38,24 @@ namespace Code.Game.Features.Animator.Systems
                     continue;
                 }
 
+                if (character.isAttacking)
+                {
+                    if (!character.hasAttackDirection)
+                        continue;
+
+                    var attackState = GetAttackStateName(character.attackDirection.Value);
+
+                    if (!character.isAttackAnimStarted)
+                    {
+                        if (!stateInfo.IsName(attackState))
+                            animator.Play(attackState, 0, 0f);
+
+                        character.isAttackAnimStarted = true;
+                    }
+
+                    continue;
+                }
+
                 if (character.isMoving)
                 {
                     if (!stateInfo.IsName("Run"))
@@ -46,37 +64,26 @@ namespace Code.Game.Features.Animator.Systems
                     continue;
                 }
 
-                if(character.isAttacking)
+                if (character.isHitted)
                 {
-                    switch (character.attackDirection.Value)
-                    {
-                        case AttackDirection.Side:
-                            if (!stateInfo.IsName("AttackRight"))
-                                animator.Play("AttackRight");
-                            break;
-
-                        case AttackDirection.Up:
-                            if (!stateInfo.IsName("AttackUp"))
-                                animator.Play("AttackUp");
-                            break;
-
-                        case AttackDirection.Down:
-                            if (!stateInfo.IsName("AttackDown"))
-                                animator.Play("AttackDown");
-                            break;
-                    }
-
-                    continue;
-                }
-
-                if(character.isHitted)
-                {
-
                     continue;
                 }
 
                 if (!stateInfo.IsName("Idle"))
                     animator.Play("Idle");
+            }
+        }
+
+        private static string GetAttackStateName(AttackDirection direction)
+        {
+            switch (direction)
+            {
+                case AttackDirection.Up:
+                    return "AttackUp";
+                case AttackDirection.Down:
+                    return "AttackDown";
+                default:
+                    return "AttackRight";
             }
         }
     }

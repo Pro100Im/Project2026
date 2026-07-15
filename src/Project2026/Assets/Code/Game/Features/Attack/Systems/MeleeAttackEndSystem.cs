@@ -28,52 +28,53 @@ namespace Code.Game.Features.Attack.Systems
             {
                 var attack = attacks[i];
 
-                if (attack.duration.Value > 0)
-                    continue;
-
-                var entity = GetGameEntityById.Get(attack.ownerId.Value);
-
-                if (entity == null)
+                if (attack.isAttackHitPending)
                 {
-                    attack.isDestructed = true;
-                    continue;
+                    if (attack.duration.Value > 0)
+                        continue;
+
+                    var entity = GetGameEntityById.Get(attack.ownerId.Value);
+
+                    if (entity == null || entity.isDead || !entity.hasTargetId)
+                    {
+                        attack.isAttackHitPending = false;
+
+                        if (entity != null && !entity.isDead)
+                        {
+                            entity.isAttacking = false;
+                            entity.isAttackAnimStarted = false;
+                        }
+                    }
+                    else
+                    {
+                        var damage = CreateGameEntity.Empty();
+
+                        damage.AddOwnerId(entity.id.Value);
+                        damage.AddTargetId(entity.targetId.Value);
+                        damage.AddTargetPoint(entity.targetPoint.Value);
+                        damage.AddTotalDamage(0);
+                        damage.isDamageRequest = true;
+                        damage.isDamageEffectRequest = true;
+
+                        var damageEffect = CreateGameEntity.Empty();
+
+                        damageEffect.AddOwnerId(entity.id.Value);
+                        damageEffect.AddTargetId(entity.targetId.Value);
+                        damageEffect.AddTargetPoint(entity.targetPoint.Value);
+                        damageEffect.isEffectCheckRequest = true;
+
+                        attack.isAttackHitPending = false;
+                    }
                 }
 
-                if (!entity.hasTargetId)
-                {
-                    entity.isAttacking = false;
-                    entity.isAttackAvailable = true;
-
-                    attack.isDestructed = true;
-
-                    continue;
-                }
-
-                if (entity.isAttacking)
-                {
-                    var damage = CreateGameEntity.Empty();
-
-                    damage.AddOwnerId(entity.id.Value);
-                    damage.AddTargetId(entity.targetId.Value);
-                    damage.AddTargetPoint(entity.targetPoint.Value);
-                    damage.AddTotalDamage(0);
-                    damage.isDamageRequest = true;
-                    damage.isDamageEffectRequest = true;
-
-                    var damageEffect = CreateGameEntity.Empty();
-
-                    damageEffect.AddOwnerId(entity.id.Value);
-                    damageEffect.AddTargetId(entity.targetId.Value);
-                    damageEffect.AddTargetPoint(entity.targetPoint.Value);
-                    damageEffect.isEffectCheckRequest = true;
-                }
-
-                entity.isAttacking = false;
-
-                if (attack.cooldown.Value > 0)
+                if (attack.isAttackHitPending || attack.cooldown.Value > 0)
                     continue;
 
-                entity.isAttackAvailable = true;
+                var owner = GetGameEntityById.Get(attack.ownerId.Value);
+
+                if (owner != null)
+                    owner.isAttackAvailable = true;
+
                 attack.isDestructed = true;
             }
         }

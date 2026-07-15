@@ -1,4 +1,5 @@
 using Code.Game.Common.Entity;
+using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
 
@@ -6,11 +7,15 @@ namespace Code.Game.Features.Attack.Systems
 {
     public class RangeAttackEndSystem : IExecuteSystem
     {
+        private readonly TargetService _targetService;
+
         private readonly IGroup<GameEntity> _rangeAttacks;
         private readonly List<GameEntity> _attacksBuffer = new(86);
 
-        public RangeAttackEndSystem(GameContext gameContext)
+        public RangeAttackEndSystem(GameContext gameContext, TargetService targetService)
         {
+            _targetService = targetService;
+
             _rangeAttacks = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.OwnerId,
@@ -27,23 +32,42 @@ namespace Code.Game.Features.Attack.Systems
             {
                 var attack = attacks[i];
 
-                if (attack.duration.Value > 0)
-                    continue;
-
-                var entity = GetGameEntityById.Get(attack.ownerId.Value);
-
-                if (entity == null)
+                if (attack.isAttackHitPending)
                 {
-                    attack.isDestructed = true;
-                    continue;
+                    if (attack.duration.Value > 0)
+                        continue;
+
+                    var entity = GetGameEntityById.Get(attack.ownerId.Value);
+
+                    if (entity == null || entity.isDead || !entity.hasTargetId)
+                    {
+                        attack.isAttackHitPending = false;
+
+                        if (entity != null && !entity.isDead)
+                        {
+                            entity.isAttacking = false;
+                            entity.isAttackAnimStarted = false;
+                        }
+                    }
+                    else
+                    {
+                        var target = GetGameEntityById.Get(entity.targetId.Value);
+
+                        if (target != null && !target.isDead)
+                            AttackProjectileHelper.TryFire(_targetService, entity, target);
+
+                        attack.isAttackHitPending = false;
+                    }
                 }
 
-                entity.isAttacking = false;
-
-                if (attack.cooldown.Value > 0)
+                if (attack.isAttackHitPending || attack.cooldown.Value > 0)
                     continue;
 
-                entity.isAttackAvailable = true;
+                var owner = GetGameEntityById.Get(attack.ownerId.Value);
+
+                if (owner != null)
+                    owner.isAttackAvailable = true;
+
                 attack.isDestructed = true;
             }
         }

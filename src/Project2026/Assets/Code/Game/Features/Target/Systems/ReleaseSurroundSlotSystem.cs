@@ -1,6 +1,8 @@
 using Code.Game.Common.Entity;
+using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Code.Game.Features.Target.Systems
 {
@@ -17,9 +19,13 @@ namespace Code.Game.Features.Target.Systems
                 .AllOf(
                     GameMatcher.SurroundSlot,
                     GameMatcher.SurroundTargetId,
+                    GameMatcher.Range,
                     GameMatcher.Id));
 
-            _maps = context.GetGroup(GameMatcher.AllOf(GameMatcher.SurroundField));
+            _maps = context.GetGroup(GameMatcher
+                .AllOf(
+                    GameMatcher.SurroundField,
+                    GameMatcher.TilemapMovement));
         }
 
         public void Execute()
@@ -30,6 +36,7 @@ namespace Code.Game.Features.Target.Systems
                 return;
 
             var surroundField = mapEntity.surroundField.Value;
+            var tilemap = mapEntity.tilemapMovement.Value;
             var units = _units.GetEntities(_buffer);
 
             for (var i = 0; i < units.Count; i++)
@@ -40,7 +47,15 @@ namespace Code.Game.Features.Target.Systems
                 if (!shouldRelease)
                 {
                     var target = GetGameEntityById.Get(unit.surroundTargetId.Value);
-                    shouldRelease = target == null || target.isDead;
+
+                    if (target == null || target.isDead)
+                    {
+                        shouldRelease = true;
+                    }
+                    else if (!IsSlotInAttackRange(unit, target, tilemap))
+                    {
+                        shouldRelease = true;
+                    }
                 }
 
                 if (!shouldRelease)
@@ -55,6 +70,27 @@ namespace Code.Game.Features.Target.Systems
                 if (unit.hasTargetId)
                     unit.RemoveTargetId();
             }
+        }
+
+        private static bool IsSlotInAttackRange(
+            GameEntity unit,
+            GameEntity target,
+            Dictionary<Vector3Int, Vector3> tilemap)
+        {
+            var slot = unit.surroundSlot.Value;
+
+            if (!tilemap.TryGetValue(slot, out var slotWorld))
+                return false;
+
+            if (unit.hasUnitAnchorPoint)
+                slotWorld += unit.unitAnchorPoint.Value;
+
+            var closest = TargetService.GetClosestPoint(target, slotWorld);
+            var dx = slotWorld.x - closest.x;
+            var dy = slotWorld.y - closest.y;
+            var physicalRange = TargetService.GetPhysicalRange(unit.range.Value);
+
+            return (dx * dx) + (dy * dy) <= physicalRange * physicalRange;
         }
     }
 }

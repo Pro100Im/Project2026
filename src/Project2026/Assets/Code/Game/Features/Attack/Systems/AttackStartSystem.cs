@@ -2,7 +2,6 @@ using Code.Game.Common.Entity;
 using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Code.Game.Features.Attack.Systems
 {
@@ -35,13 +34,13 @@ namespace Code.Game.Features.Attack.Systems
             {
                 var attacker = attackers[i];
 
-                if (!attacker.isAttackAvailable || attacker.isDead || !attacker.hasTargetId)
+                if (!attacker.isAttackAvailable || attacker.isAttacking || attacker.isDead || !attacker.hasTargetId)
                     continue;
 
                 var targetId = attacker.targetId.Value;
                 var target = GetGameEntityById.Get(targetId);
 
-                if (target.isDead)
+                if (target == null || target.isDead)
                     continue;
 
                 if (attacker.isMeleeAttack)
@@ -54,7 +53,7 @@ namespace Code.Game.Features.Attack.Systems
                         continue;
                 }
 
-                if (attacker.isRangeAttack && !TryFireProjectile(attacker, target))
+                if (attacker.isRangeAttack && !AttackProjectileHelper.CanFire(_targetService, attacker, target))
                     continue;
 
                 var attackDirection = _targetService.GetAttackDirection(attacker.attackerPoint.Value, attacker.targetPoint.Value);
@@ -64,8 +63,28 @@ namespace Code.Game.Features.Attack.Systems
                 else
                     attacker.AddAttackDirection(attackDirection);
 
+                if (attacker.hasSpriteRenderer)
+                {
+                    var dx = attacker.targetPoint.Value.x - attacker.attackerPoint.Value.x;
+
+                    if (dx != 0f)
+                    {
+                        var shouldFlipX = dx < 0f;
+                        var spriteRenderer = attacker.spriteRenderer.Value;
+
+                        if (spriteRenderer.flipX != shouldFlipX)
+                            spriteRenderer.flipX = shouldFlipX;
+                    }
+                }
+
                 attacker.isAttacking = true;
                 attacker.isAttackAvailable = false;
+
+                if (attacker.isMoving)
+                    attacker.isMoving = false;
+
+                if (attacker.hasVelocity)
+                    attacker.RemoveVelocity();
 
                 var entity = CreateGameEntity.Empty();
 
@@ -75,47 +94,8 @@ namespace Code.Game.Features.Attack.Systems
 
                 entity.isMeleeAttack = attacker.isMeleeAttack;
                 entity.isRangeAttack = attacker.isRangeAttack;
+                entity.isAttackHitPending = true;
             }
-        }
-
-        private bool TryFireProjectile(GameEntity owner, GameEntity target)
-        {
-            var projectile = CreateGameEntity.Empty();
-
-            projectile.AddOwnerId(owner.id.Value);
-            projectile.AddTargetId(owner.targetId.Value);
-            projectile.AddSpawnPosition(owner.firePoint.Value);
-            projectile.AddAttackerPoint(owner.firePoint.Value);
-            projectile.AddTeam(owner.team.Value);
-            projectile.isMovementAvailable = true;
-
-            foreach (var property in owner.projectile.Value.Properties)
-                property.Apply(projectile);
-
-            var targetVel = target.hasVelocity ? target.velocity.Value : Vector3.zero;
-            var projSpeed = projectile.movementSpeed.Value;
-            var interceptPoint = _targetService.GetInterceptPoint(owner.attackerPoint.Value, projSpeed, owner.targetPoint.Value, targetVel);
-
-            var physicalRange = TargetService.GetPhysicalRange(owner.range.Value);
-            var dx = interceptPoint.x - owner.attackerPoint.Value.x;
-            var dy = interceptPoint.y - owner.attackerPoint.Value.y;
-
-            if ((dx * dx) + (dy * dy) > physicalRange * physicalRange)
-            {
-                projectile.isDestructed = true;
-                return false;
-            }
-
-            var totalDistance = Vector3.Distance(owner.firePoint.Value, interceptPoint);
-            var baseArcHeight = projectile.trajectoryBaseArcHeight.Value;
-            var distanceFactor = Mathf.Clamp01(totalDistance / 10f);
-            var dynamicArcHeight = baseArcHeight * distanceFactor;
-
-            projectile.AddTargetPoint(interceptPoint);
-            projectile.AddTotalDistance(totalDistance);
-            projectile.ReplaceTrajectoryCurrentArcHeight(dynamicArcHeight);
-
-            return true;
         }
     }
 }

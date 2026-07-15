@@ -213,6 +213,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<AttackStartSystem>(Lifetime.Singleton);
             builder.Register<MeleeAttackEndSystem>(Lifetime.Singleton);
             builder.Register<RangeAttackEndSystem>(Lifetime.Singleton);
+            builder.Register<AttackActionCompleteSystem>(Lifetime.Singleton);
             builder.Register<RangeAttackHitSystem>(Lifetime.Singleton);
             builder.Register<RangeAreaAttackHitSystem>(Lifetime.Singleton);
 

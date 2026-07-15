@@ -111,7 +111,7 @@ namespace Code.Game.Features.Target.Systems
                     attacker.ReplaceTargetPoint(bestTargetPoint);
                     attacker.ReplaceTargetId(bestTargetId);
                 }
-                else if (attacker.hasTargetId)
+                else if (attacker.hasTargetId && !attacker.isAttacking)
                 {
                     attacker.RemoveTargetId();
                 }
