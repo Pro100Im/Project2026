@@ -34,17 +34,7 @@ namespace Code.Game.Features.Damage.Systems
                     continue;
 
                 var hitEffect = CreateGameEntity.Empty();
-                var targetPoint = damage.targetPoint.Value;
-
-                if (attacker.hasMovementOffset)
-                {
-                    var movementOffset = attacker.movementOffset.Value;
-
-                    targetPoint.x += movementOffset.x;
-                    targetPoint.y += movementOffset.y;
-                }
-
-                hitEffect.AddSpawnPosition(targetPoint);
+                hitEffect.AddSpawnPosition(damage.targetPoint.Value);
 
                 foreach (var property in attacker.fireDamageHitEffect.Value.Properties)
                     property.Apply(hitEffect);

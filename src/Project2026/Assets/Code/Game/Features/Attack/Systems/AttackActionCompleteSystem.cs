@@ -17,7 +17,6 @@ namespace Code.Game.Features.Attack.Systems
             _attackers = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Attacking,
-                    GameMatcher.Animator,
                     GameMatcher.Id));
 
             _pendingHits = gameContext.GetGroup(GameMatcher
@@ -43,6 +42,12 @@ namespace Code.Game.Features.Attack.Systems
 
                 if (HasPendingHit(attacker.id.Value))
                     continue;
+
+                if (!attacker.hasAnimator)
+                {
+                    ClearAttackAction(attacker);
+                    continue;
+                }
 
                 var stateInfo = attacker.animator.Value.GetCurrentAnimatorStateInfo(0);
                 var isAttackAnim = stateInfo.IsName("AttackRight")
