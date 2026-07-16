@@ -14,6 +14,7 @@ namespace Code.Game.Features.Target
             Add(systemFactory.Create<AssignRallySurroundSlotSystem>());
             Add(systemFactory.Create<AssignSurroundSlotSystem>());
             Add(systemFactory.Create<CheckTargetSystem>());
+            Add(systemFactory.Create<DefensePatrolSystem>());
             Add(systemFactory.Create<RequestTargetCellSystem>());
             Add(systemFactory.Create<SelectTargetCellSystem>());
         }

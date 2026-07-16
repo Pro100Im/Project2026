@@ -16,4 +16,7 @@ namespace Code.Game.Features.Target
     [Game] public class SurroundSlot : IComponent { public Vector3Int Value; }
     [Game] public class SurroundTargetId : IComponent { public int Value; }
     [Game] public class RallyToCastle : IComponent { }
+    [Game] public class DefensePatrolIdleDuration : IComponent { public float Value; }
+    [Game] public class DefensePatrolWait : IComponent { public float Value; }
+    [Game] public class DefensePatrolCell : IComponent { public Vector3Int Value; }
 }

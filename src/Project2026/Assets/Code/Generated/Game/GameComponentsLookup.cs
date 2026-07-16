@@ -125,35 +125,38 @@ public static class GameComponentsLookup {
     public const int SpawnRequsted = 114;
     public const int WaitingToSpawn = 115;
     public const int DefenseFlow = 116;
-    public const int RallyToCastle = 117;
-    public const int SurroundSlot = 118;
-    public const int SurroundTargetId = 119;
-    public const int Targetable = 120;
-    public const int TargetCell = 121;
-    public const int TargetCellRequest = 122;
-    public const int TargetFlow = 123;
-    public const int TargetId = 124;
-    public const int TargetPoint = 125;
-    public const int TargetSelected = 126;
-    public const int Tower = 127;
-    public const int TowerBuildRequest = 128;
-    public const int TowerPlace = 129;
-    public const int TowerUpgrade = 130;
-    public const int TowerUpgradeIcon = 131;
-    public const int TowerUpgradePrice = 132;
-    public const int TowerUpgradeRequest = 133;
-    public const int Unit = 134;
-    public const int UnitAnchorPoint = 135;
-    public const int UnitIcon = 136;
-    public const int UnitSize = 137;
-    public const int CurrentWaveEnemies = 138;
-    public const int CurrentWaveNumber = 139;
-    public const int WaveEnemiesAlive = 140;
-    public const int WaveInProgress = 141;
-    public const int WaveStartRequsted = 142;
-    public const int Projectile = 143;
+    public const int DefensePatrolCell = 117;
+    public const int DefensePatrolIdleDuration = 118;
+    public const int DefensePatrolWait = 119;
+    public const int RallyToCastle = 120;
+    public const int SurroundSlot = 121;
+    public const int SurroundTargetId = 122;
+    public const int Targetable = 123;
+    public const int TargetCell = 124;
+    public const int TargetCellRequest = 125;
+    public const int TargetFlow = 126;
+    public const int TargetId = 127;
+    public const int TargetPoint = 128;
+    public const int TargetSelected = 129;
+    public const int Tower = 130;
+    public const int TowerBuildRequest = 131;
+    public const int TowerPlace = 132;
+    public const int TowerUpgrade = 133;
+    public const int TowerUpgradeIcon = 134;
+    public const int TowerUpgradePrice = 135;
+    public const int TowerUpgradeRequest = 136;
+    public const int Unit = 137;
+    public const int UnitAnchorPoint = 138;
+    public const int UnitIcon = 139;
+    public const int UnitSize = 140;
+    public const int CurrentWaveEnemies = 141;
+    public const int CurrentWaveNumber = 142;
+    public const int WaveEnemiesAlive = 143;
+    public const int WaveInProgress = 144;
+    public const int WaveStartRequsted = 145;
+    public const int Projectile = 146;
 
-    public const int TotalComponents = 144;
+    public const int TotalComponents = 147;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -273,6 +276,9 @@ public static class GameComponentsLookup {
         "SpawnRequsted",
         "WaitingToSpawn",
         "DefenseFlow",
+        "DefensePatrolCell",
+        "DefensePatrolIdleDuration",
+        "DefensePatrolWait",
         "RallyToCastle",
         "SurroundSlot",
         "SurroundTargetId",
@@ -420,6 +426,9 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Spawn.SpawnRequsted),
         typeof(Code.Game.Features.Spawn.WaitingToSpawn),
         typeof(Code.Game.Features.Target.DefenseFlow),
+        typeof(Code.Game.Features.Target.DefensePatrolCell),
+        typeof(Code.Game.Features.Target.DefensePatrolIdleDuration),
+        typeof(Code.Game.Features.Target.DefensePatrolWait),
         typeof(Code.Game.Features.Target.RallyToCastle),
         typeof(Code.Game.Features.Target.SurroundSlot),
         typeof(Code.Game.Features.Target.SurroundTargetId),

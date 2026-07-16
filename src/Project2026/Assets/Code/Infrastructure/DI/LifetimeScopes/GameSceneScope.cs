@@ -206,6 +206,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<RequestTargetCellSystem>(Lifetime.Singleton);
             builder.Register<SelectTargetCellSystem>(Lifetime.Singleton);
             builder.Register<CheckTargetSystem>(Lifetime.Singleton);
+            builder.Register<DefensePatrolSystem>(Lifetime.Singleton);
 
             builder.Register<FlipAlongMoveDirectionSystem>(Lifetime.Singleton);
             builder.Register<GridMovementSystem>(Lifetime.Singleton);

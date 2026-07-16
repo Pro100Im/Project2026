@@ -32,6 +32,7 @@ MonoBehaviour:
   - rid: 2286603035550154837
   - rid: 2286603056206053667
   - rid: 4221333317118328832
+  - rid: 8171215584738410700
   references:
     version: 2
     RefIds:
@@ -68,6 +69,11 @@ MonoBehaviour:
       data:
         <Mode>k__BackingField: 0
         <Resistance>k__BackingField: 5
+    - rid: 8171215584738410700
+      type: {class: DefensePatrolProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <IdleDuration>k__BackingField: 3
     - rid: 4221333317118328832
       type: {class: PhysicalAttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:

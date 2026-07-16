@@ -61,7 +61,13 @@ namespace Code.Game.Features.Target.Systems
 
                 if (unit.hasSurroundSlot)
                 {
-                    SelectSurroundSlotCell(unit, cell, size, unitId, mapEntity);
+                    SelectDirectCellToward(unit, cell, size, unitId, mapEntity, unit.surroundSlot.Value);
+                    continue;
+                }
+
+                if (unit.hasDefensePatrolCell)
+                {
+                    SelectDirectCellToward(unit, cell, size, unitId, mapEntity, unit.defensePatrolCell.Value);
                     continue;
                 }
 
@@ -177,11 +183,15 @@ namespace Code.Game.Features.Target.Systems
             }
         }
 
-        private void SelectSurroundSlotCell(GameEntity unit, Vector3Int cell, Vector2Int size, int unitId, GameEntity mapEntity)
+        private void SelectDirectCellToward(
+            GameEntity unit,
+            Vector3Int cell,
+            Vector2Int size,
+            int unitId,
+            GameEntity mapEntity,
+            Vector3Int targetCell)
         {
-            var slot = unit.surroundSlot.Value;
-
-            if (cell == slot)
+            if (cell == targetCell)
             {
                 unit.ReplaceTargetCell(cell);
                 unit.isTargetCellRequest = false;
@@ -189,7 +199,7 @@ namespace Code.Game.Features.Target.Systems
                 return;
             }
 
-            var bestDist = ChebyshevDistance(cell, slot);
+            var bestDist = ChebyshevDistance(cell, targetCell);
             var bestCost = float.MaxValue;
             var chosen = cell;
             var found = false;
@@ -205,7 +215,7 @@ namespace Code.Game.Features.Target.Systems
                 if (IsCuttingCorner(cell, cand, size, unitId, mapEntity))
                     continue;
 
-                var candDist = ChebyshevDistance(cand, slot);
+                var candDist = ChebyshevDistance(cand, targetCell);
 
                 if (candDist > bestDist)
                     continue;
