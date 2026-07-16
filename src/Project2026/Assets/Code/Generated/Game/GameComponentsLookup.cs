@@ -113,45 +113,47 @@ public static class GameComponentsLookup {
     public const int TrajectoryMovement = 102;
     public const int TrajectoryPathProgress = 103;
     public const int Velocity = 104;
-    public const int PlayerCastle = 105;
-    public const int PlayerCastleCells = 106;
-    public const int Player = 107;
-    public const int FireResistance = 108;
-    public const int FrostResistance = 109;
-    public const int PhysicalResistance = 110;
-    public const int Reward = 111;
-    public const int SpawnPosition = 112;
-    public const int SpawnRequsted = 113;
-    public const int WaitingToSpawn = 114;
-    public const int DefenseFlow = 115;
-    public const int SurroundSlot = 116;
-    public const int SurroundTargetId = 117;
-    public const int Targetable = 118;
-    public const int TargetCell = 119;
-    public const int TargetCellRequest = 120;
-    public const int TargetFlow = 121;
-    public const int TargetId = 122;
-    public const int TargetPoint = 123;
-    public const int TargetSelected = 124;
-    public const int Tower = 125;
-    public const int TowerBuildRequest = 126;
-    public const int TowerPlace = 127;
-    public const int TowerUpgrade = 128;
-    public const int TowerUpgradeIcon = 129;
-    public const int TowerUpgradePrice = 130;
-    public const int TowerUpgradeRequest = 131;
-    public const int Unit = 132;
-    public const int UnitAnchorPoint = 133;
-    public const int UnitIcon = 134;
-    public const int UnitSize = 135;
-    public const int CurrentWaveEnemies = 136;
-    public const int CurrentWaveNumber = 137;
-    public const int WaveEnemiesAlive = 138;
-    public const int WaveInProgress = 139;
-    public const int WaveStartRequsted = 140;
-    public const int Projectile = 141;
+    public const int CastleUnderAttack = 105;
+    public const int PlayerCastle = 106;
+    public const int PlayerCastleCells = 107;
+    public const int Player = 108;
+    public const int FireResistance = 109;
+    public const int FrostResistance = 110;
+    public const int PhysicalResistance = 111;
+    public const int Reward = 112;
+    public const int SpawnPosition = 113;
+    public const int SpawnRequsted = 114;
+    public const int WaitingToSpawn = 115;
+    public const int DefenseFlow = 116;
+    public const int RallyToCastle = 117;
+    public const int SurroundSlot = 118;
+    public const int SurroundTargetId = 119;
+    public const int Targetable = 120;
+    public const int TargetCell = 121;
+    public const int TargetCellRequest = 122;
+    public const int TargetFlow = 123;
+    public const int TargetId = 124;
+    public const int TargetPoint = 125;
+    public const int TargetSelected = 126;
+    public const int Tower = 127;
+    public const int TowerBuildRequest = 128;
+    public const int TowerPlace = 129;
+    public const int TowerUpgrade = 130;
+    public const int TowerUpgradeIcon = 131;
+    public const int TowerUpgradePrice = 132;
+    public const int TowerUpgradeRequest = 133;
+    public const int Unit = 134;
+    public const int UnitAnchorPoint = 135;
+    public const int UnitIcon = 136;
+    public const int UnitSize = 137;
+    public const int CurrentWaveEnemies = 138;
+    public const int CurrentWaveNumber = 139;
+    public const int WaveEnemiesAlive = 140;
+    public const int WaveInProgress = 141;
+    public const int WaveStartRequsted = 142;
+    public const int Projectile = 143;
 
-    public const int TotalComponents = 142;
+    public const int TotalComponents = 144;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -259,6 +261,7 @@ public static class GameComponentsLookup {
         "TrajectoryMovement",
         "TrajectoryPathProgress",
         "Velocity",
+        "CastleUnderAttack",
         "PlayerCastle",
         "PlayerCastleCells",
         "Player",
@@ -270,6 +273,7 @@ public static class GameComponentsLookup {
         "SpawnRequsted",
         "WaitingToSpawn",
         "DefenseFlow",
+        "RallyToCastle",
         "SurroundSlot",
         "SurroundTargetId",
         "Targetable",
@@ -404,6 +408,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Movement.TrajectoryMovement),
         typeof(Code.Game.Features.Movement.TrajectoryPathProgress),
         typeof(Code.Game.Features.Movement.Velocity),
+        typeof(Code.Game.Features.Player.CastleUnderAttack),
         typeof(Code.Game.Features.Player.PlayerCastle),
         typeof(Code.Game.Features.Player.PlayerCastleCells),
         typeof(Code.Game.Features.Player.PlayerComponent),
@@ -415,6 +420,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Spawn.SpawnRequsted),
         typeof(Code.Game.Features.Spawn.WaitingToSpawn),
         typeof(Code.Game.Features.Target.DefenseFlow),
+        typeof(Code.Game.Features.Target.RallyToCastle),
         typeof(Code.Game.Features.Target.SurroundSlot),
         typeof(Code.Game.Features.Target.SurroundTargetId),
         typeof(Code.Game.Features.Target.Targetable),

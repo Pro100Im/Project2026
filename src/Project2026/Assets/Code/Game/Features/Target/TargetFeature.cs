@@ -9,6 +9,9 @@ namespace Code.Game.Features.Target
         public TargetFeature(ISystemFactory systemFactory)
         {
             Add(systemFactory.Create<ReleaseSurroundSlotSystem>());
+            Add(systemFactory.Create<UpdateCastleThreatSystem>());
+            Add(systemFactory.Create<AssignRallyToCastleSystem>());
+            Add(systemFactory.Create<AssignRallySurroundSlotSystem>());
             Add(systemFactory.Create<AssignSurroundSlotSystem>());
             Add(systemFactory.Create<CheckTargetSystem>());
             Add(systemFactory.Create<RequestTargetCellSystem>());
