@@ -10,10 +10,12 @@ namespace Code.Meta.Features.Game
     public class UnitsPanel : MonoBehaviour
     {
         [SerializeField] private EntityConfig _firstUnitSlot;
+        [SerializeField] private EntityConfig _secondUnitSlot;
 
         private GameScreen _gameScreen;
 
         private Button _firstUnitSlotButton;
+        private Button _secondUnitSlotButton;
 
         [Inject]
         public void Construct(GameScreen gameScreen)
@@ -23,12 +25,14 @@ namespace Code.Meta.Features.Game
 
         private void Start()
         {
-            _firstUnitSlotButton = _gameScreen.GetButton("UnitButton");
+            _firstUnitSlotButton = _gameScreen.GetButton("UnitButton1");
+            _secondUnitSlotButton = _gameScreen.GetButton("UnitButton2");
 
-            _firstUnitSlotButton.clickable.clicked += SpawnFistSlotUnit;
+            _firstUnitSlotButton.clickable.clicked += SpawnFirstSlotUnit;
+            _secondUnitSlotButton.clickable.clicked += SpawnSecondSlotUnit;
         }
 
-        private void SpawnFistSlotUnit()
+        private void SpawnFirstSlotUnit()
         {
             var entity = CreateGameEntity.Empty();
             var unitSize = _firstUnitSlot.GetProperty<UnitSizeProperty>().Size;
@@ -39,9 +43,21 @@ namespace Code.Meta.Features.Game
             entity.isPlayer = true;
         }
 
+        private void SpawnSecondSlotUnit()
+        {
+            var entity = CreateGameEntity.Empty();
+            var unitSize = _secondUnitSlot.GetProperty<UnitSizeProperty>().Size;
+
+            entity.AddUnitSize(unitSize);
+            entity.AddEntityConfig(_secondUnitSlot);
+            entity.isSpawnRequsted = true;
+            entity.isPlayer = true;
+        }
+
         private void OnDestroy()
         {
-            _firstUnitSlotButton.clickable.clicked -= SpawnFistSlotUnit;
+            _firstUnitSlotButton.clickable.clicked -= SpawnFirstSlotUnit;
+            _secondUnitSlotButton.clickable.clicked -= SpawnSecondSlotUnit;
         }
     }
 }

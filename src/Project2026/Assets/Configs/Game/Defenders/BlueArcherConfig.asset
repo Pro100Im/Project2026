@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2652ec64a2cfac428b7546f4941961e, type: 3}
+  m_Name: BlueArcherConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.EntityConfig
+  Properties:
+  - rid: 8171215584738410588
+  - rid: 8171215584738410594
+  - rid: 8171215584738410595
+  - rid: 8171215584738410596
+  - rid: 8171215584738410597
+  - rid: 8171215584738410598
+  - rid: 8171215584738410600
+  - rid: 8171215584738410616
+  - rid: 8171215631311700222
+  - rid: 8171215631311700224
+  - rid: 8171215745916338281
+  - rid: 2286602697378365525
+  - rid: 2286602697378365558
+  - rid: 2286602737992335449
+  - rid: 2286602889171828874
+  - rid: 2286602901821587540
+  - rid: 2286603035550154837
+  - rid: 2286603056206053667
+  - rid: 4221333317118328832
+  - rid: 8171215584738410700
+  - rid: 4221333383968718924
+  references:
+    version: 2
+    RefIds:
+    - rid: 2286602697378365525
+      type: {class: MovementOffsetProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Offset>k__BackingField: {x: 0, y: 0.3, z: 0}
+    - rid: 2286602697378365558
+      type: {class: UnitProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+    - rid: 2286602737992335449
+      type: {class: TeamProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Team>k__BackingField: 1
+    - rid: 2286602889171828874
+      type: {class: GridMovementProperty, ns: Assets.Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+    - rid: 2286602901821587540
+      type: {class: PhysicalResistanceProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Resistance>k__BackingField: 5
+    - rid: 2286603035550154837
+      type: {class: FrostResistanceProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Resistance>k__BackingField: 5
+    - rid: 2286603056206053667
+      type: {class: FireResistanceProperty, ns: Assets.Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Resistance>k__BackingField: 5
+    - rid: 4221333317118328832
+      type: {class: PhysicalAttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <PhysicalDamage>k__BackingField: 5
+        <PhysicalHitEffect>k__BackingField: {fileID: 11400000, guid: 0801227ced598bd4fa883a790a2e14b0, type: 2}
+    - rid: 4221333383968718924
+      type: {class: ProjectileProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Projectile>k__BackingField: {fileID: 11400000, guid: a7172fd29b9e9b24b827c18c6f5f3d5a, type: 2}
+    - rid: 8171215584738410588
+      type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+    - rid: 8171215584738410594
+      type: {class: ViewPrefabProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Prefab>k__BackingField: {fileID: -3016027265122920863, guid: 9b94eea3d90cf8d4b9ee3cc768bfd5c6, type: 3}
+    - rid: 8171215584738410595
+      type: {class: TargetableProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+    - rid: 8171215584738410596
+      type: {class: SpeedProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Speed>k__BackingField: 1
+    - rid: 8171215584738410597
+      type: {class: HealthProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Health>k__BackingField: 100
+    - rid: 8171215584738410598
+      type: {class: HealthBarProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <HpBar>k__BackingField: {fileID: 11400000, guid: 940e7d5b532b66741ab204f744f5205b, type: 2}
+        <SpawnOffset>k__BackingField: {x: 0, y: 0.5, z: 0}
+    - rid: 8171215584738410600
+      type: {class: AttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Range>k__BackingField: 5
+        <DetectionRange>k__BackingField: 7
+        <Cooldown>k__BackingField: 3
+        <Duration>k__BackingField: 0.6
+        <IsMelee>k__BackingField: 0
+    - rid: 8171215584738410616
+      type: {class: SpawnEffectProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <SpawnEffect>k__BackingField: {fileID: 11400000, guid: 66146da2da0797949afeef7485ed8aeb, type: 2}
+        <SpawnEffectOffset>k__BackingField: {x: 0, y: 0, z: 0}
+    - rid: 8171215584738410700
+      type: {class: DefensePatrolProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <IdleDuration>k__BackingField: 3
+    - rid: 8171215631311700222
+      type: {class: KillableProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+    - rid: 8171215631311700224
+      type: {class: DeathDurationProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Duration>k__BackingField: 0.8
+    - rid: 8171215745916338281
+      type: {class: UnitSizeProperty, ns: Assets.Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Size>k__BackingField: {x: 1, y: 1}

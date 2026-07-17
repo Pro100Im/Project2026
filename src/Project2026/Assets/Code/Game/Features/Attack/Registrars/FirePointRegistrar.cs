@@ -9,14 +9,14 @@ namespace Code.Game.Features.Attack.Registrars
 
         public override void RegisterComponents()
         {
-            if(!Entity.hasFirePoint)
-                Entity.AddFirePoint(_firePoint.position);
+            if(!Entity.hasFirePointOffset)
+                Entity.AddFirePointOffset(_firePoint.localPosition);
         }
 
         public override void UnregisterComponents()
         {
-            if(Entity.hasFirePoint)
-                Entity.RemoveFirePoint();
+            if(Entity.hasFirePointOffset)
+                Entity.RemoveFirePointOffset();
         }
 
         private void OnDrawGizmosSelected()

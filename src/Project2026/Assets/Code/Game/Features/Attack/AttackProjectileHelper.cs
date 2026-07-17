@@ -18,12 +18,13 @@ namespace Code.Game.Features.Attack
             if (!TryGetIntercept(targetService, owner, target, out var interceptPoint, out var totalDistance, out var dynamicArcHeight))
                 return false;
 
+            var firePoint = GetFirePoint(owner);
             var projectile = CreateGameEntity.Empty();
 
             projectile.AddOwnerId(owner.id.Value);
             projectile.AddTargetId(owner.targetId.Value);
-            projectile.AddSpawnPosition(owner.firePoint.Value);
-            projectile.AddAttackerPoint(owner.firePoint.Value);
+            projectile.AddSpawnPosition(firePoint);
+            projectile.AddAttackerPoint(firePoint);
             projectile.AddTeam(owner.team.Value);
             projectile.isMovementAvailable = true;
 
@@ -49,7 +50,7 @@ namespace Code.Game.Features.Attack
             totalDistance = 0f;
             dynamicArcHeight = 0f;
 
-            if (!owner.hasProjectile || !owner.hasFirePoint || !owner.hasAttackerPoint || !owner.hasRange)
+            if (!owner.hasProjectile || !owner.hasFirePointOffset || !owner.hasWoldPos || !owner.hasAttackerPoint || !owner.hasRange)
                 return false;
 
             var projSpeed = 0f;
@@ -80,11 +81,13 @@ namespace Code.Game.Features.Attack
             if ((dx * dx) + (dy * dy) > physicalRange * physicalRange)
                 return false;
 
-            totalDistance = Vector3.Distance(owner.firePoint.Value, interceptPoint);
+            totalDistance = Vector3.Distance(GetFirePoint(owner), interceptPoint);
             var distanceFactor = Mathf.Clamp01(totalDistance / 10f);
             dynamicArcHeight = baseArcHeight * distanceFactor;
 
             return true;
         }
+
+        private static Vector3 GetFirePoint(GameEntity owner) => owner.woldPos.Value + owner.firePointOffset.Value;
     }
 }

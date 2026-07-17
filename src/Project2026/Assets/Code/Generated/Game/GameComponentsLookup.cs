@@ -38,7 +38,7 @@ public static class GameComponentsLookup {
     public const int AttackHitPending = 27;
     public const int Attacking = 28;
     public const int DetectionRange = 29;
-    public const int FirePoint = 30;
+    public const int FirePointOffset = 30;
     public const int Hitted = 31;
     public const int MeleeAttack = 32;
     public const int Range = 33;
@@ -189,7 +189,7 @@ public static class GameComponentsLookup {
         "AttackHitPending",
         "Attacking",
         "DetectionRange",
-        "FirePoint",
+        "FirePointOffset",
         "Hitted",
         "MeleeAttack",
         "Range",
@@ -339,7 +339,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Attack.AttackHitPending),
         typeof(Code.Game.Features.Attack.Attacking),
         typeof(Code.Game.Features.Attack.DetectionRange),
-        typeof(Code.Game.Features.Attack.FirePoint),
+        typeof(Code.Game.Features.Attack.FirePointOffset),
         typeof(Code.Game.Features.Attack.Hitted),
         typeof(Code.Game.Features.Attack.MeleeAttack),
         typeof(Code.Game.Features.Attack.Range),

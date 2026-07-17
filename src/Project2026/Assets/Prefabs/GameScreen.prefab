@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Meta.Features.Game.UnitsPanel
   _firstUnitSlot: {fileID: 11400000, guid: 5004249a1aba98f489582c13eba43155, type: 2}
+  _secondUnitSlot: {fileID: 11400000, guid: 18a01406d3defc8499815df154731fa2, type: 2}
 --- !u!1 &5686554603850505932
 GameObject:
   m_ObjectHideFlags: 0
