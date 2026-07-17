@@ -199,6 +199,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<CombustionSystem>(Lifetime.Singleton);
 
             builder.Register<ReleaseSurroundSlotSystem>(Lifetime.Singleton);
+            builder.Register<RepositionRangedSurroundSlotSystem>(Lifetime.Singleton);
             builder.Register<UpdateCastleThreatSystem>(Lifetime.Singleton);
             builder.Register<AssignRallyToCastleSystem>(Lifetime.Singleton);
             builder.Register<AssignRallySurroundSlotSystem>(Lifetime.Singleton);

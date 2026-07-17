@@ -141,7 +141,8 @@ namespace Code.Game.Features.Target.Systems
                         mapEntity,
                         tilemap,
                         surroundField,
-                        out var slot))
+                        out var slot,
+                        defender.isRangeAttack))
                     continue;
 
                 surroundField[slot] = defenderId;

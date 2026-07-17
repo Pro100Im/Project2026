@@ -41,6 +41,37 @@ namespace Code.Game.Features.Target.Services
             return Mathf.CeilToInt(GetEffectiveRange(range));
         }
 
+        public static int GetRangedMinRing(float range)
+        {
+            return Mathf.Max(2, Mathf.CeilToInt(GetEffectiveRange(range) * 0.5f));
+        }
+
+        public static float GetRangedMinSafePhysical(float range) => GetPhysicalRange(range) * 0.5f;
+
+        public static bool IsTooCloseForRanged(GameEntity unit, GameEntity target)
+        {
+            var unitPos = unit.woldPos.Value;
+
+            if (unit.hasUnitAnchorPoint)
+                unitPos += unit.unitAnchorPoint.Value;
+
+            var closest = GetClosestPoint(target, unitPos);
+            var dx = unitPos.x - closest.x;
+            var dy = unitPos.y - closest.y;
+            var minSafe = GetRangedMinSafePhysical(unit.range.Value);
+
+            return (dx * dx) + (dy * dy) < minSafe * minSafe;
+        }
+
+        public static float GetSqrDistanceToTarget(Vector3 worldPos, GameEntity target)
+        {
+            var closest = GetClosestPoint(target, worldPos);
+            var dx = worldPos.x - closest.x;
+            var dy = worldPos.y - closest.y;
+
+            return (dx * dx) + (dy * dy);
+        }
+
         private readonly List<Vector3Int> _slotCandidatesBuffer = new(64);
 
         public bool TryPickSurroundSlot(
@@ -52,7 +83,8 @@ namespace Code.Game.Features.Target.Services
             GameEntity map,
             Dictionary<Vector3Int, Vector3> tilemap,
             Dictionary<Vector3Int, int> surroundField,
-            out Vector3Int bestSlot)
+            out Vector3Int bestSlot,
+            bool preferMaxRange = false)
         {
             GetFootprint(target, out var minX, out var minY, out var maxX, out var maxY);
 
@@ -69,7 +101,8 @@ namespace Code.Game.Features.Target.Services
                 map,
                 tilemap,
                 surroundField,
-                out bestSlot);
+                out bestSlot,
+                preferMaxRange);
         }
 
         public bool TryPickSurroundSlot(
@@ -85,18 +118,104 @@ namespace Code.Game.Features.Target.Services
             GameEntity map,
             Dictionary<Vector3Int, Vector3> tilemap,
             Dictionary<Vector3Int, int> surroundField,
+            out Vector3Int bestSlot,
+            bool preferMaxRange = false)
+        {
+            bestSlot = default;
+            var maxRing = GetSurroundMaxRing(range);
+            var physicalRange = GetPhysicalRange(range);
+            var sqrPhysicalRange = physicalRange * physicalRange;
+
+            if (preferMaxRange)
+            {
+                var minPreferredRing = Mathf.Min(GetRangedMinRing(range), maxRing);
+
+                if (TryCollectBestSlotOnRings(
+                        unitCell,
+                        target,
+                        minX,
+                        minY,
+                        maxX,
+                        maxY,
+                        maxRing,
+                        minPreferredRing,
+                        -1,
+                        sqrPhysicalRange,
+                        size,
+                        unitId,
+                        map,
+                        tilemap,
+                        surroundField,
+                        out bestSlot))
+                    return true;
+
+                if (minPreferredRing > 1
+                    && TryCollectBestSlotOnRings(
+                        unitCell,
+                        target,
+                        minX,
+                        minY,
+                        maxX,
+                        maxY,
+                        minPreferredRing - 1,
+                        1,
+                        -1,
+                        sqrPhysicalRange,
+                        size,
+                        unitId,
+                        map,
+                        tilemap,
+                        surroundField,
+                        out bestSlot))
+                    return true;
+
+                return false;
+            }
+
+            return TryCollectBestSlotOnRings(
+                unitCell,
+                target,
+                minX,
+                minY,
+                maxX,
+                maxY,
+                1,
+                maxRing,
+                1,
+                sqrPhysicalRange,
+                size,
+                unitId,
+                map,
+                tilemap,
+                surroundField,
+                out bestSlot);
+        }
+
+        private bool TryCollectBestSlotOnRings(
+            Vector3Int unitCell,
+            GameEntity target,
+            int minX,
+            int minY,
+            int maxX,
+            int maxY,
+            int startRing,
+            int endRing,
+            int step,
+            float sqrPhysicalRange,
+            Vector2Int size,
+            int unitId,
+            GameEntity map,
+            Dictionary<Vector3Int, Vector3> tilemap,
+            Dictionary<Vector3Int, int> surroundField,
             out Vector3Int bestSlot)
         {
             bestSlot = default;
             var bestDist = int.MaxValue;
-            var maxRing = GetSurroundMaxRing(range);
-            var physicalRange = GetPhysicalRange(range);
-            var sqrPhysicalRange = physicalRange * physicalRange;
             var found = false;
 
             _slotCandidatesBuffer.Clear();
 
-            for (var ring = 1; ring <= maxRing; ring++)
+            for (var ring = startRing; step > 0 ? ring <= endRing : ring >= endRing; ring += step)
             {
                 var oMinX = minX - ring;
                 var oMaxX = maxX + ring;
