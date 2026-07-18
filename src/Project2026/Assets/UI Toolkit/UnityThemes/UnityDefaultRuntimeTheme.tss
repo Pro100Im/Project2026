@@ -1,1 +1,5 @@
 @import url("unity-theme://default");
+
+Label, Button, TextField {
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/ThaleahFat%20SDF.asset?fileID=11400000&guid=4f91cd89f157d37449660700b7886222&type=2#ThaleahFat SDF");
+}
