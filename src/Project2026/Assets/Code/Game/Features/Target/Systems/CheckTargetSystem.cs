@@ -37,6 +37,7 @@ namespace Code.Game.Features.Target.Systems
                 return;
 
             var spatialHash = mapEntity.spatialHash.Value;
+            var tilemap = mapEntity.tilemapMovement.Value;
             var attackers = _attackers.GetEntities(_buffer);
 
             for (var i = 0; i < attackers.Count; i++)
@@ -50,7 +51,7 @@ namespace Code.Game.Features.Target.Systems
 
                 var myTeam = attacker.team.Value;
 
-                if (TryUseSurroundTarget(attacker, myTeam, attackOriginPos))
+                if (TryUseSurroundTarget(attacker, myTeam, attackOriginPos, tilemap))
                     continue;
 
                 var range = attacker.detectionRange.Value;
@@ -90,7 +91,7 @@ namespace Code.Game.Features.Target.Systems
                             if (!target.hasCurrentCell)
                                 continue;
 
-                            var targetPoint = TargetService.GetClosestPoint(target, attackOriginPos);
+                            var targetPoint = TargetService.GetClosestPoint(target, tilemap, attackOriginPos);
 
                             var dx = attackOriginPos.x - targetPoint.x;
                             var dy = attackOriginPos.y - targetPoint.y;
@@ -122,7 +123,11 @@ namespace Code.Game.Features.Target.Systems
             }
         }
 
-        private static bool TryUseSurroundTarget(GameEntity attacker, Team myTeam, Vector2 attackOriginPos)
+        private static bool TryUseSurroundTarget(
+            GameEntity attacker,
+            Team myTeam,
+            Vector2 attackOriginPos,
+            Dictionary<Vector3Int, Vector3> tilemap)
         {
             if (!attacker.hasSurroundTargetId)
                 return false;
@@ -136,7 +141,7 @@ namespace Code.Game.Features.Target.Systems
                 || !target.hasCurrentCell)
                 return false;
 
-            var targetPoint = TargetService.GetClosestPoint(target, attackOriginPos);
+            var targetPoint = TargetService.GetClosestPoint(target, tilemap, attackOriginPos);
 
             attacker.ReplaceAttackerPoint(attackOriginPos);
             attacker.ReplaceTargetPoint(targetPoint);

@@ -80,9 +80,7 @@ namespace Code.Game.Features.Target.Systems
 
                 if (!integration.TryGetValue(cell, out var currentCost) || currentCost == 0)
                 {
-                    if (unit.hasTargetCell)
-                        unit.RemoveTargetCell();
-
+                    ClearTargetCell(unit, size, unitId, mapEntity);
                     unit.isTargetCellRequest = false;
 
                     continue;
@@ -90,9 +88,7 @@ namespace Code.Game.Features.Target.Systems
 
                 if (!flow.TryGetValue(cell, out var idealDir) || idealDir == Vector3Int.zero)
                 {
-                    if (unit.hasTargetCell)
-                        unit.RemoveTargetCell();
-
+                    ClearTargetCell(unit, size, unitId, mapEntity);
                     unit.isTargetCellRequest = false;
 
                     continue;
@@ -175,9 +171,9 @@ namespace Code.Game.Features.Target.Systems
                 }
 
                 if (found && chosen != cell)
-                    unit.ReplaceTargetCell(chosen);
+                    SetTargetCell(unit, chosen, size, unitId, mapEntity);
                 else
-                    unit.ReplaceTargetCell(cell);
+                    SetTargetCell(unit, cell, size, unitId, mapEntity);
 
                 unit.isTargetCellRequest = false;
             }
@@ -193,7 +189,7 @@ namespace Code.Game.Features.Target.Systems
         {
             if (cell == targetCell)
             {
-                unit.ReplaceTargetCell(cell);
+                SetTargetCell(unit, cell, size, unitId, mapEntity);
                 unit.isTargetCellRequest = false;
 
                 return;
@@ -243,11 +239,75 @@ namespace Code.Game.Features.Target.Systems
             }
 
             if (found && chosen != cell)
-                unit.ReplaceTargetCell(chosen);
+                SetTargetCell(unit, chosen, size, unitId, mapEntity);
             else
-                unit.ReplaceTargetCell(cell);
+                SetTargetCell(unit, cell, size, unitId, mapEntity);
 
             unit.isTargetCellRequest = false;
+        }
+
+        private static void SetTargetCell(
+            GameEntity unit,
+            Vector3Int targetCell,
+            Vector2Int size,
+            int unitId,
+            GameEntity mapEntity)
+        {
+            var reservedField = mapEntity.reservedField.Value;
+
+            if (unit.hasTargetCell)
+                ClearReservedFootprint(reservedField, unit.targetCell.Value, size, unitId);
+
+            unit.ReplaceTargetCell(targetCell);
+            WriteReservedFootprint(reservedField, targetCell, size, unitId);
+        }
+
+        private static void ClearTargetCell(
+            GameEntity unit,
+            Vector2Int size,
+            int unitId,
+            GameEntity mapEntity)
+        {
+            if (!unit.hasTargetCell)
+                return;
+
+            ClearReservedFootprint(mapEntity.reservedField.Value, unit.targetCell.Value, size, unitId);
+            unit.RemoveTargetCell();
+        }
+
+        private static void ClearReservedFootprint(
+            Dictionary<Vector3Int, int> reservedField,
+            Vector3Int origin,
+            Vector2Int size,
+            int unitId)
+        {
+            for (var x = 0; x < size.x; x++)
+            {
+                for (var y = 0; y < size.y; y++)
+                {
+                    var cell = new Vector3Int(origin.x + x, origin.y + y, origin.z);
+
+                    if (reservedField.TryGetValue(cell, out var ownerId) && ownerId == unitId)
+                        reservedField.Remove(cell);
+                }
+            }
+        }
+
+        private static void WriteReservedFootprint(
+            Dictionary<Vector3Int, int> reservedField,
+            Vector3Int origin,
+            Vector2Int size,
+            int unitId)
+        {
+            for (var x = 0; x < size.x; x++)
+            {
+                for (var y = 0; y < size.y; y++)
+                {
+                    var cell = new Vector3Int(origin.x + x, origin.y + y, origin.z);
+
+                    reservedField[cell] = unitId;
+                }
+            }
         }
 
         private static int ChebyshevDistance(Vector3Int a, Vector3Int b)

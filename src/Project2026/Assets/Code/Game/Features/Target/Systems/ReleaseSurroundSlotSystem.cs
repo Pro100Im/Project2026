@@ -43,27 +43,36 @@ namespace Code.Game.Features.Target.Systems
             for (var i = 0; i < units.Count; i++)
             {
                 var unit = units[i];
+                var slot = unit.surroundSlot.Value;
+                var unitId = unit.id.Value;
                 var shouldRelease = unit.isDead;
 
                 if (!shouldRelease)
                 {
-                    var target = GetGameEntityById.Get(unit.surroundTargetId.Value);
-
-                    if (target == null || target.isDead)
+                    if (!surroundField.TryGetValue(slot, out var ownerId) || ownerId != unitId)
                     {
                         shouldRelease = true;
                     }
-                    else if (!IsSlotInAttackRange(unit, target, tilemap))
+                    else
                     {
-                        shouldRelease = true;
+                        var target = GetGameEntityById.Get(unit.surroundTargetId.Value);
+
+                        if (target == null || target.isDead)
+                        {
+                            shouldRelease = true;
+                        }
+                        else if (!IsSlotInAttackRange(unit, target, tilemap))
+                        {
+                            shouldRelease = true;
+                        }
                     }
                 }
 
                 if (!shouldRelease)
                     continue;
 
-                var slot = unit.surroundSlot.Value;
-                surroundField.Remove(slot);
+                if (surroundField.TryGetValue(slot, out var currentOwner) && currentOwner == unitId)
+                    surroundField.Remove(slot);
 
                 unit.RemoveSurroundSlot();
                 unit.RemoveSurroundTargetId();
@@ -103,7 +112,7 @@ namespace Code.Game.Features.Target.Systems
                     if (!tilemap.TryGetValue(cell, out var cellWorld))
                         continue;
 
-                    var closest = TargetService.GetClosestPoint(target, cellWorld);
+                    var closest = TargetService.GetClosestPoint(target, tilemap, cellWorld);
                     var dx = cellWorld.x - closest.x;
                     var dy = cellWorld.y - closest.y;
                     var cellSqr = (dx * dx) + (dy * dy);

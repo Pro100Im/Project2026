@@ -86,6 +86,65 @@ namespace Code.Game.Features.Target.Services
                 ? (Vector2)target.bounds.Value.bounds.ClosestPoint(fromPoint)
                 : (Vector2)target.woldPos.Value;
 
+        public static Vector2 GetClosestPoint(
+            GameEntity target,
+            Dictionary<Vector3Int, Vector3> tilemap,
+            Vector2 fromPoint)
+        {
+            var boundsPoint = GetClosestPoint(target, fromPoint);
+
+            if (!TryGetFootprintClosestPoint(target, tilemap, fromPoint, out var footprintPoint))
+                return boundsPoint;
+
+            var boundsDx = fromPoint.x - boundsPoint.x;
+            var boundsDy = fromPoint.y - boundsPoint.y;
+            var boundsSqr = (boundsDx * boundsDx) + (boundsDy * boundsDy);
+
+            var footprintDx = fromPoint.x - footprintPoint.x;
+            var footprintDy = fromPoint.y - footprintPoint.y;
+            var footprintSqr = (footprintDx * footprintDx) + (footprintDy * footprintDy);
+
+            return footprintSqr <= boundsSqr ? footprintPoint : boundsPoint;
+        }
+
+        private static bool TryGetFootprintClosestPoint(
+            GameEntity target,
+            Dictionary<Vector3Int, Vector3> tilemap,
+            Vector2 fromPoint,
+            out Vector2 closest)
+        {
+            closest = default;
+
+            if (!target.hasCurrentCell || !target.hasUnitSize)
+                return false;
+
+            var size = target.unitSize.Value;
+
+            if (size.x <= 1 && size.y <= 1)
+                return false;
+
+            GetFootprint(target, out var minX, out var minY, out var maxX, out var maxY);
+
+            var minCell = new Vector3Int(minX, minY, 0);
+            var maxCell = new Vector3Int(maxX, maxY, 0);
+
+            if (!tilemap.TryGetValue(minCell, out var minWorld)
+                || !tilemap.TryGetValue(maxCell, out var maxWorld))
+                return false;
+
+            var half = CellSize * 0.5f;
+            var rectMinX = Mathf.Min(minWorld.x, maxWorld.x) - half;
+            var rectMinY = Mathf.Min(minWorld.y, maxWorld.y) - half;
+            var rectMaxX = Mathf.Max(minWorld.x, maxWorld.x) + half;
+            var rectMaxY = Mathf.Max(minWorld.y, maxWorld.y) + half;
+
+            closest = new Vector2(
+                Mathf.Clamp(fromPoint.x, rectMinX, rectMaxX),
+                Mathf.Clamp(fromPoint.y, rectMinY, rectMaxY));
+
+            return true;
+        }
+
         public static int GetSurroundMaxRing(float range)
         {
             return Mathf.Max(1, Mathf.FloorToInt(GetEffectiveRange(range)));
@@ -98,14 +157,17 @@ namespace Code.Game.Features.Target.Services
 
         public static float GetRangedMinSafePhysical(float range) => GetPhysicalRange(range) * 0.5f;
 
-        public static bool IsTooCloseForRanged(GameEntity unit, GameEntity target)
+        public static bool IsTooCloseForRanged(
+            GameEntity unit,
+            GameEntity target,
+            Dictionary<Vector3Int, Vector3> tilemap)
         {
             var unitPos = unit.woldPos.Value;
 
             if (unit.hasUnitAnchorPoint)
                 unitPos += unit.unitAnchorPoint.Value;
 
-            var closest = GetClosestPoint(target, unitPos);
+            var closest = GetClosestPoint(target, tilemap, unitPos);
             var dx = unitPos.x - closest.x;
             var dy = unitPos.y - closest.y;
             var minSafe = GetRangedMinSafePhysical(unit.range.Value);
@@ -113,9 +175,12 @@ namespace Code.Game.Features.Target.Services
             return (dx * dx) + (dy * dy) < minSafe * minSafe;
         }
 
-        public static float GetSqrDistanceToTarget(Vector3 worldPos, GameEntity target)
+        public static float GetSqrDistanceToTarget(
+            Vector3 worldPos,
+            GameEntity target,
+            Dictionary<Vector3Int, Vector3> tilemap)
         {
-            var closest = GetClosestPoint(target, worldPos);
+            var closest = GetClosestPoint(target, tilemap, worldPos);
             var dx = worldPos.x - closest.x;
             var dy = worldPos.y - closest.y;
 
@@ -286,9 +351,7 @@ namespace Code.Game.Features.Target.Services
             if (ring < 1 || ring > GetSurroundMaxRing(range))
                 return false;
 
-            if (surroundField.TryGetValue(unitCell, out var ownerId) && ownerId != unitId)
-                return false;
-
+            // Occupying the cell has priority: steal a foreign surround claim on our own cell.
             if (!CanFitSlot(unitCell, size, unitId, map))
                 return false;
 
@@ -421,7 +484,7 @@ namespace Code.Game.Features.Target.Services
                     if (!tilemap.TryGetValue(cell, out var cellWorldPos))
                         continue;
 
-                    var targetPoint = GetClosestPoint(target, cellWorldPos);
+                    var targetPoint = GetClosestPoint(target, tilemap, cellWorldPos);
                     var dx = cellWorldPos.x - targetPoint.x;
                     var dy = cellWorldPos.y - targetPoint.y;
                     var cellSqr = (dx * dx) + (dy * dy);

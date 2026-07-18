@@ -117,7 +117,7 @@ namespace Code.Game.Features.Target.Systems
 
                             TargetService.GetFootprint(target, out var minX, out var minY, out var maxX, out var maxY);
 
-                            var targetPoint = TargetService.GetClosestPoint(target, unitOriginPos);
+                            var targetPoint = TargetService.GetClosestPoint(target, tilemap, unitOriginPos);
                             var dx = unitOriginPos.x - targetPoint.x;
                             var dy = unitOriginPos.y - targetPoint.y;
                             var sDist = (dx * dx) + (dy * dy);

@@ -39,7 +39,7 @@ namespace Code.Game.Features.Level.Systems
             {
                 var entity = cells[i];
 
-                if (entity.isMoving || entity.isDead)
+                if (entity.isDead)
                     continue;
 
                 var origin = entity.currentCell.Value;

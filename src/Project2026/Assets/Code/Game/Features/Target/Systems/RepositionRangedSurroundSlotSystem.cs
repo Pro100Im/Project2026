@@ -63,7 +63,7 @@ namespace Code.Game.Features.Target.Systems
                 if (target == null || target.isDead || !target.hasCurrentCell)
                     continue;
 
-                if (!TargetService.IsTooCloseForRanged(unit, target))
+                if (!TargetService.IsTooCloseForRanged(unit, target, tilemap))
                     continue;
 
                 var currentSlot = unit.surroundSlot.Value;
@@ -71,7 +71,7 @@ namespace Code.Game.Features.Target.Systems
                 if (!tilemap.TryGetValue(currentSlot, out var currentSlotWorld))
                     continue;
 
-                var currentSqrDist = TargetService.GetSqrDistanceToTarget(currentSlotWorld, target);
+                var currentSqrDist = TargetService.GetSqrDistanceToTarget(currentSlotWorld, target, tilemap);
 
                 if (!_targetService.TryPickSurroundSlot(
                         unit.currentCell.Value,
@@ -92,7 +92,7 @@ namespace Code.Game.Features.Target.Systems
                 if (!tilemap.TryGetValue(newSlot, out var newSlotWorld))
                     continue;
 
-                var newSqrDist = TargetService.GetSqrDistanceToTarget(newSlotWorld, target);
+                var newSqrDist = TargetService.GetSqrDistanceToTarget(newSlotWorld, target, tilemap);
 
                 if (newSqrDist <= currentSqrDist)
                     continue;
