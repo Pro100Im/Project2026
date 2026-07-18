@@ -23,7 +23,9 @@ namespace Code.Game.Features.Attack.Systems
                     GameMatcher.AttackCooldown,
                     GameMatcher.AttackDuration,
                     GameMatcher.Range,
-                    GameMatcher.TargetId));
+                    GameMatcher.TargetId,
+                    GameMatcher.CurrentCell,
+                    GameMatcher.UnitSize));
         }
 
         public void Execute()
@@ -37,10 +39,16 @@ namespace Code.Game.Features.Attack.Systems
                 if (!attacker.isAttackAvailable || attacker.isAttacking || attacker.isDead || !attacker.hasTargetId)
                     continue;
 
+                if (!attacker.hasSurroundSlot || attacker.currentCell.Value != attacker.surroundSlot.Value)
+                    continue;
+
                 var targetId = attacker.targetId.Value;
                 var target = GetGameEntityById.Get(targetId);
 
-                if (target == null || target.isDead)
+                if (target == null || target.isDead || !target.hasCurrentCell)
+                    continue;
+
+                if (!IsOnAttackRing(attacker, target))
                     continue;
 
                 if (attacker.isMeleeAttack)
@@ -53,8 +61,14 @@ namespace Code.Game.Features.Attack.Systems
                         continue;
                 }
 
-                if (attacker.isRangeAttack && !AttackProjectileHelper.CanFire(_targetService, attacker, target))
-                    continue;
+                if (attacker.isRangeAttack)
+                {
+                    if (TargetService.IsTooCloseForRanged(attacker, target))
+                        continue;
+
+                    if (!AttackProjectileHelper.CanFire(_targetService, attacker, target))
+                        continue;
+                }
 
                 var attackDirection = _targetService.GetAttackDirection(attacker.attackerPoint.Value, attacker.targetPoint.Value);
 
@@ -96,6 +110,21 @@ namespace Code.Game.Features.Attack.Systems
                 entity.isRangeAttack = attacker.isRangeAttack;
                 entity.isAttackHitPending = true;
             }
+        }
+
+        private static bool IsOnAttackRing(GameEntity attacker, GameEntity target)
+        {
+            TargetService.GetFootprint(target, out var minX, out var minY, out var maxX, out var maxY);
+
+            var ring = TargetService.GetFootprintRing(
+                attacker.currentCell.Value,
+                attacker.unitSize.Value,
+                minX,
+                minY,
+                maxX,
+                maxY);
+
+            return ring >= 1 && ring <= TargetService.GetSurroundMaxRing(attacker.range.Value);
         }
     }
 }

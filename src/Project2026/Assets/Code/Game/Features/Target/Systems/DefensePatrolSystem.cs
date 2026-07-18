@@ -39,7 +39,6 @@ namespace Code.Game.Features.Target.Systems
                 .NoneOf(
                     GameMatcher.Dead,
                     GameMatcher.SurroundSlot,
-                    GameMatcher.TargetId,
                     GameMatcher.Attacking,
                     GameMatcher.RallyToCastle));
 
@@ -135,7 +134,6 @@ namespace Code.Game.Features.Target.Systems
                 if (castleThreatened
                     || entity.isRallyToCastle
                     || entity.hasSurroundSlot
-                    || entity.hasTargetId
                     || entity.isAttacking
                     || entity.isDead)
                 {

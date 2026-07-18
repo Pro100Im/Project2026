@@ -48,8 +48,12 @@ namespace Code.Game.Features.Target.Systems
                 if (attacker.hasUnitAnchorPoint)
                     attackOriginPos += attacker.unitAnchorPoint.Value;
 
-                var range = attacker.detectionRange.Value;
                 var myTeam = attacker.team.Value;
+
+                if (TryUseSurroundTarget(attacker, myTeam, attackOriginPos))
+                    continue;
+
+                var range = attacker.detectionRange.Value;
                 var attackerCell = attacker.currentCell.Value;
                 var physicalRange = TargetService.GetPhysicalRange(range);
                 var sqrPhysicalRange = physicalRange * physicalRange;
@@ -68,38 +72,38 @@ namespace Code.Game.Features.Target.Systems
                     {
                         var checkPos = new Vector2Int(attackerCell.x + x, attackerCell.y + y);
 
-                        if (spatialHash.TryGetValue(checkPos, out var potentialTargets))
+                        if (!spatialHash.TryGetValue(checkPos, out var potentialTargets))
+                            continue;
+
+                        for (var j = 0; j < potentialTargets.Count; j++)
                         {
-                            for (var j = 0; j < potentialTargets.Count; j++)
+                            var targetId = potentialTargets[j];
+
+                            if (targetId == attacker.id.Value || !_processedTargets.Add(targetId))
+                                continue;
+
+                            var target = GetGameEntityById.Get(targetId);
+
+                            if (target == null || target.team.Value == myTeam || !target.isTargetable || target.isDead)
+                                continue;
+
+                            if (!target.hasCurrentCell)
+                                continue;
+
+                            var targetPoint = TargetService.GetClosestPoint(target, attackOriginPos);
+
+                            var dx = attackOriginPos.x - targetPoint.x;
+                            var dy = attackOriginPos.y - targetPoint.y;
+                            var sDist = (dx * dx) + (dy * dy);
+
+                            if (sDist > sqrPhysicalRange)
+                                continue;
+
+                            if (sDist < closestSqrDist)
                             {
-                                var targetId = potentialTargets[j];
-
-                                if (targetId == attacker.id.Value || !_processedTargets.Add(targetId))
-                                    continue;
-
-                                var target = GetGameEntityById.Get(targetId);
-
-                                if (target != null && target.team.Value != myTeam && target.isTargetable && !target.isDead)
-                                {
-                                    if (!target.hasCurrentCell)
-                                        continue;
-
-                                    var targetPoint = TargetService.GetClosestPoint(target, attackOriginPos);
-
-                                    var dx = attackOriginPos.x - targetPoint.x;
-                                    var dy = attackOriginPos.y - targetPoint.y;
-                                    var sDist = (dx * dx) + (dy * dy);
-
-                                    if (sDist > sqrPhysicalRange)
-                                        continue;
-
-                                    if (sDist < closestSqrDist)
-                                    {
-                                        closestSqrDist = sDist;
-                                        bestTargetId = targetId;
-                                        bestTargetPoint = targetPoint;
-                                    }
-                                }
+                                closestSqrDist = sDist;
+                                bestTargetId = targetId;
+                                bestTargetPoint = targetPoint;
                             }
                         }
                     }
@@ -116,6 +120,28 @@ namespace Code.Game.Features.Target.Systems
                     attacker.RemoveTargetId();
                 }
             }
+        }
+
+        private static bool TryUseSurroundTarget(GameEntity attacker, Team myTeam, Vector2 attackOriginPos)
+        {
+            if (!attacker.hasSurroundTargetId)
+                return false;
+
+            var target = GetGameEntityById.Get(attacker.surroundTargetId.Value);
+
+            if (target == null
+                || target.team.Value == myTeam
+                || !target.isTargetable
+                || target.isDead
+                || !target.hasCurrentCell)
+                return false;
+
+            var targetPoint = TargetService.GetClosestPoint(target, attackOriginPos);
+
+            attacker.ReplaceAttackerPoint(attackOriginPos);
+            attacker.ReplaceTargetPoint(targetPoint);
+            attacker.ReplaceTargetId(target.id.Value);
+            return true;
         }
     }
 }

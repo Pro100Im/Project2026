@@ -20,7 +20,8 @@ namespace Code.Game.Features.Target.Systems
                     GameMatcher.SurroundSlot,
                     GameMatcher.SurroundTargetId,
                     GameMatcher.Range,
-                    GameMatcher.Id));
+                    GameMatcher.Id,
+                    GameMatcher.UnitSize));
 
             _maps = context.GetGroup(GameMatcher
                 .AllOf(
@@ -77,20 +78,49 @@ namespace Code.Game.Features.Target.Systems
             GameEntity target,
             Dictionary<Vector3Int, Vector3> tilemap)
         {
-            var slot = unit.surroundSlot.Value;
-
-            if (!tilemap.TryGetValue(slot, out var slotWorld))
+            if (!target.hasCurrentCell)
                 return false;
 
-            if (unit.hasUnitAnchorPoint)
-                slotWorld += unit.unitAnchorPoint.Value;
+            var slot = unit.surroundSlot.Value;
+            var size = unit.unitSize.Value;
 
-            var closest = TargetService.GetClosestPoint(target, slotWorld);
-            var dx = slotWorld.x - closest.x;
-            var dy = slotWorld.y - closest.y;
+            TargetService.GetFootprint(target, out var minX, out var minY, out var maxX, out var maxY);
+            var ring = TargetService.GetFootprintRing(slot, size, minX, minY, maxX, maxY);
+            var maxRing = TargetService.GetSurroundMaxRing(unit.range.Value);
+
+            if (ring < 1 || ring > maxRing)
+                return false;
+
+            var bestSqr = float.MaxValue;
+            var found = false;
+
+            for (var x = 0; x < size.x; x++)
+            {
+                for (var y = 0; y < size.y; y++)
+                {
+                    var cell = new Vector3Int(slot.x + x, slot.y + y, 0);
+
+                    if (!tilemap.TryGetValue(cell, out var cellWorld))
+                        continue;
+
+                    var closest = TargetService.GetClosestPoint(target, cellWorld);
+                    var dx = cellWorld.x - closest.x;
+                    var dy = cellWorld.y - closest.y;
+                    var cellSqr = (dx * dx) + (dy * dy);
+
+                    if (cellSqr < bestSqr)
+                        bestSqr = cellSqr;
+
+                    found = true;
+                }
+            }
+
+            if (!found)
+                return false;
+
             var physicalRange = TargetService.GetPhysicalRange(unit.range.Value);
 
-            return (dx * dx) + (dy * dy) <= physicalRange * physicalRange;
+            return bestSqr <= physicalRange * physicalRange;
         }
     }
 }

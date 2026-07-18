@@ -24,6 +24,56 @@ namespace Code.Game.Features.Target.Services
             maxY = origin.y + footprintSize.y - 1;
         }
 
+        public static int GetFootprintRing(
+            Vector3Int origin,
+            Vector2Int size,
+            int tMinX,
+            int tMinY,
+            int tMaxX,
+            int tMaxY)
+        {
+            var aMinX = origin.x;
+            var aMinY = origin.y;
+            var aMaxX = origin.x + size.x - 1;
+            var aMaxY = origin.y + size.y - 1;
+
+            var gapX = IntervalGap(aMinX, aMaxX, tMinX, tMaxX);
+            var gapY = IntervalGap(aMinY, aMaxY, tMinY, tMaxY);
+
+            return Mathf.Max(gapX, gapY);
+        }
+
+        private static int IntervalGap(int aMin, int aMax, int bMin, int bMax)
+        {
+            if (aMax < bMin)
+                return bMin - aMax;
+
+            if (bMax < aMin)
+                return aMin - bMax;
+
+            return 0;
+        }
+
+        public static void GetOriginBlockedAabb(
+            int tMinX,
+            int tMinY,
+            int tMaxX,
+            int tMaxY,
+            Vector2Int size,
+            out int bMinX,
+            out int bMinY,
+            out int bMaxX,
+            out int bMaxY)
+        {
+            var padX = size.x - 1;
+            var padY = size.y - 1;
+
+            bMinX = tMinX - padX;
+            bMinY = tMinY - padY;
+            bMaxX = tMaxX;
+            bMaxY = tMaxY;
+        }
+
         public static float GetEffectiveRange(float range)
         {
             return Mathf.Max(range, MinEffectiveRange);
@@ -38,7 +88,7 @@ namespace Code.Game.Features.Target.Services
 
         public static int GetSurroundMaxRing(float range)
         {
-            return Mathf.CeilToInt(GetEffectiveRange(range));
+            return Mathf.Max(1, Mathf.FloorToInt(GetEffectiveRange(range)));
         }
 
         public static int GetRangedMinRing(float range)
@@ -126,6 +176,25 @@ namespace Code.Game.Features.Target.Services
             var physicalRange = GetPhysicalRange(range);
             var sqrPhysicalRange = physicalRange * physicalRange;
 
+            GetOriginBlockedAabb(minX, minY, maxX, maxY, size, out var bMinX, out var bMinY, out var bMaxX, out var bMaxY);
+
+            if (TryClaimCurrentCellAsSlot(
+                    unitCell,
+                    target,
+                    minX,
+                    minY,
+                    maxX,
+                    maxY,
+                    range,
+                    size,
+                    unitId,
+                    map,
+                    tilemap,
+                    surroundField,
+                    preferMaxRange,
+                    out bestSlot))
+                return true;
+
             if (preferMaxRange)
             {
                 var minPreferredRing = Mathf.Min(GetRangedMinRing(range), maxRing);
@@ -133,10 +202,10 @@ namespace Code.Game.Features.Target.Services
                 if (TryCollectBestSlotOnRings(
                         unitCell,
                         target,
-                        minX,
-                        minY,
-                        maxX,
-                        maxY,
+                        bMinX,
+                        bMinY,
+                        bMaxX,
+                        bMaxY,
                         maxRing,
                         minPreferredRing,
                         -1,
@@ -146,6 +215,7 @@ namespace Code.Game.Features.Target.Services
                         map,
                         tilemap,
                         surroundField,
+                        collectAllRings: false,
                         out bestSlot))
                     return true;
 
@@ -153,10 +223,10 @@ namespace Code.Game.Features.Target.Services
                     && TryCollectBestSlotOnRings(
                         unitCell,
                         target,
-                        minX,
-                        minY,
-                        maxX,
-                        maxY,
+                        bMinX,
+                        bMinY,
+                        bMaxX,
+                        bMaxY,
                         minPreferredRing - 1,
                         1,
                         -1,
@@ -166,6 +236,7 @@ namespace Code.Game.Features.Target.Services
                         map,
                         tilemap,
                         surroundField,
+                        collectAllRings: false,
                         out bestSlot))
                     return true;
 
@@ -175,10 +246,10 @@ namespace Code.Game.Features.Target.Services
             return TryCollectBestSlotOnRings(
                 unitCell,
                 target,
-                minX,
-                minY,
-                maxX,
-                maxY,
+                bMinX,
+                bMinY,
+                bMaxX,
+                bMaxY,
                 1,
                 maxRing,
                 1,
@@ -188,16 +259,66 @@ namespace Code.Game.Features.Target.Services
                 map,
                 tilemap,
                 surroundField,
+                collectAllRings: true,
                 out bestSlot);
+        }
+
+        private static bool TryClaimCurrentCellAsSlot(
+            Vector3Int unitCell,
+            GameEntity target,
+            int tMinX,
+            int tMinY,
+            int tMaxX,
+            int tMaxY,
+            float range,
+            Vector2Int size,
+            int unitId,
+            GameEntity map,
+            Dictionary<Vector3Int, Vector3> tilemap,
+            Dictionary<Vector3Int, int> surroundField,
+            bool preferMaxRange,
+            out Vector3Int bestSlot)
+        {
+            bestSlot = default;
+
+            var ring = GetFootprintRing(unitCell, size, tMinX, tMinY, tMaxX, tMaxY);
+
+            if (ring < 1 || ring > GetSurroundMaxRing(range))
+                return false;
+
+            if (surroundField.TryGetValue(unitCell, out var ownerId) && ownerId != unitId)
+                return false;
+
+            if (!CanFitSlot(unitCell, size, unitId, map))
+                return false;
+
+            if (!TryGetClosestFootprintSqrDistance(unitCell, size, target, tilemap, out var sqrDist))
+                return false;
+
+            var physicalRange = GetPhysicalRange(range);
+
+            if (sqrDist > physicalRange * physicalRange)
+                return false;
+
+            if (preferMaxRange)
+            {
+                var minSafe = GetRangedMinSafePhysical(range);
+
+                if (sqrDist < minSafe * minSafe)
+                    return false;
+            }
+
+            bestSlot = unitCell;
+            return true;
         }
 
         private bool TryCollectBestSlotOnRings(
             Vector3Int unitCell,
             GameEntity target,
-            int minX,
-            int minY,
-            int maxX,
-            int maxY,
+            int bMinX,
+            int bMinY,
+            int bMaxX,
+            int bMaxY,
             int startRing,
             int endRing,
             int step,
@@ -207,6 +328,7 @@ namespace Code.Game.Features.Target.Services
             GameEntity map,
             Dictionary<Vector3Int, Vector3> tilemap,
             Dictionary<Vector3Int, int> surroundField,
+            bool collectAllRings,
             out Vector3Int bestSlot)
         {
             bestSlot = default;
@@ -217,12 +339,15 @@ namespace Code.Game.Features.Target.Services
 
             for (var ring = startRing; step > 0 ? ring <= endRing : ring >= endRing; ring += step)
             {
-                var oMinX = minX - ring;
-                var oMaxX = maxX + ring;
-                var oMinY = minY - ring;
-                var oMaxY = maxY + ring;
+                var oMinX = bMinX - ring;
+                var oMaxX = bMaxX + ring;
+                var oMinY = bMinY - ring;
+                var oMaxY = bMaxY + ring;
 
-                _slotCandidatesBuffer.Clear();
+                if (!collectAllRings)
+                    _slotCandidatesBuffer.Clear();
+
+                var ringCandidateCount = 0;
 
                 for (var x = oMinX; x <= oMaxX; x++)
                 {
@@ -235,14 +360,13 @@ namespace Code.Game.Features.Target.Services
 
                         var candidate = new Vector3Int(x, y, 0);
 
-                        if (!tilemap.TryGetValue(candidate, out var candidateWorldPos))
+                        if (!tilemap.ContainsKey(candidate))
                             continue;
 
-                        var targetPoint = GetClosestPoint(target, candidateWorldPos);
-                        var dx = candidateWorldPos.x - targetPoint.x;
-                        var dy = candidateWorldPos.y - targetPoint.y;
+                        if (!TryGetClosestFootprintSqrDistance(candidate, size, target, tilemap, out var sqrDist))
+                            continue;
 
-                        if ((dx * dx) + (dy * dy) > sqrPhysicalRange)
+                        if (sqrDist > sqrPhysicalRange)
                             continue;
 
                         if (surroundField.TryGetValue(candidate, out var ownerId) && ownerId != unitId)
@@ -252,10 +376,11 @@ namespace Code.Game.Features.Target.Services
                             continue;
 
                         _slotCandidatesBuffer.Add(candidate);
+                        ringCandidateCount++;
                     }
                 }
 
-                if (_slotCandidatesBuffer.Count > 0)
+                if (!collectAllRings && ringCandidateCount > 0)
                     break;
             }
 
@@ -270,6 +395,40 @@ namespace Code.Game.Features.Target.Services
                 {
                     bestDist = dist;
                     bestSlot = candidate;
+                    found = true;
+                }
+            }
+
+            return found;
+        }
+
+        private static bool TryGetClosestFootprintSqrDistance(
+            Vector3Int origin,
+            Vector2Int size,
+            GameEntity target,
+            Dictionary<Vector3Int, Vector3> tilemap,
+            out float sqrDist)
+        {
+            sqrDist = float.MaxValue;
+            var found = false;
+
+            for (var x = 0; x < size.x; x++)
+            {
+                for (var y = 0; y < size.y; y++)
+                {
+                    var cell = new Vector3Int(origin.x + x, origin.y + y, 0);
+
+                    if (!tilemap.TryGetValue(cell, out var cellWorldPos))
+                        continue;
+
+                    var targetPoint = GetClosestPoint(target, cellWorldPos);
+                    var dx = cellWorldPos.x - targetPoint.x;
+                    var dy = cellWorldPos.y - targetPoint.y;
+                    var cellSqr = (dx * dx) + (dy * dy);
+
+                    if (cellSqr < sqrDist)
+                        sqrDist = cellSqr;
+
                     found = true;
                 }
             }
