@@ -141,6 +141,9 @@ namespace Code.Game.Features.Target.Systems
                 || !target.hasCurrentCell)
                 return false;
 
+            if (!TargetService.IsOnAttackRing(attacker, target))
+                return false;
+
             var targetPoint = TargetService.GetClosestPoint(target, tilemap, attackOriginPos);
 
             attacker.ReplaceAttackerPoint(attackOriginPos);

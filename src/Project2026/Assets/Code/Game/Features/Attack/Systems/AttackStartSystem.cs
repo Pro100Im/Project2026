@@ -63,7 +63,8 @@ namespace Code.Game.Features.Attack.Systems
                     var isRetreating = attacker.hasSurroundSlot
                         && attacker.currentCell.Value != attacker.surroundSlot.Value;
 
-                    if (isRetreating && TargetService.IsTooCloseForRanged(attacker, target, tilemap))
+                    if (isRetreating && attacker.isMoving
+                        && TargetService.IsTooCloseForRanged(attacker, target, tilemap))
                         continue;
 
                     if (!AttackProjectileHelper.CanFire(_targetService, attacker, target))
@@ -139,19 +140,7 @@ namespace Code.Game.Features.Attack.Systems
             flipDx = dx;
         }
 
-        private static bool IsOnAttackRing(GameEntity attacker, GameEntity target)
-        {
-            TargetService.GetFootprint(target, out var minX, out var minY, out var maxX, out var maxY);
-
-            var ring = TargetService.GetFootprintRing(
-                attacker.currentCell.Value,
-                attacker.unitSize.Value,
-                minX,
-                minY,
-                maxX,
-                maxY);
-
-            return ring >= 1 && ring <= TargetService.GetSurroundMaxRing(attacker.range.Value);
-        }
+        private static bool IsOnAttackRing(GameEntity attacker, GameEntity target) =>
+            TargetService.IsOnAttackRing(attacker, target);
     }
 }

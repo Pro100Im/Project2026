@@ -150,6 +150,26 @@ namespace Code.Game.Features.Target.Services
             return Mathf.Max(1, Mathf.FloorToInt(GetEffectiveRange(range)));
         }
 
+        public static bool IsOnAttackRing(GameEntity attacker, GameEntity target)
+        {
+            if (!attacker.hasCurrentCell || !attacker.hasRange || !target.hasCurrentCell)
+                return false;
+
+            var size = attacker.hasUnitSize ? attacker.unitSize.Value : Vector2Int.one;
+
+            GetFootprint(target, out var minX, out var minY, out var maxX, out var maxY);
+
+            var ring = GetFootprintRing(
+                attacker.currentCell.Value,
+                size,
+                minX,
+                minY,
+                maxX,
+                maxY);
+
+            return ring >= 1 && ring <= GetSurroundMaxRing(attacker.range.Value);
+        }
+
         public static int GetRangedMinRing(float range)
         {
             return Mathf.Max(2, Mathf.CeilToInt(GetEffectiveRange(range) * 0.5f));

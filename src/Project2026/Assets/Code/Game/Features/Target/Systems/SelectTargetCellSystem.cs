@@ -39,6 +39,7 @@ namespace Code.Game.Features.Target.Systems
                     GameMatcher.DefenseIntegrationFields,
                     GameMatcher.OccupField,
                     GameMatcher.ReservedField,
+                    GameMatcher.SurroundField,
                     GameMatcher.TilemapMovement));
         }
 
@@ -239,11 +240,76 @@ namespace Code.Game.Features.Target.Systems
             }
 
             if (found && chosen != cell)
+            {
                 SetTargetCell(unit, chosen, size, unitId, mapEntity);
+            }
             else
+            {
                 SetTargetCell(unit, cell, size, unitId, mapEntity);
 
+                if (unit.isRangeAttack)
+                    TrySettleSurroundSlotOnStuck(unit, cell, mapEntity);
+                else
+                    TryReleaseSurroundSlotIfUnreachable(unit, mapEntity);
+            }
+
             unit.isTargetCellRequest = false;
+        }
+
+        private static void TrySettleSurroundSlotOnStuck(
+            GameEntity unit,
+            Vector3Int cell,
+            GameEntity mapEntity)
+        {
+            if (!unit.hasSurroundSlot
+                || !unit.hasSurroundTargetId
+                || !unit.hasRange)
+                return;
+
+            if (unit.surroundSlot.Value == cell)
+                return;
+
+            var target = GetGameEntityById.Get(unit.surroundTargetId.Value);
+
+            if (target == null || target.isDead || !target.hasCurrentCell)
+                return;
+
+            if (!TargetService.IsOnAttackRing(unit, target))
+                return;
+
+            var surroundField = mapEntity.surroundField.Value;
+            var unitId = unit.id.Value;
+            var oldSlot = unit.surroundSlot.Value;
+
+            if (surroundField.TryGetValue(oldSlot, out var ownerId) && ownerId == unitId)
+                surroundField.Remove(oldSlot);
+
+            surroundField[cell] = unitId;
+            unit.ReplaceSurroundSlot(cell);
+        }
+
+        private static void TryReleaseSurroundSlotIfUnreachable(GameEntity unit, GameEntity mapEntity)
+        {
+            if (!unit.hasSurroundSlot || !unit.hasSurroundTargetId || !unit.hasRange)
+                return;
+
+            var target = GetGameEntityById.Get(unit.surroundTargetId.Value);
+
+            if (target == null || target.isDead || !target.hasCurrentCell)
+                return;
+
+            if (TargetService.IsOnAttackRing(unit, target))
+                return;
+
+            var surroundField = mapEntity.surroundField.Value;
+            var unitId = unit.id.Value;
+            var slot = unit.surroundSlot.Value;
+
+            if (surroundField.TryGetValue(slot, out var ownerId) && ownerId == unitId)
+                surroundField.Remove(slot);
+
+            unit.RemoveSurroundSlot();
+            unit.RemoveSurroundTargetId();
         }
 
         private static void SetTargetCell(

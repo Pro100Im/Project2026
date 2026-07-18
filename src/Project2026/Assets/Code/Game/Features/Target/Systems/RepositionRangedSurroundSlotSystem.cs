@@ -58,6 +58,9 @@ namespace Code.Game.Features.Target.Systems
                 if (unit.isAttackAvailable)
                     continue;
 
+                if (unit.currentCell.Value != unit.surroundSlot.Value)
+                    continue;
+
                 var target = GetGameEntityById.Get(unit.surroundTargetId.Value);
 
                 if (target == null || target.isDead || !target.hasCurrentCell)
