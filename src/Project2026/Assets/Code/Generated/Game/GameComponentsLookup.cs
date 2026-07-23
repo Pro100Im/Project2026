@@ -8,157 +8,160 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int Animator = 0;
-    public const int Attached = 1;
-    public const int Bounds = 2;
-    public const int DelayDestruct = 3;
-    public const int Destructed = 4;
-    public const int EntityConfig = 5;
-    public const int Id = 6;
-    public const int LineRenderer = 7;
-    public const int OwnerId = 8;
-    public const int SortOrder = 9;
-    public const int Sprite = 10;
-    public const int SpriteRenderer = 11;
-    public const int Team = 12;
-    public const int TouchZone = 13;
-    public const int Transform = 14;
-    public const int UIDocument = 15;
-    public const int View = 16;
-    public const int ViewPath = 17;
-    public const int ViewPrefab = 18;
-    public const int WoldPos = 19;
-    public const int AreaAttack = 20;
-    public const int AttackAnimStarted = 21;
-    public const int AttackAvailable = 22;
-    public const int AttackCooldown = 23;
-    public const int AttackDirection = 24;
-    public const int AttackDuration = 25;
-    public const int AttackerPoint = 26;
-    public const int AttackHitPending = 27;
-    public const int Attacking = 28;
-    public const int DetectionRange = 29;
-    public const int FirePointOffset = 30;
-    public const int Hitted = 31;
-    public const int MeleeAttack = 32;
-    public const int Range = 33;
-    public const int RangeAttack = 34;
-    public const int RangeHit = 35;
-    public const int Cooldown = 36;
-    public const int ChaosDamage = 37;
-    public const int ChaosDamageHitEffect = 38;
-    public const int DamageEffectRequest = 39;
-    public const int DamageRequest = 40;
-    public const int FireDamage = 41;
-    public const int FireDamageHitEffect = 42;
-    public const int FrostDamage = 43;
-    public const int FrostDamageHitEffect = 44;
-    public const int LightningDamage = 45;
-    public const int LightningDamageHitEffect = 46;
-    public const int PhysicalDamage = 47;
-    public const int PhysicalDamageHitEffect = 48;
-    public const int TotalDamage = 49;
-    public const int Dead = 50;
-    public const int DeathDuration = 51;
-    public const int Killable = 52;
-    public const int ApplyDebuffRequest = 53;
-    public const int AttackSlowingDown = 54;
-    public const int ChillDebuff = 55;
-    public const int CombustionDebuff = 56;
-    public const int MoveSlowingDown = 57;
-    public const int Duration = 58;
-    public const int ChillDuration = 59;
-    public const int ChillEffect = 60;
-    public const int CombustionCoolDown = 61;
-    public const int CombustionDuration = 62;
-    public const int CombustionEffect = 63;
-    public const int Effect = 64;
-    public const int EffectCheckRequest = 65;
-    public const int Stackable = 66;
-    public const int Enemy = 67;
-    public const int ExchequerGoldCapacity = 68;
-    public const int ExchequerGoldChangeRequest = 69;
-    public const int ExchequerManaCapacity = 70;
-    public const int ExchequerManaChangeRequest = 71;
-    public const int ExchequerMealCapacity = 72;
-    public const int ExchequerMealChangeRequest = 73;
-    public const int GameExchequer = 74;
-    public const int CurrentHealth = 75;
-    public const int HpBar = 76;
-    public const int MaxHealth = 77;
-    public const int DefenseFlowFields = 78;
-    public const int DefenseIntegrationFields = 79;
-    public const int FlowFieldDirty = 80;
-    public const int FlowFields = 81;
-    public const int IntegrationFields = 82;
-    public const int OccupField = 83;
-    public const int ReservedField = 84;
-    public const int SpatialHash = 85;
-    public const int SpawnMap = 86;
-    public const int SpawnReservedField = 87;
-    public const int SurroundField = 88;
-    public const int TilemapMovement = 89;
-    public const int CurrentCell = 90;
-    public const int GridMovement = 91;
-    public const int LastDirection = 92;
-    public const int MovementAvailable = 93;
-    public const int MovementOffset = 94;
-    public const int MovementSpeed = 95;
-    public const int MovementSpeedBonus = 96;
-    public const int Moving = 97;
-    public const int TotalDistance = 98;
-    public const int Trajectory = 99;
-    public const int TrajectoryBaseArcHeight = 100;
-    public const int TrajectoryCurrentArcHeight = 101;
-    public const int TrajectoryMovement = 102;
-    public const int TrajectoryPathProgress = 103;
-    public const int Velocity = 104;
-    public const int CastleUnderAttack = 105;
-    public const int PlayerCastle = 106;
-    public const int PlayerCastleCells = 107;
-    public const int Player = 108;
-    public const int FireResistance = 109;
-    public const int FrostResistance = 110;
-    public const int PhysicalResistance = 111;
-    public const int Reward = 112;
-    public const int SpawnPosition = 113;
-    public const int SpawnRequsted = 114;
-    public const int WaitingToSpawn = 115;
-    public const int DefenseFlow = 116;
-    public const int DefensePatrolCell = 117;
-    public const int DefensePatrolIdleDuration = 118;
-    public const int DefensePatrolWait = 119;
-    public const int RallyToCastle = 120;
-    public const int SurroundSlot = 121;
-    public const int SurroundTargetId = 122;
-    public const int Targetable = 123;
-    public const int TargetCell = 124;
-    public const int TargetCellRequest = 125;
-    public const int TargetFlow = 126;
-    public const int TargetId = 127;
-    public const int TargetPoint = 128;
-    public const int TargetSelected = 129;
-    public const int Tower = 130;
-    public const int TowerBuildRequest = 131;
-    public const int TowerPlace = 132;
-    public const int TowerUpgrade = 133;
-    public const int TowerUpgradeIcon = 134;
-    public const int TowerUpgradePrice = 135;
-    public const int TowerUpgradeRequest = 136;
-    public const int Unit = 137;
-    public const int UnitAnchorPoint = 138;
-    public const int UnitIcon = 139;
-    public const int UnitSize = 140;
-    public const int CurrentWaveEnemies = 141;
-    public const int CurrentWaveNumber = 142;
-    public const int WaveEnemiesAlive = 143;
-    public const int WaveInProgress = 144;
-    public const int WaveStartRequsted = 145;
-    public const int Projectile = 146;
+    public const int Pause = 0;
+    public const int Animator = 1;
+    public const int Attached = 2;
+    public const int Bounds = 3;
+    public const int DelayDestruct = 4;
+    public const int Destructed = 5;
+    public const int EntityConfig = 6;
+    public const int Id = 7;
+    public const int LineRenderer = 8;
+    public const int OwnerId = 9;
+    public const int SortOrder = 10;
+    public const int Sprite = 11;
+    public const int SpriteRenderer = 12;
+    public const int Team = 13;
+    public const int TouchZone = 14;
+    public const int Transform = 15;
+    public const int UIDocument = 16;
+    public const int View = 17;
+    public const int ViewPath = 18;
+    public const int ViewPrefab = 19;
+    public const int WoldPos = 20;
+    public const int AreaAttack = 21;
+    public const int AttackAnimStarted = 22;
+    public const int AttackAvailable = 23;
+    public const int AttackCooldown = 24;
+    public const int AttackDirection = 25;
+    public const int AttackDuration = 26;
+    public const int AttackerPoint = 27;
+    public const int AttackHitPending = 28;
+    public const int Attacking = 29;
+    public const int DetectionRange = 30;
+    public const int FirePointOffset = 31;
+    public const int Hitted = 32;
+    public const int MeleeAttack = 33;
+    public const int Range = 34;
+    public const int RangeAttack = 35;
+    public const int RangeHit = 36;
+    public const int Cooldown = 37;
+    public const int ChaosDamage = 38;
+    public const int ChaosDamageHitEffect = 39;
+    public const int DamageEffectRequest = 40;
+    public const int DamageRequest = 41;
+    public const int FireDamage = 42;
+    public const int FireDamageHitEffect = 43;
+    public const int FrostDamage = 44;
+    public const int FrostDamageHitEffect = 45;
+    public const int LightningDamage = 46;
+    public const int LightningDamageHitEffect = 47;
+    public const int PhysicalDamage = 48;
+    public const int PhysicalDamageHitEffect = 49;
+    public const int TotalDamage = 50;
+    public const int Dead = 51;
+    public const int DeathDuration = 52;
+    public const int Killable = 53;
+    public const int ApplyDebuffRequest = 54;
+    public const int AttackSlowingDown = 55;
+    public const int ChillDebuff = 56;
+    public const int CombustionDebuff = 57;
+    public const int MoveSlowingDown = 58;
+    public const int Duration = 59;
+    public const int ChillDuration = 60;
+    public const int ChillEffect = 61;
+    public const int CombustionCoolDown = 62;
+    public const int CombustionDuration = 63;
+    public const int CombustionEffect = 64;
+    public const int Effect = 65;
+    public const int EffectCheckRequest = 66;
+    public const int Stackable = 67;
+    public const int Enemy = 68;
+    public const int ExchequerGoldCapacity = 69;
+    public const int ExchequerGoldChangeRequest = 70;
+    public const int ExchequerManaCapacity = 71;
+    public const int ExchequerManaChangeRequest = 72;
+    public const int ExchequerMealCapacity = 73;
+    public const int ExchequerMealChangeRequest = 74;
+    public const int GameExchequer = 75;
+    public const int GameSession = 76;
+    public const int CurrentHealth = 77;
+    public const int HpBar = 78;
+    public const int MaxHealth = 79;
+    public const int DefenseFlowFields = 80;
+    public const int DefenseIntegrationFields = 81;
+    public const int FlowFieldDirty = 82;
+    public const int FlowFields = 83;
+    public const int IntegrationFields = 84;
+    public const int OccupField = 85;
+    public const int ReservedField = 86;
+    public const int SpatialHash = 87;
+    public const int SpawnMap = 88;
+    public const int SpawnReservedField = 89;
+    public const int SurroundField = 90;
+    public const int TilemapMovement = 91;
+    public const int CurrentCell = 92;
+    public const int GridMovement = 93;
+    public const int LastDirection = 94;
+    public const int MovementAvailable = 95;
+    public const int MovementOffset = 96;
+    public const int MovementSpeed = 97;
+    public const int MovementSpeedBonus = 98;
+    public const int Moving = 99;
+    public const int TotalDistance = 100;
+    public const int Trajectory = 101;
+    public const int TrajectoryBaseArcHeight = 102;
+    public const int TrajectoryCurrentArcHeight = 103;
+    public const int TrajectoryMovement = 104;
+    public const int TrajectoryPathProgress = 105;
+    public const int Velocity = 106;
+    public const int CastleUnderAttack = 107;
+    public const int PlayerCastle = 108;
+    public const int PlayerCastleCells = 109;
+    public const int Player = 110;
+    public const int FireResistance = 111;
+    public const int FrostResistance = 112;
+    public const int PhysicalResistance = 113;
+    public const int Reward = 114;
+    public const int SpawnPosition = 115;
+    public const int SpawnRequsted = 116;
+    public const int WaitingToSpawn = 117;
+    public const int DefenseFlow = 118;
+    public const int DefensePatrolCell = 119;
+    public const int DefensePatrolIdleDuration = 120;
+    public const int DefensePatrolWait = 121;
+    public const int RallyToCastle = 122;
+    public const int SurroundSlot = 123;
+    public const int SurroundTargetId = 124;
+    public const int Targetable = 125;
+    public const int TargetCell = 126;
+    public const int TargetCellRequest = 127;
+    public const int TargetFlow = 128;
+    public const int TargetId = 129;
+    public const int TargetPoint = 130;
+    public const int TargetSelected = 131;
+    public const int Tower = 132;
+    public const int TowerBuildRequest = 133;
+    public const int TowerPlace = 134;
+    public const int TowerUpgrade = 135;
+    public const int TowerUpgradeIcon = 136;
+    public const int TowerUpgradePrice = 137;
+    public const int TowerUpgradeRequest = 138;
+    public const int Unit = 139;
+    public const int UnitAnchorPoint = 140;
+    public const int UnitIcon = 141;
+    public const int UnitSize = 142;
+    public const int CurrentWaveEnemies = 143;
+    public const int CurrentWaveNumber = 144;
+    public const int WaveEnemiesAlive = 145;
+    public const int WaveInProgress = 146;
+    public const int WaveStartRequsted = 147;
+    public const int Projectile = 148;
 
-    public const int TotalComponents = 147;
+    public const int TotalComponents = 149;
 
     public static readonly string[] componentNames = {
+        "Pause",
         "Animator",
         "Attached",
         "Bounds",
@@ -234,6 +237,7 @@ public static class GameComponentsLookup {
         "ExchequerMealCapacity",
         "ExchequerMealChangeRequest",
         "GameExchequer",
+        "GameSession",
         "CurrentHealth",
         "HpBar",
         "MaxHealth",
@@ -309,6 +313,7 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Assets.Code.Game.Features.Pause.Pause),
         typeof(Code.Game.Common.AnimatorComponent),
         typeof(Code.Game.Common.Attached),
         typeof(Code.Game.Common.BoundsComponent),
@@ -384,6 +389,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Exchequer.ExchequerMealCapacity),
         typeof(Code.Game.Features.Exchequer.ExchequerMealChangeRequest),
         typeof(Code.Game.Features.Exchequer.GameExchequer),
+        typeof(Code.Game.Features.GameSession.GameSessionComponent),
         typeof(Code.Game.Features.Health.CurrentHealth),
         typeof(Code.Game.Features.Health.HpBar),
         typeof(Code.Game.Features.Health.MaxHealth),

@@ -23,6 +23,8 @@ using Code.Game.Features.Effect;
 using Code.Game.Features.Effect.Systems;
 using Code.Game.Features.Exchequer;
 using Code.Game.Features.Exchequer.Systems;
+using Code.Game.Features.GameSession;
+using Code.Game.Features.GameSession.Systems;
 using Code.Game.Features.Health;
 using Code.Game.Features.Health.Systems;
 using Code.Game.Features.Input;
@@ -31,6 +33,8 @@ using Code.Game.Features.Level;
 using Code.Game.Features.Level.Systems;
 using Code.Game.Features.Movement;
 using Code.Game.Features.Movement.Systems;
+using Code.Game.Features.Pause;
+using Code.Game.Features.Pause.Systems;
 using Code.Game.Features.Player;
 using Code.Game.Features.Player.Systems;
 using Code.Game.Features.Rewards;
@@ -123,7 +127,9 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<GameTickFeature>(Lifetime.Singleton);
             builder.Register<GameFixedTickFeature>(Lifetime.Singleton);
 
+            builder.Register<GameSessionFeature>(Lifetime.Singleton);
             builder.Register<InputFeature>(Lifetime.Singleton);
+            builder.Register<PauseFeature>(Lifetime.Singleton);
             builder.Register<PlayerFeature>(Lifetime.Singleton);
 
             builder.Register<TowerFeature>(Lifetime.Singleton);
@@ -165,8 +171,10 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<CreateEntityViewFromPathSystem>(Lifetime.Singleton);
             builder.Register<CreateEntityViewFromPrefabSystem>(Lifetime.Singleton);
 
+            builder.Register<GameSessionSystem>(Lifetime.Singleton);
             builder.Register<InitializeInputSystem>(Lifetime.Singleton);
             builder.Register<InputClickOnEntitySystem>(Lifetime.Singleton);
+            builder.Register<PauseSystem>(Lifetime.Singleton);
             builder.Register<TowerMenuSystem>(Lifetime.Singleton);
             builder.Register<CleanUpInputDestructedSystem>(Lifetime.Singleton);
             builder.Register<TearDownInputDestructedSystem>(Lifetime.Singleton);

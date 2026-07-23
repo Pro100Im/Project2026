@@ -8,6 +8,7 @@ namespace Code.Game.Input.Service
         public void DisableInput();
 
         public bool WasClicked();
+        public bool WasPauseClicked();
 
         public Vector2 GetPointer();
         public Vector2 GetWorldPointer();

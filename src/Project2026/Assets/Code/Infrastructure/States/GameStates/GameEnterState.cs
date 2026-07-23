@@ -22,12 +22,20 @@ namespace Code.Infrastructure.States.GameStates
 
         public override void Enter()
         {
-            CreatePlayer();
+            CreateGameSession();
+            CreatePlayerInput();
 
             _stateMachine.Enter<GameLoopState>();
         }
 
-        private void CreatePlayer()
+        private void CreateGameSession()
+        {
+            var entity = CreateGameEntity.Empty();
+
+            entity.isGameSession = true;
+        }
+
+        private void CreatePlayerInput()
         {
             var entity = CreateInputEntity.Empty();
 

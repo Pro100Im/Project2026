@@ -8,18 +8,22 @@
 //------------------------------------------------------------------------------
 public static class InputComponentsLookup {
 
-    public const int Destructed = 0;
-    public const int TargetId = 1;
-    public const int AxisInput = 2;
-    public const int Input = 3;
-    public const int PointerInput = 4;
-    public const int PointerRay = 5;
-    public const int ScreenPointerInput = 6;
-    public const int WorldPointerInput = 7;
+    public const int ForcedPauseRequested = 0;
+    public const int PauseRequested = 1;
+    public const int Destructed = 2;
+    public const int TargetId = 3;
+    public const int AxisInput = 4;
+    public const int Input = 5;
+    public const int PointerInput = 6;
+    public const int PointerRay = 7;
+    public const int ScreenPointerInput = 8;
+    public const int WorldPointerInput = 9;
 
-    public const int TotalComponents = 8;
+    public const int TotalComponents = 10;
 
     public static readonly string[] componentNames = {
+        "ForcedPauseRequested",
+        "PauseRequested",
         "Destructed",
         "TargetId",
         "AxisInput",
@@ -31,6 +35,8 @@ public static class InputComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Assets.Code.Game.Features.Pause.ForcedPauseRequested),
+        typeof(Assets.Code.Game.Features.Pause.PauseRequested),
         typeof(Code.Game.Common.Destructed),
         typeof(Code.Game.Features.Target.TargetId),
         typeof(Code.Game.Input.AxisInput),

@@ -23,6 +23,7 @@ namespace Code.Game.Input.Service
         }
 
         public bool WasClicked() => _newInputSystemApi.Player.PointClick.WasPerformedThisFrame();
+        public bool WasPauseClicked() => _newInputSystemApi.Player.Pause.WasPerformedThisFrame();
 
         public Vector2 GetPointer() => _newInputSystemApi.Player.Point.ReadValue<Vector2>();
 

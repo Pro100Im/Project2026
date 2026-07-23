@@ -8,10 +8,12 @@ using Code.Game.Features.Debaffs;
 using Code.Game.Features.Duration;
 using Code.Game.Features.Effect;
 using Code.Game.Features.Exchequer;
+using Code.Game.Features.GameSession;
 using Code.Game.Features.Health;
 using Code.Game.Features.Input;
 using Code.Game.Features.Level;
 using Code.Game.Features.Movement;
+using Code.Game.Features.Pause;
 using Code.Game.Features.Player;
 using Code.Game.Features.Rewards;
 using Code.Game.Features.Spawn;
@@ -28,7 +30,9 @@ namespace Code.Game.Features
     {
         public GameTickFeature(ISystemFactory systemFactory)
         {
+            Add(systemFactory.Create<GameSessionFeature>());
             Add(systemFactory.Create<InputFeature>());
+            Add(systemFactory.Create<PauseFeature>());
             Add(systemFactory.Create<PlayerFeature>());
 
             Add(systemFactory.Create<WaveFeature>());
