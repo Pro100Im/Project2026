@@ -12,6 +12,7 @@ namespace Code.Game.Features.Input.Systems
         private readonly GameScreen _gameScreen;
 
         private readonly IGroup<GameEntity> _entities;
+        private readonly IGroup<GameEntity> _gameSessions;
 
         private readonly List<GameEntity> _entitiesBuffer = new(16);
 
@@ -25,10 +26,16 @@ namespace Code.Game.Features.Input.Systems
                 GameMatcher.Id,
                 GameMatcher.TouchZone,
                 GameMatcher.Transform));
+
+            _gameSessions = gameContext.GetGroup(GameMatcher.GameSession);
         }
 
         public void Execute()
         {
+            var session = _gameSessions.GetSingleEntity();
+            if (session != null && session.isPause)
+                return;
+
             if (_inputService.WasClicked())
             {
                 var pointer = _inputService.GetPointer();

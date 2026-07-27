@@ -126,6 +126,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
         {
             builder.Register<GameTickFeature>(Lifetime.Singleton);
             builder.Register<GameFixedTickFeature>(Lifetime.Singleton);
+            builder.Register<GameplayFeature>(Lifetime.Singleton);
 
             builder.Register<GameSessionFeature>(Lifetime.Singleton);
             builder.Register<InputFeature>(Lifetime.Singleton);
