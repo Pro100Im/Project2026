@@ -1,4 +1,5 @@
 using Code.Game.Common.Destruct;
+using Code.Game.Features.Ability;
 using Code.Game.Features.Animator;
 using Code.Game.Features.Attack;
 using Code.Game.Features.Cooldown;
@@ -34,6 +35,7 @@ namespace Code.Game.Features
             Add(systemFactory.Create<WaveFeature>());
             Add(systemFactory.Create<SpawnFeature>());
             Add(systemFactory.Create<CreateViewFeature>());
+            Add(systemFactory.Create<AbilityFeature>());
 
             Add(systemFactory.Create<DebuffFeature>());
 

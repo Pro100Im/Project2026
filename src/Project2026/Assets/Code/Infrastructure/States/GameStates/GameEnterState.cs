@@ -3,7 +3,6 @@ using Code.Game.Common.UI.Transition;
 using Code.Infrastructure.States.StateInfrastructure;
 using Code.Infrastructure.States.StateMachine;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace Code.Infrastructure.States.GameStates
 {
@@ -23,7 +22,6 @@ namespace Code.Infrastructure.States.GameStates
         public override void Enter()
         {
             CreateGameSession();
-            CreatePlayerInput();
 
             _stateMachine.Enter<GameLoopState>();
         }
@@ -33,16 +31,6 @@ namespace Code.Infrastructure.States.GameStates
             var entity = CreateGameEntity.Empty();
 
             entity.isGameSession = true;
-        }
-
-        private void CreatePlayerInput()
-        {
-            var entity = CreateInputEntity.Empty();
-
-            entity.isInput = true;
-            entity.AddAxisInput(Vector2.zero);
-            entity.AddPointerInput(Vector2.zero);
-            entity.AddPointerRay(new Ray());
         }
 
         protected override void Exit()

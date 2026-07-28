@@ -9,10 +9,12 @@ namespace Code.Game.Features.Effect
         {
             Add(systemFactory.Create<ApplyChillEffectSystem>());
             Add(systemFactory.Create<ApplyCombustionEffectSystem>());
+            Add(systemFactory.Create<ApplyFreezeEffectSystem>());
             Add(systemFactory.Create<EffectCheckRequestCleanupSystem>());
 
             Add(systemFactory.Create<ChillEffectEndSystem>());
             Add(systemFactory.Create<CombustionEffectEndSystem>());
+            Add(systemFactory.Create<FreezeEffectEndSystem>());
         }
     }
 }

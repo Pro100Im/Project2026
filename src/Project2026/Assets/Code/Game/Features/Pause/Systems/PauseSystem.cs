@@ -45,7 +45,10 @@ namespace Code.Game.Features.Pause.Systems
             }
 
             foreach (var entity in entities)
+            {
                 entity.isPauseRequested = false;
+                entity.isDestructed = true;
+            }
         }
 
         protected override bool Filter(InputEntity entity) => entity.isPauseRequested;

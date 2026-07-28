@@ -16,4 +16,5 @@ namespace Code.Game.Features.Tower
     [Meta] public class TowerMenuComponent : IComponent { public TowerMenu Value; }
     [Meta] public class TowerOpenBuildMenu : IComponent { }
     [Meta] public class TowerOpenUpgradeMenu : IComponent { }
+    [Meta] public class TowerMenuCloseRequest : IComponent { }
 }

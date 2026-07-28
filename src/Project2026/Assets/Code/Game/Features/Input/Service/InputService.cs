@@ -1,6 +1,5 @@
 using Code.Game.Common.Cameras;
 using Settings.Input;
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,12 +16,8 @@ namespace Code.Game.Input.Service
             _cameraService = cameraService;
         }
 
-        public void SubscribeOnClick(Action<InputAction.CallbackContext> clickAction)
-        {
-            _newInputSystemApi.Player.PointClick.performed += clickAction;
-        }
-
         public bool WasClicked() => _newInputSystemApi.Player.PointClick.WasPerformedThisFrame();
+        public bool WasCancelClicked() => _newInputSystemApi.Player.Cancel.WasPerformedThisFrame();
         public bool WasPauseClicked() => _newInputSystemApi.Player.Pause.WasPerformedThisFrame();
 
         public Vector2 GetPointer() => _newInputSystemApi.Player.Point.ReadValue<Vector2>();
@@ -41,14 +36,6 @@ namespace Code.Game.Input.Service
                 return Vector2.zero;
 
             return _cameraService.GetCamera().WorldToScreenPoint(pos);
-        }
-
-        public Ray GetRayWorldPointer()
-        {
-            if (Mouse.current == null)
-                return new Ray();
-
-            return _cameraService.GetCamera().ScreenPointToRay(GetPointer());
         }
 
         public void EnableInput() => _newInputSystemApi.Player.Enable();

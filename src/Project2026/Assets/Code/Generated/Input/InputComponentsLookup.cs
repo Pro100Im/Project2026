@@ -12,24 +12,38 @@ public static class InputComponentsLookup {
     public const int PauseRequested = 1;
     public const int Destructed = 2;
     public const int TargetId = 3;
-    public const int AxisInput = 4;
-    public const int Input = 5;
-    public const int PointerInput = 6;
-    public const int PointerRay = 7;
-    public const int ScreenPointerInput = 8;
-    public const int WorldPointerInput = 9;
+    public const int AbilityCastIntent = 4;
+    public const int CancelClick = 5;
+    public const int CancelIntent = 6;
+    public const int ClickInput = 7;
+    public const int EntityInteractIntent = 8;
+    public const int Input = 9;
+    public const int InteractTarget = 10;
+    public const int PointerInput = 11;
+    public const int PointerOverUI = 12;
+    public const int PointerState = 13;
+    public const int PrimaryClick = 14;
+    public const int ScreenPointerInput = 15;
+    public const int WorldPointerInput = 16;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 17;
 
     public static readonly string[] componentNames = {
         "ForcedPauseRequested",
         "PauseRequested",
         "Destructed",
         "TargetId",
-        "AxisInput",
+        "AbilityCastIntent",
+        "CancelClick",
+        "CancelIntent",
+        "ClickInput",
+        "EntityInteractIntent",
         "Input",
+        "InteractTarget",
         "PointerInput",
-        "PointerRay",
+        "PointerOverUI",
+        "PointerState",
+        "PrimaryClick",
         "ScreenPointerInput",
         "WorldPointerInput"
     };
@@ -39,10 +53,17 @@ public static class InputComponentsLookup {
         typeof(Assets.Code.Game.Features.Pause.PauseRequested),
         typeof(Code.Game.Common.Destructed),
         typeof(Code.Game.Features.Target.TargetId),
-        typeof(Code.Game.Input.AxisInput),
+        typeof(Code.Game.Input.AbilityCastIntent),
+        typeof(Code.Game.Input.CancelClick),
+        typeof(Code.Game.Input.CancelIntent),
+        typeof(Code.Game.Input.ClickInput),
+        typeof(Code.Game.Input.EntityInteractIntent),
         typeof(Code.Game.Input.Input),
+        typeof(Code.Game.Input.InteractTarget),
         typeof(Code.Game.Input.PointerInput),
-        typeof(Code.Game.Input.PointerRay),
+        typeof(Code.Game.Input.PointerOverUI),
+        typeof(Code.Game.Input.PointerState),
+        typeof(Code.Game.Input.PrimaryClick),
         typeof(Code.Game.Input.ScreenPointerInput),
         typeof(Code.Game.Input.WorldPointerInput)
     };

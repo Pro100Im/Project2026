@@ -5,6 +5,8 @@ using Code.Game.Common.Destruct;
 using Code.Game.Common.Destruct.Systems;
 using Code.Game.Common.UI.Transition;
 using Code.Game.Features;
+using Code.Game.Features.Ability;
+using Code.Game.Features.Ability.Systems;
 using Code.Game.Features.Animator;
 using Code.Game.Features.Animator.Systems;
 using Code.Game.Features.Attack;
@@ -132,6 +134,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<InputFeature>(Lifetime.Singleton);
             builder.Register<PauseFeature>(Lifetime.Singleton);
             builder.Register<PlayerFeature>(Lifetime.Singleton);
+            builder.Register<AbilityFeature>(Lifetime.Singleton);
 
             builder.Register<TowerFeature>(Lifetime.Singleton);
             builder.Register<UnitFeature>(Lifetime.Singleton);
@@ -174,13 +177,24 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<GameSessionSystem>(Lifetime.Singleton);
             builder.Register<InitializeInputSystem>(Lifetime.Singleton);
-            builder.Register<InputClickOnEntitySystem>(Lifetime.Singleton);
-            builder.Register<PauseSystem>(Lifetime.Singleton);
-            builder.Register<TowerMenuSystem>(Lifetime.Singleton);
-            builder.Register<CleanUpInputDestructedSystem>(Lifetime.Singleton);
+            builder.Register<CapturePointerSystem>(Lifetime.Singleton);
+            builder.Register<CaptureClickSystem>(Lifetime.Singleton);
+            builder.Register<ResolveClickTargetSystem>(Lifetime.Singleton);
+            builder.Register<RouteClickSystem>(Lifetime.Singleton);
+            builder.Register<CleanUpInputSystem>(Lifetime.Singleton);
             builder.Register<TearDownInputDestructedSystem>(Lifetime.Singleton);
 
+            builder.Register<PauseSystem>(Lifetime.Singleton);
+            builder.Register<TowerMenuSystem>(Lifetime.Singleton);
+            builder.Register<TowerMenuCloseSystem>(Lifetime.Singleton);
+
             builder.Register<PlayerCameraInitSystem>(Lifetime.Singleton);
+
+            builder.Register<AbilitySelectSystem>(Lifetime.Singleton);
+            builder.Register<AbilityCancelSystem>(Lifetime.Singleton);
+            builder.Register<AbilityCastRequestSystem>(Lifetime.Singleton);
+            builder.Register<AbilityTargetingPreviewSystem>(Lifetime.Singleton);
+            builder.Register<AbilityCastSystem>(Lifetime.Singleton);
 
             builder.Register<WaveInitSystem>(Lifetime.Singleton);
             builder.Register<WaveStartSystem>(Lifetime.Singleton);
@@ -206,6 +220,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<MoveSlowingDownSystem>(Lifetime.Singleton);
             builder.Register<CombustionSystem>(Lifetime.Singleton);
+            builder.Register<FreezeSystem>(Lifetime.Singleton);
 
             builder.Register<ReleaseSurroundSlotSystem>(Lifetime.Singleton);
             builder.Register<RepositionRangedSurroundSlotSystem>(Lifetime.Singleton);
@@ -248,9 +263,11 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<ApplyChillEffectSystem>(Lifetime.Singleton);
             builder.Register<ApplyCombustionEffectSystem>(Lifetime.Singleton);
+            builder.Register<ApplyFreezeEffectSystem>(Lifetime.Singleton);
             builder.Register<EffectCheckRequestCleanupSystem>(Lifetime.Singleton);
             builder.Register<ChillEffectEndSystem>(Lifetime.Singleton);
             builder.Register<CombustionEffectEndSystem>(Lifetime.Singleton);
+            builder.Register<FreezeEffectEndSystem>(Lifetime.Singleton);
 
             builder.Register<CooldownLeftSystem>(Lifetime.Singleton);
             builder.Register<DurationLeftSystem>(Lifetime.Singleton);

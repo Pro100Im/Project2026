@@ -8,11 +8,13 @@ namespace Code.Game.StaticData.Data
         protected override void Add(GameEntity entity)
         {
             entity.isTowerPlace = true;
+            entity.isInteractable = true;
         }
 
         protected override void Remove(GameEntity entity)
         {
             entity.isTowerPlace = false;
+            entity.isInteractable = false;
         }
 
         protected override void Replace(GameEntity entity)

@@ -35,3 +35,4 @@ Jenny/                        ← Jenny generator + JennyRoslyn.properties + bat
 - `EntityComponentRegistrar` — связывает Unity-объекты с Entitas-сущностями
 - `Feature : Feature` — группирует системы, задаёт порядок выполнения
 - `ISystemFactory` / VContainer resolve — все системы создаются через DI
+- Gameplay follows `.cursor/rules/06-ecs-data-oriented.mdc`: data in components/configs, behavior in Entitas systems

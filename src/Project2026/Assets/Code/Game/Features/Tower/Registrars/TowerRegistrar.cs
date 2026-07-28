@@ -8,12 +8,14 @@ namespace Code.Game.Features.Tower.Registrars
         {
             Entity.isPlayer = true;
             Entity.isTowerPlace = true;
+            Entity.isInteractable = true;
         }
 
         public override void UnregisterComponents()
         {
             Entity.isPlayer = false;
             Entity.isTowerPlace = false;
+            Entity.isInteractable = false;
         }
     }
 }

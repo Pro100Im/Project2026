@@ -19,14 +19,15 @@ public static class MetaComponentsLookup {
     public const int GameExchequer = 8;
     public const int Reward = 9;
     public const int TargetId = 10;
-    public const int TowerMenu = 11;
-    public const int TowerOpenBuildMenu = 12;
-    public const int TowerOpenUpgradeMenu = 13;
-    public const int UnitRangeShowed = 14;
-    public const int UnitRangeView = 15;
-    public const int UnitSelectedView = 16;
+    public const int TowerMenuCloseRequest = 11;
+    public const int TowerMenu = 12;
+    public const int TowerOpenBuildMenu = 13;
+    public const int TowerOpenUpgradeMenu = 14;
+    public const int UnitRangeShowed = 15;
+    public const int UnitRangeView = 16;
+    public const int UnitSelectedView = 17;
 
-    public const int TotalComponents = 17;
+    public const int TotalComponents = 18;
 
     public static readonly string[] componentNames = {
         "Pause",
@@ -40,6 +41,7 @@ public static class MetaComponentsLookup {
         "GameExchequer",
         "Reward",
         "TargetId",
+        "TowerMenuCloseRequest",
         "TowerMenu",
         "TowerOpenBuildMenu",
         "TowerOpenUpgradeMenu",
@@ -60,6 +62,7 @@ public static class MetaComponentsLookup {
         typeof(Code.Game.Features.Exchequer.GameExchequer),
         typeof(Code.Game.Features.Rewards.Reward),
         typeof(Code.Game.Features.Target.TargetId),
+        typeof(Code.Game.Features.Tower.TowerMenuCloseRequest),
         typeof(Code.Game.Features.Tower.TowerMenuComponent),
         typeof(Code.Game.Features.Tower.TowerOpenBuildMenu),
         typeof(Code.Game.Features.Tower.TowerOpenUpgradeMenu),

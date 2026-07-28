@@ -8,6 +8,7 @@ namespace Code.Game.Features.Debaffs
     {
         public DebuffFeature(ISystemFactory systemFactory)
         {
+            Add(systemFactory.Create<FreezeSystem>());
             Add(systemFactory.Create<MoveSlowingDownSystem>());
             Add(systemFactory.Create<CombustionSystem>());
         }

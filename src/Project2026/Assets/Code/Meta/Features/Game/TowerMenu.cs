@@ -90,12 +90,8 @@ namespace Code.Meta.Features.Game
 
         private void CloseRequest()
         {
-            if(_currentTowerEntity != null)
-            {
-                var entityClick = CreateInputEntity.Empty();
-                entityClick.AddTargetId(_currentTowerEntity.id.Value);
-                entityClick.isInput = true;
-            }
+            var request = CreateMetaEntity.Empty();
+            request.isTowerMenuCloseRequest = true;
 
             _currentTowerEntity = null;
         }

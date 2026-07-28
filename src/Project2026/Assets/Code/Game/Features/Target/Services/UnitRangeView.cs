@@ -24,17 +24,24 @@ namespace Code.Game.Features.Target.Services
             _fadeTween?.Kill();
             _scaleTween?.Kill();
 
-            transform.position = position;
-
-            var physicalRadius = range * _cellSize;
-            var targetScale = physicalRadius * 2f;
-            var finalScale = new Vector3(targetScale, targetScale, 1f);
+            UpdateRangeView(position, range);
+            var finalScale = _rangeView.transform.localScale;
 
             _rangeView.gameObject.SetActive(true);
             _fadeTween = _rangeView.DOFade(_opacity, 0.25f);
             _scaleTween = _rangeView.transform.DOScale(finalScale, 0.3f)
                 .From(Vector3.zero)
                 .SetEase(Ease.OutBack);
+        }
+
+        public void UpdateRangeView(Vector3 position, float range)
+        {
+            transform.position = position;
+
+            var physicalRadius = range * _cellSize;
+            var targetScale = physicalRadius * 2f;
+
+            _rangeView.transform.localScale = new Vector3(targetScale, targetScale, 1f);
         }
 
         public void HideRangeView()

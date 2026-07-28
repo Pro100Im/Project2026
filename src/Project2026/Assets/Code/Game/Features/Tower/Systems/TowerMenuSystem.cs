@@ -15,12 +15,9 @@ namespace Code.Game.Features.Tower.Systems
         }
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context) =>
-            context.CreateCollector(InputMatcher
-                .AllOf(
-                InputMatcher.Input
-                ));
+            context.CreateCollector(InputMatcher.EntityInteractIntent.Added());
 
-        protected override bool Filter(InputEntity entity) => entity.isInput;
+        protected override bool Filter(InputEntity entity) => entity.isEntityInteractIntent;
 
         protected override void Execute(List<InputEntity> entities)
         {
@@ -97,8 +94,6 @@ namespace Code.Game.Features.Tower.Systems
                         menuEntity.isTowerOpenUpgradeMenu = false;
                     }
                 }
-
-                entity.isDestructed = true;
             }
         }
     }

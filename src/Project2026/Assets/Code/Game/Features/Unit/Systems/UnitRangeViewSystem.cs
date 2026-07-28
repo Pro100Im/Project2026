@@ -16,12 +16,9 @@ namespace Code.Game.Features.Unit.Systems
         }
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context) =>
-            context.CreateCollector(InputMatcher
-                .AllOf(
-                InputMatcher.Input
-                ));
+            context.CreateCollector(InputMatcher.EntityInteractIntent.Added());
 
-        protected override bool Filter(InputEntity entity) => entity.isInput;
+        protected override bool Filter(InputEntity entity) => entity.isEntityInteractIntent;
 
         protected override void Execute(List<InputEntity> entities)
         {
@@ -55,13 +52,11 @@ namespace Code.Game.Features.Unit.Systems
                         rangeView.isUnitRangeShowed = true;
                     }
                 }
-                else if(rangeView.isUnitRangeShowed)
+                else if (rangeView.isUnitRangeShowed)
                 {
                     rangeView.unitRangeView.Value.HideRangeView();
                     rangeView.isUnitRangeShowed = false;
                 }
-
-                entity.isDestructed = true;
             }
         }
     }

@@ -1,0 +1,17 @@
+---
+description: Always prefer Entitas ECS and data-oriented gameplay design
+alwaysApply: true
+---
+
+# ECS and Data-Oriented Gameplay
+
+- Model gameplay as components containing data and systems transforming that data.
+- Keep gameplay decisions out of `MonoBehaviour`, UI, registrars, static helpers, and stateful god services.
+- UI, views, and registrars are adapters: they create entities or request components and render component state.
+- For new behavior, define `[Feature]Components.cs` first, then `EntityProperty`/`EntityConfig`, systems, feature ordering, and DI registration.
+- Run Jenny after every component change. Never edit `Assets/Code/Generated/` manually.
+- Systems query `IGroup`, reuse typed buffers, iterate with indexed `for`, and communicate through components or request entities.
+- Put tunable values, references, and behavior tags in static data. Do not hardcode balance values or target rules in UI and systems.
+- Keep side effects such as DOTween and view mutation at the presentation boundary; ECS component state must trigger them.
+- Reuse existing entity pipelines such as spawn, effects, duration, damage, and destruction instead of adding parallel imperative flows.
+- Prefer small composable data components and focused systems over inheritance and behavior-heavy objects.
