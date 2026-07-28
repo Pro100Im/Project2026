@@ -11,28 +11,30 @@ public static class MetaComponentsLookup {
     public const int Pause = 0;
     public const int DelayDestruct = 1;
     public const int Destructed = 2;
-    public const int ExchequerGoldCapacity = 3;
-    public const int ExchequerGoldChangeRequest = 4;
-    public const int ExchequerManaChangeRequest = 5;
-    public const int ExchequerMealCapacity = 6;
-    public const int ExchequerMealChangeRequest = 7;
-    public const int GameExchequer = 8;
-    public const int Reward = 9;
-    public const int TargetId = 10;
-    public const int TowerMenuCloseRequest = 11;
-    public const int TowerMenu = 12;
-    public const int TowerOpenBuildMenu = 13;
-    public const int TowerOpenUpgradeMenu = 14;
-    public const int UnitRangeShowed = 15;
-    public const int UnitRangeView = 16;
-    public const int UnitSelectedView = 17;
+    public const int AbilityRangeShowed = 3;
+    public const int ExchequerGoldCapacity = 4;
+    public const int ExchequerGoldChangeRequest = 5;
+    public const int ExchequerManaChangeRequest = 6;
+    public const int ExchequerMealCapacity = 7;
+    public const int ExchequerMealChangeRequest = 8;
+    public const int GameExchequer = 9;
+    public const int Reward = 10;
+    public const int TargetId = 11;
+    public const int TowerMenuCloseRequest = 12;
+    public const int TowerMenu = 13;
+    public const int TowerOpenBuildMenu = 14;
+    public const int TowerOpenUpgradeMenu = 15;
+    public const int UnitRangeShowed = 16;
+    public const int UnitRangeView = 17;
+    public const int UnitSelectedView = 18;
 
-    public const int TotalComponents = 18;
+    public const int TotalComponents = 19;
 
     public static readonly string[] componentNames = {
         "Pause",
         "DelayDestruct",
         "Destructed",
+        "AbilityRangeShowed",
         "ExchequerGoldCapacity",
         "ExchequerGoldChangeRequest",
         "ExchequerManaChangeRequest",
@@ -54,6 +56,7 @@ public static class MetaComponentsLookup {
         typeof(Assets.Code.Game.Features.Pause.Pause),
         typeof(Code.Game.Common.DelayDestruct),
         typeof(Code.Game.Common.Destructed),
+        typeof(Code.Game.Features.Ability.AbilityRangeShowed),
         typeof(Code.Game.Features.Exchequer.ExchequerGoldCapacity),
         typeof(Code.Game.Features.Exchequer.ExchequerGoldChangeRequest),
         typeof(Code.Game.Features.Exchequer.ExchequerManaChangeRequest),

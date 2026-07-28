@@ -50,6 +50,7 @@ namespace Code.Game.Features.Unit.Systems
                         rangeView.unitRangeView.Value.ShowRangeView(pos, TargetService.GetEffectiveRange(targetEntity.range.Value));
                         rangeView.ReplaceTargetId(targetEntity.id.Value);
                         rangeView.isUnitRangeShowed = true;
+                        rangeView.isAbilityRangeShowed = false;
                     }
                 }
                 else if (rangeView.isUnitRangeShowed)

@@ -44,7 +44,11 @@ namespace Code.Game.Features.Ability.Systems
 
             if (targeting.Count == 0)
             {
-                HideAbilityRange(rangeView);
+                if (rangeView.isAbilityRangeShowed)
+                {
+                    HideAbilityRange(rangeView);
+                    rangeView.isAbilityRangeShowed = false;
+                }
 
                 return;
             }
@@ -64,6 +68,7 @@ namespace Code.Game.Features.Ability.Systems
 
                 rangeView.unitRangeView.Value.ShowRangeView(position, ability.abilityRadius.Value);
                 ability.isAbilityRangeShowed = true;
+                rangeView.isAbilityRangeShowed = true;
 
                 return;
             }

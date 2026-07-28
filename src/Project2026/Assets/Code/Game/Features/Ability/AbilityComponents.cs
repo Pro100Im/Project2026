@@ -15,5 +15,5 @@ namespace Code.Game.Features.Ability
     [Game] public class AbilityRadius : IComponent { public float Value; }
     [Game] public class AbilityTargetFilter : IComponent { public AbilityTargetType Value; }
 
-    [Game] public class AbilityRangeShowed : IComponent { }
+    [Game, Meta] public class AbilityRangeShowed : IComponent { }
 }
