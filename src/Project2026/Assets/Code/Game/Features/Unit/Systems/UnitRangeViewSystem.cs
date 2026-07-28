@@ -31,34 +31,59 @@ namespace Code.Game.Features.Unit.Systems
             {
                 var entity = entities[i];
 
-                if (entity.hasTargetId)
+                if (!entity.hasTargetId)
                 {
-                    var targetEntity = GetGameEntityById.Get(entity.targetId.Value);
-
-                    if (rangeView.isUnitRangeShowed && (rangeView.hasTargetId && rangeView.targetId.Value == targetEntity.id.Value || !targetEntity.hasRange))
-                    {
-                        rangeView.unitRangeView.Value.HideRangeView();
-                        rangeView.isUnitRangeShowed = false;
-                    }
-                    else if (targetEntity.hasRange && targetEntity.hasTransform)
-                    {
-                        var pos = targetEntity.woldPos.Value;
-
-                        if (targetEntity.hasUnitAnchorPoint)
-                            pos += targetEntity.unitAnchorPoint.Value;
-
-                        rangeView.unitRangeView.Value.ShowRangeView(pos, TargetService.GetEffectiveRange(targetEntity.range.Value));
-                        rangeView.ReplaceTargetId(targetEntity.id.Value);
-                        rangeView.isUnitRangeShowed = true;
-                        rangeView.isAbilityRangeShowed = false;
-                    }
+                    Deselect(rangeView);
+                    continue;
                 }
-                else if (rangeView.isUnitRangeShowed)
+
+                var targetEntity = GetGameEntityById.Get(entity.targetId.Value);
+
+                if (targetEntity == null)
                 {
-                    rangeView.unitRangeView.Value.HideRangeView();
-                    rangeView.isUnitRangeShowed = false;
+                    Deselect(rangeView);
+                    continue;
                 }
+
+                if (rangeView.hasTargetId && rangeView.targetId.Value == targetEntity.id.Value)
+                    continue;
+
+                rangeView.ReplaceTargetId(targetEntity.id.Value);
+
+                if (targetEntity.hasRange && targetEntity.hasTransform)
+                    Show(rangeView, targetEntity);
+                else
+                    Hide(rangeView);
             }
+        }
+
+        private static void Show(MetaEntity rangeView, GameEntity targetEntity)
+        {
+            var pos = targetEntity.woldPos.Value;
+
+            if (targetEntity.hasUnitAnchorPoint)
+                pos += targetEntity.unitAnchorPoint.Value;
+
+            rangeView.unitRangeView.Value.ShowRangeView(pos, TargetService.GetEffectiveRange(targetEntity.range.Value));
+            rangeView.isUnitRangeShowed = true;
+            rangeView.isAbilityRangeShowed = false;
+        }
+
+        private static void Hide(MetaEntity rangeView)
+        {
+            if (!rangeView.isUnitRangeShowed)
+                return;
+
+            rangeView.unitRangeView.Value.HideRangeView();
+            rangeView.isUnitRangeShowed = false;
+        }
+
+        private static void Deselect(MetaEntity rangeView)
+        {
+            Hide(rangeView);
+
+            if (rangeView.hasTargetId)
+                rangeView.RemoveTargetId();
         }
     }
 }

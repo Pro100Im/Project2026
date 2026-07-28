@@ -187,6 +187,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<PauseSystem>(Lifetime.Singleton);
             builder.Register<TowerMenuSystem>(Lifetime.Singleton);
             builder.Register<TowerMenuCloseSystem>(Lifetime.Singleton);
+            builder.Register<TowerMenuAutoCloseSystem>(Lifetime.Singleton);
 
             builder.Register<PlayerCameraInitSystem>(Lifetime.Singleton);
 
@@ -204,6 +205,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<TowerUpgradeSystem>(Lifetime.Singleton);
 
             builder.Register<UnitRangeViewSystem>(Lifetime.Singleton);
+            builder.Register<UnitRangeViewRefreshSystem>(Lifetime.Singleton);
 
             builder.Register<EnemySelectSpawnPosSystem>(Lifetime.Singleton);
             builder.Register<EnemySpawnSystem>(Lifetime.Singleton);

@@ -56,7 +56,7 @@ namespace Code.Meta.Features.Game
             _archerTowerButton.clickable.clicked += CreateArcherTower;
             _iceTowerButton.clickable.clicked += CreateIceTower;
             _fireTowerButton.clickable.clicked += CreateFireTower;
-            _towerBuildsCloseButton.clickable.clicked += CloseRequest;
+            _towerBuildsCloseButton.clickable.clicked += CloseAndDeselectRequest;
 
             _towerUpgradeMenu = _gameScreen.GetVisualElement("TowerUpgradeMenu");
             _towerUpgradesContainer = _gameScreen.GetVisualElement("TowerUpgradesContainer");
@@ -70,7 +70,7 @@ namespace Code.Meta.Features.Game
 
             _towerUpgrade1Button.clickable.clicked += UpgradeTower1;
             _towerUpgrade2Button.clickable.clicked += UpgradeTower2;
-            _towerUpgradesCloseButton.clickable.clicked += CloseRequest;
+            _towerUpgradesCloseButton.clickable.clicked += CloseAndDeselectRequest;
         }
 
         public void OpenTowerBuildMenu(Vector2 screenPos, GameEntity entity)
@@ -92,6 +92,17 @@ namespace Code.Meta.Features.Game
         {
             var request = CreateMetaEntity.Empty();
             request.isTowerMenuCloseRequest = true;
+
+            _currentTowerEntity = null;
+        }
+
+        private void CloseAndDeselectRequest()
+        {
+            var request = CreateMetaEntity.Empty();
+            request.isTowerMenuCloseRequest = true;
+
+            if (_currentTowerEntity != null && _currentTowerEntity.hasId)
+                request.AddTargetId(_currentTowerEntity.id.Value);
 
             _currentTowerEntity = null;
         }
@@ -210,11 +221,11 @@ namespace Code.Meta.Features.Game
             _archerTowerButton.clickable.clicked -= CreateArcherTower;
             _iceTowerButton.clickable.clicked -= CreateIceTower;
             _fireTowerButton.clickable.clicked -= CreateFireTower;
-            _towerBuildsCloseButton.clickable.clicked -= CloseRequest;
+            _towerBuildsCloseButton.clickable.clicked -= CloseAndDeselectRequest;
 
             _towerUpgrade1Button.clickable.clicked -= UpgradeTower1;
             _towerUpgrade2Button.clickable.clicked -= UpgradeTower2;
-            _towerUpgradesCloseButton.clickable.clicked -= CloseRequest;
+            _towerUpgradesCloseButton.clickable.clicked -= CloseAndDeselectRequest;
         }
     }
 }

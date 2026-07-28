@@ -9,6 +9,7 @@ namespace Code.Game.Features.Tower
         {
             Add(systemFactory.Create<TowerMenuSystem>());
             Add(systemFactory.Create<TowerMenuCloseSystem>());
+            Add(systemFactory.Create<TowerMenuAutoCloseSystem>());
             Add(systemFactory.Create<TowerBuildSystem>());
             Add(systemFactory.Create<TowerUpgradeSystem>());
         }

@@ -66,6 +66,9 @@ namespace Code.Game.Features.Ability.Systems
                 if (rangeView.isUnitRangeShowed)
                     rangeView.isUnitRangeShowed = false;
 
+                if (rangeView.hasTargetId)
+                    rangeView.RemoveTargetId();
+
                 rangeView.unitRangeView.Value.ShowRangeView(position, ability.abilityRadius.Value);
                 ability.isAbilityRangeShowed = true;
                 rangeView.isAbilityRangeShowed = true;

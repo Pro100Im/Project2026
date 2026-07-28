@@ -7,6 +7,7 @@ namespace Code.Game.Features.Tower.Systems
     {
         private readonly IGroup<MetaEntity> _closeRequests;
         private readonly IGroup<MetaEntity> _towerMenus;
+        private readonly IGroup<MetaEntity> _rangeViews;
 
         private readonly List<MetaEntity> _closeBuffer = new(4);
 
@@ -17,6 +18,7 @@ namespace Code.Game.Features.Tower.Systems
                 .NoneOf(MetaMatcher.Destructed));
 
             _towerMenus = metaContext.GetGroup(MetaMatcher.TowerMenu);
+            _rangeViews = metaContext.GetGroup(MetaMatcher.UnitRangeView);
         }
 
         public void Execute()
@@ -44,7 +46,30 @@ namespace Code.Game.Features.Tower.Systems
             }
 
             for (var i = 0; i < requests.Count; i++)
-                requests[i].isDestructed = true;
+            {
+                var request = requests[i];
+
+                if (request.hasTargetId)
+                    Deselect(request.targetId.Value);
+
+                request.isDestructed = true;
+            }
+        }
+
+        private void Deselect(int targetId)
+        {
+            var rangeView = _rangeViews.GetSingleEntity();
+
+            if (rangeView == null || !rangeView.hasTargetId || rangeView.targetId.Value != targetId)
+                return;
+
+            if (rangeView.isUnitRangeShowed)
+            {
+                rangeView.unitRangeView.Value.HideRangeView();
+                rangeView.isUnitRangeShowed = false;
+            }
+
+            rangeView.RemoveTargetId();
         }
     }
 }
