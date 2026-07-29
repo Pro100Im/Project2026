@@ -10,6 +10,7 @@ namespace Code.Game.Features.Ability
     }
 
     [Game] public class AbilitySelectRequest : IComponent { }
+    [Game] public class AbilityCancelRequest : IComponent { }
     [Game] public class AbilityTargeting : IComponent { }
     [Game] public class AbilityCastRequest : IComponent { }
     [Game] public class AbilityRadius : IComponent { public float Value; }
