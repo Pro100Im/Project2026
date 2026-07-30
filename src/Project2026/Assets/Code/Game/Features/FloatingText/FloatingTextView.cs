@@ -1,10 +1,11 @@
+using Code.Infrastructure.View;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
 namespace Code.Game.Features.FloatingText
 {
-    public class FloatingTextView : MonoBehaviour
+    public class FloatingTextView : EntityDependant
     {
         [SerializeField] private TextMeshPro _text;
         [SerializeField] private Color _damageColor = new(1f, 0.35f, 0.25f, 1f);
@@ -15,13 +16,15 @@ namespace Code.Game.Features.FloatingText
         private Tween _moveTween;
         private Tween _fadeTween;
 
-        public void Play(float value, bool isHeal)
+        private void OnEnable()
         {
-            _moveTween?.Kill();
-            _fadeTween?.Kill();
+            if (Entity == null || !Entity.hasFloatingText || _text == null)
+                return;
 
-            var color = isHeal ? _healColor : _damageColor;
-            _text.text = Mathf.RoundToInt(value).ToString();
+            KillTweens();
+
+            var color = Entity.isHealFloatingText ? _healColor : _damageColor;
+            _text.text = Mathf.RoundToInt(Entity.floatingText.Value).ToString();
             _text.color = color;
 
             var startPos = transform.position;
@@ -32,10 +35,22 @@ namespace Code.Game.Features.FloatingText
                 .SetEase(Ease.InQuad);
         }
 
+        private void OnDisable()
+        {
+            KillTweens();
+        }
+
         private void OnDestroy()
+        {
+            KillTweens();
+        }
+
+        private void KillTweens()
         {
             _moveTween?.Kill();
             _fadeTween?.Kill();
+            _moveTween = null;
+            _fadeTween = null;
         }
     }
 }

@@ -45,13 +45,13 @@ namespace Code.Infrastructure.View.Pool
                 return pool;
 
             pool = new ObjectPool<EntityBehaviour>(
-                () => CreateInstance(prefab),
-                OnGet,
-                OnRelease,
-                OnDestroy,
+                createFunc: () => CreateInstance(prefab),
+                actionOnGet: null,
+                actionOnRelease: OnRelease,
+                actionOnDestroy: OnDestroy,
                 collectionCheck: false,
-                DefaultCapacity,
-                MaxSize);
+                defaultCapacity: DefaultCapacity,
+                maxSize: MaxSize);
 
             _pools[prefab] = pool;
             return pool;
@@ -60,12 +60,10 @@ namespace Code.Infrastructure.View.Pool
         private EntityBehaviour CreateInstance(EntityBehaviour prefab)
         {
             var view = Object.Instantiate(prefab, _root);
+            view.gameObject.SetActive(false);
             _instanceToPrefab[view] = prefab;
             return view;
         }
-
-        private static void OnGet(EntityBehaviour view) =>
-            view.gameObject.SetActive(true);
 
         private void OnRelease(EntityBehaviour view)
         {

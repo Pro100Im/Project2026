@@ -37,6 +37,7 @@ namespace Code.Infrastructure.View.Systems
                 var view = _pool.Get(viewPrefab, entity.spawnPosition.Value, Quaternion.identity);
 
                 view.SetEntity(entity);
+                view.gameObject.SetActive(true);
 
                 entity.RemoveSpawnPosition();
                 entity.RemoveViewPath();
