@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2652ec64a2cfac428b7546f4941961e, type: 3}
+  m_Name: FloatingTextEntityConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.EntityConfig
+  Properties:
+  - rid: 4221333701249466448
+  - rid: 4221333701249466449
+  references:
+    version: 2
+    RefIds:
+    - rid: 4221333701249466448
+      type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+    - rid: 4221333701249466449
+      type: {class: ViewPrefabProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Prefab>k__BackingField: {fileID: 1893404157363187206, guid: b3e4e275f69cd3b409cb238f255a5044, type: 3}

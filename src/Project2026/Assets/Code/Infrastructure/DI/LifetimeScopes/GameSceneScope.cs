@@ -25,6 +25,7 @@ using Code.Game.Features.Effect;
 using Code.Game.Features.Effect.Systems;
 using Code.Game.Features.Exchequer;
 using Code.Game.Features.Exchequer.Systems;
+using Code.Game.Features.FloatingText.Systems;
 using Code.Game.Features.GameSession;
 using Code.Game.Features.GameSession.Systems;
 using Code.Game.Features.Health;
@@ -73,6 +74,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
     public class GameSceneScope : LifetimeScope
     {
         [SerializeField] private WavesConfig _wavesConfig;
+        [SerializeField] private FloatingTextConfig _floatingTextConfig;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -257,6 +259,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<FireDamageCanculateSystem>(Lifetime.Singleton);
             builder.Register<FireDamageHitEffectSystem>(Lifetime.Singleton);
 
+            builder.Register<CreateDamageFloatingTextSystem>(Lifetime.Singleton);
             builder.Register<ApplyDamageSystem>(Lifetime.Singleton);
 
             builder.Register<HealthBarSystem>(Lifetime.Singleton);
@@ -291,6 +294,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
         private void BindGameConfigs(IContainerBuilder builder)
         {
             builder.RegisterInstance(_wavesConfig).AsSelf();
+            builder.RegisterInstance(_floatingTextConfig).AsSelf();
         }
     }
 }

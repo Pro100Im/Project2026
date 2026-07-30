@@ -1,4 +1,5 @@
 using Code.Game.Features.Damage.Systems;
+using Code.Game.Features.FloatingText.Systems;
 using Code.Infrastructure.Systems;
 
 namespace Code.Game.Features.Damage
@@ -16,6 +17,7 @@ namespace Code.Game.Features.Damage
             Add(systemFactory.Create<FireDamageCanculateSystem>());
             Add(systemFactory.Create<FireDamageHitEffectSystem>());
 
+            Add(systemFactory.Create<CreateDamageFloatingTextSystem>());
             Add(systemFactory.Create<ApplyDamageSystem>());
         }
     }

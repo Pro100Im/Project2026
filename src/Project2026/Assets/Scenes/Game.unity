@@ -2359,6 +2359,7 @@ MonoBehaviour:
   - {fileID: 1454892664}
   - {fileID: 1642830682}
   _wavesConfig: {fileID: 11400000, guid: 076af5ff1e1e3ec4fa679b8e4ec6895c, type: 2}
+  _floatingTextConfig: {fileID: 11400000, guid: c46d905cd184c3d45973f27e29a3634a, type: 2}
 --- !u!4 &1085809923
 Transform:
   m_ObjectHideFlags: 0
