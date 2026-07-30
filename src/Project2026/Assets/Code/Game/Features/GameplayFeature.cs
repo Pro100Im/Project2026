@@ -45,10 +45,9 @@ namespace Code.Game.Features
 
             Add(systemFactory.Create<LevelFeature>());
 
-            Add(systemFactory.Create<MovementFeature>());
-
+            // Combat pipeline: decide → step → strike
             Add(systemFactory.Create<TargetFeature>());
-
+            Add(systemFactory.Create<MovementFeature>());
             Add(systemFactory.Create<AttackFeature>());
             Add(systemFactory.Create<DamageFeature>());
 

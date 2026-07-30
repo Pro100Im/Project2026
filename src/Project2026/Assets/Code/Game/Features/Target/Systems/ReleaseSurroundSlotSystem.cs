@@ -74,11 +74,23 @@ namespace Code.Game.Features.Target.Systems
                 if (surroundField.TryGetValue(slot, out var currentOwner) && currentOwner == unitId)
                     surroundField.Remove(slot);
 
+                var releasedTargetId = unit.surroundTargetId.Value;
+
                 unit.RemoveSurroundSlot();
                 unit.RemoveSurroundTargetId();
 
-                if (unit.hasTargetId)
+                // Clear combat target only when the surround target is gone / unit died.
+                // Keep TargetId when only the slot was invalid so AssignSurround can reclaim.
+                var releasedTarget = GetGameEntityById.Get(releasedTargetId);
+                var targetGone = releasedTarget == null || releasedTarget.isDead;
+
+                if ((unit.isDead || targetGone)
+                    && unit.hasTargetId
+                    && unit.targetId.Value == releasedTargetId
+                    && !unit.isAttacking)
+                {
                     unit.RemoveTargetId();
+                }
             }
         }
 

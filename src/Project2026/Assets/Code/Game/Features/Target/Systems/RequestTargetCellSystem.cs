@@ -1,8 +1,7 @@
-using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
 
-namespace Assets.Code.Game.Features.Target.Systems
+namespace Code.Game.Features.Target.Systems
 {
     public class RequestTargetCellSystem : IExecuteSystem
     {
@@ -10,7 +9,7 @@ namespace Assets.Code.Game.Features.Target.Systems
 
         private readonly List<GameEntity> _buffer = new(256);
 
-        public RequestTargetCellSystem(GameContext context, TargetService targetService)
+        public RequestTargetCellSystem(GameContext context)
         {
             _units = context.GetGroup(GameMatcher
                 .AllOf(

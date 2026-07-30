@@ -1,5 +1,4 @@
 using Assets.Code.Game.Features.Debaffs.Systems;
-using Assets.Code.Game.Features.Target.Systems;
 using Code.Game.Common.Cameras;
 using Code.Game.Common.Destruct;
 using Code.Game.Common.Destruct.Systems;
@@ -227,22 +226,23 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<FreezeSystem>(Lifetime.Singleton);
 
             builder.Register<ReleaseSurroundSlotSystem>(Lifetime.Singleton);
+            builder.Register<SelectCombatTargetSystem>(Lifetime.Singleton);
+            builder.Register<AssignSurroundSlotSystem>(Lifetime.Singleton);
             builder.Register<RepositionRangedSurroundSlotSystem>(Lifetime.Singleton);
             builder.Register<UpdateCastleThreatSystem>(Lifetime.Singleton);
             builder.Register<AssignRallyToCastleSystem>(Lifetime.Singleton);
             builder.Register<AssignRallySurroundSlotSystem>(Lifetime.Singleton);
-            builder.Register<AssignSurroundSlotSystem>(Lifetime.Singleton);
+            builder.Register<DefensePatrolSystem>(Lifetime.Singleton);
             builder.Register<RequestTargetCellSystem>(Lifetime.Singleton);
             builder.Register<SelectTargetCellSystem>(Lifetime.Singleton);
-            builder.Register<CheckTargetSystem>(Lifetime.Singleton);
-            builder.Register<DefensePatrolSystem>(Lifetime.Singleton);
 
-            builder.Register<FlipAlongMoveDirectionSystem>(Lifetime.Singleton);
             builder.Register<GridMovementSystem>(Lifetime.Singleton);
+            builder.Register<FlipAlongMoveDirectionSystem>(Lifetime.Singleton);
             builder.Register<AttachPosToTargetSystem>(Lifetime.Singleton);
             builder.Register<TrajectoryMovementSystem>(Lifetime.Singleton);
             builder.Register<MovementSpeedBonusCleanUpSystem>(Lifetime.Singleton);
 
+            builder.Register<UpdateCombatAimSystem>(Lifetime.Singleton);
             builder.Register<AttackStartSystem>(Lifetime.Singleton);
             builder.Register<MeleeAttackEndSystem>(Lifetime.Singleton);
             builder.Register<RangeAttackEndSystem>(Lifetime.Singleton);

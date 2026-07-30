@@ -6,9 +6,20 @@ using UnityEngine;
 
 namespace Code.Game.Features.Target.Systems
 {
-    // to do remove magic numbs
     public class SelectTargetCellSystem : IExecuteSystem
     {
+        private const float BlockedIdealPushPenalty = 20f;
+        private const float BlockedByAttackingAllyPenalty = 100f;
+        private const float BlockedByIdleAllyPenalty = 50f;
+        private const float BlockedByMovingAllyPenalty = 5f;
+        private const float IdealStepBonus = 20f;
+        private const float SameDirectionBonus = 8f;
+        private const float ReverseDirectionPenalty = 100f;
+        private const float JitterPerIdMod = 0.1f;
+        private const float DirectSameDirectionBonus = 0.5f;
+        private const float DirectReverseDirectionPenalty = 10f;
+        private const float DirectJitterPerIdMod = 0.01f;
+
         private readonly TargetService _targetService;
 
         private readonly IGroup<GameEntity> _units;
@@ -100,7 +111,7 @@ namespace Code.Game.Features.Target.Systems
 
                 if (!CanFit(idealStep, size, unitId, mapEntity, out int blockingId))
                 {
-                    var pushPenalty = 20;
+                    var pushPenalty = BlockedIdealPushPenalty;
 
                     if (blockingId != -1)
                     {
@@ -109,11 +120,11 @@ namespace Code.Game.Features.Target.Systems
                         if (blockingUnit != null && blockingUnit.hasTeam && blockingUnit.team.Value == myTeam && !blockingUnit.isDead)
                         {
                             if (blockingUnit.isAttacking)
-                                pushPenalty = 100;
+                                pushPenalty = BlockedByAttackingAllyPenalty;
                             else if (!blockingUnit.isMoving)
-                                pushPenalty = 50;
+                                pushPenalty = BlockedByIdleAllyPenalty;
                             else
-                                pushPenalty = 5;
+                                pushPenalty = BlockedByMovingAllyPenalty;
                         }
                     }
 
@@ -148,17 +159,17 @@ namespace Code.Game.Features.Target.Systems
                         var moveDir = cand - cell;
 
                         if (cand == idealStep)
-                            totalCandCost -= 20.0f;
+                            totalCandCost -= IdealStepBonus;
 
                         if (unit.hasLastDirection)
                         {
                             if (unit.lastDirection.Value == moveDir)
-                                totalCandCost -= 8.0f;
+                                totalCandCost -= SameDirectionBonus;
                             else if (unit.lastDirection.Value == -moveDir)
-                                totalCandCost += 100.0f;
+                                totalCandCost += ReverseDirectionPenalty;
                         }
 
-                        var jitter = (unitId % 10) * 0.1f;
+                        var jitter = (unitId % 10) * JitterPerIdMod;
 
                         totalCandCost += jitter;
 
@@ -223,12 +234,12 @@ namespace Code.Game.Features.Target.Systems
                 if (unit.hasLastDirection)
                 {
                     if (unit.lastDirection.Value == moveDir)
-                        totalCost -= 0.5f;
+                        totalCost -= DirectSameDirectionBonus;
                     else if (unit.lastDirection.Value == -moveDir)
-                        totalCost += 10.0f;
+                        totalCost += DirectReverseDirectionPenalty;
                 }
 
-                totalCost += (unitId % 10) * 0.01f;
+                totalCost += (unitId % 10) * DirectJitterPerIdMod;
 
                 if (candDist < bestDist || (candDist == bestDist && totalCost < bestCost))
                 {

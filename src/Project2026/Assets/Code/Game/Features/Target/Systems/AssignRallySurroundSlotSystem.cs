@@ -148,6 +148,7 @@ namespace Code.Game.Features.Target.Systems
                 surroundField[slot] = defenderId;
                 defender.AddSurroundSlot(slot);
                 defender.AddSurroundTargetId(bestEnemy.id.Value);
+                defender.ReplaceTargetId(bestEnemy.id.Value);
                 defender.isRallyToCastle = false;
             }
         }

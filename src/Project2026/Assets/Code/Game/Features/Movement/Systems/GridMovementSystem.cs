@@ -12,7 +12,6 @@ namespace Code.Game.Features.Movement.Systems
         private readonly IGroup<GameEntity> _units;
         private readonly IGroup<GameEntity> _maps;
 
-        private const float _arriveThreshold = 0.1f;
         private const float _distThreshold = 0.001f;
 
         private readonly List<GameEntity> _unitsBuffer = new(512);
@@ -92,20 +91,18 @@ namespace Code.Game.Features.Movement.Systems
                     dirVec /= dist;
 
                 var speed = unit.movementSpeed.Value * unit.movementSpeedBonus.Value * _timeService.DeltaTime;
-                var newPos = currentPos + dirVec * speed;
+                var arrived = dist <= speed || dist <= _distThreshold;
+                var newPos = arrived ? targetWorldPos : currentPos + dirVec * speed;
 
                 unit.ReplaceVelocity(dirVec * unit.movementSpeed.Value);
                 unit.ReplaceWoldPos(newPos);
                 unit.transform.Value.position = newPos;
                 unit.isMoving = true;
 
-                if (Vector3.Distance(newPos, targetWorldPos) < _arriveThreshold)
+                if (arrived)
                 {
                     unit.ReplaceCurrentCell(targetCell);
-
-                    var moveStep = targetCell - currentCell;
-
-                    unit.ReplaceLastDirection(moveStep);
+                    unit.ReplaceLastDirection(targetCell - currentCell);
                 }
             }
         }
