@@ -40,7 +40,7 @@ namespace Code.Game.Features.FloatingText.Systems
                 var spawnPos = ResolveSpawnPosition(damage);
                 var text = CreateGameEntity.Empty();
 
-                text.AddFloatingText(damageAmount);
+                text.AddFloatingText(-damageAmount);
                 text.isDamageFloatingText = true;
                 text.AddSpawnPosition(spawnPos);
 
@@ -51,14 +51,16 @@ namespace Code.Game.Features.FloatingText.Systems
 
         private Vector3 ResolveSpawnPosition(GameEntity damage)
         {
-            if (damage.hasTargetPoint)
-                return (Vector3)damage.targetPoint.Value + _config.SpawnOffset;
-
             var target = GetGameEntityById.Get(damage.targetId.Value);
 
             if (target != null && target.hasWoldPos)
-                return target.woldPos.Value + _config.SpawnOffset;
+            {
+                var pos = target.woldPos.Value + _config.SpawnOffset;
+                pos.x += Random.Range(-_config.SpawnOffsetRangeX, _config.SpawnOffsetRangeX);
 
+                return pos;
+            }
+              
             if (target != null && target.hasSpawnPosition)
                 return target.spawnPosition.Value + _config.SpawnOffset;
 

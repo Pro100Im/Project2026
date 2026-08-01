@@ -45,7 +45,6 @@ namespace Code.Game.Features.Effect.Systems
                     property.Apply(entity);
 
                 entity.AddDuration(entity.combustionDuration.Value);
-                entity.AddCooldown(0);
 
                 if (targetEntity.isCombustionDebuff)
                 {
@@ -53,6 +52,8 @@ namespace Code.Game.Features.Effect.Systems
                 }
                 else
                 {
+                    entity.AddCooldown(entity.combustionCoolDown.Value);
+
                     targetEntity.isCombustionDebuff = true;
                 }
 

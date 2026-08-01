@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.FloatingTextConfig
   <Text>k__BackingField: {fileID: 11400000, guid: 046c6b9a251dfcb458220b7a6bf0ebb1, type: 2}
   <SpawnOffset>k__BackingField: {x: 0, y: 0.35, z: 0}
+  <SpawnOffsetRangeX>k__BackingField: 0.3
