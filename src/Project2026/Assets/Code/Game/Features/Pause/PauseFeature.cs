@@ -8,6 +8,7 @@ namespace Code.Game.Features.Pause
         public PauseFeature(ISystemFactory systemFactory)
         {
             Add(systemFactory.Create<PauseSystem>());
+            Add(systemFactory.Create<PauseMenuSystem>());
         }
     }
 }

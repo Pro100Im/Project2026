@@ -9,29 +9,31 @@
 public static class MetaComponentsLookup {
 
     public const int Pause = 0;
-    public const int DelayDestruct = 1;
-    public const int Destructed = 2;
-    public const int AbilityRangeShowed = 3;
-    public const int ExchequerGoldCapacity = 4;
-    public const int ExchequerGoldChangeRequest = 5;
-    public const int ExchequerManaChangeRequest = 6;
-    public const int ExchequerMealCapacity = 7;
-    public const int ExchequerMealChangeRequest = 8;
-    public const int GameExchequer = 9;
-    public const int Reward = 10;
-    public const int TargetId = 11;
-    public const int TowerMenuCloseRequest = 12;
-    public const int TowerMenu = 13;
-    public const int TowerOpenBuildMenu = 14;
-    public const int TowerOpenUpgradeMenu = 15;
-    public const int UnitRangeShowed = 16;
-    public const int UnitRangeView = 17;
-    public const int UnitSelectedView = 18;
+    public const int PauseMenu = 1;
+    public const int DelayDestruct = 2;
+    public const int Destructed = 3;
+    public const int AbilityRangeShowed = 4;
+    public const int ExchequerGoldCapacity = 5;
+    public const int ExchequerGoldChangeRequest = 6;
+    public const int ExchequerManaChangeRequest = 7;
+    public const int ExchequerMealCapacity = 8;
+    public const int ExchequerMealChangeRequest = 9;
+    public const int GameExchequer = 10;
+    public const int Reward = 11;
+    public const int TargetId = 12;
+    public const int TowerMenuCloseRequest = 13;
+    public const int TowerMenu = 14;
+    public const int TowerOpenBuildMenu = 15;
+    public const int TowerOpenUpgradeMenu = 16;
+    public const int UnitRangeShowed = 17;
+    public const int UnitRangeView = 18;
+    public const int UnitSelectedView = 19;
 
-    public const int TotalComponents = 19;
+    public const int TotalComponents = 20;
 
     public static readonly string[] componentNames = {
         "Pause",
+        "PauseMenu",
         "DelayDestruct",
         "Destructed",
         "AbilityRangeShowed",
@@ -54,6 +56,7 @@ public static class MetaComponentsLookup {
 
     public static readonly System.Type[] componentTypes = {
         typeof(Assets.Code.Game.Features.Pause.Pause),
+        typeof(Assets.Code.Game.Features.Pause.PauseMenuComponent),
         typeof(Code.Game.Common.DelayDestruct),
         typeof(Code.Game.Common.Destructed),
         typeof(Code.Game.Features.Ability.AbilityRangeShowed),

@@ -6,15 +6,14 @@ using VContainer;
 
 namespace Code.Meta.Features.Game
 {
-    public class GameMenu : MonoBehaviour
+    public class PauseMenu : MonoBehaviour
     {
         private GameScreen _gameScreen;
         private UIService _uIService;
 
-        private VisualElement _gameMenu;
+        private VisualElement _pauseMenu;
         private Image _mask;
 
-        private Button _menuButton;
         private Button _cancelButton;
 
         [Inject]
@@ -26,14 +25,11 @@ namespace Code.Meta.Features.Game
 
         private void Start()
         {
-            //_gameMenu = _gameScreen.GetVisualElement("GameMenu");
-            //_mask = _gameScreen.GetImage("Mask");
+            _pauseMenu = _gameScreen.GetVisualElement("PauseMenu");
+            _mask = _gameScreen.GetImage("Mask");
+            _cancelButton = _gameScreen.GetButton("CancelButton");
 
-            _menuButton = _gameScreen.GetButton("MenuButton");
-            //_cancelButton = _gameScreen.GetButton("CancelButton");
-
-            _menuButton.clickable.clicked += PauseRequest;
-            //_cancelButton.clickable.clicked += PauseRequest;
+            _cancelButton.clickable.clicked += PauseRequest;
         }
 
         private void PauseRequest()
@@ -43,28 +39,27 @@ namespace Code.Meta.Features.Game
             entityClick.isInput = true;
         }
 
-        private void CloseMenu()
+        public void CloseMenu()
         {
-            _uIService.Hide(_gameMenu).AsAsyncUnitUniTask();
+            _uIService.Hide(_pauseMenu).AsAsyncUnitUniTask();
 
-            _gameMenu.pickingMode = PickingMode.Ignore;
+            _pauseMenu.pickingMode = PickingMode.Ignore;
             _mask.pickingMode = PickingMode.Ignore;
             _cancelButton.pickingMode = PickingMode.Ignore;
         }
 
-        private void OpenMenu()
+        public void OpenMenu()
         {
-            _uIService.Show(_gameMenu).AsAsyncUnitUniTask();
+            _uIService.Show(_pauseMenu).AsAsyncUnitUniTask();
 
-            _gameMenu.pickingMode = PickingMode.Position;
+            _pauseMenu.pickingMode = PickingMode.Position;
             _mask.pickingMode = PickingMode.Position;
             _cancelButton.pickingMode = PickingMode.Position;
         }
 
         private void OnDestroy()
         {
-            _menuButton.clickable.clicked -= PauseRequest;
-            //_cancelButton.clickable.clicked -= PauseRequest;
+            _cancelButton.clickable.clicked -= PauseRequest;
         }
     }
 }

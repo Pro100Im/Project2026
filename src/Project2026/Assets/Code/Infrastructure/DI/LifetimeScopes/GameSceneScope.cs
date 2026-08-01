@@ -186,6 +186,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<TearDownInputDestructedSystem>(Lifetime.Singleton);
 
             builder.Register<PauseSystem>(Lifetime.Singleton);
+            builder.Register<PauseMenuSystem>(Lifetime.Singleton);
             builder.Register<TowerMenuSystem>(Lifetime.Singleton);
             builder.Register<TowerMenuCloseSystem>(Lifetime.Singleton);
             builder.Register<TowerMenuAutoCloseSystem>(Lifetime.Singleton);

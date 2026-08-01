@@ -42,7 +42,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ddff6f34abb20b40b03c67eb6e76b53, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Meta.Features.Game.SpellsPanel
   _freezeAbilitySlot: {fileID: 11400000, guid: fe17f6b96340d9e40a178d958524b0b9, type: 2}
 --- !u!1 &4120555828841475007
@@ -54,9 +54,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2881048623033862531}
-  - component: {fileID: 5780196675555063508}
+  - component: {fileID: 4145712057023424447}
+  - component: {fileID: 5445658559376367452}
+  - component: {fileID: 2552855739176192797}
+  - component: {fileID: 6370683550390981695}
   m_Layer: 0
-  m_Name: GameMenu
+  m_Name: PauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +80,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 37443703770885465}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5780196675555063508
+--- !u!114 &4145712057023424447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,9 +89,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 4120555828841475007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3e7941fd3ae36b47a521fe6b1c19422, type: 3}
+  m_Script: {fileID: 11500000, guid: 87078ab9a8d341c469e2da046a0f4e4d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Code.Meta.Features.Game.GameMenu
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Meta.Features.Game.PauseMenu
+--- !u!114 &5445658559376367452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4120555828841475007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c3d4e5f6478910a1b2c3d4e5f67802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.MetaEntityBehaviour
+--- !u!114 &2552855739176192797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4120555828841475007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d233eff6d4c67044b5226d79ae3526c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Pause.Registrars.PauseMenuRegistrar
+  EntityView: {fileID: 5445658559376367452}
+  _pauseMenu: {fileID: 4145712057023424447}
+--- !u!114 &6370683550390981695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4120555828841475007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bdea3e31a9f4a228d50cfc2014fc9e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.MetaSelfInitializeEntityView
+  _entityBehaviour: {fileID: 5445658559376367452}
 --- !u!1 &4933473282176414999
 GameObject:
   m_ObjectHideFlags: 0

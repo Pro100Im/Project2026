@@ -15,6 +15,7 @@ namespace Code.Meta.Features.Game
         private VisualElement _root;
 
         private Button _startWaveButton;
+        private Button _menuButton;
 
         [Inject]
         public void Construct(UIService uIService)
@@ -27,7 +28,10 @@ namespace Code.Meta.Features.Game
             _root = _gameScreenDoc.rootVisualElement;
 
             _startWaveButton = _root.Q<Button>("StartWaveButton");
+            _menuButton = _root.Q<Button>("MenuButton");
+
             _startWaveButton.clickable.clicked += StartWave;
+            _menuButton.clickable.clicked += PauseRequest;
         }
 
         public VisualElement GetRoot() => _root;
@@ -44,6 +48,14 @@ namespace Code.Meta.Features.Game
 
             entity.isWaveStartRequsted = true;
         }
+
+        private void PauseRequest()
+        {
+            var entityClick = CreateInputEntity.Empty();
+            entityClick.isPauseRequested = true;
+            entityClick.isInput = true;
+        }
+
         public bool IsPointerOverUI(Vector2 screenPos)
         {
             return _uIService.IsPointerOverUI(screenPos, _root);
@@ -52,7 +64,7 @@ namespace Code.Meta.Features.Game
         private void OnDestroy()
         {
             _startWaveButton.clickable.clicked -= StartWave;
+            _menuButton.clickable.clicked -= PauseRequest;
         }
-
     }
 }

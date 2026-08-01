@@ -1,7 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="ActionButtons" src="project://database/Assets/UI%20Toolkit/Game/ActionButtons.uxml?fileID=9197481963319205126&amp;guid=a1e298e8eb29d4247b2a205db1de5632&amp;type=3#ActionButtons"/>
     <ui:Template name="GameExchequer" src="project://database/Assets/UI%20Toolkit/Game/GameExchequer.uxml?fileID=9197481963319205126&amp;guid=813f0c47f0ec11341bfce5305980c6c0&amp;type=3#GameExchequer"/>
-    <ui:Template name="GameMenu" src="project://database/Assets/UI%20Toolkit/Game/GameMenu.uxml?fileID=9197481963319205126&amp;guid=8cb6115eed4237840bca64ea87fe06c1&amp;type=3#GameMenu"/>
+    <ui:Template name="GameMenu" src="project://database/Assets/UI%20Toolkit/Game/PauseMenu.uxml?fileID=9197481963319205126&amp;guid=8cb6115eed4237840bca64ea87fe06c1&amp;type=3#PauseMenu"/>
     <ui:Template name="TowerMenu" src="project://database/Assets/UI%20Toolkit/Game/TowerMenu.uxml?fileID=9197481963319205126&amp;guid=e8342821644945b4dabbdb96666d83da&amp;type=3#TowerMenu"/>
     <Style src="project://database/Assets/UI%20Toolkit/Global/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=f0b50401ae793a440bdbacc20d05f547&amp;type=3#GlobalStyle"/>
     <ui:VisualElement name="Canvas" picking-mode="Ignore" style="flex-grow: 1;">
@@ -14,6 +14,6 @@
         <ui:Instance template="GameExchequer" name="GameExchequer" style="position: absolute; right: 0;"/>
         <ui:Instance template="ActionButtons" name="ActionButtons" picking-mode="Ignore" style="position: absolute; width: 1920px; height: 1080px;"/>
         <ui:Instance template="TowerMenu" name="TowerMenu" picking-mode="Ignore" style="position: absolute; height: 1080px; width: 1920px;"/>
-        <ui:Instance template="GameMenu" name="GameMenu" style="position: absolute;"/>
+        <ui:Instance template="GameMenu" name="GameMenu" picking-mode="Ignore" style="position: absolute; width: 1920px; height: 1080px;"/>
     </ui:VisualElement>
 </ui:UXML>
