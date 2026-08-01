@@ -212,8 +212,8 @@ MonoBehaviour:
   _text: {fileID: 6690747956059600812}
   _damageColor: {r: 0.85882354, g: 0.23529412, b: 0.101960786, a: 1}
   _healColor: {r: 0.21754792, g: 0.8018868, b: 0.18534178, a: 1}
-  _floatDistance: 0.6
-  _duration: 0.8
+  _floatDistance: 1
+  _duration: 1.4
 --- !u!114 &3095177949074939934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,4 +227,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Registrars.SelfDestructRegistrar
   EntityView: {fileID: 1893404157363187206}
-  _selfDestructDuration: 1
+  _selfDestructDuration: 1.5
