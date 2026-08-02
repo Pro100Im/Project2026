@@ -1,0 +1,18 @@
+:root {
+}
+
+.ActionButton {
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/TinySquareBlueButton.png?fileID=2800000&guid=a50118f0d3cff6744a19a2fea27c115d&type=3#TinySquareBlueButton");
+    width: 100px;
+    height: 100px;
+    align-self: auto;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    -unity-background-scale-mode: scale-to-fit;
+    background-color: rgba(188, 188, 188, 0);
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+}
