@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TorchGoblin
+  m_Controller: {fileID: 9100000, guid: b3b8ab516f45a7c4094d17c1711ab6fd, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -3100369314251171874, guid: 9292c13a51d17e443b73859d43402e8e, type: 3}
+    m_OverrideClip: {fileID: -3100369314251171874, guid: 9292c13a51d17e443b73859d43402e8e, type: 3}
+  - m_OriginalClip: {fileID: 5522812681064789136, guid: 9292c13a51d17e443b73859d43402e8e, type: 3}
+    m_OverrideClip: {fileID: 5522812681064789136, guid: 9292c13a51d17e443b73859d43402e8e, type: 3}
+  - m_OriginalClip: {fileID: 6720303635017113406, guid: 9292c13a51d17e443b73859d43402e8e, type: 3}
+    m_OverrideClip: {fileID: 6720303635017113406, guid: 9292c13a51d17e443b73859d43402e8e, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 29b150bdf73a00743b23bcf9bda2aea7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 29b150bdf73a00743b23bcf9bda2aea7, type: 2}
+  - m_OriginalClip: {fileID: 6720303635017113406, guid: 174f41b609fc50a489428f56ec74a095, type: 3}
+    m_OverrideClip: {fileID: 6720303635017113406, guid: 9292c13a51d17e443b73859d43402e8e, type: 3}
+  - m_OriginalClip: {fileID: 6720303635017113406, guid: ab5dbfde0a95cda43a26c709e71fa5ab, type: 3}
+    m_OverrideClip: {fileID: 6720303635017113406, guid: 9292c13a51d17e443b73859d43402e8e, type: 3}

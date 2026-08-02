@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Common.Registrars.SelfDestructTimerRegistrar
   EntityView: {fileID: 2769651622987638512}
-  _selfDestructDuration: 0.8
+  _selfDestructDuration: 1.2
 --- !u!1 &4571709258303778017
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,12 +143,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -3938067102993155475, guid: dc61687b6a5c544dd919bee8fb6648ab, type: 3}
+  m_Sprite: {fileID: -3938067102993155475, guid: 818b1fdcc25f3944dbaf34f7ed4684ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.34, y: 0.31}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -163,7 +163,7 @@ Animator:
   m_GameObject: {fileID: 4571709258303778017}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 421be1d3663de40b78469de2c863cc11, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4527ee4bc19a4664ea336512f988576d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -262,10 +262,10 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.63, y: 0.53}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!95 &3313090957088459750
 Animator:
@@ -277,7 +277,7 @@ Animator:
   m_GameObject: {fileID: 8453899842337288590}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4bd5b3c8c1762471aaa9d375dd372eae, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5a85fa147e62ab54bbae70007a7fd018, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

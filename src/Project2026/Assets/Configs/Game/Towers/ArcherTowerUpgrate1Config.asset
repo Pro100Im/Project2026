@@ -48,7 +48,7 @@ MonoBehaviour:
         <Mode>k__BackingField: 0
         <Prices>k__BackingField: 0a000000
         <UpgradeIcons>k__BackingField:
-        - {fileID: 21300000, guid: 3497f8226f551ed428f26885c673bb7b, type: 3}
+        - {fileID: 7316229441688303391, guid: 8ba215d72be9d624286b5e52e6a9b1e8, type: 3}
         <Upgrades>k__BackingField:
         - {fileID: 11400000, guid: 19c13ad7104e13e4ebc4d9c7d710b758, type: 2}
     - rid: 2286603216724688993
@@ -83,4 +83,4 @@ MonoBehaviour:
       type: {class: SpriteProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <_sprite>k__BackingField: {fileID: 21300000, guid: 03aa25daa6e4a644e952eeff624233c1, type: 3}
+        <_sprite>k__BackingField: {fileID: 7316229441688303391, guid: 8ba215d72be9d624286b5e52e6a9b1e8, type: 3}
