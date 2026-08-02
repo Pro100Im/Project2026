@@ -52,6 +52,22 @@ PrefabInstance:
       propertyPath: _fullWidth
       value: 0.93
       objectReference: {fileID: 0}
+    - target: {fileID: 1823357452111533005, guid: 4a356d44723836145be75457b4a66ff9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.935
+      objectReference: {fileID: 0}
+    - target: {fileID: 1823357452111533005, guid: 4a356d44723836145be75457b4a66ff9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 1823357452111533005, guid: 4a356d44723836145be75457b4a66ff9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.473
+      objectReference: {fileID: 0}
+    - target: {fileID: 1823357452111533005, guid: 4a356d44723836145be75457b4a66ff9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0058
+      objectReference: {fileID: 0}
     - target: {fileID: 3690567927285784400, guid: 4a356d44723836145be75457b4a66ff9, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.8
