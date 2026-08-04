@@ -113,7 +113,7 @@ MonoBehaviour:
       type: {class: AttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Range>k__BackingField: 1.5
+        <Range>k__BackingField: 1.1
         <DetectionRange>k__BackingField: 3
         <Cooldown>k__BackingField: 3
         <Duration>k__BackingField: 0.6
@@ -132,7 +132,7 @@ MonoBehaviour:
       type: {class: DeathDurationProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Duration>k__BackingField: 0.8
+        <Duration>k__BackingField: 1.5
     - rid: 8171215745916338281
       type: {class: UnitSizeProperty, ns: Assets.Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:

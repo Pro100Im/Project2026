@@ -69,11 +69,6 @@ MonoBehaviour:
       data:
         <Mode>k__BackingField: 0
         <Resistance>k__BackingField: 5
-    - rid: 8171215584738410700
-      type: {class: DefensePatrolProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
-      data:
-        <Mode>k__BackingField: 0
-        <IdleDuration>k__BackingField: 3
     - rid: 4221333317118328832
       type: {class: PhysicalAttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
@@ -124,6 +119,11 @@ MonoBehaviour:
         <Mode>k__BackingField: 0
         <SpawnEffect>k__BackingField: {fileID: 11400000, guid: 66146da2da0797949afeef7485ed8aeb, type: 2}
         <SpawnEffectOffset>k__BackingField: {x: 0, y: 0, z: 0}
+    - rid: 8171215584738410700
+      type: {class: DefensePatrolProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <IdleDuration>k__BackingField: 3
     - rid: 8171215631311700222
       type: {class: KillableProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
@@ -132,7 +132,7 @@ MonoBehaviour:
       type: {class: DeathDurationProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Duration>k__BackingField: 0.8
+        <Duration>k__BackingField: 1.1
     - rid: 8171215745916338281
       type: {class: UnitSizeProperty, ns: Assets.Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
