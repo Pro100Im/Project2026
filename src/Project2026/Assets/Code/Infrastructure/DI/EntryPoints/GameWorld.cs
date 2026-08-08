@@ -1,31 +1,62 @@
-using Code.Infrastructure.States.GameStates;
-using Code.Infrastructure.States.StateMachine;
+using Code.Game.Common.Entity;
+using Code.Game.Common.UI.Transition;
+using Code.Game.Features;
+using Code.Infrastructure.Systems;
+using Cysharp.Threading.Tasks;
+using System;
 using VContainer.Unity;
 
 namespace Code.Infrastructure.DI.EntryPoints
 {
-    public class GameWorld : ITickable, IInitializable, IFixedTickable
+    public class GameWorld : ITickable, IInitializable, IDisposable
     {
-        private IGameStateMachine _gameStateMachine;
+        private readonly ISystemFactory _systems;
+        private readonly TransitionScreen _transitionScreen;
+        private readonly GameContext _gameContext;
 
-        public GameWorld(IGameStateMachine gameStateMachine)
+        private GameTickFeature _gameTickFeature;
+
+        public GameWorld(TransitionScreen transitionScreen, ISystemFactory systems, GameContext gameContext)
         {
-            _gameStateMachine = gameStateMachine;
+            _systems = systems;
+            _gameContext = gameContext;
+            _transitionScreen = transitionScreen;
         }
 
         public void Initialize()
         {
-            _gameStateMachine.Enter<GameEnterState>();
+            CreateGameSession();
+        }
+
+        private void CreateGameSession()
+        {
+            var entity = CreateGameEntity.Empty();
+            entity.isGameSession = true;
+
+            _gameTickFeature = _systems.Create<GameTickFeature>();
+
+            _gameTickFeature.Initialize();
+
+            _transitionScreen.Hide().Forget();
         }
 
         public void Tick()
         {
-            _gameStateMachine.Tick();
+            _gameTickFeature?.Execute();
+            _gameTickFeature?.Cleanup();
         }
 
-        public void FixedTick()
+        public void Dispose()
         {
-            _gameStateMachine.FixedTick();
+            //_gameTickFeature.DeactivateReactiveSystems();
+            //_gameTickFeature.ClearReactiveSystems();
+
+            //foreach (GameEntity entity in _gameContext.GetEntities())
+            //    entity.isDestructed = true;
+
+            //_gameTickFeature.Cleanup();
+            //_gameTickFeature.TearDown();
+            //_gameTickFeature = null;
         }
     }
 }

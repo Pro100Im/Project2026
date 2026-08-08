@@ -15,6 +15,7 @@ namespace Code.Meta.Features.Game
         private Image _mask;
 
         private Button _cancelButton;
+        private Button _exitButton;
 
         [Inject]
         public void Construct(UIService uIService, GameScreen gameScreen)
@@ -28,8 +29,10 @@ namespace Code.Meta.Features.Game
             _pauseMenu = _gameScreen.GetVisualElement("PauseMenu");
             _mask = _gameScreen.GetImage("Mask");
             _cancelButton = _gameScreen.GetButton("CancelButton");
+            _exitButton = _gameScreen.GetButton("ExitButton");
 
             _cancelButton.clickable.clicked += PauseRequest;
+            _exitButton.clickable.clicked += Exit;
         }
 
         private void PauseRequest()
@@ -37,6 +40,11 @@ namespace Code.Meta.Features.Game
             var entityClick = CreateInputEntity.Empty();
             entityClick.isPauseRequested = true;
             entityClick.isInput = true;
+        }
+
+        public void Exit()
+        {
+
         }
 
         public void CloseMenu()
@@ -59,7 +67,8 @@ namespace Code.Meta.Features.Game
 
         private void OnDestroy()
         {
-            _cancelButton.clickable.clicked -= PauseRequest;
+            //_cancelButton.clickable.clicked -= PauseRequest;
+            //_exitButton.clickable.clicked -= Exit;
         }
     }
 }

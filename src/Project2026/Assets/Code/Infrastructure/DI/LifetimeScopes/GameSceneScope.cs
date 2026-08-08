@@ -56,9 +56,6 @@ using Code.Game.Input.Service;
 using Code.Game.Input.Systems;
 using Code.Game.StaticData.Configs;
 using Code.Infrastructure.DI.EntryPoints;
-using Code.Infrastructure.States.Factory;
-using Code.Infrastructure.States.GameStates;
-using Code.Infrastructure.States.StateMachine;
 using Code.Infrastructure.Systems;
 using Code.Infrastructure.View;
 using Code.Infrastructure.View.Pool;
@@ -82,7 +79,6 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             BindGameConfigs(builder);
             BindContexts(builder);
 
-            BindGameStates(builder);
             BindStateMachine(builder);
 
             BindFeatures(builder);
@@ -115,14 +111,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
         private void BindStateMachine(IContainerBuilder builder)
         {
-            builder.Register<GameStateMachine>(Lifetime.Singleton).AsImplementedInterfaces();
-        }
-
-        private void BindGameStates(IContainerBuilder builder)
-        {
-            builder.Register<GameEnterState>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-            builder.Register<GameLoopState>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-            builder.Register<GameOverState>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            
         }
 
         private void BindFeatures(IContainerBuilder builder)
@@ -288,7 +277,6 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
         private void BindGameFactories(IContainerBuilder builder)
         {
-            builder.Register<IStateFactory, StateFactory>(Lifetime.Singleton);
             builder.Register<ISystemFactory, SystemFactory>(Lifetime.Singleton);
         }
 

@@ -16,17 +16,10 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
         protected override void Configure(IContainerBuilder builder)
         {
-            BindUIFactories(builder);
-
             BindCommonServices(builder);
             BindAssetManagementServices(builder);
 
             builder.RegisterComponentInNewPrefab(_coroutineRunner, Lifetime.Singleton).DontDestroyOnLoad().AsImplementedInterfaces();
-        }
-
-        private void BindUIFactories(IContainerBuilder builder)
-        {
-
         }
 
         private void BindCommonServices(IContainerBuilder builder)
@@ -34,7 +27,6 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<ITimeService, UnityTimeService>(Lifetime.Singleton);
             builder.Register<IRandomService, RandomService>(Lifetime.Singleton);
             builder.Register<ISceneLoader, SceneLoader>(Lifetime.Singleton);
-
             builder.Register<UIService>(Lifetime.Singleton);
         }
 

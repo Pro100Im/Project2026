@@ -24,7 +24,7 @@ namespace Code.Game.Input.Service
 
         public Vector2 GetWorldPointer()
         {
-            if(Mouse.current == null)
+            if(Mouse.current == null || _cameraService.GetCamera() == null)
                 return Vector2.zero;
 
             return _cameraService.GetCamera().ScreenToWorldPoint(GetPointer());
@@ -32,7 +32,7 @@ namespace Code.Game.Input.Service
 
         public Vector2 GetScreenPointer(Vector3 pos)
         {
-            if (Mouse.current == null)
+            if (Mouse.current == null || _cameraService.GetCamera() == null)
                 return Vector2.zero;
 
             return _cameraService.GetCamera().WorldToScreenPoint(pos);
