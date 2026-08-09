@@ -60,6 +60,11 @@ namespace Code.Meta.Features.Game
         {
             await _transitionScreen.Show();
 
+            //foreach (var entity in Contexts.sharedInstance.game.GetEntities())
+            //{
+            //    entity.isDestructed = true;
+            //}
+
             _sceneLoader.Load(_menuSceneName);
         }
 
