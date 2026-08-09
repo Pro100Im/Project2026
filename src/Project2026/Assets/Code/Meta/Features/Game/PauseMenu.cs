@@ -60,15 +60,6 @@ namespace Code.Meta.Features.Game
         {
             await _transitionScreen.Show();
 
-            try
-            {
-                Contexts.sharedInstance.Reset();
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogWarning($"Contexts reset failed: {e.Message}");
-            }
-
             _sceneLoader.Load(_menuSceneName);
         }
 
