@@ -13,21 +13,18 @@ namespace Code.Game.Features.Input.Systems
 
         private readonly List<InputEntity> _pointersBuffer = new(1);
 
-        public CaptureClickSystem(
-            InputContext inputContext,
-            GameContext gameContext,
-            IInputService inputService)
+        public CaptureClickSystem(IInputService inputService)
         {
             _inputService = inputService;
 
-            _pointers = inputContext.GetGroup(InputMatcher
+            _pointers = Contexts.sharedInstance.input.GetGroup(InputMatcher
                 .AllOf(
                     InputMatcher.PointerState,
                     InputMatcher.PointerInput,
                     InputMatcher.WorldPointerInput)
                 .NoneOf(InputMatcher.Destructed));
 
-            _gameSessions = gameContext.GetGroup(GameMatcher.GameSession);
+            _gameSessions = Contexts.sharedInstance.game.GetGroup(GameMatcher.GameSession);
         }
 
         public void Execute()

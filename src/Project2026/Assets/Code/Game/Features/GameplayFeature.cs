@@ -28,9 +28,9 @@ namespace Code.Game.Features
     {
         private readonly IGroup<GameEntity> _gameSessions;
 
-        public GameplayFeature(ISystemFactory systemFactory, GameContext gameContext)
+        public GameplayFeature(ISystemFactory systemFactory)
         {
-            _gameSessions = gameContext.GetGroup(GameMatcher.GameSession);
+            _gameSessions = Contexts.sharedInstance.game.GetGroup(GameMatcher.GameSession);
 
             Add(systemFactory.Create<WaveFeature>());
             Add(systemFactory.Create<SpawnFeature>());
@@ -45,7 +45,6 @@ namespace Code.Game.Features
 
             Add(systemFactory.Create<LevelFeature>());
 
-            // Combat pipeline: decide → step → strike
             Add(systemFactory.Create<TargetFeature>());
             Add(systemFactory.Create<MovementFeature>());
             Add(systemFactory.Create<AttackFeature>());

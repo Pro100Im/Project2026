@@ -12,10 +12,10 @@ namespace Code.Game.Features.FloatingText.Systems
         private readonly IGroup<GameEntity> _damages;
         private readonly List<GameEntity> _damagesBuffer = new(86);
 
-        public CreateDamageFloatingTextSystem(GameContext gameContext, FloatingTextConfig config)
+        public CreateDamageFloatingTextSystem(FloatingTextConfig config)
         {
             _config = config;
-            _damages = gameContext.GetGroup(GameMatcher
+            _damages = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.DamageRequest,
                     GameMatcher.TotalDamage,

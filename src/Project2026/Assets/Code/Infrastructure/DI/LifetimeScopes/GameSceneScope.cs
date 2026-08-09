@@ -77,7 +77,6 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             BindServices(builder);
 
             BindGameConfigs(builder);
-            BindContexts(builder);
 
             BindStateMachine(builder);
 
@@ -88,14 +87,6 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             BindGameFactories(builder);
 
             builder.RegisterEntryPoint<GameWorld>();
-        }
-
-        private void BindContexts(IContainerBuilder builder)
-        {
-            builder.RegisterInstance(Contexts.sharedInstance);
-            builder.RegisterInstance(Contexts.sharedInstance.game);
-            builder.RegisterInstance(Contexts.sharedInstance.input);
-            builder.RegisterInstance(Contexts.sharedInstance.meta);
         }
 
         private void BindServices(IContainerBuilder builder)
@@ -117,7 +108,6 @@ namespace Code.Infrastructure.DI.LifetimeScopes
         private void BindFeatures(IContainerBuilder builder)
         {
             builder.Register<GameTickFeature>(Lifetime.Singleton);
-            builder.Register<GameFixedTickFeature>(Lifetime.Singleton);
             builder.Register<GameplayFeature>(Lifetime.Singleton);
 
             builder.Register<GameSessionFeature>(Lifetime.Singleton);

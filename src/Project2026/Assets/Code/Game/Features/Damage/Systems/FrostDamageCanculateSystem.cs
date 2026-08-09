@@ -11,9 +11,9 @@ namespace Code.Game.Features.Damage.Systems
 
         private readonly List<GameEntity> _damagesBuffer = new(86);
 
-        public FrostDamageCanculateSystem(GameContext gameContext)
+        public FrostDamageCanculateSystem()
         {
-            _damages = gameContext.GetGroup(GameMatcher
+            _damages = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.TotalDamage,
                     GameMatcher.OwnerId,

@@ -13,11 +13,11 @@ namespace Code.Game.Features.Wave.Systems
 
         private readonly List<GameEntity> _buffer = new(16);
 
-        public WaveProgressSystem(GameContext gameContext, WavesConfig wavesConfig)
+        public WaveProgressSystem(WavesConfig wavesConfig)
         {
             _wavesConfig = wavesConfig;
 
-            _waves = gameContext.GetGroup(GameMatcher
+            _waves = Contexts.sharedInstance.game.GetGroup(GameMatcher
               .AllOf(
               GameMatcher.CurrentWaveNumber,
               GameMatcher.WaveEnemiesAlive,

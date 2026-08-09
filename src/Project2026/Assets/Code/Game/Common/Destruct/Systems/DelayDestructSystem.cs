@@ -11,9 +11,9 @@ namespace Code.Game.Common.Destruct.Systems
 
         private readonly List<GameEntity> _entitiesBuffer = new(128);
 
-        public DelayDestructSystem(GameContext game, ITimeService time)
+        public DelayDestructSystem(ITimeService time)
         {
-            _entities = game.GetGroup(GameMatcher
+            _entities = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                 GameMatcher.TargetId,
                 GameMatcher.DelayDestruct,

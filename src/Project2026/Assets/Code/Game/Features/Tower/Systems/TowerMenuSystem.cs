@@ -8,10 +8,9 @@ namespace Code.Game.Features.Tower.Systems
     {
         private readonly IGroup<MetaEntity> _towerMenu;
 
-        public TowerMenuSystem(InputContext inputContext, MetaContext metaContext)
-            : base(inputContext)
+        public TowerMenuSystem() : base(Contexts.sharedInstance.input)
         {
-            _towerMenu = metaContext.GetGroup(MetaMatcher.TowerMenu);
+            _towerMenu = Contexts.sharedInstance.meta.GetGroup(MetaMatcher.TowerMenu);
         }
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context) =>

@@ -9,8 +9,7 @@ namespace Code.Game.Features.Level.Systems
     {
         private readonly TargetService _targetService;
 
-        public BuildFlowFieldSystem(GameContext gameContext, TargetService targetService)
-            : base(gameContext)
+        public BuildFlowFieldSystem(TargetService targetService) : base(Contexts.sharedInstance.game)
         {
             _targetService = targetService;
         }
@@ -27,7 +26,7 @@ namespace Code.Game.Features.Level.Systems
 
         protected override void Execute(List<GameEntity> maps)
         {
-            for (int i = 0; i < maps.Count; i++)
+            for (var i = 0; i < maps.Count; i++)
             {
                 var map = maps[i];
                 var tilemap = map.tilemapMovement.Value;
@@ -61,13 +60,8 @@ namespace Code.Game.Features.Level.Systems
             }
         }
 
-        private void GenerateFields(
-            List<Vector2Int> sizesToGenerate,
-            List<Vector3Int> goals,
-            Dictionary<Vector3Int, Vector3> tilemap,
-            Dictionary<Vector3Int, int> occupField,
-            Dictionary<Vector2Int, Dictionary<Vector3Int, int>> allIntegrations,
-            Dictionary<Vector2Int, Dictionary<Vector3Int, Vector3Int>> allFlows)
+        private void GenerateFields(List<Vector2Int> sizesToGenerate, List<Vector3Int> goals, Dictionary<Vector3Int, Vector3> tilemap,
+            Dictionary<Vector3Int, int> occupField, Dictionary<Vector2Int, Dictionary<Vector3Int, int>> allIntegrations, Dictionary<Vector2Int, Dictionary<Vector3Int, Vector3Int>> allFlows)
         {
             var goalsSet = new HashSet<Vector3Int>(goals);
 
@@ -97,9 +91,10 @@ namespace Code.Game.Features.Level.Systems
             for (var i = 0; i < goals.Count; i++)
             {
                 var goal = goals[i];
-                for (int x = -(size.x - 1); x <= 0; x++)
+
+                for (var x = -(size.x - 1); x <= 0; x++)
                 {
-                    for (int y = -(size.y - 1); y <= 0; y++)
+                    for (var y = -(size.y - 1); y <= 0; y++)
                     {
                         var anchorPos = new Vector3Int(goal.x + x, goal.y + y);
 
@@ -165,9 +160,9 @@ namespace Code.Game.Features.Level.Systems
         private bool CanFit(Vector3Int origin, Vector2Int size, Dictionary<Vector3Int, Vector3> tilemap, 
             Dictionary<Vector3Int, int> occupField, HashSet<Vector3Int> goalsSet)
         {
-            for (int x = 0; x < size.x; x++)
+            for (var x = 0; x < size.x; x++)
             {
-                for (int y = 0; y < size.y; y++)
+                for (var y = 0; y < size.y; y++)
                 {
                     var checkPos = new Vector3Int(origin.x + x, origin.y + y, 0);
 

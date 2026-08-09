@@ -13,11 +13,13 @@ namespace Code.Game.Features.Ability.Systems
         private readonly List<GameEntity> _cancelRequestsBuffer = new(4);
         private readonly List<GameEntity> _targetingBuffer = new(2);
 
-        public AbilityCancelSystem(InputContext inputContext, GameContext gameContext)
+        public AbilityCancelSystem()
         {
-            _cancelIntents = inputContext.GetGroup(InputMatcher
+            _cancelIntents = Contexts.sharedInstance.input.GetGroup(InputMatcher
                 .AllOf(InputMatcher.CancelIntent)
                 .NoneOf(InputMatcher.Destructed));
+
+            var gameContext = Contexts.sharedInstance.game;
 
             _cancelRequests = gameContext.GetGroup(GameMatcher
                 .AllOf(GameMatcher.AbilityCancelRequest)

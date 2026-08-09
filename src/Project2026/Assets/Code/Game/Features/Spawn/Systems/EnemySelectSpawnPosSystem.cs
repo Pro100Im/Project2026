@@ -15,22 +15,24 @@ namespace Code.Game.Features.Spawn.Systems
         private readonly List<GameEntity> _spawnMapsBuffer = new(8);
         private readonly List<GameEntity> _enemiesBuffer = new(124);
 
-        public EnemySelectSpawnPosSystem(GameContext context, IRandomService random)
+        public EnemySelectSpawnPosSystem(IRandomService random)
         {
+            var gameContext = Contexts.sharedInstance.game;
+
             _random = random;
 
-            _enemies = context.GetGroup(GameMatcher
+            _enemies = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.SpawnRequsted,
                     GameMatcher.Enemy,
                     GameMatcher.UnitSize));
 
-            _spawnMaps = context.GetGroup(GameMatcher
+            _spawnMaps = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.SpawnMap,
                     GameMatcher.Enemy));
 
-            _maps = context.GetGroup(GameMatcher
+            _maps = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.OccupField,
                     GameMatcher.ReservedField,
@@ -53,7 +55,7 @@ namespace Code.Game.Features.Spawn.Systems
 
             spawnReservedField.Clear();
 
-            for ( var i = 0; i < spawnMaps.Count; i++)
+            for (var i = 0; i < spawnMaps.Count; i++)
             {
                 var spawnMap = spawnMaps[i];
                 var points = spawnMap.spawnMap.Value;
@@ -70,7 +72,7 @@ namespace Code.Game.Features.Spawn.Systems
                     var count = 0;
                     var chosenPos = Vector3.zero;
                     var chosenCell = Vector3Int.zero;
-                    bool found = false;
+                    var found = false;
 
                     foreach (var kvp in points)
                     {
@@ -104,9 +106,9 @@ namespace Code.Game.Features.Spawn.Systems
         private bool CanFit(Vector3Int origin, Vector2Int size, Dictionary<Vector3Int, int> occupied, Dictionary<Vector3Int, int> reserved,
                             HashSet<Vector3Int> spawnReserved, Dictionary<Vector3Int, Vector3> tilemap)
         {
-            for (int x = 0; x < size.x; x++)
+            for (var x = 0; x < size.x; x++)
             {
-                for (int y = 0; y < size.y; y++)
+                for (var y = 0; y < size.y; y++)
                 {
                     var checkCell = new Vector3Int(origin.x + x, origin.y + y, origin.z);
 
@@ -129,9 +131,9 @@ namespace Code.Game.Features.Spawn.Systems
 
         private void ReserveCells(Vector3Int origin, Vector2Int size, HashSet<Vector3Int> reserved)
         {
-            for (int x = 0; x < size.x; x++)
+            for (var x = 0; x < size.x; x++)
             {
-                for (int y = 0; y < size.y; y++)
+                for (var y = 0; y < size.y; y++)
                 {
                     reserved.Add(new Vector3Int(origin.x + x, origin.y + y, origin.z));
                 }

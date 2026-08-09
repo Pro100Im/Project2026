@@ -12,8 +12,10 @@ namespace Code.Game.Features.Attack.Systems
         private readonly List<GameEntity> _attackersBuffer = new(86);
         private readonly List<GameEntity> _pendingBuffer = new(86);
 
-        public AttackActionCompleteSystem(GameContext gameContext)
+        public AttackActionCompleteSystem()
         {
+            var gameContext = Contexts.sharedInstance.game;
+
             _attackers = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Attacking,
@@ -61,7 +63,7 @@ namespace Code.Game.Features.Attack.Systems
             }
         }
 
-        private static void ClearAttackAction(GameEntity attacker)
+        private void ClearAttackAction(GameEntity attacker)
         {
             attacker.isAttacking = false;
             attacker.isAttackAnimStarted = false;

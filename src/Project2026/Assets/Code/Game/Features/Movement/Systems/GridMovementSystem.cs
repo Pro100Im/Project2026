@@ -16,11 +16,13 @@ namespace Code.Game.Features.Movement.Systems
 
         private readonly List<GameEntity> _unitsBuffer = new(512);
 
-        public GridMovementSystem(GameContext context, ITimeService timeService)
+        public GridMovementSystem(ITimeService timeService)
         {
+            var gameContext = Contexts.sharedInstance.game;
+
             _timeService = timeService;
 
-            _units = context.GetGroup(GameMatcher
+            _units = gameContext.GetGroup(GameMatcher
                 .AllOf(
                 GameMatcher.Transform,
                 GameMatcher.MovementSpeed,
@@ -30,7 +32,7 @@ namespace Code.Game.Features.Movement.Systems
                 GameMatcher.UnitSize,
                 GameMatcher.GridMovement));
 
-            _maps = context.GetGroup(GameMatcher
+            _maps = gameContext.GetGroup(GameMatcher
                 .AllOf(
                 GameMatcher.FlowFields,
                 GameMatcher.IntegrationFields,

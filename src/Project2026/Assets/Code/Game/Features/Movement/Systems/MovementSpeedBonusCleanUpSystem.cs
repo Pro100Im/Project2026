@@ -9,8 +9,8 @@ namespace Code.Game.Features.Movement.Systems
 
         private readonly List<GameEntity> _entitiesBuffer = new(512);
 
-        public MovementSpeedBonusCleanUpSystem(GameContext game) =>
-          _entities = game.GetGroup(GameMatcher
+        public MovementSpeedBonusCleanUpSystem() =>
+          _entities = Contexts.sharedInstance.game.GetGroup(GameMatcher
               .AllOf(
                 GameMatcher.Id,
                 GameMatcher.MovementSpeedBonus));

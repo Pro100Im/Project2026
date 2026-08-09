@@ -11,9 +11,9 @@ namespace Code.Game.Features.Animator.Systems
 
         private readonly List<GameEntity> _charactersBuffer = new(512);
 
-        public CharacterAnimatorSystem(GameContext gameContext)
+        public CharacterAnimatorSystem()
         {
-            _characters = gameContext.GetGroup(GameMatcher
+            _characters = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                 GameMatcher.View,
                 GameMatcher.Animator,
@@ -74,7 +74,7 @@ namespace Code.Game.Features.Animator.Systems
             }
         }
 
-        private static string GetAttackStateName(AttackDirection direction)
+        private string GetAttackStateName(AttackDirection direction)
         {
             switch (direction)
             {

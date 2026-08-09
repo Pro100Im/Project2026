@@ -6,10 +6,11 @@ namespace Code.Game.Common.Destruct.Systems
     public class MetaDestructedSystem : ICleanupSystem
     {
         private readonly IGroup<MetaEntity> _entities;
+
         private readonly List<MetaEntity> _entitiesBuffer = new(16);
 
-        public MetaDestructedSystem(MetaContext metaContext) =>
-          _entities = metaContext.GetGroup(MetaMatcher.Destructed);
+        public MetaDestructedSystem() =>
+          _entities = Contexts.sharedInstance.meta.GetGroup(MetaMatcher.Destructed);
 
         public void Cleanup()
         {

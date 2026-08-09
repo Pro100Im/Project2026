@@ -11,16 +11,18 @@ namespace Code.Game.Features.Level.Systems
 
         private readonly List<GameEntity> _buffer = new(512);
 
-        public UpdateSpatialHashSystem(GameContext context)
+        public UpdateSpatialHashSystem()
         {
-            _targetables = context.GetGroup(GameMatcher
+            var gameContext = Contexts.sharedInstance.game;
+
+            _targetables = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.CurrentCell,
                     GameMatcher.Targetable,
                     GameMatcher.Id)
                 .NoneOf(GameMatcher.Dead));
 
-            _maps = context.GetGroup(GameMatcher.SpatialHash);
+            _maps = gameContext.GetGroup(GameMatcher.SpatialHash);
         }
 
         public void Execute()

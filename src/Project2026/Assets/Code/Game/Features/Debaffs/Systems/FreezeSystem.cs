@@ -9,9 +9,9 @@ namespace Code.Game.Features.Debaffs.Systems
 
         private readonly List<GameEntity> _frozenUnitsBuffer = new(128);
 
-        public FreezeSystem(GameContext gameContext)
+        public FreezeSystem()
         {
-            _frozenUnits = gameContext.GetGroup(GameMatcher
+            _frozenUnits = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Unit,
                     GameMatcher.FreezeDebuff)

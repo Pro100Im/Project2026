@@ -9,9 +9,9 @@ namespace Code.Game.Features.Attack.Systems
         private readonly IGroup<GameEntity> _attacks;
         private readonly List<GameEntity> _attacksBuffer = new(86);
 
-        public RangeAttackHitSystem(GameContext gameContext)
+        public RangeAttackHitSystem()
         {
-            _attacks = gameContext.GetGroup(GameMatcher
+            _attacks = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Id,
                     GameMatcher.OwnerId,

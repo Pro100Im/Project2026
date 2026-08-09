@@ -11,8 +11,10 @@ namespace Code.Game.Features.Tower.Systems
 
         private readonly List<MetaEntity> _closeBuffer = new(4);
 
-        public TowerMenuCloseSystem(MetaContext metaContext)
+        public TowerMenuCloseSystem()
         {
+            var metaContext = Contexts.sharedInstance.meta;
+
             _closeRequests = metaContext.GetGroup(MetaMatcher
                 .AllOf(MetaMatcher.TowerMenuCloseRequest)
                 .NoneOf(MetaMatcher.Destructed));

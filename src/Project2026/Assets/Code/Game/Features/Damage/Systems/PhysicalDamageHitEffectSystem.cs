@@ -10,9 +10,9 @@ namespace Code.Game.Features.Damage.Systems
 
         private readonly List<GameEntity> _damagesBuffer = new(86);
 
-        public PhysicalDamageHitEffectSystem(GameContext gameContext)
+        public PhysicalDamageHitEffectSystem()
         {
-            _damages = gameContext.GetGroup(GameMatcher
+            _damages = Contexts.sharedInstance.game.GetGroup(GameMatcher
             .AllOf(
                 GameMatcher.OwnerId,
                 GameMatcher.TargetId,
@@ -24,7 +24,6 @@ namespace Code.Game.Features.Damage.Systems
         public void Execute()
         {
             var damages = _damages.GetEntities(_damagesBuffer);
-
 
             for (var i = 0; i < damages.Count; i++)
             {

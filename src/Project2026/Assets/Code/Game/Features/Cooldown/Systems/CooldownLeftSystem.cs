@@ -12,11 +12,11 @@ namespace Code.Game.Features.Cooldown.Systems
 
         private readonly List<GameEntity> _cooldownsBuffer = new(86);
 
-        public CooldownLeftSystem(GameContext gameContext, ITimeService timeService)
+        public CooldownLeftSystem(ITimeService timeService)
         {
             _timeService = timeService;
 
-            _cooldowns = gameContext.GetGroup(GameMatcher.Cooldown);
+            _cooldowns = Contexts.sharedInstance.game.GetGroup(GameMatcher.Cooldown);
         }
 
         public void Execute()

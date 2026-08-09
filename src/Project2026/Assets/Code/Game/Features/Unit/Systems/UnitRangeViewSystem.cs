@@ -9,10 +9,9 @@ namespace Code.Game.Features.Unit.Systems
     {
         private readonly IGroup<MetaEntity> _rangeView;
 
-        public UnitRangeViewSystem(InputContext inputContext, MetaContext metaContext)
-            : base(inputContext)
+        public UnitRangeViewSystem() : base(Contexts.sharedInstance.input)
         {
-            _rangeView = metaContext.GetGroup(MetaMatcher.UnitRangeView);
+            _rangeView = Contexts.sharedInstance.meta.GetGroup(MetaMatcher.UnitRangeView);
         }
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context) =>

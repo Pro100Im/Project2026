@@ -18,17 +18,19 @@ namespace Code.Game.Features.Target.Systems
         private readonly List<GameEntity> _buffer = new(256);
         private readonly List<Vector3Int> _candidates = new(64);
 
-        public DefensePatrolSystem(GameContext context, ITimeService timeService)
+        public DefensePatrolSystem(ITimeService timeService)
         {
+            var gameContext = Contexts.sharedInstance.game;
+
             _timeService = timeService;
 
-            _castles = context.GetGroup(GameMatcher
+            _castles = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.PlayerCastle)
                 .NoneOf(
                     GameMatcher.Dead));
 
-            _patrollers = context.GetGroup(GameMatcher
+            _patrollers = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Team,
                     GameMatcher.GridMovement,
@@ -42,12 +44,12 @@ namespace Code.Game.Features.Target.Systems
                     GameMatcher.Attacking,
                     GameMatcher.RallyToCastle));
 
-            _patrolState = context.GetGroup(GameMatcher
+            _patrolState = gameContext.GetGroup(GameMatcher
                 .AnyOf(
                     GameMatcher.DefensePatrolWait,
                     GameMatcher.DefensePatrolCell));
 
-            _maps = context.GetGroup(GameMatcher
+            _maps = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.DefenseIntegrationFields,
                     GameMatcher.OccupField,
@@ -154,13 +156,7 @@ namespace Code.Game.Features.Target.Systems
             return integration.TryGetValue(cell, out var cost) && cost == 0;
         }
 
-        private bool TryPickPatrolCell(
-            GameEntity unit,
-            Vector3Int currentCell,
-            Vector2Int size,
-            int unitId,
-            GameEntity map,
-            out Vector3Int patrolCell)
+        private bool TryPickPatrolCell(GameEntity unit, Vector3Int currentCell, Vector2Int size, int unitId, GameEntity map, out Vector3Int patrolCell)
         {
             patrolCell = default;
 

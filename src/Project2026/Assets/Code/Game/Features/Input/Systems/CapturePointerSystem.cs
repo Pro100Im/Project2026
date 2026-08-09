@@ -13,15 +13,12 @@ namespace Code.Game.Features.Input.Systems
 
         private readonly List<InputEntity> _pointersBuffer = new(1);
 
-        public CapturePointerSystem(
-            InputContext inputContext,
-            IInputService inputService,
-            GameScreen gameScreen)
+        public CapturePointerSystem(IInputService inputService, GameScreen gameScreen)
         {
             _inputService = inputService;
             _gameScreen = gameScreen;
 
-            _pointers = inputContext.GetGroup(InputMatcher
+            _pointers = Contexts.sharedInstance.input.GetGroup(InputMatcher
                 .AllOf(InputMatcher.PointerState)
                 .NoneOf(InputMatcher.Destructed));
         }

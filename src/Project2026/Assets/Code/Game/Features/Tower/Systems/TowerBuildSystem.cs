@@ -9,9 +9,9 @@ namespace Code.Game.Features.Tower.Systems
 
         private readonly List<GameEntity> _buffer = new(16);
 
-        public TowerBuildSystem(GameContext gameContext)
+        public TowerBuildSystem()
         {
-            _places = gameContext.GetGroup(GameMatcher
+            _places = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Player,
                     GameMatcher.TowerPlace,

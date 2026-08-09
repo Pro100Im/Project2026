@@ -12,11 +12,11 @@ namespace Code.Game.Features.Attack.Systems
         private readonly IGroup<GameEntity> _rangeAttacks;
         private readonly List<GameEntity> _attacksBuffer = new(86);
 
-        public RangeAttackEndSystem(GameContext gameContext, TargetService targetService)
+        public RangeAttackEndSystem(TargetService targetService)
         {
             _targetService = targetService;
 
-            _rangeAttacks = gameContext.GetGroup(GameMatcher
+            _rangeAttacks = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.OwnerId,
                     GameMatcher.Cooldown,

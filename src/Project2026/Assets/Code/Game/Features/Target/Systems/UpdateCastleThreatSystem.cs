@@ -10,16 +10,18 @@ namespace Code.Game.Features.Target.Systems
 
         private readonly List<GameEntity> _buffer = new(64);
 
-        public UpdateCastleThreatSystem(GameContext context)
+        public UpdateCastleThreatSystem()
         {
-            _castles = context.GetGroup(GameMatcher
+            var gameContext = Contexts.sharedInstance.game;
+
+            _castles = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.PlayerCastle,
                     GameMatcher.Id)
                 .NoneOf(
                     GameMatcher.Dead));
 
-            _enemies = context.GetGroup(GameMatcher
+            _enemies = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Team,
                     GameMatcher.Id)

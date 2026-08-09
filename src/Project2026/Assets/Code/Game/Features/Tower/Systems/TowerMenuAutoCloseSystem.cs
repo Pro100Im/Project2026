@@ -7,8 +7,10 @@ namespace Code.Game.Features.Tower.Systems
         private readonly IGroup<MetaEntity> _towerMenus;
         private readonly IGroup<MetaEntity> _rangeViews;
 
-        public TowerMenuAutoCloseSystem(MetaContext metaContext)
+        public TowerMenuAutoCloseSystem()
         {
+            var metaContext = Contexts.sharedInstance.meta;
+
             _towerMenus = metaContext.GetGroup(MetaMatcher.TowerMenu);
             _rangeViews = metaContext.GetGroup(MetaMatcher.UnitRangeView);
         }

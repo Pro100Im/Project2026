@@ -15,22 +15,24 @@ namespace Code.Game.Features.Spawn.Systems
         private readonly List<GameEntity> _spawnMapsBuffer = new(8);
         private readonly List<GameEntity> _enemiesBuffer = new(124);
 
-        public PlayerSelectSpawnPosSystem(GameContext context, IRandomService random)
+        public PlayerSelectSpawnPosSystem(IRandomService random)
         {
+            var gameContext = Contexts.sharedInstance.game;
+
             _random = random;
 
-            _units = context.GetGroup(GameMatcher
+            _units = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.SpawnRequsted,
                     GameMatcher.Player,
                     GameMatcher.UnitSize));
 
-            _spawnMaps = context.GetGroup(GameMatcher
+            _spawnMaps = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.SpawnMap,
                     GameMatcher.Player));
 
-            _maps = context.GetGroup(GameMatcher
+            _maps = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.OccupField,
                     GameMatcher.ReservedField,

@@ -66,7 +66,7 @@ namespace Code.Meta.Features.Game
             }
             catch (System.Exception e)
             {
-                UnityEngine.Debug.LogWarning($"Contexts reset failed: {e.Message}");
+                Debug.LogWarning($"Contexts reset failed: {e.Message}");
             }
 
             _sceneLoader.Load(_menuSceneName);

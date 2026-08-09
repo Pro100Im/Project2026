@@ -8,10 +8,10 @@ namespace Code.Game.Features.Input.Systems
         private readonly IInputService _inputService;
         private readonly InputContext _inputContext;
 
-        public InitializeInputSystem(IInputService inputService, InputContext inputContext)
+        public InitializeInputSystem(IInputService inputService)
         {
             _inputService = inputService;
-            _inputContext = inputContext;
+            _inputContext = Contexts.sharedInstance.input;
         }
 
         public void Initialize()

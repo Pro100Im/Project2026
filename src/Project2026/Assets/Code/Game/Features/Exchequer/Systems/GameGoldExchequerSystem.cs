@@ -7,9 +7,9 @@ namespace Code.Game.Features.Exchequer.Systems
     {
         private readonly IGroup<GameEntity> _exchequer;
 
-        public GameGoldExchequerSystem(GameContext gameContext) : base(gameContext)
+        public GameGoldExchequerSystem() : base(Contexts.sharedInstance.game)
         {
-            _exchequer = gameContext.GetGroup(GameMatcher
+            _exchequer = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.GameExchequer,
                     GameMatcher.ExchequerGoldCapacity));

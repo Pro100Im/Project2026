@@ -6,9 +6,9 @@ namespace Code.Game.Features.Animator.Systems
     {
         private readonly IGroup<GameEntity> _castles;
 
-        public PlayerCastleAnimatorSystem(GameContext gameContext)
+        public PlayerCastleAnimatorSystem()
         {
-            _castles = gameContext.GetGroup(GameMatcher
+            _castles = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.View,
                     GameMatcher.Animator,

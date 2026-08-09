@@ -9,9 +9,9 @@ namespace Code.Game.Features.Movement.Systems
 
         private readonly List<GameEntity> _unitsBuffer = new(512);
 
-        public FlipAlongMoveDirectionSystem(GameContext context)
+        public FlipAlongMoveDirectionSystem()
         {
-            _units = context.GetGroup(GameMatcher.AllOf(
+            _units = Contexts.sharedInstance.game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.CurrentCell,
                 GameMatcher.TargetCell,
                 GameMatcher.SpriteRenderer,

@@ -10,9 +10,9 @@ namespace Code.Game.Features.Rewards.Systems
 
         private readonly List<GameEntity> _rewardsBuffer = new(86);
 
-        public KillRewardSystem(GameContext gameContext)
+        public KillRewardSystem()
         {
-            _rewards = gameContext.GetGroup(GameMatcher
+            _rewards = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Id,
                     GameMatcher.Reward,

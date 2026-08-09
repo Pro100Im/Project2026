@@ -11,15 +11,15 @@ namespace Code.Game.Features.Ability.Systems
         private readonly List<InputEntity> _castBuffer = new(4);
         private readonly List<GameEntity> _targetingBuffer = new(2);
 
-        public AbilityCastRequestSystem(InputContext inputContext, GameContext gameContext)
+        public AbilityCastRequestSystem()
         {
-            _castIntents = inputContext.GetGroup(InputMatcher
+            _castIntents = Contexts.sharedInstance.input.GetGroup(InputMatcher
                 .AllOf(
                     InputMatcher.AbilityCastIntent,
                     InputMatcher.WorldPointerInput)
                 .NoneOf(InputMatcher.Destructed));
 
-            _targeting = gameContext.GetGroup(GameMatcher
+            _targeting = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.AbilityTargeting,
                     GameMatcher.AbilityRadius,

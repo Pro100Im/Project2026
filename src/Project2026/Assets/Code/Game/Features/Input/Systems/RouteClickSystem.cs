@@ -10,13 +10,13 @@ namespace Code.Game.Features.Input.Systems
 
         private readonly List<InputEntity> _clicksBuffer = new(4);
 
-        public RouteClickSystem(InputContext inputContext, GameContext gameContext)
+        public RouteClickSystem()
         {
-            _clicks = inputContext.GetGroup(InputMatcher
+            _clicks = Contexts.sharedInstance.input.GetGroup(InputMatcher
                 .AllOf(InputMatcher.ClickInput)
                 .NoneOf(InputMatcher.Destructed));
 
-            _abilityTargeting = gameContext.GetGroup(GameMatcher
+            _abilityTargeting = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(GameMatcher.AbilityTargeting)
                 .NoneOf(GameMatcher.Destructed));
         }

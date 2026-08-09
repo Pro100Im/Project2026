@@ -8,6 +8,7 @@ namespace Code.Game.Features.Target.Systems
 {
     public class SelectTargetCellSystem : IExecuteSystem
     {
+        // TO DO
         private const float BlockedIdealPushPenalty = 20f;
         private const float BlockedByAttackingAllyPenalty = 100f;
         private const float BlockedByIdleAllyPenalty = 50f;
@@ -27,11 +28,13 @@ namespace Code.Game.Features.Target.Systems
 
         private readonly List<GameEntity> _buffer = new(128);
 
-        public SelectTargetCellSystem(GameContext context, TargetService targetService)
+        public SelectTargetCellSystem(TargetService targetService)
         {
+            var gameContext = Contexts.sharedInstance.game;
+
             _targetService = targetService;
 
-            _units = context.GetGroup(GameMatcher
+            _units = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Transform,
                     GameMatcher.CurrentCell,
@@ -42,7 +45,7 @@ namespace Code.Game.Features.Target.Systems
                     GameMatcher.MovementAvailable,
                     GameMatcher.GridMovement));
 
-            _maps = context.GetGroup(GameMatcher
+            _maps = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.FlowFields,
                     GameMatcher.IntegrationFields,
@@ -191,13 +194,7 @@ namespace Code.Game.Features.Target.Systems
             }
         }
 
-        private void SelectDirectCellToward(
-            GameEntity unit,
-            Vector3Int cell,
-            Vector2Int size,
-            int unitId,
-            GameEntity mapEntity,
-            Vector3Int targetCell)
+        private void SelectDirectCellToward(GameEntity unit, Vector3Int cell, Vector2Int size, int unitId, GameEntity mapEntity, Vector3Int targetCell)
         {
             if (cell == targetCell)
             {
@@ -267,10 +264,7 @@ namespace Code.Game.Features.Target.Systems
             unit.isTargetCellRequest = false;
         }
 
-        private static void TrySettleSurroundSlotOnStuck(
-            GameEntity unit,
-            Vector3Int cell,
-            GameEntity mapEntity)
+        private void TrySettleSurroundSlotOnStuck(GameEntity unit, Vector3Int cell, GameEntity mapEntity)
         {
             if (!unit.hasSurroundSlot
                 || !unit.hasSurroundTargetId
@@ -299,7 +293,7 @@ namespace Code.Game.Features.Target.Systems
             unit.ReplaceSurroundSlot(cell);
         }
 
-        private static void TryReleaseSurroundSlotIfUnreachable(GameEntity unit, GameEntity mapEntity)
+        private void TryReleaseSurroundSlotIfUnreachable(GameEntity unit, GameEntity mapEntity)
         {
             if (!unit.hasSurroundSlot || !unit.hasSurroundTargetId || !unit.hasRange)
                 return;
@@ -323,12 +317,7 @@ namespace Code.Game.Features.Target.Systems
             unit.RemoveSurroundTargetId();
         }
 
-        private static void SetTargetCell(
-            GameEntity unit,
-            Vector3Int targetCell,
-            Vector2Int size,
-            int unitId,
-            GameEntity mapEntity)
+        private void SetTargetCell(GameEntity unit, Vector3Int targetCell, Vector2Int size, int unitId, GameEntity mapEntity)
         {
             var reservedField = mapEntity.reservedField.Value;
 
@@ -339,11 +328,7 @@ namespace Code.Game.Features.Target.Systems
             WriteReservedFootprint(reservedField, targetCell, size, unitId);
         }
 
-        private static void ClearTargetCell(
-            GameEntity unit,
-            Vector2Int size,
-            int unitId,
-            GameEntity mapEntity)
+        private void ClearTargetCell(GameEntity unit, Vector2Int size, int unitId, GameEntity mapEntity)
         {
             if (!unit.hasTargetCell)
                 return;
@@ -352,11 +337,7 @@ namespace Code.Game.Features.Target.Systems
             unit.RemoveTargetCell();
         }
 
-        private static void ClearReservedFootprint(
-            Dictionary<Vector3Int, int> reservedField,
-            Vector3Int origin,
-            Vector2Int size,
-            int unitId)
+        private void ClearReservedFootprint(Dictionary<Vector3Int, int> reservedField, Vector3Int origin, Vector2Int size, int unitId)
         {
             for (var x = 0; x < size.x; x++)
             {
@@ -370,11 +351,7 @@ namespace Code.Game.Features.Target.Systems
             }
         }
 
-        private static void WriteReservedFootprint(
-            Dictionary<Vector3Int, int> reservedField,
-            Vector3Int origin,
-            Vector2Int size,
-            int unitId)
+        private void WriteReservedFootprint(Dictionary<Vector3Int, int> reservedField, Vector3Int origin, Vector2Int size, int unitId)
         {
             for (var x = 0; x < size.x; x++)
             {
@@ -387,7 +364,7 @@ namespace Code.Game.Features.Target.Systems
             }
         }
 
-        private static int ChebyshevDistance(Vector3Int a, Vector3Int b)
+        private int ChebyshevDistance(Vector3Int a, Vector3Int b)
         {
             return Mathf.Max(Mathf.Abs(a.x - b.x), Mathf.Abs(a.y - b.y));
         }

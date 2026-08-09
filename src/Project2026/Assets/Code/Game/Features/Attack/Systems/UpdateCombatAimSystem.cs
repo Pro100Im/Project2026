@@ -2,7 +2,6 @@ using Code.Game.Common.Entity;
 using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Code.Game.Features.Attack.Systems
 {
@@ -13,9 +12,11 @@ namespace Code.Game.Features.Attack.Systems
 
         private readonly List<GameEntity> _buffer = new(256);
 
-        public UpdateCombatAimSystem(GameContext context)
+        public UpdateCombatAimSystem()
         {
-            _aimers = context.GetGroup(GameMatcher
+            var gameContext = Contexts.sharedInstance.game;
+
+            _aimers = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.TargetId,
                     GameMatcher.Team,
@@ -27,7 +28,7 @@ namespace Code.Game.Features.Attack.Systems
                     GameMatcher.TrajectoryMovement,
                     GameMatcher.Dead));
 
-            _maps = context.GetGroup(GameMatcher.AllOf(GameMatcher.TilemapMovement));
+            _maps = gameContext.GetGroup(GameMatcher.AllOf(GameMatcher.TilemapMovement));
         }
 
         public void Execute()

@@ -10,9 +10,9 @@ namespace Code.Game.Features.Damage.Systems
 
         private readonly List<GameEntity> _damagesBuffer = new(86);
 
-        public FrostDamageHitEffectSystem(GameContext gameContext)
+        public FrostDamageHitEffectSystem()
         {
-            _damages = gameContext.GetGroup(GameMatcher
+            _damages = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.OwnerId,
                     GameMatcher.TargetId,

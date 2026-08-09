@@ -13,11 +13,11 @@ namespace Code.Game.Features.Movement.Systems
 
         private readonly List<GameEntity> _entitiesBuffer = new(86);
 
-        public TrajectoryMovementSystem(GameContext context, ITimeService timeService)
+        public TrajectoryMovementSystem(ITimeService timeService)
         {
             _timeService = timeService;
 
-            _entities = context.GetGroup(GameMatcher.AllOf(
+            _entities = Contexts.sharedInstance.game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.Id,
                 GameMatcher.OwnerId,
                 GameMatcher.MovementSpeed,

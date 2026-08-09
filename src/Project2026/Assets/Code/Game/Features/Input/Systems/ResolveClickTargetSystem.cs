@@ -13,14 +13,11 @@ namespace Code.Game.Features.Input.Systems
         private readonly List<InputEntity> _clicksBuffer = new(4);
         private readonly List<GameEntity> _entitiesBuffer = new(16);
 
-        public ResolveClickTargetSystem(
-            InputContext inputContext,
-            GameContext gameContext,
-            IInputService inputService)
+        public ResolveClickTargetSystem(IInputService inputService)
         {
             _inputService = inputService;
 
-            _clicks = inputContext.GetGroup(InputMatcher
+            _clicks = Contexts.sharedInstance.input.GetGroup(InputMatcher
                 .AllOf(
                     InputMatcher.ClickInput,
                     InputMatcher.PrimaryClick,
@@ -29,7 +26,7 @@ namespace Code.Game.Features.Input.Systems
                     InputMatcher.PointerOverUI,
                     InputMatcher.Destructed));
 
-            _entities = gameContext.GetGroup(GameMatcher
+            _entities = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Id,
                     GameMatcher.TouchZone,

@@ -9,9 +9,9 @@ namespace Code.Game.Features.Effect.Systems
 
         private readonly List<GameEntity> _requestsBuffer = new(124);
 
-        public EffectCheckRequestCleanupSystem(GameContext gameContext)
+        public EffectCheckRequestCleanupSystem()
         {
-            _requests = gameContext.GetGroup(GameMatcher.EffectCheckRequest);
+            _requests = Contexts.sharedInstance.game.GetGroup(GameMatcher.EffectCheckRequest);
         }
 
         public void Execute()

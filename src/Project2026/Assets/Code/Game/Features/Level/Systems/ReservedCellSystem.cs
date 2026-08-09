@@ -11,9 +11,11 @@ namespace Code.Game.Features.Level.Systems
 
         private readonly List<GameEntity> _unitsBuffer = new(512);
 
-        public ReservedCellSystem(GameContext context)
+        public ReservedCellSystem()
         {
-            _units = context.GetGroup(GameMatcher
+            var gameContext = Contexts.sharedInstance.game;
+
+            _units = gameContext.GetGroup(GameMatcher
                 .AllOf(
                 GameMatcher.TargetCell,
                 GameMatcher.UnitSize,
@@ -21,7 +23,7 @@ namespace Code.Game.Features.Level.Systems
                 GameMatcher.GridMovement,
                 GameMatcher.Id));
 
-            _maps = context.GetGroup(GameMatcher
+            _maps = gameContext.GetGroup(GameMatcher
                 .AllOf(
                 GameMatcher.ReservedField));
         }

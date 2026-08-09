@@ -1,5 +1,4 @@
 using Code.Infrastructure.AssetManagement;
-using Code.Infrastructure.View;
 using Code.Infrastructure.View.Pool;
 using Entitas;
 using System.Collections.Generic;
@@ -15,12 +14,12 @@ namespace Code.Infrastructure.View.Systems
         private readonly IGroup<GameEntity> _entities;
         private readonly List<GameEntity> _buffer = new(32);
 
-        public CreateEntityViewFromPathSystem(GameContext game, IAssetProvider assetProvider, IEntityViewPool pool)
+        public CreateEntityViewFromPathSystem(IAssetProvider assetProvider, IEntityViewPool pool)
         {
             _assetProvider = assetProvider;
             _pool = pool;
 
-            _entities = game.GetGroup(GameMatcher
+            _entities = Contexts.sharedInstance.game.GetGroup(GameMatcher
               .AllOf(GameMatcher.ViewPath)
               .NoneOf(GameMatcher.View));
         }

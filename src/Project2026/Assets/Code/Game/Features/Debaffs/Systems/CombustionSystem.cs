@@ -10,9 +10,9 @@ namespace Assets.Code.Game.Features.Debaffs.Systems
 
         private readonly List<GameEntity> _effectsBuffer = new(256);
 
-        public CombustionSystem(GameContext gameContext)
+        public CombustionSystem()
         {
-            _effects = gameContext.GetGroup(GameMatcher
+            _effects = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Id,
                     GameMatcher.TargetId,
@@ -44,7 +44,6 @@ namespace Assets.Code.Game.Features.Debaffs.Systems
                     damage.AddTargetPoint(targetEntity.woldPos.Value);
                     damage.AddTotalDamage(0);
                     damage.isDamageRequest = true;
-                    //damage.isDamageEffectRequest = true;
 
                     effect.ReplaceCooldown(effect.combustionCoolDown.Value);
                 }

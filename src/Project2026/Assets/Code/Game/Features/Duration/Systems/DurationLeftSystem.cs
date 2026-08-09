@@ -12,11 +12,11 @@ namespace Code.Game.Features.Duration.Systems
 
         private readonly List<GameEntity> _durationsBuffer = new(86);
 
-        public DurationLeftSystem(GameContext gameContext, ITimeService timeService)
+        public DurationLeftSystem(ITimeService timeService)
         {
             _timeService = timeService;
 
-            _durations = gameContext.GetGroup(GameMatcher.Duration);
+            _durations = Contexts.sharedInstance.game.GetGroup(GameMatcher.Duration);
         }
 
         public void Execute()

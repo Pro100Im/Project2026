@@ -15,11 +15,13 @@ namespace Code.Game.Features.Target.Systems
 
         private readonly List<GameEntity> _buffer = new(256);
 
-        public AssignSurroundSlotSystem(GameContext context, TargetService targetService)
+        public AssignSurroundSlotSystem(TargetService targetService)
         {
+            var gameContext = Contexts.sharedInstance.game;
+
             _targetService = targetService;
 
-            _units = context.GetGroup(GameMatcher
+            _units = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.GridMovement,
                     GameMatcher.CurrentCell,
@@ -34,7 +36,7 @@ namespace Code.Game.Features.Target.Systems
                     GameMatcher.SurroundSlot,
                     GameMatcher.Dead));
 
-            _maps = context.GetGroup(GameMatcher
+            _maps = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.TilemapMovement,
                     GameMatcher.SurroundField,

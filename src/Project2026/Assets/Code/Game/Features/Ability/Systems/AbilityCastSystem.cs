@@ -14,8 +14,10 @@ namespace Code.Game.Features.Ability.Systems
         private readonly List<GameEntity> _castsBuffer = new(8);
         private readonly HashSet<int> _checkedTargets = new(128);
 
-        public AbilityCastSystem(GameContext gameContext)
+        public AbilityCastSystem()
         {
+            var gameContext = Contexts.sharedInstance.game;
+
             _casts = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.AbilityCastRequest,
@@ -100,10 +102,7 @@ namespace Code.Game.Features.Ability.Systems
             request.isEffectCheckRequest = true;
         }
 
-        private bool MatchesTargetFilter(
-            Team casterTeam,
-            Team targetTeam,
-            AbilityTargetType targetType)
+        private bool MatchesTargetFilter(Team casterTeam, Team targetTeam, AbilityTargetType targetType)
         {
             if (casterTeam == Team.None || targetTeam == Team.None)
                 return false;
@@ -117,9 +116,7 @@ namespace Code.Game.Features.Ability.Systems
             };
         }
 
-        private Vector3Int FindClosestCell(
-            Vector3 point,
-            Dictionary<Vector3Int, Vector3> tilemap)
+        private Vector3Int FindClosestCell(Vector3 point, Dictionary<Vector3Int, Vector3> tilemap)
         {
             var closestCell = Vector3Int.zero;
             var closestDistance = float.MaxValue;

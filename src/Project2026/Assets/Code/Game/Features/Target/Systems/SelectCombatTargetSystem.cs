@@ -8,6 +8,7 @@ namespace Code.Game.Features.Target.Systems
 {
     public class SelectCombatTargetSystem : IExecuteSystem
     {
+        // TO DO
         private const float HoldRangeMultiplier = 1.15f;
         private const float SwitchCloserRatio = 0.7f;
         private const int RescanStaggerFrames = 15;
@@ -18,9 +19,11 @@ namespace Code.Game.Features.Target.Systems
         private readonly List<GameEntity> _buffer = new(256);
         private readonly HashSet<int> _processedTargets = new(256);
 
-        public SelectCombatTargetSystem(GameContext context)
+        public SelectCombatTargetSystem()
         {
-            _attackers = context.GetGroup(GameMatcher.AllOf(
+            var gameContext = Contexts.sharedInstance.game;
+
+            _attackers = gameContext.GetGroup(GameMatcher.AllOf(
                 GameMatcher.Id,
                 GameMatcher.Team,
                 GameMatcher.Range,
@@ -28,7 +31,7 @@ namespace Code.Game.Features.Target.Systems
                 GameMatcher.Transform,
                 GameMatcher.CurrentCell));
 
-            _maps = context.GetGroup(GameMatcher.AllOf(
+            _maps = gameContext.GetGroup(GameMatcher.AllOf(
                 GameMatcher.SpatialHash,
                 GameMatcher.TilemapMovement,
                 GameMatcher.SurroundField));
@@ -182,10 +185,7 @@ namespace Code.Game.Features.Target.Systems
                 && target.hasCurrentCell;
         }
 
-        private static float GetSqrDistToTarget(
-            Vector2 attackOriginPos,
-            GameEntity target,
-            Dictionary<Vector3Int, Vector3> tilemap)
+        private static float GetSqrDistToTarget(Vector2 attackOriginPos, GameEntity target, Dictionary<Vector3Int, Vector3> tilemap)
         {
             var targetPoint = TargetService.GetClosestPoint(target, tilemap, attackOriginPos);
             var dx = attackOriginPos.x - targetPoint.x;

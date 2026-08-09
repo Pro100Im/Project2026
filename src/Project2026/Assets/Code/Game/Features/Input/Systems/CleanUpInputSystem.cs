@@ -11,8 +11,10 @@ namespace Code.Game.Features.Input.Systems
         private readonly List<InputEntity> _clicksBuffer = new(16);
         private readonly List<InputEntity> _destructedBuffer = new(16);
 
-        public CleanUpInputSystem(InputContext inputContext)
+        public CleanUpInputSystem()
         {
+            var inputContext = Contexts.sharedInstance.input;
+
             _clicks = inputContext.GetGroup(InputMatcher.ClickInput);
             _destructed = inputContext.GetGroup(InputMatcher.Destructed);
         }

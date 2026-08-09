@@ -1,8 +1,6 @@
-using Code.Game.Common.Entity;
 using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Code.Game.Features.Target.Systems
 {
@@ -18,25 +16,27 @@ namespace Code.Game.Features.Target.Systems
         private readonly List<GameEntity> _buffer = new(256);
         private readonly List<GameEntity> _castleThreatEnemies = new(32);
 
-        public AssignRallySurroundSlotSystem(GameContext context, TargetService targetService)
+        public AssignRallySurroundSlotSystem(TargetService targetService)
         {
+            var gameContext = Contexts.sharedInstance.game;
+
             _targetService = targetService;
 
-            _castles = context.GetGroup(GameMatcher
+            _castles = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.PlayerCastle,
                     GameMatcher.Id)
                 .NoneOf(
                     GameMatcher.Dead));
 
-            _enemies = context.GetGroup(GameMatcher
+            _enemies = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Team,
                     GameMatcher.Id)
                 .NoneOf(
                     GameMatcher.Dead));
 
-            _rallyingDefenders = context.GetGroup(GameMatcher
+            _rallyingDefenders = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.RallyToCastle,
                     GameMatcher.GridMovement,
@@ -50,7 +50,7 @@ namespace Code.Game.Features.Target.Systems
                     GameMatcher.SurroundSlot,
                     GameMatcher.Dead));
 
-            _maps = context.GetGroup(GameMatcher
+            _maps = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.TilemapMovement,
                     GameMatcher.SurroundField,
@@ -146,6 +146,7 @@ namespace Code.Game.Features.Target.Systems
                     continue;
 
                 surroundField[slot] = defenderId;
+
                 defender.AddSurroundSlot(slot);
                 defender.AddSurroundTargetId(bestEnemy.id.Value);
                 defender.ReplaceTargetId(bestEnemy.id.Value);

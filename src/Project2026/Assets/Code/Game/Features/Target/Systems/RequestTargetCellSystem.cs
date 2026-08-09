@@ -9,9 +9,9 @@ namespace Code.Game.Features.Target.Systems
 
         private readonly List<GameEntity> _buffer = new(256);
 
-        public RequestTargetCellSystem(GameContext context)
+        public RequestTargetCellSystem()
         {
-            _units = context.GetGroup(GameMatcher
+            _units = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Transform,
                     GameMatcher.CurrentCell,

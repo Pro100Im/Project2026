@@ -10,9 +10,9 @@ namespace Code.Game.Features.Health.Systems
 
         private readonly List<GameEntity> _hpBarsBuffer = new(512);
 
-        public HealthBarSystem(GameContext gameContext)
+        public HealthBarSystem()
         {
-            _hpBars = gameContext.GetGroup(GameMatcher
+            _hpBars = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.HpBar,
                     GameMatcher.OwnerId,

@@ -13,8 +13,10 @@ namespace Code.Game.Features.Attack.Systems
         private readonly List<GameEntity> _attacksBuffer = new(86);
         private readonly HashSet<int> _checkedTargets = new(128);
 
-        public RangeAreaAttackHitSystem(GameContext gameContext)
+        public RangeAreaAttackHitSystem()
         {
+            var gameContext = Contexts.sharedInstance.game;
+
             _maps = gameContext.GetGroup(GameMatcher.AllOf(GameMatcher.SpatialHash));
 
             _attacks = gameContext.GetGroup(GameMatcher

@@ -10,9 +10,9 @@ namespace Code.Game.Features.Effect.Systems
 
         private readonly List<GameEntity> _effectRequestsBuffer = new(64);
 
-        public ApplyFreezeEffectSystem(GameContext gameContext)
+        public ApplyFreezeEffectSystem()
         {
-            _effectRequests = gameContext.GetGroup(GameMatcher
+            _effectRequests = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.OwnerId,
                     GameMatcher.TargetId,

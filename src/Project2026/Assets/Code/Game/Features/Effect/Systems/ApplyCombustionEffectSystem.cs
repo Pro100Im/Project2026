@@ -10,9 +10,9 @@ namespace Code.Game.Features.Effect.Systems
 
         private readonly List<GameEntity> _effectRequestsBuffer = new(124);
 
-        public ApplyCombustionEffectSystem(GameContext gameContext)
+        public ApplyCombustionEffectSystem()
         {
-            _effectRequests = gameContext.GetGroup(GameMatcher
+            _effectRequests = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.OwnerId,
                     GameMatcher.TargetId,

@@ -8,8 +8,8 @@ namespace Code.Game.Common.Destruct.Systems
         private readonly IGroup<GameEntity> _entities;
         private readonly List<GameEntity> _entitiesBuffer = new(64);
 
-        public GameDestructedSystem(GameContext game) =>
-          _entities = game.GetGroup(GameMatcher.Destructed);
+        public GameDestructedSystem() =>
+          _entities = Contexts.sharedInstance.game.GetGroup(GameMatcher.Destructed);
 
         public void Cleanup()
         {

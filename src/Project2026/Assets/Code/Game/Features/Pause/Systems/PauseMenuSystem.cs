@@ -7,9 +7,9 @@ namespace Code.Game.Features.Pause.Systems
     {
         private readonly IGroup<MetaEntity> _pauseMenu;
 
-        public PauseMenuSystem(GameContext gameContext, MetaContext metaContext) : base(gameContext)
+        public PauseMenuSystem() : base(Contexts.sharedInstance.game)
         {
-            _pauseMenu = metaContext.GetGroup(MetaMatcher.PauseMenu);
+            _pauseMenu = Contexts.sharedInstance.meta.GetGroup(MetaMatcher.PauseMenu);
         }
 
         protected override void Execute(List<GameEntity> entities)

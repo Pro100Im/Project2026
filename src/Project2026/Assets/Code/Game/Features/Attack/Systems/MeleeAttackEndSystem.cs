@@ -10,9 +10,9 @@ namespace Code.Game.Features.Attack.Systems
 
         private readonly List<GameEntity> _attacksBuffer = new(86);
 
-        public MeleeAttackEndSystem(GameContext gameContext)
+        public MeleeAttackEndSystem()
         {
-            _attacks = gameContext.GetGroup(GameMatcher
+            _attacks = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.OwnerId,
                     GameMatcher.Cooldown,

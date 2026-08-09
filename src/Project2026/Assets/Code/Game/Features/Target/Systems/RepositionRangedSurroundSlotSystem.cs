@@ -15,11 +15,13 @@ namespace Code.Game.Features.Target.Systems
 
         private readonly List<GameEntity> _buffer = new(128);
 
-        public RepositionRangedSurroundSlotSystem(GameContext context, TargetService targetService)
+        public RepositionRangedSurroundSlotSystem(TargetService targetService)
         {
+            var gameContext = Contexts.sharedInstance.game;
+
             _targetService = targetService;
 
-            _units = context.GetGroup(GameMatcher
+            _units = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.RangeAttack,
                     GameMatcher.SurroundSlot,
@@ -32,7 +34,7 @@ namespace Code.Game.Features.Target.Systems
                     GameMatcher.Dead,
                     GameMatcher.Attacking));
 
-            _maps = context.GetGroup(GameMatcher
+            _maps = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.TilemapMovement,
                     GameMatcher.SurroundField,

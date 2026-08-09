@@ -12,11 +12,11 @@ namespace Code.Game.Common.Destruct.Systems
 
         private readonly List<GameEntity> _entitiesBuffer = new(64);
 
-        public GameDestructedViewSystem(GameContext game, IEntityViewPool pool)
+        public GameDestructedViewSystem(IEntityViewPool pool)
         {
             _pool = pool;
 
-            _entities = game.GetGroup(
+            _entities = Contexts.sharedInstance.game.GetGroup(
               GameMatcher.AllOf(
                 GameMatcher.Destructed,
                 GameMatcher.View));

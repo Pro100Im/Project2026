@@ -10,8 +10,8 @@ namespace Code.Game.Features.Effect.Systems
 
         private readonly List<GameEntity> _entitiesBuffer = new(64);
 
-        public ChillEffectEndSystem(GameContext game) =>
-          _entities = game.GetGroup(GameMatcher
+        public ChillEffectEndSystem() =>
+          _entities = Contexts.sharedInstance.game.GetGroup(GameMatcher
               .AllOf(
                 GameMatcher.TargetId,
                 GameMatcher.Duration,

@@ -15,8 +15,10 @@ namespace Code.Game.Features.Attack.Systems
 
         private readonly List<GameEntity> _attacksBuffer = new(86);
 
-        public AttackStartSystem(GameContext gameContext, TargetService targetService)
+        public AttackStartSystem(TargetService targetService)
         {
+            var gameContext = Contexts.sharedInstance.game;
+
             _targetService = targetService;
 
             _attackers = gameContext.GetGroup(GameMatcher
@@ -112,11 +114,7 @@ namespace Code.Game.Features.Attack.Systems
             }
         }
 
-        private void ResolveAttackFacing(
-            GameEntity attacker,
-            GameEntity target,
-            out AttackDirection attackDirection,
-            out float flipDx)
+        private void ResolveAttackFacing(GameEntity attacker, GameEntity target, out AttackDirection attackDirection, out float flipDx)
         {
             var worldDx = attacker.targetPoint.Value.x - attacker.attackerPoint.Value.x;
             var worldDy = attacker.targetPoint.Value.y - attacker.attackerPoint.Value.y;
@@ -144,7 +142,7 @@ namespace Code.Game.Features.Attack.Systems
             flipDx = dx;
         }
 
-        private static bool IsOnAttackRing(GameEntity attacker, GameEntity target) =>
+        private bool IsOnAttackRing(GameEntity attacker, GameEntity target) =>
             TargetService.IsOnAttackRing(attacker, target);
     }
 }

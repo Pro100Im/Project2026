@@ -7,7 +7,7 @@ namespace Code.Game.Features.Player.Systems
     {
         private readonly ICameraService _cameraService;
 
-        public PlayerCameraInitSystem(GameContext game, ICameraService cameraService)
+        public PlayerCameraInitSystem(ICameraService cameraService)
         {
             _cameraService = cameraService;
         }

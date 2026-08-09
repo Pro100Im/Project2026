@@ -12,8 +12,10 @@ namespace Code.Game.Features.Ability.Systems
         private readonly List<GameEntity> _requestsBuffer = new(8);
         private readonly List<GameEntity> _targetingBuffer = new(2);
 
-        public AbilitySelectSystem(GameContext gameContext)
+        public AbilitySelectSystem()
         {
+            var gameContext = Contexts.sharedInstance.game;
+
             _requests = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.AbilitySelectRequest,

@@ -10,9 +10,9 @@ namespace Code.Game.Features.Spawn.Systems
 
         private readonly List<GameEntity> _buffer = new(124);
 
-        public EnemySpawnSystem(GameContext gameContext)
+        public EnemySpawnSystem()
         {
-            _enemiesToSpawn = gameContext.GetGroup(GameMatcher
+            _enemiesToSpawn = Contexts.sharedInstance.game.GetGroup(GameMatcher
               .AllOf(
               GameMatcher.SpawnRequsted,
               GameMatcher.SpawnPosition,

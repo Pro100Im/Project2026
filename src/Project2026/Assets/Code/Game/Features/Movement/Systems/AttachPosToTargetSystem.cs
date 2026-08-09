@@ -10,9 +10,9 @@ namespace Code.Game.Features.Movement.Systems
 
         private readonly List<GameEntity> _followersBuffer = new(512);
 
-        public AttachPosToTargetSystem(GameContext gameContext)
+        public AttachPosToTargetSystem()
         { 
-            _followers = gameContext.GetGroup(GameMatcher
+            _followers = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Attached,
                     GameMatcher.TargetId,

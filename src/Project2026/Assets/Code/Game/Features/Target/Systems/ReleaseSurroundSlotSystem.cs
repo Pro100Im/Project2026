@@ -13,9 +13,11 @@ namespace Code.Game.Features.Target.Systems
 
         private readonly List<GameEntity> _buffer = new(256);
 
-        public ReleaseSurroundSlotSystem(GameContext context)
+        public ReleaseSurroundSlotSystem()
         {
-            _units = context.GetGroup(GameMatcher
+            var gameContext = Contexts.sharedInstance.game;
+
+            _units = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.SurroundSlot,
                     GameMatcher.SurroundTargetId,
@@ -23,7 +25,7 @@ namespace Code.Game.Features.Target.Systems
                     GameMatcher.Id,
                     GameMatcher.UnitSize));
 
-            _maps = context.GetGroup(GameMatcher
+            _maps = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.SurroundField,
                     GameMatcher.TilemapMovement));
@@ -79,8 +81,6 @@ namespace Code.Game.Features.Target.Systems
                 unit.RemoveSurroundSlot();
                 unit.RemoveSurroundTargetId();
 
-                // Clear combat target only when the surround target is gone / unit died.
-                // Keep TargetId when only the slot was invalid so AssignSurround can reclaim.
                 var releasedTarget = GetGameEntityById.Get(releasedTargetId);
                 var targetGone = releasedTarget == null || releasedTarget.isDead;
 
@@ -94,10 +94,7 @@ namespace Code.Game.Features.Target.Systems
             }
         }
 
-        private static bool IsSlotInAttackRange(
-            GameEntity unit,
-            GameEntity target,
-            Dictionary<Vector3Int, Vector3> tilemap)
+        private static bool IsSlotInAttackRange(GameEntity unit, GameEntity target, Dictionary<Vector3Int, Vector3> tilemap)
         {
             if (!target.hasCurrentCell)
                 return false;
@@ -106,6 +103,7 @@ namespace Code.Game.Features.Target.Systems
             var size = unit.unitSize.Value;
 
             TargetService.GetFootprint(target, out var minX, out var minY, out var maxX, out var maxY);
+
             var ring = TargetService.GetFootprintRing(slot, size, minX, minY, maxX, maxY);
             var maxRing = TargetService.GetSurroundMaxRing(unit.range.Value);
 

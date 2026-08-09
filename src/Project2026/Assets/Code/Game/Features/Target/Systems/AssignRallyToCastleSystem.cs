@@ -11,15 +11,17 @@ namespace Code.Game.Features.Target.Systems
 
         private readonly List<GameEntity> _buffer = new(256);
 
-        public AssignRallyToCastleSystem(GameContext context)
+        public AssignRallyToCastleSystem()
         {
-            _castles = context.GetGroup(GameMatcher
+            var gameContext = Contexts.sharedInstance.game;
+
+            _castles = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.PlayerCastle)
                 .NoneOf(
                     GameMatcher.Dead));
 
-            _idleDefenders = context.GetGroup(GameMatcher
+            _idleDefenders = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Team,
                     GameMatcher.GridMovement,
@@ -31,7 +33,7 @@ namespace Code.Game.Features.Target.Systems
                     GameMatcher.Attacking,
                     GameMatcher.RallyToCastle));
 
-            _rallyingDefenders = context.GetGroup(GameMatcher
+            _rallyingDefenders = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.RallyToCastle));
         }

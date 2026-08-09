@@ -12,15 +12,15 @@ namespace Code.Game.Features.Debaffs.Systems
         private readonly List<GameEntity> _entitiesBuffer = new(512);
         private readonly List<GameEntity> _effectsBuffer = new(256);
 
-        public MoveSlowingDownSystem(GameContext gameContext)
+        public MoveSlowingDownSystem()
         {
-            _effects = gameContext.GetGroup(GameMatcher
+            _effects = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.Id,
                     GameMatcher.MoveSlowingDown,
                     GameMatcher.Effect));
 
-            _entities = gameContext.GetGroup(GameMatcher
+            _entities = Contexts.sharedInstance.game.GetGroup(GameMatcher
                .AllOf(
                    GameMatcher.Id,
                    GameMatcher.MoveSlowingDown,

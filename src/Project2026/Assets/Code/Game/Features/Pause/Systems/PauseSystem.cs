@@ -11,14 +11,15 @@ namespace Code.Game.Features.Pause.Systems
         private readonly ITimeService _timeService;
         private readonly List<GameEntity> _animatorsBuffer = new(512);
 
-        public PauseSystem(InputContext inputContext, GameContext gameContext, ITimeService timeService) : base(inputContext)
+        public PauseSystem(ITimeService timeService) : base(Contexts.sharedInstance.input)
         {
+            var gameContext = Contexts.sharedInstance.game;
+
             _game = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.GameSession));
 
             _animators = gameContext.GetGroup(GameMatcher.Animator);
-
             _timeService = timeService;
         }
 

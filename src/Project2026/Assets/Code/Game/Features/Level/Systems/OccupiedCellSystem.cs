@@ -11,15 +11,17 @@ namespace Code.Game.Features.Level.Systems
 
         private readonly List<GameEntity> _cellsBuffer = new(512);
 
-        public OccupiedCellSystem(GameContext context)
+        public OccupiedCellSystem()
         {
-            _cells = context.GetGroup(GameMatcher
+            var gameContext = Contexts.sharedInstance.game;
+
+            _cells = gameContext.GetGroup(GameMatcher
                 .AllOf(
                 GameMatcher.CurrentCell,
                 GameMatcher.UnitSize,
                 GameMatcher.Id));
 
-            _maps = context.GetGroup(GameMatcher
+            _maps = gameContext.GetGroup(GameMatcher
                 .AllOf(GameMatcher.OccupField));
         }
 

@@ -10,9 +10,9 @@ namespace Code.Game.Features.Effect.Systems
 
         private readonly List<GameEntity> _effectsBuffer = new(64);
 
-        public FreezeEffectEndSystem(GameContext gameContext)
+        public FreezeEffectEndSystem()
         {
-            _effects = gameContext.GetGroup(GameMatcher
+            _effects = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.TargetId,
                     GameMatcher.Duration,
@@ -40,7 +40,7 @@ namespace Code.Game.Features.Effect.Systems
             }
         }
 
-        private static bool HasActiveFreeze(List<GameEntity> effects, GameEntity endingEffect)
+        private bool HasActiveFreeze(List<GameEntity> effects, GameEntity endingEffect)
         {
             for (var i = 0; i < effects.Count; i++)
             {

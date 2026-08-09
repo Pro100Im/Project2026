@@ -1,4 +1,3 @@
-using Code.Infrastructure.View;
 using Code.Infrastructure.View.Pool;
 using Entitas;
 using System.Collections.Generic;
@@ -12,11 +11,11 @@ namespace Code.Infrastructure.View.Systems
         private readonly IGroup<GameEntity> _entities;
         private readonly List<GameEntity> _buffer = new(32);
 
-        public CreateEntityViewFromPrefabSystem(GameContext game, IEntityViewPool pool)
+        public CreateEntityViewFromPrefabSystem(IEntityViewPool pool)
         {
             _pool = pool;
 
-            _entities = game.GetGroup(GameMatcher
+            _entities = Contexts.sharedInstance.game.GetGroup(GameMatcher
               .AllOf
               (GameMatcher.ViewPrefab,
                GameMatcher.SpawnPosition)

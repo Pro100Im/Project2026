@@ -16,10 +16,10 @@ namespace Code.Infrastructure.DI.EntryPoints
 
         private GameTickFeature _gameTickFeature;
 
-        public GameWorld(TransitionScreen transitionScreen, ISystemFactory systems, GameContext gameContext)
+        public GameWorld(TransitionScreen transitionScreen, ISystemFactory systems)
         {
             _systems = systems;
-            _gameContext = gameContext;
+            _gameContext = Contexts.sharedInstance.game;
             _transitionScreen = transitionScreen;
         }
 
@@ -52,6 +52,12 @@ namespace Code.Infrastructure.DI.EntryPoints
             //_gameTickFeature.ClearReactiveSystems();
 
             //foreach (GameEntity entity in _gameContext.GetEntities())
+            //    entity.isDestructed = true;
+
+            //foreach (MetaEntity entity in Contexts.sharedInstance.meta.GetEntities())
+            //    entity.isDestructed = true;
+
+            //foreach (InputEntity entity in Contexts.sharedInstance.input.GetEntities())
             //    entity.isDestructed = true;
 
             //_gameTickFeature.Cleanup();

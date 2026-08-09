@@ -13,20 +13,17 @@ namespace Code.Game.Features.Ability.Systems
         private readonly List<GameEntity> _targetingBuffer = new(2);
         private readonly List<InputEntity> _pointersBuffer = new(1);
 
-        public AbilityTargetingPreviewSystem(
-            GameContext gameContext,
-            MetaContext metaContext,
-            InputContext inputContext)
+        public AbilityTargetingPreviewSystem()
         {
-            _targeting = gameContext.GetGroup(GameMatcher
+            _targeting = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.AbilityTargeting,
                     GameMatcher.AbilityRadius)
                 .NoneOf(GameMatcher.Destructed));
 
-            _rangeViews = metaContext.GetGroup(MetaMatcher.UnitRangeView);
+            _rangeViews = Contexts.sharedInstance.meta.GetGroup(MetaMatcher.UnitRangeView);
 
-            _pointers = inputContext.GetGroup(InputMatcher
+            _pointers = Contexts.sharedInstance.input.GetGroup(InputMatcher
                 .AllOf(
                     InputMatcher.PointerState,
                     InputMatcher.WorldPointerInput)

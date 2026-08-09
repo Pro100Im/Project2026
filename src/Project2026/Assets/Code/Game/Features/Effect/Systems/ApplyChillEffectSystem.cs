@@ -10,9 +10,9 @@ namespace Code.Game.Features.Effect.Systems
 
         private readonly List<GameEntity> _effectRequestsBuffer = new(124);
 
-        public ApplyChillEffectSystem(GameContext gameContext)
+        public ApplyChillEffectSystem()
         {
-            _effectRequests = gameContext.GetGroup(GameMatcher
+            _effectRequests = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.OwnerId,
                     GameMatcher.TargetId,

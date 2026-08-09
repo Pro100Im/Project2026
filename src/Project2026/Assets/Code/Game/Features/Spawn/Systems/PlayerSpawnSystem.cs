@@ -10,9 +10,9 @@ namespace Code.Game.Features.Spawn.Systems
 
         private readonly List<GameEntity> _buffer = new(124);
 
-        public PlayerSpawnSystem(GameContext gameContext)
+        public PlayerSpawnSystem()
         {
-            _unitsToSpawn = gameContext.GetGroup(GameMatcher
+            _unitsToSpawn = Contexts.sharedInstance.game.GetGroup(GameMatcher
               .AllOf(
               GameMatcher.SpawnRequsted,
               GameMatcher.SpawnPosition,

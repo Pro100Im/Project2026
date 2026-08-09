@@ -7,7 +7,6 @@ namespace Code.Game.Features.Attack
     {
         public AttackFeature(ISystemFactory systemFactory)
         {
-            // Aim after Movement — position is already up to date
             Add(systemFactory.Create<UpdateCombatAimSystem>());
             Add(systemFactory.Create<AttackStartSystem>());
             Add(systemFactory.Create<MeleeAttackEndSystem>());

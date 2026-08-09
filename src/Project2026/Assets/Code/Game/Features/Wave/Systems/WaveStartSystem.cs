@@ -13,8 +13,10 @@ namespace Code.Game.Features.Wave.Systems
         private readonly List<GameEntity> _waveRequestsBuffer = new(16);
         private readonly List<GameEntity> _waveBuffer = new(16);
 
-        public WaveStartSystem(GameContext gameContext, WavesConfig wavesConfig)
+        public WaveStartSystem(WavesConfig wavesConfig)
         {
+            var gameContext = Contexts.sharedInstance.game;
+
             _wavesConfig = wavesConfig;
 
             _waves = gameContext.GetGroup(GameMatcher

@@ -9,8 +9,8 @@ namespace Code.Game.Input.Systems
 
         private readonly List<InputEntity> _buffer = new(16);
 
-        public TearDownInputDestructedSystem(InputContext inputContext) =>
-          _entities = inputContext.GetGroup(InputMatcher.Input);
+        public TearDownInputDestructedSystem() =>
+          _entities = Contexts.sharedInstance.input.GetGroup(InputMatcher.Input);
 
         public void TearDown()
         {

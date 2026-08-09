@@ -10,9 +10,9 @@ namespace Code.Game.Features.Death.Systems
 
         private readonly List<GameEntity> _deathsBuffer = new(86);
 
-        public DeathSystem(GameContext gameContext)
+        public DeathSystem()
         {
-            _deaths = gameContext.GetGroup(GameMatcher.CurrentHealth);
+            _deaths = Contexts.sharedInstance.game.GetGroup(GameMatcher.CurrentHealth);
         }
 
         public void Execute()
