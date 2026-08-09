@@ -1,5 +1,8 @@
 using Code.Game.Common.Entity;
 using Code.Game.Common.UI;
+using Code.Game.Common.UI.Transition;
+using Code.Infrastructure.Loading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
@@ -8,8 +11,12 @@ namespace Code.Meta.Features.Game
 {
     public class PauseMenu : MonoBehaviour
     {
+        [SerializeField] private string _menuSceneName = "HomeScreen";
+
         private GameScreen _gameScreen;
         private UIService _uIService;
+        private TransitionScreen _transitionScreen;
+        private ISceneLoader _sceneLoader;
 
         private VisualElement _pauseMenu;
         private Image _mask;
@@ -18,10 +25,12 @@ namespace Code.Meta.Features.Game
         private Button _exitButton;
 
         [Inject]
-        public void Construct(UIService uIService, GameScreen gameScreen)
+        public void Construct(UIService uIService, GameScreen gameScreen, ISceneLoader sceneLoader, TransitionScreen transitionScreen)
         {
             _gameScreen = gameScreen;
             _uIService = uIService;
+            _transitionScreen = transitionScreen;
+            _sceneLoader = sceneLoader;
         }
 
         private void Start()
@@ -44,7 +53,23 @@ namespace Code.Meta.Features.Game
 
         public void Exit()
         {
+            ExitAsync().Forget();
+        }
 
+        private async UniTaskVoid ExitAsync()
+        {
+            await _transitionScreen.Show();
+
+            try
+            {
+                Contexts.sharedInstance.Reset();
+            }
+            catch (System.Exception e)
+            {
+                UnityEngine.Debug.LogWarning($"Contexts reset failed: {e.Message}");
+            }
+
+            _sceneLoader.Load(_menuSceneName);
         }
 
         public void CloseMenu()
@@ -54,6 +79,7 @@ namespace Code.Meta.Features.Game
             _pauseMenu.pickingMode = PickingMode.Ignore;
             _mask.pickingMode = PickingMode.Ignore;
             _cancelButton.pickingMode = PickingMode.Ignore;
+            _exitButton.pickingMode = PickingMode.Ignore;
         }
 
         public void OpenMenu()
@@ -63,12 +89,15 @@ namespace Code.Meta.Features.Game
             _pauseMenu.pickingMode = PickingMode.Position;
             _mask.pickingMode = PickingMode.Position;
             _cancelButton.pickingMode = PickingMode.Position;
+            _exitButton.pickingMode = PickingMode.Position;
         }
 
         private void OnDestroy()
         {
-            //_cancelButton.clickable.clicked -= PauseRequest;
-            //_exitButton.clickable.clicked -= Exit;
+            if (_cancelButton != null)
+                _cancelButton.clickable.clicked -= PauseRequest;
+            if (_exitButton != null)
+                _exitButton.clickable.clicked -= Exit;
         }
     }
 }

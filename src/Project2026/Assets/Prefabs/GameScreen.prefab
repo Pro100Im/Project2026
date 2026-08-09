@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87078ab9a8d341c469e2da046a0f4e4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Meta.Features.Game.PauseMenu
+  _menuSceneName: HomeScreen
 --- !u!114 &5445658559376367452
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@
                 <ui:Button text="TOWN" name="ArcherTower" picking-mode="Ignore" class="button commonText" style="margin-left: 25px;">
                     <ui:Image name="Icon" picking-mode="Ignore" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/Buildings/Black%20Buildings/House2.png?fileID=2800000&amp;guid=8185e5dbd071dc346a9f05a69c7f2437&amp;type=3#House2&quot;); -unity-background-scale-mode: scale-to-fit; margin-bottom: 22px; left: 0; width: 100px; margin-left: 74px; margin-top: 19px;"/>
                 </ui:Button>
-                <ui:Button text="EXIT" name="ArcherTower" picking-mode="Ignore" class="button commonText" style="margin-left: 25px;">
+                <ui:Button text="EXIT" name="ExitButton" picking-mode="Ignore" class="button commonText" style="margin-left: 25px;">
                     <ui:Image name="Icon" picking-mode="Ignore" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Icons/Icon_08.png?fileID=2800000&amp;guid=eb11edec265f9eb42b9fee820381fede&amp;type=3#Icon_08&quot;); -unity-background-scale-mode: scale-to-fit; margin-bottom: 22px; left: 0; width: 100px; margin-left: 74px; margin-top: 19px;"/>
                 </ui:Button>
             </ui:VisualElement>
