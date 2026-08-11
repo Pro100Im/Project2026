@@ -218,14 +218,21 @@ namespace Code.Meta.Features.Game
 
         private void OnDestroy()
         {
-            _archerTowerButton.clickable.clicked -= CreateArcherTower;
-            _iceTowerButton.clickable.clicked -= CreateIceTower;
-            _fireTowerButton.clickable.clicked -= CreateFireTower;
-            _towerBuildsCloseButton.clickable.clicked -= CloseAndDeselectRequest;
+            if (_archerTowerButton != null)
+                _archerTowerButton.clickable.clicked -= CreateArcherTower;
+            if (_iceTowerButton != null)
+                _iceTowerButton.clickable.clicked -= CreateIceTower;
+            if (_fireTowerButton != null)
+                _fireTowerButton.clickable.clicked -= CreateFireTower;
+            if (_towerBuildsCloseButton != null)
+                _towerBuildsCloseButton.clickable.clicked -= CloseAndDeselectRequest;
 
-            _towerUpgrade1Button.clickable.clicked -= UpgradeTower1;
-            _towerUpgrade2Button.clickable.clicked -= UpgradeTower2;
-            _towerUpgradesCloseButton.clickable.clicked -= CloseAndDeselectRequest;
+            if (_towerUpgrade1Button != null)
+                _towerUpgrade1Button.clickable.clicked -= UpgradeTower1;
+            if (_towerUpgrade2Button != null)
+                _towerUpgrade2Button.clickable.clicked -= UpgradeTower2;
+            if (_towerUpgradesCloseButton != null)
+                _towerUpgradesCloseButton.clickable.clicked -= CloseAndDeselectRequest;
         }
     }
 }

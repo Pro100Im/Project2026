@@ -59,12 +59,6 @@ namespace Code.Meta.Features.Game
         private async UniTaskVoid ExitAsync()
         {
             await _transitionScreen.Show();
-
-            //foreach (var entity in Contexts.sharedInstance.game.GetEntities())
-            //{
-            //    entity.isDestructed = true;
-            //}
-
             _sceneLoader.Load(_menuSceneName);
         }
 

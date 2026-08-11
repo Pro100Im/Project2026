@@ -56,8 +56,10 @@ namespace Code.Meta.Features.Game
 
         private void OnDestroy()
         {
-            _firstUnitSlotButton.clickable.clicked -= SpawnFirstSlotUnit;
-            _secondUnitSlotButton.clickable.clicked -= SpawnSecondSlotUnit;
+            if (_firstUnitSlotButton != null)
+                _firstUnitSlotButton.clickable.clicked -= SpawnFirstSlotUnit;
+            if (_secondUnitSlotButton != null)
+                _secondUnitSlotButton.clickable.clicked -= SpawnSecondSlotUnit;
         }
     }
 }

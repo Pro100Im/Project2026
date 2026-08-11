@@ -32,7 +32,10 @@ namespace Code.Game.Features.Spawn.Registrars
 
         public override void UnregisterComponents()
         {
-            Entity.RemoveAllComponents();
+            if (Entity.hasSpawnMap)
+                Entity.RemoveSpawnMap();
+
+            Entity.isPlayer = false;
         }
     }
 }

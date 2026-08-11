@@ -7,5 +7,6 @@ namespace Code.Infrastructure.View.Pool
     {
         EntityBehaviour Get(EntityBehaviour prefab, Vector3 position, Quaternion rotation);
         void Release(EntityBehaviour view);
+        void Clear();
     }
 }

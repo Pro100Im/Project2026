@@ -17,10 +17,14 @@ namespace Code.Game.Features.Exchequer.Registrars
 
         public override void UnregisterComponents()
         {
-            Entity.RemoveGameExchequer();
-            Entity.RemoveExchequerMealCapacity();
-            Entity.RemoveExchequerManaCapacity();
-            Entity.RemoveExchequerGoldCapacity();
+            if (Entity.hasGameExchequer)
+                Entity.RemoveGameExchequer();
+            if (Entity.hasExchequerMealCapacity)
+                Entity.RemoveExchequerMealCapacity();
+            if (Entity.hasExchequerManaCapacity)
+                Entity.RemoveExchequerManaCapacity();
+            if (Entity.hasExchequerGoldCapacity)
+                Entity.RemoveExchequerGoldCapacity();
         }
     }
 }

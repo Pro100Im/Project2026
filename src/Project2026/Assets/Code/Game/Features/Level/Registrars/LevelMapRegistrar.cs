@@ -49,18 +49,31 @@ namespace Code.Game.Features.Level.Registrars
 
         public override void UnregisterComponents()
         {
-            Entity.RemoveTilemapMovement();
-            Entity.RemoveFlowFields();
-            Entity.RemoveTargetFlow();
-            Entity.RemoveIntegrationFields();
-            Entity.RemoveDefenseFlowFields();
-            Entity.RemoveDefenseFlow();
-            Entity.RemoveDefenseIntegrationFields();
-            Entity.RemoveOccupField();
-            Entity.RemoveReservedField();
-            Entity.RemoveSpawnReservedField();
-            Entity.RemoveSpatialHash();
-            Entity.RemoveSurroundField();
+            if (Entity.hasTilemapMovement)
+                Entity.RemoveTilemapMovement();
+            if (Entity.hasFlowFields)
+                Entity.RemoveFlowFields();
+            if (Entity.hasTargetFlow)
+                Entity.RemoveTargetFlow();
+            if (Entity.hasIntegrationFields)
+                Entity.RemoveIntegrationFields();
+            if (Entity.hasDefenseFlowFields)
+                Entity.RemoveDefenseFlowFields();
+            if (Entity.hasDefenseFlow)
+                Entity.RemoveDefenseFlow();
+            if (Entity.hasDefenseIntegrationFields)
+                Entity.RemoveDefenseIntegrationFields();
+            if (Entity.hasOccupField)
+                Entity.RemoveOccupField();
+            if (Entity.hasReservedField)
+                Entity.RemoveReservedField();
+            if (Entity.hasSpawnReservedField)
+                Entity.RemoveSpawnReservedField();
+            if (Entity.hasSpatialHash)
+                Entity.RemoveSpatialHash();
+            if (Entity.hasSurroundField)
+                Entity.RemoveSurroundField();
+
             Entity.isFlowFieldDirty = false;
         }
 

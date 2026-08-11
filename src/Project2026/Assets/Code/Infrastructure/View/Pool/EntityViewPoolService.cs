@@ -11,7 +11,7 @@ namespace Code.Infrastructure.View.Pool
         private const int DefaultCapacity = 16;
         private const int MaxSize = 200;
 
-        private readonly Transform _root;
+        private Transform _root;
         private readonly Dictionary<EntityBehaviour, ObjectPool<EntityBehaviour>> _pools = new(32);
         private readonly Dictionary<EntityBehaviour, EntityBehaviour> _instanceToPrefab = new(128);
 
@@ -37,6 +37,21 @@ namespace Code.Infrastructure.View.Pool
             }
 
             GetOrCreatePool(prefab).Release(view);
+        }
+
+        public void Clear()
+        {
+            // Scene unload may already destroy pooled GOs; skip pool.Clear() to avoid
+            // MissingReferenceException in actionOnDestroy. Destroying the root is enough.
+            _pools.Clear();
+            _instanceToPrefab.Clear();
+
+            if (_root != null)
+            {
+                if (_root)
+                    Object.Destroy(_root.gameObject);
+                _root = null;
+            }
         }
 
         private ObjectPool<EntityBehaviour> GetOrCreatePool(EntityBehaviour prefab)
@@ -87,7 +102,8 @@ namespace Code.Infrastructure.View.Pool
         private void OnDestroy(EntityBehaviour view)
         {
             _instanceToPrefab.Remove(view);
-            Object.Destroy(view.gameObject);
+            if (view != null)
+                Object.Destroy(view.gameObject);
         }
     }
 }

@@ -22,12 +22,25 @@ namespace Code.Infrastructure.View
 
         public void ReleaseEntity()
         {
-            foreach (IEntityComponentRegistrar registrar in GetComponentsInChildren<IEntityComponentRegistrar>())
-                registrar.UnregisterComponents();
+            if (_entity == null)
+                return;
 
-            OnEntityReleased(_entity);
-            _entity.Release(this);
-            _entity = null;
+            var entity = _entity;
+            try
+            {
+                if (entity.isEnabled)
+                {
+                    foreach (IEntityComponentRegistrar registrar in GetComponentsInChildren<IEntityComponentRegistrar>())
+                        registrar.UnregisterComponents();
+                }
+
+                OnEntityReleased(entity);
+            }
+            finally
+            {
+                entity.Release(this);
+                _entity = null;
+            }
         }
 
         private void OnDestroy()

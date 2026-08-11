@@ -21,8 +21,10 @@ namespace Code.Game.Features.Player.Registrars
 
         public override void UnregisterComponents()
         {
-            Entity.RemoveCurrentCell();
-            Entity.RemoveUnitSize();
+            if (Entity.hasCurrentCell)
+                Entity.RemoveCurrentCell();
+            if (Entity.hasUnitSize)
+                Entity.RemoveUnitSize();
         }
 
         private void OnDrawGizmosSelected()

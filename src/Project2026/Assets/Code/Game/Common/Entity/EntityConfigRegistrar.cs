@@ -16,7 +16,6 @@ namespace Code.Game.Common.Entity
 
         public override void UnregisterComponents()
         {
-            Entity.RemoveAllComponents();
         }
     }
 }
