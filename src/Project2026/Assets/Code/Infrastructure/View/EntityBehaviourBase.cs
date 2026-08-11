@@ -30,6 +30,12 @@ namespace Code.Infrastructure.View
             _entity = null;
         }
 
+        private void OnDestroy()
+        {
+            if (_entity != null)
+                ReleaseEntity();
+        }
+
         protected virtual void OnEntityBound(TEntity entity) { }
 
         protected virtual void OnEntityReleased(TEntity entity) { }

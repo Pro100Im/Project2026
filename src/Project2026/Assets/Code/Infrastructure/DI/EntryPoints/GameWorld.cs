@@ -4,11 +4,7 @@ using Code.Game.Features;
 using Code.Game.Features.Input;
 using Code.Infrastructure.Systems;
 using Cysharp.Threading.Tasks;
-using Entitas;
-using Entitas.Unity;
 using System;
-using UnityEngine;
-using UnityEngine.Rendering.VirtualTexturing;
 using VContainer.Unity;
 
 namespace Code.Infrastructure.DI.EntryPoints
