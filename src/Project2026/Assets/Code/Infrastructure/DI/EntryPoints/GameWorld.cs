@@ -107,9 +107,7 @@ namespace Code.Infrastructure.DI.EntryPoints
                 entity.view.Value.ReleaseEntity();
             }
 
-            var metaViews = UnityEngine.Object.FindObjectsByType<MetaEntityBehaviour>(
-                FindObjectsInactive.Include,
-                FindObjectsSortMode.None);
+            var metaViews = UnityEngine.Object.FindObjectsByType<MetaEntityBehaviour>(FindObjectsInactive.Include);
 
             for (var i = 0; i < metaViews.Length; i++)
             {
