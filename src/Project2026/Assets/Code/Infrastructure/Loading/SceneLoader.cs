@@ -1,6 +1,6 @@
-﻿using Code.Infrastructure.Helpers;
+﻿using Cysharp.Threading.Tasks;
 using System;
-using System.Collections;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,31 +8,33 @@ namespace Code.Infrastructure.Loading
 {
     public class SceneLoader : ISceneLoader
     {
-        private readonly ICoroutineRunner _coroutineRunner;
-
-        public SceneLoader(ICoroutineRunner coroutineRunner)
+        public async UniTask Load(string nextScene, LoadSceneMode mode = LoadSceneMode.Single, CancellationToken token = default)
         {
-            _coroutineRunner = coroutineRunner;
+            var scene = SceneManager.GetSceneByName(nextScene);
+
+            if (scene.IsValid() && scene.isLoaded) 
+                return;
+
+            try
+            {
+                await SceneManager.LoadSceneAsync(nextScene, mode).ToUniTask(cancellationToken: token);
+            }
+            catch (OperationCanceledException)
+            {
+                await SceneManager.UnloadSceneAsync(nextScene);
+
+                throw;
+            }
         }
 
-        public void Load(string name, Action onLoaded = null) =>
-          _coroutineRunner.StartCoroutine(LoadCorountine(name, onLoaded));
-
-        private IEnumerator LoadCorountine(string nextScene, Action onLoaded)
+        public async UniTask UnLoad(string sceneName)
         {
-            if (SceneManager.GetActiveScene().name == nextScene)
-            {
-                onLoaded?.Invoke();
+            var scene = SceneManager.GetSceneByName(sceneName);
 
-                yield break;
-            }
+            if (!scene.IsValid() || !scene.isLoaded) 
+                return;
 
-            AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(nextScene);
-
-            while (!waitNextScene.isDone)
-                yield return null;
-
-            onLoaded?.Invoke();
+            await SceneManager.UnloadSceneAsync(sceneName);
         }
     }
 }

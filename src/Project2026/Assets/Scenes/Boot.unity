@@ -153,6 +153,7 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   _homeScreenSceneName: HomeScreen
+  _townSceneName: Town
 --- !u!4 &969482028
 Transform:
   m_ObjectHideFlags: 0

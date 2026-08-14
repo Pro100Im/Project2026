@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/HomeScreen.unity
     guid: 833c547607792a64ab44757ace28c1e8
   - enabled: 1
+    path: Assets/Scenes/Town.unity
+    guid: a70098d5f1326664591ed5c9404be163
+  - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:

@@ -4,6 +4,7 @@ using Code.Game.Common.UI.Transition;
 using Code.Infrastructure.Loading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using VContainer;
 
@@ -12,6 +13,7 @@ namespace Code.Meta.Features.Game
     public class PauseMenu : MonoBehaviour
     {
         [SerializeField] private string _menuSceneName = "HomeScreen";
+        [SerializeField] private string _gameSceneName = "Game";
 
         private GameScreen _gameScreen;
         private UIService _uIService;
@@ -59,7 +61,9 @@ namespace Code.Meta.Features.Game
         private async UniTaskVoid ExitAsync()
         {
             await _transitionScreen.Show();
-            _sceneLoader.Load(_menuSceneName);
+            await _sceneLoader.Load(_menuSceneName, LoadSceneMode.Additive); 
+
+            _sceneLoader.UnLoad(_gameSceneName).Forget();
         }
 
         public void CloseMenu()

@@ -2,6 +2,7 @@ using Code.Game.Common.Random;
 using Code.Game.Common.Time;
 using Code.Game.Common.UI;
 using Code.Infrastructure.AssetManagement;
+using Code.Infrastructure.DI.EntryPoints;
 using Code.Infrastructure.Helpers;
 using Code.Infrastructure.Loading;
 using UnityEngine;
@@ -13,6 +14,9 @@ namespace Code.Infrastructure.DI.LifetimeScopes
     public class GlobalScope : LifetimeScope
     {
         [SerializeField] private CoroutineRunner _coroutineRunner;
+        [Space]
+        [SerializeField] private GameObject _eventSystem;
+        [SerializeField] private GameObject _audioListener;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -20,6 +24,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             BindAssetManagementServices(builder);
 
             builder.RegisterComponentInNewPrefab(_coroutineRunner, Lifetime.Singleton).DontDestroyOnLoad().AsImplementedInterfaces();
+            builder.RegisterEntryPoint<GlobalWorld>().WithParameter("eventSystem", _eventSystem).WithParameter("audioListener", _audioListener);
         }
 
         private void BindCommonServices(IContainerBuilder builder)

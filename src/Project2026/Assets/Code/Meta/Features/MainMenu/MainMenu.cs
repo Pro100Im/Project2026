@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using VContainer;
 
@@ -13,6 +14,7 @@ namespace Code.Meta.UI.MainMenu
     public class MainMenu : MonoBehaviour
     {
         [SerializeField] private string _gameSceneName = "Game";
+        [SerializeField] private string _homeScreenSceneName = "HomeScreen";
         [Space]
         [SerializeField] private UIDocument _mainMenuDoc;
         [Space]
@@ -80,8 +82,9 @@ namespace Code.Meta.UI.MainMenu
         private async void EnterNetworkBattleLoadingState()
         {
             await _transitionScreen.Show();
-
-            _sceneLoader.Load(_gameSceneName);       
+            await _sceneLoader.Load(_gameSceneName, LoadSceneMode.Additive);   
+            
+            _sceneLoader.UnLoad(_homeScreenSceneName).Forget();
         }
 
         private void Exit()
