@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0e0a06d15a9718e4694b48a80abdea7a
+guid: 36cee26bbdd6e6746aa90b0156e66029
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5002096206624228670
-    second: Barracks_0
+      213: -550340798497380053
+    second: Gemini_Generated_Image_ex0dw2ex0dw2ex0d (5)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Barracks_0
+      name: Gemini_Generated_Image_ex0dw2ex0dw2ex0d (5)_0
       rect:
         serializedVersion: 2
         x: 3
-        y: 10
-        width: 186
-        height: 189
+        y: 5
+        width: 314
+        height: 211
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e358a286ff30b6540800000000000000
-      internalID: 5002096206624228670
+      spriteID: b29a828a5fbcc58f0800000000000000
+      internalID: -550340798497380053
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Barracks_0: 5002096206624228670
+      Gemini_Generated_Image_ex0dw2ex0dw2ex0d (5)_0: -550340798497380053
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
