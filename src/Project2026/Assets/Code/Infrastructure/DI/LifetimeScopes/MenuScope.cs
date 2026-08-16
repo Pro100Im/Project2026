@@ -13,7 +13,6 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterComponentInHierarchy<TransitionScreen>();
             builder.RegisterEntryPoint<MenuWorld>().WithParameter(_sceneParameter, _gameScreenSceneName);
         }
     }

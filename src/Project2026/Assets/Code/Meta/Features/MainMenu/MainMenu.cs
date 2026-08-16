@@ -15,17 +15,19 @@ namespace Code.Meta.UI.MainMenu
     {
         [SerializeField] private string _gameSceneName = "Game";
         [SerializeField] private string _homeScreenSceneName = "HomeScreen";
+        [SerializeField] private string _townSceneName = "Town";
         [Space]
         [SerializeField] private UIDocument _mainMenuDoc;
         [Space]
         [SerializeField] private InputActionMap _pressAnyBtn;
 
+        private VisualElement _canvas;
         private VisualElement _mainMenu;
         private VisualElement _intro;
 
         private Button _quickMatchButton;
         private Button _exitButton;
-        private Button _cancelSearchingButton;
+        private Button _townButton;
 
         private ISceneLoader _sceneLoader;
         private TransitionScreen _transitionScreen;
@@ -45,18 +47,42 @@ namespace Code.Meta.UI.MainMenu
         {
             var root = _mainMenuDoc.rootVisualElement;
 
+            _canvas = root.Q<VisualElement>("Canvas");
+
             _intro = root.Q<VisualElement>("Intro");
 
             _mainMenu = root.Q<VisualElement>("MainMenu");
 
             _quickMatchButton = root.Q<Button>("QuickPlayButton");
-            _quickMatchButton.clickable.clicked += EnterNetworkBattleLoadingState;
+            _quickMatchButton.clickable.clicked += StartGame;
+
+            _townButton = root.Q<Button>("TownButton");
+            _townButton.clickable.clicked += EnterTown;
 
             _exitButton = root.Q<Button>("ExitButton");
             _exitButton.clickable.clicked += Exit;
 
             _pressAnyBtn.actionTriggered += OnAnyButtonPress;
             _pressAnyBtn.Enable();
+        }
+
+        private async void EnterTown()
+        {
+            await _transitionScreen.Show();
+
+            try
+            {
+                var townScene = SceneManager.GetSceneByName(_townSceneName);
+
+                if (townScene.IsValid())
+                    SceneManager.SetActiveScene(townScene);
+
+                await _uIService.Hide(_canvas);
+            }
+            finally
+            {
+                await _transitionScreen.Hide();
+            }
         }
 
         private void Start()
@@ -75,11 +101,12 @@ namespace Code.Meta.UI.MainMenu
                 _uIService.Show(_mainMenu).AsTask();
 
                 _quickMatchButton.pickingMode = PickingMode.Position;
+                _townButton.pickingMode = PickingMode.Position;
                 _exitButton.pickingMode = PickingMode.Position;
             }
         }
 
-        private async void EnterNetworkBattleLoadingState()
+        private async void StartGame()
         {
             await _transitionScreen.Show();
             await _sceneLoader.Load(_gameSceneName, LoadSceneMode.Additive);   
@@ -89,12 +116,13 @@ namespace Code.Meta.UI.MainMenu
 
         private void Exit()
         {
-
+            Application.Quit();
         }
 
         private void OnDestroy()
         {
-            _quickMatchButton.clickable.clicked -= EnterNetworkBattleLoadingState;
+            _quickMatchButton.clickable.clicked -= StartGame;
+            _townButton.clickable.clicked -= EnterTown;
             _exitButton.clickable.clicked -= Exit;
         }
     }

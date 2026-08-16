@@ -5,6 +5,7 @@
         <ui:VisualElement name="MainMenu" picking-mode="Ignore" class="hide" style="flex-grow: 0; width: 800px; height: 800px; align-items: center; justify-content: flex-start; align-content: auto; align-self: center; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px; position: absolute; top: auto; left: auto; right: auto; bottom: auto; transition-property: opacity; transition-duration: 0.3s;">
             <ui:VisualElement name="ButtonContainer" picking-mode="Ignore" style="flex-grow: 1; align-self: stretch; align-items: center; justify-content: center; padding-top: 70px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px; margin-top: 0; margin-bottom: 0; align-content: auto; margin-right: 0; margin-left: 0;">
                 <ui:Button text="QuickPlay" name="QuickPlayButton" picking-mode="Ignore" class="margin commonText button" style="top: 50px;"/>
+                <ui:Button text="Town" name="TownButton" picking-mode="Ignore" class="margin commonText button" style="top: 50px;"/>
                 <ui:Button text="Exit" name="ExitButton" picking-mode="Ignore" class="margin commonText button" style="top: 50px;"/>
             </ui:VisualElement>
         </ui:VisualElement>

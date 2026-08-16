@@ -49,5 +49,6 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   _coroutineRunner: {fileID: 9176870911400713054, guid: 6ceb5b09c7c4c924fa39aa33e8357284, type: 3}
+  _transitionScreen: {fileID: 4370996338199513842, guid: 1d05d44f752e975419a15430415307f3, type: 3}
   _eventSystem: {fileID: 4958062613359279666, guid: 93104f96f9a74f44b8ebca197f442469, type: 3}
   _audioListener: {fileID: 935637804072450249, guid: 8aaf33fa826d9324b8f44e1592a4ce38, type: 3}

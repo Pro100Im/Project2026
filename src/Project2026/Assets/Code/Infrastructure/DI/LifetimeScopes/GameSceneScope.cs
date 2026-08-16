@@ -2,7 +2,6 @@ using Assets.Code.Game.Features.Debaffs.Systems;
 using Code.Game.Common.Cameras;
 using Code.Game.Common.Destruct;
 using Code.Game.Common.Destruct.Systems;
-using Code.Game.Common.UI.Transition;
 using Code.Game.Features;
 using Code.Game.Features.Ability;
 using Code.Game.Features.Ability.Systems;
@@ -95,9 +94,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<IEntityViewPool, EntityViewPoolService>(Lifetime.Singleton);
             builder.Register<TargetService>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<ICameraService>().AsImplementedInterfaces().AsSelf();
-            builder.RegisterComponentInHierarchy<TransitionScreen>();
             builder.RegisterComponentInHierarchy<GameScreen>();
-            builder.RegisterComponentInHierarchy<Game.Features.Target.Services.UnitRangeView>();
+            builder.RegisterComponentInHierarchy<UnitRangeView>();
         }
 
         private void BindStateMachine(IContainerBuilder builder)
