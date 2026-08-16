@@ -15,6 +15,7 @@ namespace Code.Game.Features.Animator.Systems
                     GameMatcher.PlayerCastle));
         }
 
+        // TO DO
         public void Execute()
         {
             var castle = _castles.GetSingleEntity();
@@ -24,6 +25,9 @@ namespace Code.Game.Features.Animator.Systems
 
             var animator = castle.animator.Value;
             var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+            if (!castle.isDead && castle.currentHealth.Value <= castle.maxHealth.Value/2 && !stateInfo.IsName("CastleDamaged"))
+                animator.Play("CastleDamaged");
 
             if (castle.isDead && !stateInfo.IsName("CastleDestroy"))
                 animator.Play("CastleDestroy");
