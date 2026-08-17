@@ -83,4 +83,4 @@ MonoBehaviour:
       type: {class: SpriteProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <_sprite>k__BackingField: {fileID: 7316229441688303391, guid: 8bd8ba6cad2c52f4bb13dcc59e396c1c, type: 3}
+        <_sprite>k__BackingField: {fileID: 21300000, guid: 8bd8ba6cad2c52f4bb13dcc59e396c1c, type: 3}
