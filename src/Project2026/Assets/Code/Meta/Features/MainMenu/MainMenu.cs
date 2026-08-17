@@ -66,28 +66,39 @@ namespace Code.Meta.UI.MainMenu
             _pressAnyBtn.Enable();
         }
 
+        private void Start()
+        {
+            SceneManager.activeSceneChanged += OnActiveSceneChanged;
+
+            _transitionScreen.Hide().Forget();
+        }
+
+        private void OnActiveSceneChanged(Scene arg0, Scene arg1)
+        {
+            if (!SceneManager.GetActiveScene().name.Equals(_homeScreenSceneName))
+                return;
+
+            _uIService.Show(_canvas).Forget();
+            _transitionScreen.Hide().Forget();
+        }
+
         private async void EnterTown()
         {
             await _transitionScreen.Show();
 
             try
             {
+                await _uIService.Hide(_canvas);
+
                 var townScene = SceneManager.GetSceneByName(_townSceneName);
 
                 if (townScene.IsValid())
                     SceneManager.SetActiveScene(townScene);
-
-                await _uIService.Hide(_canvas);
             }
-            finally
+            catch
             {
-                await _transitionScreen.Hide();
-            }
-        }
 
-        private void Start()
-        {
-            _transitionScreen.Hide().AsTask();
+            }
         }
 
         private void OnAnyButtonPress(InputAction.CallbackContext context)
@@ -109,7 +120,7 @@ namespace Code.Meta.UI.MainMenu
         private async void StartGame()
         {
             await _transitionScreen.Show();
-            await _sceneLoader.Load(_gameSceneName, LoadSceneMode.Additive);   
+            await _sceneLoader.Load(_gameSceneName, LoadSceneMode.Additive, default, true);   
             
             _sceneLoader.UnLoad(_homeScreenSceneName).Forget();
         }
@@ -124,6 +135,8 @@ namespace Code.Meta.UI.MainMenu
             _quickMatchButton.clickable.clicked -= StartGame;
             _townButton.clickable.clicked -= EnterTown;
             _exitButton.clickable.clicked -= Exit;
+
+            SceneManager.activeSceneChanged -= OnActiveSceneChanged;
         }
     }
 }

@@ -84,6 +84,11 @@ namespace Code.Game.Common.UI
             }
         }
 
+        public bool HasComponent(VisualElement element, string className)
+        {
+            return element.ClassListContains(className);
+        }
+
         public void MoveToScreenToPos(Vector2 screenPos, VisualElement root, VisualElement movementElement)
         {
             var localPos = new Vector2(screenPos.x, Screen.height - screenPos.y);

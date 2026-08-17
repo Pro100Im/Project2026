@@ -61,7 +61,7 @@ namespace Code.Meta.Features.Game
         private async UniTaskVoid ExitAsync()
         {
             await _transitionScreen.Show();
-            await _sceneLoader.Load(_menuSceneName, LoadSceneMode.Additive); 
+            await _sceneLoader.Load(_menuSceneName, LoadSceneMode.Additive, default, true); 
 
             _sceneLoader.UnLoad(_gameSceneName).Forget();
         }

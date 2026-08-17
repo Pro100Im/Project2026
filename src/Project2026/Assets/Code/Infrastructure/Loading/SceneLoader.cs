@@ -8,7 +8,7 @@ namespace Code.Infrastructure.Loading
 {
     public class SceneLoader : ISceneLoader
     {
-        public async UniTask Load(string nextScene, LoadSceneMode mode = LoadSceneMode.Single, CancellationToken token = default)
+        public async UniTask Load(string nextScene, LoadSceneMode mode = LoadSceneMode.Single, CancellationToken token = default, bool setActiveScene = false)
         {
             var scene = SceneManager.GetSceneByName(nextScene);
 
@@ -18,6 +18,9 @@ namespace Code.Infrastructure.Loading
             try
             {
                 await SceneManager.LoadSceneAsync(nextScene, mode).ToUniTask(cancellationToken: token);
+
+                if(setActiveScene)
+                    SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextScene));
             }
             catch (OperationCanceledException)
             {

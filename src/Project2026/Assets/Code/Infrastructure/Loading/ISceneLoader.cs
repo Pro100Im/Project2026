@@ -6,7 +6,7 @@ namespace Code.Infrastructure.Loading
 {
     public interface ISceneLoader
     {
-        public UniTask Load(string nextScene, LoadSceneMode mode = LoadSceneMode.Single, CancellationToken token = default);
+        public UniTask Load(string nextScene, LoadSceneMode mode = LoadSceneMode.Single, CancellationToken token = default, bool setActiveScene = false);
         public UniTask UnLoad(string sceneName);
     }
 }

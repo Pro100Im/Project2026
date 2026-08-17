@@ -1,6 +1,7 @@
 using Code.Game.Common.UI;
 using Code.Game.Common.UI.Transition;
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -32,16 +33,27 @@ public class TownScreen : MonoBehaviour
         var root = _townDoc.rootVisualElement;
 
         _canvas = root.Q<VisualElement>("Canvas");
-
         _exitButton = root.Q<Button>("ExitButton");
 
         _exitButton.clickable.clicked += ExitTown;
+
+        _uIService.Hide(_canvas).Forget();
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        //_uIService.Show(_canvas).Forget();
-        //_transitionScreen.Hide().Forget();
+        SceneManager.activeSceneChanged += OnActiveSceneChanged;
+    }
+
+    private void OnActiveSceneChanged(Scene arg0, Scene arg1)
+    {
+        if (SceneManager.GetActiveScene().name.Equals(_townSceneName))
+        {
+            _uIService.Show(_canvas).Forget();
+            _transitionScreen.Hide().Forget();
+        }
+        else if(!_uIService.HasComponent(_canvas, "hide"))
+            _uIService.Hide(_canvas).Forget();
     }
 
     private async void ExitTown()
@@ -54,24 +66,23 @@ public class TownScreen : MonoBehaviour
             {
                 var scene = SceneManager.GetSceneAt(i);
 
-                if (scene.name != "Town")
+                if (!scene.name.Equals(_townSceneName))
                 {
                     SceneManager.SetActiveScene(scene);
 
                     break;
                 }
             }
-
-            await _uIService.Hide(_canvas);
         }
-        finally
+        catch
         {
-            await _transitionScreen.Hide();
+            
         }
     }
 
     private void OnDestroy()
     {
         _exitButton.clickable.clicked -= ExitTown;
+        SceneManager.activeSceneChanged -= OnActiveSceneChanged;
     }
 }
