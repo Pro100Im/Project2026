@@ -81,7 +81,7 @@ namespace Code.Meta.UI.MainMenu
             if (!SceneManager.GetActiveScene().name.Equals(_homeScreenSceneName))
                 return;
 
-            await _uIService.Show(_canvas);
+            _uIService.Show(_canvas).Forget();
             _transitionScreen.Hide().Forget();
         }
 
@@ -92,8 +92,7 @@ namespace Code.Meta.UI.MainMenu
             try
             {
                 _cameraService.SetActiveTownCamera();
-
-                await _uIService.Hide(_canvas);
+                _uIService.Hide(_canvas).Forget();
 
                 var townScene = SceneManager.GetSceneByName(_townSceneName);
 
