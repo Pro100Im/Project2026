@@ -4,6 +4,9 @@ namespace Code.Game.Common.Cameras
 {
     public interface ICameraService
     {
-        Camera GetCamera();
+        public Camera GetCamera();
+
+        public void SetActiveTownCamera();
+        public void SetActiveMainCamera();
     }
 }

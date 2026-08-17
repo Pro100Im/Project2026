@@ -1,3 +1,4 @@
+using Code.Game.Common.Cameras;
 using Code.Game.Common.UI;
 using Code.Game.Common.UI.Transition;
 using Cysharp.Threading.Tasks;
@@ -13,6 +14,8 @@ public class TownScreen : MonoBehaviour
     [Space]
     [SerializeField] private UIDocument _townDoc;
 
+    private ICameraService _cameraService;
+
     private TransitionScreen _transitionScreen;
     private UIService _uIService;
 
@@ -22,10 +25,11 @@ public class TownScreen : MonoBehaviour
     private Button _exitButton;
 
     [Inject]
-    public void Construct(TransitionScreen transitionScreen, UIService uIService)
+    public void Construct(TransitionScreen transitionScreen, UIService uIService, ICameraService cameraService)
     {
         _transitionScreen = transitionScreen;
         _uIService = uIService;
+        _cameraService = cameraService;
     }
 
     private void Awake()
@@ -59,6 +63,8 @@ public class TownScreen : MonoBehaviour
     private async void ExitTown()
     {
         await _transitionScreen.Show();
+
+        _cameraService.SetActiveMainCamera();
 
         try
         {

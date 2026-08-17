@@ -1,4 +1,5 @@
-﻿using Code.Game.Common.UI;
+﻿using Code.Game.Common.Cameras;
+using Code.Game.Common.UI;
 using Code.Game.Common.UI.Transition;
 using Code.Infrastructure.Loading;
 using Cysharp.Threading.Tasks;
@@ -30,17 +31,19 @@ namespace Code.Meta.UI.MainMenu
         private Button _townButton;
 
         private ISceneLoader _sceneLoader;
+        private ICameraService _cameraService;
         private TransitionScreen _transitionScreen;
         private UIService _uIService;
 
         public IObserver<InputControl> OnAnyButton { get; private set; }
 
         [Inject]
-        private void Construct(ISceneLoader sceneLoader, TransitionScreen transitionScreen, UIService uIService)
+        private void Construct(ISceneLoader sceneLoader, ICameraService cameraService, TransitionScreen transitionScreen, UIService uIService)
         {
             _sceneLoader = sceneLoader;
             _transitionScreen = transitionScreen;
             _uIService = uIService;
+            _cameraService = cameraService;
         }
 
         private void Awake()
@@ -73,12 +76,12 @@ namespace Code.Meta.UI.MainMenu
             _transitionScreen.Hide().Forget();
         }
 
-        private void OnActiveSceneChanged(Scene arg0, Scene arg1)
+        private async void OnActiveSceneChanged(Scene arg0, Scene arg1)
         {
             if (!SceneManager.GetActiveScene().name.Equals(_homeScreenSceneName))
                 return;
 
-            _uIService.Show(_canvas).Forget();
+            await _uIService.Show(_canvas);
             _transitionScreen.Hide().Forget();
         }
 
@@ -88,6 +91,8 @@ namespace Code.Meta.UI.MainMenu
 
             try
             {
+                _cameraService.SetActiveTownCamera();
+
                 await _uIService.Hide(_canvas);
 
                 var townScene = SceneManager.GetSceneByName(_townSceneName);

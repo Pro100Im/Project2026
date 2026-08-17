@@ -1,6 +1,5 @@
 using Code.Infrastructure.Loading;
 using Cysharp.Threading.Tasks;
-using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 

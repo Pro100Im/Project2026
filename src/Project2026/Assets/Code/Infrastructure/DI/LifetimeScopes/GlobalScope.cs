@@ -1,3 +1,4 @@
+using Code.Game.Common.Cameras;
 using Code.Game.Common.Random;
 using Code.Game.Common.Time;
 using Code.Game.Common.UI;
@@ -16,6 +17,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
     {
         [SerializeField] private CoroutineRunner _coroutineRunner;
         [SerializeField] private TransitionScreen _transitionScreen;
+        [SerializeField] private CinemachineCameraService _cameraSirvice;
         [Space]
         [SerializeField] private GameObject _eventSystem;
         [SerializeField] private GameObject _audioListener;
@@ -26,7 +28,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             BindAssetManagementServices(builder);
 
             builder.RegisterComponentInNewPrefab(_coroutineRunner, Lifetime.Singleton).DontDestroyOnLoad().AsImplementedInterfaces();
-            builder.RegisterComponentInNewPrefab(_transitionScreen, Lifetime.Singleton).DontDestroyOnLoad().AsImplementedInterfaces();
+            builder.RegisterComponentInNewPrefab(_transitionScreen, Lifetime.Singleton).DontDestroyOnLoad().AsImplementedInterfaces().AsSelf();
+            builder.RegisterComponentInNewPrefab(_cameraSirvice, Lifetime.Singleton).DontDestroyOnLoad().AsImplementedInterfaces().AsSelf();
             builder.RegisterEntryPoint<GlobalWorld>().WithParameter("eventSystem", _eventSystem).WithParameter("audioListener", _audioListener);
         }
 
