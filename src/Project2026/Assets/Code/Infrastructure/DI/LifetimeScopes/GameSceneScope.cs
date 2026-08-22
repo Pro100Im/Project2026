@@ -153,6 +153,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<CreateEntityViewFromPrefabSystem>(Lifetime.Singleton);
 
             builder.Register<GameSessionSystem>(Lifetime.Singleton);
+            builder.Register<GameSessionEndMenuSystem>(Lifetime.Singleton);
+
             builder.Register<InitializeInputSystem>(Lifetime.Singleton);
             builder.Register<CapturePointerSystem>(Lifetime.Singleton);
             builder.Register<CaptureClickSystem>(Lifetime.Singleton);

@@ -30,32 +30,55 @@ namespace Code.Game.Features.Pause.Systems
             if (game == null)
                 return;
 
-            if (game.isPause)
+            if(game.isForcedPause)
+            {
+                game.isForcedPause = false;
+
+                ResumeGame();
+            }
+            else if (!game.isForcedPause)
+            {
+                game.isForcedPause = true;
+
+                PauseGame();
+            }
+            else if (game.isPause && !game.isForcedPause)
             {
                 game.isPause = false;
 
-                _timeService.StartTime();
-                SetAnimatorsSpeed(1f);
+                ResumeGame();
             }
-            else
+            else if(!game.isForcedPause)
             {
                 game.isPause = true;
 
-                _timeService.StopTime();
-                SetAnimatorsSpeed(0f);
+                PauseGame();
             }
 
             foreach (var entity in entities)
             {
+                entity.isForcedPauseRequested = false;
                 entity.isPauseRequested = false;
                 entity.isDestructed = true;
             }
         }
 
-        protected override bool Filter(InputEntity entity) => entity.isPauseRequested;
+        protected override bool Filter(InputEntity entity) => entity.isPauseRequested || entity.isForcedPauseRequested;
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context) =>
-           context.CreateCollector(InputMatcher.PauseRequested.Added());
+           context.CreateCollector(InputMatcher.PauseRequested.Added(), InputMatcher.ForcedPauseRequested.Added());
+
+        private void PauseGame()
+        {
+            _timeService.StopTime();
+            SetAnimatorsSpeed(0f);
+        }
+
+        private void ResumeGame()
+        {
+            _timeService.StartTime();
+            SetAnimatorsSpeed(1f);
+        }
 
         private void SetAnimatorsSpeed(float speed)
         {

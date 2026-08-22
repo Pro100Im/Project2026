@@ -76,7 +76,7 @@ namespace Code.Meta.UI.MainMenu
             _transitionScreen.Hide().Forget();
         }
 
-        private async void OnActiveSceneChanged(Scene arg0, Scene arg1)
+        private void OnActiveSceneChanged(Scene arg0, Scene arg1)
         {
             if (!SceneManager.GetActiveScene().name.Equals(_homeScreenSceneName))
                 return;
