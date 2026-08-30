@@ -77,9 +77,9 @@ namespace Code.Meta.Features.Game
         private async void Restart()
         {
             await _transitionScreen.Show();
-            await _sceneLoader.Load(_gameSceneName, LoadSceneMode.Additive, default, true);
+            await _sceneLoader.UnLoad(_gameSceneName);
 
-            _sceneLoader.UnLoad(_gameSceneName).Forget();
+            _sceneLoader.Load(_gameSceneName, LoadSceneMode.Additive, default, true).Forget();
         }
 
         public void Exit()
