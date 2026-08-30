@@ -15,7 +15,7 @@
         <ui:Instance template="GameExchequer" name="GameExchequer" style="position: absolute; right: 0;"/>
         <ui:Instance template="ActionButtons" name="ActionButtons" picking-mode="Ignore" style="position: absolute; width: 1920px; height: 1080px;"/>
         <ui:Instance template="TowerMenu" name="TowerMenu" picking-mode="Ignore" style="position: absolute; height: 1080px; width: 1920px;"/>
-        <ui:Instance template="GameMenu" name="PauseMenu" picking-mode="Ignore" style="position: absolute; width: 1920px; height: 1080px;"/>
-        <ui:Instance template="GameOverMenu" picking-mode="Ignore" name="GameOverMenu" style="position: absolute; width: 1920px; height: 1080px;"/>
+        <ui:Instance template="GameMenu" name="PauseMenuRoot" picking-mode="Ignore" style="position: absolute; width: 1920px; height: 1080px;"/>
+        <ui:Instance template="GameOverMenu" picking-mode="Ignore" name="GameOverMenuRoot" style="position: absolute; width: 1920px; height: 1080px;"/>
     </ui:VisualElement>
 </ui:UXML>

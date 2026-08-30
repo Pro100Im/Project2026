@@ -5,18 +5,18 @@ namespace Code.Game.Features.GameSession.Systems
 {
     public class GameSessionEndMenuSystem : ReactiveSystem<GameEntity>
     {
-        private readonly IGroup<MetaEntity> _pauseMenu;
+        private readonly IGroup<MetaEntity> _endGameMenu;
 
         public GameSessionEndMenuSystem() : base(Contexts.sharedInstance.game)
         {
-            _pauseMenu = Contexts.sharedInstance.meta.GetGroup(MetaMatcher.PauseMenu);
+            _endGameMenu = Contexts.sharedInstance.meta.GetGroup(MetaMatcher.EndGameMenu);
         }
 
         protected override void Execute(List<GameEntity> entities)
         {
-            var pauseMenuEntity = _pauseMenu.GetSingleEntity();
+            var endGameMenuEntity = _endGameMenu.GetSingleEntity();
 
-            if (pauseMenuEntity == null)
+            if (endGameMenuEntity == null)
                 return;
 
             for (var i = 0; i < entities.Count; i++)
@@ -24,9 +24,9 @@ namespace Code.Game.Features.GameSession.Systems
                 var entity = entities[i];
 
                 if (entity.isForcedPause)
-                    pauseMenuEntity.pauseMenu.Value.OpenMenu();
+                    endGameMenuEntity.endGameMenu.Value.OpenMenu();
                 else
-                    pauseMenuEntity.pauseMenu.Value.CloseMenu();
+                    endGameMenuEntity.endGameMenu.Value.CloseMenu();
             }
         }
 

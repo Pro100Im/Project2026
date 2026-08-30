@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Game.Features.Exchequer.Registrars
 {
-    public class GameExchequerRegistrar : EntityComponentRegistrar
+    public class GameExchequerRegistrar : MetaEntityComponentRegistrar
     {
         [SerializeField] private GameExchequerView _gameExchequerView;
 

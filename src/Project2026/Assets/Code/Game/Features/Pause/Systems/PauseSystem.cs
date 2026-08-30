@@ -30,36 +30,48 @@ namespace Code.Game.Features.Pause.Systems
             if (game == null)
                 return;
 
-            if(game.isForcedPause)
-            {
-                game.isForcedPause = false;
+            var forcedPauseRequested = false;
+            var pauseRequested = false;
 
-                ResumeGame();
-            }
-            else if (!game.isForcedPause)
+            for (var i = 0; i < entities.Count; i++)
             {
-                game.isForcedPause = true;
+                var entity = entities[i];
 
-                PauseGame();
-            }
-            else if (game.isPause && !game.isForcedPause)
-            {
-                game.isPause = false;
+                if (entity.isForcedPauseRequested)
+                    forcedPauseRequested = true;
 
-                ResumeGame();
-            }
-            else if(!game.isForcedPause)
-            {
-                game.isPause = true;
+                if (entity.isPauseRequested)
+                    pauseRequested = true;
 
-                PauseGame();
-            }
-
-            foreach (var entity in entities)
-            {
                 entity.isForcedPauseRequested = false;
                 entity.isPauseRequested = false;
                 entity.isDestructed = true;
+            }
+
+            if (forcedPauseRequested)
+            {
+                if (!game.isForcedPause)
+                {
+                    game.isForcedPause = true;
+                    game.isPause = false;
+                    PauseGame();
+                }
+
+                return;
+            }
+
+            if (!pauseRequested || game.isForcedPause)
+                return;
+
+            if (game.isPause)
+            {
+                game.isPause = false;
+                ResumeGame();
+            }
+            else
+            {
+                game.isPause = true;
+                PauseGame();
             }
         }
 

@@ -38,9 +38,9 @@ namespace Code.Meta.Features.Game
         private void Start()
         {
             _pauseMenu = _gameScreen.GetVisualElement("PauseMenu");
-            _mask = _gameScreen.GetImage("Mask");
-            _cancelButton = _gameScreen.GetButton("CancelButton");
-            _exitButton = _gameScreen.GetButton("ExitButton");
+            _mask = _pauseMenu.Q<Image>("Mask");
+            _cancelButton = _pauseMenu.Q<Button>("CancelButton");
+            _exitButton = _pauseMenu.Q<Button>("ExitButton");
 
             _cancelButton.clickable.clicked += PauseRequest;
             _exitButton.clickable.clicked += Exit;

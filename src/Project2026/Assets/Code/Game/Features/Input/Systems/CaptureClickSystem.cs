@@ -30,7 +30,7 @@ namespace Code.Game.Features.Input.Systems
         public void Execute()
         {
             var session = _gameSessions.GetSingleEntity();
-            if (session != null && session.isPause)
+            if (session != null && (session.isPause || session.isForcedPause))
                 return;
 
             var primaryClicked = _inputService.WasClicked();

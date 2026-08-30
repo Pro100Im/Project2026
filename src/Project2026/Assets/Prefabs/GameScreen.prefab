@@ -45,6 +45,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Meta.Features.Game.SpellsPanel
   _freezeAbilitySlot: {fileID: 11400000, guid: fe17f6b96340d9e40a178d958524b0b9, type: 2}
+--- !u!1 &2975577872493818806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3489441649091680336}
+  - component: {fileID: 5628438934737802515}
+  m_Layer: 0
+  m_Name: EndGameMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3489441649091680336
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2975577872493818806}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 37443703770885465}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5628438934737802515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2975577872493818806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675c58ec343d264489488af20e519c56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Meta.Features.Game.EndGameMenu
+  _menuSceneName: HomeScreen
+  _gameSceneName: Game
+  _townSceneName: Town
 --- !u!1 &4120555828841475007
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,9 +102,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2881048623033862531}
   - component: {fileID: 4145712057023424447}
-  - component: {fileID: 5445658559376367452}
-  - component: {fileID: 2552855739176192797}
-  - component: {fileID: 6370683550390981695}
   m_Layer: 0
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -93,45 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Meta.Features.Game.PauseMenu
   _menuSceneName: HomeScreen
---- !u!114 &5445658559376367452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4120555828841475007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2c3d4e5f6478910a1b2c3d4e5f67802, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.MetaEntityBehaviour
---- !u!114 &2552855739176192797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4120555828841475007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d233eff6d4c67044b5226d79ae3526c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Pause.Registrars.PauseMenuRegistrar
-  EntityView: {fileID: 5445658559376367452}
-  _pauseMenu: {fileID: 4145712057023424447}
---- !u!114 &6370683550390981695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4120555828841475007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bdea3e31a9f4a228d50cfc2014fc9e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.MetaSelfInitializeEntityView
-  _entityBehaviour: {fileID: 5445658559376367452}
+  _gameSceneName: Game
 --- !u!1 &4933473282176414999
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,9 +148,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7331010246951210151}
   - component: {fileID: 6343993040223468091}
-  - component: {fileID: 4605429170542480131}
-  - component: {fileID: 7574193790645885336}
-  - component: {fileID: 5171135505108696753}
   m_Layer: 0
   m_Name: GameExchequerScore
   m_TagString: Untagged
@@ -179,45 +182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b30b8020b692e4297a000e2a9de229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Exchequer.GameExchequerView
---- !u!114 &4605429170542480131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4933473282176414999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80e9e6d76a148574fa7021028a8f886a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.EntityBehaviour
---- !u!114 &7574193790645885336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4933473282176414999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91000b786247f214a819d2f2d99b9f0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Exchequer.Registrars.GameExchequerRegistrar
-  EntityView: {fileID: 4605429170542480131}
-  _gameExchequerView: {fileID: 6343993040223468091}
---- !u!114 &5171135505108696753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4933473282176414999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9267ce2d010e48444a785586d0cd3ba9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.SelfInitializeEntityView
-  _entityBehaviour: {fileID: 4605429170542480131}
 --- !u!1 &5073148147066312515
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,9 +238,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4447435418071865669}
   - component: {fileID: 7260230358904753697}
-  - component: {fileID: 5678901234567890123}
-  - component: {fileID: 5678901234567890124}
-  - component: {fileID: 4245613680657649297}
   m_Layer: 0
   m_Name: TowerMenuScreen
   m_TagString: Untagged
@@ -314,45 +275,6 @@ MonoBehaviour:
   _archerTowerUpgrade: {fileID: 11400000, guid: 73f3088a3a3933840acd244ee4f29d32, type: 2}
   _iceTowerUpgrade: {fileID: 11400000, guid: dfe9c98c526e0c14a93a301602b65e37, type: 2}
   _fireTowerUpgrade: {fileID: 11400000, guid: 9bc3c24ddfc42204b9d3d59f88d6955d, type: 2}
---- !u!114 &5678901234567890123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5686554603850505932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2c3d4e5f6478910a1b2c3d4e5f67802, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.MetaEntityBehaviour
---- !u!114 &5678901234567890124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5686554603850505932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bdea3e31a9f4a228d50cfc2014fc9e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.MetaSelfInitializeEntityView
-  _entityBehaviour: {fileID: 5678901234567890123}
---- !u!114 &4245613680657649297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5686554603850505932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 749e769ed72efd849aad39db36dadff2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Tower.Registrars.TowerMenuRegistrar
-  EntityView: {fileID: 5678901234567890123}
-  _towerMenu: {fileID: 7260230358904753697}
 --- !u!1 &7233587024386251885
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,6 +286,12 @@ GameObject:
   - component: {fileID: 37443703770885465}
   - component: {fileID: 6065925166278461840}
   - component: {fileID: 8807403438092941496}
+  - component: {fileID: 3033597318860373398}
+  - component: {fileID: 3431128461194078256}
+  - component: {fileID: 7373133170734915639}
+  - component: {fileID: 4676878413966042311}
+  - component: {fileID: 4454633942003018480}
+  - component: {fileID: 4009221701914809914}
   m_Layer: 0
   m_Name: GameScreen
   m_TagString: Untagged
@@ -389,6 +317,7 @@ Transform:
   - {fileID: 64306097802940132}
   - {fileID: 2881048623033862531}
   - {fileID: 2875722846749434901}
+  - {fileID: 3489441649091680336}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6065925166278461840
@@ -427,3 +356,84 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Meta.Features.Game.GameScreen
   _gameScreenDoc: {fileID: 6065925166278461840}
+--- !u!114 &3033597318860373398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7233587024386251885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c3d4e5f6478910a1b2c3d4e5f67802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.MetaEntityBehaviour
+--- !u!114 &3431128461194078256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7233587024386251885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d233eff6d4c67044b5226d79ae3526c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Pause.Registrars.PauseMenuRegistrar
+  EntityView: {fileID: 3033597318860373398}
+  _pauseMenu: {fileID: 4145712057023424447}
+--- !u!114 &7373133170734915639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7233587024386251885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beedc96acb1828043b296417bbfa4323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.GameSession.Registrars.EndGameMenuRegistrar
+  EntityView: {fileID: 3033597318860373398}
+  _endGameMenu: {fileID: 5628438934737802515}
+--- !u!114 &4676878413966042311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7233587024386251885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91000b786247f214a819d2f2d99b9f0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Exchequer.Registrars.GameExchequerRegistrar
+  EntityView: {fileID: 3033597318860373398}
+  _gameExchequerView: {fileID: 6343993040223468091}
+--- !u!114 &4454633942003018480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7233587024386251885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749e769ed72efd849aad39db36dadff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Tower.Registrars.TowerMenuRegistrar
+  EntityView: {fileID: 3033597318860373398}
+  _towerMenu: {fileID: 7260230358904753697}
+--- !u!114 &4009221701914809914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7233587024386251885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bdea3e31a9f4a228d50cfc2014fc9e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.MetaSelfInitializeEntityView
+  _entityBehaviour: {fileID: 3033597318860373398}

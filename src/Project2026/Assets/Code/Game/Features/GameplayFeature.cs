@@ -86,7 +86,7 @@ namespace Code.Game.Features
         private bool IsPaused()
         {
             var session = _gameSessions.GetSingleEntity();
-            return session != null && session.isPause;
+            return session != null && (session.isPause || session.isForcedPause);
         }
     }
 }

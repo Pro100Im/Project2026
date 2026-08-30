@@ -5,14 +5,14 @@ namespace Code.Game.Features.Exchequer.Systems
 {
     public class GameGoldExchequerSystem : ReactiveSystem<GameEntity>
     {
-        private readonly IGroup<GameEntity> _exchequer;
+        private readonly IGroup<MetaEntity> _exchequer;
 
         public GameGoldExchequerSystem() : base(Contexts.sharedInstance.game)
         {
-            _exchequer = Contexts.sharedInstance.game.GetGroup(GameMatcher
+            _exchequer = Contexts.sharedInstance.meta.GetGroup(MetaMatcher
                 .AllOf(
-                    GameMatcher.GameExchequer,
-                    GameMatcher.ExchequerGoldCapacity));
+                    MetaMatcher.GameExchequer,
+                    MetaMatcher.ExchequerGoldCapacity));
         }
 
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>

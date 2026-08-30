@@ -16,21 +16,23 @@ public static class MetaComponentsLookup {
     public const int AbilityRangeShowed = 5;
     public const int ExchequerGoldCapacity = 6;
     public const int ExchequerGoldChangeRequest = 7;
-    public const int ExchequerManaChangeRequest = 8;
-    public const int ExchequerMealCapacity = 9;
-    public const int ExchequerMealChangeRequest = 10;
-    public const int GameExchequer = 11;
-    public const int Reward = 12;
-    public const int TargetId = 13;
-    public const int TowerMenuCloseRequest = 14;
-    public const int TowerMenu = 15;
-    public const int TowerOpenBuildMenu = 16;
-    public const int TowerOpenUpgradeMenu = 17;
-    public const int UnitRangeShowed = 18;
-    public const int UnitRangeView = 19;
-    public const int UnitSelectedView = 20;
+    public const int ExchequerManaCapacity = 8;
+    public const int ExchequerManaChangeRequest = 9;
+    public const int ExchequerMealCapacity = 10;
+    public const int ExchequerMealChangeRequest = 11;
+    public const int GameExchequer = 12;
+    public const int EndGameMenu = 13;
+    public const int Reward = 14;
+    public const int TargetId = 15;
+    public const int TowerMenuCloseRequest = 16;
+    public const int TowerMenu = 17;
+    public const int TowerOpenBuildMenu = 18;
+    public const int TowerOpenUpgradeMenu = 19;
+    public const int UnitRangeShowed = 20;
+    public const int UnitRangeView = 21;
+    public const int UnitSelectedView = 22;
 
-    public const int TotalComponents = 21;
+    public const int TotalComponents = 23;
 
     public static readonly string[] componentNames = {
         "ForcedPause",
@@ -41,10 +43,12 @@ public static class MetaComponentsLookup {
         "AbilityRangeShowed",
         "ExchequerGoldCapacity",
         "ExchequerGoldChangeRequest",
+        "ExchequerManaCapacity",
         "ExchequerManaChangeRequest",
         "ExchequerMealCapacity",
         "ExchequerMealChangeRequest",
         "GameExchequer",
+        "EndGameMenu",
         "Reward",
         "TargetId",
         "TowerMenuCloseRequest",
@@ -65,10 +69,12 @@ public static class MetaComponentsLookup {
         typeof(Code.Game.Features.Ability.AbilityRangeShowed),
         typeof(Code.Game.Features.Exchequer.ExchequerGoldCapacity),
         typeof(Code.Game.Features.Exchequer.ExchequerGoldChangeRequest),
+        typeof(Code.Game.Features.Exchequer.ExchequerManaCapacity),
         typeof(Code.Game.Features.Exchequer.ExchequerManaChangeRequest),
         typeof(Code.Game.Features.Exchequer.ExchequerMealCapacity),
         typeof(Code.Game.Features.Exchequer.ExchequerMealChangeRequest),
         typeof(Code.Game.Features.Exchequer.GameExchequer),
+        typeof(Code.Game.Features.GameSession.EndGameMenuComponent),
         typeof(Code.Game.Features.Rewards.Reward),
         typeof(Code.Game.Features.Target.TargetId),
         typeof(Code.Game.Features.Tower.TowerMenuCloseRequest),
