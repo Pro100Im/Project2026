@@ -84,7 +84,7 @@ namespace Code.Game.Features.Attack.Systems
                 else
                     attacker.AddAttackDirection(attackDirection);
 
-                if (attacker.hasSpriteRenderer && flipDx != 0f)
+                if (!attacker.isTower && attacker.hasSpriteRenderer && flipDx != 0f)
                 {
                     var shouldFlipX = flipDx < 0f;
                     var spriteRenderer = attacker.spriteRenderer.Value;

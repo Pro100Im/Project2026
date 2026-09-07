@@ -194,6 +194,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             builder.Register<CharacterAnimatorSystem>(Lifetime.Singleton);
             builder.Register<PlayerCastleAnimatorSystem>(Lifetime.Singleton);
+            builder.Register<CannonAnimatorSystem>(Lifetime.Singleton);
 
             builder.Register<BuildFlowFieldSystem>(Lifetime.Singleton);
             builder.Register<OccupiedCellSystem>(Lifetime.Singleton);
@@ -222,6 +223,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<MovementSpeedBonusCleanUpSystem>(Lifetime.Singleton);
 
             builder.Register<UpdateCombatAimSystem>(Lifetime.Singleton);
+            builder.Register<UpdateCannonAimSystem>(Lifetime.Singleton);
             builder.Register<AttackStartSystem>(Lifetime.Singleton);
             builder.Register<MeleeAttackEndSystem>(Lifetime.Singleton);
             builder.Register<RangeAttackEndSystem>(Lifetime.Singleton);

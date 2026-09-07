@@ -9,6 +9,7 @@ namespace Code.Game.Features.Animator
         {
             Add(systemFactory.Create<CharacterAnimatorSystem>());
             Add(systemFactory.Create<PlayerCastleAnimatorSystem>());
+            Add(systemFactory.Create<CannonAnimatorSystem>());
         }
     }
 }
