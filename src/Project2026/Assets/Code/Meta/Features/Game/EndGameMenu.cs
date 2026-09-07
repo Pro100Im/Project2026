@@ -49,6 +49,8 @@ namespace Code.Meta.Features.Game
             _townButton.clickable.clicked += Town;
             _exitButton.clickable.clicked += Exit;
 
+            SceneManager.activeSceneChanged += OnActiveSceneChanged;
+
             _uIService.Hide(_gameOverMenu).Forget();
         }
 
@@ -104,8 +106,23 @@ namespace Code.Meta.Features.Game
             _uIService.Show(_gameOverMenu).AsAsyncUnitUniTask();
         }
 
+        private void OnActiveSceneChanged(Scene _, Scene __)
+        {
+            if (!SceneManager.GetActiveScene().name.Equals(_gameSceneName))
+                return;
+
+            var session = Contexts.sharedInstance.game
+                .GetGroup(GameMatcher.GameSession)
+                .GetSingleEntity();
+
+            if (session != null && session.isForcedPause)
+                OpenMenu();
+        }
+
         private void OnDestroy()
         {
+            SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+
             if (_restartButton != null)
                 _restartButton.clickable.clicked -= Restart;
             if (_townButton != null)
