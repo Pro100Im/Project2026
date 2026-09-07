@@ -12,7 +12,7 @@ using VContainer;
 
 namespace Code.Meta.UI.MainMenu
 {
-    public class MainMenu : MonoBehaviour
+    public class MainMenuScreen : MonoBehaviour
     {
         [SerializeField] private string _gameSceneName = "Game";
         [SerializeField] private string _homeScreenSceneName = "HomeScreen";
@@ -50,7 +50,7 @@ namespace Code.Meta.UI.MainMenu
         {
             var root = _mainMenuDoc.rootVisualElement;
 
-            _canvas = root.Q<VisualElement>("Canvas");
+            _canvas = root.Q<VisualElement>("MainMenuCanvas");
 
             _intro = root.Q<VisualElement>("Intro");
 
@@ -64,6 +64,8 @@ namespace Code.Meta.UI.MainMenu
 
             _exitButton = root.Q<Button>("ExitButton");
             _exitButton.clickable.clicked += Exit;
+
+            _uIService.Hide(_mainMenu).Forget();
 
             _pressAnyBtn.actionTriggered += OnAnyButtonPress;
             _pressAnyBtn.Enable();
@@ -79,7 +81,11 @@ namespace Code.Meta.UI.MainMenu
         private void OnActiveSceneChanged(Scene arg0, Scene arg1)
         {
             if (!SceneManager.GetActiveScene().name.Equals(_homeScreenSceneName))
+            {
+                _uIService.Hide(_canvas).Forget();
+
                 return;
+            }
 
             _uIService.Show(_canvas).Forget();
             _transitionScreen.Hide().Forget();
@@ -92,7 +98,6 @@ namespace Code.Meta.UI.MainMenu
             try
             {
                 _cameraService.SetActiveTownCamera();
-                _uIService.Hide(_canvas).Forget();
 
                 var townScene = SceneManager.GetSceneByName(_townSceneName);
 
@@ -114,10 +119,6 @@ namespace Code.Meta.UI.MainMenu
 
                 _uIService.Hide(_intro).AsTask();
                 _uIService.Show(_mainMenu).AsTask();
-
-                _quickMatchButton.pickingMode = PickingMode.Position;
-                _townButton.pickingMode = PickingMode.Position;
-                _exitButton.pickingMode = PickingMode.Position;
             }
         }
 

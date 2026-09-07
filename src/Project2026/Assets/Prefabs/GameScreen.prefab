@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 675c58ec343d264489488af20e519c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Meta.Features.Game.EndGameMenu
+  _endGameMenuDoc: {fileID: 6065925166278461840}
   _menuSceneName: HomeScreen
   _gameSceneName: Game
   _townSceneName: Town
@@ -355,6 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: def7532ab64359a4a9313251765ef94b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Meta.Features.Game.GameScreen
+  _gameSceneName: Game
   _gameScreenDoc: {fileID: 6065925166278461840}
 --- !u!114 &3033597318860373398
 MonoBehaviour:

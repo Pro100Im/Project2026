@@ -1,6 +1,7 @@
 using Code.Game.Common.Entity;
 using Code.Game.Common.UI;
 using Code.Game.StaticData.Configs;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
@@ -17,7 +18,6 @@ namespace Code.Meta.Features.Game
         private UIService _uIService;
 
         private VisualElement _towerBuildMenu;
-        private VisualElement _towerBuildsContainer;
 
         private Button _archerTowerButton;
         private Button _iceTowerButton;
@@ -25,7 +25,6 @@ namespace Code.Meta.Features.Game
         private Button _towerBuildsCloseButton;
 
         private VisualElement _towerUpgradeMenu;
-        private VisualElement _towerUpgradesContainer;
 
         private Button _towerUpgradesCloseButton;
         private Button _towerUpgrade1Button;
@@ -46,7 +45,6 @@ namespace Code.Meta.Features.Game
         private void Start()
         {
             _towerBuildMenu = _gameScreen.GetVisualElement("TowerBuildMenu");
-            _towerBuildsContainer = _gameScreen.GetVisualElement("TowerBuildsContainer");
 
             _archerTowerButton = _gameScreen.GetButton("ArcherTower");
             _iceTowerButton = _gameScreen.GetButton("IceTower");
@@ -59,7 +57,6 @@ namespace Code.Meta.Features.Game
             _towerBuildsCloseButton.clickable.clicked += CloseAndDeselectRequest;
 
             _towerUpgradeMenu = _gameScreen.GetVisualElement("TowerUpgradeMenu");
-            _towerUpgradesContainer = _gameScreen.GetVisualElement("TowerUpgradesContainer");
 
             _towerUpgrade1Button = _gameScreen.GetButton("TowerUpgrade1");
             _towerUpgrade2Button = _gameScreen.GetButton("TowerUpgrade2");
@@ -71,6 +68,9 @@ namespace Code.Meta.Features.Game
             _towerUpgrade1Button.clickable.clicked += UpgradeTower1;
             _towerUpgrade2Button.clickable.clicked += UpgradeTower2;
             _towerUpgradesCloseButton.clickable.clicked += CloseAndDeselectRequest;
+
+            _uIService.Hide(_towerBuildMenu).Forget();
+            _uIService.Hide(_towerUpgradeMenu).Forget();
         }
 
         public void OpenTowerBuildMenu(Vector2 screenPos, GameEntity entity)
@@ -79,13 +79,6 @@ namespace Code.Meta.Features.Game
 
             _uIService.MoveToScreenToPos(screenPos, _gameScreen.GetRoot(), _towerBuildMenu);
             _uIService.Show(_towerBuildMenu).AsAsyncUnitUniTask();
-
-            _towerBuildsContainer.pickingMode = PickingMode.Position;
-
-            _archerTowerButton.pickingMode = PickingMode.Position;
-            _iceTowerButton.pickingMode = PickingMode.Position;
-            _fireTowerButton.pickingMode = PickingMode.Position;
-            _towerBuildsCloseButton.pickingMode = PickingMode.Position;
         }
 
         private void CloseRequest()
@@ -110,12 +103,6 @@ namespace Code.Meta.Features.Game
         public void CloseTowerBuilds()
         {
             _currentTowerEntity = null;
-
-            _towerBuildsContainer.pickingMode = PickingMode.Ignore;
-            _archerTowerButton.pickingMode = PickingMode.Ignore;
-            _iceTowerButton.pickingMode = PickingMode.Ignore;
-            _fireTowerButton.pickingMode = PickingMode.Ignore;
-            _towerBuildsCloseButton.pickingMode = PickingMode.Ignore;
 
             _uIService.Hide(_towerBuildMenu).AsAsyncUnitUniTask();
         }
@@ -161,39 +148,24 @@ namespace Code.Meta.Features.Game
             {
                 _towerUpgradeIcon1.sprite = entity.towerUpgradeIcon.Value[0];
                 _uIService.Show(_towerUpgrade1Button).AsAsyncUnitUniTask();
-                _towerUpgrade1Button.pickingMode = PickingMode.Position;
 
                 _towerUpgradeIcon2.sprite = entity.towerUpgradeIcon.Value[1];
                 _uIService.Show(_towerUpgrade2Button).AsAsyncUnitUniTask();
-                _towerUpgrade2Button.pickingMode = PickingMode.Position;
             }
             else
             {
-                _towerUpgrade2Button.pickingMode = PickingMode.Ignore;
                 _uIService.Hide(_towerUpgrade2Button).AsAsyncUnitUniTask();
                 _towerUpgradeIcon1.sprite = entity.towerUpgradeIcon.Value[0];
                 _uIService.Show(_towerUpgrade1Button).AsAsyncUnitUniTask();
-                _towerUpgrade1Button.pickingMode = PickingMode.Position;
             }
 
             _uIService.MoveToScreenToPos(screenPos, _gameScreen.GetRoot(), _towerUpgradeMenu);
             _uIService.Show(_towerUpgradeMenu).AsAsyncUnitUniTask();
-
-            _towerUpgradesContainer.pickingMode = PickingMode.Position;
-            _towerUpgradesCloseButton.pickingMode = PickingMode.Position;
         }
 
         public void CloseTowerUpgrades()
         {
             _currentTowerEntity = null;
-
-            _towerUpgradesCloseButton.pickingMode = PickingMode.Ignore;
-
-            _towerUpgradesContainer.pickingMode = PickingMode.Ignore;
-
-            _towerUpgrade1Button.pickingMode = PickingMode.Ignore;
-            _towerUpgrade2Button.pickingMode = PickingMode.Ignore;
-            _towerUpgradesCloseButton.pickingMode = PickingMode.Ignore;
 
             _uIService.Hide(_towerUpgradeMenu).AsAsyncUnitUniTask();
             _uIService.Hide(_towerUpgrade1Button).AsAsyncUnitUniTask();

@@ -9,13 +9,16 @@ namespace Code.Game.Common.UI
 {
     public class UIService
     {
-        private List<VisualElement> _visualElements = new();
+        private readonly List<VisualElement> _visualElements = new();
+        private readonly Stack<VisualElement> _pickingStack = new();
 
-        private Dictionary<VisualElement, CancellationTokenSource> _activeTransitions = new();
+        private readonly Dictionary<VisualElement, CancellationTokenSource> _activeTransitions = new();
 
         public async UniTask Hide(VisualElement element)
         {
-            if (element.ClassListContains("hide")) 
+            SetSubtreePickingInteractable(element, false);
+
+            if (element.ClassListContains("hide"))
                 return;
 
             await PlayTransition(element, true);
@@ -23,7 +26,9 @@ namespace Code.Game.Common.UI
 
         public async UniTask Show(VisualElement element)
         {
-            if (!element.ClassListContains("hide")) 
+            SetSubtreePickingInteractable(element, true);
+
+            if (!element.ClassListContains("hide"))
                 return;
 
             await PlayTransition(element, false);
@@ -55,9 +60,9 @@ namespace Code.Game.Common.UI
 
             element.schedule.Execute(() =>
             {
-                if (isHiding) 
+                if (isHiding)
                     element.AddToClassList("hide");
-                else 
+                else
                     element.RemoveFromClassList("hide");
             });
 
@@ -111,13 +116,55 @@ namespace Code.Game.Common.UI
             screenPos.y = Screen.height - screenPos.y;
             panel.PickAll(screenPos, _visualElements);
 
-            foreach (var el in _visualElements)
+            for (var i = 0; i < _visualElements.Count; i++)
             {
-                if (el.pickingMode == PickingMode.Position)
+                var el = _visualElements[i];
+
+                if (el.pickingMode == PickingMode.Position && !IsUnderHidden(el))
                     return true;
             }
 
             return false;
+        }
+
+        private static bool IsUnderHidden(VisualElement element)
+        {
+            for (var current = element; current != null; current = current.parent)
+            {
+                if (current.ClassListContains("hide"))
+                    return true;
+            }
+
+            return false;
+        }
+
+        private void SetSubtreePickingInteractable(VisualElement root, bool interactable)
+        {
+            _pickingStack.Clear();
+            _pickingStack.Push(root);
+
+            while (_pickingStack.Count > 0)
+            {
+                var element = _pickingStack.Pop();
+
+                if (interactable)
+                {
+                    if (element.userData is PickingMode storedMode && !element.ClassListContains("hide"))
+                    {
+                        element.pickingMode = storedMode;
+                        element.userData = null;
+                    }
+                }
+                else if (element.pickingMode == PickingMode.Position)
+                {
+                    element.userData = PickingMode.Position;
+                    element.pickingMode = PickingMode.Ignore;
+                }
+
+                var childCount = element.childCount;
+                for (var i = 0; i < childCount; i++)
+                    _pickingStack.Push(element[i]);
+            }
         }
     }
 }

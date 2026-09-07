@@ -23,8 +23,6 @@ namespace Code.Meta.Features.Game
         private ICameraService _cameraService;
 
         private VisualElement _gameOverMenu;
-        private VisualElement _canvas;
-        private Image _mask;
 
         private Button _restartButton;
         private Button _townButton;
@@ -42,9 +40,7 @@ namespace Code.Meta.Features.Game
 
         private void Start()
         {
-            _canvas = _gameScreen.GetVisualElement("Canvas");
             _gameOverMenu = _gameScreen.GetVisualElement("GameOverMenu");
-            _mask = _gameOverMenu.Q<Image>("Mask");
             _restartButton = _gameOverMenu.Q<Button>("RestartButton");
             _townButton = _gameOverMenu.Q<Button>("TownButton");
             _exitButton = _gameOverMenu.Q<Button>("ExitButton");
@@ -52,6 +48,8 @@ namespace Code.Meta.Features.Game
             _restartButton.clickable.clicked += Restart;
             _townButton.clickable.clicked += Town;
             _exitButton.clickable.clicked += Exit;
+
+            _uIService.Hide(_gameOverMenu).Forget();
         }
 
         private async void Town()
@@ -60,8 +58,9 @@ namespace Code.Meta.Features.Game
 
             try
             {
+                CloseMenu();
+
                 _cameraService.SetActiveTownCamera();
-                _uIService.Hide(_canvas).Forget();
 
                 var townScene = SceneManager.GetSceneByName(_townSceneName);
 
@@ -98,25 +97,11 @@ namespace Code.Meta.Features.Game
         public void CloseMenu()
         {
             _uIService.Hide(_gameOverMenu).AsAsyncUnitUniTask();
-
-            _gameOverMenu.pickingMode = PickingMode.Ignore;
-            _mask.pickingMode = PickingMode.Ignore;
-
-            _restartButton.pickingMode = PickingMode.Ignore;
-            _townButton.pickingMode = PickingMode.Ignore;
-            _exitButton.pickingMode = PickingMode.Ignore;
         }
 
         public void OpenMenu()
         {
             _uIService.Show(_gameOverMenu).AsAsyncUnitUniTask();
-
-            _gameOverMenu.pickingMode = PickingMode.Position;
-            _mask.pickingMode = PickingMode.Position;
-
-            _restartButton.pickingMode = PickingMode.Position;
-            _townButton.pickingMode = PickingMode.Position;
-            _exitButton.pickingMode = PickingMode.Position;
         }
 
         private void OnDestroy()

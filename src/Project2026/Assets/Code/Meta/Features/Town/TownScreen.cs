@@ -36,7 +36,7 @@ public class TownScreen : MonoBehaviour
     {
         var root = _townDoc.rootVisualElement;
 
-        _canvas = root.Q<VisualElement>("Canvas");
+        _canvas = root.Q<VisualElement>("TowerCanvas");
         _exitButton = root.Q<Button>("ExitButton");
 
         _exitButton.clickable.clicked += ExitTown;
@@ -57,7 +57,9 @@ public class TownScreen : MonoBehaviour
             _transitionScreen.Hide().Forget();
         }
         else if(!_uIService.HasComponent(_canvas, "hide"))
+        {
             _uIService.Hide(_canvas).Forget();
+        }
     }
 
     private async void ExitTown()

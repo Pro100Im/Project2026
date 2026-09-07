@@ -21,7 +21,6 @@ namespace Code.Meta.Features.Game
         private ISceneLoader _sceneLoader;
 
         private VisualElement _pauseMenu;
-        private Image _mask;
 
         private Button _cancelButton;
         private Button _exitButton;
@@ -38,12 +37,13 @@ namespace Code.Meta.Features.Game
         private void Start()
         {
             _pauseMenu = _gameScreen.GetVisualElement("PauseMenu");
-            _mask = _pauseMenu.Q<Image>("Mask");
             _cancelButton = _pauseMenu.Q<Button>("CancelButton");
             _exitButton = _pauseMenu.Q<Button>("ExitButton");
 
             _cancelButton.clickable.clicked += PauseRequest;
             _exitButton.clickable.clicked += Exit;
+
+            _uIService.Hide(_pauseMenu).Forget();
         }
 
         private void PauseRequest()
@@ -69,21 +69,11 @@ namespace Code.Meta.Features.Game
         public void CloseMenu()
         {
             _uIService.Hide(_pauseMenu).AsAsyncUnitUniTask();
-
-            _pauseMenu.pickingMode = PickingMode.Ignore;
-            _mask.pickingMode = PickingMode.Ignore;
-            _cancelButton.pickingMode = PickingMode.Ignore;
-            _exitButton.pickingMode = PickingMode.Ignore;
         }
 
         public void OpenMenu()
         {
             _uIService.Show(_pauseMenu).AsAsyncUnitUniTask();
-
-            _pauseMenu.pickingMode = PickingMode.Position;
-            _mask.pickingMode = PickingMode.Position;
-            _cancelButton.pickingMode = PickingMode.Position;
-            _exitButton.pickingMode = PickingMode.Position;
         }
 
         private void OnDestroy()
