@@ -8,9 +8,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 475775723786083140, guid: 79ec5570a682c0e4cb363fbfb60120cf, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5434488079836592972, guid: 79ec5570a682c0e4cb363fbfb60120cf, type: 3}
       propertyPath: m_Name
-      value: Bushe1_0 (3) Variant
+      value: Bushe1_0 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5450692856242214105, guid: 79ec5570a682c0e4cb363fbfb60120cf, type: 3}
       propertyPath: m_LocalScale.x
