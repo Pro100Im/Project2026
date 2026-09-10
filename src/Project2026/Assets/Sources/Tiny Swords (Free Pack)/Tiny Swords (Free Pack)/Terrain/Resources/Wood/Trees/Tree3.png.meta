@@ -137,7 +137,7 @@ TextureImporter:
       name: Tree3_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
         width: 192
         height: 192
@@ -247,7 +247,7 @@ TextureImporter:
       name: Tree3_5
       rect:
         serializedVersion: 2
-        x: 961
+        x: 960
         y: 0
         width: 192
         height: 192

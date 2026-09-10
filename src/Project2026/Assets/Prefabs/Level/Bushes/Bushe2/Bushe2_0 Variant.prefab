@@ -16,9 +16,13 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1593215029817198705, guid: ca50a83f898e1ad4fb0b341835117f40, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5318065669795062320, guid: ca50a83f898e1ad4fb0b341835117f40, type: 3}
       propertyPath: m_Name
-      value: Bushe2_0 (10) Variant
+      value: Bushe2_0 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8170185723185501106, guid: ca50a83f898e1ad4fb0b341835117f40, type: 3}
       propertyPath: m_LocalScale.x
