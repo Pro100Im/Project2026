@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0e0a06d15a9718e4694b48a80abdea7a
+guid: ed68a681bc7c07249a911ebe806d0b34
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5002096206624228670
-    second: Barracks_0
+      213: 5348348893335098934
+    second: PreSawmill_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 56
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Barracks_0
+      name: PreSawmill_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 10
-        width: 186
-        height: 198
+        x: 0
+        y: 3
+        width: 129
+        height: 171
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e358a286ff30b6540800000000000000
-      internalID: 5002096206624228670
+      spriteID: 63697125bf6293a40800000000000000
+      internalID: 5348348893335098934
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b77a8520657d6644c80955c47f64c080
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Barracks_0: 5002096206624228670
+      PreSawmill_0: 5348348893335098934
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

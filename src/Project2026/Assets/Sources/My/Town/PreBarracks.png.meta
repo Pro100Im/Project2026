@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0e0a06d15a9718e4694b48a80abdea7a
+guid: 6709cc6a53e035846946a6dd550f35e5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5002096206624228670
-    second: Barracks_0
+      213: 259680018152355144
+    second: PreBarracks_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Barracks_0
+      name: PreBarracks_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 10
-        width: 186
-        height: 198
+        x: 0
+        y: 8
+        width: 191
+        height: 205
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e358a286ff30b6540800000000000000
-      internalID: 5002096206624228670
+      spriteID: 845fc35c9919a9300800000000000000
+      internalID: 259680018152355144
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b77a8520657d6644c80955c47f64c080
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Barracks_0: 5002096206624228670
+      PreBarracks_0: 259680018152355144
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

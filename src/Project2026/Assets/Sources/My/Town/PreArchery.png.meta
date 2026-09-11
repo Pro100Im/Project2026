@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0e0a06d15a9718e4694b48a80abdea7a
+guid: b08530811f30633479ae8a0c92a95529
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5002096206624228670
-    second: Barracks_0
+      213: 7540303484126962164
+    second: PreArchery_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Barracks_0
+      name: PreArchery_0
       rect:
         serializedVersion: 2
         x: 3
-        y: 10
+        y: 6
         width: 186
-        height: 198
+        height: 207
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e358a286ff30b6540800000000000000
-      internalID: 5002096206624228670
+      spriteID: 4f1270e811a84a860800000000000000
+      internalID: 7540303484126962164
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b77a8520657d6644c80955c47f64c080
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Barracks_0: 5002096206624228670
+      PreArchery_0: 7540303484126962164
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
