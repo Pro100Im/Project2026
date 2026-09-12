@@ -43,12 +43,10 @@ namespace Code.Game.Common.UI
 
         public async UniTask Show(VisualElement element)
         {
+            if (element.ClassListContains("hide"))
+                await PlayTransition(element, false);
+
             SetSubtreePickingInteractable(element, true);
-
-            if (!element.ClassListContains("hide"))
-                return;
-
-            await PlayTransition(element, false);
         }
 
         private async UniTask PlayTransition(VisualElement element, bool isHiding)
@@ -177,7 +175,7 @@ namespace Code.Game.Common.UI
 
                 if (interactable)
                 {
-                    if (element.userData is PickingMode storedMode && !element.ClassListContains("hide"))
+                    if (element.userData is PickingMode storedMode)
                     {
                         element.pickingMode = storedMode;
                         element.userData = null;
