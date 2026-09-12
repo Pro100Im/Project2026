@@ -1,3 +1,4 @@
+using Code.Game.Features.Town.Systems;
 using Code.Infrastructure.Systems;
 
 namespace Code.Game.Features.Town
@@ -6,7 +7,8 @@ namespace Code.Game.Features.Town
     {
         public TownFeature(ISystemFactory systemFactory)
         {
-            
+            //Add(systemFactory.Create<TownMenuSystem>());
+            Add(systemFactory.Create<TownTestSystem>());
         }
     }
 }
