@@ -9,10 +9,27 @@ namespace Code.Game.Common.UI
 {
     public class UIService
     {
+        private readonly List<VisualElement> _roots = new(4);
         private readonly List<VisualElement> _visualElements = new();
         private readonly Stack<VisualElement> _pickingStack = new();
 
         private readonly Dictionary<VisualElement, CancellationTokenSource> _activeTransitions = new();
+
+        public void RegisterRoot(VisualElement root)
+        {
+            if (root == null || _roots.Contains(root))
+                return;
+
+            _roots.Add(root);
+        }
+
+        public void UnregisterRoot(VisualElement root)
+        {
+            if (root == null)
+                return;
+
+            _roots.Remove(root);
+        }
 
         public async UniTask Hide(VisualElement element)
         {
@@ -102,6 +119,17 @@ namespace Code.Game.Common.UI
 
             movementElement.style.left = clampedX;
             movementElement.style.top = clampedY;
+        }
+
+        public bool IsPointerOverUI(Vector2 screenPos)
+        {
+            for (var i = 0; i < _roots.Count; i++)
+            {
+                if (IsPointerOverUI(screenPos, _roots[i]))
+                    return true;
+            }
+
+            return false;
         }
 
         public bool IsPointerOverUI(Vector2 screenPos, VisualElement element)

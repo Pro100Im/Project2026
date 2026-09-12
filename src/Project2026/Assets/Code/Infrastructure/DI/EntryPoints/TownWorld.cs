@@ -1,8 +1,5 @@
 using Code.Game.Common.Entity;
 using Code.Game.Common.Time;
-using Code.Game.Common.UI.Transition;
-using Code.Game.Features;
-using Code.Game.Features.Input;
 using Code.Game.Features.Town;
 using Code.Infrastructure.Identifiers;
 using Code.Infrastructure.Systems;
@@ -18,10 +15,8 @@ namespace Code.Infrastructure.DI.EntryPoints
     public class TownWorld : ITickable, IInitializable, IDisposable
     {
         private readonly ISystemFactory _systems;
-        private readonly TransitionScreen _transitionScreen;
         private readonly IEntityViewPool _viewPool;
         private readonly ITimeService _timeService;
-
 
         private TownFeature _townFeature;
         private readonly List<GameEntity> _viewReleaseBuffer = new(128);
@@ -67,7 +62,6 @@ namespace Code.Infrastructure.DI.EntryPoints
 
             Contexts.sharedInstance.game.Reset();
             Contexts.sharedInstance.meta.Reset();
-            Contexts.sharedInstance.input.Reset();
             Contexts.sharedInstance.network.Reset();
 
             EntityIdentifier.Reset();

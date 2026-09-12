@@ -34,5 +34,5 @@ Jenny/                        ← Jenny generator + JennyRoslyn.properties + bat
 - `EntityProperty` → `EntityConfig` (ScriptableObject) — данные сущностей в инспекторе
 - `EntityComponentRegistrar` — связывает Unity-объекты с Entitas-сущностями
 - `Feature : Feature` — группирует системы, задаёт порядок выполнения
-- `ISystemFactory` / VContainer resolve — все системы создаются через DI
+- `ISystemFactory` собирает Feature/System по конструктору; VContainer регистрирует только сервисы и фабрику
 - Gameplay follows `.cursor/rules/06-ecs-data-oriented.mdc`: data in components/configs, behavior in Entitas systems

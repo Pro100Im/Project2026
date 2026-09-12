@@ -1,64 +1,8 @@
-using Assets.Code.Game.Features.Debaffs.Systems;
-using Code.Game.Common.Cameras;
-using Code.Game.Common.Destruct;
-using Code.Game.Common.Destruct.Systems;
-using Code.Game.Features;
-using Code.Game.Features.Ability;
-using Code.Game.Features.Ability.Systems;
-using Code.Game.Features.Animator;
-using Code.Game.Features.Animator.Systems;
-using Code.Game.Features.Attack;
-using Code.Game.Features.Attack.Systems;
-using Code.Game.Features.Cooldown;
-using Code.Game.Features.Cooldown.Systems;
-using Code.Game.Features.Damage;
-using Code.Game.Features.Damage.Systems;
-using Code.Game.Features.Death;
-using Code.Game.Features.Death.Systems;
-using Code.Game.Features.Debaffs;
-using Code.Game.Features.Debaffs.Systems;
-using Code.Game.Features.Duration;
-using Code.Game.Features.Duration.Systems;
-using Code.Game.Features.Effect;
-using Code.Game.Features.Effect.Systems;
-using Code.Game.Features.Exchequer;
-using Code.Game.Features.Exchequer.Systems;
-using Code.Game.Features.FloatingText.Systems;
-using Code.Game.Features.GameSession;
-using Code.Game.Features.GameSession.Systems;
-using Code.Game.Features.Health;
-using Code.Game.Features.Health.Systems;
-using Code.Game.Features.Input;
-using Code.Game.Features.Input.Systems;
-using Code.Game.Features.Level;
-using Code.Game.Features.Level.Systems;
-using Code.Game.Features.Movement;
-using Code.Game.Features.Movement.Systems;
-using Code.Game.Features.Pause;
-using Code.Game.Features.Pause.Systems;
-using Code.Game.Features.Player;
-using Code.Game.Features.Player.Systems;
-using Code.Game.Features.Rewards;
-using Code.Game.Features.Rewards.Systems;
-using Code.Game.Features.Spawn;
-using Code.Game.Features.Spawn.Systems;
-using Code.Game.Features.Target;
 using Code.Game.Features.Target.Services;
-using Code.Game.Features.Target.Systems;
-using Code.Game.Features.Tower;
-using Code.Game.Features.Tower.Systems;
-using Code.Game.Features.Unit;
-using Code.Game.Features.Unit.Systems;
-using Code.Game.Features.Wave;
-using Code.Game.Features.Wave.Systems;
-using Code.Game.Input.Service;
-using Code.Game.Input.Systems;
 using Code.Game.StaticData.Configs;
 using Code.Infrastructure.DI.EntryPoints;
 using Code.Infrastructure.Systems;
-using Code.Infrastructure.View;
 using Code.Infrastructure.View.Pool;
-using Code.Infrastructure.View.Systems;
 using Code.Meta.Features.Game;
 using UnityEngine;
 using VContainer;
@@ -74,15 +18,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
         protected override void Configure(IContainerBuilder builder)
         {
             BindServices(builder);
-
             BindGameConfigs(builder);
-
-            BindStateMachine(builder);
-
-            BindFeatures(builder);
-
-            BindSystems(builder);
-
             BindGameFactories(builder);
 
             builder.RegisterEntryPoint<GameWorld>();
@@ -90,178 +26,10 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
         private void BindServices(IContainerBuilder builder)
         {
-            builder.Register<IInputService, InputService>(Lifetime.Singleton);
             builder.Register<IEntityViewPool, EntityViewPoolService>(Lifetime.Singleton);
             builder.Register<TargetService>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<GameScreen>();
             builder.RegisterComponentInHierarchy<UnitRangeView>();
-        }
-
-        private void BindStateMachine(IContainerBuilder builder)
-        {
-            
-        }
-
-        private void BindFeatures(IContainerBuilder builder)
-        {
-            builder.Register<GameTickFeature>(Lifetime.Singleton);
-            builder.Register<GameplayFeature>(Lifetime.Singleton);
-
-            builder.Register<GameSessionFeature>(Lifetime.Singleton);
-            builder.Register<InputFeature>(Lifetime.Singleton);
-            builder.Register<PauseFeature>(Lifetime.Singleton);
-            builder.Register<PlayerFeature>(Lifetime.Singleton);
-            builder.Register<AbilityFeature>(Lifetime.Singleton);
-
-            builder.Register<TowerFeature>(Lifetime.Singleton);
-            builder.Register<UnitFeature>(Lifetime.Singleton);
-
-            builder.Register<CooldownFeature>(Lifetime.Singleton);
-            builder.Register<DurationFeature>(Lifetime.Singleton);
-
-            builder.Register<WaveFeature>(Lifetime.Singleton);
-            builder.Register<SpawnFeature>(Lifetime.Singleton);
-            builder.Register<CreateViewFeature>(Lifetime.Singleton);
-
-            builder.Register<LevelFeature>(Lifetime.Singleton);
-
-            builder.Register<DebuffFeature>(Lifetime.Singleton);
-
-            builder.Register<TargetFeature>(Lifetime.Singleton);
-
-            builder.Register<MovementFeature>(Lifetime.Singleton);
-
-            builder.Register<AttackFeature>(Lifetime.Singleton);
-            builder.Register<DamageFeature>(Lifetime.Singleton);
-
-            builder.Register<HealthFeature>(Lifetime.Singleton);
-            builder.Register<DeathFeature>(Lifetime.Singleton);
-
-            builder.Register<RewardFeature>(Lifetime.Singleton);
-            builder.Register<GameExchequerFeature>(Lifetime.Singleton);
-
-            builder.Register<EffectFeature>(Lifetime.Singleton);
-
-            builder.Register<AnimatorFeature>(Lifetime.Singleton);
-
-            builder.Register<ProcessDestructedFeature>(Lifetime.Singleton);
-        }
-
-        private void BindSystems(IContainerBuilder builder)
-        {
-            builder.Register<CreateEntityViewFromPathSystem>(Lifetime.Singleton);
-            builder.Register<CreateEntityViewFromPrefabSystem>(Lifetime.Singleton);
-
-            builder.Register<GameSessionSystem>(Lifetime.Singleton);
-            builder.Register<GameSessionEndMenuSystem>(Lifetime.Singleton);
-
-            builder.Register<InitializeInputSystem>(Lifetime.Singleton);
-            builder.Register<CapturePointerSystem>(Lifetime.Singleton);
-            builder.Register<CaptureClickSystem>(Lifetime.Singleton);
-            builder.Register<ResolveClickTargetSystem>(Lifetime.Singleton);
-            builder.Register<RouteClickSystem>(Lifetime.Singleton);
-            builder.Register<CleanUpInputSystem>(Lifetime.Singleton);
-            builder.Register<TearDownInputDestructedSystem>(Lifetime.Singleton);
-
-            builder.Register<PauseSystem>(Lifetime.Singleton);
-            builder.Register<PauseMenuSystem>(Lifetime.Singleton);
-            builder.Register<TowerMenuSystem>(Lifetime.Singleton);
-            builder.Register<TowerMenuCloseSystem>(Lifetime.Singleton);
-            builder.Register<TowerMenuAutoCloseSystem>(Lifetime.Singleton);
-
-            builder.Register<PlayerCameraInitSystem>(Lifetime.Singleton);
-
-            builder.Register<AbilitySelectSystem>(Lifetime.Singleton);
-            builder.Register<AbilityCancelSystem>(Lifetime.Singleton);
-            builder.Register<AbilityCastRequestSystem>(Lifetime.Singleton);
-            builder.Register<AbilityTargetingPreviewSystem>(Lifetime.Singleton);
-            builder.Register<AbilityCastSystem>(Lifetime.Singleton);
-
-            builder.Register<WaveInitSystem>(Lifetime.Singleton);
-            builder.Register<WaveStartSystem>(Lifetime.Singleton);
-            builder.Register<WaveProgressSystem>(Lifetime.Singleton);
-
-            builder.Register<TowerBuildSystem>(Lifetime.Singleton);
-            builder.Register<TowerUpgradeSystem>(Lifetime.Singleton);
-
-            builder.Register<UnitRangeViewSystem>(Lifetime.Singleton);
-            builder.Register<UnitRangeViewRefreshSystem>(Lifetime.Singleton);
-
-            builder.Register<EnemySelectSpawnPosSystem>(Lifetime.Singleton);
-            builder.Register<EnemySpawnSystem>(Lifetime.Singleton);
-            builder.Register<PlayerSelectSpawnPosSystem>(Lifetime.Singleton);
-            builder.Register<PlayerSpawnSystem>(Lifetime.Singleton);
-
-            builder.Register<CharacterAnimatorSystem>(Lifetime.Singleton);
-            builder.Register<PlayerCastleAnimatorSystem>(Lifetime.Singleton);
-
-            builder.Register<BuildFlowFieldSystem>(Lifetime.Singleton);
-            builder.Register<OccupiedCellSystem>(Lifetime.Singleton);
-            builder.Register<ReservedCellSystem>(Lifetime.Singleton);
-            builder.Register<UpdateSpatialHashSystem>(Lifetime.Singleton);
-
-            builder.Register<MoveSlowingDownSystem>(Lifetime.Singleton);
-            builder.Register<CombustionSystem>(Lifetime.Singleton);
-            builder.Register<FreezeSystem>(Lifetime.Singleton);
-
-            builder.Register<ReleaseSurroundSlotSystem>(Lifetime.Singleton);
-            builder.Register<SelectCombatTargetSystem>(Lifetime.Singleton);
-            builder.Register<AssignSurroundSlotSystem>(Lifetime.Singleton);
-            builder.Register<RepositionRangedSurroundSlotSystem>(Lifetime.Singleton);
-            builder.Register<UpdateCastleThreatSystem>(Lifetime.Singleton);
-            builder.Register<AssignRallyToCastleSystem>(Lifetime.Singleton);
-            builder.Register<AssignRallySurroundSlotSystem>(Lifetime.Singleton);
-            builder.Register<DefensePatrolSystem>(Lifetime.Singleton);
-            builder.Register<RequestTargetCellSystem>(Lifetime.Singleton);
-            builder.Register<SelectTargetCellSystem>(Lifetime.Singleton);
-
-            builder.Register<GridMovementSystem>(Lifetime.Singleton);
-            builder.Register<FlipAlongMoveDirectionSystem>(Lifetime.Singleton);
-            builder.Register<AttachPosToTargetSystem>(Lifetime.Singleton);
-            builder.Register<TrajectoryMovementSystem>(Lifetime.Singleton);
-            builder.Register<MovementSpeedBonusCleanUpSystem>(Lifetime.Singleton);
-
-            builder.Register<UpdateCombatAimSystem>(Lifetime.Singleton);
-            builder.Register<AttackStartSystem>(Lifetime.Singleton);
-            builder.Register<MeleeAttackEndSystem>(Lifetime.Singleton);
-            builder.Register<RangeAttackEndSystem>(Lifetime.Singleton);
-            builder.Register<AttackActionCompleteSystem>(Lifetime.Singleton);
-            builder.Register<RangeAttackHitSystem>(Lifetime.Singleton);
-            builder.Register<RangeAreaAttackHitSystem>(Lifetime.Singleton);
-
-            builder.Register<PhysicalDamageCanculateSystem>(Lifetime.Singleton);
-            builder.Register<PhysicalDamageHitEffectSystem>(Lifetime.Singleton);
-
-            builder.Register<FrostDamageCanculateSystem>(Lifetime.Singleton);
-            builder.Register<FrostDamageHitEffectSystem>(Lifetime.Singleton);
-
-            builder.Register<FireDamageCanculateSystem>(Lifetime.Singleton);
-            builder.Register<FireDamageHitEffectSystem>(Lifetime.Singleton);
-
-            builder.Register<CreateDamageFloatingTextSystem>(Lifetime.Singleton);
-            builder.Register<ApplyDamageSystem>(Lifetime.Singleton);
-
-            builder.Register<HealthBarSystem>(Lifetime.Singleton);
-            builder.Register<DeathSystem>(Lifetime.Singleton);
-            builder.Register<KillRewardSystem>(Lifetime.Singleton);
-
-            builder.Register<ApplyChillEffectSystem>(Lifetime.Singleton);
-            builder.Register<ApplyCombustionEffectSystem>(Lifetime.Singleton);
-            builder.Register<ApplyFreezeEffectSystem>(Lifetime.Singleton);
-            builder.Register<EffectCheckRequestCleanupSystem>(Lifetime.Singleton);
-            builder.Register<ChillEffectEndSystem>(Lifetime.Singleton);
-            builder.Register<CombustionEffectEndSystem>(Lifetime.Singleton);
-            builder.Register<FreezeEffectEndSystem>(Lifetime.Singleton);
-
-            builder.Register<CooldownLeftSystem>(Lifetime.Singleton);
-            builder.Register<DurationLeftSystem>(Lifetime.Singleton);
-
-            builder.Register<GameGoldExchequerSystem>(Lifetime.Singleton);
-
-            builder.Register<DelayDestructSystem>(Lifetime.Singleton);
-            builder.Register<MetaDestructedSystem>(Lifetime.Singleton);
-            builder.Register<GameDestructedViewSystem>(Lifetime.Singleton);
-            builder.Register<GameDestructedSystem>(Lifetime.Singleton);
         }
 
         private void BindGameFactories(IContainerBuilder builder)

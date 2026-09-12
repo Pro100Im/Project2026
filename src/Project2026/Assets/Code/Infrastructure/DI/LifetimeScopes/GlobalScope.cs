@@ -3,10 +3,12 @@ using Code.Game.Common.Random;
 using Code.Game.Common.Time;
 using Code.Game.Common.UI;
 using Code.Game.Common.UI.Transition;
+using Code.Game.Input.Service;
 using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.DI.EntryPoints;
 using Code.Infrastructure.Helpers;
 using Code.Infrastructure.Loading;
+using Code.Infrastructure.Systems;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -26,10 +28,12 @@ namespace Code.Infrastructure.DI.LifetimeScopes
         {
             BindCommonServices(builder);
             BindAssetManagementServices(builder);
+            BindGameFactories(builder);
 
             builder.RegisterComponentInNewPrefab(_coroutineRunner, Lifetime.Singleton).DontDestroyOnLoad().AsImplementedInterfaces();
             builder.RegisterComponentInNewPrefab(_transitionScreen, Lifetime.Singleton).DontDestroyOnLoad().AsImplementedInterfaces().AsSelf();
             builder.RegisterComponentInNewPrefab(_cameraSirvice, Lifetime.Singleton).DontDestroyOnLoad().AsImplementedInterfaces().AsSelf();
+
             builder.RegisterEntryPoint<GlobalWorld>().WithParameter("eventSystem", _eventSystem).WithParameter("audioListener", _audioListener);
         }
 
@@ -39,11 +43,17 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<IRandomService, RandomService>(Lifetime.Singleton);
             builder.Register<ISceneLoader, SceneLoader>(Lifetime.Singleton);
             builder.Register<UIService>(Lifetime.Singleton);
+            builder.Register<IInputService, InputService>(Lifetime.Singleton);
         }
 
         private void BindAssetManagementServices(IContainerBuilder builder)
         {
             builder.Register<IAssetProvider, AssetProvider>(Lifetime.Singleton);
+        }
+
+        private void BindGameFactories(IContainerBuilder builder)
+        {
+            builder.Register<ISystemFactory, SystemFactory>(Lifetime.Singleton);
         }
     }
 }

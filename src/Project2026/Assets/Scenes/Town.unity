@@ -7883,7 +7883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.DI.LifetimeScopes.TownScope
   parentReference:
-    TypeName: 
+    TypeName: Code.Infrastructure.DI.LifetimeScopes.GlobalScope
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 1674529489}

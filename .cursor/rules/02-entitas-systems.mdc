@@ -45,7 +45,7 @@ public class AttackStartSystem : IExecuteSystem
 - Группа и буфер — `readonly` поля, инициализируются в конструкторе.
 - Буфер — `List<T>` с начальной ёмкостью `new(N)`, не `new List<T>()`.
 - Итерация по буферу — **индексный `for`**, не `foreach`.
-- Зависимости через конструктор (VContainer resolves).
+- Зависимости через конструктор; `ISystemFactory` собирает систему из контейнера (сервисы), без `Register` каждой системы.
 - Guard clauses с `continue`, не вложенный `if`.
 - `IExecuteSystem` — основной. Используй `IInitializeSystem`, `ICleanupSystem`, `ITearDownSystem` только по необходимости.
 
@@ -61,9 +61,18 @@ public class AttackFeature : Feature
 }
 ```
 
-## Регистрация в LifetimeScope
-Каждую систему И каждую Feature регистрировать отдельно:
+## Композиция в LifetimeScope
+VContainer регистрирует **только сервисы и `ISystemFactory`**. Feature и System не регистрируются.
+
+- `GlobalScope` — общие сервисы (Time, Input, UI, …) + фабрика; `GlobalWorld` тикает общие фичи (например `InputFeature`).
+- Сценовый scope (`GameSceneScope`, `TownScope`) — сценовые сервисы + **своя** `ISystemFactory` (резолвер сцены видит parent).
+- Состав систем задаёт корневой Feature мира (`GameTickFeature`, `TownFeature`), а не список `Register` в scope.
+
 ```csharp
-builder.Register<AttackFeature>(Lifetime.Singleton);
-builder.Register<AttackStartSystem>(Lifetime.Singleton);
+// LifetimeScope — только сервисы
+builder.Register<ISystemFactory, SystemFactory>(Lifetime.Singleton);
+builder.Register<TargetService>(Lifetime.Singleton);
+
+// World — композиция
+_feature = _systems.Create<GameTickFeature>();
 ```

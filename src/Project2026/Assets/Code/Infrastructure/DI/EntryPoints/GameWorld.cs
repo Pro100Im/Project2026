@@ -2,7 +2,6 @@ using Code.Game.Common.Entity;
 using Code.Game.Common.Time;
 using Code.Game.Common.UI.Transition;
 using Code.Game.Features;
-using Code.Game.Features.Input;
 using Code.Infrastructure.Identifiers;
 using Code.Infrastructure.Systems;
 using Code.Infrastructure.View;
@@ -21,7 +20,6 @@ namespace Code.Infrastructure.DI.EntryPoints
         private readonly TransitionScreen _transitionScreen;
         private readonly IEntityViewPool _viewPool;
         private readonly ITimeService _timeService;
-        private readonly InputFeature _inputFeature;
 
         private GameTickFeature _gameTickFeature;
         private readonly List<GameEntity> _viewReleaseBuffer = new(128);
@@ -29,13 +27,11 @@ namespace Code.Infrastructure.DI.EntryPoints
         public GameWorld(
             TransitionScreen transitionScreen,
             ISystemFactory systems,
-            InputFeature inputFeature,
             IEntityViewPool viewPool,
             ITimeService timeService)
         {
             _systems = systems;
             _transitionScreen = transitionScreen;
-            _inputFeature = inputFeature;
             _viewPool = viewPool;
             _timeService = timeService;
         }
@@ -53,7 +49,6 @@ namespace Code.Infrastructure.DI.EntryPoints
 
             _gameTickFeature = _systems.Create<GameTickFeature>();
             _gameTickFeature.ActivateReactiveSystems();
-            _inputFeature.ActivateReactiveSystems();
 
             _gameTickFeature.Initialize();
 
@@ -72,19 +67,14 @@ namespace Code.Infrastructure.DI.EntryPoints
                 return;
 
             _gameTickFeature.DeactivateReactiveSystems();
-            _inputFeature.DeactivateReactiveSystems();
 
             ReleaseAllBoundViews();
 
             _gameTickFeature.ClearReactiveSystems();
             _gameTickFeature.TearDown();
 
-            _inputFeature.ClearReactiveSystems();
-            _inputFeature.TearDown();
-
             Contexts.sharedInstance.game.Reset();
             Contexts.sharedInstance.meta.Reset();
-            Contexts.sharedInstance.input.Reset();
             Contexts.sharedInstance.network.Reset();
 
             EntityIdentifier.Reset();

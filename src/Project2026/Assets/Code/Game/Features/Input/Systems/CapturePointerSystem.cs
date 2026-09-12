@@ -1,5 +1,5 @@
+using Code.Game.Common.UI;
 using Code.Game.Input.Service;
-using Code.Meta.Features.Game;
 using Entitas;
 using System.Collections.Generic;
 
@@ -8,15 +8,15 @@ namespace Code.Game.Features.Input.Systems
     public class CapturePointerSystem : IExecuteSystem
     {
         private readonly IInputService _inputService;
-        private readonly GameScreen _gameScreen;
+        private readonly UIService _uiService;
         private readonly IGroup<InputEntity> _pointers;
 
         private readonly List<InputEntity> _pointersBuffer = new(1);
 
-        public CapturePointerSystem(IInputService inputService, GameScreen gameScreen)
+        public CapturePointerSystem(IInputService inputService, UIService uiService)
         {
             _inputService = inputService;
-            _gameScreen = gameScreen;
+            _uiService = uiService;
 
             _pointers = Contexts.sharedInstance.input.GetGroup(InputMatcher
                 .AllOf(InputMatcher.PointerState)
@@ -28,7 +28,7 @@ namespace Code.Game.Features.Input.Systems
             var pointers = _pointers.GetEntities(_pointersBuffer);
             var screenPointer = _inputService.GetPointer();
             var worldPointer = _inputService.GetWorldPointer();
-            var overUI = _gameScreen.IsPointerOverUI(screenPointer);
+            var overUI = _uiService.IsPointerOverUI(screenPointer);
 
             for (var i = 0; i < pointers.Count; i++)
             {

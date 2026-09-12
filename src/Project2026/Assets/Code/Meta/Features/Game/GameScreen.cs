@@ -2,8 +2,6 @@ using Code.Game.Common.Entity;
 using Code.Game.Common.UI;
 using Code.Game.Common.UI.Transition;
 using Cysharp.Threading.Tasks;
-using System;
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -46,6 +44,7 @@ namespace Code.Meta.Features.Game
 
         private void Start()
         {
+            _uIService.RegisterRoot(_root);
             SceneManager.activeSceneChanged += OnActiveSceneChanged;
         }
 
@@ -84,13 +83,9 @@ namespace Code.Meta.Features.Game
             entityClick.isInput = true;
         }
 
-        public bool IsPointerOverUI(Vector2 screenPos)
-        {
-            return _uIService.IsPointerOverUI(screenPos, _root);
-        }
-
         private void OnDestroy()
         {
+            _uIService?.UnregisterRoot(_root);
             _startWaveButton.clickable.clicked -= StartWave;
             _menuButton.clickable.clicked -= PauseRequest;
         }
