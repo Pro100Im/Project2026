@@ -8,7 +8,7 @@ namespace Code.Game.Features.Town
         public TownFeature(ISystemFactory systemFactory)
         {
             //Add(systemFactory.Create<TownMenuSystem>());
-            Add(systemFactory.Create<TownTestSystem>());
+            //Add(systemFactory.Create<TownTestSystem>());
         }
     }
 }

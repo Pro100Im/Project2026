@@ -24,15 +24,15 @@ public partial class Contexts : Entitas.IContexts {
     public GameContext game { get; set; }
     public InputContext input { get; set; }
     public MetaContext meta { get; set; }
-    public NetworkContext network { get; set; }
+    public TownContext town { get; set; }
 
-    public Entitas.IContext[] allContexts { get { return new Entitas.IContext [] { game, input, meta, network }; } }
+    public Entitas.IContext[] allContexts { get { return new Entitas.IContext [] { game, input, meta, town }; } }
 
     public Contexts() {
         game = new GameContext();
         input = new InputContext();
         meta = new MetaContext();
-        network = new NetworkContext();
+        town = new TownContext();
 
         var postConstructors = System.Linq.Enumerable.Where(
             GetType().GetMethods(),
@@ -70,6 +70,10 @@ public partial class Contexts {
             Id,
             game.GetGroup(GameMatcher.Id),
             (e, c) => ((Code.Game.Common.Id)c).Value));
+        town.AddEntityIndex(new Entitas.PrimaryEntityIndex<TownEntity, int>(
+            Id,
+            town.GetGroup(TownMatcher.Id),
+            (e, c) => ((Code.Game.Common.Id)c).Value));
     }
 }
 
@@ -77,6 +81,10 @@ public static class ContextsExtensions {
 
     public static GameEntity GetEntityWithId(this GameContext context, int Value) {
         return ((Entitas.PrimaryEntityIndex<GameEntity, int>)context.GetEntityIndex(Contexts.Id)).GetEntity(Value);
+    }
+
+    public static TownEntity GetEntityWithId(this TownContext context, int Value) {
+        return ((Entitas.PrimaryEntityIndex<TownEntity, int>)context.GetEntityIndex(Contexts.Id)).GetEntity(Value);
     }
 }
 //------------------------------------------------------------------------------
@@ -97,7 +105,7 @@ public partial class Contexts {
             CreateContextObserver(game);
             CreateContextObserver(input);
             CreateContextObserver(meta);
-            CreateContextObserver(network);
+            CreateContextObserver(town);
         } catch(System.Exception e) {
             UnityEngine.Debug.LogError(e);
         }

@@ -6,8 +6,8 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed class NetworkAttribute : Entitas.CodeGeneration.Attributes.ContextAttribute {
+public sealed class TownAttribute : Entitas.CodeGeneration.Attributes.ContextAttribute {
 
-    public NetworkAttribute() : base("Network") {
+    public TownAttribute() : base("Town") {
     }
 }

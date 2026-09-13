@@ -7,31 +7,31 @@ using UnityEngine.UIElements;
 
 namespace Code.Game.Common
 {
-    [Game] public class Id : IComponent { [PrimaryEntityIndex] public int Value; }
+    [Game, Town] public class Id : IComponent { [PrimaryEntityIndex] public int Value; }
     [Game] public class SortOrder : IComponent { public int Value; } 
-    [Game] public class Attached : IComponent { }
-    [Game] public class OwnerId : IComponent { public int Value; }
+    [Game, Town] public class Attached : IComponent { }
+    [Game, Town] public class OwnerId : IComponent { public int Value; }
     [Game] public class TeamComponent : IComponent { public Team Value; }
     [Game] public class WoldPosComponent : IComponent { public Vector3 Value; }
 
-    [Game] public class EntityConfigComponent : IComponent { public EntityConfig Value; }
+    [Game, Town] public class EntityConfigComponent : IComponent { public EntityConfig Value; }
 
     [Game] public class TransformComponent : IComponent { public Transform Value; }
     [Game] public class AnimatorComponent : IComponent { public Animator Value; }
-    [Game] public class SpriteRendererComponent : IComponent { public SpriteRenderer Value; }
-    [Game] public class UIDocumentComponent : IComponent { public UIDocument Value; }
+    [Game, Town] public class SpriteRendererComponent : IComponent { public SpriteRenderer Value; }
+    [Game, Town] public class UIDocumentComponent : IComponent { public UIDocument Value; }
     [Game] public class BoundsComponent : IComponent { public SpriteRenderer Value; }
     [Game] public class TouchZoneComponent : IComponent { public SpriteRenderer Value; }
     [Game] public class Interactable : IComponent { }
     [Game] public class LineRendererComponent : IComponent { public LineRenderer Value; }
 
-    [Game] public class View : IComponent { public IEntityView Value; }
+    [Game, Town] public class View : IComponent { public IEntityView Value; }
     [Game] public class ViewPath : IComponent { public string Value; }
     [Game] public class ViewPrefab : IComponent { public EntityBehaviour Value; }
-    [Game] public class SpriteComponent : IComponent { public Sprite Value; }
+    [Game, Town] public class SpriteComponent : IComponent { public Sprite Value; }
 
-    [Game, Input, Meta] public class Destructed : IComponent { }
-    [Game, Meta] public class DelayDestruct : IComponent { }
+    [Game, Input, Meta, Town] public class Destructed : IComponent { }
+    [Game, Meta, Town] public class DelayDestruct : IComponent { }
 }
 
 public enum Team

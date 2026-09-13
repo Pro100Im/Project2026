@@ -6,16 +6,16 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed partial class NetworkContext : Entitas.Context<NetworkEntity> {
+public sealed partial class TownContext : Entitas.Context<TownEntity> {
 
-    public NetworkContext()
+    public TownContext()
         : base(
-            NetworkComponentsLookup.TotalComponents,
+            TownComponentsLookup.TotalComponents,
             0,
             new Entitas.ContextInfo(
-                "Network",
-                NetworkComponentsLookup.componentNames,
-                NetworkComponentsLookup.componentTypes
+                "Town",
+                TownComponentsLookup.componentNames,
+                TownComponentsLookup.componentTypes
             ),
             (entity) =>
 
@@ -24,7 +24,7 @@ public sealed partial class NetworkContext : Entitas.Context<NetworkEntity> {
 #else
                 new Entitas.SafeAERC(entity),
 #endif
-            () => new NetworkEntity()
+            () => new TownEntity()
         ) {
     }
 }

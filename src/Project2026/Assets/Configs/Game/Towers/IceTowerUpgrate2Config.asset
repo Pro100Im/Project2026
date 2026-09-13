@@ -32,7 +32,7 @@ MonoBehaviour:
       type: {class: SpriteProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 1
-        <_sprite>k__BackingField: {fileID: 21300000, guid: 8bd8ba6cad2c52f4bb13dcc59e396c1c, type: 3}
+        <_sprite>k__BackingField: {fileID: 21300000, guid: 7924b74e873967c4b8ec17158f304da6, type: 3}
     - rid: 2286603194387136871
       type: {class: AttackProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:

@@ -75,7 +75,6 @@ namespace Code.Infrastructure.DI.EntryPoints
 
             Contexts.sharedInstance.game.Reset();
             Contexts.sharedInstance.meta.Reset();
-            Contexts.sharedInstance.network.Reset();
 
             EntityIdentifier.Reset();
             _timeService.StartTime();

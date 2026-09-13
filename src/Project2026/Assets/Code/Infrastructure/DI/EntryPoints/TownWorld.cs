@@ -60,16 +60,16 @@ namespace Code.Infrastructure.DI.EntryPoints
             _townFeature.ClearReactiveSystems();
             _townFeature.TearDown();
 
-            Contexts.sharedInstance.game.Reset();
+            Contexts.sharedInstance.town.Reset();
             Contexts.sharedInstance.meta.Reset();
-            Contexts.sharedInstance.network.Reset();
 
             EntityIdentifier.Reset();
+
             _timeService.StartTime();
             _viewPool.Clear();
 
             _townFeature = null;
-        }
+        } 
 
         private void ReleaseAllBoundViews()
         {
