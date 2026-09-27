@@ -129,6 +129,9 @@ GameObject:
   m_Component:
   - component: {fileID: 31265196}
   - component: {fileID: 31265197}
+  - component: {fileID: 91000000011}
+  - component: {fileID: 91000000012}
+  - component: {fileID: 91000000013}
   m_Layer: 0
   m_Name: Houses
   m_TagString: Untagged
@@ -337,6 +340,9 @@ GameObject:
   - component: {fileID: 40798092}
   - component: {fileID: 40798093}
   - component: {fileID: 40798094}
+  - component: {fileID: 91000000051}
+  - component: {fileID: 91000000052}
+  - component: {fileID: 91000000053}
   m_Layer: 0
   m_Name: CrystalMine
   m_TagString: Untagged
@@ -8051,6 +8057,9 @@ GameObject:
   - component: {fileID: 1148856543}
   - component: {fileID: 1148856544}
   - component: {fileID: 1148856545}
+  - component: {fileID: 91000000031}
+  - component: {fileID: 91000000032}
+  - component: {fileID: 91000000033}
   m_Layer: 0
   m_Name: GoldMine
   m_TagString: Untagged
@@ -9257,6 +9266,9 @@ GameObject:
   - component: {fileID: 1528750770}
   - component: {fileID: 1528750769}
   - component: {fileID: 1528750771}
+  - component: {fileID: 91000000071}
+  - component: {fileID: 91000000072}
+  - component: {fileID: 91000000073}
   m_Layer: 0
   m_Name: Monastery_0
   m_TagString: Untagged
@@ -9431,6 +9443,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1542810560}
   - component: {fileID: 1542810561}
+  - component: {fileID: 91000000091}
+  - component: {fileID: 91000000092}
+  - component: {fileID: 91000000093}
   m_Layer: 0
   m_Name: Towers
   m_TagString: Untagged
@@ -9739,6 +9754,9 @@ GameObject:
   - component: {fileID: 1595850076}
   - component: {fileID: 1595850077}
   - component: {fileID: 1595850078}
+  - component: {fileID: 91000000061}
+  - component: {fileID: 91000000062}
+  - component: {fileID: 91000000063}
   m_Layer: 0
   m_Name: Sawmill
   m_TagString: Untagged
@@ -10712,6 +10730,10 @@ GameObject:
   - component: {fileID: 1674529490}
   - component: {fileID: 1674529491}
   - component: {fileID: 1674529492}
+  - component: {fileID: 91000000994}
+  - component: {fileID: 91000000991}
+  - component: {fileID: 91000000992}
+  - component: {fileID: 91000000993}
   m_Layer: 0
   m_Name: TownScreen
   m_TagString: Untagged
@@ -11067,6 +11089,9 @@ GameObject:
   - component: {fileID: 1769449615}
   - component: {fileID: 1769449614}
   - component: {fileID: 1769449616}
+  - component: {fileID: 91000000081}
+  - component: {fileID: 91000000082}
+  - component: {fileID: 91000000083}
   m_Layer: 0
   m_Name: Archery_0
   m_TagString: Untagged
@@ -12830,6 +12855,9 @@ GameObject:
   - component: {fileID: 1788071126}
   - component: {fileID: 1788071125}
   - component: {fileID: 1788071127}
+  - component: {fileID: 91000000021}
+  - component: {fileID: 91000000022}
+  - component: {fileID: 91000000023}
   m_Layer: 0
   m_Name: Barracks_0
   m_TagString: Untagged
@@ -13658,6 +13686,9 @@ GameObject:
   - component: {fileID: 1988550391}
   - component: {fileID: 1988550392}
   - component: {fileID: 1988550393}
+  - component: {fileID: 91000000041}
+  - component: {fileID: 91000000042}
+  - component: {fileID: 91000000043}
   m_Layer: 0
   m_Name: RuneStoneMine
   m_TagString: Untagged
@@ -14591,6 +14622,419 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 1
+--- !u!114 &91000000011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31265195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf52ff83532434a90247285ff775c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownEntityBehaviour
+--- !u!114 &91000000012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31265195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cd618498c449099b0d1795ac7c789f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownSelfInitializeEntityView
+  _entityBehaviour: {fileID: 91000000011}
+--- !u!114 &91000000013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31265195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a837f21a27644519be1ad2a19fcc30d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Town.Registrars.TownBuildingRegistrar
+  EntityView: {fileID: 91000000011}
+  _config: {fileID: 11400000, guid: 924229e1337c4723835c43abb97aa4b0, type: 2}
+  _view: {fileID: 31265197}
+--- !u!114 &91000000021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788071124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf52ff83532434a90247285ff775c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownEntityBehaviour
+--- !u!114 &91000000022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788071124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cd618498c449099b0d1795ac7c789f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownSelfInitializeEntityView
+  _entityBehaviour: {fileID: 91000000021}
+--- !u!114 &91000000023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788071124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a837f21a27644519be1ad2a19fcc30d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Town.Registrars.TownBuildingRegistrar
+  EntityView: {fileID: 91000000021}
+  _config: {fileID: 11400000, guid: 6f8adc14a815414882b071edb08d9603, type: 2}
+  _view: {fileID: 1788071127}
+--- !u!114 &91000000031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148856542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf52ff83532434a90247285ff775c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownEntityBehaviour
+--- !u!114 &91000000032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148856542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cd618498c449099b0d1795ac7c789f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownSelfInitializeEntityView
+  _entityBehaviour: {fileID: 91000000031}
+--- !u!114 &91000000033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148856542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a837f21a27644519be1ad2a19fcc30d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Town.Registrars.TownBuildingRegistrar
+  EntityView: {fileID: 91000000031}
+  _config: {fileID: 11400000, guid: 966ff1b2342e46419978cce24c4c8f89, type: 2}
+  _view: {fileID: 1148856545}
+--- !u!114 &91000000041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988550390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf52ff83532434a90247285ff775c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownEntityBehaviour
+--- !u!114 &91000000042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988550390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cd618498c449099b0d1795ac7c789f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownSelfInitializeEntityView
+  _entityBehaviour: {fileID: 91000000041}
+--- !u!114 &91000000043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988550390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a837f21a27644519be1ad2a19fcc30d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Town.Registrars.TownBuildingRegistrar
+  EntityView: {fileID: 91000000041}
+  _config: {fileID: 11400000, guid: 84bfe49029294846a1626b34fb37cfcb, type: 2}
+  _view: {fileID: 1988550393}
+--- !u!114 &91000000051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40798091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf52ff83532434a90247285ff775c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownEntityBehaviour
+--- !u!114 &91000000052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40798091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cd618498c449099b0d1795ac7c789f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownSelfInitializeEntityView
+  _entityBehaviour: {fileID: 91000000051}
+--- !u!114 &91000000053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40798091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a837f21a27644519be1ad2a19fcc30d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Town.Registrars.TownBuildingRegistrar
+  EntityView: {fileID: 91000000051}
+  _config: {fileID: 11400000, guid: 9cd15aa5560e4ade9e0255b21747d93f, type: 2}
+  _view: {fileID: 40798094}
+--- !u!114 &91000000061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595850075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf52ff83532434a90247285ff775c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownEntityBehaviour
+--- !u!114 &91000000062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595850075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cd618498c449099b0d1795ac7c789f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownSelfInitializeEntityView
+  _entityBehaviour: {fileID: 91000000061}
+--- !u!114 &91000000063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595850075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a837f21a27644519be1ad2a19fcc30d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Town.Registrars.TownBuildingRegistrar
+  EntityView: {fileID: 91000000061}
+  _config: {fileID: 11400000, guid: 60a9fa410b904865a7bbd0413f471bd8, type: 2}
+  _view: {fileID: 1595850078}
+--- !u!114 &91000000071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528750768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf52ff83532434a90247285ff775c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownEntityBehaviour
+--- !u!114 &91000000072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528750768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cd618498c449099b0d1795ac7c789f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownSelfInitializeEntityView
+  _entityBehaviour: {fileID: 91000000071}
+--- !u!114 &91000000073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528750768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a837f21a27644519be1ad2a19fcc30d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Town.Registrars.TownBuildingRegistrar
+  EntityView: {fileID: 91000000071}
+  _config: {fileID: 11400000, guid: 2133f33efcc84008ba60dfcc879f68eb, type: 2}
+  _view: {fileID: 1528750771}
+--- !u!114 &91000000081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769449613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf52ff83532434a90247285ff775c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownEntityBehaviour
+--- !u!114 &91000000082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769449613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cd618498c449099b0d1795ac7c789f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownSelfInitializeEntityView
+  _entityBehaviour: {fileID: 91000000081}
+--- !u!114 &91000000083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769449613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a837f21a27644519be1ad2a19fcc30d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Town.Registrars.TownBuildingRegistrar
+  EntityView: {fileID: 91000000081}
+  _config: {fileID: 11400000, guid: 15012dac2cef4828a203ce81516b8f97, type: 2}
+  _view: {fileID: 1769449616}
+--- !u!114 &91000000091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542810559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf52ff83532434a90247285ff775c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownEntityBehaviour
+--- !u!114 &91000000092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542810559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cd618498c449099b0d1795ac7c789f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownSelfInitializeEntityView
+  _entityBehaviour: {fileID: 91000000091}
+--- !u!114 &91000000093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542810559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a837f21a27644519be1ad2a19fcc30d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Town.Registrars.TownBuildingRegistrar
+  EntityView: {fileID: 91000000091}
+  _config: {fileID: 11400000, guid: c83683e599994d3099dcff15d32ba232, type: 2}
+  _view: {fileID: 1542810561}
+--- !u!114 &91000000994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674529489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e00145aeb4104e9c9fcfe821e859f32d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Meta.Features.Town.TownBuildMenu
+  _townScreen: {fileID: 1674529492}
+  _slotTemplate: {fileID: 9197481963319205126, guid: 7bb695ea573149c486dd10c50337ae93, type: 3}
+--- !u!114 &91000000991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674529489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf52ff83532434a90247285ff775c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownEntityBehaviour
+--- !u!114 &91000000992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674529489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cd618498c449099b0d1795ac7c789f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.View.TownSelfInitializeEntityView
+  _entityBehaviour: {fileID: 91000000991}
+--- !u!114 &91000000993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674529489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22bc4edfdba24bec91359664397c9b1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Town.Registrars.TownBuildMenuRegistrar
+  EntityView: {fileID: 91000000991}
+  _townBuildMenu: {fileID: 91000000994}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

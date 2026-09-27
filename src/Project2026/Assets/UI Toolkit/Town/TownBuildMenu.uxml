@@ -1,0 +1,11 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Global/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=f0b50401ae793a440bdbacc20d05f547&amp;type=3#GlobalStyle"/>
+    <Style src="project://database/Assets/UI%20Toolkit/Town/TownBuildMenu.uss?fileID=7433441132597879392&amp;guid=717f716ece1640368b7d001a00317038&amp;type=3#TownBuildMenu"/>
+    <ui:VisualElement name="TownBuildMenu" picking-mode="Position" class="build-menu-overlay hide" style="display: none;">
+        <ui:VisualElement name="TownBuildPanel" picking-mode="Position" class="build-menu-panel">
+            <ui:Label text="Build" name="TownBuildTitle" picking-mode="Ignore" class="commonText build-menu-title"/>
+            <ui:VisualElement name="TownBuildColumns" picking-mode="Ignore" class="build-columns"/>
+            <ui:Button text="" name="TownBuildCloseButton" class="build-menu-close"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

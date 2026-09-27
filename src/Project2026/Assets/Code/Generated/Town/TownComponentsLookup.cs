@@ -18,8 +18,16 @@ public static class TownComponentsLookup {
     public const int SpriteRenderer = 7;
     public const int UIDocument = 8;
     public const int View = 9;
+    public const int TownBuilding = 10;
+    public const int TownBuildingConfig = 11;
+    public const int TownBuildingLevel = 12;
+    public const int TownBuildingMaxLevel = 13;
+    public const int TownBuildingType = 14;
+    public const int TownBuildMenu = 15;
+    public const int TownBuildMenuOpened = 16;
+    public const int TownView = 17;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 18;
 
     public static readonly string[] componentNames = {
         "Attached",
@@ -31,7 +39,15 @@ public static class TownComponentsLookup {
         "Sprite",
         "SpriteRenderer",
         "UIDocument",
-        "View"
+        "View",
+        "TownBuilding",
+        "TownBuildingConfig",
+        "TownBuildingLevel",
+        "TownBuildingMaxLevel",
+        "TownBuildingType",
+        "TownBuildMenu",
+        "TownBuildMenuOpened",
+        "TownView"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -44,6 +60,14 @@ public static class TownComponentsLookup {
         typeof(Code.Game.Common.SpriteComponent),
         typeof(Code.Game.Common.SpriteRendererComponent),
         typeof(Code.Game.Common.UIDocumentComponent),
-        typeof(Code.Game.Common.View)
+        typeof(Code.Game.Common.View),
+        typeof(Code.Game.Features.Town.TownBuilding),
+        typeof(Code.Game.Features.Town.TownBuildingConfigComponent),
+        typeof(Code.Game.Features.Town.TownBuildingLevel),
+        typeof(Code.Game.Features.Town.TownBuildingMaxLevel),
+        typeof(Code.Game.Features.Town.TownBuildingType),
+        typeof(Code.Game.Features.Town.TownBuildMenuComponent),
+        typeof(Code.Game.Features.Town.TownBuildMenuOpened),
+        typeof(Code.Game.Features.Town.TownViewComponent)
     };
 }

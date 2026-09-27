@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1af465e3bec4ed98fe2dd077cb4d028, type: 3}
+  m_Name: SawmillConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.TownBuildingConfig
+  <Type>k__BackingField: 5
+  <Title>k__BackingField: Sawmill
+  <Levels>k__BackingField:
+  - <Title>k__BackingField: Sawmill
+    <Icon>k__BackingField: {fileID: 21300000, guid: 983c11389b437f441b7510c75e109763, type: 3}

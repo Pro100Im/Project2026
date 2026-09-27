@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1af465e3bec4ed98fe2dd077cb4d028, type: 3}
+  m_Name: HousesConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.TownBuildingConfig
+  <Type>k__BackingField: 0
+  <Title>k__BackingField: Houses
+  <Levels>k__BackingField:
+  - <Title>k__BackingField: Houses I
+    <Icon>k__BackingField: {fileID: -5391499930902814504, guid: ad4db5eb18da7504b9c9ce4371cb5da5, type: 3}
+  - <Title>k__BackingField: Houses II
+    <Icon>k__BackingField: {fileID: -6871032511782127585, guid: bd8488faf20faa2469ca28baf489a3dd, type: 3}

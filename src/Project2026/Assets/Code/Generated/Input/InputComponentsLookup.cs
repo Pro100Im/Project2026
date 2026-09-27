@@ -12,27 +12,33 @@ public static class InputComponentsLookup {
     public const int PauseRequested = 1;
     public const int Destructed = 2;
     public const int TargetId = 3;
-    public const int AbilityCastIntent = 4;
-    public const int CancelClick = 5;
-    public const int CancelIntent = 6;
-    public const int ClickInput = 7;
-    public const int EntityInteractIntent = 8;
-    public const int Input = 9;
-    public const int InteractTarget = 10;
-    public const int PointerInput = 11;
-    public const int PointerOverUI = 12;
-    public const int PointerState = 13;
-    public const int PrimaryClick = 14;
-    public const int ScreenPointerInput = 15;
-    public const int WorldPointerInput = 16;
+    public const int TownBuildMenuCloseRequested = 4;
+    public const int TownBuildMenuToggleRequested = 5;
+    public const int TownBuildRequested = 6;
+    public const int AbilityCastIntent = 7;
+    public const int CancelClick = 8;
+    public const int CancelIntent = 9;
+    public const int ClickInput = 10;
+    public const int EntityInteractIntent = 11;
+    public const int Input = 12;
+    public const int InteractTarget = 13;
+    public const int PointerInput = 14;
+    public const int PointerOverUI = 15;
+    public const int PointerState = 16;
+    public const int PrimaryClick = 17;
+    public const int ScreenPointerInput = 18;
+    public const int WorldPointerInput = 19;
 
-    public const int TotalComponents = 17;
+    public const int TotalComponents = 20;
 
     public static readonly string[] componentNames = {
         "ForcedPauseRequested",
         "PauseRequested",
         "Destructed",
         "TargetId",
+        "TownBuildMenuCloseRequested",
+        "TownBuildMenuToggleRequested",
+        "TownBuildRequested",
         "AbilityCastIntent",
         "CancelClick",
         "CancelIntent",
@@ -53,6 +59,9 @@ public static class InputComponentsLookup {
         typeof(Assets.Code.Game.Features.Pause.PauseRequested),
         typeof(Code.Game.Common.Destructed),
         typeof(Code.Game.Features.Target.TargetId),
+        typeof(Code.Game.Features.Town.TownBuildMenuCloseRequested),
+        typeof(Code.Game.Features.Town.TownBuildMenuToggleRequested),
+        typeof(Code.Game.Features.Town.TownBuildRequested),
         typeof(Code.Game.Input.AbilityCastIntent),
         typeof(Code.Game.Input.CancelClick),
         typeof(Code.Game.Input.CancelIntent),

@@ -1,19 +1,41 @@
 using Code.Game.Features.Town.Views;
-using Code.Meta.Features.Game;
+using Code.Game.StaticData.Configs;
+using Code.Meta.Features.Town;
 using Entitas;
 
 namespace Code.Game.Features.Town
 {
-    //[Game] public class TownCastle : IComponent { }
-    //[Game] public class ActiveBuilding : IComponent { }
-    //[Game] public class TownBuildingLevel : IComponent { public int Value; }
-    //[Game] public class TownBuildingMaxLevel : IComponent { public int Value; }
-    //[Game] public class VillageViewComponent : IComponent { public TownView Value; }
-    //[Game] public class TowersViewComponent : IComponent { public TownView Value; }
-    //[Game] public class GoldMineViewComponent : IComponent { public TownView Value; }
-    //[Game] public class KnightBarrackViewComponent : IComponent { public TownView Value; }
-    //[Game] public class ArcherBarrackViewComponent : IComponent { public TownView Value; }
-    //[Game] public class CathedralViewComponent : IComponent { public TownView Value; }
+    [Town] public class TownBuilding : IComponent { }
+    [Town] public class TownBuildingType : IComponent { public BuildingType Value; }
+    [Town] public class TownBuildingLevel : IComponent { public int Value; }
+    [Town] public class TownBuildingMaxLevel : IComponent { public int Value; }
+    [Town] public class TownBuildingConfigComponent : IComponent { public TownBuildingConfig Value; }
+    [Town] public class TownViewComponent : IComponent { public TownView Value; }
 
-    //[Meta] public class PauseMenuComponent : IComponent { public PauseMenu Value; }
+    [Town] public class TownBuildMenuComponent : IComponent { public TownBuildMenu Value; }
+    [Town] public class TownBuildMenuOpened : IComponent { }
+
+    [Input] public class TownBuildMenuToggleRequested : IComponent { }
+    [Input] public class TownBuildMenuCloseRequested : IComponent { }
+    [Input] public class TownBuildRequested : IComponent { public BuildingType Value; }
+
+    public enum BuildingType
+    {
+        Houses,
+        Barracks,
+        GoldMine,
+        StoneMine,
+        CrystalMine,
+        Sawmill,
+        Church,
+        Archery,
+        Towers
+    }
+
+    public enum TownBuildSlotState
+    {
+        Built,
+        Available,
+        Locked
+    }
 }

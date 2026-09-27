@@ -1,0 +1,123 @@
+.build-menu-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.45);
+    transition-property: opacity;
+    transition-duration: 0.2s;
+}
+
+.build-menu-panel {
+    width: 1120px;
+    height: 600px;
+    padding-top: 70px;
+    padding-right: 30px;
+    padding-bottom: 40px;
+    padding-left: 30px;
+    align-items: center;
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Banners/Banner_Slots.png?fileID=2800000&guid=072717bc57c49fe4b8d08208e4b8c83c&type=3#Banner_Slots");
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+.build-menu-title {
+    position: absolute;
+    top: 18px;
+    left: 0;
+    right: 0;
+    font-size: 44px;
+}
+
+.build-menu-close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 70px;
+    height: 70px;
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Icons/Icon_09.png?fileID=2800000&guid=a90ab0d79a24370459b8936305e6c969&type=3#Icon_09");
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.build-columns {
+    flex-grow: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.build-column {
+    width: 116px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.build-slot {
+    width: 108px;
+    height: 150px;
+    margin-top: 4px;
+    margin-right: 0;
+    margin-bottom: 4px;
+    margin-left: 0;
+    padding-top: 6px;
+    padding-right: 4px;
+    padding-bottom: 6px;
+    padding-left: 4px;
+    align-items: center;
+    justify-content: space-between;
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Cursors/Cursor_04.png?fileID=2800000&guid=434fa6d8f91adba44ba63b4ab1b7c81b&type=3#Cursor_04");
+    -unity-background-scale-mode: stretch-to-fill;
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    transition-property: scale, opacity;
+    transition-duration: 0.1s;
+}
+
+.build-slot:disabled {
+    opacity: 1;
+}
+
+.build-slot:hover:enabled {
+    scale: 1.06 1.06;
+}
+
+.build-slot__icon {
+    width: 76px;
+    height: 70px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.build-slot__title {
+    font-size: 18px;
+    white-space: normal;
+}
+
+.build-slot__state {
+    font-size: 16px;
+}
+
+.build-slot--built {
+    -unity-background-image-tint-color: rgb(170, 230, 150);
+}
+
+.build-slot--built .build-slot__state {
+    color: rgb(40, 110, 30);
+}
+
+.build-slot--available .build-slot__state {
+    color: rgb(150, 90, 10);
+}
+
+.build-slot--locked:disabled {
+    opacity: 0.45;
+}
