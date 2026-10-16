@@ -38,7 +38,10 @@ namespace Code.Game.Features.Town.Systems
                 var request = entities[i];
 
                 if (isMenuOpened)
+                {
+                    menu.isTownBuildMenuOpened = false;
                     Build(request.townBuildRequested.Value);
+                }
 
                 request.RemoveTownBuildRequested();
                 request.isDestructed = true;

@@ -8,8 +8,8 @@ namespace Code.Game.Features.Town
         public TownFeature(ISystemFactory systemFactory)
         {
             Add(systemFactory.Create<TownBuildMenuToggleSystem>());
-            Add(systemFactory.Create<TownBuildMenuOpenSystem>());
             Add(systemFactory.Create<TownBuildSystem>());
+            Add(systemFactory.Create<TownBuildMenuOpenSystem>());
             Add(systemFactory.Create<TownBuildingViewSystem>());
             Add(systemFactory.Create<TownBuildMenuRenderSystem>());
         }
