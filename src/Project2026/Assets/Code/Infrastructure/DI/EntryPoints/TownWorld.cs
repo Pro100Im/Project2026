@@ -84,6 +84,14 @@ namespace Code.Infrastructure.DI.EntryPoints
                 entity.view.Value.ReleaseEntity();
             }
 
+            var townViews = UnityEngine.Object.FindObjectsByType<TownEntityBehaviour>(FindObjectsInactive.Include);
+
+            for (var i = 0; i < townViews.Length; i++)
+            {
+                if (townViews[i].Entity != null)
+                    townViews[i].ReleaseEntity();
+            }
+
             var metaViews = UnityEngine.Object.FindObjectsByType<MetaEntityBehaviour>(FindObjectsInactive.Include);
 
             for (var i = 0; i < metaViews.Length; i++)
