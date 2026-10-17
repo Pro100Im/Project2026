@@ -10,15 +10,9 @@ namespace Code.Game.Features.Target.Systems
 {
     public class SelectTargetCellSystem : IExecuteSystem
     {
-        private const float BlockedIdealPushPenalty = 20f;
-        private const float BlockedByAttackingAllyPenalty = 100f;
-        private const float BlockedByIdleAllyPenalty = 50f;
-        private const float BlockedByMovingAllyPenalty = 5f;
         private const float IdealStepBonus = 20f;
         private const float SameDirectionBonus = 8f;
-        private const float JitterPerIdMod = 0.1f;
         private const float DirectSameDirectionBonus = 0.5f;
-        private const float DirectJitterPerIdMod = 0.01f;
         private const float MoveWaitThreshold = 0.35f;
         private const int DetourCommitSteps = 2;
 
@@ -118,45 +112,23 @@ namespace Code.Game.Features.Target.Systems
                 return;
             }
 
-            ClearCommitIfProgress(unit, currentCost);
-
-            var idealStep = cell + idealDir;
-            var pushPenalty = GetBlockedIdealPenalty(idealStep, size, unitId, unit.team.Value, mapEntity);
-
-            if (unit.hasMoveCommit)
+            var progress = new StepLimits
             {
-                if (TryPickCommittedStep(unit, cell, size, unitId, mapEntity, integration, cell, false, int.MaxValue, out var committed))
-                {
-                    AcceptStep(unit, committed, size, unitId, mapEntity);
-                    ConsumeCommit(unit);
-                    return;
-                }
+                Integration = integration,
+                CapCost = true,
+                MaxCost = currentCost,
+                PreferIdeal = true,
+                IdealStep = cell + idealDir,
+                DirectionBonus = SameDirectionBonus
+            };
 
-                if (AccumulateWait(unit, deltaTime) < MoveWaitThreshold)
-                {
-                    Stay(unit, cell, size, unitId, mapEntity);
-                    return;
-                }
-            }
-            else if (TryPickFlowProgress(unit, cell, size, unitId, mapEntity, integration, currentCost, idealStep, pushPenalty, out var progress))
+            var detour = new StepLimits
             {
-                AcceptStep(unit, progress, size, unitId, mapEntity);
-                return;
-            }
-            else if (AccumulateWait(unit, deltaTime) < MoveWaitThreshold)
-            {
-                Stay(unit, cell, size, unitId, mapEntity);
-                return;
-            }
+                Integration = integration,
+                DirectionBonus = SameDirectionBonus
+            };
 
-            if (TryPickFlowDetour(unit, cell, size, unitId, mapEntity, integration, out var detour))
-            {
-                AcceptStep(unit, detour, size, unitId, mapEntity);
-                SetMoveCommit(unit, detour - cell, currentCost);
-                return;
-            }
-
-            Stay(unit, cell, size, unitId, mapEntity);
+            ChooseStep(unit, cell, size, unitId, mapEntity, deltaTime, false, currentCost, progress, detour);
         }
 
         private void SelectDirectCellToward(
@@ -177,11 +149,49 @@ namespace Code.Game.Features.Target.Systems
             }
 
             var currentDist = ChebyshevDistance(cell, targetCell);
-            ClearCommitIfProgress(unit, currentDist);
+
+            var progress = new StepLimits
+            {
+                MeasureDistance = true,
+                MaxDistance = currentDist - 1,
+                Goal = targetCell,
+                DirectionBonus = DirectSameDirectionBonus
+            };
+
+            var detour = new StepLimits
+            {
+                MeasureDistance = true,
+                MaxDistance = currentDist,
+                Goal = targetCell,
+                DirectionBonus = DirectSameDirectionBonus
+            };
+
+            ChooseStep(unit, cell, size, unitId, mapEntity, deltaTime, true, currentDist, progress, detour);
+        }
+
+        private void ChooseStep(
+            GameEntity unit,
+            Vector3Int cell,
+            Vector2Int size,
+            int unitId,
+            GameEntity mapEntity,
+            float deltaTime,
+            bool direct,
+            float metric,
+            StepLimits progress,
+            StepLimits detour)
+        {
+            if (unit.hasMoveCommit && unit.moveCommit.Value.Direct != direct)
+                unit.RemoveMoveCommit();
+
+            ClearCommitIfProgress(unit, metric);
 
             if (unit.hasMoveCommit)
             {
-                if (TryPickCommittedStep(unit, cell, size, unitId, mapEntity, null, targetCell, true, currentDist, out var committed))
+                var commitLimits = detour;
+                commitLimits.AlongCommit = true;
+
+                if (TryPickStep(unit, cell, size, unitId, mapEntity, commitLimits, out var committed))
                 {
                     AcceptStep(unit, committed, size, unitId, mapEntity);
                     ConsumeCommit(unit);
@@ -194,9 +204,9 @@ namespace Code.Game.Features.Target.Systems
                     return;
                 }
             }
-            else if (TryPickCloserStep(unit, cell, size, unitId, mapEntity, targetCell, currentDist, out var closer))
+            else if (TryPickStep(unit, cell, size, unitId, mapEntity, progress, out var step))
             {
-                AcceptStep(unit, closer, size, unitId, mapEntity);
+                AcceptStep(unit, step, size, unitId, mapEntity);
                 return;
             }
             else if (AccumulateWait(unit, deltaTime) < MoveWaitThreshold)
@@ -205,264 +215,90 @@ namespace Code.Game.Features.Target.Systems
                 return;
             }
 
-            if (TryPickDirectDetour(unit, cell, size, unitId, mapEntity, targetCell, currentDist, out var detour))
+            if (TryPickStep(unit, cell, size, unitId, mapEntity, detour, out var detourStep))
             {
-                AcceptStep(unit, detour, size, unitId, mapEntity);
-                SetMoveCommit(unit, detour - cell, currentDist);
+                AcceptStep(unit, detourStep, size, unitId, mapEntity);
+                SetMoveCommit(unit, detourStep - cell, metric, direct);
                 return;
             }
 
-            if (unit.isRangeAttack)
-                TrySettleSurroundSlotOnStuck(unit, cell, mapEntity);
-            else
-                TryReleaseSurroundSlotIfUnreachable(unit, mapEntity);
+            if (direct)
+            {
+                if (unit.isRangeAttack)
+                    TrySettleSurroundSlotOnStuck(unit, cell, mapEntity);
+                else
+                    TryReleaseSurroundSlotIfUnreachable(unit, mapEntity);
+            }
 
             Stay(unit, cell, size, unitId, mapEntity);
         }
 
-        private bool TryPickFlowProgress(
+        private bool TryPickStep(
             GameEntity unit,
             Vector3Int cell,
             Vector2Int size,
             int unitId,
             GameEntity mapEntity,
-            Dictionary<Vector3Int, int> integration,
-            int currentCost,
-            Vector3Int idealStep,
-            float pushPenalty,
+            StepLimits limits,
             out Vector3Int chosen)
         {
             chosen = cell;
-            var bestCost = float.MaxValue;
+            var bestScore = float.MaxValue;
+            var bestDistance = int.MaxValue;
             var found = false;
-            var neighbors = _targetService.GetNeighbors(cell);
-            var jitter = (unitId % 10) * JitterPerIdMod;
-
-            for (var j = 0; j < neighbors.Count; j++)
-            {
-                var cand = neighbors[j];
-
-                if (!integration.TryGetValue(cand, out var candCost) || candCost > currentCost)
-                    continue;
-
-                if (!CanStep(cell, cand, size, unitId, mapEntity, unit))
-                    continue;
-
-                var moveDir = cand - cell;
-                var totalCost = (float)candCost;
-                var sameDirection = unit.hasLastDirection && unit.lastDirection.Value == moveDir;
-
-                if (cand == idealStep)
-                    totalCost -= IdealStepBonus;
-
-                if (sameDirection)
-                    totalCost -= SameDirectionBonus;
-                else if (pushPenalty > 0f && cand != idealStep)
-                    totalCost += pushPenalty;
-
-                totalCost += jitter;
-
-                if (totalCost < bestCost)
-                {
-                    bestCost = totalCost;
-                    chosen = cand;
-                    found = true;
-                }
-            }
-
-            return found;
-        }
-
-        private bool TryPickFlowDetour(
-            GameEntity unit,
-            Vector3Int cell,
-            Vector2Int size,
-            int unitId,
-            GameEntity mapEntity,
-            Dictionary<Vector3Int, int> integration,
-            out Vector3Int chosen)
-        {
-            chosen = cell;
-            var bestCost = float.MaxValue;
-            var found = false;
-            var neighbors = _targetService.GetNeighbors(cell);
-            var jitter = (unitId % 10) * JitterPerIdMod;
-
-            for (var j = 0; j < neighbors.Count; j++)
-            {
-                var cand = neighbors[j];
-
-                if (!integration.TryGetValue(cand, out var candCost))
-                    continue;
-
-                if (!CanStep(cell, cand, size, unitId, mapEntity, unit))
-                    continue;
-
-                var moveDir = cand - cell;
-                var totalCost = (float)candCost;
-
-                if (unit.hasLastDirection && unit.lastDirection.Value == moveDir)
-                    totalCost -= SameDirectionBonus;
-
-                totalCost += jitter;
-
-                if (totalCost < bestCost)
-                {
-                    bestCost = totalCost;
-                    chosen = cand;
-                    found = true;
-                }
-            }
-
-            return found;
-        }
-
-        private bool TryPickCloserStep(
-            GameEntity unit,
-            Vector3Int cell,
-            Vector2Int size,
-            int unitId,
-            GameEntity mapEntity,
-            Vector3Int targetCell,
-            int currentDist,
-            out Vector3Int chosen)
-        {
-            chosen = cell;
-            var bestDist = currentDist;
-            var bestCost = float.MaxValue;
-            var found = false;
-            var neighbors = _targetService.GetNeighbors(cell);
-            var jitter = (unitId % 10) * DirectJitterPerIdMod;
-
-            for (var j = 0; j < neighbors.Count; j++)
-            {
-                var cand = neighbors[j];
-                var candDist = ChebyshevDistance(cand, targetCell);
-
-                if (candDist >= currentDist)
-                    continue;
-
-                if (!CanStep(cell, cand, size, unitId, mapEntity, unit))
-                    continue;
-
-                var totalCost = ScoreDirectStep(unit, cand - cell, candDist, jitter);
-
-                if (candDist < bestDist || (candDist == bestDist && totalCost < bestCost))
-                {
-                    bestDist = candDist;
-                    bestCost = totalCost;
-                    chosen = cand;
-                    found = true;
-                }
-            }
-
-            return found;
-        }
-
-        private bool TryPickDirectDetour(
-            GameEntity unit,
-            Vector3Int cell,
-            Vector2Int size,
-            int unitId,
-            GameEntity mapEntity,
-            Vector3Int targetCell,
-            int currentDist,
-            out Vector3Int chosen)
-        {
-            chosen = cell;
-            var bestDist = int.MaxValue;
-            var bestCost = float.MaxValue;
-            var found = false;
-            var neighbors = _targetService.GetNeighbors(cell);
-            var jitter = (unitId % 10) * DirectJitterPerIdMod;
-
-            for (var j = 0; j < neighbors.Count; j++)
-            {
-                var cand = neighbors[j];
-                var candDist = ChebyshevDistance(cand, targetCell);
-
-                if (candDist > currentDist)
-                    continue;
-
-                if (!CanStep(cell, cand, size, unitId, mapEntity, unit))
-                    continue;
-
-                var totalCost = ScoreDirectStep(unit, cand - cell, candDist, jitter);
-
-                if (candDist < bestDist || (candDist == bestDist && totalCost < bestCost))
-                {
-                    bestDist = candDist;
-                    bestCost = totalCost;
-                    chosen = cand;
-                    found = true;
-                }
-            }
-
-            return found;
-        }
-
-        private bool TryPickCommittedStep(
-            GameEntity unit,
-            Vector3Int cell,
-            Vector2Int size,
-            int unitId,
-            GameEntity mapEntity,
-            Dictionary<Vector3Int, int> integration,
-            Vector3Int goalCell,
-            bool hasGoal,
-            int currentDist,
-            out Vector3Int chosen)
-        {
-            chosen = cell;
-            var bestCost = float.MaxValue;
-            var bestDist = int.MaxValue;
-            var found = false;
-            var commitDirection = unit.moveCommit.Value.Direction;
+            var commitDirection = limits.AlongCommit && unit.hasMoveCommit
+                ? unit.moveCommit.Value.Direction
+                : Vector3Int.zero;
             var neighbors = _targetService.GetNeighbors(cell);
 
             for (var j = 0; j < neighbors.Count; j++)
             {
                 var cand = neighbors[j];
                 var moveDir = cand - cell;
+                var distance = 0;
+                float score;
 
-                if (Dot(moveDir, commitDirection) <= 0)
+                if (limits.AlongCommit && Dot(moveDir, commitDirection) <= 0)
                     continue;
 
-                if (!CanStep(cell, cand, size, unitId, mapEntity, unit))
-                    continue;
-
-                var candDist = 0;
-                var totalCost = 0f;
-
-                if (!hasGoal)
+                if (limits.MeasureDistance)
                 {
-                    if (integration == null || !integration.TryGetValue(cand, out var candCost))
+                    distance = ChebyshevDistance(cand, limits.Goal);
+
+                    if (distance > limits.MaxDistance)
                         continue;
 
-                    totalCost = candCost;
+                    score = distance;
                 }
                 else
                 {
-                    candDist = ChebyshevDistance(cand, goalCell);
-
-                    if (candDist > currentDist)
+                    if (limits.Integration == null || !limits.Integration.TryGetValue(cand, out var cost))
                         continue;
 
-                    totalCost = candDist;
+                    if (limits.CapCost && cost > limits.MaxCost)
+                        continue;
+
+                    score = cost;
                 }
 
-                if (unit.hasLastDirection && unit.lastDirection.Value == moveDir)
-                    totalCost -= SameDirectionBonus;
+                if (!CanStep(cell, cand, size, unitId, mapEntity, unit))
+                    continue;
 
-                var better = !hasGoal
-                    ? totalCost < bestCost
-                    : candDist < bestDist || (candDist == bestDist && totalCost < bestCost);
+                if (limits.PreferIdeal && cand == limits.IdealStep)
+                    score -= IdealStepBonus;
+
+                if (unit.hasLastDirection && unit.lastDirection.Value == moveDir)
+                    score -= limits.DirectionBonus;
+
+                var better = limits.MeasureDistance
+                    ? distance < bestDistance || (distance == bestDistance && score < bestScore)
+                    : score < bestScore;
 
                 if (!better)
                     continue;
 
-                bestCost = totalCost;
-                bestDist = candDist;
+                bestScore = score;
+                bestDistance = distance;
                 chosen = cand;
                 found = true;
             }
@@ -481,16 +317,6 @@ namespace Code.Game.Features.Target.Systems
         {
             SetTargetCell(unit, cell, size, unitId, mapEntity);
             unit.isTargetCellRequest = false;
-        }
-
-        private static float ScoreDirectStep(GameEntity unit, Vector3Int moveDir, int candDist, float jitter)
-        {
-            var totalCost = (float)candDist;
-
-            if (unit.hasLastDirection && unit.lastDirection.Value == moveDir)
-                totalCost -= DirectSameDirectionBonus;
-
-            return totalCost + jitter;
         }
 
         private float AccumulateWait(GameEntity unit, float deltaTime)
@@ -523,13 +349,14 @@ namespace Code.Game.Features.Target.Systems
                 unit.RemoveMoveCommit();
         }
 
-        private static void SetMoveCommit(GameEntity unit, Vector3Int direction, float startCost)
+        private static void SetMoveCommit(GameEntity unit, Vector3Int direction, float startCost, bool direct)
         {
             var data = new MoveCommitData
             {
                 Direction = direction,
                 Steps = DetourCommitSteps - 1,
-                StartCost = startCost
+                StartCost = startCost,
+                Direct = direct
             };
 
             if (unit.hasMoveCommit)
@@ -652,36 +479,9 @@ namespace Code.Game.Features.Target.Systems
             }
         }
 
-        private float GetBlockedIdealPenalty(
-            Vector3Int idealStep,
-            Vector2Int size,
-            int unitId,
-            Team myTeam,
-            GameEntity mapEntity)
-        {
-            if (CanFit(idealStep, size, unitId, mapEntity, out var blockingId))
-                return 0f;
-
-            if (blockingId == -1)
-                return BlockedIdealPushPenalty;
-
-            var blockingUnit = GetGameEntityById.Get(blockingId);
-
-            if (blockingUnit == null || !blockingUnit.hasTeam || blockingUnit.team.Value != myTeam || blockingUnit.isDead)
-                return BlockedIdealPushPenalty;
-
-            if (blockingUnit.isAttacking)
-                return BlockedByAttackingAllyPenalty;
-
-            if (!blockingUnit.isMoving)
-                return BlockedByIdleAllyPenalty;
-
-            return BlockedByMovingAllyPenalty;
-        }
-
         private bool CanStep(Vector3Int current, Vector3Int neighbor, Vector2Int size, int unitId, GameEntity map, GameEntity unit)
         {
-            if (!CanFit(neighbor, size, unitId, map, out _))
+            if (!CanFit(neighbor, size, unitId, map))
                 return false;
 
             if (IsCuttingCorner(current, neighbor, size, unitId, map))
@@ -702,10 +502,8 @@ namespace Code.Game.Features.Target.Systems
             return (a.x * b.x) + (a.y * b.y);
         }
 
-        private bool CanFit(Vector3Int origin, Vector2Int size, int unitId, GameEntity map, out int blockingEntityId)
+        private bool CanFit(Vector3Int origin, Vector2Int size, int unitId, GameEntity map)
         {
-            blockingEntityId = -1;
-
             var tilemap = map.tilemapMovement.Value;
             var occupField = map.occupField.Value;
             var reservedField = map.reservedField.Value;
@@ -720,18 +518,10 @@ namespace Code.Game.Features.Target.Systems
                         return false;
 
                     if (occupField.TryGetValue(checkPos, out var occId) && occId != unitId)
-                    {
-                        blockingEntityId = occId;
-
                         return false;
-                    }
 
                     if (reservedField.TryGetValue(checkPos, out var resId) && resId != unitId)
-                    {
-                        blockingEntityId = resId;
-
                         return false;
-                    }
                 }
             }
 
@@ -745,11 +535,25 @@ namespace Code.Game.Features.Target.Systems
                 var corner1 = new Vector3Int(neighbor.x, current.y, 0);
                 var corner2 = new Vector3Int(current.x, neighbor.y, 0);
 
-                if (!CanFit(corner1, size, unitId, map, out _) || !CanFit(corner2, size, unitId, map, out _))
+                if (!CanFit(corner1, size, unitId, map) || !CanFit(corner2, size, unitId, map))
                     return true;
             }
 
             return false;
+        }
+
+        private struct StepLimits
+        {
+            public Dictionary<Vector3Int, int> Integration;
+            public bool CapCost;
+            public int MaxCost;
+            public bool MeasureDistance;
+            public int MaxDistance;
+            public Vector3Int Goal;
+            public bool AlongCommit;
+            public bool PreferIdeal;
+            public Vector3Int IdealStep;
+            public float DirectionBonus;
         }
     }
 }

@@ -36,15 +36,7 @@ namespace Code.Game.Features.Target.Systems
                     continue;
 
                 if (unit.hasSurroundSlot && unit.currentCell.Value == unit.surroundSlot.Value)
-                {
-                    if (unit.hasMoveWait)
-                        unit.RemoveMoveWait();
-
-                    if (unit.hasMoveCommit)
-                        unit.RemoveMoveCommit();
-
                     continue;
-                }
 
                 if (!unit.hasTargetCell || unit.targetCell.Value == unit.currentCell.Value)
                     unit.isTargetCellRequest = true;

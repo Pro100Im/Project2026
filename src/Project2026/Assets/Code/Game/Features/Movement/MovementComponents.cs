@@ -8,6 +8,7 @@ namespace Code.Game.Features.Movement
         public Vector3Int Direction;
         public int Steps;
         public float StartCost;
+        public bool Direct;
     }
 
     [Game] public class MovementSpeed : IComponent { public float Value; }
