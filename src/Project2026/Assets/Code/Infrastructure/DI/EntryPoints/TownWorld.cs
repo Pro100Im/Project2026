@@ -2,6 +2,7 @@ using Code.Game.Common.Entity;
 using Code.Game.Common.Time;
 using Code.Game.Features.Town;
 using Code.Infrastructure.Identifiers;
+using Code.Infrastructure.Persistence;
 using Code.Infrastructure.Systems;
 using Code.Infrastructure.View;
 using Code.Infrastructure.View.Pool;
@@ -17,15 +18,17 @@ namespace Code.Infrastructure.DI.EntryPoints
         private readonly ISystemFactory _systems;
         private readonly IEntityViewPool _viewPool;
         private readonly ITimeService _timeService;
+        private readonly IUserProgressService _progress;
 
         private TownFeature _townFeature;
         private readonly List<GameEntity> _viewReleaseBuffer = new(128);
 
-        public TownWorld(ISystemFactory systems, IEntityViewPool viewPool, ITimeService timeService)
+        public TownWorld(ISystemFactory systems, IEntityViewPool viewPool, ITimeService timeService, IUserProgressService progress)
         {
             _systems = systems;
             _viewPool = viewPool;
             _timeService = timeService;
+            _progress = progress;
         }
 
         public void Initialize()
@@ -50,6 +53,8 @@ namespace Code.Infrastructure.DI.EntryPoints
 
         public void Dispose()
         {
+            _progress.Flush();
+
             if (_townFeature == null)
                 return;
 

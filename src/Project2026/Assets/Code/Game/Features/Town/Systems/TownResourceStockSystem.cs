@@ -1,4 +1,5 @@
 using Code.Game.StaticData.Configs;
+using Code.Infrastructure.Persistence;
 using Entitas;
 using System.Collections.Generic;
 
@@ -6,10 +7,12 @@ namespace Code.Game.Features.Town.Systems
 {
     public class TownResourceStockSystem : ReactiveSystem<TownEntity>
     {
+        private readonly IUserProgressService _progress;
         private readonly IGroup<TownEntity> _exchequer;
 
-        public TownResourceStockSystem() : base(Contexts.sharedInstance.town)
+        public TownResourceStockSystem(IUserProgressService progress) : base(Contexts.sharedInstance.town)
         {
+            _progress = progress;
             _exchequer = Contexts.sharedInstance.town.GetGroup(TownMatcher
                 .AllOf(
                     TownMatcher.TownExchequer,
@@ -102,6 +105,9 @@ namespace Code.Game.Features.Town.Systems
                 exchequer.ReplaceTownKnowledge(knowledge);
                 view.SetKnowledge(knowledge);
             }
+
+            if (goldChanged || stoneChanged || crystalChanged || woodChanged || knowledgeChanged)
+                _progress.SetTownResources(gold, stone, crystal, wood, knowledge);
         }
     }
 }

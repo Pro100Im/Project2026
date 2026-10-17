@@ -1,3 +1,4 @@
+using Code.Infrastructure.Persistence;
 using Entitas;
 using System.Collections.Generic;
 
@@ -5,13 +6,15 @@ namespace Code.Game.Features.Town.Systems
 {
     public class TownBuildSystem : ReactiveSystem<InputEntity>
     {
+        private readonly IUserProgressService _progress;
         private readonly IGroup<TownEntity> _menus;
         private readonly IGroup<TownEntity> _buildings;
 
         private readonly List<TownEntity> _buildingsBuffer = new(16);
 
-        public TownBuildSystem() : base(Contexts.sharedInstance.input)
+        public TownBuildSystem(IUserProgressService progress) : base(Contexts.sharedInstance.input)
         {
+            _progress = progress;
             var townContext = Contexts.sharedInstance.town;
 
             _menus = townContext.GetGroup(TownMatcher.TownBuildMenu);
@@ -64,7 +67,9 @@ namespace Code.Game.Features.Town.Systems
                 if (level >= building.townBuildingMaxLevel.Value)
                     continue;
 
-                building.ReplaceTownBuildingLevel(level + 1);
+                var nextLevel = level + 1;
+                building.ReplaceTownBuildingLevel(nextLevel);
+                _progress.SetBuildingLevel(type, nextLevel);
             }
         }
     }

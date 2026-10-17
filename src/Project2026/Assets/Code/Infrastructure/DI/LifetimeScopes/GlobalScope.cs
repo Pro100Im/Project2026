@@ -8,6 +8,7 @@ using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.DI.EntryPoints;
 using Code.Infrastructure.Helpers;
 using Code.Infrastructure.Loading;
+using Code.Infrastructure.Persistence;
 using Code.Infrastructure.Systems;
 using UnityEngine;
 using VContainer;
@@ -44,6 +45,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<ISceneLoader, SceneLoader>(Lifetime.Singleton);
             builder.Register<UIService>(Lifetime.Singleton);
             builder.Register<IInputService, InputService>(Lifetime.Singleton);
+            builder.Register<IStorageService, JsonFileStorageService>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<UserProgressService>().As<IUserService>().As<IUserProgressService>();
         }
 
         private void BindAssetManagementServices(IContainerBuilder builder)

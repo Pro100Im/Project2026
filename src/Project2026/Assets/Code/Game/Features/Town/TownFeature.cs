@@ -7,6 +7,7 @@ namespace Code.Game.Features.Town
     {
         public TownFeature(ISystemFactory systemFactory)
         {
+            Add(systemFactory.Create<TownProgressLoadSystem>());
             Add(systemFactory.Create<TownBuildMenuToggleSystem>());
             Add(systemFactory.Create<TownBuildSystem>());
             Add(systemFactory.Create<TownBuildMenuOpenSystem>());

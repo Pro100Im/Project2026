@@ -51,56 +51,41 @@ namespace Code.Game.Features.Town
             SetupPopTransition(_knowledgeScore);
             SetupPopTransition(_goldScore);
 
-            _woodScore.text = 0.ToString();
-            _stoneScore.text = 0.ToString();
-            _crystalScore.text = 0.ToString();
-            _knowledgeScore.text = 0.ToString();
-            _goldScore.text = 0.ToString();
+            WriteScore(_woodScore, _woodValue);
+            WriteScore(_stoneScore, _stoneValue);
+            WriteScore(_crystalScore, _crystalValue);
+            WriteScore(_knowledgeScore, _knowledgeValue);
+            WriteScore(_goldScore, _goldValue);
         }
 
-        public void SetWood(int value)
-        {
-            if (value != _woodValue)
-                _woodPopReset = PlayPopAnimation(_woodScore, _woodPopReset);
+        public void SetWood(int value, bool animate = true) => SetScore(_woodScore, ref _woodValue, ref _woodPopReset, value, animate);
 
-            _woodValue = value;
-            _woodScore.text = value.ToString();
+        public void SetStone(int value, bool animate = true) => SetScore(_stoneScore, ref _stoneValue, ref _stonePopReset, value, animate);
+
+        public void SetCrystal(int value, bool animate = true) => SetScore(_crystalScore, ref _crystalValue, ref _crystalPopReset, value, animate);
+
+        public void SetKnowledge(int value, bool animate = true) => SetScore(_knowledgeScore, ref _knowledgeValue, ref _knowledgePopReset, value, animate);
+
+        public void SetGold(int value, bool animate = true) => SetScore(_goldScore, ref _goldValue, ref _goldPopReset, value, animate);
+
+        private static void SetScore(Label label, ref int current, ref IVisualElementScheduledItem popReset, int value, bool animate)
+        {
+            var changed = value != current;
+            current = value;
+
+            if (label == null)
+                return;
+
+            if (animate && changed)
+                popReset = PlayPopAnimation(label, popReset);
+
+            label.text = value.ToString();
         }
 
-        public void SetStone(int value)
+        private static void WriteScore(Label label, int value)
         {
-            if (value != _stoneValue)
-                _stonePopReset = PlayPopAnimation(_stoneScore, _stonePopReset);
-
-            _stoneValue = value;
-            _stoneScore.text = value.ToString();
-        }
-
-        public void SetCrystal(int value)
-        {
-            if (value != _crystalValue)
-                _crystalPopReset = PlayPopAnimation(_crystalScore, _crystalPopReset);
-
-            _crystalValue = value;
-            _crystalScore.text = value.ToString();
-        }
-
-        public void SetKnowledge(int value)
-        {
-            if (value != _knowledgeValue)
-                _knowledgePopReset = PlayPopAnimation(_knowledgeScore, _knowledgePopReset);
-
-            _knowledgeValue = value;
-            _knowledgeScore.text = value.ToString();
-        }
-
-        public void SetGold(int value)
-        {
-            if (value != _goldValue)
-                _goldPopReset = PlayPopAnimation(_goldScore, _goldPopReset);
-
-            _goldValue = value;
-            _goldScore.text = value.ToString();
+            if (label != null)
+                label.text = value.ToString();
         }
 
         private static void SetupPopTransition(VisualElement element)
