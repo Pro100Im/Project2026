@@ -8,7 +8,7 @@ namespace Code.Infrastructure.Persistence
 {
     public class UserProgressService : IUserService, IUserProgressService, ITickable, IDisposable
     {
-        private const string SaveKey = "user";
+        public const string SaveKey = "user";
         private const float SaveIntervalSeconds = 5f;
 
         private readonly IStorageService _storage;
@@ -113,6 +113,37 @@ namespace Code.Infrastructure.Persistence
             });
             MarkDirty();
         }
+
+#if UNITY_EDITOR
+        public void ResetResources()
+        {
+            SetTownResources(0, 0, 0, 0, 0);
+            Flush();
+        }
+
+        public void ResetBuildings()
+        {
+            if (_save.Town.Buildings == null || _save.Town.Buildings.Count == 0)
+                return;
+
+            _save.Town.ClearBuildings();
+            MarkDirty();
+            Flush();
+        }
+
+        public void ResetPlayer()
+        {
+            SetTownResources(0, 0, 0, 0, 0);
+
+            if (_save.Town.Buildings != null && _save.Town.Buildings.Count > 0)
+            {
+                _save.Town.ClearBuildings();
+                MarkDirty();
+            }
+
+            Flush();
+        }
+#endif
 
         public void Flush()
         {

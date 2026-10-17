@@ -13,6 +13,11 @@ namespace Code.Infrastructure.Persistence
         bool TryGetBuildingLevel(BuildingType type, out int level);
         void SetTownResources(int gold, int stone, int crystal, int wood, int knowledge);
         void SetBuildingLevel(BuildingType type, int level);
+#if UNITY_EDITOR
+        void ResetResources();
+        void ResetBuildings();
+        void ResetPlayer();
+#endif
         void Flush();
     }
 }

@@ -20,6 +20,23 @@ namespace Code.Infrastructure.Persistence
         public int Wood;
         public int Knowledge;
         public List<TownBuildingProgressData> Buildings = new(8);
+
+#if UNITY_EDITOR
+        public void ClearResources()
+        {
+            Gold = 0;
+            Stone = 0;
+            Crystal = 0;
+            Wood = 0;
+            Knowledge = 0;
+        }
+
+        public void ClearBuildings()
+        {
+            Buildings ??= new List<TownBuildingProgressData>(8);
+            Buildings.Clear();
+        }
+#endif
     }
 
     public class TownBuildingProgressData
