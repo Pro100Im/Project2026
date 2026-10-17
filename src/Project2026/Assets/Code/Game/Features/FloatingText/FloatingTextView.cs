@@ -1,5 +1,6 @@
 using Code.Infrastructure.View;
 using DG.Tweening;
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -21,18 +22,42 @@ namespace Code.Game.Features.FloatingText
             if (Entity == null || !Entity.hasFloatingText || _text == null)
                 return;
 
+            var color = Entity.isHealFloatingText ? _healColor : _damageColor;
+            var text = Mathf.RoundToInt(Entity.floatingText.Value).ToString();
+
+            Play(text, color, null);
+        }
+
+        public void Play(string text, Action onComplete)
+        {
+            Play(text, _healColor, onComplete);
+        }
+
+        private void Play(string text, Color color, Action onComplete)
+        {
+            if (_text == null)
+                return;
+
             KillTweens();
 
-            var color = Entity.isHealFloatingText ? _healColor : _damageColor;
-            _text.text = Mathf.RoundToInt(Entity.floatingText.Value).ToString();
+            _text.text = text;
             _text.color = color;
 
-            var startPos = transform.position;
-            var endPos = startPos + Vector3.up * _floatDistance;
+            var endPos = transform.position + Vector3.up * _floatDistance;
 
             _moveTween = transform.DOMove(endPos, _duration).SetEase(Ease.OutQuad);
             _fadeTween = DOTween.ToAlpha(() => _text.color, c => _text.color = c, 0f, _duration)
                 .SetEase(Ease.InQuad);
+
+            if (onComplete == null)
+                return;
+
+            _fadeTween.OnComplete(() =>
+            {
+                _moveTween = null;
+                _fadeTween = null;
+                onComplete();
+            });
         }
 
         private void OnDisable()

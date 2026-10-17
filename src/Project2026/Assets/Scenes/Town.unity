@@ -7918,6 +7918,7 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 1674529489}
+  _floatingTextPrefab: {fileID: 1893404157363187206, guid: b3e4e275f69cd3b409cb238f255a5044, type: 3}
 --- !u!1 &1142286607
 GameObject:
   m_ObjectHideFlags: 0

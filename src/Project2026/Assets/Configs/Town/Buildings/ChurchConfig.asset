@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.TownBuildingConfig
   <Type>k__BackingField: 6
   <Title>k__BackingField: Church
+  <Resource>k__BackingField: 5
   <Levels>k__BackingField:
   - <Title>k__BackingField: Church
     <Icon>k__BackingField: {fileID: 9080485990912184260, guid: 55509c12f4f024f458e4a5d33e6d628d, type: 3}
+    <ProductionInterval>k__BackingField: 3
+    <ProductionAmount>k__BackingField: 1

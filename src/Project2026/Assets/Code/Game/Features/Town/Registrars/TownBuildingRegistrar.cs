@@ -18,6 +18,12 @@ namespace Code.Game.Features.Town.Registrars
             Entity.AddTownBuildingMaxLevel(_config.Levels.Length);
             Entity.AddTownBuildingConfig(_config);
             Entity.AddTownView(_view);
+
+            if (_config.Resource != TownResource.None)
+            {
+                Entity.AddTownBuildingWorkers(1);
+                Entity.AddTownProductionCooldown(0f);
+            }
         }
 
         public override void UnregisterComponents()
@@ -34,6 +40,12 @@ namespace Code.Game.Features.Town.Registrars
                 Entity.RemoveTownBuildingConfig();
             if (Entity.hasTownView)
                 Entity.RemoveTownView();
+            if (Entity.hasTownBuildingWorkers)
+                Entity.RemoveTownBuildingWorkers();
+            if (Entity.hasTownProductionCooldown)
+                Entity.RemoveTownProductionCooldown();
+            if (Entity.hasTownResourceGained)
+                Entity.RemoveTownResourceGained();
         }
     }
 }

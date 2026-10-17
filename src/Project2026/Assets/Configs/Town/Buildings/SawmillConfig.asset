@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.TownBuildingConfig
   <Type>k__BackingField: 5
   <Title>k__BackingField: Sawmill
+  <Resource>k__BackingField: 4
   <Levels>k__BackingField:
   - <Title>k__BackingField: Sawmill
     <Icon>k__BackingField: {fileID: 21300000, guid: 983c11389b437f441b7510c75e109763, type: 3}
+    <ProductionInterval>k__BackingField: 3
+    <ProductionAmount>k__BackingField: 1

@@ -23,11 +23,20 @@ public static class TownComponentsLookup {
     public const int TownBuildingLevel = 12;
     public const int TownBuildingMaxLevel = 13;
     public const int TownBuildingType = 14;
-    public const int TownBuildMenu = 15;
-    public const int TownBuildMenuOpened = 16;
-    public const int TownView = 17;
+    public const int TownBuildingWorkers = 15;
+    public const int TownBuildMenu = 16;
+    public const int TownBuildMenuOpened = 17;
+    public const int TownCrystal = 18;
+    public const int TownGold = 19;
+    public const int TownKnowledge = 20;
+    public const int TownProductionCooldown = 21;
+    public const int TownResourceGained = 22;
+    public const int TownResources = 23;
+    public const int TownStone = 24;
+    public const int TownView = 25;
+    public const int TownWood = 26;
 
-    public const int TotalComponents = 18;
+    public const int TotalComponents = 27;
 
     public static readonly string[] componentNames = {
         "Attached",
@@ -45,9 +54,18 @@ public static class TownComponentsLookup {
         "TownBuildingLevel",
         "TownBuildingMaxLevel",
         "TownBuildingType",
+        "TownBuildingWorkers",
         "TownBuildMenu",
         "TownBuildMenuOpened",
-        "TownView"
+        "TownCrystal",
+        "TownGold",
+        "TownKnowledge",
+        "TownProductionCooldown",
+        "TownResourceGained",
+        "TownResources",
+        "TownStone",
+        "TownView",
+        "TownWood"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -66,8 +84,17 @@ public static class TownComponentsLookup {
         typeof(Code.Game.Features.Town.TownBuildingLevel),
         typeof(Code.Game.Features.Town.TownBuildingMaxLevel),
         typeof(Code.Game.Features.Town.TownBuildingType),
+        typeof(Code.Game.Features.Town.TownBuildingWorkers),
         typeof(Code.Game.Features.Town.TownBuildMenuComponent),
         typeof(Code.Game.Features.Town.TownBuildMenuOpened),
-        typeof(Code.Game.Features.Town.TownViewComponent)
+        typeof(Code.Game.Features.Town.TownCrystal),
+        typeof(Code.Game.Features.Town.TownGold),
+        typeof(Code.Game.Features.Town.TownKnowledge),
+        typeof(Code.Game.Features.Town.TownProductionCooldown),
+        typeof(Code.Game.Features.Town.TownResourceGained),
+        typeof(Code.Game.Features.Town.TownResources),
+        typeof(Code.Game.Features.Town.TownStone),
+        typeof(Code.Game.Features.Town.TownViewComponent),
+        typeof(Code.Game.Features.Town.TownWood)
     };
 }
