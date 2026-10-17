@@ -63,9 +63,10 @@ namespace Code.Game.Features.Target.Systems
                         {
                             shouldRelease = true;
                         }
-                        else if (!IsSlotInAttackRange(unit, target, tilemap))
+                        else if (!IsCellInAttackRange(unit, target, tilemap, slot))
                         {
-                            shouldRelease = true;
+                            if (!TryReanchorSlot(unit, target, tilemap, surroundField))
+                                shouldRelease = true;
                         }
                     }
                 }
@@ -94,17 +95,48 @@ namespace Code.Game.Features.Target.Systems
             }
         }
 
-        private static bool IsSlotInAttackRange(GameEntity unit, GameEntity target, Dictionary<Vector3Int, Vector3> tilemap)
+        private static bool TryReanchorSlot(
+            GameEntity unit,
+            GameEntity target,
+            Dictionary<Vector3Int, Vector3> tilemap,
+            Dictionary<Vector3Int, int> surroundField)
+        {
+            if (!unit.hasCurrentCell)
+                return false;
+
+            var currentCell = unit.currentCell.Value;
+
+            if (currentCell == unit.surroundSlot.Value)
+                return false;
+
+            if (!IsCellInAttackRange(unit, target, tilemap, currentCell))
+                return false;
+
+            var unitId = unit.id.Value;
+            var oldSlot = unit.surroundSlot.Value;
+
+            if (surroundField.TryGetValue(oldSlot, out var ownerId) && ownerId == unitId)
+                surroundField.Remove(oldSlot);
+
+            surroundField[currentCell] = unitId;
+            unit.ReplaceSurroundSlot(currentCell);
+            return true;
+        }
+
+        private static bool IsCellInAttackRange(
+            GameEntity unit,
+            GameEntity target,
+            Dictionary<Vector3Int, Vector3> tilemap,
+            Vector3Int cell)
         {
             if (!target.hasCurrentCell)
                 return false;
 
-            var slot = unit.surroundSlot.Value;
             var size = unit.unitSize.Value;
 
             TargetService.GetFootprint(target, out var minX, out var minY, out var maxX, out var maxY);
 
-            var ring = TargetService.GetFootprintRing(slot, size, minX, minY, maxX, maxY);
+            var ring = TargetService.GetFootprintRing(cell, size, minX, minY, maxX, maxY);
             var maxRing = TargetService.GetSurroundMaxRing(unit.range.Value);
 
             if (ring < 1 || ring > maxRing)
@@ -117,9 +149,9 @@ namespace Code.Game.Features.Target.Systems
             {
                 for (var y = 0; y < size.y; y++)
                 {
-                    var cell = new Vector3Int(slot.x + x, slot.y + y, 0);
+                    var footprintCell = new Vector3Int(cell.x + x, cell.y + y, 0);
 
-                    if (!tilemap.TryGetValue(cell, out var cellWorld))
+                    if (!tilemap.TryGetValue(footprintCell, out var cellWorld))
                         continue;
 
                     var closest = TargetService.GetClosestPoint(target, tilemap, cellWorld);

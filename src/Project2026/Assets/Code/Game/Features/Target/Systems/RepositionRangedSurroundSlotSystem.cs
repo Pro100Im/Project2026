@@ -102,6 +102,20 @@ namespace Code.Game.Features.Target.Systems
                 if (newSqrDist <= currentSqrDist)
                     continue;
 
+                TargetService.GetFootprint(target, out var minX, out var minY, out var maxX, out var maxY);
+
+                var size = unit.unitSize.Value;
+                var currentRing = TargetService.GetFootprintRing(currentSlot, size, minX, minY, maxX, maxY);
+                var newRing = TargetService.GetFootprintRing(newSlot, size, minX, minY, maxX, maxY);
+
+                if (newRing < currentRing + 1)
+                    continue;
+
+                var minFartherDistance = Mathf.Sqrt(currentSqrDist) + TargetService.CellSize;
+
+                if (newSqrDist < minFartherDistance * minFartherDistance)
+                    continue;
+
                 surroundField.Remove(currentSlot);
                 surroundField[newSlot] = unit.id.Value;
                 unit.ReplaceSurroundSlot(newSlot);

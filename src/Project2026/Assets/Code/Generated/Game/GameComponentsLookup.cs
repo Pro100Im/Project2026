@@ -119,62 +119,64 @@ public static class GameComponentsLookup {
     public const int CurrentCell = 108;
     public const int GridMovement = 109;
     public const int LastDirection = 110;
-    public const int MovementAvailable = 111;
-    public const int MovementOffset = 112;
-    public const int MovementSpeed = 113;
-    public const int MovementSpeedBonus = 114;
-    public const int Moving = 115;
-    public const int TotalDistance = 116;
-    public const int Trajectory = 117;
-    public const int TrajectoryBaseArcHeight = 118;
-    public const int TrajectoryCurrentArcHeight = 119;
-    public const int TrajectoryMovement = 120;
-    public const int TrajectoryPathProgress = 121;
-    public const int Velocity = 122;
-    public const int CastleUnderAttack = 123;
-    public const int PlayerCastle = 124;
-    public const int PlayerCastleCells = 125;
-    public const int Player = 126;
-    public const int FireResistance = 127;
-    public const int FrostResistance = 128;
-    public const int PhysicalResistance = 129;
-    public const int Reward = 130;
-    public const int SpawnPosition = 131;
-    public const int SpawnRequsted = 132;
-    public const int WaitingToSpawn = 133;
-    public const int DefenseFlow = 134;
-    public const int DefensePatrolCell = 135;
-    public const int DefensePatrolIdleDuration = 136;
-    public const int DefensePatrolWait = 137;
-    public const int RallyToCastle = 138;
-    public const int SurroundSlot = 139;
-    public const int SurroundTargetId = 140;
-    public const int Targetable = 141;
-    public const int TargetCell = 142;
-    public const int TargetCellRequest = 143;
-    public const int TargetFlow = 144;
-    public const int TargetId = 145;
-    public const int TargetPoint = 146;
-    public const int TargetSelected = 147;
-    public const int Tower = 148;
-    public const int TowerBuildRequest = 149;
-    public const int TowerPlace = 150;
-    public const int TowerUpgrade = 151;
-    public const int TowerUpgradeIcon = 152;
-    public const int TowerUpgradePrice = 153;
-    public const int TowerUpgradeRequest = 154;
-    public const int Unit = 155;
-    public const int UnitAnchorPoint = 156;
-    public const int UnitIcon = 157;
-    public const int UnitSize = 158;
-    public const int CurrentWaveEnemies = 159;
-    public const int CurrentWaveNumber = 160;
-    public const int WaveEnemiesAlive = 161;
-    public const int WaveInProgress = 162;
-    public const int WaveStartRequsted = 163;
-    public const int Projectile = 164;
+    public const int MoveCommit = 111;
+    public const int MovementAvailable = 112;
+    public const int MovementOffset = 113;
+    public const int MovementSpeed = 114;
+    public const int MovementSpeedBonus = 115;
+    public const int MoveWait = 116;
+    public const int Moving = 117;
+    public const int TotalDistance = 118;
+    public const int Trajectory = 119;
+    public const int TrajectoryBaseArcHeight = 120;
+    public const int TrajectoryCurrentArcHeight = 121;
+    public const int TrajectoryMovement = 122;
+    public const int TrajectoryPathProgress = 123;
+    public const int Velocity = 124;
+    public const int CastleUnderAttack = 125;
+    public const int PlayerCastle = 126;
+    public const int PlayerCastleCells = 127;
+    public const int Player = 128;
+    public const int FireResistance = 129;
+    public const int FrostResistance = 130;
+    public const int PhysicalResistance = 131;
+    public const int Reward = 132;
+    public const int SpawnPosition = 133;
+    public const int SpawnRequsted = 134;
+    public const int WaitingToSpawn = 135;
+    public const int DefenseFlow = 136;
+    public const int DefensePatrolCell = 137;
+    public const int DefensePatrolIdleDuration = 138;
+    public const int DefensePatrolWait = 139;
+    public const int RallyToCastle = 140;
+    public const int SurroundSlot = 141;
+    public const int SurroundTargetId = 142;
+    public const int Targetable = 143;
+    public const int TargetCell = 144;
+    public const int TargetCellRequest = 145;
+    public const int TargetFlow = 146;
+    public const int TargetId = 147;
+    public const int TargetPoint = 148;
+    public const int TargetSelected = 149;
+    public const int Tower = 150;
+    public const int TowerBuildRequest = 151;
+    public const int TowerPlace = 152;
+    public const int TowerUpgrade = 153;
+    public const int TowerUpgradeIcon = 154;
+    public const int TowerUpgradePrice = 155;
+    public const int TowerUpgradeRequest = 156;
+    public const int Unit = 157;
+    public const int UnitAnchorPoint = 158;
+    public const int UnitIcon = 159;
+    public const int UnitSize = 160;
+    public const int CurrentWaveEnemies = 161;
+    public const int CurrentWaveNumber = 162;
+    public const int WaveEnemiesAlive = 163;
+    public const int WaveInProgress = 164;
+    public const int WaveStartRequsted = 165;
+    public const int Projectile = 166;
 
-    public const int TotalComponents = 165;
+    public const int TotalComponents = 167;
 
     public static readonly string[] componentNames = {
         "ForcedPause",
@@ -288,10 +290,12 @@ public static class GameComponentsLookup {
         "CurrentCell",
         "GridMovement",
         "LastDirection",
+        "MoveCommit",
         "MovementAvailable",
         "MovementOffset",
         "MovementSpeed",
         "MovementSpeedBonus",
+        "MoveWait",
         "Moving",
         "TotalDistance",
         "Trajectory",
@@ -456,10 +460,12 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Movement.CurrentCell),
         typeof(Code.Game.Features.Movement.GridMovement),
         typeof(Code.Game.Features.Movement.LastDirection),
+        typeof(Code.Game.Features.Movement.MoveCommit),
         typeof(Code.Game.Features.Movement.MovementAvailable),
         typeof(Code.Game.Features.Movement.MovementOffset),
         typeof(Code.Game.Features.Movement.MovementSpeed),
         typeof(Code.Game.Features.Movement.MovementSpeedBonus),
+        typeof(Code.Game.Features.Movement.MoveWait),
         typeof(Code.Game.Features.Movement.Moving),
         typeof(Code.Game.Features.Movement.TotalDistance),
         typeof(Code.Game.Features.Movement.Trajectory),
