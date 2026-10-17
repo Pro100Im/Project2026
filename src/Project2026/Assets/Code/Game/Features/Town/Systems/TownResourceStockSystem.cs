@@ -4,56 +4,103 @@ using System.Collections.Generic;
 
 namespace Code.Game.Features.Town.Systems
 {
-    public class TownResourceStockSystem : IExecuteSystem
+    public class TownResourceStockSystem : ReactiveSystem<TownEntity>
     {
-        private readonly IGroup<TownEntity> _stock;
-        private readonly IGroup<TownEntity> _gains;
+        private readonly IGroup<TownEntity> _exchequer;
 
-        private readonly List<TownEntity> _gainsBuffer = new(8);
-
-        public TownResourceStockSystem()
+        public TownResourceStockSystem() : base(Contexts.sharedInstance.town)
         {
-            var town = Contexts.sharedInstance.town;
-
-            _stock = town.GetGroup(TownMatcher.TownResources);
-            _gains = town.GetGroup(TownMatcher
+            _exchequer = Contexts.sharedInstance.town.GetGroup(TownMatcher
                 .AllOf(
-                    TownMatcher.TownResourceGained,
-                    TownMatcher.TownBuildingConfig));
+                    TownMatcher.TownExchequer,
+                    TownMatcher.TownResources));
         }
 
-        public void Execute()
-        {
-            var stock = _stock.GetSingleEntity();
+        protected override ICollector<TownEntity> GetTrigger(IContext<TownEntity> context) =>
+            context.CreateCollector(TownMatcher.TownResourceGained.Added());
 
-            if (stock == null)
+        protected override bool Filter(TownEntity entity) =>
+            entity.hasTownResourceGained && entity.hasTownBuildingConfig;
+
+        protected override void Execute(List<TownEntity> entities)
+        {
+            var exchequer = _exchequer.GetSingleEntity();
+
+            if (exchequer == null)
                 return;
 
-            var gains = _gains.GetEntities(_gainsBuffer);
+            var gold = exchequer.townGold.Value;
+            var stone = exchequer.townStone.Value;
+            var crystal = exchequer.townCrystal.Value;
+            var wood = exchequer.townWood.Value;
+            var knowledge = exchequer.townKnowledge.Value;
 
-            for (var i = 0; i < gains.Count; i++)
+            var goldChanged = false;
+            var stoneChanged = false;
+            var crystalChanged = false;
+            var woodChanged = false;
+            var knowledgeChanged = false;
+
+            for (var i = 0; i < entities.Count; i++)
             {
-                var building = gains[i];
+                var building = entities[i];
                 var amount = building.townResourceGained.Value;
 
                 switch (building.townBuildingConfig.Value.Resource)
                 {
                     case TownResource.Gold:
-                        stock.ReplaceTownGold(stock.townGold.Value + amount);
+                        gold += amount;
+                        goldChanged = true;
                         break;
                     case TownResource.Stone:
-                        stock.ReplaceTownStone(stock.townStone.Value + amount);
+                        stone += amount;
+                        stoneChanged = true;
                         break;
                     case TownResource.Crystal:
-                        stock.ReplaceTownCrystal(stock.townCrystal.Value + amount);
+                        crystal += amount;
+                        crystalChanged = true;
                         break;
                     case TownResource.Wood:
-                        stock.ReplaceTownWood(stock.townWood.Value + amount);
+                        wood += amount;
+                        woodChanged = true;
                         break;
                     case TownResource.Knowledge:
-                        stock.ReplaceTownKnowledge(stock.townKnowledge.Value + amount);
+                        knowledge += amount;
+                        knowledgeChanged = true;
                         break;
                 }
+            }
+
+            var view = exchequer.townExchequer.Value;
+
+            if (goldChanged)
+            {
+                exchequer.ReplaceTownGold(gold);
+                view.SetGold(gold);
+            }
+
+            if (stoneChanged)
+            {
+                exchequer.ReplaceTownStone(stone);
+                view.SetStone(stone);
+            }
+
+            if (crystalChanged)
+            {
+                exchequer.ReplaceTownCrystal(crystal);
+                view.SetCrystal(crystal);
+            }
+
+            if (woodChanged)
+            {
+                exchequer.ReplaceTownWood(wood);
+                view.SetWood(wood);
+            }
+
+            if (knowledgeChanged)
+            {
+                exchequer.ReplaceTownKnowledge(knowledge);
+                view.SetKnowledge(knowledge);
             }
         }
     }

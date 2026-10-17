@@ -24,6 +24,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
         private void BindServices(IContainerBuilder builder)
         {
             builder.Register<IEntityViewPool, EntityViewPoolService>(Lifetime.Singleton);
+            builder.RegisterComponentInHierarchy<TownScreen>();
         }
 
         private void BindGameFactories(IContainerBuilder builder)

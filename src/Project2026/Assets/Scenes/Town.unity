@@ -10760,6 +10760,8 @@ GameObject:
   - component: {fileID: 91000000991}
   - component: {fileID: 91000000992}
   - component: {fileID: 91000000993}
+  - component: {fileID: 91000000995}
+  - component: {fileID: 91000000996}
   m_Layer: 0
   m_Name: TownScreen
   m_TagString: Untagged
@@ -14970,6 +14972,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Code.Meta.Features.Town.TownBuildMenu
   _townScreen: {fileID: 1674529492}
   _slotTemplate: {fileID: 9197481963319205126, guid: 7bb695ea573149c486dd10c50337ae93, type: 3}
+--- !u!114 &91000000995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674529489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c1e9a4b8d2f47e0a3b5c7d9e1f02468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Town.TownExchequerView
+--- !u!114 &91000000996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674529489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3a2c6d1b5e49a7c0d4e8f2a6b17395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Town.Registrars.TownExchequerRegistrar
+  EntityView: {fileID: 91000000991}
+  _townExchequerView: {fileID: 91000000995}
 --- !u!4 &3043357179353453261
 Transform:
   m_ObjectHideFlags: 0

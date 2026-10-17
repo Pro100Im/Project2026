@@ -16,6 +16,7 @@ namespace Code.Game.Features.Town
     [Town] public class TownProductionCooldown : IComponent { public float Value; }
     [Town] public class TownResourceGained : IComponent { public int Value; }
 
+    [Town] public class TownExchequer : IComponent { public TownExchequerView Value; }
     [Town] public class TownResources : IComponent { }
     [Town] public class TownGold : IComponent { public int Value; }
     [Town] public class TownStone : IComponent { public int Value; }
