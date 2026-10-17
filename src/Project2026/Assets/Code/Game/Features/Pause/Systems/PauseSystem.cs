@@ -19,7 +19,9 @@ namespace Code.Game.Features.Pause.Systems
                 .AllOf(
                     GameMatcher.GameSession));
 
-            _animators = gameContext.GetGroup(GameMatcher.Animator);
+            _animators = gameContext.GetGroup(GameMatcher
+                .AllOf(GameMatcher.Animator)
+                .NoneOf(GameMatcher.PlayerCastle));
             _timeService = timeService;
         }
 
