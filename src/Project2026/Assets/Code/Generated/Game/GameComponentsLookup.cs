@@ -98,82 +98,83 @@ public static class GameComponentsLookup {
     public const int GameExchequer = 87;
     public const int DamageFloatingText = 88;
     public const int FloatingText = 89;
-    public const int HealFloatingText = 90;
-    public const int GameSession = 91;
-    public const int CurrentHealth = 92;
-    public const int HpBar = 93;
-    public const int MaxHealth = 94;
-    public const int DefenseFlowFields = 95;
-    public const int DefenseIntegrationFields = 96;
-    public const int FlowFieldDirty = 97;
-    public const int FlowFields = 98;
-    public const int IntegrationFields = 99;
-    public const int OccupField = 100;
-    public const int ReservedField = 101;
-    public const int SpatialHash = 102;
-    public const int SpawnMap = 103;
-    public const int SpawnReservedField = 104;
-    public const int SurroundField = 105;
-    public const int TilemapMovement = 106;
-    public const int CurrentCell = 107;
-    public const int GridMovement = 108;
-    public const int LastDirection = 109;
-    public const int MovementAvailable = 110;
-    public const int MovementOffset = 111;
-    public const int MovementSpeed = 112;
-    public const int MovementSpeedBonus = 113;
-    public const int Moving = 114;
-    public const int TotalDistance = 115;
-    public const int Trajectory = 116;
-    public const int TrajectoryBaseArcHeight = 117;
-    public const int TrajectoryCurrentArcHeight = 118;
-    public const int TrajectoryMovement = 119;
-    public const int TrajectoryPathProgress = 120;
-    public const int Velocity = 121;
-    public const int CastleUnderAttack = 122;
-    public const int PlayerCastle = 123;
-    public const int PlayerCastleCells = 124;
-    public const int Player = 125;
-    public const int FireResistance = 126;
-    public const int FrostResistance = 127;
-    public const int PhysicalResistance = 128;
-    public const int Reward = 129;
-    public const int SpawnPosition = 130;
-    public const int SpawnRequsted = 131;
-    public const int WaitingToSpawn = 132;
-    public const int DefenseFlow = 133;
-    public const int DefensePatrolCell = 134;
-    public const int DefensePatrolIdleDuration = 135;
-    public const int DefensePatrolWait = 136;
-    public const int RallyToCastle = 137;
-    public const int SurroundSlot = 138;
-    public const int SurroundTargetId = 139;
-    public const int Targetable = 140;
-    public const int TargetCell = 141;
-    public const int TargetCellRequest = 142;
-    public const int TargetFlow = 143;
-    public const int TargetId = 144;
-    public const int TargetPoint = 145;
-    public const int TargetSelected = 146;
-    public const int Tower = 147;
-    public const int TowerBuildRequest = 148;
-    public const int TowerPlace = 149;
-    public const int TowerUpgrade = 150;
-    public const int TowerUpgradeIcon = 151;
-    public const int TowerUpgradePrice = 152;
-    public const int TowerUpgradeRequest = 153;
-    public const int Unit = 154;
-    public const int UnitAnchorPoint = 155;
-    public const int UnitIcon = 156;
-    public const int UnitSize = 157;
-    public const int CurrentWaveEnemies = 158;
-    public const int CurrentWaveNumber = 159;
-    public const int WaveEnemiesAlive = 160;
-    public const int WaveInProgress = 161;
-    public const int WaveStartRequsted = 162;
-    public const int Projectile = 163;
+    public const int FloatingTextColor = 90;
+    public const int HealFloatingText = 91;
+    public const int GameSession = 92;
+    public const int CurrentHealth = 93;
+    public const int HpBar = 94;
+    public const int MaxHealth = 95;
+    public const int DefenseFlowFields = 96;
+    public const int DefenseIntegrationFields = 97;
+    public const int FlowFieldDirty = 98;
+    public const int FlowFields = 99;
+    public const int IntegrationFields = 100;
+    public const int OccupField = 101;
+    public const int ReservedField = 102;
+    public const int SpatialHash = 103;
+    public const int SpawnMap = 104;
+    public const int SpawnReservedField = 105;
+    public const int SurroundField = 106;
+    public const int TilemapMovement = 107;
+    public const int CurrentCell = 108;
+    public const int GridMovement = 109;
+    public const int LastDirection = 110;
+    public const int MovementAvailable = 111;
+    public const int MovementOffset = 112;
+    public const int MovementSpeed = 113;
+    public const int MovementSpeedBonus = 114;
+    public const int Moving = 115;
+    public const int TotalDistance = 116;
+    public const int Trajectory = 117;
+    public const int TrajectoryBaseArcHeight = 118;
+    public const int TrajectoryCurrentArcHeight = 119;
+    public const int TrajectoryMovement = 120;
+    public const int TrajectoryPathProgress = 121;
+    public const int Velocity = 122;
+    public const int CastleUnderAttack = 123;
+    public const int PlayerCastle = 124;
+    public const int PlayerCastleCells = 125;
+    public const int Player = 126;
+    public const int FireResistance = 127;
+    public const int FrostResistance = 128;
+    public const int PhysicalResistance = 129;
+    public const int Reward = 130;
+    public const int SpawnPosition = 131;
+    public const int SpawnRequsted = 132;
+    public const int WaitingToSpawn = 133;
+    public const int DefenseFlow = 134;
+    public const int DefensePatrolCell = 135;
+    public const int DefensePatrolIdleDuration = 136;
+    public const int DefensePatrolWait = 137;
+    public const int RallyToCastle = 138;
+    public const int SurroundSlot = 139;
+    public const int SurroundTargetId = 140;
+    public const int Targetable = 141;
+    public const int TargetCell = 142;
+    public const int TargetCellRequest = 143;
+    public const int TargetFlow = 144;
+    public const int TargetId = 145;
+    public const int TargetPoint = 146;
+    public const int TargetSelected = 147;
+    public const int Tower = 148;
+    public const int TowerBuildRequest = 149;
+    public const int TowerPlace = 150;
+    public const int TowerUpgrade = 151;
+    public const int TowerUpgradeIcon = 152;
+    public const int TowerUpgradePrice = 153;
+    public const int TowerUpgradeRequest = 154;
+    public const int Unit = 155;
+    public const int UnitAnchorPoint = 156;
+    public const int UnitIcon = 157;
+    public const int UnitSize = 158;
+    public const int CurrentWaveEnemies = 159;
+    public const int CurrentWaveNumber = 160;
+    public const int WaveEnemiesAlive = 161;
+    public const int WaveInProgress = 162;
+    public const int WaveStartRequsted = 163;
+    public const int Projectile = 164;
 
-    public const int TotalComponents = 164;
+    public const int TotalComponents = 165;
 
     public static readonly string[] componentNames = {
         "ForcedPause",
@@ -266,6 +267,7 @@ public static class GameComponentsLookup {
         "GameExchequer",
         "DamageFloatingText",
         "FloatingText",
+        "FloatingTextColor",
         "HealFloatingText",
         "GameSession",
         "CurrentHealth",
@@ -433,6 +435,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Exchequer.GameExchequer),
         typeof(Code.Game.Features.FloatingText.DamageFloatingText),
         typeof(Code.Game.Features.FloatingText.FloatingText),
+        typeof(Code.Game.Features.FloatingText.FloatingTextColor),
         typeof(Code.Game.Features.FloatingText.HealFloatingText),
         typeof(Code.Game.Features.GameSession.GameSessionComponent),
         typeof(Code.Game.Features.Health.CurrentHealth),

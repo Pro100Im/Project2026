@@ -20,6 +20,7 @@ namespace Code.Game.StaticData.Configs
         [field: SerializeField] public BuildingType Type { get; private set; }
         [field: SerializeField] public string Title { get; private set; }
         [field: SerializeField] public TownResource Resource { get; private set; }
+        [field: SerializeField] public Color GainColor { get; private set; } = Color.white;
         [field: SerializeField] public TownBuildingLevelData[] Levels { get; private set; }
 
         public bool TryGetProduction(int level, out float interval, out int amount)

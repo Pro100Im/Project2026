@@ -15,3 +15,5 @@ MonoBehaviour:
   <Text>k__BackingField: {fileID: 11400000, guid: 046c6b9a251dfcb458220b7a6bf0ebb1, type: 2}
   <SpawnOffset>k__BackingField: {x: 0, y: 0.35, z: 0}
   <SpawnOffsetRangeX>k__BackingField: 0.3
+  <DamageColor>k__BackingField: {r: 1, g: 0.35, b: 0.25, a: 1}
+  <HealColor>k__BackingField: {r: 0.35, g: 1, b: 0.45, a: 1}

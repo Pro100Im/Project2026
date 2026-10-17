@@ -3,6 +3,7 @@ using Code.Infrastructure.View;
 using Code.Infrastructure.View.Pool;
 using Entitas;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Code.Game.Features.Town.Systems
 {
@@ -57,7 +58,11 @@ namespace Code.Game.Features.Town.Systems
                 return;
             }
 
-            text.Play($"+{building.townResourceGained.Value}", () => _pool.Release(view));
+            var color = building.hasTownBuildingConfig
+                ? building.townBuildingConfig.Value.GainColor
+                : Color.white;
+
+            text.Play($"+{building.townResourceGained.Value}", color, () => _pool.Release(view));
         }
     }
 }

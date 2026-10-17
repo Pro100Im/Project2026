@@ -9,8 +9,6 @@ namespace Code.Game.Features.FloatingText
     public class FloatingTextView : EntityDependant
     {
         [SerializeField] private TextMeshPro _text;
-        [SerializeField] private Color _damageColor = new(1f, 0.35f, 0.25f, 1f);
-        [SerializeField] private Color _healColor = new(0.35f, 1f, 0.45f, 1f);
         [SerializeField] private float _floatDistance = 0.6f;
         [SerializeField] private float _duration = 0.8f;
 
@@ -22,21 +20,18 @@ namespace Code.Game.Features.FloatingText
             if (Entity == null || !Entity.hasFloatingText || _text == null)
                 return;
 
-            var color = Entity.isHealFloatingText ? _healColor : _damageColor;
             var text = Mathf.RoundToInt(Entity.floatingText.Value).ToString();
 
-            Play(text, color, null);
+            Play(text, Entity.floatingTextColor.Value, null);
         }
 
-        public void Play(string text, Action onComplete)
-        {
-            Play(text, _healColor, onComplete);
-        }
-
-        private void Play(string text, Color color, Action onComplete)
+        public void Play(string text, Color color = default, Action onComplete = null)
         {
             if (_text == null)
                 return;
+
+            if (color == default)
+                color = Color.white;
 
             KillTweens();
 
@@ -49,14 +44,12 @@ namespace Code.Game.Features.FloatingText
             _fadeTween = DOTween.ToAlpha(() => _text.color, c => _text.color = c, 0f, _duration)
                 .SetEase(Ease.InQuad);
 
-            if (onComplete == null)
-                return;
-
             _fadeTween.OnComplete(() =>
             {
                 _moveTween = null;
                 _fadeTween = null;
-                onComplete();
+
+                onComplete?.Invoke();
             });
         }
 
@@ -74,6 +67,7 @@ namespace Code.Game.Features.FloatingText
         {
             _moveTween?.Kill();
             _fadeTween?.Kill();
+
             _moveTween = null;
             _fadeTween = null;
         }

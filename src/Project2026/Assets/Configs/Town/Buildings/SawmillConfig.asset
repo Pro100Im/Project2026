@@ -15,6 +15,7 @@ MonoBehaviour:
   <Type>k__BackingField: 5
   <Title>k__BackingField: Sawmill
   <Resource>k__BackingField: 4
+  <GainColor>k__BackingField: {r: 0.6784314, g: 0.42745098, b: 0.32156864, a: 1}
   <Levels>k__BackingField:
   - <Title>k__BackingField: Sawmill
     <Icon>k__BackingField: {fileID: 21300000, guid: 983c11389b437f441b7510c75e109763, type: 3}

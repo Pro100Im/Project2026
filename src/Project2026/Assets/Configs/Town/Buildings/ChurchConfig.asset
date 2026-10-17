@@ -15,6 +15,7 @@ MonoBehaviour:
   <Type>k__BackingField: 6
   <Title>k__BackingField: Church
   <Resource>k__BackingField: 5
+  <GainColor>k__BackingField: {r: 0.54901963, g: 0.37254903, b: 1, a: 1}
   <Levels>k__BackingField:
   - <Title>k__BackingField: Church
     <Icon>k__BackingField: {fileID: 9080485990912184260, guid: 55509c12f4f024f458e4a5d33e6d628d, type: 3}

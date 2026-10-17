@@ -15,6 +15,7 @@ MonoBehaviour:
   <Type>k__BackingField: 2
   <Title>k__BackingField: Gold Mine
   <Resource>k__BackingField: 1
+  <GainColor>k__BackingField: {r: 0.9529412, g: 0.854902, b: 0.35686275, a: 1}
   <Levels>k__BackingField:
   - <Title>k__BackingField: Gold Mine
     <Icon>k__BackingField: {fileID: 21300000, guid: ddd9fa73d6a9152438ce26d07a8770df, type: 3}

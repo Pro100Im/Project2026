@@ -41,6 +41,7 @@ namespace Code.Game.Features.FloatingText.Systems
                 var text = CreateGameEntity.Empty();
 
                 text.AddFloatingText(-damageAmount);
+                text.AddFloatingTextColor(_config.DamageColor);
                 text.isDamageFloatingText = true;
                 text.AddSpawnPosition(spawnPos);
 
