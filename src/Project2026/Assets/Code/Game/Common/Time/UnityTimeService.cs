@@ -4,9 +4,11 @@ namespace Code.Game.Common.Time
 {
     public class UnityTimeService : ITimeService
     {
-        public float DeltaTime => !_paused ? UnityEngine.Time.deltaTime : 0;
+        public float DeltaTime => UnityEngine.Time.deltaTime;
 
-        public float FixedDeltaTime => !_paused ? UnityEngine.Time.fixedDeltaTime : 0;
+        public float GameDeltaTime => !_paused ? UnityEngine.Time.deltaTime : 0;
+
+        public float TownDeltaTime => UnityEngine.Time.deltaTime;
 
         public DateTime UtcNow => DateTime.UtcNow;
 

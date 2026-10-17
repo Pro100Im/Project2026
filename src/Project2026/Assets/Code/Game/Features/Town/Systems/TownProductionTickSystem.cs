@@ -45,7 +45,7 @@ namespace Code.Game.Features.Town.Systems
                         out var amount))
                     continue;
 
-                var cooldown = building.townProductionCooldown.Value - _timeService.DeltaTime;
+                var cooldown = building.townProductionCooldown.Value - _timeService.TownDeltaTime;
 
                 if (cooldown > 0f)
                 {
