@@ -11,6 +11,29 @@
     -unity-background-image-tint-color: rgb(255, 255, 255);
     background-color: rgba(255, 255, 255, 0);
     -unity-background-scale-mode: stretch-to-fill;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    cursor: link;
+    transition-property: scale, -unity-background-image-tint-color;
+    transition-duration: 0.12s;
+    transition-timing-function: ease-out-cubic;
+}
+
+.button:hover:enabled {
+    scale: 1.04 1.04;
+    -unity-background-image-tint-color: rgb(255, 236, 210);
+}
+
+.button:active:enabled {
+    scale: 0.97 0.97;
+    -unity-background-image-tint-color: rgb(190, 160, 130);
+}
+
+.button:disabled {
+    -unity-background-image-tint-color: rgb(140, 140, 140);
+    opacity: 0.55;
 }
 
 .commonText {
