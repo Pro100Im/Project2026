@@ -84,7 +84,8 @@ namespace Code.Game.Features.Target.Systems
                         tilemap,
                         surroundField,
                         out var slot,
-                        unit.isRangeAttack))
+                        unit.isRangeAttack,
+                        holdFirePosition: unit.isRangeAttack))
                     continue;
 
                 surroundField[slot] = unit.id.Value;

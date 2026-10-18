@@ -11,7 +11,6 @@ namespace Code.Game.Features.Attack.Systems
         private readonly TargetService _targetService;
 
         private readonly IGroup<GameEntity> _attackers;
-        private readonly IGroup<GameEntity> _maps;
 
         private readonly List<GameEntity> _attacksBuffer = new(86);
 
@@ -30,18 +29,10 @@ namespace Code.Game.Features.Attack.Systems
                     GameMatcher.TargetId,
                     GameMatcher.CurrentCell,
                     GameMatcher.UnitSize));
-
-            _maps = gameContext.GetGroup(GameMatcher.AllOf(GameMatcher.TilemapMovement));
         }
 
         public void Execute()
         {
-            var mapEntity = _maps.GetSingleEntity();
-
-            if (mapEntity == null)
-                return;
-
-            var tilemap = mapEntity.tilemapMovement.Value;
             var attackers = _attackers.GetEntities(_attacksBuffer);
 
             for (var i = 0; i < attackers.Count; i++)
@@ -61,20 +52,14 @@ namespace Code.Game.Features.Attack.Systems
                 if (target == null || target.isDead || !target.hasCurrentCell)
                     continue;
 
-                if (!IsOnAttackRing(attacker, target))
-                    continue;
-
                 if (attacker.isRangeAttack)
                 {
-                    var isRetreating = attacker.hasSurroundSlot
-                        && attacker.currentCell.Value != attacker.surroundSlot.Value;
-
-                    if (isRetreating && attacker.isMoving
-                        && TargetService.IsTooCloseForRanged(attacker, target, tilemap))
-                        continue;
-
                     if (!AttackProjectileHelper.CanFire(_targetService, attacker, target))
                         continue;
+                }
+                else if (!IsOnAttackRing(attacker, target))
+                {
+                    continue;
                 }
 
                 ResolveAttackFacing(attacker, target, out var attackDirection, out var flipDx);

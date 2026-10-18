@@ -56,6 +56,17 @@ namespace Code.Game.Features.Target.Systems
             for (var i = 0; i < units.Count; i++)
             {
                 var unit = units[i];
+                var target = GetGameEntityById.Get(unit.surroundTargetId.Value);
+
+                if (target == null || target.isDead || !target.hasCurrentCell)
+                    continue;
+
+                var currentCell = unit.currentCell.Value;
+                var currentSlot = unit.surroundSlot.Value;
+
+                if (currentCell != currentSlot
+                    && TryHoldCurrentFiringCell(unit, target, currentCell, currentSlot, mapEntity, tilemap, surroundField))
+                    continue;
 
                 if (unit.isAttackAvailable)
                     continue;
@@ -63,15 +74,16 @@ namespace Code.Game.Features.Target.Systems
                 if (unit.currentCell.Value != unit.surroundSlot.Value)
                     continue;
 
-                var target = GetGameEntityById.Get(unit.surroundTargetId.Value);
+                currentSlot = unit.surroundSlot.Value;
 
-                if (target == null || target.isDead || !target.hasCurrentCell)
+                TargetService.GetFootprint(target, out var minX, out var minY, out var maxX, out var maxY);
+
+                var size = unit.unitSize.Value;
+                var currentRing = TargetService.GetFootprintRing(currentSlot, size, minX, minY, maxX, maxY);
+                var insideMinRing = currentRing < TargetService.GetRangedMinRing(unit.range.Value);
+
+                if (!insideMinRing && !TargetService.IsTooCloseForRanged(unit, target, tilemap))
                     continue;
-
-                if (!TargetService.IsTooCloseForRanged(unit, target, tilemap))
-                    continue;
-
-                var currentSlot = unit.surroundSlot.Value;
 
                 if (!tilemap.TryGetValue(currentSlot, out var currentSlotWorld))
                     continue;
@@ -102,24 +114,53 @@ namespace Code.Game.Features.Target.Systems
                 if (newSqrDist <= currentSqrDist)
                     continue;
 
-                TargetService.GetFootprint(target, out var minX, out var minY, out var maxX, out var maxY);
-
-                var size = unit.unitSize.Value;
-                var currentRing = TargetService.GetFootprintRing(currentSlot, size, minX, minY, maxX, maxY);
-                var newRing = TargetService.GetFootprintRing(newSlot, size, minX, minY, maxX, maxY);
-
-                if (newRing < currentRing + 1)
-                    continue;
-
-                var minFartherDistance = Mathf.Sqrt(currentSqrDist) + TargetService.CellSize;
-
-                if (newSqrDist < minFartherDistance * minFartherDistance)
+                if (!TargetService.CanFireFromCell(newSlot, target, unit.range.Value, size, tilemap))
                     continue;
 
                 surroundField.Remove(currentSlot);
                 surroundField[newSlot] = unit.id.Value;
                 unit.ReplaceSurroundSlot(newSlot);
             }
+        }
+
+        private static bool TryHoldCurrentFiringCell(
+            GameEntity unit,
+            GameEntity target,
+            Vector3Int currentCell,
+            Vector3Int currentSlot,
+            GameEntity mapEntity,
+            Dictionary<Vector3Int, Vector3> tilemap,
+            Dictionary<Vector3Int, int> surroundField)
+        {
+            if (!tilemap.TryGetValue(currentCell, out var currentWorld)
+                || !tilemap.TryGetValue(currentSlot, out var slotWorld))
+                return false;
+
+            var currentSqrDist = TargetService.GetSqrDistanceToTarget(currentWorld, target, tilemap);
+            var slotSqrDist = TargetService.GetSqrDistanceToTarget(slotWorld, target, tilemap);
+
+            if (slotSqrDist >= currentSqrDist)
+                return false;
+
+            if (!TargetService.CanFireFromCell(
+                    currentCell,
+                    target,
+                    unit.range.Value,
+                    unit.unitSize.Value,
+                    tilemap))
+                return false;
+
+            if (!TargetService.CanFitSlot(currentCell, unit.unitSize.Value, unit.id.Value, mapEntity))
+                return false;
+
+            var unitId = unit.id.Value;
+
+            if (surroundField.TryGetValue(currentSlot, out var ownerId) && ownerId == unitId)
+                surroundField.Remove(currentSlot);
+
+            surroundField[currentCell] = unitId;
+            unit.ReplaceSurroundSlot(currentCell);
+            return true;
         }
     }
 }

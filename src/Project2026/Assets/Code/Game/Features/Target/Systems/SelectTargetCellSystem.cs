@@ -397,6 +397,22 @@ namespace Code.Game.Features.Target.Systems
             if (!TargetService.IsOnAttackRing(unit, target))
                 return;
 
+            if (unit.isRangeAttack)
+            {
+                TargetService.GetFootprint(target, out var tMinX, out var tMinY, out var tMaxX, out var tMaxY);
+
+                var ring = TargetService.GetFootprintRing(
+                    cell,
+                    unit.unitSize.Value,
+                    tMinX,
+                    tMinY,
+                    tMaxX,
+                    tMaxY);
+
+                if (ring < TargetService.GetRangedMinRing(unit.range.Value))
+                    return;
+            }
+
             var surroundField = mapEntity.surroundField.Value;
             var unitId = unit.id.Value;
             var oldSlot = unit.surroundSlot.Value;
