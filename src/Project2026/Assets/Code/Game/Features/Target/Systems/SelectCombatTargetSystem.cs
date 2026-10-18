@@ -93,8 +93,8 @@ namespace Code.Game.Features.Target.Systems
                 var bestSqrDist = float.MaxValue;
                 var physicalRange = TargetService.GetPhysicalRange(detectionRange);
                 var sqrPhysicalRange = physicalRange * physicalRange;
-                var attackerCell = attacker.currentCell.Value;
-                var iRange = Mathf.CeilToInt(TargetService.GetEffectiveRange(detectionRange));
+                var originCell = GetScanOriginCell(attacker.currentCell.Value, attackOriginPos, tilemap);
+                var iRange = Mathf.CeilToInt(TargetService.GetEffectiveRange(detectionRange)) + 1;
 
                 _processedTargets.Clear();
 
@@ -102,7 +102,7 @@ namespace Code.Game.Features.Target.Systems
                 {
                     for (var y = -iRange; y <= iRange; y++)
                     {
-                        var checkPos = new Vector2Int(attackerCell.x + x, attackerCell.y + y);
+                        var checkPos = new Vector2Int(originCell.x + x, originCell.y + y);
 
                         if (!spatialHash.TryGetValue(checkPos, out var potentialTargets))
                             continue;
@@ -163,6 +163,23 @@ namespace Code.Game.Features.Target.Systems
                 attacker.ReplaceTargetId(bestTargetId);
                 SyncSurroundToTargetId(attacker, surroundField);
             }
+        }
+
+        private static Vector3Int GetScanOriginCell(
+            Vector3Int attackerCell,
+            Vector2 attackOriginPos,
+            Dictionary<Vector3Int, Vector3> tilemap)
+        {
+            if (!tilemap.TryGetValue(attackerCell, out var cellWorld))
+                return attackerCell;
+
+            var offsetX = attackOriginPos.x - cellWorld.x;
+            var offsetY = attackOriginPos.y - cellWorld.y;
+
+            return new Vector3Int(
+                attackerCell.x + Mathf.RoundToInt(offsetX / TargetService.CellSize),
+                attackerCell.y + Mathf.RoundToInt(offsetY / TargetService.CellSize),
+                attackerCell.z);
         }
 
         private static Vector2 GetAttackOrigin(GameEntity attacker)

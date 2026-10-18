@@ -67,20 +67,37 @@ namespace Code.Game.Features.Attack
                 return false;
 
             var firePoint = GetFirePoint(owner);
+            var rangeOrigin = GetRangeOrigin(owner);
             aimPoint = owner.targetPoint.Value;
+
+            var rangeDx = aimPoint.x - rangeOrigin.x;
+            var rangeDy = aimPoint.y - rangeOrigin.y;
+            var sqrRange = (rangeDx * rangeDx) + (rangeDy * rangeDy);
+            var physicalRange = TargetService.GetPhysicalRange(owner.range.Value);
+
+            if (sqrRange > physicalRange * physicalRange)
+                return false;
 
             var dx = aimPoint.x - firePoint.x;
             var dy = aimPoint.y - firePoint.y;
-            var sqrDistance = (dx * dx) + (dy * dy);
-            var physicalRange = TargetService.GetPhysicalRange(owner.range.Value);
 
-            if (sqrDistance > physicalRange * physicalRange)
-                return false;
-
-            totalDistance = Mathf.Sqrt(sqrDistance);
+            totalDistance = Mathf.Sqrt((dx * dx) + (dy * dy));
             dynamicArcHeight = GetArcHeight(baseArcHeight, totalDistance);
 
             return true;
+        }
+
+        private static Vector3 GetRangeOrigin(GameEntity owner)
+        {
+            if (owner.hasAttackerPoint)
+                return owner.attackerPoint.Value;
+
+            var origin = owner.woldPos.Value;
+
+            if (owner.hasUnitAnchorPoint)
+                origin += owner.unitAnchorPoint.Value;
+
+            return origin;
         }
 
         private static Vector3 GetFirePoint(GameEntity owner) => owner.woldPos.Value + owner.firePointOffset.Value;
