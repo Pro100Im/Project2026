@@ -505,7 +505,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 3
+      minMaxState: 0
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -558,7 +558,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 3
+      minMaxState: 0
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -1721,35 +1721,17 @@ ParticleSystem:
     rowMode: 1
     sprites:
     - sprite: {fileID: -67924925095688269, guid: 1b1d3bac4dfa8ed4b832cdd4afd2fba4, type: 3}
-      flipU: 0
-      flipV: 0
     - sprite: {fileID: -1473440142343485929, guid: 1b1d3bac4dfa8ed4b832cdd4afd2fba4, type: 3}
-      flipU: 0
-      flipV: 0
     - sprite: {fileID: 6065719682878445309, guid: 1b1d3bac4dfa8ed4b832cdd4afd2fba4, type: 3}
-      flipU: 0
-      flipV: 0
     - sprite: {fileID: 9165710306475261066, guid: 1b1d3bac4dfa8ed4b832cdd4afd2fba4, type: 3}
-      flipU: 0
-      flipV: 0
     - sprite: {fileID: -2092317922923651828, guid: 1b1d3bac4dfa8ed4b832cdd4afd2fba4, type: 3}
-      flipU: 0
-      flipV: 0
     - sprite: {fileID: 9015670353412449868, guid: 1b1d3bac4dfa8ed4b832cdd4afd2fba4, type: 3}
-      flipU: 0
-      flipV: 0
     - sprite: {fileID: 3556718046733199388, guid: 1b1d3bac4dfa8ed4b832cdd4afd2fba4, type: 3}
-      flipU: 0
-      flipV: 0
     - sprite: {fileID: -7910140599244389621, guid: 1b1d3bac4dfa8ed4b832cdd4afd2fba4, type: 3}
-      flipU: 0
-      flipV: 0
     - sprite: {fileID: 1556029973359163379, guid: 1b1d3bac4dfa8ed4b832cdd4afd2fba4, type: 3}
-      flipU: 0
-      flipV: 0
     - sprite: {fileID: 8596063046478050488, guid: 1b1d3bac4dfa8ed4b832cdd4afd2fba4, type: 3}
-      flipU: 0
-      flipV: 0
+    flipU: 0
+    flipV: 0
   VelocityModule:
     enabled: 0
     x:
@@ -5081,7 +5063,7 @@ ParticleSystemRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 9
+  m_SortingOrder: 10
   m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
