@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: -4034592776969640122}
   - component: {fileID: 715177512618367007}
   - component: {fileID: -7131632106690711948}
+  - component: {fileID: 8123456789012345603}
+  - component: {fileID: 8123456789012345604}
   m_Layer: 0
   m_Name: DefaultArcher
   m_TagString: Untagged
@@ -121,6 +123,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Attack.Registrars.FirePointRegistrar
   EntityView: {fileID: -3016027265122920863}
   _firePoint: {fileID: 8899384356295587931}
+--- !u!114 &8123456789012345603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543715583764140608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5124d7e90b723dd4f681b03e7ac544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.HitReaction.HitReactionView
+  _spriteRenderer: {fileID: 8240447858109985219}
+  _visual: {fileID: 3268227164965527082}
+  _flashDuration: 0.15
+  _punchDistance: 0.055
+  _punchOutDuration: 0.04
+  _punchReturnDuration: 0.08
+--- !u!114 &8123456789012345604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543715583764140608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06235e8fa1c834ee50792c14f8bd655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.HitReaction.Registrars.HitReactionRegistrar
+  EntityView: {fileID: -3016027265122920863}
+  _hitReactionView: {fileID: 8123456789012345603}
 --- !u!1 &2357328491508856399
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,7 +214,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: d19f6a2c8e4b4d7a91c0e5f3a6b8d241, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

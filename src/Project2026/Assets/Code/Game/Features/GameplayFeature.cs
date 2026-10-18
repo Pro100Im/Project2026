@@ -10,6 +10,7 @@ using Code.Game.Features.Duration;
 using Code.Game.Features.Effect;
 using Code.Game.Features.Exchequer;
 using Code.Game.Features.Health;
+using Code.Game.Features.HitReaction;
 using Code.Game.Features.Level;
 using Code.Game.Features.Movement;
 using Code.Game.Features.Rewards;
@@ -49,6 +50,7 @@ namespace Code.Game.Features
             Add(systemFactory.Create<MovementFeature>());
             Add(systemFactory.Create<AttackFeature>());
             Add(systemFactory.Create<DamageFeature>());
+            Add(systemFactory.Create<HitReactionFeature>());
 
             Add(systemFactory.Create<HealthFeature>());
             Add(systemFactory.Create<DeathFeature>());

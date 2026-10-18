@@ -1,6 +1,7 @@
 using Code.Game.Common.Entity;
 using Entitas;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Code.Game.Features.Damage.Systems
 {
@@ -41,10 +42,44 @@ namespace Code.Game.Features.Damage.Systems
                     }
 
                     target.ReplaceCurrentHealth(newCurrentHealth);
+
+                    if (damageAmount > 0f)
+                        RequestHitReaction(damage, target);
                 }
 
                 damage.isDestructed = true;
             }
+        }
+
+        private static void RequestHitReaction(GameEntity damage, GameEntity target)
+        {
+            if (!target.hasHitReaction)
+                return;
+
+            var direction = GetHitDirection(damage, target);
+
+            if (target.hasHitReactionRequest)
+                target.ReplaceHitReactionRequest(direction);
+            else
+                target.AddHitReactionRequest(direction);
+        }
+
+        private static Vector2 GetHitDirection(GameEntity damage, GameEntity target)
+        {
+            if (!target.hasWoldPos)
+                return Vector2.up;
+
+            var owner = GetGameEntityById.Get(damage.ownerId.Value);
+
+            if (owner == null || !owner.hasWoldPos)
+                return Vector2.up;
+
+            var delta = (Vector2)(target.woldPos.Value - owner.woldPos.Value);
+
+            if (delta.sqrMagnitude <= 0.0001f)
+                return Vector2.up;
+
+            return delta.normalized;
         }
     }
 }
