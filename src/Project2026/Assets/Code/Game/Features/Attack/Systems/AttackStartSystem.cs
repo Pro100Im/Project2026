@@ -41,6 +41,7 @@ namespace Code.Game.Features.Attack.Systems
 
                 if (!attacker.isAttackAvailable
                     || attacker.isAttacking
+                    || attacker.isBlocking
                     || attacker.isDead
                     || attacker.isFreezeDebuff
                     || !attacker.hasTargetId)

@@ -5,6 +5,8 @@ namespace Code.Game.Features.Damage
 {
     [Game] public class DamageRequest : IComponent { }
     [Game] public class DamageEffectRequest : IComponent { }
+    [Game] public class AreaDamage : IComponent { }
+    [Game] public class Blocked : IComponent { }
     [Game] public class TotalDamage : IComponent { public float Value; }
 
     [Game] public class PhysicalDamage : IComponent { public float Value; }

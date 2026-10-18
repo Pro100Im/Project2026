@@ -109,6 +109,7 @@ namespace Code.Game.Features.Attack.Systems
             damage.AddTargetPoint(hitPoint);
             damage.AddTotalDamage(0);
             damage.isDamageRequest = true;
+            damage.isAreaDamage = true;
 
             var damageEffect = CreateGameEntity.Empty();
 

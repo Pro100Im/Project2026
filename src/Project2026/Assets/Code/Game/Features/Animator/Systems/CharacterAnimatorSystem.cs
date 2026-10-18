@@ -38,6 +38,17 @@ namespace Code.Game.Features.Animator.Systems
                     continue;
                 }
 
+                if (character.isBlocking)
+                {
+                    if (character.isBlockRequest || !stateInfo.IsName("Block"))
+                        animator.Play("Block", 0, 0f);
+
+                    if (character.isBlockRequest)
+                        character.isBlockRequest = false;
+
+                    continue;
+                }
+
                 if (character.isAttacking)
                 {
                     if (!character.hasAttackDirection)
