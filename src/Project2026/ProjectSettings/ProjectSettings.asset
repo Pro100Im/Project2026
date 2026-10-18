@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: DefaultCompany
   productName: Project2026
-  defaultCursor: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: 866af86ee8b11824ca1f6b85c83da885, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
@@ -792,6 +792,7 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
+  enableDirectStorage: 0
   cloudProjectId: c179485d-b464-4da1-b0cc-351654f133ab
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
