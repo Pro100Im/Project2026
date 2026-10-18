@@ -11,7 +11,8 @@ namespace Code.Game.Features.Movement
 
             Add(systemFactory.Create<FlipAlongMoveDirectionSystem>());
             Add(systemFactory.Create<AttachPosToTargetSystem>());
- 
+
+            Add(systemFactory.Create<UpdateProjectileAimSystem>());
             Add(systemFactory.Create<TrajectoryMovementSystem>());
 
             Add(systemFactory.Create<MovementSpeedBonusCleanUpSystem>());

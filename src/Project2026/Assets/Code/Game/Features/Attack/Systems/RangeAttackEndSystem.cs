@@ -1,5 +1,4 @@
 using Code.Game.Common.Entity;
-using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
 
@@ -7,15 +6,11 @@ namespace Code.Game.Features.Attack.Systems
 {
     public class RangeAttackEndSystem : IExecuteSystem
     {
-        private readonly TargetService _targetService;
-
         private readonly IGroup<GameEntity> _rangeAttacks;
         private readonly List<GameEntity> _attacksBuffer = new(86);
 
-        public RangeAttackEndSystem(TargetService targetService)
+        public RangeAttackEndSystem()
         {
-            _targetService = targetService;
-
             _rangeAttacks = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.OwnerId,
@@ -54,7 +49,7 @@ namespace Code.Game.Features.Attack.Systems
                         var target = GetGameEntityById.Get(entity.targetId.Value);
 
                         if (target != null && !target.isDead)
-                            AttackProjectileHelper.TryFire(_targetService, entity, target);
+                            AttackProjectileHelper.TryFire(entity);
 
                         attack.isAttackHitPending = false;
                     }

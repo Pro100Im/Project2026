@@ -54,7 +54,7 @@ namespace Code.Game.Features.Attack.Systems
 
                 if (attacker.isRangeAttack)
                 {
-                    if (!AttackProjectileHelper.CanFire(_targetService, attacker, target))
+                    if (!AttackProjectileHelper.CanFire(attacker))
                         continue;
                 }
                 else if (!IsOnAttackRing(attacker, target))

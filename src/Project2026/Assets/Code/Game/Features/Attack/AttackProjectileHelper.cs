@@ -8,14 +8,15 @@ namespace Code.Game.Features.Attack
 {
     public static class AttackProjectileHelper
     {
-        public static bool CanFire(TargetService targetService, GameEntity owner, GameEntity target)
-        {
-            return TryGetIntercept(targetService, owner, target, out _, out _, out _);
-        }
+        public static float GetArcHeight(float baseArcHeight, float distance) =>
+            baseArcHeight * Mathf.Clamp01(distance / 10f);
 
-        public static bool TryFire(TargetService targetService, GameEntity owner, GameEntity target)
+        public static bool CanFire(GameEntity owner) =>
+            TryGetShot(owner, out _, out _, out _);
+
+        public static bool TryFire(GameEntity owner)
         {
-            if (!TryGetIntercept(targetService, owner, target, out var interceptPoint, out var totalDistance, out var dynamicArcHeight))
+            if (!TryGetShot(owner, out var aimPoint, out var totalDistance, out var dynamicArcHeight))
                 return false;
 
             var firePoint = GetFirePoint(owner);
@@ -31,26 +32,24 @@ namespace Code.Game.Features.Attack
             foreach (var property in owner.projectile.Value.Properties)
                 property.Apply(projectile);
 
-            projectile.AddTargetPoint(interceptPoint);
+            projectile.AddTargetPoint(aimPoint);
             projectile.AddTotalDistance(totalDistance);
             projectile.ReplaceTrajectoryCurrentArcHeight(dynamicArcHeight);
 
             return true;
         }
 
-        private static bool TryGetIntercept(
-            TargetService targetService,
+        private static bool TryGetShot(
             GameEntity owner,
-            GameEntity target,
-            out Vector3 interceptPoint,
+            out Vector3 aimPoint,
             out float totalDistance,
             out float dynamicArcHeight)
         {
-            interceptPoint = default;
+            aimPoint = default;
             totalDistance = 0f;
             dynamicArcHeight = 0f;
 
-            if (!owner.hasProjectile || !owner.hasFirePointOffset || !owner.hasWoldPos || !owner.hasAttackerPoint || !owner.hasRange)
+            if (!owner.hasProjectile || !owner.hasFirePointOffset || !owner.hasWoldPos || !owner.hasTargetPoint || !owner.hasRange)
                 return false;
 
             var projSpeed = 0f;
@@ -67,23 +66,19 @@ namespace Code.Game.Features.Attack
             if (projSpeed <= 0f)
                 return false;
 
-            var targetVel = target.hasVelocity ? target.velocity.Value : Vector3.zero;
-            interceptPoint = targetService.GetInterceptPoint(
-                owner.attackerPoint.Value,
-                projSpeed,
-                owner.targetPoint.Value,
-                targetVel);
+            var firePoint = GetFirePoint(owner);
+            aimPoint = owner.targetPoint.Value;
 
+            var dx = aimPoint.x - firePoint.x;
+            var dy = aimPoint.y - firePoint.y;
+            var sqrDistance = (dx * dx) + (dy * dy);
             var physicalRange = TargetService.GetPhysicalRange(owner.range.Value);
-            var dx = interceptPoint.x - owner.attackerPoint.Value.x;
-            var dy = interceptPoint.y - owner.attackerPoint.Value.y;
 
-            if ((dx * dx) + (dy * dy) > physicalRange * physicalRange)
+            if (sqrDistance > physicalRange * physicalRange)
                 return false;
 
-            totalDistance = Vector3.Distance(GetFirePoint(owner), interceptPoint);
-            var distanceFactor = Mathf.Clamp01(totalDistance / 10f);
-            dynamicArcHeight = baseArcHeight * distanceFactor;
+            totalDistance = Mathf.Sqrt(sqrDistance);
+            dynamicArcHeight = GetArcHeight(baseArcHeight, totalDistance);
 
             return true;
         }
