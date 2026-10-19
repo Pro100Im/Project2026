@@ -173,6 +173,9 @@ namespace Code.Game.Common.UI
             {
                 var element = _pickingStack.Pop();
 
+                if (interactable && element != root && element.ClassListContains("hide"))
+                    continue;
+
                 if (interactable)
                 {
                     if (element.userData is PickingMode storedMode)
