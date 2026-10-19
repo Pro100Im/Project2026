@@ -1,0 +1,339 @@
+.menu-fade {
+    transition-property: opacity;
+    transition-duration: 0.2s;
+}
+
+.menu-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-scrim {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(34, 34, 34, 0.58);
+}
+
+.menu-panel {
+    width: 560px;
+    padding-top: 86px;
+    padding-right: 40px;
+    padding-bottom: 48px;
+    padding-left: 40px;
+    align-items: center;
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Banners/Banner_Slots.png?fileID=2800000&guid=072717bc57c49fe4b8d08208e4b8c83c&type=3#Banner_Slots");
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.92);
+}
+
+.menu-panel--build {
+    width: 500px;
+    padding-top: 78px;
+    padding-right: 28px;
+    padding-bottom: 36px;
+    padding-left: 28px;
+}
+
+.menu-panel--upgrade {
+    width: 360px;
+    padding-top: 78px;
+    padding-right: 24px;
+    padding-bottom: 32px;
+    padding-left: 24px;
+}
+
+.menu-title {
+    position: absolute;
+    top: 22px;
+    left: 40px;
+    right: 40px;
+    color: rgb(82, 24, 7);
+    font-size: 52px;
+    -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/ThaleahFat%20SDF.asset?fileID=11400000&guid=4f91cd89f157d37449660700b7886222&type=2#ThaleahFat SDF");
+    -unity-text-outline-color: rgb(214, 183, 152);
+    -unity-text-outline-width: 1.5px;
+}
+
+.menu-choices {
+    align-items: center;
+}
+
+.button.menu-choice {
+    translate: 0 0;
+    width: 420px;
+    height: 112px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+    margin-right: 0;
+    margin-bottom: 8px;
+    margin-left: 0;
+    padding-top: 8px;
+    padding-right: 16px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+}
+
+.menu-choice__icon {
+    width: 72px;
+    height: 72px;
+    margin-right: 12px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.menu-icon-settings {
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Icons/Icon_10.png?fileID=2800000&guid=35bc1a3741426d4498ddd0f87f79ee19&type=3#Icon_10");
+}
+
+.menu-icon-house {
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/Buildings/Black%20Buildings/House2.png?fileID=2800000&guid=8185e5dbd071dc346a9f05a69c7f2437&type=3#House2");
+}
+
+.menu-icon-exit {
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Icons/Icon_08.png?fileID=2800000&guid=eb11edec265f9eb42b9fee820381fede&type=3#Icon_08");
+}
+
+.menu-icon-restart {
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Icons/Icon_05.png?fileID=2800000&guid=9fd214d87b23d4c45adcbc81b4d58dc3&type=3#Icon_05");
+}
+
+.menu-icon-town {
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Icons/Icon_01.png?fileID=2800000&guid=3d7574687a3e0f74b80eaa957215e5f5&type=3#Icon_01");
+}
+
+.screen-root {
+    flex-grow: 1;
+}
+
+.hud-gear {
+    width: 101px;
+    height: 101px;
+    margin-top: 0;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: 0;
+    align-self: flex-start;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    cursor: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Cursors/Cursor_02.png?fileID=2800000&guid=14ca4e7afa59404479849ae527b25a1d&type=3") 23 17;
+    transition-property: scale;
+    transition-duration: 0.12s;
+    transition-timing-function: ease-out-cubic;
+}
+
+.hud-gear:hover:enabled {
+    scale: 1.04 1.04;
+}
+
+.hud-gear:active:enabled {
+    scale: 0.97 0.97;
+}
+
+.hud-gear__icon {
+    width: 80px;
+    height: 80px;
+    -unity-background-scale-mode: scale-to-fit;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    transition-property: -unity-background-image-tint-color;
+    transition-duration: 0.12s;
+    transition-timing-function: ease-out-cubic;
+}
+
+.hud-gear:hover:enabled > .hud-gear__icon {
+    -unity-background-image-tint-color: rgb(255, 236, 210);
+}
+
+.hud-gear:active:enabled > .hud-gear__icon {
+    -unity-background-image-tint-color: rgb(190, 160, 130);
+}
+
+.button.menu-choice .commonText {
+    font-size: 32px;
+}
+
+.menu-close {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 70px;
+    height: 70px;
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Icons/Icon_09.png?fileID=2800000&guid=a90ab0d79a24370459b8936305e6c969&type=3#Icon_09");
+    background-color: rgba(0, 0, 0, 0);
+    -unity-background-scale-mode: scale-to-fit;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    cursor: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Cursors/Cursor_02.png?fileID=2800000&guid=14ca4e7afa59404479849ae527b25a1d&type=3") 23 17;
+    transition-property: scale;
+    transition-duration: 0.12s;
+    transition-timing-function: ease-out-cubic;
+}
+
+.menu-close:hover:enabled {
+    scale: 1.06 1.06;
+}
+
+.menu-close:active:enabled {
+    scale: 0.96 0.96;
+}
+
+.menu-pop {
+    position: absolute;
+    transition-property: opacity;
+    transition-duration: 0.2s;
+}
+
+.captionText {
+    color: rgb(82, 24, 7);
+    font-size: 16px;
+    -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/ThaleahFat%20SDF.asset?fileID=11400000&guid=4f91cd89f157d37449660700b7886222&type=2#ThaleahFat SDF");
+    -unity-text-outline-color: rgb(214, 183, 152);
+    -unity-text-outline-width: 1px;
+    white-space: nowrap;
+}
+
+.tower-choice {
+    width: 120px;
+    height: 150px;
+    margin-top: 4px;
+    margin-right: 6px;
+    margin-bottom: 4px;
+    margin-left: 6px;
+    padding-top: 8px;
+    padding-right: 4px;
+    padding-bottom: 10px;
+    padding-left: 4px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Cursors/Cursor_04.png?fileID=2800000&guid=434fa6d8f91adba44ba63b4ab1b7c81b&type=3#Cursor_04");
+    -unity-background-scale-mode: stretch-to-fill;
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.tower-choice__icon {
+    width: 76px;
+    height: 76px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.tower-icon-archer {
+    background-image: url("project://database/Assets/Sources/My/Towers/ArcherTower/ArcherTowerLvl1.png?fileID=2800000&guid=27a9b08c06b9d0345965c2029f6c961c&type=3#ArcherTowerLvl1");
+}
+
+.tower-icon-ice {
+    background-image: url("project://database/Assets/Sources/My/Towers/IceTower/IceTowerLvl1.png?fileID=2800000&guid=5fdd65c9ff91f634d88404bbebc2a074&type=3#IceTowerLvl1");
+}
+
+.tower-icon-fire {
+    background-image: url("project://database/Assets/Sources/My/Towers/FireTower/FireTowerLvl1.png?fileID=2800000&guid=57f518205be7e1c4490654ddb95779df&type=3#FireTowerLvl1");
+}
+
+.wave-call__icon {
+    width: 84px;
+    height: 84px;
+    margin-right: 8px;
+    -unity-background-scale-mode: scale-to-fit;
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Icons/Icon_07.png?fileID=2800000&guid=547686f4269777f44b5e2233675497c2&type=3#Icon_07");
+}
+
+.tower-row {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.main-menu-canvas {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    background-image: url("project://database/Assets/Sources/My/MySquare.png?fileID=2800000&guid=485f5edb7d62a0f43ba0f1c569046509&type=3#MySquare");
+    -unity-background-image-tint-color: rgb(106, 135, 144);
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+.main-menu-title {
+    position: absolute;
+    top: 72px;
+}
+
+.main-menu-intro {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 72px;
+    align-items: center;
+}
+
+.menu-search {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.button.wave-call {
+    translate: 0 0;
+    position: absolute;
+    right: 36px;
+    bottom: 28px;
+    width: 340px;
+    height: 128px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 8px;
+    padding-right: 18px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+}
+
+.wave-call__text {
+    align-items: center;
+}
+
+.wave-call__title {
+    color: rgb(82, 24, 7);
+    font-size: 36px;
+    -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/ThaleahFat%20SDF.asset?fileID=11400000&guid=4f91cd89f157d37449660700b7886222&type=2#ThaleahFat SDF");
+    -unity-text-outline-color: rgb(214, 183, 152);
+    -unity-text-outline-width: 1.5px;
+}
+
+.wave-call__action {
+    color: rgb(120, 48, 12);
+    font-size: 26px;
+    -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/ThaleahFat%20SDF.asset?fileID=11400000&guid=4f91cd89f157d37449660700b7886222&type=2#ThaleahFat SDF");
+    -unity-text-outline-color: rgb(214, 183, 152);
+    -unity-text-outline-width: 1px;
+}

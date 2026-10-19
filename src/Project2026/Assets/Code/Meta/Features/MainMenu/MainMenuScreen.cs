@@ -55,6 +55,7 @@ namespace Code.Meta.UI.MainMenu
             _intro = root.Q<VisualElement>("Intro");
 
             _mainMenu = root.Q<VisualElement>("MainMenu");
+            var searchingPopUp = root.Q<VisualElement>("SearchingPopUp");
 
             _quickMatchButton = root.Q<Button>("QuickPlayButton");
             _quickMatchButton.clickable.clicked += StartGame;
@@ -66,6 +67,7 @@ namespace Code.Meta.UI.MainMenu
             _exitButton.clickable.clicked += Exit;
 
             _uIService.Hide(_mainMenu).Forget();
+            _uIService.Hide(searchingPopUp).Forget();
 
             _pressAnyBtn.actionTriggered += OnAnyButtonPress;
             _pressAnyBtn.Enable();
@@ -101,12 +103,16 @@ namespace Code.Meta.UI.MainMenu
 
                 var townScene = SceneManager.GetSceneByName(_townSceneName);
 
-                if (townScene.IsValid())
+                if (!townScene.IsValid() || !townScene.isLoaded)
+                    await _sceneLoader.Load(_townSceneName, LoadSceneMode.Additive, default, true);
+                else
                     SceneManager.SetActiveScene(townScene);
-            }
-            catch
-            {
 
+                _uIService.Hide(_canvas).Forget();
+            }
+            finally
+            {
+                _transitionScreen.Hide().Forget();
             }
         }
 

@@ -23,6 +23,7 @@ namespace Code.Meta.Features.Game
         private VisualElement _pauseMenu;
 
         private Button _cancelButton;
+        private Button _restartButton;
         private Button _exitButton;
 
         [Inject]
@@ -38,9 +39,11 @@ namespace Code.Meta.Features.Game
         {
             _pauseMenu = _gameScreen.GetVisualElement("PauseMenu");
             _cancelButton = _pauseMenu.Q<Button>("CancelButton");
+            _restartButton = _pauseMenu.Q<Button>("RestartButton");
             _exitButton = _pauseMenu.Q<Button>("ExitButton");
 
             _cancelButton.clickable.clicked += PauseRequest;
+            _restartButton.clickable.clicked += Restart;
             _exitButton.clickable.clicked += Exit;
 
             _uIService.Hide(_pauseMenu).Forget();
@@ -51,6 +54,14 @@ namespace Code.Meta.Features.Game
             var entityClick = CreateInputEntity.Empty();
             entityClick.isPauseRequested = true;
             entityClick.isInput = true;
+        }
+
+        private async void Restart()
+        {
+            await _transitionScreen.Show();
+            await _sceneLoader.UnLoad(_gameSceneName);
+
+            _sceneLoader.Load(_gameSceneName, LoadSceneMode.Additive, default, true).Forget();
         }
 
         public void Exit()
@@ -80,6 +91,8 @@ namespace Code.Meta.Features.Game
         {
             if (_cancelButton != null)
                 _cancelButton.clickable.clicked -= PauseRequest;
+            if (_restartButton != null)
+                _restartButton.clickable.clicked -= Restart;
             if (_exitButton != null)
                 _exitButton.clickable.clicked -= Exit;
         }

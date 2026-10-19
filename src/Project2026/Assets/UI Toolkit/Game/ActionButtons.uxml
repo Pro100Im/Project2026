@@ -2,24 +2,24 @@
     <Style src="project://database/Assets/UI%20Toolkit/Game/ActionButtons.uss?fileID=7433441132597879392&amp;guid=de3542756e6be7f46bac7197a7088ce7&amp;type=3#ActionButtons"/>
     <ui:VisualElement name="Canvas" picking-mode="Ignore" style="flex-grow: 1;">
         <ui:VisualElement name="UnitButtons" style="flex-grow: 1; position: absolute; flex-direction: row; top: 950px; left: auto; right: 600px;">
-            <ui:Button text="Button" name="UnitButton1" class="ActionButton">
+            <ui:Button text="" name="UnitButton1" class="ActionButton tower-slot">
                 <ui:Image name="Icon" style="background-image: url(&quot;project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Human%20Avatars/Avatars_21.png?fileID=2800000&amp;guid=a54bb8d01623006499878669c87c2a1f&amp;type=3#Avatars_21&quot;); width: 90px; height: 90px; -unity-background-scale-mode: scale-to-fit;"/>
             </ui:Button>
-            <ui:Button text="Button" name="UnitButton2" class="ActionButton">
+            <ui:Button text="" name="UnitButton2" class="ActionButton tower-slot">
                 <ui:Image name="Icon" style="background-image: url(&quot;project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Human%20Avatars/Avatars_23.png?fileID=2800000&amp;guid=bb7ce7d8e4758ef408f778df2952e0c4&amp;type=3#Avatars_23&quot;); width: 90px; height: 90px; -unity-background-scale-mode: scale-to-fit;"/>
             </ui:Button>
-            <ui:Button text="Button" name="StubButton" class="ActionButton">
+            <ui:Button text="" name="StubButton" class="ActionButton tower-slot">
                 <ui:Image name="Icon" style="background-image: url(&quot;project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Cursors/Cursor_03.png?fileID=2800000&amp;guid=74b821c6b63fb13429fc1f38133a5a89&amp;type=3#Cursor_03&quot;); width: 90px; height: 90px; -unity-background-scale-mode: scale-to-fit;"/>
             </ui:Button>
         </ui:VisualElement>
         <ui:VisualElement name="SpellButtons" style="flex-grow: 1; position: absolute; flex-direction: row; top: 950px; left: auto; right: 1000px;">
-            <ui:Button text="" name="SpellButton" class="ActionButton">
+            <ui:Button text="" name="SpellButton" class="ActionButton tower-slot">
                 <ui:Image name="Icon" style="background-image: url(&quot;project://database/Assets/Sources/My/Debuffs/Chill.png?fileID=2800000&amp;guid=29eb51e39f48bc24fa308bd0a272a308&amp;type=3#Chill&quot;); width: 90px; height: 90px; -unity-background-scale-mode: scale-to-fit;"/>
             </ui:Button>
-            <ui:Button text="" name="StubButton" class="ActionButton">
+            <ui:Button text="" name="StubButton" class="ActionButton tower-slot">
                 <ui:Image name="Icon" style="background-image: url(&quot;project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Cursors/Cursor_03.png?fileID=2800000&amp;guid=74b821c6b63fb13429fc1f38133a5a89&amp;type=3#Cursor_03&quot;); width: 90px; height: 90px; -unity-background-scale-mode: scale-to-fit;"/>
             </ui:Button>
-            <ui:Button text="" name="StubButton" class="ActionButton">
+            <ui:Button text="" name="StubButton" class="ActionButton tower-slot">
                 <ui:Image name="Icon" style="background-image: url(&quot;project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Cursors/Cursor_03.png?fileID=2800000&amp;guid=74b821c6b63fb13429fc1f38133a5a89&amp;type=3#Cursor_03&quot;); width: 90px; height: 90px; -unity-background-scale-mode: scale-to-fit;"/>
             </ui:Button>
         </ui:VisualElement>
