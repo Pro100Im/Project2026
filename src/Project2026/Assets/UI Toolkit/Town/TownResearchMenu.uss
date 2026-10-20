@@ -1,0 +1,156 @@
+.research-panel {
+    width: 820px;
+    height: 520px;
+    padding-top: 78px;
+    padding-right: 28px;
+    padding-bottom: 28px;
+    padding-left: 28px;
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Banners/Banner_Slots.png?fileID=2800000&guid=072717bc57c49fe4b8d08208e4b8c83c&type=3#Banner_Slots");
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+.research-tree {
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.research-center {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    align-items: center;
+    justify-content: center;
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/TinySquareBlueButton.png?fileID=2800000&guid=a50118f0d3cff6744a19a2fea27c115d&type=3#TinySquareBlueButton");
+    -unity-background-scale-mode: stretch-to-fill;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.research-center__label {
+    color: rgb(255, 236, 196);
+    font-size: 16px;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/ThaleahFat%20SDF.asset?fileID=11400000&guid=4f91cd89f157d37449660700b7886222&type=2#ThaleahFat SDF");
+    -unity-text-align: middle-center;
+}
+
+.research-node {
+    position: absolute;
+    width: 76px;
+    height: 76px;
+    min-width: 76px;
+    min-height: 76px;
+    max-width: 76px;
+    max-height: 76px;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/TinySquareBlueButton.png?fileID=2800000&guid=a50118f0d3cff6744a19a2fea27c115d&type=3#TinySquareBlueButton");
+    -unity-background-scale-mode: stretch-to-fill;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.research-node__icon {
+    width: 36px;
+    height: 36px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.research-node--owned {
+    -unity-background-image-tint-color: rgb(255, 214, 120);
+}
+
+.research-node--available {
+    -unity-background-image-tint-color: rgb(170, 220, 140);
+}
+
+.research-node--locked {
+    opacity: 0.45;
+}
+
+.research-node--unaffordable {
+    -unity-background-image-tint-color: rgb(220, 140, 130);
+}
+
+.research-detail {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    width: 560px;
+    height: 360px;
+    padding-top: 36px;
+    padding-right: 40px;
+    padding-bottom: 28px;
+    padding-left: 40px;
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Banners/Banner_Slots.png?fileID=2800000&guid=072717bc57c49fe4b8d08208e4b8c83c&type=3#Banner_Slots");
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+.research-detail__icon {
+    position: absolute;
+    left: 36px;
+    top: 36px;
+    width: 72px;
+    height: 72px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.research-detail__title {
+    margin-left: 96px;
+    margin-top: 8px;
+    color: rgb(82, 24, 7);
+    font-size: 32px;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/ThaleahFat%20SDF.asset?fileID=11400000&guid=4f91cd89f157d37449660700b7886222&type=2#ThaleahFat SDF");
+    -unity-text-align: middle-left;
+}
+
+.research-detail__description {
+    margin-top: 28px;
+    margin-left: 96px;
+    color: rgb(82, 24, 7);
+    font-size: 22px;
+    white-space: normal;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/ThaleahFat%20SDF.asset?fileID=11400000&guid=4f91cd89f157d37449660700b7886222&type=2#ThaleahFat SDF");
+    -unity-text-align: upper-left;
+}
+
+.research-detail__price {
+    margin-top: 16px;
+    margin-left: 96px;
+    color: rgb(140, 78, 24);
+    font-size: 24px;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/ThaleahFat%20SDF.asset?fileID=11400000&guid=4f91cd89f157d37449660700b7886222&type=2#ThaleahFat SDF");
+    -unity-text-align: middle-left;
+}
+
+.research-detail__buy {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    translate: -50% 0;
+    width: 280px;
+    height: 72px;
+    min-width: 280px;
+    min-height: 72px;
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Wood%20Table/WoodTable_Slots.png?fileID=2800000&guid=922213a7128e89d4a9e89e3f1c689ae9&type=3#WoodTable_Slots");
+    -unity-background-scale-mode: stretch-to-fill;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    color: rgb(82, 24, 7);
+    font-size: 28px;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/ThaleahFat%20SDF.asset?fileID=11400000&guid=4f91cd89f157d37449660700b7886222&type=2#ThaleahFat SDF");
+    -unity-text-align: middle-center;
+}
+
+.research-detail__buy:disabled {
+    opacity: 0.55;
+}

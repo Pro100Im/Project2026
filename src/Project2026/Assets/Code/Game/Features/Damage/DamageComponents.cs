@@ -11,6 +11,7 @@ namespace Code.Game.Features.Damage
 
     [Game] public class PhysicalDamage : IComponent { public float Value; }
     [Game] public class FireDamage : IComponent { public float Value; }
+    [Game] public class FireDamageMultiplier : IComponent { public float Value; }
     [Game] public class FrostDamage : IComponent { public float Value; }
     [Game] public class LightningDamage : IComponent { public float Value; }
     [Game] public class ChaosDamage : IComponent { public float Value; }

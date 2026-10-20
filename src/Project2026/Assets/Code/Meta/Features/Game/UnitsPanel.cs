@@ -1,6 +1,4 @@
-using Assets.Code.Game.StaticData.Property;
 using Code.Game.Common.Entity;
-using Code.Game.StaticData.Configs;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
@@ -9,9 +7,6 @@ namespace Code.Meta.Features.Game
 {
     public class UnitsPanel : MonoBehaviour
     {
-        [SerializeField] private EntityConfig _firstUnitSlot;
-        [SerializeField] private EntityConfig _secondUnitSlot;
-
         private GameScreen _gameScreen;
 
         private Button _firstUnitSlotButton;
@@ -32,24 +27,14 @@ namespace Code.Meta.Features.Game
             _secondUnitSlotButton.clickable.clicked += SpawnSecondSlotUnit;
         }
 
-        private void SpawnFirstSlotUnit()
+        private void SpawnFirstSlotUnit() => RequestSpawn(0);
+
+        private void SpawnSecondSlotUnit() => RequestSpawn(1);
+
+        private static void RequestSpawn(int slot)
         {
             var entity = CreateGameEntity.Empty();
-            var unitSize = _firstUnitSlot.GetProperty<UnitSizeProperty>().Size;
-
-            entity.AddUnitSize(unitSize);
-            entity.AddEntityConfig(_firstUnitSlot);
-            entity.isSpawnRequsted = true;
-            entity.isPlayer = true;
-        }
-
-        private void SpawnSecondSlotUnit()
-        {
-            var entity = CreateGameEntity.Empty();
-            var unitSize = _secondUnitSlot.GetProperty<UnitSizeProperty>().Size;
-
-            entity.AddUnitSize(unitSize);
-            entity.AddEntityConfig(_secondUnitSlot);
+            entity.AddSpawnSlot(slot);
             entity.isSpawnRequsted = true;
             entity.isPlayer = true;
         }

@@ -193,6 +193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 64306097802940132}
   - component: {fileID: 5503208523163108721}
+  - component: {fileID: 5503208523163108722}
   m_Layer: 0
   m_Name: UnitsPanel
   m_TagString: Untagged
@@ -227,6 +228,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01c7476fec0e95e4dbaca59f56b39962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Meta.Features.Game.UnitsPanel
+--- !u!114 &5503208523163108722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5073148147066312515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2b8d60792a47f1345061728394a5b6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Features.Unit.Registrars.UnitSlotRegistrar
   _firstUnitSlot: {fileID: 11400000, guid: 5004249a1aba98f489582c13eba43155, type: 2}
   _secondUnitSlot: {fileID: 11400000, guid: 18a01406d3defc8499815df154731fa2, type: 2}
 --- !u!1 &5686554603850505932

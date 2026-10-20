@@ -35,6 +35,9 @@ namespace Code.Game.Features.Damage.Systems
 
                 var target = GetGameEntityById.Get(damage.targetId.Value);
                 var resistance = target.hasFrostResistance ? target.frostResistance.Value : 0;
+
+                if (target.hasResistanceBonus)
+                    resistance += target.resistanceBonus.Value;
                 var resistPercent = resistance / 100f;
 
                 resistPercent = Mathf.Clamp(resistPercent, 0f, 1f);

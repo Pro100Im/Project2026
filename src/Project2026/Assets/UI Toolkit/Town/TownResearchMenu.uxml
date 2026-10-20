@@ -1,0 +1,20 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Global/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=f0b50401ae793a440bdbacc20d05f547&amp;type=3#GlobalStyle"/>
+    <Style src="project://database/Assets/UI%20Toolkit/Town/TownBuildMenu.uss?fileID=7433441132597879392&amp;guid=717f716ece1640368b7d001a00317038&amp;type=3#TownBuildMenu"/>
+    <Style src="project://database/Assets/UI%20Toolkit/Town/TownResearchMenu.uss?fileID=7433441132597879392&amp;guid=b4d0f82914c691356728394a5b6c7d8e&amp;type=3#TownResearchMenu"/>
+    <ui:VisualElement name="TownResearchMenu" picking-mode="Position" class="build-menu-overlay hide" style="display: none;">
+        <ui:VisualElement name="TownResearchPanel" picking-mode="Position" class="research-panel">
+            <ui:Label text="Research" name="TownResearchTitle" picking-mode="Ignore" class="commonText build-menu-title"/>
+            <ui:VisualElement name="TownResearchTree" picking-mode="Ignore" class="research-tree"/>
+            <ui:VisualElement name="TownResearchDetail" picking-mode="Position" class="research-detail" style="display: none;">
+                <ui:Image name="TownResearchDetailIcon" picking-mode="Ignore" class="research-detail__icon"/>
+                <ui:Label text="" name="TownResearchDetailTitle" picking-mode="Ignore" class="research-detail__title"/>
+                <ui:Label text="" name="TownResearchDetailDescription" picking-mode="Ignore" class="research-detail__description"/>
+                <ui:Label text="" name="TownResearchDetailPrice" picking-mode="Ignore" class="research-detail__price"/>
+                <ui:Button text="" name="TownResearchDetailClose" class="build-menu-close"/>
+                <ui:Button text="Buy" name="TownResearchDetailBuy" class="research-detail__buy"/>
+            </ui:VisualElement>
+            <ui:Button text="" name="TownResearchCloseButton" class="build-menu-close"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

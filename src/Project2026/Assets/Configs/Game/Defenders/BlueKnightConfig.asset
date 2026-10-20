@@ -34,6 +34,7 @@ MonoBehaviour:
   - rid: 4221333317118328832
   - rid: 8171215584738410700
   - rid: 5901847263518492011
+  - rid: 9100000000000000101
   references:
     version: 2
     RefIds:
@@ -76,11 +77,16 @@ MonoBehaviour:
         <Mode>k__BackingField: 0
         <PhysicalDamage>k__BackingField: 5
         <PhysicalHitEffect>k__BackingField: {fileID: 11400000, guid: 0801227ced598bd4fa883a790a2e14b0, type: 2}
+    - rid: 9100000000000000101
+      type: {class: UnitKindProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Kind>k__BackingField: 0
     - rid: 5901847263518492011
       type: {class: PassiveBlockProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Chance>k__BackingField: 0.9
+        <Chance>k__BackingField: 0
         <Duration>k__BackingField: 0.3
     - rid: 8171215584738410588
       type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}

@@ -4,6 +4,7 @@ namespace Code.Game.Features.Exchequer
 {
     [Game, Meta] public struct GameExchequer : IComponent { public GameExchequerView Value; };
     [Game, Meta] public struct ExchequerGoldChangeRequest : IComponent { public int Value; };
+    [Game] public class GoldIncomeScaled : IComponent { }
     [Game, Meta] public struct ExchequerMealChangeRequest : IComponent { public int Value; };
     [Game, Meta] public struct ExchequerManaChangeRequest : IComponent { public int Value; };
 

@@ -5,7 +5,7 @@ namespace Code.Infrastructure.Persistence
 {
     public class UserSaveData
     {
-        public const int CurrentVersion = 1;
+        public const int CurrentVersion = 2;
 
         public int Version = CurrentVersion;
         public string UserId;
@@ -20,6 +20,7 @@ namespace Code.Infrastructure.Persistence
         public int Wood;
         public int Knowledge;
         public List<TownBuildingProgressData> Buildings = new(8);
+        public List<ResearchProgressData> Research = new(8);
 
 #if UNITY_EDITOR
         public void ClearResources()
@@ -36,12 +37,24 @@ namespace Code.Infrastructure.Persistence
             Buildings ??= new List<TownBuildingProgressData>(8);
             Buildings.Clear();
         }
+
+        public void ClearResearch()
+        {
+            Research ??= new List<ResearchProgressData>(8);
+            Research.Clear();
+        }
 #endif
     }
 
     public class TownBuildingProgressData
     {
         public BuildingType Type;
+        public int Level;
+    }
+
+    public class ResearchProgressData
+    {
+        public ResearchId Id;
         public int Level;
     }
 }

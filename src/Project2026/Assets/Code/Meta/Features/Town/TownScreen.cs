@@ -24,6 +24,7 @@ public class TownScreen : MonoBehaviour
 
     private Button _exitButton;
     private Button _townButton;
+    private Button _researchButton;
 
     [Inject]
     public void Construct(TransitionScreen transitionScreen, UIService uIService, ICameraService cameraService)
@@ -40,9 +41,11 @@ public class TownScreen : MonoBehaviour
         _canvas = _root.Q<VisualElement>("TowerCanvas");
         _exitButton = _root.Q<Button>("ExitButton");
         _townButton = _root.Q<Button>("TownButton");
+        _researchButton = _root.Q<Button>("ResearchButton");
 
         _exitButton.clickable.clicked += ExitTown;
         _townButton.clickable.clicked += ToggleBuildMenuRequest;
+        _researchButton.clickable.clicked += ToggleResearchMenuRequest;
 
         _uIService.Hide(_canvas).Forget();
     }
@@ -81,6 +84,20 @@ public class TownScreen : MonoBehaviour
         request.isInput = true;
     }
 
+    private void ToggleResearchMenuRequest()
+    {
+        var request = CreateInputEntity.Empty();
+        request.isTownResearchMenuToggleRequested = true;
+        request.isInput = true;
+    }
+
+    private void CloseResearchMenuRequest()
+    {
+        var request = CreateInputEntity.Empty();
+        request.isTownResearchMenuCloseRequested = true;
+        request.isInput = true;
+    }
+
     private void CloseBuildMenuRequest()
     {
         var request = CreateInputEntity.Empty();
@@ -91,6 +108,7 @@ public class TownScreen : MonoBehaviour
     private async void ExitTown()
     {
         CloseBuildMenuRequest();
+        CloseResearchMenuRequest();
 
         await _transitionScreen.Show();
 
@@ -121,6 +139,8 @@ public class TownScreen : MonoBehaviour
         _uIService?.UnregisterRoot(_root);
         _exitButton.clickable.clicked -= ExitTown;
         _townButton.clickable.clicked -= ToggleBuildMenuRequest;
+        if (_researchButton != null)
+            _researchButton.clickable.clicked -= ToggleResearchMenuRequest;
         SceneManager.activeSceneChanged -= OnActiveSceneChanged;
     }
 }

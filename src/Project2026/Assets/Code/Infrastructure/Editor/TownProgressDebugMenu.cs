@@ -15,30 +15,40 @@ namespace Code.Infrastructure.Editor
         private static readonly List<TownEntity> BuildingsBuffer = new(16);
 
         [MenuItem("Tools/Town/Reset Player", false, 1)]
-        private static void ResetPlayer() => Reset(true, true);
+        private static void ResetPlayer() => Reset(true, true, true);
 
         [MenuItem("Tools/Town/Reset Resources", false, 2)]
-        private static void ResetResources() => Reset(true, false);
+        private static void ResetResources() => Reset(true, false, false);
 
         [MenuItem("Tools/Town/Reset Buildings", false, 3)]
-        private static void ResetBuildings() => Reset(false, true);
+        private static void ResetBuildings() => Reset(false, true, false);
 
-        private static void Reset(bool resetResources, bool resetBuildings)
+        [MenuItem("Tools/Town/Reset Research", false, 4)]
+        private static void ResetResearch() => Reset(false, false, true);
+
+        private static void Reset(bool resetResources, bool resetBuildings, bool resetResearch)
         {
             if (TryGetLiveProgress(out var progress))
             {
-                if (resetResources && resetBuildings)
+                if (resetResources && resetBuildings && resetResearch)
                     progress.ResetPlayer();
-                else if (resetResources)
-                    progress.ResetResources();
                 else
-                    progress.ResetBuildings();
+                {
+                    if (resetResources)
+                        progress.ResetResources();
 
-                ApplyLiveTown(resetResources, resetBuildings);
+                    if (resetBuildings)
+                        progress.ResetBuildings();
+
+                    if (resetResearch)
+                        progress.ResetResearch();
+                }
+
+                ApplyLiveTown(resetResources, resetBuildings, resetResearch);
                 return;
             }
 
-            ResetFile(resetResources, resetBuildings);
+            ResetFile(resetResources, resetBuildings, resetResearch);
         }
 
         private static bool TryGetLiveProgress(out IUserProgressService progress)
@@ -63,7 +73,7 @@ namespace Code.Infrastructure.Editor
             return false;
         }
 
-        private static void ResetFile(bool resetResources, bool resetBuildings)
+        private static void ResetFile(bool resetResources, bool resetBuildings, bool resetResearch)
         {
             var storage = new JsonFileStorageService();
 
@@ -79,6 +89,7 @@ namespace Code.Infrastructure.Editor
 
             save.Town ??= new TownProgressData();
             save.Town.Buildings ??= new List<TownBuildingProgressData>(8);
+            save.Town.Research ??= new List<ResearchProgressData>(8);
 
             if (resetResources)
                 save.Town.ClearResources();
@@ -86,10 +97,13 @@ namespace Code.Infrastructure.Editor
             if (resetBuildings)
                 save.Town.ClearBuildings();
 
+            if (resetResearch)
+                save.Town.ClearResearch();
+
             storage.Save(UserProgressService.SaveKey, save);
         }
 
-        private static void ApplyLiveTown(bool resetResources, bool resetBuildings)
+        private static void ApplyLiveTown(bool resetResources, bool resetBuildings, bool resetResearch)
         {
             var town = Contexts.sharedInstance.town;
 
@@ -98,6 +112,12 @@ namespace Code.Infrastructure.Editor
 
             if (resetBuildings)
                 ApplyLiveBuildings(town);
+
+            if (resetResearch)
+            {
+                ApplyLiveResearch(town);
+                ApplyLiveGameResearch();
+            }
         }
 
         private static void ApplyLiveResources(TownContext town)
@@ -146,6 +166,47 @@ namespace Code.Infrastructure.Editor
                     continue;
 
                 buildings[i].ReplaceTownBuildingLevel(0);
+            }
+        }
+
+        private static readonly List<TownEntity> ResearchBuffer = new(32);
+        private static readonly List<GameEntity> GameResearchBuffer = new(32);
+
+        private static void ApplyLiveResearch(TownContext town)
+        {
+            var nodes = town.GetGroup(TownMatcher
+                .AllOf(
+                    TownMatcher.ResearchNode,
+                    TownMatcher.ResearchLevel,
+                    TownMatcher.ResearchStartingLevel)).GetEntities(ResearchBuffer);
+
+            for (var i = 0; i < nodes.Count; i++)
+            {
+                var start = nodes[i].researchStartingLevel.Value;
+
+                if (nodes[i].researchLevel.Value == start)
+                    continue;
+
+                nodes[i].ReplaceResearchLevel(start);
+            }
+        }
+
+        private static void ApplyLiveGameResearch()
+        {
+            var nodes = Contexts.sharedInstance.game.GetGroup(GameMatcher
+                .AllOf(
+                    GameMatcher.ResearchNode,
+                    GameMatcher.ResearchLevel,
+                    GameMatcher.ResearchStartingLevel)).GetEntities(GameResearchBuffer);
+
+            for (var i = 0; i < nodes.Count; i++)
+            {
+                var start = nodes[i].researchStartingLevel.Value;
+
+                if (nodes[i].researchLevel.Value == start)
+                    continue;
+
+                nodes[i].ReplaceResearchLevel(start);
             }
         }
     }

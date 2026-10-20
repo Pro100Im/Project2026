@@ -63,129 +63,156 @@ public static class GameComponentsLookup {
     public const int DamageRequest = 52;
     public const int FireDamage = 53;
     public const int FireDamageHitEffect = 54;
-    public const int FrostDamage = 55;
-    public const int FrostDamageHitEffect = 56;
-    public const int LightningDamage = 57;
-    public const int LightningDamageHitEffect = 58;
-    public const int PhysicalDamage = 59;
-    public const int PhysicalDamageHitEffect = 60;
-    public const int TotalDamage = 61;
-    public const int Dead = 62;
-    public const int DeathDuration = 63;
-    public const int Killable = 64;
-    public const int ApplyDebuffRequest = 65;
-    public const int AttackSlowingDown = 66;
-    public const int ChillDebuff = 67;
-    public const int CombustionDebuff = 68;
-    public const int FreezeDebuff = 69;
-    public const int MoveSlowingDown = 70;
-    public const int Duration = 71;
-    public const int ChillDuration = 72;
-    public const int ChillEffect = 73;
-    public const int CombustionCoolDown = 74;
-    public const int CombustionDuration = 75;
-    public const int CombustionEffect = 76;
-    public const int Effect = 77;
-    public const int EffectCheckRequest = 78;
-    public const int FreezeDuration = 79;
-    public const int FreezeEffect = 80;
-    public const int Stackable = 81;
-    public const int Enemy = 82;
-    public const int ExchequerGoldCapacity = 83;
-    public const int ExchequerGoldChangeRequest = 84;
-    public const int ExchequerManaCapacity = 85;
-    public const int ExchequerManaChangeRequest = 86;
-    public const int ExchequerMealCapacity = 87;
-    public const int ExchequerMealChangeRequest = 88;
-    public const int GameExchequer = 89;
-    public const int DamageFloatingText = 90;
-    public const int FloatingText = 91;
-    public const int FloatingTextColor = 92;
-    public const int HealFloatingText = 93;
-    public const int GameSession = 94;
-    public const int CurrentHealth = 95;
-    public const int HpBar = 96;
-    public const int MaxHealth = 97;
-    public const int HitReaction = 98;
-    public const int HitReactionRequest = 99;
-    public const int DefenseFlowFields = 100;
-    public const int DefenseIntegrationFields = 101;
-    public const int FlowFieldDirty = 102;
-    public const int FlowFields = 103;
-    public const int IntegrationFields = 104;
-    public const int OccupField = 105;
-    public const int ReservedField = 106;
-    public const int SpatialHash = 107;
-    public const int SpawnMap = 108;
-    public const int SpawnReservedField = 109;
-    public const int SurroundField = 110;
-    public const int TilemapMovement = 111;
-    public const int CurrentCell = 112;
-    public const int GridMovement = 113;
-    public const int LastDirection = 114;
-    public const int MoveCommit = 115;
-    public const int MovementAvailable = 116;
-    public const int MovementOffset = 117;
-    public const int MovementSpeed = 118;
-    public const int MovementSpeedBonus = 119;
-    public const int MoveWait = 120;
-    public const int Moving = 121;
-    public const int TotalDistance = 122;
-    public const int Trajectory = 123;
-    public const int TrajectoryBaseArcHeight = 124;
-    public const int TrajectoryCurrentArcHeight = 125;
-    public const int TrajectoryMovement = 126;
-    public const int TrajectoryPathProgress = 127;
-    public const int Velocity = 128;
-    public const int Blocking = 129;
-    public const int BlockRequest = 130;
-    public const int BlockTimer = 131;
-    public const int PassiveBlockChance = 132;
-    public const int PassiveBlockDuration = 133;
-    public const int CastleUnderAttack = 134;
-    public const int PlayerCastle = 135;
-    public const int PlayerCastleCells = 136;
-    public const int Player = 137;
-    public const int FireResistance = 138;
-    public const int FrostResistance = 139;
-    public const int PhysicalResistance = 140;
-    public const int Reward = 141;
-    public const int SpawnPosition = 142;
-    public const int SpawnRequsted = 143;
-    public const int WaitingToSpawn = 144;
-    public const int DefenseFlow = 145;
-    public const int DefensePatrolCell = 146;
-    public const int DefensePatrolIdleDuration = 147;
-    public const int DefensePatrolWait = 148;
-    public const int RallyToCastle = 149;
-    public const int SurroundSlot = 150;
-    public const int SurroundTargetId = 151;
-    public const int Targetable = 152;
-    public const int TargetCell = 153;
-    public const int TargetCellRequest = 154;
-    public const int TargetFlow = 155;
-    public const int TargetId = 156;
-    public const int TargetPoint = 157;
-    public const int TargetSelected = 158;
-    public const int Tower = 159;
-    public const int TowerBuildRequest = 160;
-    public const int TowerPlace = 161;
-    public const int TowerUpgrade = 162;
-    public const int TowerUpgradeIcon = 163;
-    public const int TowerUpgradePrice = 164;
-    public const int TowerUpgradeRequest = 165;
-    public const int Unit = 166;
-    public const int UnitAnchorPoint = 167;
-    public const int UnitIcon = 168;
-    public const int UnitSize = 169;
-    public const int CurrentWaveEnemies = 170;
-    public const int CurrentWaveNumber = 171;
-    public const int WaveEnemiesAlive = 172;
-    public const int WaveInProgress = 173;
-    public const int WaveStartRequsted = 174;
-    public const int Projectile = 175;
+    public const int FireDamageMultiplier = 55;
+    public const int FrostDamage = 56;
+    public const int FrostDamageHitEffect = 57;
+    public const int LightningDamage = 58;
+    public const int LightningDamageHitEffect = 59;
+    public const int PhysicalDamage = 60;
+    public const int PhysicalDamageHitEffect = 61;
+    public const int TotalDamage = 62;
+    public const int Dead = 63;
+    public const int DeathDuration = 64;
+    public const int Killable = 65;
+    public const int ApplyDebuffRequest = 66;
+    public const int AttackSlowingDown = 67;
+    public const int ChillDebuff = 68;
+    public const int CombustionDebuff = 69;
+    public const int FreezeDebuff = 70;
+    public const int MoveSlowingDown = 71;
+    public const int Duration = 72;
+    public const int ChillDuration = 73;
+    public const int ChillEffect = 74;
+    public const int CombustionCoolDown = 75;
+    public const int CombustionDuration = 76;
+    public const int CombustionEffect = 77;
+    public const int Effect = 78;
+    public const int EffectCheckRequest = 79;
+    public const int FreezeDuration = 80;
+    public const int FreezeEffect = 81;
+    public const int Stackable = 82;
+    public const int Enemy = 83;
+    public const int ExchequerGoldCapacity = 84;
+    public const int ExchequerGoldChangeRequest = 85;
+    public const int ExchequerManaCapacity = 86;
+    public const int ExchequerManaChangeRequest = 87;
+    public const int ExchequerMealCapacity = 88;
+    public const int ExchequerMealChangeRequest = 89;
+    public const int GameExchequer = 90;
+    public const int GoldIncomeScaled = 91;
+    public const int DamageFloatingText = 92;
+    public const int FloatingText = 93;
+    public const int FloatingTextColor = 94;
+    public const int HealFloatingText = 95;
+    public const int GameSession = 96;
+    public const int CurrentHealth = 97;
+    public const int HpBar = 98;
+    public const int MaxHealth = 99;
+    public const int HitReaction = 100;
+    public const int HitReactionRequest = 101;
+    public const int DefenseFlowFields = 102;
+    public const int DefenseIntegrationFields = 103;
+    public const int FlowFieldDirty = 104;
+    public const int FlowFields = 105;
+    public const int IntegrationFields = 106;
+    public const int OccupField = 107;
+    public const int ReservedField = 108;
+    public const int SpatialHash = 109;
+    public const int SpawnMap = 110;
+    public const int SpawnReservedField = 111;
+    public const int SurroundField = 112;
+    public const int TilemapMovement = 113;
+    public const int CurrentCell = 114;
+    public const int GridMovement = 115;
+    public const int LastDirection = 116;
+    public const int MoveCommit = 117;
+    public const int MovementAvailable = 118;
+    public const int MovementOffset = 119;
+    public const int MovementSpeed = 120;
+    public const int MovementSpeedBonus = 121;
+    public const int MoveWait = 122;
+    public const int Moving = 123;
+    public const int TotalDistance = 124;
+    public const int Trajectory = 125;
+    public const int TrajectoryBaseArcHeight = 126;
+    public const int TrajectoryCurrentArcHeight = 127;
+    public const int TrajectoryMovement = 128;
+    public const int TrajectoryPathProgress = 129;
+    public const int Velocity = 130;
+    public const int Blocking = 131;
+    public const int BlockRequest = 132;
+    public const int BlockTimer = 133;
+    public const int PassiveBlockChance = 134;
+    public const int PassiveBlockDuration = 135;
+    public const int CastleUnderAttack = 136;
+    public const int PlayerCastle = 137;
+    public const int PlayerCastleCells = 138;
+    public const int Player = 139;
+    public const int FireDamageBonus = 140;
+    public const int GoldIncomeBonus = 141;
+    public const int KnightBlockBonus = 142;
+    public const int ResearchBlockBonus = 143;
+    public const int ResearchBonus = 144;
+    public const int ResearchCost = 145;
+    public const int ResearchFireBonus = 146;
+    public const int ResearchGoldBonus = 147;
+    public const int ResearchId = 148;
+    public const int ResearchKnightUnlock = 149;
+    public const int ResearchLevel = 150;
+    public const int ResearchMaxLevel = 151;
+    public const int ResearchNode = 152;
+    public const int ResearchParent = 153;
+    public const int ResearchRequiredBuilding = 154;
+    public const int ResearchRequiredBuildingLevel = 155;
+    public const int ResearchResistanceBonus = 156;
+    public const int ResearchStartingLevel = 157;
+    public const int UnlockedKnight = 158;
+    public const int FireResistance = 159;
+    public const int FrostResistance = 160;
+    public const int PhysicalResistance = 161;
+    public const int ResistanceBonus = 162;
+    public const int Reward = 163;
+    public const int SpawnPosition = 164;
+    public const int SpawnRequsted = 165;
+    public const int SpawnSlot = 166;
+    public const int WaitingToSpawn = 167;
+    public const int DefenseFlow = 168;
+    public const int DefensePatrolCell = 169;
+    public const int DefensePatrolIdleDuration = 170;
+    public const int DefensePatrolWait = 171;
+    public const int RallyToCastle = 172;
+    public const int SurroundSlot = 173;
+    public const int SurroundTargetId = 174;
+    public const int Targetable = 175;
+    public const int TargetCell = 176;
+    public const int TargetCellRequest = 177;
+    public const int TargetFlow = 178;
+    public const int TargetId = 179;
+    public const int TargetPoint = 180;
+    public const int TargetSelected = 181;
+    public const int Tower = 182;
+    public const int TowerBuildRequest = 183;
+    public const int TowerPlace = 184;
+    public const int TowerUpgrade = 185;
+    public const int TowerUpgradeIcon = 186;
+    public const int TowerUpgradePrice = 187;
+    public const int TowerUpgradeRequest = 188;
+    public const int DefaultUnitConfig = 189;
+    public const int ResolvedUnitConfig = 190;
+    public const int Unit = 191;
+    public const int UnitAnchorPoint = 192;
+    public const int UnitIcon = 193;
+    public const int UnitKind = 194;
+    public const int UnitSize = 195;
+    public const int UnitSlot = 196;
+    public const int CurrentWaveEnemies = 197;
+    public const int CurrentWaveNumber = 198;
+    public const int WaveEnemiesAlive = 199;
+    public const int WaveInProgress = 200;
+    public const int WaveStartRequsted = 201;
+    public const int Projectile = 202;
 
-    public const int TotalComponents = 176;
+    public const int TotalComponents = 203;
 
     public static readonly string[] componentNames = {
         "ForcedPause",
@@ -243,6 +270,7 @@ public static class GameComponentsLookup {
         "DamageRequest",
         "FireDamage",
         "FireDamageHitEffect",
+        "FireDamageMultiplier",
         "FrostDamage",
         "FrostDamageHitEffect",
         "LightningDamage",
@@ -278,6 +306,7 @@ public static class GameComponentsLookup {
         "ExchequerMealCapacity",
         "ExchequerMealChangeRequest",
         "GameExchequer",
+        "GoldIncomeScaled",
         "DamageFloatingText",
         "FloatingText",
         "FloatingTextColor",
@@ -326,12 +355,33 @@ public static class GameComponentsLookup {
         "PlayerCastle",
         "PlayerCastleCells",
         "Player",
+        "FireDamageBonus",
+        "GoldIncomeBonus",
+        "KnightBlockBonus",
+        "ResearchBlockBonus",
+        "ResearchBonus",
+        "ResearchCost",
+        "ResearchFireBonus",
+        "ResearchGoldBonus",
+        "ResearchId",
+        "ResearchKnightUnlock",
+        "ResearchLevel",
+        "ResearchMaxLevel",
+        "ResearchNode",
+        "ResearchParent",
+        "ResearchRequiredBuilding",
+        "ResearchRequiredBuildingLevel",
+        "ResearchResistanceBonus",
+        "ResearchStartingLevel",
+        "UnlockedKnight",
         "FireResistance",
         "FrostResistance",
         "PhysicalResistance",
+        "ResistanceBonus",
         "Reward",
         "SpawnPosition",
         "SpawnRequsted",
+        "SpawnSlot",
         "WaitingToSpawn",
         "DefenseFlow",
         "DefensePatrolCell",
@@ -354,10 +404,14 @@ public static class GameComponentsLookup {
         "TowerUpgradeIcon",
         "TowerUpgradePrice",
         "TowerUpgradeRequest",
+        "DefaultUnitConfig",
+        "ResolvedUnitConfig",
         "Unit",
         "UnitAnchorPoint",
         "UnitIcon",
+        "UnitKind",
         "UnitSize",
+        "UnitSlot",
         "CurrentWaveEnemies",
         "CurrentWaveNumber",
         "WaveEnemiesAlive",
@@ -422,6 +476,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Damage.DamageRequest),
         typeof(Code.Game.Features.Damage.FireDamage),
         typeof(Code.Game.Features.Damage.FireDamageHitEffect),
+        typeof(Code.Game.Features.Damage.FireDamageMultiplier),
         typeof(Code.Game.Features.Damage.FrostDamage),
         typeof(Code.Game.Features.Damage.FrostDamageHitEffect),
         typeof(Code.Game.Features.Damage.LightningDamage),
@@ -457,6 +512,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Exchequer.ExchequerMealCapacity),
         typeof(Code.Game.Features.Exchequer.ExchequerMealChangeRequest),
         typeof(Code.Game.Features.Exchequer.GameExchequer),
+        typeof(Code.Game.Features.Exchequer.GoldIncomeScaled),
         typeof(Code.Game.Features.FloatingText.DamageFloatingText),
         typeof(Code.Game.Features.FloatingText.FloatingText),
         typeof(Code.Game.Features.FloatingText.FloatingTextColor),
@@ -505,12 +561,33 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Player.PlayerCastle),
         typeof(Code.Game.Features.Player.PlayerCastleCells),
         typeof(Code.Game.Features.Player.PlayerComponent),
+        typeof(Code.Game.Features.Research.FireDamageBonus),
+        typeof(Code.Game.Features.Research.GoldIncomeBonus),
+        typeof(Code.Game.Features.Research.KnightBlockBonus),
+        typeof(Code.Game.Features.Research.ResearchBlockBonus),
+        typeof(Code.Game.Features.Research.ResearchBonus),
+        typeof(Code.Game.Features.Research.ResearchCost),
+        typeof(Code.Game.Features.Research.ResearchFireBonus),
+        typeof(Code.Game.Features.Research.ResearchGoldBonus),
+        typeof(Code.Game.Features.Research.ResearchIdComponent),
+        typeof(Code.Game.Features.Research.ResearchKnightUnlock),
+        typeof(Code.Game.Features.Research.ResearchLevel),
+        typeof(Code.Game.Features.Research.ResearchMaxLevel),
+        typeof(Code.Game.Features.Research.ResearchNode),
+        typeof(Code.Game.Features.Research.ResearchParent),
+        typeof(Code.Game.Features.Research.ResearchRequiredBuilding),
+        typeof(Code.Game.Features.Research.ResearchRequiredBuildingLevel),
+        typeof(Code.Game.Features.Research.ResearchResistanceBonus),
+        typeof(Code.Game.Features.Research.ResearchStartingLevel),
+        typeof(Code.Game.Features.Research.UnlockedKnight),
         typeof(Code.Game.Features.Resistance.FireResistance),
         typeof(Code.Game.Features.Resistance.FrostResistance),
         typeof(Code.Game.Features.Resistance.PhysicalResistance),
+        typeof(Code.Game.Features.Resistance.ResistanceBonus),
         typeof(Code.Game.Features.Rewards.Reward),
         typeof(Code.Game.Features.Spawn.SpawnPosition),
         typeof(Code.Game.Features.Spawn.SpawnRequsted),
+        typeof(Code.Game.Features.Spawn.SpawnSlot),
         typeof(Code.Game.Features.Spawn.WaitingToSpawn),
         typeof(Code.Game.Features.Target.DefenseFlow),
         typeof(Code.Game.Features.Target.DefensePatrolCell),
@@ -533,10 +610,14 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Tower.TowerUpgradeIcon),
         typeof(Code.Game.Features.Tower.TowerUpgradePrice),
         typeof(Code.Game.Features.Tower.TowerUpgradeRequest),
+        typeof(Code.Game.Features.Unit.DefaultUnitConfig),
+        typeof(Code.Game.Features.Unit.ResolvedUnitConfig),
         typeof(Code.Game.Features.Unit.Unit),
         typeof(Code.Game.Features.Unit.UnitAnchorPoint),
         typeof(Code.Game.Features.Unit.UnitIcon),
+        typeof(Code.Game.Features.Unit.UnitKindComponent),
         typeof(Code.Game.Features.Unit.UnitSize),
+        typeof(Code.Game.Features.Unit.UnitSlot),
         typeof(Code.Game.Features.Wave.CurrentWaveEnemies),
         typeof(Code.Game.Features.Wave.CurrentWaveNumber),
         typeof(Code.Game.Features.Wave.WaveEnemiesAlive),

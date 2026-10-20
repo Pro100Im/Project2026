@@ -35,11 +35,19 @@ namespace Code.Game.Features.Damage.Systems
 
                 var target = GetGameEntityById.Get(damage.targetId.Value);
                 var resistance = target.hasFireResistance ? target.fireResistance.Value : 0;
+
+                if (target.hasResistanceBonus)
+                    resistance += target.resistanceBonus.Value;
                 var resistPercent = resistance / 100f;
 
                 resistPercent = Mathf.Clamp(resistPercent, 0f, 1f);
 
-                var fireDamage = attacker.fireDamage.Value * (1 - resistPercent);
+                var fireDamage = attacker.fireDamage.Value;
+
+                if (attacker.hasFireDamageMultiplier)
+                    fireDamage *= attacker.fireDamageMultiplier.Value;
+
+                fireDamage *= 1f - resistPercent;
                 var totalDamage = damage.totalDamage.Value + fireDamage;
 
                 damage.ReplaceTotalDamage(totalDamage);

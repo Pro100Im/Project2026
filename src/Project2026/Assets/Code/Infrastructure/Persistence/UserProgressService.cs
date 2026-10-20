@@ -65,6 +65,23 @@ namespace Code.Infrastructure.Persistence
             return false;
         }
 
+        public bool TryGetResearchLevel(ResearchId id, out int level)
+        {
+            var research = _save.Town.Research;
+
+            for (var i = 0; i < research.Count; i++)
+            {
+                if (research[i].Id != id)
+                    continue;
+
+                level = research[i].Level;
+                return true;
+            }
+
+            level = 0;
+            return false;
+        }
+
         public void SetTownResources(int gold, int stone, int crystal, int wood, int knowledge)
         {
             var town = _save.Town;
@@ -114,6 +131,36 @@ namespace Code.Infrastructure.Persistence
             MarkDirty();
         }
 
+        public void SetResearchLevel(ResearchId id, int level)
+        {
+            if (level < 0)
+                level = 0;
+
+            var research = _save.Town.Research;
+
+            for (var i = 0; i < research.Count; i++)
+            {
+                var node = research[i];
+
+                if (node.Id != id)
+                    continue;
+
+                if (node.Level == level)
+                    return;
+
+                node.Level = level;
+                MarkDirty();
+                return;
+            }
+
+            research.Add(new ResearchProgressData
+            {
+                Id = id,
+                Level = level
+            });
+            MarkDirty();
+        }
+
 #if UNITY_EDITOR
         public void ResetResources()
         {
@@ -131,6 +178,16 @@ namespace Code.Infrastructure.Persistence
             Flush();
         }
 
+        public void ResetResearch()
+        {
+            if (_save.Town.Research == null || _save.Town.Research.Count == 0)
+                return;
+
+            _save.Town.ClearResearch();
+            MarkDirty();
+            Flush();
+        }
+
         public void ResetPlayer()
         {
             SetTownResources(0, 0, 0, 0, 0);
@@ -138,6 +195,12 @@ namespace Code.Infrastructure.Persistence
             if (_save.Town.Buildings != null && _save.Town.Buildings.Count > 0)
             {
                 _save.Town.ClearBuildings();
+                MarkDirty();
+            }
+
+            if (_save.Town.Research != null && _save.Town.Research.Count > 0)
+            {
+                _save.Town.ClearResearch();
                 MarkDirty();
             }
 
@@ -192,6 +255,7 @@ namespace Code.Infrastructure.Persistence
             _save = save;
             _save.Town ??= new TownProgressData();
             _save.Town.Buildings ??= new List<TownBuildingProgressData>(8);
+            _save.Town.Research ??= new List<ResearchProgressData>(8);
 
             var mutated = false;
 

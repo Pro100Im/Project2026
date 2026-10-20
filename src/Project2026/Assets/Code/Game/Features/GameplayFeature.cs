@@ -13,6 +13,8 @@ using Code.Game.Features.Health;
 using Code.Game.Features.HitReaction;
 using Code.Game.Features.Level;
 using Code.Game.Features.Movement;
+using Code.Game.Features.Research;
+using Code.Game.Features.Research.Systems;
 using Code.Game.Features.Rewards;
 using Code.Game.Features.Spawn;
 using Code.Game.Features.Target;
@@ -33,8 +35,10 @@ namespace Code.Game.Features
         {
             _gameSessions = Contexts.sharedInstance.game.GetGroup(GameMatcher.GameSession);
 
+            Add(systemFactory.Create<GameResearchFeature>());
             Add(systemFactory.Create<WaveFeature>());
             Add(systemFactory.Create<SpawnFeature>());
+            Add(systemFactory.Create<ResearchGrantFeature>());
             Add(systemFactory.Create<CreateViewFeature>());
             Add(systemFactory.Create<AbilityFeature>());
 
@@ -56,7 +60,7 @@ namespace Code.Game.Features
             Add(systemFactory.Create<DeathFeature>());
 
             Add(systemFactory.Create<RewardFeature>());
-
+            Add(systemFactory.Create<GrantKillGoldSystem>());
             Add(systemFactory.Create<GameExchequerFeature>());
 
             Add(systemFactory.Create<EffectFeature>());

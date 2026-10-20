@@ -18,26 +18,55 @@ public static class TownComponentsLookup {
     public const int SpriteRenderer = 7;
     public const int UIDocument = 8;
     public const int View = 9;
-    public const int TownBuilding = 10;
-    public const int TownBuildingConfig = 11;
-    public const int TownBuildingLevel = 12;
-    public const int TownBuildingMaxLevel = 13;
-    public const int TownBuildingType = 14;
-    public const int TownBuildingWorkers = 15;
-    public const int TownBuildMenu = 16;
-    public const int TownBuildMenuOpened = 17;
-    public const int TownCrystal = 18;
-    public const int TownExchequer = 19;
-    public const int TownGold = 20;
-    public const int TownKnowledge = 21;
-    public const int TownProductionCooldown = 22;
-    public const int TownResourceGained = 23;
-    public const int TownResources = 24;
-    public const int TownStone = 25;
-    public const int TownView = 26;
-    public const int TownWood = 27;
+    public const int FireDamageBonus = 10;
+    public const int GoldIncomeBonus = 11;
+    public const int KnightBlockBonus = 12;
+    public const int ResearchBlockBonus = 13;
+    public const int ResearchBonus = 14;
+    public const int ResearchCost = 15;
+    public const int ResearchDescription = 16;
+    public const int ResearchDirection = 17;
+    public const int ResearchFireBonus = 18;
+    public const int ResearchGoldBonus = 19;
+    public const int ResearchIcon = 20;
+    public const int ResearchId = 21;
+    public const int ResearchKnightUnlock = 22;
+    public const int ResearchLevel = 23;
+    public const int ResearchMaxLevel = 24;
+    public const int ResearchNode = 25;
+    public const int ResearchNodePosition = 26;
+    public const int ResearchNodeState = 27;
+    public const int ResearchParent = 28;
+    public const int ResearchRequiredBuilding = 29;
+    public const int ResearchRequiredBuildingLevel = 30;
+    public const int ResearchResistanceBonus = 31;
+    public const int ResearchStartingLevel = 32;
+    public const int ResearchTitle = 33;
+    public const int TownResearchMenu = 34;
+    public const int TownResearchMenuOpened = 35;
+    public const int UnlockedKnight = 36;
+    public const int TownBuilding = 37;
+    public const int TownBuildingConfig = 38;
+    public const int TownBuildingLevel = 39;
+    public const int TownBuildingMaxLevel = 40;
+    public const int TownBuildingType = 41;
+    public const int TownBuildingWorkers = 42;
+    public const int TownBuildMenu = 43;
+    public const int TownBuildMenuOpened = 44;
+    public const int TownCrystal = 45;
+    public const int TownExchequer = 46;
+    public const int TownGold = 47;
+    public const int TownKnowledge = 48;
+    public const int TownProductionCooldown = 49;
+    public const int TownProductionMultiplier = 50;
+    public const int TownProductionRemainder = 51;
+    public const int TownResourceGained = 52;
+    public const int TownResources = 53;
+    public const int TownStone = 54;
+    public const int TownView = 55;
+    public const int TownWood = 56;
 
-    public const int TotalComponents = 28;
+    public const int TotalComponents = 57;
 
     public static readonly string[] componentNames = {
         "Attached",
@@ -50,6 +79,33 @@ public static class TownComponentsLookup {
         "SpriteRenderer",
         "UIDocument",
         "View",
+        "FireDamageBonus",
+        "GoldIncomeBonus",
+        "KnightBlockBonus",
+        "ResearchBlockBonus",
+        "ResearchBonus",
+        "ResearchCost",
+        "ResearchDescription",
+        "ResearchDirection",
+        "ResearchFireBonus",
+        "ResearchGoldBonus",
+        "ResearchIcon",
+        "ResearchId",
+        "ResearchKnightUnlock",
+        "ResearchLevel",
+        "ResearchMaxLevel",
+        "ResearchNode",
+        "ResearchNodePosition",
+        "ResearchNodeState",
+        "ResearchParent",
+        "ResearchRequiredBuilding",
+        "ResearchRequiredBuildingLevel",
+        "ResearchResistanceBonus",
+        "ResearchStartingLevel",
+        "ResearchTitle",
+        "TownResearchMenu",
+        "TownResearchMenuOpened",
+        "UnlockedKnight",
         "TownBuilding",
         "TownBuildingConfig",
         "TownBuildingLevel",
@@ -63,6 +119,8 @@ public static class TownComponentsLookup {
         "TownGold",
         "TownKnowledge",
         "TownProductionCooldown",
+        "TownProductionMultiplier",
+        "TownProductionRemainder",
         "TownResourceGained",
         "TownResources",
         "TownStone",
@@ -81,6 +139,33 @@ public static class TownComponentsLookup {
         typeof(Code.Game.Common.SpriteRendererComponent),
         typeof(Code.Game.Common.UIDocumentComponent),
         typeof(Code.Game.Common.View),
+        typeof(Code.Game.Features.Research.FireDamageBonus),
+        typeof(Code.Game.Features.Research.GoldIncomeBonus),
+        typeof(Code.Game.Features.Research.KnightBlockBonus),
+        typeof(Code.Game.Features.Research.ResearchBlockBonus),
+        typeof(Code.Game.Features.Research.ResearchBonus),
+        typeof(Code.Game.Features.Research.ResearchCost),
+        typeof(Code.Game.Features.Research.ResearchDescription),
+        typeof(Code.Game.Features.Research.ResearchDirection),
+        typeof(Code.Game.Features.Research.ResearchFireBonus),
+        typeof(Code.Game.Features.Research.ResearchGoldBonus),
+        typeof(Code.Game.Features.Research.ResearchIcon),
+        typeof(Code.Game.Features.Research.ResearchIdComponent),
+        typeof(Code.Game.Features.Research.ResearchKnightUnlock),
+        typeof(Code.Game.Features.Research.ResearchLevel),
+        typeof(Code.Game.Features.Research.ResearchMaxLevel),
+        typeof(Code.Game.Features.Research.ResearchNode),
+        typeof(Code.Game.Features.Research.ResearchNodePosition),
+        typeof(Code.Game.Features.Research.ResearchNodeStateComponent),
+        typeof(Code.Game.Features.Research.ResearchParent),
+        typeof(Code.Game.Features.Research.ResearchRequiredBuilding),
+        typeof(Code.Game.Features.Research.ResearchRequiredBuildingLevel),
+        typeof(Code.Game.Features.Research.ResearchResistanceBonus),
+        typeof(Code.Game.Features.Research.ResearchStartingLevel),
+        typeof(Code.Game.Features.Research.ResearchTitle),
+        typeof(Code.Game.Features.Research.TownResearchMenuComponent),
+        typeof(Code.Game.Features.Research.TownResearchMenuOpened),
+        typeof(Code.Game.Features.Research.UnlockedKnight),
         typeof(Code.Game.Features.Town.TownBuilding),
         typeof(Code.Game.Features.Town.TownBuildingConfigComponent),
         typeof(Code.Game.Features.Town.TownBuildingLevel),
@@ -94,6 +179,8 @@ public static class TownComponentsLookup {
         typeof(Code.Game.Features.Town.TownGold),
         typeof(Code.Game.Features.Town.TownKnowledge),
         typeof(Code.Game.Features.Town.TownProductionCooldown),
+        typeof(Code.Game.Features.Town.TownProductionMultiplier),
+        typeof(Code.Game.Features.Town.TownProductionRemainder),
         typeof(Code.Game.Features.Town.TownResourceGained),
         typeof(Code.Game.Features.Town.TownResources),
         typeof(Code.Game.Features.Town.TownStone),

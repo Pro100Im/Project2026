@@ -11,30 +11,36 @@ public static class InputComponentsLookup {
     public const int ForcedPauseRequested = 0;
     public const int PauseRequested = 1;
     public const int Destructed = 2;
-    public const int TargetId = 3;
-    public const int TownBuildMenuCloseRequested = 4;
-    public const int TownBuildMenuToggleRequested = 5;
-    public const int TownBuildRequested = 6;
-    public const int AbilityCastIntent = 7;
-    public const int CancelClick = 8;
-    public const int CancelIntent = 9;
-    public const int ClickInput = 10;
-    public const int EntityInteractIntent = 11;
-    public const int Input = 12;
-    public const int InteractTarget = 13;
-    public const int PointerInput = 14;
-    public const int PointerOverUI = 15;
-    public const int PointerState = 16;
-    public const int PrimaryClick = 17;
-    public const int ScreenPointerInput = 18;
-    public const int WorldPointerInput = 19;
+    public const int TownResearchMenuCloseRequested = 3;
+    public const int TownResearchMenuToggleRequested = 4;
+    public const int TownResearchPurchaseRequested = 5;
+    public const int TargetId = 6;
+    public const int TownBuildMenuCloseRequested = 7;
+    public const int TownBuildMenuToggleRequested = 8;
+    public const int TownBuildRequested = 9;
+    public const int AbilityCastIntent = 10;
+    public const int CancelClick = 11;
+    public const int CancelIntent = 12;
+    public const int ClickInput = 13;
+    public const int EntityInteractIntent = 14;
+    public const int Input = 15;
+    public const int InteractTarget = 16;
+    public const int PointerInput = 17;
+    public const int PointerOverUI = 18;
+    public const int PointerState = 19;
+    public const int PrimaryClick = 20;
+    public const int ScreenPointerInput = 21;
+    public const int WorldPointerInput = 22;
 
-    public const int TotalComponents = 20;
+    public const int TotalComponents = 23;
 
     public static readonly string[] componentNames = {
         "ForcedPauseRequested",
         "PauseRequested",
         "Destructed",
+        "TownResearchMenuCloseRequested",
+        "TownResearchMenuToggleRequested",
+        "TownResearchPurchaseRequested",
         "TargetId",
         "TownBuildMenuCloseRequested",
         "TownBuildMenuToggleRequested",
@@ -58,6 +64,9 @@ public static class InputComponentsLookup {
         typeof(Assets.Code.Game.Features.Pause.ForcedPauseRequested),
         typeof(Assets.Code.Game.Features.Pause.PauseRequested),
         typeof(Code.Game.Common.Destructed),
+        typeof(Code.Game.Features.Research.TownResearchMenuCloseRequested),
+        typeof(Code.Game.Features.Research.TownResearchMenuToggleRequested),
+        typeof(Code.Game.Features.Research.TownResearchPurchaseRequested),
         typeof(Code.Game.Features.Target.TargetId),
         typeof(Code.Game.Features.Town.TownBuildMenuCloseRequested),
         typeof(Code.Game.Features.Town.TownBuildMenuToggleRequested),

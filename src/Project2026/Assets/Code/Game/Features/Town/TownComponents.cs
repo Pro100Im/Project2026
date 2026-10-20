@@ -13,6 +13,8 @@ namespace Code.Game.Features.Town
     [Town] public class TownViewComponent : IComponent { public TownView Value; }
 
     [Town] public class TownBuildingWorkers : IComponent { public int Value; }
+    [Town] public class TownProductionMultiplier : IComponent { public float Value; }
+    [Town] public class TownProductionRemainder : IComponent { public float Value; }
     [Town] public class TownProductionCooldown : IComponent { public float Value; }
     [Town] public class TownResourceGained : IComponent { public int Value; }
 

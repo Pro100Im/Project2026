@@ -1,4 +1,5 @@
 using Code.Game.Common.Cameras;
+using Code.Game.StaticData.Configs;
 using Code.Game.Common.Random;
 using Code.Game.Common.Time;
 using Code.Game.Common.UI;
@@ -24,6 +25,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
         [Space]
         [SerializeField] private GameObject _eventSystem;
         [SerializeField] private GameObject _audioListener;
+        [SerializeField] private ResearchCatalog _researchCatalog;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -47,6 +49,9 @@ namespace Code.Infrastructure.DI.LifetimeScopes
             builder.Register<IInputService, InputService>(Lifetime.Singleton);
             builder.Register<IStorageService, JsonFileStorageService>(Lifetime.Singleton);
             builder.RegisterEntryPoint<UserProgressService>().As<IUserService>().As<IUserProgressService>();
+
+            if (_researchCatalog != null)
+                builder.RegisterInstance(_researchCatalog);
         }
 
         private void BindAssetManagementServices(IContainerBuilder builder)
