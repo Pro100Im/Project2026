@@ -66,7 +66,7 @@ namespace Code.Game.Features.Research.Systems
                         step++;
                     }
 
-                    positions[i] = origin + DirectionStep(direction) * (spacing * step);
+                    positions[i] = origin + DirectionStep(direction) * (spacing * step * StepLength(direction));
                     placed[i] = true;
                     progress = true;
                 }
@@ -104,6 +104,20 @@ namespace Code.Game.Features.Research.Systems
             }
 
             return -1;
+        }
+
+        private static float StepLength(ResearchLinkDirection direction)
+        {
+            switch (direction)
+            {
+                case ResearchLinkDirection.NorthEast:
+                case ResearchLinkDirection.NorthWest:
+                case ResearchLinkDirection.SouthEast:
+                case ResearchLinkDirection.SouthWest:
+                    return 1.5f;
+                default:
+                    return 1f;
+            }
         }
 
         private static Vector2 DirectionStep(ResearchLinkDirection direction)
