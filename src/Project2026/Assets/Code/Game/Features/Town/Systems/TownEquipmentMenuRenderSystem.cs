@@ -54,11 +54,11 @@ namespace Code.Game.Features.Town.Systems
                     && _roster.TryGet(kind, out var entry)
                     && UnitSlotUnlockQuery.IsReady(kind, nodes, buildings))
                 {
-                    menu.SetSlot(i, entry.Icon, entry.Title);
+                    menu.SetSlot(i, entry.Icon, entry.Title, true, kind);
                     continue;
                 }
 
-                menu.SetSlot(i, _roster.LockedIcon, "Empty");
+                menu.SetSlot(i, _roster.LockedIcon, "Empty", false, default);
             }
 
             _choices.Clear();

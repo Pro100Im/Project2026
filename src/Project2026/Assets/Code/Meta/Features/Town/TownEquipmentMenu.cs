@@ -24,6 +24,8 @@ namespace Code.Meta.Features.Town
         private Button _clearButton;
         private readonly Slot[] _slots = new Slot[UnitRoster.SlotCount];
         private readonly List<UnitKind> _choiceKinds = new(4);
+        private readonly List<Button> _choiceButtons = new(4);
+        private readonly List<EquipmentChoice> _available = new(4);
 
         private int _selectedSlot = -1;
         private int _visibilityVersion;
@@ -73,7 +75,7 @@ namespace Code.Meta.Features.Town
             HideAsync(++_visibilityVersion).Forget();
         }
 
-        public void SetSlot(int index, Sprite icon, string title)
+        public void SetSlot(int index, Sprite icon, string title, bool assigned, UnitKind kind)
         {
             if (index < 0 || index >= _slots.Length || _slots[index] == null)
                 return;
@@ -81,24 +83,22 @@ namespace Code.Meta.Features.Town
             var slot = _slots[index];
             slot.Icon.sprite = icon;
             slot.Title.text = title;
+            slot.Assigned = assigned;
+            slot.Kind = kind;
+            RefreshVisibleChoices();
         }
 
         public void SetChoices(List<EquipmentChoice> choices)
         {
-            if (!SameChoices(choices))
+            if (!SameAvailable(choices))
             {
-                _choices.Clear();
-                _choiceKinds.Clear();
+                _available.Clear();
 
                 for (var i = 0; i < choices.Count; i++)
-                {
-                    var choice = choices[i];
-                    _choiceKinds.Add(choice.Kind);
-                    _choices.Add(CreateChoice(choice));
-                }
+                    _available.Add(choices[i]);
             }
 
-            RefreshEmpty();
+            RefreshVisibleChoices();
         }
 
         private void Select(int index)
@@ -106,6 +106,7 @@ namespace Code.Meta.Features.Town
             _selectedSlot = _selectedSlot == index ? -1 : index;
             RefreshSelection();
             ShowChoices(_selectedSlot >= 0);
+            RefreshVisibleChoices();
         }
 
         private void RefreshSelection()
@@ -133,10 +134,66 @@ namespace Code.Meta.Features.Town
             _empty.style.display = show ? DisplayStyle.Flex : DisplayStyle.None;
         }
 
+        private void RefreshVisibleChoices()
+        {
+            if (_choices == null)
+                return;
+
+            if (!SameChoices(_available))
+            {
+                _choices.Clear();
+                _choiceKinds.Clear();
+                _choiceButtons.Clear();
+
+                for (var i = 0; i < _available.Count; i++)
+                {
+                    _choiceKinds.Add(_available[i].Kind);
+                    var button = CreateChoice(_available[i]);
+                    _choiceButtons.Add(button);
+                    _choices.Add(button);
+                }
+            }
+
+            RefreshChoiceState();
+            RefreshEmpty();
+        }
+
+        private void RefreshChoiceState()
+        {
+            for (var i = 0; i < _choiceButtons.Count; i++)
+                _choiceButtons[i].SetEnabled(!IsAssigned(_choiceKinds[i]));
+        }
+
+        private bool IsAssigned(UnitKind kind)
+        {
+            for (var i = 0; i < _slots.Length; i++)
+            {
+                if (_slots[i] != null && _slots[i].Assigned && _slots[i].Kind == kind)
+                    return true;
+            }
+
+            return false;
+        }
+
+        private bool SameAvailable(List<EquipmentChoice> choices)
+        {
+            if (choices.Count != _available.Count)
+                return false;
+
+            for (var i = 0; i < choices.Count; i++)
+            {
+                if (choices[i].Kind != _available[i].Kind)
+                    return false;
+            }
+
+            return true;
+        }
+
         private Button CreateChoice(EquipmentChoice choice)
         {
             var button = new Button();
             button.AddToClassList("build-slot");
+            button.AddToClassList("equipment-choice");
 
             var icon = new Image();
             icon.AddToClassList("build-slot__icon");
@@ -172,7 +229,7 @@ namespace Code.Meta.Features.Town
 
         private void Assign(UnitKind kind)
         {
-            if (_selectedSlot < 0)
+            if (_selectedSlot < 0 || IsAssigned(kind))
                 return;
 
             var request = CreateInputEntity.Empty();
@@ -232,6 +289,8 @@ namespace Code.Meta.Features.Town
             public readonly Button Button;
             public readonly Image Icon;
             public readonly Label Title;
+            public bool Assigned;
+            public UnitKind Kind;
 
             public Slot(Button button, Image icon, Label title)
             {

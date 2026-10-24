@@ -12,6 +12,10 @@
     margin-top: 20px;
 }
 
+.equipment-choice:disabled {
+    opacity: 0.45;
+}
+
 .equipment-slot--selected {
     -unity-background-image-tint-color: rgb(255, 220, 120);
 }

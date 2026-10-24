@@ -82,7 +82,26 @@ namespace Code.Game.Features.Town.Systems
             if (!UnitSlotUnlockQuery.IsReady(kind, nodes, buildings))
                 return;
 
+            if (OtherSlotsAlreadyHold(slot, kind))
+                return;
+
             _progress.SetUnitSlot(slot, kind);
+        }
+
+        private bool OtherSlotsAlreadyHold(int slot, UnitKind kind)
+        {
+            var count = 0;
+
+            for (var i = 0; i < UnitRoster.SlotCount; i++)
+            {
+                if (i == slot)
+                    continue;
+
+                if (_progress.TryGetUnitSlot(i, out var assigned) && assigned == kind)
+                    count++;
+            }
+
+            return count >= 1;
         }
 
         private void Clear(int slot)
