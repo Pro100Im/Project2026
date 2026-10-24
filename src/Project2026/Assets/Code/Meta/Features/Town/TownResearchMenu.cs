@@ -444,8 +444,7 @@ namespace Code.Meta.Features.Town
     public sealed class ResearchFog : VisualElement
     {
         public const int MaxCircles = 32;
-        public const float Radius = 200f;
-        public const float Feather = 72f;
+        public const float Radius = 125f;
 
         private readonly Vector4[] _circles = new Vector4[MaxCircles];
 
@@ -483,7 +482,7 @@ namespace Code.Meta.Features.Town
                 count = MaxCircles;
 
             for (var i = 0; i < count; i++)
-                _circles[i] = new Vector4(points[i].x, points[i].y, Radius, Feather);
+                _circles[i] = new Vector4(points[i].x, points[i].y, Radius, 0f);
 
             _material.SetVectorArray("_Circles", _circles);
             _material.SetFloat("_CircleCount", count);

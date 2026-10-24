@@ -50,9 +50,43 @@ Shader "Project2026/ResearchFog"
                 return output;
             }
 
+            float Hash(float2 p)
+            {
+                return frac(sin(dot(p, float2(127.1, 311.7))) * 43758.5453);
+            }
+
+            float Noise(float2 p)
+            {
+                float2 cell = floor(p);
+                float2 fraction = frac(p);
+                float a = Hash(cell);
+                float b = Hash(cell + float2(1.0, 0.0));
+                float c = Hash(cell + float2(0.0, 1.0));
+                float d = Hash(cell + float2(1.0, 1.0));
+                float2 blend = fraction * fraction * (3.0 - 2.0 * fraction);
+                return lerp(lerp(a, b, blend.x), lerp(c, d, blend.x), blend.y);
+            }
+
+            float Fbm(float2 p)
+            {
+                float value = 0.0;
+                float weight = 0.5;
+
+                [unroll]
+                for (int octave = 0; octave < 4; octave++)
+                {
+                    value += weight * Noise(p);
+                    p = p * 2.13 + float2(19.2, 7.7);
+                    weight *= 0.5;
+                }
+
+                return value;
+            }
+
             half4 Frag(Varyings input) : SV_Target
             {
                 float2 pixel = float2(input.uv.x, 1.0 - input.uv.y) * _TargetSize.xy;
+                float warp = (Fbm(pixel * 0.018) - 0.5) * 100.0;
                 float reveal = 0.0;
                 int count = (int)_CircleCount;
 
@@ -62,14 +96,18 @@ Shader "Project2026/ResearchFog"
                     if (i >= count)
                         break;
 
-                    float dist = distance(pixel, _Circles[i].xy);
+                    float2 delta = abs(pixel - _Circles[i].xy);
+                    float dist = max(delta.x, delta.y) + warp;
                     float radius = _Circles[i].z;
-                    float feather = _Circles[i].w;
-                    reveal = max(reveal, smoothstep(radius, radius - feather, dist));
+                    reveal = max(reveal, smoothstep(radius, radius - 16.0, dist));
                 }
 
-                float alpha = _FogColor.a * (1.0 - reveal);
-                return half4(_FogColor.rgb, alpha);
+                float grain = Fbm(pixel * 0.09);
+                float speck = Hash(floor(pixel * 0.35));
+                float cover = 1.0 - reveal;
+                float alpha = _FogColor.a * cover * lerp(0.72, 1.0, grain) * lerp(0.88, 1.0, speck);
+                float3 color = _FogColor.rgb * lerp(0.78, 1.08, grain);
+                return half4(color, alpha);
             }
             ENDHLSL
         }
