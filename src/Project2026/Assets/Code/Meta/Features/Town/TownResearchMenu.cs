@@ -38,6 +38,7 @@ namespace Code.Meta.Features.Town
         private VisualElement _menu;
         private VisualElement _tree;
         private ResearchTreeGraph _graph;
+        private ResearchFog _fog;
         private VisualElement _center;
         private Button _closeButton;
         private VisualElement _detail;
@@ -52,6 +53,7 @@ namespace Code.Meta.Features.Town
 
         private readonly Dictionary<ResearchId, NodeView> _nodes = new(32);
         private readonly List<ResearchLink> _links = new(32);
+        private readonly List<Vector2> _fogPoints = new(32);
 
         private Vector2 _pan;
         private bool _dragging;
@@ -88,6 +90,9 @@ namespace Code.Meta.Features.Town
             _graph.style.top = 0f;
             _graph.style.bottom = 0f;
             _tree.Insert(0, _graph);
+
+            _fog = new ResearchFog();
+            _tree.Insert(1, _fog);
 
             _center = new VisualElement();
             _center.AddToClassList("research-center");
@@ -132,7 +137,7 @@ namespace Code.Meta.Features.Town
             HideAsync(++_visibilityVersion).Forget();
         }
 
-        public void SetNode(ResearchId id, string title, string description, Sprite icon, int cost, ResearchNodeState state, Vector2 position)
+        public void SetNode(ResearchId id, string title, string description, Sprite icon, int cost, ResearchNodeState state, Vector2 position, bool veiled)
         {
             if (_tree == null)
                 return;
@@ -143,8 +148,11 @@ namespace Code.Meta.Features.Town
             node.Description = description;
             node.Cost = cost;
             node.State = state;
+            node.Veiled = veiled;
             node.Icon.sprite = icon;
-            node.Icon.style.display = icon == null ? DisplayStyle.None : DisplayStyle.Flex;
+            node.Icon.style.display = veiled || icon == null ? DisplayStyle.None : DisplayStyle.Flex;
+            node.Button.style.display = veiled ? DisplayStyle.None : DisplayStyle.Flex;
+            node.Button.pickingMode = veiled ? PickingMode.Ignore : PickingMode.Position;
 
             node.Available = state == ResearchNodeState.Available;
             node.Unaffordable = state == ResearchNodeState.Unaffordable;
@@ -154,7 +162,12 @@ namespace Code.Meta.Features.Town
             node.Button.EnableInClassList(UnaffordableClass, state == ResearchNodeState.Unaffordable);
             ApplyLayout();
 
-            if (id == _selectedId)
+            if (id != _selectedId)
+                return;
+
+            if (veiled)
+                HideDetail();
+            else
                 ShowDetail(node);
         }
 
@@ -215,16 +228,24 @@ namespace Code.Meta.Features.Town
                 button.style.top = center.y + placed.y - half;
             }
 
+            _fogPoints.Clear();
+            _fogPoints.Add(center);
+
             foreach (var pair in _nodes)
             {
-                if (pair.Value.Available || pair.Value.Unaffordable)
-                    pair.Value.Button.BringToFront();
+                if (pair.Value.Veiled)
+                    continue;
+
+                pair.Value.Button.BringToFront();
+                _fogPoints.Add(center + pair.Value.Offset);
             }
 
             SetNodeSize(_center, centerSize);
             _center.style.left = center.x - centerSize * 0.5f;
             _center.style.top = center.y - centerSize * 0.5f;
+            _center.BringToFront();
             _graph.Set(center, _links);
+            _fog.Redraw(width, height, _fogPoints);
         }
 
         private void OnPointerDown(PointerDownEvent evt)
@@ -278,7 +299,7 @@ namespace Code.Meta.Features.Town
 
         private void OpenDetail(ResearchId id)
         {
-            if (!_nodes.TryGetValue(id, out var node))
+            if (!_nodes.TryGetValue(id, out var node) || node.Veiled)
                 return;
 
             _selectedId = id;
@@ -354,6 +375,8 @@ namespace Code.Meta.Features.Town
 
             if (_detailBuy != null)
                 _detailBuy.clickable.clicked -= BuySelected;
+
+            _fog?.Dispose();
         }
 
         private sealed class NodeView
@@ -367,6 +390,7 @@ namespace Code.Meta.Features.Town
             public Vector2 Offset;
             public bool Available;
             public bool Unaffordable;
+            public bool Veiled;
 
             public NodeView(Button button, Image icon)
             {
@@ -414,6 +438,95 @@ namespace Code.Meta.Features.Town
                 painter.LineTo(_center + link.To);
                 painter.Stroke();
             }
+        }
+    }
+
+    public sealed class ResearchFog : VisualElement
+    {
+        public const int MaxCircles = 32;
+        public const float Radius = 100f;
+        public const float Feather = 36f;
+
+        private readonly Vector4[] _circles = new Vector4[MaxCircles];
+
+        private RenderTexture _texture;
+        private Material _material;
+
+        public ResearchFog()
+        {
+            pickingMode = PickingMode.Ignore;
+            style.position = Position.Absolute;
+            style.left = 0f;
+            style.right = 0f;
+            style.top = 0f;
+            style.bottom = 0f;
+            style.backgroundSize = new BackgroundSize(Length.Percent(100f), Length.Percent(100f));
+
+            var shader = Shader.Find("Project2026/ResearchFog");
+
+            if (shader != null)
+                _material = new Material(shader);
+        }
+
+        public void Redraw(float width, float height, List<Vector2> points)
+        {
+            if (_material == null)
+                return;
+
+            var pixelWidth = Mathf.Max(1, Mathf.RoundToInt(width));
+            var pixelHeight = Mathf.Max(1, Mathf.RoundToInt(height));
+            EnsureTexture(pixelWidth, pixelHeight);
+
+            var count = points.Count;
+
+            if (count > MaxCircles)
+                count = MaxCircles;
+
+            for (var i = 0; i < count; i++)
+                _circles[i] = new Vector4(points[i].x, points[i].y, Radius, Feather);
+
+            _material.SetVectorArray("_Circles", _circles);
+            _material.SetFloat("_CircleCount", count);
+            _material.SetVector("_TargetSize", new Vector4(pixelWidth, pixelHeight, 0f, 0f));
+            Graphics.Blit(Texture2D.whiteTexture, _texture, _material);
+            style.backgroundImage = Background.FromRenderTexture(_texture);
+        }
+
+        public void Dispose()
+        {
+            style.backgroundImage = new StyleBackground();
+
+            if (_texture != null)
+            {
+                _texture.Release();
+                UnityEngine.Object.Destroy(_texture);
+                _texture = null;
+            }
+
+            if (_material != null)
+            {
+                UnityEngine.Object.Destroy(_material);
+                _material = null;
+            }
+        }
+
+        private void EnsureTexture(int width, int height)
+        {
+            if (_texture != null && _texture.width == width && _texture.height == height)
+                return;
+
+            if (_texture != null)
+            {
+                _texture.Release();
+                UnityEngine.Object.Destroy(_texture);
+            }
+
+            _texture = new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32)
+            {
+                filterMode = FilterMode.Bilinear,
+                wrapMode = TextureWrapMode.Clamp
+            };
+            _texture.Create();
         }
     }
 }

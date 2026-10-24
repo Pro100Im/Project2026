@@ -59,7 +59,8 @@ namespace Code.Game.Features.Research.Systems
                     icon,
                     node.researchCost.Value,
                     node.researchNodeState.Value,
-                    position);
+                    position,
+                    !Revealed(node, nodes));
 
                 _links.Add(new ResearchLink(ParentPosition(node, nodes), position, node.researchNodeState.Value == ResearchNodeState.Owned));
             }
@@ -67,7 +68,7 @@ namespace Code.Game.Features.Research.Systems
             view.SetLinks(_links);
         }
 
-        private static Vector2 ParentPosition(TownEntity node, List<TownEntity> nodes)
+        private Vector2 ParentPosition(TownEntity node, List<TownEntity> nodes)
         {
             if (!node.hasResearchParent)
                 return Vector2.zero;
@@ -85,6 +86,27 @@ namespace Code.Game.Features.Research.Systems
             }
 
             return Vector2.zero;
+        }
+
+        private bool Revealed(TownEntity node, List<TownEntity> nodes)
+        {
+            if (node.researchNodeState.Value == ResearchNodeState.Owned || !node.hasResearchParent)
+                return true;
+
+            var parentId = node.researchParent.Value;
+
+            for (var i = 0; i < nodes.Count; i++)
+            {
+                var candidate = nodes[i];
+
+                if (!candidate.hasResearchId || candidate.researchId.Value != parentId)
+                    continue;
+
+                return candidate.hasResearchNodeState
+                    && candidate.researchNodeState.Value == ResearchNodeState.Owned;
+            }
+
+            return false;
         }
     }
 }
