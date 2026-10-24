@@ -8,7 +8,7 @@ namespace Code.Game.StaticData.Configs
     {
         public const string AssetPath = "Assets/Configs/Research/ResearchCatalog.asset";
 
-        [field: SerializeField] public float NodeSpacing { get; private set; } = 72f;
+        [field: SerializeField] public float NodeSpacing { get; private set; } = 108f;
         [field: SerializeField] public ResearchNodeDefinition[] Nodes { get; private set; }
 
         [SerializeField] private EntityConfig _veteranKnight;
@@ -32,7 +32,7 @@ namespace Code.Game.StaticData.Configs
 
         public void ApplyDefaults()
         {
-            NodeSpacing = 72f;
+            NodeSpacing = 108f;
             Nodes = ResearchCatalogDefaults.CreateNodes();
             AssignBranchIcons();
             WireKnightConfigs();

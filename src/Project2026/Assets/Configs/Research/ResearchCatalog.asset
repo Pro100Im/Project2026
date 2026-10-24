@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c8e1a7b5d2f4e6a9b0c1d2e3f4a5b6c, type: 3}
   m_Name: ResearchCatalog
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.ResearchCatalog
-  <NodeSpacing>k__BackingField: 72
+  <NodeSpacing>k__BackingField: 108
   <Nodes>k__BackingField: []
   _veteranKnight: {fileID: 11400000, guid: a7c3e1b24d5f4a6890b1c2d3e4f50617, type: 2}
   _eliteKnight: {fileID: 11400000, guid: b8d4f2c35e604b7901c2d3e4f5061728, type: 2}

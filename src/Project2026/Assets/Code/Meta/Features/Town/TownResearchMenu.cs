@@ -444,8 +444,8 @@ namespace Code.Meta.Features.Town
     public sealed class ResearchFog : VisualElement
     {
         public const int MaxCircles = 32;
-        public const float Radius = 100f;
-        public const float Feather = 36f;
+        public const float Radius = 200f;
+        public const float Feather = 72f;
 
         private readonly Vector4[] _circles = new Vector4[MaxCircles];
 
