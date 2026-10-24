@@ -392,3 +392,26 @@
 .button.town-research .commonText {
     font-size: 32px;
 }
+
+.button.town-equipment {
+    position: absolute;
+    right: 36px;
+    bottom: 28px;
+    width: 280px;
+    height: 112px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 8px;
+    padding-right: 16px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+}
+
+.button.town-equipment .commonText {
+    font-size: 32px;
+}

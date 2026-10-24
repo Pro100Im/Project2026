@@ -55,19 +55,21 @@ public static class TownComponentsLookup {
     public const int TownBuildMenu = 44;
     public const int TownBuildMenuOpened = 45;
     public const int TownCrystal = 46;
-    public const int TownExchequer = 47;
-    public const int TownGold = 48;
-    public const int TownKnowledge = 49;
-    public const int TownProductionCooldown = 50;
-    public const int TownProductionMultiplier = 51;
-    public const int TownProductionRemainder = 52;
-    public const int TownResourceGained = 53;
-    public const int TownResources = 54;
-    public const int TownStone = 55;
-    public const int TownView = 56;
-    public const int TownWood = 57;
+    public const int TownEquipmentMenu = 47;
+    public const int TownEquipmentMenuOpened = 48;
+    public const int TownExchequer = 49;
+    public const int TownGold = 50;
+    public const int TownKnowledge = 51;
+    public const int TownProductionCooldown = 52;
+    public const int TownProductionMultiplier = 53;
+    public const int TownProductionRemainder = 54;
+    public const int TownResourceGained = 55;
+    public const int TownResources = 56;
+    public const int TownStone = 57;
+    public const int TownView = 58;
+    public const int TownWood = 59;
 
-    public const int TotalComponents = 58;
+    public const int TotalComponents = 60;
 
     public static readonly string[] componentNames = {
         "Attached",
@@ -117,6 +119,8 @@ public static class TownComponentsLookup {
         "TownBuildMenu",
         "TownBuildMenuOpened",
         "TownCrystal",
+        "TownEquipmentMenu",
+        "TownEquipmentMenuOpened",
         "TownExchequer",
         "TownGold",
         "TownKnowledge",
@@ -178,6 +182,8 @@ public static class TownComponentsLookup {
         typeof(Code.Game.Features.Town.TownBuildMenuComponent),
         typeof(Code.Game.Features.Town.TownBuildMenuOpened),
         typeof(Code.Game.Features.Town.TownCrystal),
+        typeof(Code.Game.Features.Town.TownEquipmentMenuComponent),
+        typeof(Code.Game.Features.Town.TownEquipmentMenuOpened),
         typeof(Code.Game.Features.Town.TownExchequer),
         typeof(Code.Game.Features.Town.TownGold),
         typeof(Code.Game.Features.Town.TownKnowledge),

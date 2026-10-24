@@ -26,6 +26,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
         [SerializeField] private GameObject _eventSystem;
         [SerializeField] private GameObject _audioListener;
         [SerializeField] private ResearchCatalog _researchCatalog;
+        [SerializeField] private UnitRoster _unitRoster;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -52,6 +53,9 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 
             if (_researchCatalog != null)
                 builder.RegisterInstance(_researchCatalog);
+
+            if (_unitRoster != null)
+                builder.RegisterInstance(_unitRoster);
         }
 
         private void BindAssetManagementServices(IContainerBuilder builder)

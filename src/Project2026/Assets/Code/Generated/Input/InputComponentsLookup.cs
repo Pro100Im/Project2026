@@ -18,21 +18,25 @@ public static class InputComponentsLookup {
     public const int TownBuildMenuCloseRequested = 7;
     public const int TownBuildMenuToggleRequested = 8;
     public const int TownBuildRequested = 9;
-    public const int AbilityCastIntent = 10;
-    public const int CancelClick = 11;
-    public const int CancelIntent = 12;
-    public const int ClickInput = 13;
-    public const int EntityInteractIntent = 14;
-    public const int Input = 15;
-    public const int InteractTarget = 16;
-    public const int PointerInput = 17;
-    public const int PointerOverUI = 18;
-    public const int PointerState = 19;
-    public const int PrimaryClick = 20;
-    public const int ScreenPointerInput = 21;
-    public const int WorldPointerInput = 22;
+    public const int TownEquipmentAssignRequested = 10;
+    public const int TownEquipmentClearRequested = 11;
+    public const int TownEquipmentMenuCloseRequested = 12;
+    public const int TownEquipmentMenuToggleRequested = 13;
+    public const int AbilityCastIntent = 14;
+    public const int CancelClick = 15;
+    public const int CancelIntent = 16;
+    public const int ClickInput = 17;
+    public const int EntityInteractIntent = 18;
+    public const int Input = 19;
+    public const int InteractTarget = 20;
+    public const int PointerInput = 21;
+    public const int PointerOverUI = 22;
+    public const int PointerState = 23;
+    public const int PrimaryClick = 24;
+    public const int ScreenPointerInput = 25;
+    public const int WorldPointerInput = 26;
 
-    public const int TotalComponents = 23;
+    public const int TotalComponents = 27;
 
     public static readonly string[] componentNames = {
         "ForcedPauseRequested",
@@ -45,6 +49,10 @@ public static class InputComponentsLookup {
         "TownBuildMenuCloseRequested",
         "TownBuildMenuToggleRequested",
         "TownBuildRequested",
+        "TownEquipmentAssignRequested",
+        "TownEquipmentClearRequested",
+        "TownEquipmentMenuCloseRequested",
+        "TownEquipmentMenuToggleRequested",
         "AbilityCastIntent",
         "CancelClick",
         "CancelIntent",
@@ -71,6 +79,10 @@ public static class InputComponentsLookup {
         typeof(Code.Game.Features.Town.TownBuildMenuCloseRequested),
         typeof(Code.Game.Features.Town.TownBuildMenuToggleRequested),
         typeof(Code.Game.Features.Town.TownBuildRequested),
+        typeof(Code.Game.Features.Town.TownEquipmentAssignRequested),
+        typeof(Code.Game.Features.Town.TownEquipmentClearRequested),
+        typeof(Code.Game.Features.Town.TownEquipmentMenuCloseRequested),
+        typeof(Code.Game.Features.Town.TownEquipmentMenuToggleRequested),
         typeof(Code.Game.Input.AbilityCastIntent),
         typeof(Code.Game.Input.CancelClick),
         typeof(Code.Game.Input.CancelIntent),

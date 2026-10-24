@@ -7,12 +7,14 @@ namespace Code.Game.Features.Town.Systems
     {
         private readonly IGroup<TownEntity> _menus;
         private readonly IGroup<TownEntity> _researchMenus;
+        private readonly IGroup<TownEntity> _equipmentMenus;
 
         public TownBuildMenuToggleSystem() : base(Contexts.sharedInstance.input)
         {
             var town = Contexts.sharedInstance.town;
             _menus = town.GetGroup(TownMatcher.TownBuildMenu);
             _researchMenus = town.GetGroup(TownMatcher.TownResearchMenu);
+            _equipmentMenus = town.GetGroup(TownMatcher.TownEquipmentMenu);
         }
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context) =>
@@ -39,7 +41,10 @@ namespace Code.Game.Features.Town.Systems
                         menu.isTownBuildMenuOpened = !menu.isTownBuildMenuOpened;
 
                     if (menu.isTownBuildMenuOpened)
+                    {
                         CloseResearchMenu();
+                        CloseEquipmentMenu();
+                    }
                 }
 
                 request.isTownBuildMenuToggleRequested = false;
@@ -54,6 +59,14 @@ namespace Code.Game.Features.Town.Systems
 
             if (researchMenu != null)
                 researchMenu.isTownResearchMenuOpened = false;
+        }
+
+        private void CloseEquipmentMenu()
+        {
+            var equipmentMenu = _equipmentMenus.GetSingleEntity();
+
+            if (equipmentMenu != null)
+                equipmentMenu.isTownEquipmentMenuOpened = false;
         }
     }
 }

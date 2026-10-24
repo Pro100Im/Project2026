@@ -1,5 +1,7 @@
 using Code.Game.Common.Entity;
+using Code.Game.StaticData.Configs;
 using Entitas;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -9,75 +11,75 @@ namespace Code.Meta.Features.Game
 {
     public class UnitsPanel : MonoBehaviour
     {
-        private GameScreen _gameScreen;
+        private const int SlotCount = UnitRoster.SlotCount;
 
-        private Button _firstUnitSlotButton;
-        private Button _secondUnitSlotButton;
-        private Image _firstIcon;
-        private Image _secondIcon;
-        private StyleBackground _firstUnlockedIcon;
-        private StyleBackground _secondUnlockedIcon;
-        private StyleBackground _lockedIcon;
+        private GameScreen _gameScreen;
+        private UnitRoster _roster;
+
+        private readonly Button[] _buttons = new Button[SlotCount];
+        private readonly Image[] _icons = new Image[SlotCount];
+        private readonly Action[] _clicks = new Action[SlotCount];
 
         private IGroup<GameEntity> _slots;
         private readonly List<GameEntity> _slotBuffer = new(4);
 
         [Inject]
-        public void Construct(GameScreen gameScreen)
+        public void Construct(GameScreen gameScreen, UnitRoster roster)
         {
             _gameScreen = gameScreen;
+            _roster = roster;
         }
 
         private void Start()
         {
-            _firstUnitSlotButton = _gameScreen.GetButton("UnitButton1");
-            _secondUnitSlotButton = _gameScreen.GetButton("UnitButton2");
+            for (var i = 0; i < SlotCount; i++)
+            {
+                var button = _gameScreen.GetButton($"UnitButton{i + 1}");
+                _buttons[i] = button;
+                _icons[i] = button.Q<Image>("Icon");
 
-            _firstIcon = _firstUnitSlotButton.Q<Image>("Icon");
-            _secondIcon = _secondUnitSlotButton.Q<Image>("Icon");
-            _firstUnlockedIcon = _firstIcon.style.backgroundImage;
-            _secondUnlockedIcon = _secondIcon.style.backgroundImage;
-            _lockedIcon = _gameScreen.GetButton("StubButton").Q<Image>("Icon").style.backgroundImage;
+                var slot = i;
+                _clicks[i] = () => Spawn(slot);
+                button.clickable.clicked += _clicks[i];
+            }
 
-            _slots = Contexts.sharedInstance.game.GetGroup(GameMatcher
-                .AllOf(
-                    GameMatcher.UnitSlot,
-                    GameMatcher.UnitKind));
-
-            _firstUnitSlotButton.clickable.clicked += SpawnFirstSlotUnit;
-            _secondUnitSlotButton.clickable.clicked += SpawnSecondSlotUnit;
+            _slots = Contexts.sharedInstance.game.GetGroup(GameMatcher.UnitSlot);
         }
 
         private void Update()
         {
-            if (_firstIcon == null || _secondIcon == null)
-                return;
-
-            var firstAvailable = IsAvailable(0);
-            var secondAvailable = IsAvailable(1);
-
-            _firstIcon.style.backgroundImage = firstAvailable ? _firstUnlockedIcon : _lockedIcon;
-            _secondIcon.style.backgroundImage = secondAvailable ? _secondUnlockedIcon : _lockedIcon;
+            for (var i = 0; i < SlotCount; i++)
+                Apply(i);
         }
 
-        private void SpawnFirstSlotUnit()
+        private void Apply(int index)
         {
-            if (!IsAvailable(0))
+            var icon = _icons[index];
+
+            if (icon == null)
                 return;
 
-            RequestSpawn(0);
+            var sprite = _roster != null ? _roster.LockedIcon : null;
+
+            if (TryGetSlot(index, out var slot) && slot.isUnitSlotAvailable && slot.hasUnitIcon)
+                sprite = slot.unitIcon.Value;
+
+            if (sprite != null)
+                icon.style.backgroundImage = new StyleBackground(sprite);
         }
 
-        private void SpawnSecondSlotUnit()
+        private void Spawn(int index)
         {
-            if (!IsAvailable(1))
+            if (!TryGetSlot(index, out var slot) || !slot.isUnitSlotAvailable)
                 return;
 
-            RequestSpawn(1);
+            RequestSpawn(index);
         }
 
-        private bool IsAvailable(int index)
+        private bool TryGetSlot(int index, out GameEntity slot)
         {
+            slot = null;
+
             if (_slots == null)
                 return false;
 
@@ -85,10 +87,11 @@ namespace Code.Meta.Features.Game
 
             for (var i = 0; i < slots.Count; i++)
             {
-                var slot = slots[i];
+                if (slots[i].unitSlot.Value != index)
+                    continue;
 
-                if (slot.unitSlot.Value == index)
-                    return slot.isUnitSlotAvailable;
+                slot = slots[i];
+                return true;
             }
 
             return false;
@@ -104,10 +107,13 @@ namespace Code.Meta.Features.Game
 
         private void OnDestroy()
         {
-            if (_firstUnitSlotButton != null)
-                _firstUnitSlotButton.clickable.clicked -= SpawnFirstSlotUnit;
-            if (_secondUnitSlotButton != null)
-                _secondUnitSlotButton.clickable.clicked -= SpawnSecondSlotUnit;
+            for (var i = 0; i < _buttons.Length; i++)
+            {
+                if (_buttons[i] == null || _clicks[i] == null)
+                    continue;
+
+                _buttons[i].clickable.clicked -= _clicks[i];
+            }
         }
     }
 }

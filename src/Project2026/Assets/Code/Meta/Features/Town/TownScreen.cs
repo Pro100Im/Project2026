@@ -25,6 +25,7 @@ public class TownScreen : MonoBehaviour
     private Button _exitButton;
     private Button _townButton;
     private Button _researchButton;
+    private Button _equipmentButton;
 
     [Inject]
     public void Construct(TransitionScreen transitionScreen, UIService uIService, ICameraService cameraService)
@@ -42,10 +43,12 @@ public class TownScreen : MonoBehaviour
         _exitButton = _root.Q<Button>("ExitButton");
         _townButton = _root.Q<Button>("TownButton");
         _researchButton = _root.Q<Button>("ResearchButton");
+        _equipmentButton = _root.Q<Button>("EquipmentButton");
 
         _exitButton.clickable.clicked += ExitTown;
         _townButton.clickable.clicked += ToggleBuildMenuRequest;
         _researchButton.clickable.clicked += ToggleResearchMenuRequest;
+        _equipmentButton.clickable.clicked += ToggleEquipmentMenuRequest;
 
         _uIService.Hide(_canvas).Forget();
     }
@@ -91,10 +94,24 @@ public class TownScreen : MonoBehaviour
         request.isInput = true;
     }
 
+    private void ToggleEquipmentMenuRequest()
+    {
+        var request = CreateInputEntity.Empty();
+        request.isTownEquipmentMenuToggleRequested = true;
+        request.isInput = true;
+    }
+
     private void CloseResearchMenuRequest()
     {
         var request = CreateInputEntity.Empty();
         request.isTownResearchMenuCloseRequested = true;
+        request.isInput = true;
+    }
+
+    private void CloseEquipmentMenuRequest()
+    {
+        var request = CreateInputEntity.Empty();
+        request.isTownEquipmentMenuCloseRequested = true;
         request.isInput = true;
     }
 
@@ -109,6 +126,7 @@ public class TownScreen : MonoBehaviour
     {
         CloseBuildMenuRequest();
         CloseResearchMenuRequest();
+        CloseEquipmentMenuRequest();
 
         await _transitionScreen.Show();
 
@@ -141,6 +159,8 @@ public class TownScreen : MonoBehaviour
         _townButton.clickable.clicked -= ToggleBuildMenuRequest;
         if (_researchButton != null)
             _researchButton.clickable.clicked -= ToggleResearchMenuRequest;
+        if (_equipmentButton != null)
+            _equipmentButton.clickable.clicked -= ToggleEquipmentMenuRequest;
         SceneManager.activeSceneChanged -= OnActiveSceneChanged;
     }
 }

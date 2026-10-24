@@ -33,6 +33,18 @@ namespace Code.Game.Features.Town
     [Input] public class TownBuildMenuCloseRequested : IComponent { }
     [Input] public class TownBuildRequested : IComponent { public BuildingType Value; }
 
+    [Town] public class TownEquipmentMenuComponent : IComponent { public Code.Meta.Features.Town.TownEquipmentMenu Value; }
+    [Town] public class TownEquipmentMenuOpened : IComponent { }
+
+    [Input] public class TownEquipmentMenuToggleRequested : IComponent { }
+    [Input] public class TownEquipmentMenuCloseRequested : IComponent { }
+    [Input] public class TownEquipmentAssignRequested : IComponent
+    {
+        public int Slot;
+        public UnitKind Kind;
+    }
+    [Input] public class TownEquipmentClearRequested : IComponent { public int Slot; }
+
     public enum BuildingType
     {
         Houses,

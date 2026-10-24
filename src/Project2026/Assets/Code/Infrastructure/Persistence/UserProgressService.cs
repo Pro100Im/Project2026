@@ -1,4 +1,5 @@
 using Code.Game.Features.Town;
+using Code.Game.StaticData.Configs;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -82,6 +83,26 @@ namespace Code.Infrastructure.Persistence
             return false;
         }
 
+        public bool TryGetUnitSlot(int slot, out UnitKind kind)
+        {
+            var slots = _save.Town.UnitSlots;
+
+            if (slots != null)
+            {
+                for (var i = 0; i < slots.Count; i++)
+                {
+                    if (slots[i].Slot != slot)
+                        continue;
+
+                    kind = slots[i].Kind;
+                    return true;
+                }
+            }
+
+            kind = default;
+            return false;
+        }
+
         public void SetTownResources(int gold, int stone, int crystal, int wood, int knowledge)
         {
             var town = _save.Town;
@@ -161,6 +182,55 @@ namespace Code.Infrastructure.Persistence
             MarkDirty();
         }
 
+        public void SetUnitSlot(int slot, UnitKind kind)
+        {
+            var slots = Slots();
+
+            for (var i = 0; i < slots.Count; i++)
+            {
+                if (slots[i].Slot != slot)
+                    continue;
+
+                if (slots[i].Kind == kind)
+                    return;
+
+                slots[i].Kind = kind;
+                MarkDirty();
+                return;
+            }
+
+            slots.Add(new UnitSlotProgressData
+            {
+                Slot = slot,
+                Kind = kind
+            });
+            MarkDirty();
+        }
+
+        public void ClearUnitSlot(int slot)
+        {
+            var slots = _save.Town.UnitSlots;
+
+            if (slots == null)
+                return;
+
+            for (var i = 0; i < slots.Count; i++)
+            {
+                if (slots[i].Slot != slot)
+                    continue;
+
+                slots.RemoveAt(i);
+                MarkDirty();
+                return;
+            }
+        }
+
+        private List<UnitSlotProgressData> Slots()
+        {
+            _save.Town.UnitSlots ??= new List<UnitSlotProgressData>(UnitRoster.SlotCount);
+            return _save.Town.UnitSlots;
+        }
+
 #if UNITY_EDITOR
         public void ResetResources()
         {
@@ -201,6 +271,12 @@ namespace Code.Infrastructure.Persistence
             if (_save.Town.Research != null && _save.Town.Research.Count > 0)
             {
                 _save.Town.ClearResearch();
+                MarkDirty();
+            }
+
+            if (_save.Town.UnitSlots != null && _save.Town.UnitSlots.Count > 0)
+            {
+                _save.Town.UnitSlots.Clear();
                 MarkDirty();
             }
 
@@ -256,6 +332,7 @@ namespace Code.Infrastructure.Persistence
             _save.Town ??= new TownProgressData();
             _save.Town.Buildings ??= new List<TownBuildingProgressData>(8);
             _save.Town.Research ??= new List<ResearchProgressData>(8);
+            _save.Town.UnitSlots ??= new List<UnitSlotProgressData>(UnitRoster.SlotCount);
 
             var mutated = false;
 

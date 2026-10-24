@@ -12,9 +12,12 @@ namespace Code.Infrastructure.Persistence
 
         bool TryGetBuildingLevel(BuildingType type, out int level);
         bool TryGetResearchLevel(ResearchId id, out int level);
+        bool TryGetUnitSlot(int slot, out UnitKind kind);
         void SetTownResources(int gold, int stone, int crystal, int wood, int knowledge);
         void SetBuildingLevel(BuildingType type, int level);
         void SetResearchLevel(ResearchId id, int level);
+        void SetUnitSlot(int slot, UnitKind kind);
+        void ClearUnitSlot(int slot);
 #if UNITY_EDITOR
         void ResetResources();
         void ResetBuildings();

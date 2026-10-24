@@ -13,8 +13,11 @@ namespace Code.Game.Features.Town
             Add(systemFactory.Create<TownResearchLayoutSystem>());
             Add(systemFactory.Create<TownResearchMenuToggleSystem>());
             Add(systemFactory.Create<TownBuildMenuToggleSystem>());
+            Add(systemFactory.Create<TownEquipmentMenuToggleSystem>());
+            Add(systemFactory.Create<TownEquipmentAssignSystem>());
             Add(systemFactory.Create<TownBuildSystem>());
             Add(systemFactory.Create<TownBuildMenuOpenSystem>());
+            Add(systemFactory.Create<TownEquipmentMenuOpenSystem>());
             Add(systemFactory.Create<TownBuildingViewSystem>());
             Add(systemFactory.Create<TownBuildMenuRenderSystem>());
             Add(systemFactory.Create<TownProductionLevelSystem>());
@@ -25,6 +28,7 @@ namespace Code.Game.Features.Town
             Add(systemFactory.Create<TownGoldBonusSystem>());
             Add(systemFactory.Create<TownResearchMenuOpenSystem>());
             Add(systemFactory.Create<TownResearchMenuRenderSystem>());
+            Add(systemFactory.Create<TownEquipmentMenuRenderSystem>());
             Add(systemFactory.Create<TownResourceStockSystem>());
             Add(systemFactory.Create<TownResourceGainViewSystem>());
         }

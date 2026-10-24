@@ -1,0 +1,35 @@
+.equipment-slots {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 24px;
+}
+
+.equipment-choices {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.equipment-slot--selected {
+    -unity-background-image-tint-color: rgb(255, 220, 120);
+}
+
+.equipment-empty {
+    margin-top: 16px;
+    font-size: 28px;
+    -unity-text-align: middle-center;
+}
+
+.equipment-clear {
+    width: 220px;
+    height: 72px;
+    margin-top: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+.equipment-clear .commonText {
+    font-size: 28px;
+}

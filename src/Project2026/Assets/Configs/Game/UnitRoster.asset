@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e7c1a9b3d4f4e6a8b0c1d2e3f4a5b6d, type: 3}
+  m_Name: UnitRoster
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.UnitRoster
+  _lockedIcon: {fileID: -7143483011578089456, guid: 74b821c6b63fb13429fc1f38133a5a89, type: 3}
+  _units:
+  - <Kind>k__BackingField: 0
+    <Config>k__BackingField: {fileID: 11400000, guid: 5004249a1aba98f489582c13eba43155, type: 2}
+    <Icon>k__BackingField: {fileID: 8816000985053885555, guid: a54bb8d01623006499878669c87c2a1f, type: 3}
+    <Title>k__BackingField: Knight
+  - <Kind>k__BackingField: 1
+    <Config>k__BackingField: {fileID: 11400000, guid: 18a01406d3defc8499815df154731fa2, type: 2}
+    <Icon>k__BackingField: {fileID: -7245848890258496006, guid: bb7ce7d8e4758ef408f778df2952e0c4, type: 3}
+    <Title>k__BackingField: Archer

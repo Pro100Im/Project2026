@@ -21,6 +21,7 @@ namespace Code.Infrastructure.Persistence
         public int Knowledge;
         public List<TownBuildingProgressData> Buildings = new(8);
         public List<ResearchProgressData> Research = new(8);
+        public List<UnitSlotProgressData> UnitSlots = new(3);
 
 #if UNITY_EDITOR
         public void ClearResources()
@@ -56,5 +57,11 @@ namespace Code.Infrastructure.Persistence
     {
         public ResearchId Id;
         public int Level;
+    }
+
+    public class UnitSlotProgressData
+    {
+        public int Slot;
+        public UnitKind Kind;
     }
 }

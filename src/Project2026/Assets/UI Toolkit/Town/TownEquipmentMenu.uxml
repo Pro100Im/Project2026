@@ -1,0 +1,30 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Global/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=f0b50401ae793a440bdbacc20d05f547&amp;type=3#GlobalStyle"/>
+    <Style src="project://database/Assets/UI%20Toolkit/Town/TownBuildMenu.uss?fileID=7433441132597879392&amp;guid=717f716ece1640368b7d001a00317038&amp;type=3#TownBuildMenu"/>
+    <Style src="project://database/Assets/UI%20Toolkit/Town/TownEquipmentMenu.uss?fileID=7433441132597879392&amp;guid=a9b8c7d6e5f44321a0b9c8d7e6f50413&amp;type=3#TownEquipmentMenu"/>
+    <ui:VisualElement name="TownEquipmentMenu" picking-mode="Position" class="build-menu-overlay hide" style="display: none;">
+        <ui:VisualElement name="TownEquipmentPanel" picking-mode="Position" class="build-menu-panel">
+            <ui:Label text="Equipment" name="TownEquipmentTitle" picking-mode="Ignore" class="commonText build-menu-title"/>
+            <ui:VisualElement name="TownEquipmentSlots" picking-mode="Ignore" class="equipment-slots">
+                <ui:Button text="" name="EquipmentSlot0" class="build-slot">
+                    <ui:Image name="Icon" picking-mode="Ignore" class="build-slot__icon"/>
+                    <ui:Label text="Empty" name="Title" picking-mode="Ignore" class="commonText build-slot__title"/>
+                </ui:Button>
+                <ui:Button text="" name="EquipmentSlot1" class="build-slot">
+                    <ui:Image name="Icon" picking-mode="Ignore" class="build-slot__icon"/>
+                    <ui:Label text="Empty" name="Title" picking-mode="Ignore" class="commonText build-slot__title"/>
+                </ui:Button>
+                <ui:Button text="" name="EquipmentSlot2" class="build-slot">
+                    <ui:Image name="Icon" picking-mode="Ignore" class="build-slot__icon"/>
+                    <ui:Label text="Empty" name="Title" picking-mode="Ignore" class="commonText build-slot__title"/>
+                </ui:Button>
+            </ui:VisualElement>
+            <ui:Label text="No units" name="TownEquipmentEmpty" picking-mode="Ignore" class="commonText equipment-empty" style="display: none;"/>
+            <ui:VisualElement name="TownEquipmentChoices" picking-mode="Ignore" class="equipment-choices" style="display: none;"/>
+            <ui:Button text="" name="TownEquipmentClearButton" class="button equipment-clear" style="display: none;">
+                <ui:Label text="CLEAR" picking-mode="Ignore" class="commonText"/>
+            </ui:Button>
+            <ui:Button text="" name="TownEquipmentCloseButton" class="build-menu-close"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
