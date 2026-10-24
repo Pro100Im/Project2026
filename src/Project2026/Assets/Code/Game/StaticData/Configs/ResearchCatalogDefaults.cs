@@ -7,7 +7,7 @@ namespace Code.Game.StaticData.Configs
     {
         public static ResearchNodeDefinition[] CreateNodes() => new ResearchNodeDefinition[]
         {
-            Node(ResearchId.Knights, "Knights", "Knights are already trained.", 0, ResearchLinkDirection.West, startingLevel: 1),
+            Node(ResearchId.Knights, "Knights", "Unlocks the basic knight.", 0, ResearchLinkDirection.West),
             Node(ResearchId.VeteranKnight, "Veteran", "Unlocks a stronger knight. Requires Barracks.", 50, ResearchLinkDirection.West, new KnightUnlockResearchEffect { Priority = 1 }, ResearchId.Knights, true, BuildingType.Barracks, 1),
             Node(ResearchId.EliteKnight, "Elite", "Unlocks the strongest knight.", 150, ResearchLinkDirection.West, new KnightUnlockResearchEffect { Priority = 2 }, ResearchId.VeteranKnight),
 

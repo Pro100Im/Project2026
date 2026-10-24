@@ -16,10 +16,10 @@ MonoBehaviour:
   <Nodes>k__BackingField:
   - <Id>k__BackingField: 1
     <Title>k__BackingField: Knights
-    <Description>k__BackingField: Knights are already trained.
+    <Description>k__BackingField: Unlocks the basic knight.
     <Icon>k__BackingField: {fileID: 21300000, guid: 6509adb73ba1de04d898264b898cdf2e, type: 3}
     <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 1
+    <StartingLevel>k__BackingField: 0
     <Cost>k__BackingField: 10
     <Parent>k__BackingField: 0
     <Direction>k__BackingField: 4
