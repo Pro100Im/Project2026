@@ -8,6 +8,7 @@ namespace Code.Game.Features.Unit
     [Game] public class Unit : IComponent { }
     [Game] public class UnitKindComponent : IComponent { public UnitKind Value; }
     [Game] public class UnitSlot : IComponent { public int Value; }
+    [Game] public class UnitSlotAvailable : IComponent { }
     [Game] public class DefaultUnitConfig : IComponent { public EntityConfig Value; }
     [Game] public class ResolvedUnitConfig : IComponent { public EntityConfig Value; }
     [Game] public class UnitIcon : IComponent { public Sprite Value; }

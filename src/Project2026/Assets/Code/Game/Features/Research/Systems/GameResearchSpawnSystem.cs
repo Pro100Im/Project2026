@@ -12,6 +12,7 @@ namespace Code.Game.Features.Research.Systems
         private readonly IUserProgressService _progress;
         private readonly IGroup<GameEntity> _nodes;
         private readonly List<GameEntity> _buffer = new(4);
+        private readonly List<ResearchNodeDefinition> _definitions = new(32);
 
         public GameResearchSpawnSystem(ResearchCatalog catalog, IUserProgressService progress)
         {
@@ -22,14 +23,14 @@ namespace Code.Game.Features.Research.Systems
 
         public void Initialize()
         {
-            if (_catalog == null || _catalog.Nodes == null || _nodes.GetEntities(_buffer).Count > 0)
+            if (_catalog == null || _nodes.GetEntities(_buffer).Count > 0)
                 return;
 
-            var definitions = _catalog.Nodes;
+            _catalog.Collect(_definitions);
 
-            for (var i = 0; i < definitions.Length; i++)
+            for (var i = 0; i < _definitions.Count; i++)
             {
-                var definition = definitions[i];
+                var definition = _definitions[i];
 
                 if (definition == null)
                     continue;

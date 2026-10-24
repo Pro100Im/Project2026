@@ -1,4 +1,6 @@
 using Code.Game.Common.Entity;
+using Entitas;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
@@ -11,6 +13,14 @@ namespace Code.Meta.Features.Game
 
         private Button _firstUnitSlotButton;
         private Button _secondUnitSlotButton;
+        private Image _firstIcon;
+        private Image _secondIcon;
+        private StyleBackground _firstUnlockedIcon;
+        private StyleBackground _secondUnlockedIcon;
+        private StyleBackground _lockedIcon;
+
+        private IGroup<GameEntity> _slots;
+        private readonly List<GameEntity> _slotBuffer = new(4);
 
         [Inject]
         public void Construct(GameScreen gameScreen)
@@ -23,13 +33,66 @@ namespace Code.Meta.Features.Game
             _firstUnitSlotButton = _gameScreen.GetButton("UnitButton1");
             _secondUnitSlotButton = _gameScreen.GetButton("UnitButton2");
 
+            _firstIcon = _firstUnitSlotButton.Q<Image>("Icon");
+            _secondIcon = _secondUnitSlotButton.Q<Image>("Icon");
+            _firstUnlockedIcon = _firstIcon.style.backgroundImage;
+            _secondUnlockedIcon = _secondIcon.style.backgroundImage;
+            _lockedIcon = _gameScreen.GetButton("StubButton").Q<Image>("Icon").style.backgroundImage;
+
+            _slots = Contexts.sharedInstance.game.GetGroup(GameMatcher
+                .AllOf(
+                    GameMatcher.UnitSlot,
+                    GameMatcher.UnitKind));
+
             _firstUnitSlotButton.clickable.clicked += SpawnFirstSlotUnit;
             _secondUnitSlotButton.clickable.clicked += SpawnSecondSlotUnit;
         }
 
-        private void SpawnFirstSlotUnit() => RequestSpawn(0);
+        private void Update()
+        {
+            if (_firstIcon == null || _secondIcon == null)
+                return;
 
-        private void SpawnSecondSlotUnit() => RequestSpawn(1);
+            var firstAvailable = IsAvailable(0);
+            var secondAvailable = IsAvailable(1);
+
+            _firstIcon.style.backgroundImage = firstAvailable ? _firstUnlockedIcon : _lockedIcon;
+            _secondIcon.style.backgroundImage = secondAvailable ? _secondUnlockedIcon : _lockedIcon;
+        }
+
+        private void SpawnFirstSlotUnit()
+        {
+            if (!IsAvailable(0))
+                return;
+
+            RequestSpawn(0);
+        }
+
+        private void SpawnSecondSlotUnit()
+        {
+            if (!IsAvailable(1))
+                return;
+
+            RequestSpawn(1);
+        }
+
+        private bool IsAvailable(int index)
+        {
+            if (_slots == null)
+                return false;
+
+            var slots = _slots.GetEntities(_slotBuffer);
+
+            for (var i = 0; i < slots.Count; i++)
+            {
+                var slot = slots[i];
+
+                if (slot.unitSlot.Value == index)
+                    return slot.isUnitSlotAvailable;
+            }
+
+            return false;
+        }
 
         private static void RequestSpawn(int slot)
         {

@@ -27,6 +27,8 @@ namespace Code.Game.Features.Research
         public int Priority;
     }
 
+    [Game, Town] public class ResearchUnitSlotUnlock : IComponent { public UnitKind Value; }
+
     [Game, Town] public class FireDamageBonus : IComponent { public float Value; }
     [Game, Town] public class GoldIncomeBonus : IComponent { public float Value; }
     [Game, Town] public class KnightBlockBonus : IComponent { public float Value; }
@@ -71,7 +73,8 @@ public enum ResearchId
     Defense2,
     Defense3,
     Defense4,
-    Defense5
+    Defense5,
+    Archers
 }
 
 public enum ResearchNodeState

@@ -166,53 +166,55 @@ public static class GameComponentsLookup {
     public const int ResearchRequiredBuildingLevel = 155;
     public const int ResearchResistanceBonus = 156;
     public const int ResearchStartingLevel = 157;
-    public const int UnlockedKnight = 158;
-    public const int FireResistance = 159;
-    public const int FrostResistance = 160;
-    public const int PhysicalResistance = 161;
-    public const int ResistanceBonus = 162;
-    public const int Reward = 163;
-    public const int SpawnPosition = 164;
-    public const int SpawnRequsted = 165;
-    public const int SpawnSlot = 166;
-    public const int WaitingToSpawn = 167;
-    public const int DefenseFlow = 168;
-    public const int DefensePatrolCell = 169;
-    public const int DefensePatrolIdleDuration = 170;
-    public const int DefensePatrolWait = 171;
-    public const int RallyToCastle = 172;
-    public const int SurroundSlot = 173;
-    public const int SurroundTargetId = 174;
-    public const int Targetable = 175;
-    public const int TargetCell = 176;
-    public const int TargetCellRequest = 177;
-    public const int TargetFlow = 178;
-    public const int TargetId = 179;
-    public const int TargetPoint = 180;
-    public const int TargetSelected = 181;
-    public const int Tower = 182;
-    public const int TowerBuildRequest = 183;
-    public const int TowerPlace = 184;
-    public const int TowerUpgrade = 185;
-    public const int TowerUpgradeIcon = 186;
-    public const int TowerUpgradePrice = 187;
-    public const int TowerUpgradeRequest = 188;
-    public const int DefaultUnitConfig = 189;
-    public const int ResolvedUnitConfig = 190;
-    public const int Unit = 191;
-    public const int UnitAnchorPoint = 192;
-    public const int UnitIcon = 193;
-    public const int UnitKind = 194;
-    public const int UnitSize = 195;
-    public const int UnitSlot = 196;
-    public const int CurrentWaveEnemies = 197;
-    public const int CurrentWaveNumber = 198;
-    public const int WaveEnemiesAlive = 199;
-    public const int WaveInProgress = 200;
-    public const int WaveStartRequsted = 201;
-    public const int Projectile = 202;
+    public const int ResearchUnitSlotUnlock = 158;
+    public const int UnlockedKnight = 159;
+    public const int FireResistance = 160;
+    public const int FrostResistance = 161;
+    public const int PhysicalResistance = 162;
+    public const int ResistanceBonus = 163;
+    public const int Reward = 164;
+    public const int SpawnPosition = 165;
+    public const int SpawnRequsted = 166;
+    public const int SpawnSlot = 167;
+    public const int WaitingToSpawn = 168;
+    public const int DefenseFlow = 169;
+    public const int DefensePatrolCell = 170;
+    public const int DefensePatrolIdleDuration = 171;
+    public const int DefensePatrolWait = 172;
+    public const int RallyToCastle = 173;
+    public const int SurroundSlot = 174;
+    public const int SurroundTargetId = 175;
+    public const int Targetable = 176;
+    public const int TargetCell = 177;
+    public const int TargetCellRequest = 178;
+    public const int TargetFlow = 179;
+    public const int TargetId = 180;
+    public const int TargetPoint = 181;
+    public const int TargetSelected = 182;
+    public const int Tower = 183;
+    public const int TowerBuildRequest = 184;
+    public const int TowerPlace = 185;
+    public const int TowerUpgrade = 186;
+    public const int TowerUpgradeIcon = 187;
+    public const int TowerUpgradePrice = 188;
+    public const int TowerUpgradeRequest = 189;
+    public const int DefaultUnitConfig = 190;
+    public const int ResolvedUnitConfig = 191;
+    public const int Unit = 192;
+    public const int UnitAnchorPoint = 193;
+    public const int UnitIcon = 194;
+    public const int UnitKind = 195;
+    public const int UnitSize = 196;
+    public const int UnitSlot = 197;
+    public const int UnitSlotAvailable = 198;
+    public const int CurrentWaveEnemies = 199;
+    public const int CurrentWaveNumber = 200;
+    public const int WaveEnemiesAlive = 201;
+    public const int WaveInProgress = 202;
+    public const int WaveStartRequsted = 203;
+    public const int Projectile = 204;
 
-    public const int TotalComponents = 203;
+    public const int TotalComponents = 205;
 
     public static readonly string[] componentNames = {
         "ForcedPause",
@@ -373,6 +375,7 @@ public static class GameComponentsLookup {
         "ResearchRequiredBuildingLevel",
         "ResearchResistanceBonus",
         "ResearchStartingLevel",
+        "ResearchUnitSlotUnlock",
         "UnlockedKnight",
         "FireResistance",
         "FrostResistance",
@@ -412,6 +415,7 @@ public static class GameComponentsLookup {
         "UnitKind",
         "UnitSize",
         "UnitSlot",
+        "UnitSlotAvailable",
         "CurrentWaveEnemies",
         "CurrentWaveNumber",
         "WaveEnemiesAlive",
@@ -579,6 +583,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Research.ResearchRequiredBuildingLevel),
         typeof(Code.Game.Features.Research.ResearchResistanceBonus),
         typeof(Code.Game.Features.Research.ResearchStartingLevel),
+        typeof(Code.Game.Features.Research.ResearchUnitSlotUnlock),
         typeof(Code.Game.Features.Research.UnlockedKnight),
         typeof(Code.Game.Features.Resistance.FireResistance),
         typeof(Code.Game.Features.Resistance.FrostResistance),
@@ -618,6 +623,7 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Unit.UnitKindComponent),
         typeof(Code.Game.Features.Unit.UnitSize),
         typeof(Code.Game.Features.Unit.UnitSlot),
+        typeof(Code.Game.Features.Unit.UnitSlotAvailable),
         typeof(Code.Game.Features.Wave.CurrentWaveEnemies),
         typeof(Code.Game.Features.Wave.CurrentWaveNumber),
         typeof(Code.Game.Features.Wave.WaveEnemiesAlive),

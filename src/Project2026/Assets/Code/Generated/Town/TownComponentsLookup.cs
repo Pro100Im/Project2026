@@ -42,31 +42,32 @@ public static class TownComponentsLookup {
     public const int ResearchResistanceBonus = 31;
     public const int ResearchStartingLevel = 32;
     public const int ResearchTitle = 33;
-    public const int TownResearchMenu = 34;
-    public const int TownResearchMenuOpened = 35;
-    public const int UnlockedKnight = 36;
-    public const int TownBuilding = 37;
-    public const int TownBuildingConfig = 38;
-    public const int TownBuildingLevel = 39;
-    public const int TownBuildingMaxLevel = 40;
-    public const int TownBuildingType = 41;
-    public const int TownBuildingWorkers = 42;
-    public const int TownBuildMenu = 43;
-    public const int TownBuildMenuOpened = 44;
-    public const int TownCrystal = 45;
-    public const int TownExchequer = 46;
-    public const int TownGold = 47;
-    public const int TownKnowledge = 48;
-    public const int TownProductionCooldown = 49;
-    public const int TownProductionMultiplier = 50;
-    public const int TownProductionRemainder = 51;
-    public const int TownResourceGained = 52;
-    public const int TownResources = 53;
-    public const int TownStone = 54;
-    public const int TownView = 55;
-    public const int TownWood = 56;
+    public const int ResearchUnitSlotUnlock = 34;
+    public const int TownResearchMenu = 35;
+    public const int TownResearchMenuOpened = 36;
+    public const int UnlockedKnight = 37;
+    public const int TownBuilding = 38;
+    public const int TownBuildingConfig = 39;
+    public const int TownBuildingLevel = 40;
+    public const int TownBuildingMaxLevel = 41;
+    public const int TownBuildingType = 42;
+    public const int TownBuildingWorkers = 43;
+    public const int TownBuildMenu = 44;
+    public const int TownBuildMenuOpened = 45;
+    public const int TownCrystal = 46;
+    public const int TownExchequer = 47;
+    public const int TownGold = 48;
+    public const int TownKnowledge = 49;
+    public const int TownProductionCooldown = 50;
+    public const int TownProductionMultiplier = 51;
+    public const int TownProductionRemainder = 52;
+    public const int TownResourceGained = 53;
+    public const int TownResources = 54;
+    public const int TownStone = 55;
+    public const int TownView = 56;
+    public const int TownWood = 57;
 
-    public const int TotalComponents = 57;
+    public const int TotalComponents = 58;
 
     public static readonly string[] componentNames = {
         "Attached",
@@ -103,6 +104,7 @@ public static class TownComponentsLookup {
         "ResearchResistanceBonus",
         "ResearchStartingLevel",
         "ResearchTitle",
+        "ResearchUnitSlotUnlock",
         "TownResearchMenu",
         "TownResearchMenuOpened",
         "UnlockedKnight",
@@ -163,6 +165,7 @@ public static class TownComponentsLookup {
         typeof(Code.Game.Features.Research.ResearchResistanceBonus),
         typeof(Code.Game.Features.Research.ResearchStartingLevel),
         typeof(Code.Game.Features.Research.ResearchTitle),
+        typeof(Code.Game.Features.Research.ResearchUnitSlotUnlock),
         typeof(Code.Game.Features.Research.TownResearchMenuComponent),
         typeof(Code.Game.Features.Research.TownResearchMenuOpened),
         typeof(Code.Game.Features.Research.UnlockedKnight),

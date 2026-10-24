@@ -9,6 +9,7 @@ namespace Code.Game.Features.Research
         {
             Add(systemFactory.Create<GameResearchSpawnSystem>());
             Add(systemFactory.Create<GameResearchAggregateSystem>());
+            Add(systemFactory.Create<ResolveUnitSlotAvailabilitySystem>());
             Add(systemFactory.Create<ResolveUnitSlotSystem>());
         }
     }

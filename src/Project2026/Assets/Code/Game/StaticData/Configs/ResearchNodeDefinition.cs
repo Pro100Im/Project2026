@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Code.Game.StaticData.Configs
 {
     [Serializable]
-    public class ResearchNodeDefinition
+    public class ResearchNodeDefinition : ResearchBranchEntry
     {
         [field: SerializeField] public ResearchId Id { get; private set; }
         [field: SerializeField] public string Title { get; private set; }
@@ -16,22 +16,28 @@ namespace Code.Game.StaticData.Configs
         [field: SerializeField] public int MaxLevel { get; private set; } = 1;
         [field: SerializeField] public int StartingLevel { get; private set; }
         [field: SerializeField] public int Cost { get; private set; }
-        [field: SerializeField] public ResearchId Parent { get; private set; }
-        [field: SerializeField] public ResearchLinkDirection Direction { get; private set; }
+
+        // Kept so the flat catalog can be migrated. Layout is bound from the branch.
+        [field: SerializeField, HideInInspector] public ResearchId Parent { get; private set; }
+        [field: SerializeField, HideInInspector] public ResearchLinkDirection Direction { get; private set; }
+
         [field: SerializeField] public BuildingType RequiredBuilding { get; private set; }
         [field: SerializeField] public int RequiredBuildingLevel { get; private set; }
         [field: SerializeField] public bool HasBuildingRequirement { get; private set; }
 
         [SerializeReference] public ResearchEffect Effect;
 
+        public ResearchNodeDefinition()
+        {
+            MaxLevel = 1;
+        }
+
         public ResearchNodeDefinition(
             ResearchId id,
             string title,
             string description,
             int cost,
-            ResearchLinkDirection direction,
             ResearchEffect effect = null,
-            ResearchId parent = ResearchId.None,
             int startingLevel = 0,
             bool hasBuildingRequirement = false,
             BuildingType requiredBuilding = BuildingType.Houses,
@@ -41,14 +47,18 @@ namespace Code.Game.StaticData.Configs
             Title = title;
             Description = description;
             Cost = cost;
-            Direction = direction;
             Effect = effect;
-            Parent = parent;
             StartingLevel = startingLevel;
             MaxLevel = 1;
             HasBuildingRequirement = hasBuildingRequirement;
             RequiredBuilding = requiredBuilding;
             RequiredBuildingLevel = requiredBuildingLevel;
+        }
+
+        public void Bind(ResearchId parent, ResearchLinkDirection direction)
+        {
+            Parent = parent;
+            Direction = direction;
         }
 
         public int ResolveLevel(IUserProgressService progress)

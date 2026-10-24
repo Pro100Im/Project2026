@@ -13,329 +13,40 @@ MonoBehaviour:
   m_Name: ResearchCatalog
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.ResearchCatalog
   <NodeSpacing>k__BackingField: 108
-  <Nodes>k__BackingField:
-  - <Id>k__BackingField: 1
-    <Title>k__BackingField: Knights
-    <Description>k__BackingField: Unlocks the basic knight.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 6509adb73ba1de04d898264b898cdf2e, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 10
-    <Parent>k__BackingField: 0
+  <Branches>k__BackingField:
+  - <Name>k__BackingField: Knights
     <Direction>k__BackingField: 4
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: -2
-  - <Id>k__BackingField: 2
-    <Title>k__BackingField: Veteran
-    <Description>k__BackingField: Unlocks a stronger knight. Requires Barracks.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 6509adb73ba1de04d898264b898cdf2e, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 50
-    <Parent>k__BackingField: 1
-    <Direction>k__BackingField: 4
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 1
-    Effect:
-      rid: 947547580571058252
-  - <Id>k__BackingField: 3
-    <Title>k__BackingField: Elite
-    <Description>k__BackingField: Unlocks the strongest knight.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 6509adb73ba1de04d898264b898cdf2e, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 150
-    <Parent>k__BackingField: 2
-    <Direction>k__BackingField: 4
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058253
-  - <Id>k__BackingField: 4
-    <Title>k__BackingField: Block I
-    <Description>k__BackingField: Knights gain 10% block chance.
-    <Icon>k__BackingField: {fileID: 21300000, guid: b227c6c1c35b36940b602110d9556b13, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 15
-    <Parent>k__BackingField: 1
-    <Direction>k__BackingField: 5
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058254
-  - <Id>k__BackingField: 5
-    <Title>k__BackingField: Block II
-    <Description>k__BackingField: Knights gain 10% block chance.
-    <Icon>k__BackingField: {fileID: 21300000, guid: b227c6c1c35b36940b602110d9556b13, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 30
-    <Parent>k__BackingField: 4
-    <Direction>k__BackingField: 5
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058255
-  - <Id>k__BackingField: 6
-    <Title>k__BackingField: Block III
-    <Description>k__BackingField: Knights gain 10% block chance.
-    <Icon>k__BackingField: {fileID: 21300000, guid: b227c6c1c35b36940b602110d9556b13, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 45
-    <Parent>k__BackingField: 5
-    <Direction>k__BackingField: 5
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058256
-  - <Id>k__BackingField: 7
-    <Title>k__BackingField: Block IV
-    <Description>k__BackingField: Knights gain 10% block chance.
-    <Icon>k__BackingField: {fileID: 21300000, guid: b227c6c1c35b36940b602110d9556b13, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 60
-    <Parent>k__BackingField: 6
-    <Direction>k__BackingField: 5
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058257
-  - <Id>k__BackingField: 8
-    <Title>k__BackingField: Block V
-    <Description>k__BackingField: Knights gain 10% block chance.
-    <Icon>k__BackingField: {fileID: 21300000, guid: b227c6c1c35b36940b602110d9556b13, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 80
-    <Parent>k__BackingField: 7
-    <Direction>k__BackingField: 5
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058258
-  - <Id>k__BackingField: 9
-    <Title>k__BackingField: Gold I
-    <Description>k__BackingField: Gold income +20%.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 68f03904aa02ba244a61e03fee3f6293, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 10
-    <Parent>k__BackingField: 0
+    Entries:
+    - rid: 947547583889014860
+    - rid: 947547583889014861
+    - rid: 947547583889014884
+    - rid: 947547583889014862
+    - rid: 947547583889014863
+  - <Name>k__BackingField: Gold
     <Direction>k__BackingField: 0
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058259
-  - <Id>k__BackingField: 10
-    <Title>k__BackingField: Gold II
-    <Description>k__BackingField: Gold income +20%.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 68f03904aa02ba244a61e03fee3f6293, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 20
-    <Parent>k__BackingField: 9
-    <Direction>k__BackingField: 0
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058260
-  - <Id>k__BackingField: 11
-    <Title>k__BackingField: Gold III
-    <Description>k__BackingField: Gold income +20%.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 68f03904aa02ba244a61e03fee3f6293, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 40
-    <Parent>k__BackingField: 10
-    <Direction>k__BackingField: 0
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058261
-  - <Id>k__BackingField: 12
-    <Title>k__BackingField: Gold IV
-    <Description>k__BackingField: Gold income +20%.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 68f03904aa02ba244a61e03fee3f6293, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 80
-    <Parent>k__BackingField: 11
-    <Direction>k__BackingField: 0
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058262
-  - <Id>k__BackingField: 13
-    <Title>k__BackingField: Gold V
-    <Description>k__BackingField: Gold income +20%.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 68f03904aa02ba244a61e03fee3f6293, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 160
-    <Parent>k__BackingField: 12
-    <Direction>k__BackingField: 0
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058263
-  - <Id>k__BackingField: 14
-    <Title>k__BackingField: Fire I
-    <Description>k__BackingField: Fire damage +15%.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 57f518205be7e1c4490654ddb95779df, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 10
-    <Parent>k__BackingField: 0
+    Entries:
+    - rid: 947547583889014864
+    - rid: 947547583889014865
+    - rid: 947547583889014866
+    - rid: 947547583889014867
+    - rid: 947547583889014868
+  - <Name>k__BackingField: Fire
     <Direction>k__BackingField: 2
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058264
-  - <Id>k__BackingField: 15
-    <Title>k__BackingField: Fire II
-    <Description>k__BackingField: Fire damage +15%.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 57f518205be7e1c4490654ddb95779df, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 20
-    <Parent>k__BackingField: 14
-    <Direction>k__BackingField: 2
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058265
-  - <Id>k__BackingField: 16
-    <Title>k__BackingField: Fire III
-    <Description>k__BackingField: Fire damage +15%.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 57f518205be7e1c4490654ddb95779df, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 40
-    <Parent>k__BackingField: 15
-    <Direction>k__BackingField: 2
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058266
-  - <Id>k__BackingField: 17
-    <Title>k__BackingField: Fire IV
-    <Description>k__BackingField: Fire damage +15%.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 57f518205be7e1c4490654ddb95779df, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 80
-    <Parent>k__BackingField: 16
-    <Direction>k__BackingField: 2
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058267
-  - <Id>k__BackingField: 18
-    <Title>k__BackingField: Fire V
-    <Description>k__BackingField: Fire damage +15%.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 57f518205be7e1c4490654ddb95779df, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 160
-    <Parent>k__BackingField: 17
-    <Direction>k__BackingField: 2
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058268
-  - <Id>k__BackingField: 19
-    <Title>k__BackingField: Defense I
-    <Description>k__BackingField: Defenders gain 4 resistance.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 567fdd2e557fefc478f8aaa7ae56fb11, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 10
-    <Parent>k__BackingField: 0
+    Entries:
+    - rid: 947547583889014869
+    - rid: 947547583889014870
+    - rid: 947547583889014871
+    - rid: 947547583889014872
+    - rid: 947547583889014873
+  - <Name>k__BackingField: Defense
     <Direction>k__BackingField: 6
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058269
-  - <Id>k__BackingField: 20
-    <Title>k__BackingField: Defense II
-    <Description>k__BackingField: Defenders gain 4 resistance.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 567fdd2e557fefc478f8aaa7ae56fb11, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 20
-    <Parent>k__BackingField: 19
-    <Direction>k__BackingField: 6
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058270
-  - <Id>k__BackingField: 21
-    <Title>k__BackingField: Defense III
-    <Description>k__BackingField: Defenders gain 4 resistance.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 567fdd2e557fefc478f8aaa7ae56fb11, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 40
-    <Parent>k__BackingField: 20
-    <Direction>k__BackingField: 6
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058271
-  - <Id>k__BackingField: 22
-    <Title>k__BackingField: Defense IV
-    <Description>k__BackingField: Defenders gain 4 resistance.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 567fdd2e557fefc478f8aaa7ae56fb11, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 80
-    <Parent>k__BackingField: 21
-    <Direction>k__BackingField: 6
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058272
-  - <Id>k__BackingField: 23
-    <Title>k__BackingField: Defense V
-    <Description>k__BackingField: Defenders gain 4 resistance.
-    <Icon>k__BackingField: {fileID: 21300000, guid: 567fdd2e557fefc478f8aaa7ae56fb11, type: 3}
-    <MaxLevel>k__BackingField: 1
-    <StartingLevel>k__BackingField: 0
-    <Cost>k__BackingField: 160
-    <Parent>k__BackingField: 22
-    <Direction>k__BackingField: 6
-    <RequiredBuilding>k__BackingField: 1
-    <RequiredBuildingLevel>k__BackingField: 1
-    <HasBuildingRequirement>k__BackingField: 0
-    Effect:
-      rid: 947547580571058273
+    Entries:
+    - rid: 947547583889014874
+    - rid: 947547583889014875
+    - rid: 947547583889014876
+    - rid: 947547583889014877
+    - rid: 947547583889014878
+  <Nodes>k__BackingField: []
   _veteranKnight: {fileID: 11400000, guid: a7c3e1b24d5f4a6890b1c2d3e4f50617, type: 2}
   _eliteKnight: {fileID: 11400000, guid: b8d4f2c35e604b7901c2d3e4f5061728, type: 2}
   _knightIcon: {fileID: 21300000, guid: 6509adb73ba1de04d898264b898cdf2e, type: 3}
@@ -343,6 +54,7 @@ MonoBehaviour:
   _goldIcon: {fileID: 21300000, guid: 68f03904aa02ba244a61e03fee3f6293, type: 3}
   _fireIcon: {fileID: 21300000, guid: 57f518205be7e1c4490654ddb95779df, type: 3}
   _defenseIcon: {fileID: 21300000, guid: 567fdd2e557fefc478f8aaa7ae56fb11, type: 3}
+  _archerIcon: {fileID: -7245848890258496006, guid: bb7ce7d8e4758ef408f778df2952e0c4, type: 3}
   references:
     version: 2
     RefIds:
@@ -438,3 +150,437 @@ MonoBehaviour:
       type: {class: ResistanceResearchEffect, ns: Code.Game.StaticData.Research, asm: Assembly-CSharp}
       data:
         Value: 4
+    - rid: 947547583889014860
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 1
+        <Title>k__BackingField: Knights
+        <Description>k__BackingField: Unlocks the basic knight. Requires Barracks.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 6509adb73ba1de04d898264b898cdf2e, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 10
+        <Parent>k__BackingField: 0
+        <Direction>k__BackingField: 4
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 1
+        Effect:
+          rid: 947547580571058274
+    - rid: 947547583889014861
+      type: {class: ResearchBranchDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Name>k__BackingField: Block
+        <Direction>k__BackingField: 5
+        Entries:
+        - rid: 947547583889014879
+        - rid: 947547583889014880
+        - rid: 947547583889014881
+        - rid: 947547583889014882
+        - rid: 947547583889014883
+    - rid: 947547583889014862
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 2
+        <Title>k__BackingField: Veteran
+        <Description>k__BackingField: Unlocks a stronger knight. Requires Barracks.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 6509adb73ba1de04d898264b898cdf2e, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 50
+        <Parent>k__BackingField: 1
+        <Direction>k__BackingField: 4
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 1
+        Effect:
+          rid: 947547580571058252
+    - rid: 947547583889014863
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 3
+        <Title>k__BackingField: Elite
+        <Description>k__BackingField: Unlocks the strongest knight.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 6509adb73ba1de04d898264b898cdf2e, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 150
+        <Parent>k__BackingField: 2
+        <Direction>k__BackingField: 4
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058253
+    - rid: 947547583889014864
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 9
+        <Title>k__BackingField: Gold I
+        <Description>k__BackingField: Gold income +20%.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 68f03904aa02ba244a61e03fee3f6293, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 10
+        <Parent>k__BackingField: 0
+        <Direction>k__BackingField: 0
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058259
+    - rid: 947547583889014865
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 10
+        <Title>k__BackingField: Gold II
+        <Description>k__BackingField: Gold income +20%.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 68f03904aa02ba244a61e03fee3f6293, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 20
+        <Parent>k__BackingField: 9
+        <Direction>k__BackingField: 0
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058260
+    - rid: 947547583889014866
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 11
+        <Title>k__BackingField: Gold III
+        <Description>k__BackingField: Gold income +20%.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 68f03904aa02ba244a61e03fee3f6293, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 40
+        <Parent>k__BackingField: 10
+        <Direction>k__BackingField: 0
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058261
+    - rid: 947547583889014867
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 12
+        <Title>k__BackingField: Gold IV
+        <Description>k__BackingField: Gold income +20%.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 68f03904aa02ba244a61e03fee3f6293, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 80
+        <Parent>k__BackingField: 11
+        <Direction>k__BackingField: 0
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058262
+    - rid: 947547583889014868
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 13
+        <Title>k__BackingField: Gold V
+        <Description>k__BackingField: Gold income +20%.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 68f03904aa02ba244a61e03fee3f6293, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 160
+        <Parent>k__BackingField: 12
+        <Direction>k__BackingField: 0
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058263
+    - rid: 947547583889014869
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 14
+        <Title>k__BackingField: Fire I
+        <Description>k__BackingField: Fire damage +15%.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 57f518205be7e1c4490654ddb95779df, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 10
+        <Parent>k__BackingField: 0
+        <Direction>k__BackingField: 2
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058264
+    - rid: 947547583889014870
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 15
+        <Title>k__BackingField: Fire II
+        <Description>k__BackingField: Fire damage +15%.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 57f518205be7e1c4490654ddb95779df, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 20
+        <Parent>k__BackingField: 14
+        <Direction>k__BackingField: 2
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058265
+    - rid: 947547583889014871
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 16
+        <Title>k__BackingField: Fire III
+        <Description>k__BackingField: Fire damage +15%.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 57f518205be7e1c4490654ddb95779df, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 40
+        <Parent>k__BackingField: 15
+        <Direction>k__BackingField: 2
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058266
+    - rid: 947547583889014872
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 17
+        <Title>k__BackingField: Fire IV
+        <Description>k__BackingField: Fire damage +15%.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 57f518205be7e1c4490654ddb95779df, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 80
+        <Parent>k__BackingField: 16
+        <Direction>k__BackingField: 2
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058267
+    - rid: 947547583889014873
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 18
+        <Title>k__BackingField: Fire V
+        <Description>k__BackingField: Fire damage +15%.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 57f518205be7e1c4490654ddb95779df, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 160
+        <Parent>k__BackingField: 17
+        <Direction>k__BackingField: 2
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058268
+    - rid: 947547583889014874
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 19
+        <Title>k__BackingField: Defense I
+        <Description>k__BackingField: Defenders gain 4 resistance.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 567fdd2e557fefc478f8aaa7ae56fb11, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 10
+        <Parent>k__BackingField: 0
+        <Direction>k__BackingField: 6
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058269
+    - rid: 947547583889014875
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 20
+        <Title>k__BackingField: Defense II
+        <Description>k__BackingField: Defenders gain 4 resistance.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 567fdd2e557fefc478f8aaa7ae56fb11, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 20
+        <Parent>k__BackingField: 19
+        <Direction>k__BackingField: 6
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058270
+    - rid: 947547583889014876
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 21
+        <Title>k__BackingField: Defense III
+        <Description>k__BackingField: Defenders gain 4 resistance.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 567fdd2e557fefc478f8aaa7ae56fb11, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 40
+        <Parent>k__BackingField: 20
+        <Direction>k__BackingField: 6
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058271
+    - rid: 947547583889014877
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 22
+        <Title>k__BackingField: Defense IV
+        <Description>k__BackingField: Defenders gain 4 resistance.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 567fdd2e557fefc478f8aaa7ae56fb11, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 80
+        <Parent>k__BackingField: 21
+        <Direction>k__BackingField: 6
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058272
+    - rid: 947547583889014878
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 23
+        <Title>k__BackingField: Defense V
+        <Description>k__BackingField: Defenders gain 4 resistance.
+        <Icon>k__BackingField: {fileID: 21300000, guid: 567fdd2e557fefc478f8aaa7ae56fb11, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 160
+        <Parent>k__BackingField: 22
+        <Direction>k__BackingField: 6
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058273
+    - rid: 947547583889014879
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 4
+        <Title>k__BackingField: Block I
+        <Description>k__BackingField: Knights gain 10% block chance.
+        <Icon>k__BackingField: {fileID: 21300000, guid: b227c6c1c35b36940b602110d9556b13, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 15
+        <Parent>k__BackingField: 1
+        <Direction>k__BackingField: 5
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058254
+    - rid: 947547583889014880
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 5
+        <Title>k__BackingField: Block II
+        <Description>k__BackingField: Knights gain 10% block chance.
+        <Icon>k__BackingField: {fileID: 21300000, guid: b227c6c1c35b36940b602110d9556b13, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 30
+        <Parent>k__BackingField: 4
+        <Direction>k__BackingField: 5
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058255
+    - rid: 947547583889014881
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 6
+        <Title>k__BackingField: Block III
+        <Description>k__BackingField: Knights gain 10% block chance.
+        <Icon>k__BackingField: {fileID: 21300000, guid: b227c6c1c35b36940b602110d9556b13, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 45
+        <Parent>k__BackingField: 5
+        <Direction>k__BackingField: 5
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058256
+    - rid: 947547583889014882
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 7
+        <Title>k__BackingField: Block IV
+        <Description>k__BackingField: Knights gain 10% block chance.
+        <Icon>k__BackingField: {fileID: 21300000, guid: b227c6c1c35b36940b602110d9556b13, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 60
+        <Parent>k__BackingField: 6
+        <Direction>k__BackingField: 5
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058257
+    - rid: 947547583889014883
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 8
+        <Title>k__BackingField: Block V
+        <Description>k__BackingField: Knights gain 10% block chance.
+        <Icon>k__BackingField: {fileID: 21300000, guid: b227c6c1c35b36940b602110d9556b13, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 80
+        <Parent>k__BackingField: 7
+        <Direction>k__BackingField: 5
+        <RequiredBuilding>k__BackingField: 1
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 0
+        Effect:
+          rid: 947547580571058258
+    - rid: 947547580571058274
+      type: {class: UnitSlotUnlockResearchEffect, ns: Code.Game.StaticData.Research, asm: Assembly-CSharp}
+      data:
+        Kind: 0
+    - rid: 947547580571058275
+      type: {class: UnitSlotUnlockResearchEffect, ns: Code.Game.StaticData.Research, asm: Assembly-CSharp}
+      data:
+        Kind: 1
+    - rid: 947547583889014884
+      type: {class: ResearchBranchDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Name>k__BackingField: Archers
+        <Direction>k__BackingField: 3
+        Entries:
+        - rid: 947547583889014885
+    - rid: 947547583889014885
+      type: {class: ResearchNodeDefinition, ns: Code.Game.StaticData.Configs, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 24
+        <Title>k__BackingField: Archers
+        <Description>k__BackingField: Unlocks archers. Requires Archery.
+        <Icon>k__BackingField: {fileID: -7245848890258496006, guid: bb7ce7d8e4758ef408f778df2952e0c4, type: 3}
+        <MaxLevel>k__BackingField: 1
+        <StartingLevel>k__BackingField: 0
+        <Cost>k__BackingField: 10
+        <Parent>k__BackingField: 1
+        <Direction>k__BackingField: 3
+        <RequiredBuilding>k__BackingField: 7
+        <RequiredBuildingLevel>k__BackingField: 1
+        <HasBuildingRequirement>k__BackingField: 1
+        Effect:
+          rid: 947547580571058275

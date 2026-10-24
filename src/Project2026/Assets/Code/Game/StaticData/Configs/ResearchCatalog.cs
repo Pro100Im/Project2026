@@ -1,4 +1,5 @@
 using Code.Game.StaticData.Research;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code.Game.StaticData.Configs
@@ -9,7 +10,9 @@ namespace Code.Game.StaticData.Configs
         public const string AssetPath = "Assets/Configs/Research/ResearchCatalog.asset";
 
         [field: SerializeField] public float NodeSpacing { get; private set; } = 108f;
-        [field: SerializeField] public ResearchNodeDefinition[] Nodes { get; private set; }
+        [field: SerializeField] public ResearchBranchDefinition[] Branches { get; private set; }
+
+        [field: SerializeField, HideInInspector] public ResearchNodeDefinition[] Nodes { get; private set; }
 
         [SerializeField] private EntityConfig _veteranKnight;
         [SerializeField] private EntityConfig _eliteKnight;
@@ -18,43 +21,149 @@ namespace Code.Game.StaticData.Configs
         [SerializeField] private Sprite _goldIcon;
         [SerializeField] private Sprite _fireIcon;
         [SerializeField] private Sprite _defenseIcon;
+        [SerializeField] private Sprite _archerIcon;
 
         private void OnEnable()
         {
-            if (Nodes == null || Nodes.Length == 0)
-                ApplyDefaults();
-            else
+#if UNITY_EDITOR
+            if (!Application.isPlaying && HasLegacyNodes && !HasBranches)
             {
-                AssignBranchIcons();
-                WireKnightConfigs();
+                UnityEditor.EditorApplication.delayCall -= MigrateLegacyNodes;
+                UnityEditor.EditorApplication.delayCall += MigrateLegacyNodes;
             }
+#endif
+            if (HasBranches || HasLegacyNodes)
+            {
+                PrepareNodes();
+                return;
+            }
+
+            ApplyDefaults();
         }
 
         public void ApplyDefaults()
         {
             NodeSpacing = 108f;
-            Nodes = ResearchCatalogDefaults.CreateNodes();
-            AssignBranchIcons();
-            WireKnightConfigs();
+            Branches = ResearchCatalogDefaults.CreateBranches();
+            Nodes = System.Array.Empty<ResearchNodeDefinition>();
+            PrepareNodes();
         }
 
-        private void AssignBranchIcons()
+        public void Collect(List<ResearchNodeDefinition> result)
         {
-            if (Nodes == null)
+            result.Clear();
+
+            if (HasBranches)
+            {
+                for (var i = 0; i < Branches.Length; i++)
+                    CollectBranch(Branches[i], ResearchId.None, result);
+
+                return;
+            }
+
+            if (!HasLegacyNodes)
                 return;
 
             for (var i = 0; i < Nodes.Length; i++)
             {
-                var node = Nodes[i];
-
-                if (node == null)
-                    continue;
-
-                node.AssignIconIfEmpty(BranchIcon(node.Id));
+                if (Nodes[i] != null)
+                    result.Add(Nodes[i]);
             }
         }
 
-        private Sprite BranchIcon(ResearchId id)
+        public void MigrateLegacyNodes()
+        {
+#if UNITY_EDITOR
+            if (Application.isPlaying || HasBranches || !HasLegacyNodes)
+                return;
+
+            Branches = ResearchCatalogMigration.FromFlat(Nodes);
+            Nodes = System.Array.Empty<ResearchNodeDefinition>();
+            PrepareNodes();
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
+
+        private bool HasBranches => Branches != null && Branches.Length > 0;
+
+        private bool HasLegacyNodes => Nodes != null && Nodes.Length > 0;
+
+        private static void CollectBranch(
+            ResearchBranchDefinition branch,
+            ResearchId anchor,
+            List<ResearchNodeDefinition> result)
+        {
+            if (branch?.Entries == null)
+                return;
+
+            var previous = anchor;
+
+            for (var i = 0; i < branch.Entries.Length; i++)
+            {
+                switch (branch.Entries[i])
+                {
+                    case ResearchNodeDefinition node:
+                        node.Bind(previous, branch.Direction);
+                        result.Add(node);
+                        previous = node.Id;
+                        break;
+                    case ResearchBranchDefinition nested:
+                        CollectBranch(nested, previous, result);
+                        break;
+                }
+            }
+        }
+
+        private void PrepareNodes()
+        {
+            if (HasBranches)
+            {
+                for (var i = 0; i < Branches.Length; i++)
+                    PrepareBranch(Branches[i]);
+
+                return;
+            }
+
+            if (!HasLegacyNodes)
+                return;
+
+            for (var i = 0; i < Nodes.Length; i++)
+                PrepareNode(Nodes[i]);
+        }
+
+        private void PrepareBranch(ResearchBranchDefinition branch)
+        {
+            if (branch?.Entries == null)
+                return;
+
+            for (var i = 0; i < branch.Entries.Length; i++)
+            {
+                switch (branch.Entries[i])
+                {
+                    case ResearchNodeDefinition node:
+                        PrepareNode(node);
+                        break;
+                    case ResearchBranchDefinition nested:
+                        PrepareBranch(nested);
+                        break;
+                }
+            }
+        }
+
+        private void PrepareNode(ResearchNodeDefinition node)
+        {
+            if (node == null)
+                return;
+
+            node.AssignIconIfEmpty(IconFor(node.Id));
+
+            if (node.Effect is not KnightUnlockResearchEffect unlock)
+                return;
+
+            unlock.Config = unlock.Priority <= 1 ? _veteranKnight : _eliteKnight;
+        }
+
+        private Sprite IconFor(ResearchId id)
         {
             switch (id)
             {
@@ -86,22 +195,10 @@ namespace Code.Game.StaticData.Configs
                 case ResearchId.Defense4:
                 case ResearchId.Defense5:
                     return _defenseIcon;
+                case ResearchId.Archers:
+                    return _archerIcon;
                 default:
                     return null;
-            }
-        }
-
-        private void WireKnightConfigs()
-        {
-            if (Nodes == null)
-                return;
-
-            for (var i = 0; i < Nodes.Length; i++)
-            {
-                if (Nodes[i].Effect is not KnightUnlockResearchEffect unlock)
-                    continue;
-
-                unlock.Config = unlock.Priority <= 1 ? _veteranKnight : _eliteKnight;
             }
         }
     }

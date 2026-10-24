@@ -41,6 +41,12 @@ namespace Code.Game.Features.Spawn.Systems
                 if (slot == null)
                     continue;
 
+                if (!slot.isUnitSlotAvailable)
+                {
+                    request.isDestructed = true;
+                    continue;
+                }
+
                 var config = slot.hasResolvedUnitConfig
                     ? slot.resolvedUnitConfig.Value
                     : slot.defaultUnitConfig.Value;
