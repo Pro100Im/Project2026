@@ -23,5 +23,6 @@ namespace Code.Game.Features.Unit
 public enum UnitKind
 {
     Knight,
-    Archer
+    Archer,
+    Pawn
 }

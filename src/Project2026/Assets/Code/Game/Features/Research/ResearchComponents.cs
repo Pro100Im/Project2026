@@ -74,7 +74,8 @@ public enum ResearchId
     Defense3,
     Defense4,
     Defense5,
-    Archers
+    Archers,
+    Pawns
 }
 
 public enum ResearchNodeState

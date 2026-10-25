@@ -58,17 +58,17 @@ MonoBehaviour:
       type: {class: PhysicalResistanceProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Resistance>k__BackingField: 10
+        <Resistance>k__BackingField: 1
     - rid: 2286603056206053668
       type: {class: FrostResistanceProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Resistance>k__BackingField: 5
+        <Resistance>k__BackingField: 1
     - rid: 2286603056206053669
       type: {class: FireResistanceProperty, ns: Assets.Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Resistance>k__BackingField: 5
+        <Resistance>k__BackingField: 1
     - rid: 2286603060194836481
       type: {class: FireAttackProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:

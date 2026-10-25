@@ -22,6 +22,7 @@ namespace Code.Game.StaticData.Configs
         [SerializeField] private Sprite _fireIcon;
         [SerializeField] private Sprite _defenseIcon;
         [SerializeField] private Sprite _archerIcon;
+        [SerializeField] private Sprite _pawnIcon;
 
         private void OnEnable()
         {
@@ -197,6 +198,8 @@ namespace Code.Game.StaticData.Configs
                     return _defenseIcon;
                 case ResearchId.Archers:
                     return _archerIcon;
+                case ResearchId.Pawns:
+                    return _pawnIcon;
                 default:
                     return null;
             }

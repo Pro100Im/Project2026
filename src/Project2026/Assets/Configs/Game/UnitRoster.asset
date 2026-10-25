@@ -22,3 +22,7 @@ MonoBehaviour:
     <Config>k__BackingField: {fileID: 11400000, guid: 18a01406d3defc8499815df154731fa2, type: 2}
     <Icon>k__BackingField: {fileID: -7245848890258496006, guid: bb7ce7d8e4758ef408f778df2952e0c4, type: 3}
     <Title>k__BackingField: Archer
+  - <Kind>k__BackingField: 2
+    <Config>k__BackingField: {fileID: 11400000, guid: be813f6d4a7c9b2d3e5f60718293a4b5, type: 2}
+    <Icon>k__BackingField: {fileID: -8426932590203072280, guid: 7eb338f46095cbc4c8c1303c728fb030, type: 3}
+    <Title>k__BackingField: Pawn
