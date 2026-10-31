@@ -54,7 +54,7 @@ namespace Code.Game.Features.PassiveBlock.Systems
                     continue;
 
                 damage.isBlocked = true;
-                damage.ReplaceTotalDamage(0f);
+                damage.ReplaceTotalDamage(0);
 
                 var duration = target.hasPassiveBlockDuration
                     ? target.passiveBlockDuration.Value

@@ -5,13 +5,12 @@ using UnityEngine;
 
 namespace Code.Game.Features.Damage.Systems
 {
-    public class PhysicalDamageCanculateSystem : IExecuteSystem
+    public class PhysicalDamageCalculateSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _damages;
-
         private readonly List<GameEntity> _damagesBuffer = new(86);
 
-        public PhysicalDamageCanculateSystem()
+        public PhysicalDamageCalculateSystem()
         {
             _damages = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
@@ -30,7 +29,7 @@ namespace Code.Game.Features.Damage.Systems
                 var damage = damages[i];
                 var attacker = GetGameEntityById.Get(damage.ownerId.Value);
 
-                if(!attacker.hasPhysicalDamage)
+                if (!attacker.hasPhysicalDamage)
                     continue;
 
                 var target = GetGameEntityById.Get(damage.targetId.Value);
@@ -38,14 +37,9 @@ namespace Code.Game.Features.Damage.Systems
 
                 if (target.hasResistanceBonus)
                     resistance += target.resistanceBonus.Value;
-                var resistPercent = resistance / 100f;
 
-                resistPercent = Mathf.Clamp(resistPercent, 0f, 1f);
-
-                var physicalDamage = attacker.physicalDamage.Value * (1 - resistPercent);
-                var totalDamage = damage.totalDamage.Value  + physicalDamage;
-
-                damage.ReplaceTotalDamage(totalDamage);
+                var dealt = Mathf.Max(0, attacker.physicalDamage.Value - resistance);
+                damage.ReplaceTotalDamage(damage.totalDamage.Value + dealt);
             }
         }
     }

@@ -11,14 +11,14 @@ public partial class GameEntity {
     public Code.Game.Features.Damage.ChaosDamage chaosDamage { get { return (Code.Game.Features.Damage.ChaosDamage)GetComponent(GameComponentsLookup.ChaosDamage); } }
     public bool hasChaosDamage { get { return HasComponent(GameComponentsLookup.ChaosDamage); } }
 
-    public void AddChaosDamage(float newValue) {
+    public void AddChaosDamage(int newValue) {
         var index = GameComponentsLookup.ChaosDamage;
         var component = (Code.Game.Features.Damage.ChaosDamage)CreateComponent(index, typeof(Code.Game.Features.Damage.ChaosDamage));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceChaosDamage(float newValue) {
+    public void ReplaceChaosDamage(int newValue) {
         var index = GameComponentsLookup.ChaosDamage;
         var component = (Code.Game.Features.Damage.ChaosDamage)CreateComponent(index, typeof(Code.Game.Features.Damage.ChaosDamage));
         component.Value = newValue;

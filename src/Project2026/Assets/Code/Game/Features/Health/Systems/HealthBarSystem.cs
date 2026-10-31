@@ -31,7 +31,7 @@ namespace Code.Game.Features.Health.Systems
                 if (hpBarEntity.currentHealth.Value == owner.currentHealth.Value)
                     continue;
 
-                var healthRatio = owner.currentHealth.Value / owner.maxHealth.Value;
+                var healthRatio = (float)owner.currentHealth.Value / owner.maxHealth.Value;
                 var hpBarView = hpBarEntity.hpBar.Value;
 
                 hpBarView.SetHp(healthRatio);

@@ -5,13 +5,12 @@ using UnityEngine;
 
 namespace Code.Game.Features.Damage.Systems
 {
-    public class FireDamageCanculateSystem : IExecuteSystem
+    public class FrostDamageCalculateSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _damages;
-
         private readonly List<GameEntity> _damagesBuffer = new(86);
 
-        public FireDamageCanculateSystem()
+        public FrostDamageCalculateSystem()
         {
             _damages = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
@@ -30,27 +29,17 @@ namespace Code.Game.Features.Damage.Systems
                 var damage = damages[i];
                 var attacker = GetGameEntityById.Get(damage.ownerId.Value);
 
-                if (!attacker.hasFireDamage)
+                if (!attacker.hasFrostDamage)
                     continue;
 
                 var target = GetGameEntityById.Get(damage.targetId.Value);
-                var resistance = target.hasFireResistance ? target.fireResistance.Value : 0;
+                var resistance = target.hasFrostResistance ? target.frostResistance.Value : 0;
 
                 if (target.hasResistanceBonus)
                     resistance += target.resistanceBonus.Value;
-                var resistPercent = resistance / 100f;
 
-                resistPercent = Mathf.Clamp(resistPercent, 0f, 1f);
-
-                var fireDamage = attacker.fireDamage.Value;
-
-                if (attacker.hasFireDamageMultiplier)
-                    fireDamage *= attacker.fireDamageMultiplier.Value;
-
-                fireDamage *= 1f - resistPercent;
-                var totalDamage = damage.totalDamage.Value + fireDamage;
-
-                damage.ReplaceTotalDamage(totalDamage);
+                var dealt = Mathf.Max(0, attacker.frostDamage.Value - resistance);
+                damage.ReplaceTotalDamage(damage.totalDamage.Value + dealt);
             }
         }
     }

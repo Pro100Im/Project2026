@@ -5,7 +5,7 @@ namespace Code.Game.StaticData.Research
     [Serializable]
     public class FireDamageResearchEffect : ResearchEffect
     {
-        public float Value;
+        public int Value;
 
         public override void ApplyTown(TownEntity node) => node.AddResearchFireBonus(Value);
 

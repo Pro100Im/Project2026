@@ -11,7 +11,7 @@ public partial interface IFireDamageBonusEntity {
     Code.Game.Features.Research.FireDamageBonus fireDamageBonus { get; }
     bool hasFireDamageBonus { get; }
 
-    void AddFireDamageBonus(float newValue);
-    void ReplaceFireDamageBonus(float newValue);
+    void AddFireDamageBonus(int newValue);
+    void ReplaceFireDamageBonus(int newValue);
     void RemoveFireDamageBonus();
 }

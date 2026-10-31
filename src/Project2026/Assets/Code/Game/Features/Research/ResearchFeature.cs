@@ -18,7 +18,7 @@ namespace Code.Game.Features.Research
     {
         public ResearchGrantFeature(ISystemFactory systemFactory)
         {
-            Add(systemFactory.Create<GrantFireDamageMultiplierSystem>());
+            Add(systemFactory.Create<GrantFireDamageBonusSystem>());
             Add(systemFactory.Create<GrantResistanceBonusSystem>());
             Add(systemFactory.Create<GrantKnightBlockSystem>());
         }

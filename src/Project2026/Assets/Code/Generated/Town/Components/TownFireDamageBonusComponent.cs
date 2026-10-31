@@ -11,14 +11,14 @@ public partial class TownEntity {
     public Code.Game.Features.Research.FireDamageBonus fireDamageBonus { get { return (Code.Game.Features.Research.FireDamageBonus)GetComponent(TownComponentsLookup.FireDamageBonus); } }
     public bool hasFireDamageBonus { get { return HasComponent(TownComponentsLookup.FireDamageBonus); } }
 
-    public void AddFireDamageBonus(float newValue) {
+    public void AddFireDamageBonus(int newValue) {
         var index = TownComponentsLookup.FireDamageBonus;
         var component = (Code.Game.Features.Research.FireDamageBonus)CreateComponent(index, typeof(Code.Game.Features.Research.FireDamageBonus));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceFireDamageBonus(float newValue) {
+    public void ReplaceFireDamageBonus(int newValue) {
         var index = TownComponentsLookup.FireDamageBonus;
         var component = (Code.Game.Features.Research.FireDamageBonus)CreateComponent(index, typeof(Code.Game.Features.Research.FireDamageBonus));
         component.Value = newValue;

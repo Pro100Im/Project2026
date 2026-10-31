@@ -11,7 +11,7 @@ public partial interface IResearchFireBonusEntity {
     Code.Game.Features.Research.ResearchFireBonus researchFireBonus { get; }
     bool hasResearchFireBonus { get; }
 
-    void AddResearchFireBonus(float newValue);
-    void ReplaceResearchFireBonus(float newValue);
+    void AddResearchFireBonus(int newValue);
+    void ReplaceResearchFireBonus(int newValue);
     void RemoveResearchFireBonus();
 }

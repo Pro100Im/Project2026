@@ -6,7 +6,7 @@ namespace Code.Game.StaticData.Data
     [Serializable]
     public class HealthProperty : EntityProperty
     {
-        [field: SerializeField] public float Health { get; private set; }
+        [field: SerializeField] public int Health { get; private set; }
 
         protected override void Add(GameEntity entity)
         {

@@ -9,9 +9,9 @@ namespace Code.Game.Features.Damage
     {
         public DamageFeature(ISystemFactory systemFactory)
         {
-            Add(systemFactory.Create<PhysicalDamageCanculateSystem>());
-            Add(systemFactory.Create<FrostDamageCanculateSystem>());
-            Add(systemFactory.Create<FireDamageCanculateSystem>());
+            Add(systemFactory.Create<PhysicalDamageCalculateSystem>());
+            Add(systemFactory.Create<FrostDamageCalculateSystem>());
+            Add(systemFactory.Create<FireDamageCalculateSystem>());
 
             Add(systemFactory.Create<PassiveBlockFeature>());
 

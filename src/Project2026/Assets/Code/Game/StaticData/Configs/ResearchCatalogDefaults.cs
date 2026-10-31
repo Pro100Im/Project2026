@@ -30,11 +30,11 @@ namespace Code.Game.StaticData.Configs
                 Node(ResearchId.Gold5, "Gold V", "Gold income +20%.", 160, new GoldIncomeResearchEffect { Value = 0.2f })),
 
             Branch("Fire", ResearchLinkDirection.North,
-                Node(ResearchId.Fire1, "Fire I", "Fire damage +15%.", 10, new FireDamageResearchEffect { Value = 0.15f }),
-                Node(ResearchId.Fire2, "Fire II", "Fire damage +15%.", 20, new FireDamageResearchEffect { Value = 0.15f }),
-                Node(ResearchId.Fire3, "Fire III", "Fire damage +15%.", 40, new FireDamageResearchEffect { Value = 0.15f }),
-                Node(ResearchId.Fire4, "Fire IV", "Fire damage +15%.", 80, new FireDamageResearchEffect { Value = 0.15f }),
-                Node(ResearchId.Fire5, "Fire V", "Fire damage +15%.", 160, new FireDamageResearchEffect { Value = 0.15f })),
+                Node(ResearchId.Fire1, "Fire I", "Fire damage +1.", 10, new FireDamageResearchEffect { Value = 1 }),
+                Node(ResearchId.Fire2, "Fire II", "Fire damage +1.", 20, new FireDamageResearchEffect { Value = 1 }),
+                Node(ResearchId.Fire3, "Fire III", "Fire damage +1.", 40, new FireDamageResearchEffect { Value = 1 }),
+                Node(ResearchId.Fire4, "Fire IV", "Fire damage +1.", 80, new FireDamageResearchEffect { Value = 1 }),
+                Node(ResearchId.Fire5, "Fire V", "Fire damage +1.", 160, new FireDamageResearchEffect { Value = 1 })),
 
             Branch("Defense", ResearchLinkDirection.South,
                 Node(ResearchId.Defense1, "Defense I", "Defenders gain 4 resistance.", 10, new ResistanceResearchEffect { Value = 4 }),

@@ -11,14 +11,14 @@ public partial class GameEntity {
     public Code.Game.Features.FloatingText.FloatingText floatingText { get { return (Code.Game.Features.FloatingText.FloatingText)GetComponent(GameComponentsLookup.FloatingText); } }
     public bool hasFloatingText { get { return HasComponent(GameComponentsLookup.FloatingText); } }
 
-    public void AddFloatingText(float newValue) {
+    public void AddFloatingText(int newValue) {
         var index = GameComponentsLookup.FloatingText;
         var component = (Code.Game.Features.FloatingText.FloatingText)CreateComponent(index, typeof(Code.Game.Features.FloatingText.FloatingText));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceFloatingText(float newValue) {
+    public void ReplaceFloatingText(int newValue) {
         var index = GameComponentsLookup.FloatingText;
         var component = (Code.Game.Features.FloatingText.FloatingText)CreateComponent(index, typeof(Code.Game.Features.FloatingText.FloatingText));
         component.Value = newValue;

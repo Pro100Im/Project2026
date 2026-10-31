@@ -61,6 +61,8 @@ public class AttackFeature : Feature
 }
 ```
 
+Параллельные type-pipelines (например physical / frost / fire damage) — отдельные системы в Feature, не один класс с ветвлением по типу.
+
 ## Композиция в LifetimeScope
 VContainer регистрирует **только сервисы и `ISystemFactory`**. Feature и System не регистрируются.
 

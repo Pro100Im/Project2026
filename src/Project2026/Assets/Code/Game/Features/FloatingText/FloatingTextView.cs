@@ -20,7 +20,7 @@ namespace Code.Game.Features.FloatingText
             if (Entity == null || !Entity.hasFloatingText || _text == null)
                 return;
 
-            var text = Mathf.RoundToInt(Entity.floatingText.Value).ToString();
+            var text = Entity.floatingText.Value.ToString();
 
             Play(text, Entity.floatingTextColor.Value, null);
         }

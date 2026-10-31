@@ -7,7 +7,7 @@ namespace Code.Game.StaticData.Property
     [Serializable]
     public class FireAttackProperty : EntityProperty
     {
-        [field: SerializeField] public float Damage { get; private set; }
+        [field: SerializeField] public int Damage { get; private set; }
         [field: SerializeField] public EntityConfig HitEffect { get; private set; }
 
         protected override void Add(GameEntity entity)

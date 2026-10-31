@@ -7,7 +7,7 @@ namespace Code.Game.StaticData.Data
     [Serializable]
     public class PhysicalAttackProperty : EntityProperty
     {
-        [field: SerializeField] public float PhysicalDamage { get; private set; }
+        [field: SerializeField] public int PhysicalDamage { get; private set; }
         [field: SerializeField] public EntityConfig PhysicalHitEffect { get; private set; }
 
         protected override void Add(GameEntity entity)

@@ -15,3 +15,6 @@ alwaysApply: true
 - Keep side effects such as DOTween and view mutation at the presentation boundary; ECS component state must trigger them.
 - Reuse existing entity pipelines such as spawn, effects, duration, damage, and destruction instead of adding parallel imperative flows.
 - Prefer small composable data components and focused systems over inheritance and behavior-heavy objects.
+- One behavior type / one component set → one system. Do not merge parallel type pipelines (damage kinds, hit effects, resistances) into a single `Execute` with `hasPhysical` / `hasFire` / `hasFrost` chains.
+- Guard `continue` when “this system does not apply to this entity” is fine. Mixing rules for different types in one system is not.
+- Example: damage pipeline uses a separate calculate system and hit-effect system per damage type; `Feature` only sets execution order.

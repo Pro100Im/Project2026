@@ -26,7 +26,7 @@ namespace Code.Game.Features.Research.Systems
             var bonus = BonusEntity();
             var nodes = _nodes.GetEntities(_buffer);
 
-            var fire = 0f;
+            var fire = 0;
             var resistance = 0;
             var gold = 0f;
             var block = 0f;
@@ -59,7 +59,7 @@ namespace Code.Game.Features.Research.Systems
                 knight = node.researchKnightUnlock.Config;
             }
 
-            SetFloat(bonus.hasFireDamageBonus, fire, bonus.hasFireDamageBonus ? bonus.fireDamageBonus.Value : 0f, bonus.AddFireDamageBonus, bonus.ReplaceFireDamageBonus);
+            SetInt(bonus.hasFireDamageBonus, fire, bonus.hasFireDamageBonus ? bonus.fireDamageBonus.Value : 0, bonus.AddFireDamageBonus, bonus.ReplaceFireDamageBonus);
             SetInt(bonus.hasResistanceBonus, resistance, bonus.hasResistanceBonus ? bonus.resistanceBonus.Value : 0, bonus.AddResistanceBonus, bonus.ReplaceResistanceBonus);
             SetFloat(bonus.hasGoldIncomeBonus, gold, bonus.hasGoldIncomeBonus ? bonus.goldIncomeBonus.Value : 0f, bonus.AddGoldIncomeBonus, bonus.ReplaceGoldIncomeBonus);
             SetFloat(bonus.hasKnightBlockBonus, block, bonus.hasKnightBlockBonus ? bonus.knightBlockBonus.Value : 0f, bonus.AddKnightBlockBonus, bonus.ReplaceKnightBlockBonus);

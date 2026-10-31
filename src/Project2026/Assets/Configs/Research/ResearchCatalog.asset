@@ -112,23 +112,23 @@ MonoBehaviour:
     - rid: 947547580571058264
       type: {class: FireDamageResearchEffect, ns: Code.Game.StaticData.Research, asm: Assembly-CSharp}
       data:
-        Value: 0.15
+        Value: 1
     - rid: 947547580571058265
       type: {class: FireDamageResearchEffect, ns: Code.Game.StaticData.Research, asm: Assembly-CSharp}
       data:
-        Value: 0.15
+        Value: 1
     - rid: 947547580571058266
       type: {class: FireDamageResearchEffect, ns: Code.Game.StaticData.Research, asm: Assembly-CSharp}
       data:
-        Value: 0.15
+        Value: 1
     - rid: 947547580571058267
       type: {class: FireDamageResearchEffect, ns: Code.Game.StaticData.Research, asm: Assembly-CSharp}
       data:
-        Value: 0.15
+        Value: 1
     - rid: 947547580571058268
       type: {class: FireDamageResearchEffect, ns: Code.Game.StaticData.Research, asm: Assembly-CSharp}
       data:
-        Value: 0.15
+        Value: 1
     - rid: 947547580571058269
       type: {class: ResistanceResearchEffect, ns: Code.Game.StaticData.Research, asm: Assembly-CSharp}
       data:
@@ -301,7 +301,7 @@ MonoBehaviour:
       data:
         <Id>k__BackingField: 14
         <Title>k__BackingField: Fire I
-        <Description>k__BackingField: Fire damage +15%.
+        <Description>k__BackingField: Fire damage +1.
         <Icon>k__BackingField: {fileID: 21300000, guid: 57f518205be7e1c4490654ddb95779df, type: 3}
         <MaxLevel>k__BackingField: 1
         <StartingLevel>k__BackingField: 0
@@ -318,7 +318,7 @@ MonoBehaviour:
       data:
         <Id>k__BackingField: 15
         <Title>k__BackingField: Fire II
-        <Description>k__BackingField: Fire damage +15%.
+        <Description>k__BackingField: Fire damage +1.
         <Icon>k__BackingField: {fileID: 21300000, guid: 57f518205be7e1c4490654ddb95779df, type: 3}
         <MaxLevel>k__BackingField: 1
         <StartingLevel>k__BackingField: 0
@@ -335,7 +335,7 @@ MonoBehaviour:
       data:
         <Id>k__BackingField: 16
         <Title>k__BackingField: Fire III
-        <Description>k__BackingField: Fire damage +15%.
+        <Description>k__BackingField: Fire damage +1.
         <Icon>k__BackingField: {fileID: 21300000, guid: 57f518205be7e1c4490654ddb95779df, type: 3}
         <MaxLevel>k__BackingField: 1
         <StartingLevel>k__BackingField: 0
@@ -352,7 +352,7 @@ MonoBehaviour:
       data:
         <Id>k__BackingField: 17
         <Title>k__BackingField: Fire IV
-        <Description>k__BackingField: Fire damage +15%.
+        <Description>k__BackingField: Fire damage +1.
         <Icon>k__BackingField: {fileID: 21300000, guid: 57f518205be7e1c4490654ddb95779df, type: 3}
         <MaxLevel>k__BackingField: 1
         <StartingLevel>k__BackingField: 0
@@ -369,7 +369,7 @@ MonoBehaviour:
       data:
         <Id>k__BackingField: 18
         <Title>k__BackingField: Fire V
-        <Description>k__BackingField: Fire damage +15%.
+        <Description>k__BackingField: Fire damage +1.
         <Icon>k__BackingField: {fileID: 21300000, guid: 57f518205be7e1c4490654ddb95779df, type: 3}
         <MaxLevel>k__BackingField: 1
         <StartingLevel>k__BackingField: 0

@@ -17,7 +17,7 @@ namespace Code.Game.Features.Research
     [Game, Town] public class ResearchRequiredBuilding : IComponent { public BuildingType Value; }
     [Game, Town] public class ResearchRequiredBuildingLevel : IComponent { public int Value; }
 
-    [Game, Town] public class ResearchFireBonus : IComponent { public float Value; }
+    [Game, Town] public class ResearchFireBonus : IComponent { public int Value; }
     [Game, Town] public class ResearchResistanceBonus : IComponent { public int Value; }
     [Game, Town] public class ResearchGoldBonus : IComponent { public float Value; }
     [Game, Town] public class ResearchBlockBonus : IComponent { public float Value; }
@@ -29,7 +29,7 @@ namespace Code.Game.Features.Research
 
     [Game, Town] public class ResearchUnitSlotUnlock : IComponent { public UnitKind Value; }
 
-    [Game, Town] public class FireDamageBonus : IComponent { public float Value; }
+    [Game, Town] public class FireDamageBonus : IComponent { public int Value; }
     [Game, Town] public class GoldIncomeBonus : IComponent { public float Value; }
     [Game, Town] public class KnightBlockBonus : IComponent { public float Value; }
     [Game, Town] public class UnlockedKnight : IComponent { public EntityConfig Value; }

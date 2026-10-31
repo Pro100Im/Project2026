@@ -11,14 +11,14 @@ public partial class GameEntity {
     public Code.Game.Features.Health.CurrentHealth currentHealth { get { return (Code.Game.Features.Health.CurrentHealth)GetComponent(GameComponentsLookup.CurrentHealth); } }
     public bool hasCurrentHealth { get { return HasComponent(GameComponentsLookup.CurrentHealth); } }
 
-    public void AddCurrentHealth(float newValue) {
+    public void AddCurrentHealth(int newValue) {
         var index = GameComponentsLookup.CurrentHealth;
         var component = (Code.Game.Features.Health.CurrentHealth)CreateComponent(index, typeof(Code.Game.Features.Health.CurrentHealth));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceCurrentHealth(float newValue) {
+    public void ReplaceCurrentHealth(int newValue) {
         var index = GameComponentsLookup.CurrentHealth;
         var component = (Code.Game.Features.Health.CurrentHealth)CreateComponent(index, typeof(Code.Game.Features.Health.CurrentHealth));
         component.Value = newValue;

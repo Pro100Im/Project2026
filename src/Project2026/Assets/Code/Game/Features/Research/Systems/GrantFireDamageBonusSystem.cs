@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace Code.Game.Features.Research.Systems
 {
-    public class GrantFireDamageMultiplierSystem : IExecuteSystem
+    public class GrantFireDamageBonusSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _bonuses;
         private readonly IGroup<GameEntity> _attackers;
         private readonly List<GameEntity> _buffer = new(64);
 
-        public GrantFireDamageMultiplierSystem()
+        public GrantFireDamageBonusSystem()
         {
             var game = Contexts.sharedInstance.game;
             _bonuses = game.GetGroup(GameMatcher
@@ -22,7 +22,7 @@ namespace Code.Game.Features.Research.Systems
         public void Execute()
         {
             var bonus = _bonuses.GetSingleEntity();
-            var multiplier = bonus == null ? 1f : 1f + bonus.fireDamageBonus.Value;
+            var value = bonus == null ? 0 : bonus.fireDamageBonus.Value;
             var attackers = _attackers.GetEntities(_buffer);
 
             for (var i = 0; i < attackers.Count; i++)
@@ -32,13 +32,13 @@ namespace Code.Game.Features.Research.Systems
                 if (attacker.isResearchNode || attacker.isResearchBonus)
                     continue;
 
-                if (attacker.hasFireDamageMultiplier && attacker.fireDamageMultiplier.Value == multiplier)
+                if (attacker.hasFireDamageBonus && attacker.fireDamageBonus.Value == value)
                     continue;
 
-                if (attacker.hasFireDamageMultiplier)
-                    attacker.ReplaceFireDamageMultiplier(multiplier);
+                if (attacker.hasFireDamageBonus)
+                    attacker.ReplaceFireDamageBonus(value);
                 else
-                    attacker.AddFireDamageMultiplier(multiplier);
+                    attacker.AddFireDamageBonus(value);
             }
         }
     }

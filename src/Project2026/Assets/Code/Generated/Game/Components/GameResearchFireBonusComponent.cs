@@ -11,14 +11,14 @@ public partial class GameEntity {
     public Code.Game.Features.Research.ResearchFireBonus researchFireBonus { get { return (Code.Game.Features.Research.ResearchFireBonus)GetComponent(GameComponentsLookup.ResearchFireBonus); } }
     public bool hasResearchFireBonus { get { return HasComponent(GameComponentsLookup.ResearchFireBonus); } }
 
-    public void AddResearchFireBonus(float newValue) {
+    public void AddResearchFireBonus(int newValue) {
         var index = GameComponentsLookup.ResearchFireBonus;
         var component = (Code.Game.Features.Research.ResearchFireBonus)CreateComponent(index, typeof(Code.Game.Features.Research.ResearchFireBonus));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceResearchFireBonus(float newValue) {
+    public void ReplaceResearchFireBonus(int newValue) {
         var index = GameComponentsLookup.ResearchFireBonus;
         var component = (Code.Game.Features.Research.ResearchFireBonus)CreateComponent(index, typeof(Code.Game.Features.Research.ResearchFireBonus));
         component.Value = newValue;

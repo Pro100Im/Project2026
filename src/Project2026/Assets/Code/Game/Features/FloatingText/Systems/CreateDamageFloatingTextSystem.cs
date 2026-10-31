@@ -34,7 +34,7 @@ namespace Code.Game.Features.FloatingText.Systems
                 var damage = damages[i];
                 var damageAmount = damage.totalDamage.Value;
 
-                if (damageAmount <= 0f)
+                if (damageAmount <= 0)
                     continue;
 
                 var spawnPos = ResolveSpawnPosition(damage);

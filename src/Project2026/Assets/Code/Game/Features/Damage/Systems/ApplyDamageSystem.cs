@@ -43,7 +43,7 @@ namespace Code.Game.Features.Damage.Systems
 
                     target.ReplaceCurrentHealth(newCurrentHealth);
 
-                    if (damageAmount > 0f)
+                    if (damageAmount > 0)
                         RequestHitReaction(damage, target);
                 }
 
