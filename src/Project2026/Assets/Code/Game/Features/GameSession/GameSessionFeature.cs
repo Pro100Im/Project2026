@@ -8,6 +8,7 @@ namespace Code.Game.Features.GameSession
         public GameSessionFeature(ISystemFactory systemFactory)
         {
             Add(systemFactory.Create<GameSessionSystem>());
+            Add(systemFactory.Create<VictorySystem>());
             Add(systemFactory.Create<GameSessionEndMenuSystem>());
         }
     }

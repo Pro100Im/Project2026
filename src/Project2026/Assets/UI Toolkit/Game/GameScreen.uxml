@@ -3,6 +3,7 @@
     <ui:Template name="GameExchequer" src="project://database/Assets/UI%20Toolkit/Game/GameExchequer.uxml?fileID=9197481963319205126&amp;guid=813f0c47f0ec11341bfce5305980c6c0&amp;type=3#GameExchequer"/>
     <ui:Template name="GameMenu" src="project://database/Assets/UI%20Toolkit/Game/PauseMenu.uxml?fileID=9197481963319205126&amp;guid=8cb6115eed4237840bca64ea87fe06c1&amp;type=3#PauseMenu"/>
     <ui:Template name="GameOverMenu" src="project://database/Assets/UI%20Toolkit/Game/GameOverMenu.uxml?fileID=9197481963319205126&amp;guid=93585ca1e47d75c48b9ab3aa0e6c457c&amp;type=3#GameOverMenu"/>
+    <ui:Template name="VictoryMenu" src="project://database/Assets/UI%20Toolkit/Game/VictoryMenu.uxml?fileID=9197481963319205126&amp;guid=a7c3e91f4b2d4e8a9f1c0d6e5b4a3928&amp;type=3#VictoryMenu"/>
     <ui:Template name="TowerMenu" src="project://database/Assets/UI%20Toolkit/Game/TowerMenu.uxml?fileID=9197481963319205126&amp;guid=e8342821644945b4dabbdb96666d83da&amp;type=3#TowerMenu"/>
     <Style src="project://database/Assets/UI%20Toolkit/Global/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=f0b50401ae793a440bdbacc20d05f547&amp;type=3#GlobalStyle"/>
     <Style src="../Global/MenuChrome.uss" />
@@ -22,5 +23,6 @@
         <ui:Instance template="TowerMenu" name="TowerMenu" picking-mode="Ignore" style="position: absolute; height: 1080px; width: 1920px;"/>
         <ui:Instance template="GameMenu" name="PauseMenuRoot" picking-mode="Ignore" style="position: absolute; width: 1920px; height: 1080px;"/>
         <ui:Instance template="GameOverMenu" picking-mode="Ignore" name="GameOverMenuRoot" style="position: absolute; width: 1920px; height: 1080px;"/>
+        <ui:Instance template="VictoryMenu" picking-mode="Ignore" name="VictoryMenuRoot" style="position: absolute; width: 1920px; height: 1080px;"/>
     </ui:VisualElement>
 </ui:UXML>

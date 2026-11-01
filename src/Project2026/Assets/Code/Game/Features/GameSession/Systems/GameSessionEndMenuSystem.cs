@@ -23,10 +23,16 @@ namespace Code.Game.Features.GameSession.Systems
             {
                 var entity = entities[i];
 
-                if (entity.isForcedPause)
-                    endGameMenuEntity.endGameMenu.Value.OpenMenu();
-                else
+                if (!entity.isForcedPause)
+                {
                     endGameMenuEntity.endGameMenu.Value.CloseMenu();
+                    continue;
+                }
+
+                if (entity.isVictory)
+                    endGameMenuEntity.endGameMenu.Value.OpenVictory();
+                else
+                    endGameMenuEntity.endGameMenu.Value.OpenMenu();
             }
         }
 

@@ -1,0 +1,26 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Global/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=f0b50401ae793a440bdbacc20d05f547&amp;type=3#GlobalStyle"/>
+    <Style src="../Global/MenuChrome.uss" />
+    <ui:VisualElement name="Canvas" picking-mode="Ignore" class="screen-root">
+        <ui:VisualElement name="VictoryMenu" picking-mode="Ignore" focusable="false" class="hide menu-fade menu-overlay">
+            <ui:VisualElement name="Mask" picking-mode="Position" class="menu-scrim"/>
+            <ui:VisualElement name="Back" picking-mode="Ignore" class="menu-panel">
+                <ui:Label text="Victory" name="Title" picking-mode="Ignore" class="menu-title"/>
+                <ui:VisualElement name="ButtonsContainer" picking-mode="Ignore" class="menu-choices">
+                    <ui:Button text="" name="RestartButton" class="button menu-choice">
+                        <ui:Image name="Icon" picking-mode="Ignore" class="menu-choice__icon menu-icon-restart"/>
+                        <ui:Label text="RESTART" picking-mode="Ignore" class="commonText"/>
+                    </ui:Button>
+                    <ui:Button text="" name="TownButton" class="button menu-choice">
+                        <ui:Image name="Icon" picking-mode="Ignore" class="menu-choice__icon menu-icon-house"/>
+                        <ui:Label text="TOWN" picking-mode="Ignore" class="commonText"/>
+                    </ui:Button>
+                    <ui:Button text="" name="ExitButton" class="button menu-choice">
+                        <ui:Image name="Icon" picking-mode="Ignore" class="menu-choice__icon menu-icon-exit"/>
+                        <ui:Label text="EXIT" picking-mode="Ignore" class="commonText"/>
+                    </ui:Button>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

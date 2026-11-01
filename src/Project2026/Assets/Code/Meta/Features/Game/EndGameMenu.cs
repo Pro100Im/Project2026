@@ -23,10 +23,15 @@ namespace Code.Meta.Features.Game
         private ICameraService _cameraService;
 
         private VisualElement _gameOverMenu;
+        private VisualElement _victoryMenu;
 
-        private Button _restartButton;
-        private Button _townButton;
-        private Button _exitButton;
+        private Button _gameOverRestartButton;
+        private Button _gameOverTownButton;
+        private Button _gameOverExitButton;
+
+        private Button _victoryRestartButton;
+        private Button _victoryTownButton;
+        private Button _victoryExitButton;
 
         [Inject]
         public void Construct(UIService uIService, GameScreen gameScreen, ICameraService cameraService, ISceneLoader sceneLoader, TransitionScreen transitionScreen)
@@ -41,17 +46,28 @@ namespace Code.Meta.Features.Game
         private void Start()
         {
             _gameOverMenu = _gameScreen.GetVisualElement("GameOverMenu");
-            _restartButton = _gameOverMenu.Q<Button>("RestartButton");
-            _townButton = _gameOverMenu.Q<Button>("TownButton");
-            _exitButton = _gameOverMenu.Q<Button>("ExitButton");
+            _victoryMenu = _gameScreen.GetVisualElement("VictoryMenu");
 
-            _restartButton.clickable.clicked += Restart;
-            _townButton.clickable.clicked += Town;
-            _exitButton.clickable.clicked += Exit;
+            _gameOverRestartButton = _gameOverMenu.Q<Button>("RestartButton");
+            _gameOverTownButton = _gameOverMenu.Q<Button>("TownButton");
+            _gameOverExitButton = _gameOverMenu.Q<Button>("ExitButton");
+
+            _victoryRestartButton = _victoryMenu.Q<Button>("RestartButton");
+            _victoryTownButton = _victoryMenu.Q<Button>("TownButton");
+            _victoryExitButton = _victoryMenu.Q<Button>("ExitButton");
+
+            _gameOverRestartButton.clickable.clicked += Restart;
+            _gameOverTownButton.clickable.clicked += Town;
+            _gameOverExitButton.clickable.clicked += Exit;
+
+            _victoryRestartButton.clickable.clicked += Restart;
+            _victoryTownButton.clickable.clicked += Town;
+            _victoryExitButton.clickable.clicked += Exit;
 
             SceneManager.activeSceneChanged += OnActiveSceneChanged;
 
             _uIService.Hide(_gameOverMenu).Forget();
+            _uIService.Hide(_victoryMenu).Forget();
         }
 
         private async void Town()
@@ -99,11 +115,19 @@ namespace Code.Meta.Features.Game
         public void CloseMenu()
         {
             _uIService.Hide(_gameOverMenu).AsAsyncUnitUniTask();
+            _uIService.Hide(_victoryMenu).AsAsyncUnitUniTask();
         }
 
         public void OpenMenu()
         {
+            _uIService.Hide(_victoryMenu).AsAsyncUnitUniTask();
             _uIService.Show(_gameOverMenu).AsAsyncUnitUniTask();
+        }
+
+        public void OpenVictory()
+        {
+            _uIService.Hide(_gameOverMenu).AsAsyncUnitUniTask();
+            _uIService.Show(_victoryMenu).AsAsyncUnitUniTask();
         }
 
         private void OnActiveSceneChanged(Scene _, Scene __)
@@ -115,7 +139,12 @@ namespace Code.Meta.Features.Game
                 .GetGroup(GameMatcher.GameSession)
                 .GetSingleEntity();
 
-            if (session != null && session.isForcedPause)
+            if (session == null || !session.isForcedPause)
+                return;
+
+            if (session.isVictory)
+                OpenVictory();
+            else
                 OpenMenu();
         }
 
@@ -123,12 +152,19 @@ namespace Code.Meta.Features.Game
         {
             SceneManager.activeSceneChanged -= OnActiveSceneChanged;
 
-            if (_restartButton != null)
-                _restartButton.clickable.clicked -= Restart;
-            if (_townButton != null)
-                _townButton.clickable.clicked -= Town;
-            if (_exitButton != null)
-                _exitButton.clickable.clicked -= Exit;
+            if (_gameOverRestartButton != null)
+                _gameOverRestartButton.clickable.clicked -= Restart;
+            if (_gameOverTownButton != null)
+                _gameOverTownButton.clickable.clicked -= Town;
+            if (_gameOverExitButton != null)
+                _gameOverExitButton.clickable.clicked -= Exit;
+
+            if (_victoryRestartButton != null)
+                _victoryRestartButton.clickable.clicked -= Restart;
+            if (_victoryTownButton != null)
+                _victoryTownButton.clickable.clicked -= Town;
+            if (_victoryExitButton != null)
+                _victoryExitButton.clickable.clicked -= Exit;
         }
     }
 }
