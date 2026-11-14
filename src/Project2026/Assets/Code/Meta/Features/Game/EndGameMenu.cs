@@ -25,6 +25,11 @@ namespace Code.Meta.Features.Game
         private VisualElement _gameOverMenu;
         private VisualElement _victoryMenu;
 
+        private VisualElement _gameOverGoldReward;
+        private Label _gameOverGoldRewardValue;
+        private VisualElement _victoryGoldReward;
+        private Label _victoryGoldRewardValue;
+
         private Button _gameOverRestartButton;
         private Button _gameOverTownButton;
         private Button _gameOverExitButton;
@@ -47,6 +52,11 @@ namespace Code.Meta.Features.Game
         {
             _gameOverMenu = _gameScreen.GetVisualElement("GameOverMenu");
             _victoryMenu = _gameScreen.GetVisualElement("VictoryMenu");
+
+            _gameOverGoldReward = _gameOverMenu.Q<VisualElement>("GoldReward");
+            _gameOverGoldRewardValue = _gameOverMenu.Q<Label>("GoldRewardValue");
+            _victoryGoldReward = _victoryMenu.Q<VisualElement>("GoldReward");
+            _victoryGoldRewardValue = _victoryMenu.Q<Label>("GoldRewardValue");
 
             _gameOverRestartButton = _gameOverMenu.Q<Button>("RestartButton");
             _gameOverTownButton = _gameOverMenu.Q<Button>("TownButton");
@@ -120,14 +130,38 @@ namespace Code.Meta.Features.Game
 
         public void OpenMenu()
         {
+            BindRewards(_gameOverGoldReward, _gameOverGoldRewardValue);
             _uIService.Hide(_victoryMenu).AsAsyncUnitUniTask();
             _uIService.Show(_gameOverMenu).AsAsyncUnitUniTask();
         }
 
         public void OpenVictory()
         {
+            BindRewards(_victoryGoldReward, _victoryGoldRewardValue);
             _uIService.Hide(_gameOverMenu).AsAsyncUnitUniTask();
             _uIService.Show(_victoryMenu).AsAsyncUnitUniTask();
+        }
+
+        private void BindRewards(VisualElement goldReward, Label goldRewardValue)
+        {
+            var gold = 0;
+            var session = Contexts.sharedInstance.game
+                .GetGroup(GameMatcher.GameSession)
+                .GetSingleEntity();
+
+            if (session != null && session.hasBattleTownGold)
+                gold = session.battleTownGold.Value;
+
+            if (goldRewardValue != null)
+                goldRewardValue.text = gold.ToString();
+
+            if (goldReward == null)
+                return;
+
+            if (gold > 0)
+                goldReward.RemoveFromClassList("hide");
+            else
+                goldReward.AddToClassList("hide");
         }
 
         private void OnActiveSceneChanged(Scene _, Scene __)

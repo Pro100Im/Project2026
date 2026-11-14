@@ -172,49 +172,52 @@ public static class GameComponentsLookup {
     public const int FrostResistance = 161;
     public const int PhysicalResistance = 162;
     public const int ResistanceBonus = 163;
-    public const int Reward = 164;
-    public const int SpawnPosition = 165;
-    public const int SpawnRequsted = 166;
-    public const int SpawnSlot = 167;
-    public const int WaitingToSpawn = 168;
-    public const int DefenseFlow = 169;
-    public const int DefensePatrolCell = 170;
-    public const int DefensePatrolIdleDuration = 171;
-    public const int DefensePatrolWait = 172;
-    public const int RallyToCastle = 173;
-    public const int SurroundSlot = 174;
-    public const int SurroundTargetId = 175;
-    public const int Targetable = 176;
-    public const int TargetCell = 177;
-    public const int TargetCellRequest = 178;
-    public const int TargetFlow = 179;
-    public const int TargetId = 180;
-    public const int TargetPoint = 181;
-    public const int TargetSelected = 182;
-    public const int Tower = 183;
-    public const int TowerBuildRequest = 184;
-    public const int TowerPlace = 185;
-    public const int TowerUpgrade = 186;
-    public const int TowerUpgradeIcon = 187;
-    public const int TowerUpgradePrice = 188;
-    public const int TowerUpgradeRequest = 189;
-    public const int DefaultUnitConfig = 190;
-    public const int ResolvedUnitConfig = 191;
-    public const int Unit = 192;
-    public const int UnitAnchorPoint = 193;
-    public const int UnitIcon = 194;
-    public const int UnitKind = 195;
-    public const int UnitSize = 196;
-    public const int UnitSlot = 197;
-    public const int UnitSlotAvailable = 198;
-    public const int CurrentWaveEnemies = 199;
-    public const int CurrentWaveNumber = 200;
-    public const int WaveEnemiesAlive = 201;
-    public const int WaveInProgress = 202;
-    public const int WaveStartRequsted = 203;
-    public const int Projectile = 204;
+    public const int BattleTownGold = 164;
+    public const int BattleTownRewardsApplied = 165;
+    public const int Reward = 166;
+    public const int TownGoldReward = 167;
+    public const int SpawnPosition = 168;
+    public const int SpawnRequsted = 169;
+    public const int SpawnSlot = 170;
+    public const int WaitingToSpawn = 171;
+    public const int DefenseFlow = 172;
+    public const int DefensePatrolCell = 173;
+    public const int DefensePatrolIdleDuration = 174;
+    public const int DefensePatrolWait = 175;
+    public const int RallyToCastle = 176;
+    public const int SurroundSlot = 177;
+    public const int SurroundTargetId = 178;
+    public const int Targetable = 179;
+    public const int TargetCell = 180;
+    public const int TargetCellRequest = 181;
+    public const int TargetFlow = 182;
+    public const int TargetId = 183;
+    public const int TargetPoint = 184;
+    public const int TargetSelected = 185;
+    public const int Tower = 186;
+    public const int TowerBuildRequest = 187;
+    public const int TowerPlace = 188;
+    public const int TowerUpgrade = 189;
+    public const int TowerUpgradeIcon = 190;
+    public const int TowerUpgradePrice = 191;
+    public const int TowerUpgradeRequest = 192;
+    public const int DefaultUnitConfig = 193;
+    public const int ResolvedUnitConfig = 194;
+    public const int Unit = 195;
+    public const int UnitAnchorPoint = 196;
+    public const int UnitIcon = 197;
+    public const int UnitKind = 198;
+    public const int UnitSize = 199;
+    public const int UnitSlot = 200;
+    public const int UnitSlotAvailable = 201;
+    public const int CurrentWaveEnemies = 202;
+    public const int CurrentWaveNumber = 203;
+    public const int WaveEnemiesAlive = 204;
+    public const int WaveInProgress = 205;
+    public const int WaveStartRequsted = 206;
+    public const int Projectile = 207;
 
-    public const int TotalComponents = 205;
+    public const int TotalComponents = 208;
 
     public static readonly string[] componentNames = {
         "ForcedPause",
@@ -381,7 +384,10 @@ public static class GameComponentsLookup {
         "FrostResistance",
         "PhysicalResistance",
         "ResistanceBonus",
+        "BattleTownGold",
+        "BattleTownRewardsApplied",
         "Reward",
+        "TownGoldReward",
         "SpawnPosition",
         "SpawnRequsted",
         "SpawnSlot",
@@ -589,7 +595,10 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Resistance.FrostResistance),
         typeof(Code.Game.Features.Resistance.PhysicalResistance),
         typeof(Code.Game.Features.Resistance.ResistanceBonus),
+        typeof(Code.Game.Features.Rewards.BattleTownGold),
+        typeof(Code.Game.Features.Rewards.BattleTownRewardsApplied),
         typeof(Code.Game.Features.Rewards.Reward),
+        typeof(Code.Game.Features.Rewards.TownGoldReward),
         typeof(Code.Game.Features.Spawn.SpawnPosition),
         typeof(Code.Game.Features.Spawn.SpawnRequsted),
         typeof(Code.Game.Features.Spawn.SpawnSlot),

@@ -3,21 +3,27 @@
     <ui:Template name="GameExchequer" src="project://database/Assets/UI%20Toolkit/Game/GameExchequer.uxml?fileID=9197481963319205126&amp;guid=813f0c47f0ec11341bfce5305980c6c0&amp;type=3#GameExchequer"/>
     <ui:Template name="GameMenu" src="project://database/Assets/UI%20Toolkit/Game/PauseMenu.uxml?fileID=9197481963319205126&amp;guid=8cb6115eed4237840bca64ea87fe06c1&amp;type=3#PauseMenu"/>
     <ui:Template name="GameOverMenu" src="project://database/Assets/UI%20Toolkit/Game/GameOverMenu.uxml?fileID=9197481963319205126&amp;guid=93585ca1e47d75c48b9ab3aa0e6c457c&amp;type=3#GameOverMenu"/>
-    <ui:Template name="VictoryMenu" src="project://database/Assets/UI%20Toolkit/Game/VictoryMenu.uxml?fileID=9197481963319205126&amp;guid=a7c3e91f4b2d4e8a9f1c0d6e5b4a3928&amp;type=3#VictoryMenu"/>
     <ui:Template name="TowerMenu" src="project://database/Assets/UI%20Toolkit/Game/TowerMenu.uxml?fileID=9197481963319205126&amp;guid=e8342821644945b4dabbdb96666d83da&amp;type=3#TowerMenu"/>
+    <ui:Template name="VictoryMenu" src="project://database/Assets/UI%20Toolkit/Game/VictoryMenu.uxml?fileID=9197481963319205126&amp;guid=a7c3e91f4b2d4e8a9f1c0d6e5b4a3928&amp;type=3#VictoryMenu"/>
     <Style src="project://database/Assets/UI%20Toolkit/Global/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=f0b50401ae793a440bdbacc20d05f547&amp;type=3#GlobalStyle"/>
-    <Style src="../Global/MenuChrome.uss" />
+    <Style src="project://database/Assets/UI%20Toolkit/Global/MenuChrome.uss?fileID=7433441132597879392&amp;guid=73c0a67ec04b31c42acc38d9da2e5743&amp;type=3#MenuChrome"/>
     <ui:VisualElement name="GameScreenCanvas" picking-mode="Ignore" class="screen-root">
         <ui:Button text="" name="MenuButton" class="hud-gear">
             <ui:Image picking-mode="Ignore" name="Image" class="hud-gear__icon menu-icon-settings"/>
         </ui:Button>
-        <ui:Button text="" name="StartWaveButton" class="button wave-call">
-            <ui:Image name="Image" picking-mode="Ignore" class="wave-call__icon"/>
-            <ui:VisualElement name="WaveCallText" picking-mode="Ignore" class="wave-call__text">
-                <ui:Label text="WAVE 1" name="WaveCallTitle" picking-mode="Ignore" class="wave-call__title"/>
-                <ui:Label text="CALL" name="WaveCallAction" picking-mode="Ignore" class="wave-call__action"/>
+        <ui:VisualElement name="WaveHud" picking-mode="Ignore" class="wave-hud">
+            <ui:VisualElement name="WaveEnemiesPlaque" picking-mode="Ignore" class="wave-enemies">
+                <ui:Image name="WaveEnemiesIcon" picking-mode="Ignore" class="wave-enemies__icon" style="background-image: url(&quot;project://database/Assets/Sources/My/Other/Monster%20Part/Monster%20Eye.png?fileID=2800000&amp;guid=4461c87bad5222349b14c22b26d43b95&amp;type=3#Monster Eye&quot;); background-position-y: bottom -5px;"/>
+                <ui:Label text="0" name="WaveEnemiesRemaining" picking-mode="Ignore" enabled="true" class="wave-enemies__count" style="font-size: 65px; -unity-text-align: middle-center; white-space: pre; width: 96px; margin-left: 5px;"/>
             </ui:VisualElement>
-        </ui:Button>
+            <ui:Button text="" name="StartWaveButton" class="button wave-call">
+                <ui:Image name="Image" picking-mode="Ignore" class="wave-call__icon"/>
+                <ui:VisualElement name="WaveCallText" picking-mode="Ignore" class="wave-call__text">
+                    <ui:Label text="1 / 1" name="WaveCallTitle" picking-mode="Ignore" class="wave-call__title"/>
+                    <ui:Label text="CALL" name="WaveCallAction" picking-mode="Ignore" class="wave-call__action"/>
+                </ui:VisualElement>
+            </ui:Button>
+        </ui:VisualElement>
         <ui:Instance template="GameExchequer" name="GameExchequer" style="position: absolute; right: 0;"/>
         <ui:Instance template="ActionButtons" name="ActionButtons" picking-mode="Ignore" style="position: absolute; width: 1920px; height: 1080px;"/>
         <ui:Instance template="TowerMenu" name="TowerMenu" picking-mode="Ignore" style="position: absolute; height: 1080px; width: 1920px;"/>

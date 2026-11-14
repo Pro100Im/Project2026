@@ -46,6 +46,7 @@ namespace Code.Infrastructure.DI.EntryPoints
         {
             var entity = CreateGameEntity.Empty();
             entity.isGameSession = true;
+            entity.AddBattleTownGold(0);
 
             _gameTickFeature = _systems.Create<GameTickFeature>();
             _gameTickFeature.ActivateReactiveSystems();

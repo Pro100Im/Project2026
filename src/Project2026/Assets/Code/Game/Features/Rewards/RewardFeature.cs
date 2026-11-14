@@ -8,6 +8,7 @@ namespace Code.Game.Features.Rewards
         public RewardFeature(ISystemFactory systemFactory)
         {
             Add(systemFactory.Create<KillRewardSystem>());
+            Add(systemFactory.Create<CollectTownGoldRewardSystem>());
         }
     }
 }

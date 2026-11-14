@@ -9,6 +9,7 @@ namespace Code.Game.Features.GameSession
         {
             Add(systemFactory.Create<GameSessionSystem>());
             Add(systemFactory.Create<VictorySystem>());
+            Add(systemFactory.Create<ApplyBattleTownRewardsSystem>());
             Add(systemFactory.Create<GameSessionEndMenuSystem>());
         }
     }

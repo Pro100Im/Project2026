@@ -4,9 +4,15 @@
     <ui:VisualElement name="Canvas" picking-mode="Ignore" class="screen-root">
         <ui:VisualElement name="VictoryMenu" picking-mode="Ignore" focusable="false" class="hide menu-fade menu-overlay">
             <ui:VisualElement name="Mask" picking-mode="Position" class="menu-scrim"/>
-            <ui:VisualElement name="Back" picking-mode="Ignore" class="menu-panel">
+            <ui:VisualElement name="Back" picking-mode="Ignore" class="menu-panel menu-panel--result">
                 <ui:Label text="Victory" name="Title" picking-mode="Ignore" class="menu-title"/>
-                <ui:VisualElement name="ButtonsContainer" picking-mode="Ignore" class="menu-choices">
+                <ui:VisualElement name="RewardsRow" picking-mode="Ignore" class="menu-rewards">
+                    <ui:VisualElement name="GoldReward" picking-mode="Ignore" class="menu-reward hide">
+                        <ui:VisualElement name="GoldIcon" picking-mode="Ignore" class="menu-reward__icon menu-reward__icon--gold"/>
+                        <ui:Label text="0" name="GoldRewardValue" picking-mode="Ignore" class="menu-reward__value"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="ButtonsContainer" picking-mode="Ignore" class="menu-choices menu-choices--row">
                     <ui:Button text="" name="RestartButton" class="button menu-choice">
                         <ui:Image name="Icon" picking-mode="Ignore" class="menu-choice__icon menu-icon-restart"/>
                         <ui:Label text="RESTART" picking-mode="Ignore" class="commonText"/>

@@ -10,6 +10,7 @@ namespace Code.Game.Features.Wave
             Add(systemFactory.Create<WaveInitSystem>());
             Add(systemFactory.Create<WaveStartSystem>());
             Add(systemFactory.Create<WaveProgressSystem>());
+            Add(systemFactory.Create<WaveHudSystem>());
         }
     }
 }

@@ -22,6 +22,13 @@ namespace Code.Meta.Features.Game
 
         private Button _startWaveButton;
         private Button _menuButton;
+        private Label _waveCallTitle;
+        private Label _waveEnemiesRemaining;
+
+        private int _displayedWave;
+        private int _displayedTotal;
+        private int _displayedRemaining = -1;
+        private bool _displayedCanCall = true;
 
         [Inject]
         public void Construct(UIService uIService, TransitionScreen transitionScreen)
@@ -37,6 +44,8 @@ namespace Code.Meta.Features.Game
             _canvas = _root.Q<VisualElement>("GameScreenCanvas");
             _startWaveButton = _root.Q<Button>("StartWaveButton");
             _menuButton = _root.Q<Button>("MenuButton");
+            _waveCallTitle = _root.Q<Label>("WaveCallTitle");
+            _waveEnemiesRemaining = _root.Q<Label>("WaveEnemiesRemaining");
 
             _startWaveButton.clickable.clicked += StartWave;
             _menuButton.clickable.clicked += PauseRequest;
@@ -68,6 +77,28 @@ namespace Code.Meta.Features.Game
         public Button GetButton(string name) => _root.Q<Button>(name);
         public Image GetImage(string name) => _root.Q<Image>(name);
         public Label GetLabel(string name) => _root.Q<Label>(name);
+
+        public void SetWaveHud(int wave, int total, int remaining, bool canCall)
+        {
+            if (wave != _displayedWave || total != _displayedTotal)
+            {
+                _displayedWave = wave;
+                _displayedTotal = total;
+                _waveCallTitle.text = $"{wave} / {total}";
+            }
+
+            if (remaining != _displayedRemaining)
+            {
+                _displayedRemaining = remaining;
+                _waveEnemiesRemaining.text = remaining.ToString();
+            }
+
+            if (canCall != _displayedCanCall)
+            {
+                _displayedCanCall = canCall;
+                _startWaveButton.SetEnabled(canCall);
+            }
+        }
 
         private void StartWave()
         {

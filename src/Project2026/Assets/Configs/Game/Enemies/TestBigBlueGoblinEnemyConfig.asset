@@ -33,6 +33,7 @@ MonoBehaviour:
   - rid: 2286603056206053669
   - rid: 2286603060194836481
   - rid: 4221333261860470888
+  - rid: 5344228912345678902
   references:
     version: 2
     RefIds:
@@ -80,6 +81,11 @@ MonoBehaviour:
       data:
         <Mode>k__BackingField: 0
         <Reward>k__BackingField: {fileID: 11400000, guid: 5e508f95685565b408931cae77ec79c5, type: 2}
+    - rid: 5344228912345678902
+      type: {class: TownGoldRewardProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
+      data:
+        <Mode>k__BackingField: 0
+        <Value>k__BackingField: 10
     - rid: 8171215584738410588
       type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:
