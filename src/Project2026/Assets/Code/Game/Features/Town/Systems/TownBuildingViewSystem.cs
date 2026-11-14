@@ -1,10 +1,13 @@
 using Entitas;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Code.Game.Features.Town.Systems
 {
     public class TownBuildingViewSystem : ReactiveSystem<TownEntity>
     {
+        private readonly List<Transform> _changedBuffer = new(16);
+
         public TownBuildingViewSystem() : base(Contexts.sharedInstance.town) { }
 
         protected override ICollector<TownEntity> GetTrigger(IContext<TownEntity> context) =>
@@ -18,8 +21,25 @@ namespace Code.Game.Features.Town.Systems
             for (var i = 0; i < entities.Count; i++)
             {
                 var building = entities[i];
+                var level = building.townBuildingLevel.Value - 1;
 
-                building.townView.Value.SetViews(building.townBuildingLevel.Value - 1);
+                if (!building.isTownBuildingBuilt)
+                {
+                    building.townView.Value.SetViews(level);
+                    continue;
+                }
+
+                building.townView.Value.SetViews(level, _changedBuffer);
+
+                if (_changedBuffer.Count > 0)
+                {
+                    if (building.hasTownBuildEffectTargets)
+                        building.ReplaceTownBuildEffectTargets(new List<Transform>(_changedBuffer));
+                    else
+                        building.AddTownBuildEffectTargets(new List<Transform>(_changedBuffer));
+                }
+
+                _changedBuffer.Clear();
             }
         }
     }

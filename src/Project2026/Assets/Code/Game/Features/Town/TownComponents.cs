@@ -2,6 +2,8 @@ using Code.Game.Features.Town.Views;
 using Code.Game.StaticData.Configs;
 using Code.Meta.Features.Town;
 using Entitas;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Code.Game.Features.Town
 {
@@ -11,6 +13,8 @@ namespace Code.Game.Features.Town
     [Town] public class TownBuildingMaxLevel : IComponent { public int Value; }
     [Town] public class TownBuildingConfigComponent : IComponent { public TownBuildingConfig Value; }
     [Town] public class TownViewComponent : IComponent { public TownView Value; }
+    [Town] public class TownBuildingBuilt : IComponent { }
+    [Town] public class TownBuildEffectTargets : IComponent { public List<Transform> Value; }
 
     [Town] public class TownBuildingWorkers : IComponent { public int Value; }
     [Town] public class TownProductionMultiplier : IComponent { public float Value; }

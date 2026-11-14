@@ -69,6 +69,7 @@ namespace Code.Game.Features.Town.Systems
 
                 var nextLevel = level + 1;
                 building.ReplaceTownBuildingLevel(nextLevel);
+                building.isTownBuildingBuilt = true;
                 _progress.SetBuildingLevel(type, nextLevel);
             }
         }

@@ -46,30 +46,32 @@ public static class TownComponentsLookup {
     public const int TownResearchMenu = 35;
     public const int TownResearchMenuOpened = 36;
     public const int UnlockedKnight = 37;
-    public const int TownBuilding = 38;
-    public const int TownBuildingConfig = 39;
-    public const int TownBuildingLevel = 40;
-    public const int TownBuildingMaxLevel = 41;
-    public const int TownBuildingType = 42;
-    public const int TownBuildingWorkers = 43;
-    public const int TownBuildMenu = 44;
-    public const int TownBuildMenuOpened = 45;
-    public const int TownCrystal = 46;
-    public const int TownEquipmentMenu = 47;
-    public const int TownEquipmentMenuOpened = 48;
-    public const int TownExchequer = 49;
-    public const int TownGold = 50;
-    public const int TownKnowledge = 51;
-    public const int TownProductionCooldown = 52;
-    public const int TownProductionMultiplier = 53;
-    public const int TownProductionRemainder = 54;
-    public const int TownResourceGained = 55;
-    public const int TownResources = 56;
-    public const int TownStone = 57;
-    public const int TownView = 58;
-    public const int TownWood = 59;
+    public const int TownBuildEffectTargets = 38;
+    public const int TownBuilding = 39;
+    public const int TownBuildingBuilt = 40;
+    public const int TownBuildingConfig = 41;
+    public const int TownBuildingLevel = 42;
+    public const int TownBuildingMaxLevel = 43;
+    public const int TownBuildingType = 44;
+    public const int TownBuildingWorkers = 45;
+    public const int TownBuildMenu = 46;
+    public const int TownBuildMenuOpened = 47;
+    public const int TownCrystal = 48;
+    public const int TownEquipmentMenu = 49;
+    public const int TownEquipmentMenuOpened = 50;
+    public const int TownExchequer = 51;
+    public const int TownGold = 52;
+    public const int TownKnowledge = 53;
+    public const int TownProductionCooldown = 54;
+    public const int TownProductionMultiplier = 55;
+    public const int TownProductionRemainder = 56;
+    public const int TownResourceGained = 57;
+    public const int TownResources = 58;
+    public const int TownStone = 59;
+    public const int TownView = 60;
+    public const int TownWood = 61;
 
-    public const int TotalComponents = 60;
+    public const int TotalComponents = 62;
 
     public static readonly string[] componentNames = {
         "Attached",
@@ -110,7 +112,9 @@ public static class TownComponentsLookup {
         "TownResearchMenu",
         "TownResearchMenuOpened",
         "UnlockedKnight",
+        "TownBuildEffectTargets",
         "TownBuilding",
+        "TownBuildingBuilt",
         "TownBuildingConfig",
         "TownBuildingLevel",
         "TownBuildingMaxLevel",
@@ -173,7 +177,9 @@ public static class TownComponentsLookup {
         typeof(Code.Game.Features.Research.TownResearchMenuComponent),
         typeof(Code.Game.Features.Research.TownResearchMenuOpened),
         typeof(Code.Game.Features.Research.UnlockedKnight),
+        typeof(Code.Game.Features.Town.TownBuildEffectTargets),
         typeof(Code.Game.Features.Town.TownBuilding),
+        typeof(Code.Game.Features.Town.TownBuildingBuilt),
         typeof(Code.Game.Features.Town.TownBuildingConfigComponent),
         typeof(Code.Game.Features.Town.TownBuildingLevel),
         typeof(Code.Game.Features.Town.TownBuildingMaxLevel),

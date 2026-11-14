@@ -46,6 +46,10 @@ namespace Code.Game.Features.Town.Registrars
                 Entity.RemoveTownProductionCooldown();
             if (Entity.hasTownResourceGained)
                 Entity.RemoveTownResourceGained();
+            if (Entity.hasTownBuildEffectTargets)
+                Entity.RemoveTownBuildEffectTargets();
+
+            Entity.isTownBuildingBuilt = false;
         }
     }
 }

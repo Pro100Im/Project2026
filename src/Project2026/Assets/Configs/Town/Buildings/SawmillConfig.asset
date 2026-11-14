@@ -16,6 +16,10 @@ MonoBehaviour:
   <Title>k__BackingField: Sawmill
   <Resource>k__BackingField: 4
   <GainColor>k__BackingField: {r: 0.6784314, g: 0.42745098, b: 0.32156864, a: 1}
+  <BuildEffectPrefab>k__BackingField: {fileID: 2769651622987638512, guid: 00a798bc72654294ab284913b713d841, type: 3}
+  <BuildEffectOffset>k__BackingField: {x: 0, y: 1, z: 0}
+  <BuildEffectScale>k__BackingField: 1
+  <BuildEffectDuration>k__BackingField: 1.2
   <Levels>k__BackingField:
   - <Title>k__BackingField: Sawmill
     <Icon>k__BackingField: {fileID: 21300000, guid: 983c11389b437f441b7510c75e109763, type: 3}

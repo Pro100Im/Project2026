@@ -19,6 +19,7 @@ namespace Code.Game.Features.Town
             Add(systemFactory.Create<TownBuildMenuOpenSystem>());
             Add(systemFactory.Create<TownEquipmentMenuOpenSystem>());
             Add(systemFactory.Create<TownBuildingViewSystem>());
+            Add(systemFactory.Create<TownBuildEffectSystem>());
             Add(systemFactory.Create<TownBuildMenuRenderSystem>());
             Add(systemFactory.Create<TownProductionLevelSystem>());
             Add(systemFactory.Create<TownProductionTickSystem>());

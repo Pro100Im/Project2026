@@ -1,4 +1,5 @@
 using Code.Game.Features.Town;
+using Code.Infrastructure.View;
 using System;
 using UnityEngine;
 
@@ -21,6 +22,10 @@ namespace Code.Game.StaticData.Configs
         [field: SerializeField] public string Title { get; private set; }
         [field: SerializeField] public TownResource Resource { get; private set; }
         [field: SerializeField] public Color GainColor { get; private set; } = Color.white;
+        [field: SerializeField] public EntityBehaviour BuildEffectPrefab { get; private set; }
+        [field: SerializeField] public Vector3 BuildEffectOffset { get; private set; }
+        [field: SerializeField] public float BuildEffectScale { get; private set; } = 1f;
+        [field: SerializeField] public float BuildEffectDuration { get; private set; } = 1.2f;
         [field: SerializeField] public TownBuildingLevelData[] Levels { get; private set; }
 
         public bool TryGetProduction(int level, out float interval, out int amount)

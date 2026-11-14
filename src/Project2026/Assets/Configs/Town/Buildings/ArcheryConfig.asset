@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.TownBuildingConfig
   <Type>k__BackingField: 7
   <Title>k__BackingField: Archery
+  <BuildEffectPrefab>k__BackingField: {fileID: 2769651622987638512, guid: 00a798bc72654294ab284913b713d841, type: 3}
+  <BuildEffectOffset>k__BackingField: {x: 0, y: 1, z: 0}
+  <BuildEffectScale>k__BackingField: 1
+  <BuildEffectDuration>k__BackingField: 1.2
   <Levels>k__BackingField:
   - <Title>k__BackingField: Archery
     <Icon>k__BackingField: {fileID: 1765351576224072635, guid: 6f0a46642af7199488111133889cab05, type: 3}
