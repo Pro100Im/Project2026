@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4601073631911080010}
   - component: {fileID: 2371333581607121186}
   - component: {fileID: 5658811535841041257}
+  - component: {fileID: 3334188113019958225}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -46,8 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameSceneName: Game
+  _homeScreenSceneName: HomeScreen
+  _townSceneName: Town
   _mainMenuDoc: {fileID: 5658811535841041257}
-  _fadeDuration: 0.5
+  _levelSelectMenu: {fileID: 3334188113019958225}
   _pressAnyBtn:
     m_Name: Press Any Btn
     m_Id: 49e2d07c-f6f1-4238-ba09-06cedb19322b
@@ -101,3 +104,16 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &3334188113019958225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6644148913313555822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a04e957622c3424e95a35337d506cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Meta.UI.MainMenu.LevelSelectMenu
+  _mainMenuDoc: {fileID: 5658811535841041257}

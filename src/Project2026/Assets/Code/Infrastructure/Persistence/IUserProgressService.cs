@@ -18,10 +18,14 @@ namespace Code.Infrastructure.Persistence
         void SetResearchLevel(ResearchId id, int level);
         void SetUnitSlot(int slot, UnitKind kind);
         void ClearUnitSlot(int slot);
+        bool IsLevelCompleted(string levelNodeId);
+        bool TryGetLevelStars(string levelNodeId, out int stars);
+        void CompleteLevel(string levelNodeId, int stars);
 #if UNITY_EDITOR
         void ResetResources();
         void ResetBuildings();
         void ResetResearch();
+        void ResetLevels();
         void ResetPlayer();
 #endif
         void Flush();

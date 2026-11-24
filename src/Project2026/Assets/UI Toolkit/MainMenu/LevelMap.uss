@@ -1,0 +1,111 @@
+/* Full-screen world map shown from the main menu. */
+
+.level-map-screen {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(58, 44, 30);
+}
+
+.level-map-viewport {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.level-map-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.level-map-layer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Marker: stars above, flag in the middle, the pole base sits on the node point. */
+.level-marker {
+    position: absolute;
+    width: 96px;
+    height: 150px;
+    align-items: center;
+    transition-property: scale;
+    transition-duration: 0.12s;
+}
+
+.level-marker:hover {
+    scale: 1.08 1.08;
+}
+
+.level-marker__stars {
+    flex-direction: row;
+    justify-content: center;
+    height: 24px;
+}
+
+.level-marker__star {
+    width: 24px;
+    height: 24px;
+    margin: 0 1px;
+}
+
+.level-marker__flag {
+    width: 96px;
+    height: 104px;
+}
+
+.level-marker__title {
+    position: absolute;
+    top: 132px;
+    left: -42px;
+    width: 180px;
+    -unity-text-align: middle-center;
+    font-size: 22px;
+    color: rgb(62, 40, 20);
+    white-space: nowrap;
+}
+
+/* HUD */
+.level-map-hud {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    flex-direction: row;
+}
+
+.level-map-hud__stars {
+    flex-direction: row;
+    align-items: center;
+    padding: 6px 18px 6px 10px;
+    border-radius: 24px;
+    background-color: rgba(30, 22, 14, 0.78);
+}
+
+.level-map-hud__star {
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+}
+
+.level-map-hud__value {
+    font-size: 34px;
+    color: rgb(255, 238, 200);
+}
+
+.button.menu-choice.level-map-back {
+    position: absolute;
+    left: 32px;
+    bottom: 24px;
+    width: 220px;
+    height: 84px;
+    margin: 0;
+}

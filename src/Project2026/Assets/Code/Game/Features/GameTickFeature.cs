@@ -1,4 +1,5 @@
 using Code.Game.Features.GameSession;
+using Code.Game.Features.LevelLoad;
 using Code.Game.Features.Pause;
 using Code.Game.Features.Player;
 using Code.Infrastructure.Systems;
@@ -9,6 +10,7 @@ namespace Code.Game.Features
     {
         public GameTickFeature(ISystemFactory systemFactory)
         {
+            Add(systemFactory.Create<LevelLoadFeature>());
             Add(systemFactory.Create<GameSessionFeature>());
             Add(systemFactory.Create<PauseFeature>());
             Add(systemFactory.Create<PlayerFeature>());

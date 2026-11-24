@@ -19,6 +19,7 @@ namespace Code.Meta.UI.MainMenu
         [SerializeField] private string _townSceneName = "Town";
         [Space]
         [SerializeField] private UIDocument _mainMenuDoc;
+        [SerializeField] private LevelSelectMenu _levelSelectMenu;
         [Space]
         [SerializeField] private InputActionMap _pressAnyBtn;
 
@@ -58,13 +59,19 @@ namespace Code.Meta.UI.MainMenu
             var searchingPopUp = root.Q<VisualElement>("SearchingPopUp");
 
             _quickMatchButton = root.Q<Button>("QuickPlayButton");
-            _quickMatchButton.clickable.clicked += StartGame;
+            _quickMatchButton.clickable.clicked += OpenLevelSelect;
 
             _townButton = root.Q<Button>("TownButton");
             _townButton.clickable.clicked += EnterTown;
 
             _exitButton = root.Q<Button>("ExitButton");
             _exitButton.clickable.clicked += Exit;
+
+            if (_levelSelectMenu != null)
+            {
+                _levelSelectMenu.LevelChosen += OnLevelChosen;
+                _levelSelectMenu.BackRequested += CloseLevelSelect;
+            }
 
             _uIService.Hide(_mainMenu).Forget();
             _uIService.Hide(searchingPopUp).Forget();
@@ -128,11 +135,26 @@ namespace Code.Meta.UI.MainMenu
             }
         }
 
+        private void OpenLevelSelect()
+        {
+            _uIService.Hide(_mainMenu).Forget();
+            _levelSelectMenu?.Open();
+        }
+
+        private void CloseLevelSelect()
+        {
+            _levelSelectMenu?.Close();
+            _uIService.Show(_mainMenu).Forget();
+        }
+
+        // LevelNodeChooseSystem has already validated the node, stored it in SelectedLevel and closed the map.
+        private void OnLevelChosen(string levelNodeId) => StartGame();
+
         private async void StartGame()
         {
             await _transitionScreen.Show();
-            await _sceneLoader.Load(_gameSceneName, LoadSceneMode.Additive, default, true);   
-            
+            await _sceneLoader.Load(_gameSceneName, LoadSceneMode.Additive, default, true);
+
             _sceneLoader.UnLoad(_homeScreenSceneName).Forget();
         }
 
@@ -143,9 +165,15 @@ namespace Code.Meta.UI.MainMenu
 
         private void OnDestroy()
         {
-            _quickMatchButton.clickable.clicked -= StartGame;
+            _quickMatchButton.clickable.clicked -= OpenLevelSelect;
             _townButton.clickable.clicked -= EnterTown;
             _exitButton.clickable.clicked -= Exit;
+
+            if (_levelSelectMenu != null)
+            {
+                _levelSelectMenu.LevelChosen -= OnLevelChosen;
+                _levelSelectMenu.BackRequested -= CloseLevelSelect;
+            }
 
             SceneManager.activeSceneChanged -= OnActiveSceneChanged;
         }

@@ -122,102 +122,108 @@ public static class GameComponentsLookup {
     public const int SpawnReservedField = 111;
     public const int SurroundField = 112;
     public const int TilemapMovement = 113;
-    public const int CurrentCell = 114;
-    public const int GridMovement = 115;
-    public const int LastDirection = 116;
-    public const int MoveCommit = 117;
-    public const int MovementAvailable = 118;
-    public const int MovementOffset = 119;
-    public const int MovementSpeed = 120;
-    public const int MovementSpeedBonus = 121;
-    public const int MoveWait = 122;
-    public const int Moving = 123;
-    public const int TotalDistance = 124;
-    public const int Trajectory = 125;
-    public const int TrajectoryBaseArcHeight = 126;
-    public const int TrajectoryCurrentArcHeight = 127;
-    public const int TrajectoryMovement = 128;
-    public const int TrajectoryPathProgress = 129;
-    public const int Velocity = 130;
-    public const int Blocking = 131;
-    public const int BlockRequest = 132;
-    public const int BlockTimer = 133;
-    public const int PassiveBlockChance = 134;
-    public const int PassiveBlockDuration = 135;
-    public const int CastleUnderAttack = 136;
-    public const int PlayerCastle = 137;
-    public const int PlayerCastleCells = 138;
-    public const int Player = 139;
-    public const int FireDamageBonus = 140;
-    public const int GoldIncomeBonus = 141;
-    public const int KnightBlockBonus = 142;
-    public const int ResearchBlockBonus = 143;
-    public const int ResearchBonus = 144;
-    public const int ResearchCost = 145;
-    public const int ResearchFireBonus = 146;
-    public const int ResearchGoldBonus = 147;
-    public const int ResearchId = 148;
-    public const int ResearchKnightUnlock = 149;
-    public const int ResearchLevel = 150;
-    public const int ResearchMaxLevel = 151;
-    public const int ResearchNode = 152;
-    public const int ResearchParent = 153;
-    public const int ResearchRequiredBuilding = 154;
-    public const int ResearchRequiredBuildingLevel = 155;
-    public const int ResearchResistanceBonus = 156;
-    public const int ResearchStartingLevel = 157;
-    public const int ResearchUnitSlotUnlock = 158;
-    public const int UnlockedKnight = 159;
-    public const int FireResistance = 160;
-    public const int FrostResistance = 161;
-    public const int PhysicalResistance = 162;
-    public const int ResistanceBonus = 163;
-    public const int BattleTownGold = 164;
-    public const int BattleTownRewardsApplied = 165;
-    public const int Reward = 166;
-    public const int TownGoldReward = 167;
-    public const int SpawnPosition = 168;
-    public const int SpawnRequsted = 169;
-    public const int SpawnSlot = 170;
-    public const int WaitingToSpawn = 171;
-    public const int DefenseFlow = 172;
-    public const int DefensePatrolCell = 173;
-    public const int DefensePatrolIdleDuration = 174;
-    public const int DefensePatrolWait = 175;
-    public const int RallyToCastle = 176;
-    public const int SurroundSlot = 177;
-    public const int SurroundTargetId = 178;
-    public const int Targetable = 179;
-    public const int TargetCell = 180;
-    public const int TargetCellRequest = 181;
-    public const int TargetFlow = 182;
-    public const int TargetId = 183;
-    public const int TargetPoint = 184;
-    public const int TargetSelected = 185;
-    public const int Tower = 186;
-    public const int TowerBuildRequest = 187;
-    public const int TowerPlace = 188;
-    public const int TowerUpgrade = 189;
-    public const int TowerUpgradeIcon = 190;
-    public const int TowerUpgradePrice = 191;
-    public const int TowerUpgradeRequest = 192;
-    public const int DefaultUnitConfig = 193;
-    public const int ResolvedUnitConfig = 194;
-    public const int Unit = 195;
-    public const int UnitAnchorPoint = 196;
-    public const int UnitIcon = 197;
-    public const int UnitKind = 198;
-    public const int UnitSize = 199;
-    public const int UnitSlot = 200;
-    public const int UnitSlotAvailable = 201;
-    public const int CurrentWaveEnemies = 202;
-    public const int CurrentWaveNumber = 203;
-    public const int WaveEnemiesAlive = 204;
-    public const int WaveInProgress = 205;
-    public const int WaveStartRequsted = 206;
-    public const int Projectile = 207;
+    public const int ActiveLevel = 114;
+    public const int LevelLoaded = 115;
+    public const int LevelSpawnRequested = 116;
+    public const int WaveSchedule = 117;
+    public const int CurrentCell = 118;
+    public const int GridMovement = 119;
+    public const int LastDirection = 120;
+    public const int MoveCommit = 121;
+    public const int MovementAvailable = 122;
+    public const int MovementOffset = 123;
+    public const int MovementSpeed = 124;
+    public const int MovementSpeedBonus = 125;
+    public const int MoveWait = 126;
+    public const int Moving = 127;
+    public const int TotalDistance = 128;
+    public const int Trajectory = 129;
+    public const int TrajectoryBaseArcHeight = 130;
+    public const int TrajectoryCurrentArcHeight = 131;
+    public const int TrajectoryMovement = 132;
+    public const int TrajectoryPathProgress = 133;
+    public const int Velocity = 134;
+    public const int Blocking = 135;
+    public const int BlockRequest = 136;
+    public const int BlockTimer = 137;
+    public const int PassiveBlockChance = 138;
+    public const int PassiveBlockDuration = 139;
+    public const int CastleUnderAttack = 140;
+    public const int PlayerCastle = 141;
+    public const int PlayerCastleCells = 142;
+    public const int Player = 143;
+    public const int FireDamageBonus = 144;
+    public const int GoldIncomeBonus = 145;
+    public const int KnightBlockBonus = 146;
+    public const int ResearchBlockBonus = 147;
+    public const int ResearchBonus = 148;
+    public const int ResearchCost = 149;
+    public const int ResearchFireBonus = 150;
+    public const int ResearchGoldBonus = 151;
+    public const int ResearchId = 152;
+    public const int ResearchKnightUnlock = 153;
+    public const int ResearchLevel = 154;
+    public const int ResearchMaxLevel = 155;
+    public const int ResearchNode = 156;
+    public const int ResearchParent = 157;
+    public const int ResearchRequiredBuilding = 158;
+    public const int ResearchRequiredBuildingLevel = 159;
+    public const int ResearchResistanceBonus = 160;
+    public const int ResearchStartingLevel = 161;
+    public const int ResearchUnitSlotUnlock = 162;
+    public const int UnlockedKnight = 163;
+    public const int FireResistance = 164;
+    public const int FrostResistance = 165;
+    public const int PhysicalResistance = 166;
+    public const int ResistanceBonus = 167;
+    public const int BattleTownGold = 168;
+    public const int BattleTownRewardsApplied = 169;
+    public const int Reward = 170;
+    public const int TownGoldReward = 171;
+    public const int SpawnPosition = 172;
+    public const int SpawnRequsted = 173;
+    public const int SpawnSlot = 174;
+    public const int WaitingToSpawn = 175;
+    public const int DefenseFlow = 176;
+    public const int DefensePatrolCell = 177;
+    public const int DefensePatrolIdleDuration = 178;
+    public const int DefensePatrolWait = 179;
+    public const int RallyToCastle = 180;
+    public const int SurroundSlot = 181;
+    public const int SurroundTargetId = 182;
+    public const int Targetable = 183;
+    public const int TargetCell = 184;
+    public const int TargetCellRequest = 185;
+    public const int TargetFlow = 186;
+    public const int TargetId = 187;
+    public const int TargetPoint = 188;
+    public const int TargetSelected = 189;
+    public const int Tower = 190;
+    public const int TowerBuildRequest = 191;
+    public const int TowerPlace = 192;
+    public const int TowerUpgrade = 193;
+    public const int TowerUpgradeIcon = 194;
+    public const int TowerUpgradePrice = 195;
+    public const int TowerUpgradeRequest = 196;
+    public const int DefaultUnitConfig = 197;
+    public const int ResolvedUnitConfig = 198;
+    public const int Unit = 199;
+    public const int UnitAnchorPoint = 200;
+    public const int UnitIcon = 201;
+    public const int UnitKind = 202;
+    public const int UnitSize = 203;
+    public const int UnitSlot = 204;
+    public const int UnitSlotAvailable = 205;
+    public const int CurrentWaveEnemies = 206;
+    public const int CurrentWaveNumber = 207;
+    public const int WaveEnemiesAlive = 208;
+    public const int WaveInProgress = 209;
+    public const int WaveStartRequsted = 210;
+    public const int Projectile = 211;
+    public const int ActiveLevelNode = 212;
+    public const int LevelStars = 213;
 
-    public const int TotalComponents = 208;
+    public const int TotalComponents = 214;
 
     public static readonly string[] componentNames = {
         "ForcedPause",
@@ -334,6 +340,10 @@ public static class GameComponentsLookup {
         "SpawnReservedField",
         "SurroundField",
         "TilemapMovement",
+        "ActiveLevel",
+        "LevelLoaded",
+        "LevelSpawnRequested",
+        "WaveSchedule",
         "CurrentCell",
         "GridMovement",
         "LastDirection",
@@ -427,7 +437,9 @@ public static class GameComponentsLookup {
         "WaveEnemiesAlive",
         "WaveInProgress",
         "WaveStartRequsted",
-        "Projectile"
+        "Projectile",
+        "ActiveLevelNode",
+        "LevelStars"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -545,6 +557,10 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Level.SpawnReservedField),
         typeof(Code.Game.Features.Level.SurroundField),
         typeof(Code.Game.Features.Level.TilemapMovement),
+        typeof(Code.Game.Features.LevelLoad.ActiveLevel),
+        typeof(Code.Game.Features.LevelLoad.LevelLoaded),
+        typeof(Code.Game.Features.LevelLoad.LevelSpawnRequested),
+        typeof(Code.Game.Features.LevelLoad.WaveSchedule),
         typeof(Code.Game.Features.Movement.CurrentCell),
         typeof(Code.Game.Features.Movement.GridMovement),
         typeof(Code.Game.Features.Movement.LastDirection),
@@ -638,6 +654,8 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Wave.WaveEnemiesAlive),
         typeof(Code.Game.Features.Wave.WaveInProgress),
         typeof(Code.Game.Features.Wave.WaveStartRequsted),
-        typeof(Projectile)
+        typeof(Projectile),
+        typeof(Code.Game.Features.LevelLoad.ActiveLevelNode),
+        typeof(Code.Game.Features.LevelLoad.LevelStars)
     };
 }

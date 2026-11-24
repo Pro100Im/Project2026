@@ -100,6 +100,9 @@ namespace Code.Infrastructure.Editor
             if (resetResearch)
                 save.Town.ClearResearch();
 
+            if (resetResources && resetBuildings && resetResearch)
+                save.Campaign?.Levels?.Clear();
+
             storage.Save(UserProgressService.SaveKey, save);
         }
 

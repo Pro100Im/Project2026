@@ -31,8 +31,23 @@ public static class MetaComponentsLookup {
     public const int UnitRangeShowed = 20;
     public const int UnitRangeView = 21;
     public const int UnitSelectedView = 22;
+    public const int LevelNode = 23;
+    public const int LevelNodeId = 24;
+    public const int LevelNodeRequires = 25;
+    public const int LevelNodeRequireAll = 26;
+    public const int LevelNodePosition = 27;
+    public const int LevelNodeTitle = 28;
+    public const int LevelNodeIcon = 29;
+    public const int LevelNodeCompleted = 30;
+    public const int LevelNodeState = 31;
+    public const int LevelMapMenu = 32;
+    public const int LevelMapMenuOpened = 33;
+    public const int LevelNodeStars = 34;
+    public const int LevelMapSize = 35;
+    public const int LevelMapBackground = 36;
+    public const int LevelMapDirty = 37;
 
-    public const int TotalComponents = 23;
+    public const int TotalComponents = 38;
 
     public static readonly string[] componentNames = {
         "ForcedPause",
@@ -57,7 +72,22 @@ public static class MetaComponentsLookup {
         "TowerOpenUpgradeMenu",
         "UnitRangeShowed",
         "UnitRangeView",
-        "UnitSelectedView"
+        "UnitSelectedView",
+        "LevelNode",
+        "LevelNodeId",
+        "LevelNodeRequires",
+        "LevelNodeRequireAll",
+        "LevelNodePosition",
+        "LevelNodeTitle",
+        "LevelNodeIcon",
+        "LevelNodeCompleted",
+        "LevelNodeState",
+        "LevelMapMenu",
+        "LevelMapMenuOpened",
+        "LevelNodeStars",
+        "LevelMapSize",
+        "LevelMapBackground",
+        "LevelMapDirty"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -83,6 +113,21 @@ public static class MetaComponentsLookup {
         typeof(Code.Game.Features.Tower.TowerOpenUpgradeMenu),
         typeof(Code.Game.Features.Unit.UnitRangeShowed),
         typeof(Code.Game.Features.Unit.UnitRangeViewComponent),
-        typeof(Code.Game.Features.Unit.UnitSelectedView)
+        typeof(Code.Game.Features.Unit.UnitSelectedView),
+        typeof(Code.Meta.Features.LevelMap.LevelNode),
+        typeof(Code.Meta.Features.LevelMap.LevelNodeId),
+        typeof(Code.Meta.Features.LevelMap.LevelNodeRequires),
+        typeof(Code.Meta.Features.LevelMap.LevelNodeRequireAll),
+        typeof(Code.Meta.Features.LevelMap.LevelNodePosition),
+        typeof(Code.Meta.Features.LevelMap.LevelNodeTitle),
+        typeof(Code.Meta.Features.LevelMap.LevelNodeIcon),
+        typeof(Code.Meta.Features.LevelMap.LevelNodeCompleted),
+        typeof(Code.Meta.Features.LevelMap.LevelNodeStateComponent),
+        typeof(Code.Meta.Features.LevelMap.LevelMapMenuComponent),
+        typeof(Code.Meta.Features.LevelMap.LevelMapMenuOpened),
+        typeof(Code.Meta.Features.LevelMap.LevelNodeStars),
+        typeof(Code.Meta.Features.LevelMap.LevelMapSize),
+        typeof(Code.Meta.Features.LevelMap.LevelMapBackground),
+        typeof(Code.Meta.Features.LevelMap.LevelMapDirty)
     };
 }

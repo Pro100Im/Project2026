@@ -5,11 +5,12 @@ namespace Code.Infrastructure.Persistence
 {
     public class UserSaveData
     {
-        public const int CurrentVersion = 2;
+        public const int CurrentVersion = 4;
 
         public int Version = CurrentVersion;
         public string UserId;
         public TownProgressData Town = new();
+        public CampaignProgressData Campaign = new();
     }
 
     public class TownProgressData
@@ -45,6 +46,20 @@ namespace Code.Infrastructure.Persistence
             Research.Clear();
         }
 #endif
+    }
+
+    public class CampaignProgressData
+    {
+        public List<LevelProgressData> Levels = new(8);
+
+        // Version 3 stored only completion. Migrated into Levels on load.
+        public List<string> CompletedLevels;
+    }
+
+    public class LevelProgressData
+    {
+        public string Id;
+        public int Stars;
     }
 
     public class TownBuildingProgressData

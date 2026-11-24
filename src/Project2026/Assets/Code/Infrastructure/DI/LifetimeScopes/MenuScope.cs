@@ -1,4 +1,5 @@
-using UnityEngine;
+using Code.Infrastructure.Systems;
+using Code.Meta.UI.MainMenu;
 using VContainer;
 using VContainer.Unity;
 
@@ -6,13 +7,12 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 {
     public class MenuScope : LifetimeScope
     {
-        [SerializeField] private string _gameScreenSceneName = "Game";
-
-        private const string _sceneParameter = "gameScreenSceneName";
-
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterEntryPoint<MenuWorld>().WithParameter(_sceneParameter, _gameScreenSceneName);
+            builder.Register<ISystemFactory, SystemFactory>(Lifetime.Singleton);
+            builder.RegisterComponentInHierarchy<LevelSelectMenu>();
+
+            builder.RegisterEntryPoint<MenuWorld>();
         }
     }
 }

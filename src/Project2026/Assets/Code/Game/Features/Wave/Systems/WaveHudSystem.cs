@@ -1,4 +1,3 @@
-using Code.Game.StaticData.Configs;
 using Code.Meta.Features.Game;
 using Entitas;
 using System.Collections.Generic;
@@ -7,7 +6,6 @@ namespace Code.Game.Features.Wave.Systems
 {
     public class WaveHudSystem : IExecuteSystem
     {
-        private readonly WavesConfig _wavesConfig;
         private readonly GameScreen _gameScreen;
         private readonly IGroup<GameEntity> _waves;
         private readonly IGroup<GameEntity> _pendingEnemySpawns;
@@ -15,17 +13,17 @@ namespace Code.Game.Features.Wave.Systems
 
         private readonly List<GameEntity> _waveBuffer = new(2);
 
-        public WaveHudSystem(WavesConfig wavesConfig, GameScreen gameScreen)
+        public WaveHudSystem(GameScreen gameScreen)
         {
             var gameContext = Contexts.sharedInstance.game;
 
-            _wavesConfig = wavesConfig;
             _gameScreen = gameScreen;
 
             _waves = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.CurrentWaveNumber,
-                    GameMatcher.CurrentWaveEnemies));
+                    GameMatcher.CurrentWaveEnemies,
+                    GameMatcher.WaveSchedule));
 
             _pendingEnemySpawns = gameContext.GetGroup(GameMatcher
                 .AllOf(
@@ -47,7 +45,7 @@ namespace Code.Game.Features.Wave.Systems
                 return;
 
             var wave = waves[0];
-            var total = _wavesConfig.WaveDatas.Length;
+            var total = wave.waveSchedule.Value.WaveDatas.Length;
             var current = wave.currentWaveNumber.Value;
             var queued = wave.currentWaveEnemies.Value.Count;
             var remaining = queued + _pendingEnemySpawns.count + _livingEnemyUnits.count;

@@ -225,6 +225,60 @@ namespace Code.Infrastructure.Persistence
             }
         }
 
+        public bool IsLevelCompleted(string levelNodeId) => FindLevel(levelNodeId) != null;
+
+        public bool TryGetLevelStars(string levelNodeId, out int stars)
+        {
+            var level = FindLevel(levelNodeId);
+            stars = level?.Stars ?? 0;
+            return level != null;
+        }
+
+        // Keeps the best result: replaying a level never lowers its stars.
+        public void CompleteLevel(string levelNodeId, int stars)
+        {
+            if (string.IsNullOrEmpty(levelNodeId))
+                return;
+
+            if (stars < 0)
+                stars = 0;
+
+            var level = FindLevel(levelNodeId);
+
+            if (level == null)
+            {
+                _save.Campaign.Levels.Add(new LevelProgressData
+                {
+                    Id = levelNodeId,
+                    Stars = stars
+                });
+                MarkDirty();
+                return;
+            }
+
+            if (stars <= level.Stars)
+                return;
+
+            level.Stars = stars;
+            MarkDirty();
+        }
+
+        private LevelProgressData FindLevel(string levelNodeId)
+        {
+            if (string.IsNullOrEmpty(levelNodeId))
+                return null;
+
+            var levels = _save.Campaign.Levels;
+
+            for (var i = 0; i < levels.Count; i++)
+            {
+                if (levels[i].Id == levelNodeId)
+                    return levels[i];
+            }
+
+            return null;
+        }
+
         private List<UnitSlotProgressData> Slots()
         {
             _save.Town.UnitSlots ??= new List<UnitSlotProgressData>(UnitRoster.SlotCount);
@@ -258,9 +312,25 @@ namespace Code.Infrastructure.Persistence
             Flush();
         }
 
+        public void ResetLevels()
+        {
+            if (_save.Campaign.Levels.Count == 0)
+                return;
+
+            _save.Campaign.Levels.Clear();
+            MarkDirty();
+            Flush();
+        }
+
         public void ResetPlayer()
         {
             SetTownResources(0, 0, 0, 0, 0);
+
+            if (_save.Campaign.Levels.Count > 0)
+            {
+                _save.Campaign.Levels.Clear();
+                MarkDirty();
+            }
 
             if (_save.Town.Buildings != null && _save.Town.Buildings.Count > 0)
             {
@@ -333,8 +403,10 @@ namespace Code.Infrastructure.Persistence
             _save.Town.Buildings ??= new List<TownBuildingProgressData>(8);
             _save.Town.Research ??= new List<ResearchProgressData>(8);
             _save.Town.UnitSlots ??= new List<UnitSlotProgressData>(UnitRoster.SlotCount);
+            _save.Campaign ??= new CampaignProgressData();
+            _save.Campaign.Levels ??= new List<LevelProgressData>(8);
 
-            var mutated = false;
+            var mutated = MigrateCompletedLevels();
 
             if (string.IsNullOrEmpty(_save.UserId))
             {
@@ -355,11 +427,33 @@ namespace Code.Infrastructure.Persistence
             Flush();
         }
 
+        // Version 3 kept only a list of completed node ids. They become 1-star results.
+        private bool MigrateCompletedLevels()
+        {
+            var legacy = _save.Campaign.CompletedLevels;
+
+            if (legacy == null || legacy.Count == 0)
+            {
+                _save.Campaign.CompletedLevels = null;
+                return false;
+            }
+
+            for (var i = 0; i < legacy.Count; i++)
+            {
+                if (!string.IsNullOrEmpty(legacy[i]) && FindLevel(legacy[i]) == null)
+                    _save.Campaign.Levels.Add(new LevelProgressData { Id = legacy[i], Stars = 1 });
+            }
+
+            _save.Campaign.CompletedLevels = null;
+            return true;
+        }
+
         private static UserSaveData CreateNew() => new()
         {
             Version = UserSaveData.CurrentVersion,
             UserId = NewUserId(),
-            Town = new TownProgressData()
+            Town = new TownProgressData(),
+            Campaign = new CampaignProgressData()
         };
 
         private static string NewUserId() => Guid.NewGuid().ToString("N");

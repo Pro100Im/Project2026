@@ -55,3 +55,4 @@ MonoBehaviour:
   _audioListener: {fileID: 935637804072450249, guid: 8aaf33fa826d9324b8f44e1592a4ce38, type: 3}
   _researchCatalog: {fileID: 11400000, guid: c9e5a3d46f714c8012d3e4f506172839, type: 2}
   _unitRoster: {fileID: 11400000, guid: 8d2f6b4c1a9e4f7b0c3d5e6a7b8490c1, type: 2}
+  _levelCatalog: {fileID: 11400000, guid: e66c5d5b0a03c334b91eac920506b79c, type: 2}

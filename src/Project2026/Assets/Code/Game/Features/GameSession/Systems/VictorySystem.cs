@@ -1,5 +1,4 @@
 using Code.Game.Common.Entity;
-using Code.Game.StaticData.Configs;
 using Entitas;
 using System.Collections.Generic;
 
@@ -7,7 +6,6 @@ namespace Code.Game.Features.GameSession.Systems
 {
     public class VictorySystem : IExecuteSystem
     {
-        private readonly WavesConfig _wavesConfig;
         private readonly IGroup<GameEntity> _sessions;
         private readonly IGroup<GameEntity> _waves;
         private readonly IGroup<GameEntity> _pendingEnemySpawns;
@@ -18,11 +16,9 @@ namespace Code.Game.Features.GameSession.Systems
         private readonly List<GameEntity> _waveBuffer = new(2);
         private readonly List<GameEntity> _castleBuffer = new(2);
 
-        public VictorySystem(WavesConfig wavesConfig)
+        public VictorySystem()
         {
             var gameContext = Contexts.sharedInstance.game;
-
-            _wavesConfig = wavesConfig;
 
             _sessions = gameContext.GetGroup(GameMatcher
                 .AllOf(GameMatcher.GameSession)
@@ -31,7 +27,8 @@ namespace Code.Game.Features.GameSession.Systems
             _waves = gameContext.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.CurrentWaveNumber,
-                    GameMatcher.CurrentWaveEnemies));
+                    GameMatcher.CurrentWaveEnemies,
+                    GameMatcher.WaveSchedule));
 
             _pendingEnemySpawns = gameContext.GetGroup(GameMatcher
                 .AllOf(
@@ -66,7 +63,7 @@ namespace Code.Game.Features.GameSession.Systems
             if (wave.currentWaveNumber.Value <= 0)
                 return;
 
-            if (wave.currentWaveNumber.Value < _wavesConfig.WaveDatas.Length)
+            if (wave.currentWaveNumber.Value < wave.waveSchedule.Value.WaveDatas.Length)
                 return;
 
             if (wave.currentWaveEnemies.Value.Count > 0)

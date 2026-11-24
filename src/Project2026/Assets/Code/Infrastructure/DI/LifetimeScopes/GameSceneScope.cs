@@ -1,6 +1,7 @@
-using Code.Game.Features.Target.Services;
 using Code.Game.StaticData.Configs;
+using Code.Game.Features.Target.Services;
 using Code.Infrastructure.DI.EntryPoints;
+using Code.Infrastructure.Factories;
 using Code.Infrastructure.Systems;
 using Code.Infrastructure.View.Pool;
 using Code.Meta.Features.Game;
@@ -12,8 +13,8 @@ namespace Code.Infrastructure.DI.LifetimeScopes
 {
     public class GameSceneScope : LifetimeScope
     {
-        [SerializeField] private WavesConfig _wavesConfig;
         [SerializeField] private FloatingTextConfig _floatingTextConfig;
+        [SerializeField] private Transform _levelRoot;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -35,11 +36,12 @@ namespace Code.Infrastructure.DI.LifetimeScopes
         private void BindGameFactories(IContainerBuilder builder)
         {
             builder.Register<ISystemFactory, SystemFactory>(Lifetime.Singleton);
+            builder.RegisterInstance(_levelRoot);
+            builder.Register<ILevelFactory, LevelFactory>(Lifetime.Singleton);
         }
 
         private void BindGameConfigs(IContainerBuilder builder)
         {
-            builder.RegisterInstance(_wavesConfig).AsSelf();
             builder.RegisterInstance(_floatingTextConfig).AsSelf();
         }
     }

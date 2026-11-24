@@ -11,37 +11,42 @@ public static class InputComponentsLookup {
     public const int ForcedPauseRequested = 0;
     public const int PauseRequested = 1;
     public const int Destructed = 2;
-    public const int TownResearchMenuCloseRequested = 3;
-    public const int TownResearchMenuToggleRequested = 4;
-    public const int TownResearchPurchaseRequested = 5;
-    public const int TargetId = 6;
-    public const int TownBuildMenuCloseRequested = 7;
-    public const int TownBuildMenuToggleRequested = 8;
-    public const int TownBuildRequested = 9;
-    public const int TownEquipmentAssignRequested = 10;
-    public const int TownEquipmentClearRequested = 11;
-    public const int TownEquipmentMenuCloseRequested = 12;
-    public const int TownEquipmentMenuToggleRequested = 13;
-    public const int AbilityCastIntent = 14;
-    public const int CancelClick = 15;
-    public const int CancelIntent = 16;
-    public const int ClickInput = 17;
-    public const int EntityInteractIntent = 18;
-    public const int Input = 19;
-    public const int InteractTarget = 20;
-    public const int PointerInput = 21;
-    public const int PointerOverUI = 22;
-    public const int PointerState = 23;
-    public const int PrimaryClick = 24;
-    public const int ScreenPointerInput = 25;
-    public const int WorldPointerInput = 26;
+    public const int SelectedLevel = 3;
+    public const int TownResearchMenuCloseRequested = 4;
+    public const int TownResearchMenuToggleRequested = 5;
+    public const int TownResearchPurchaseRequested = 6;
+    public const int TargetId = 7;
+    public const int TownBuildMenuCloseRequested = 8;
+    public const int TownBuildMenuToggleRequested = 9;
+    public const int TownBuildRequested = 10;
+    public const int TownEquipmentAssignRequested = 11;
+    public const int TownEquipmentClearRequested = 12;
+    public const int TownEquipmentMenuCloseRequested = 13;
+    public const int TownEquipmentMenuToggleRequested = 14;
+    public const int AbilityCastIntent = 15;
+    public const int CancelClick = 16;
+    public const int CancelIntent = 17;
+    public const int ClickInput = 18;
+    public const int EntityInteractIntent = 19;
+    public const int Input = 20;
+    public const int InteractTarget = 21;
+    public const int PointerInput = 22;
+    public const int PointerOverUI = 23;
+    public const int PointerState = 24;
+    public const int PrimaryClick = 25;
+    public const int ScreenPointerInput = 26;
+    public const int WorldPointerInput = 27;
+    public const int LevelNodeChooseRequested = 28;
+    public const int LevelMapMenuOpenRequested = 29;
+    public const int LevelMapMenuCloseRequested = 30;
 
-    public const int TotalComponents = 27;
+    public const int TotalComponents = 31;
 
     public static readonly string[] componentNames = {
         "ForcedPauseRequested",
         "PauseRequested",
         "Destructed",
+        "SelectedLevel",
         "TownResearchMenuCloseRequested",
         "TownResearchMenuToggleRequested",
         "TownResearchPurchaseRequested",
@@ -65,13 +70,17 @@ public static class InputComponentsLookup {
         "PointerState",
         "PrimaryClick",
         "ScreenPointerInput",
-        "WorldPointerInput"
+        "WorldPointerInput",
+        "LevelNodeChooseRequested",
+        "LevelMapMenuOpenRequested",
+        "LevelMapMenuCloseRequested"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(Assets.Code.Game.Features.Pause.ForcedPauseRequested),
         typeof(Assets.Code.Game.Features.Pause.PauseRequested),
         typeof(Code.Game.Common.Destructed),
+        typeof(Code.Game.Features.LevelLoad.SelectedLevel),
         typeof(Code.Game.Features.Research.TownResearchMenuCloseRequested),
         typeof(Code.Game.Features.Research.TownResearchMenuToggleRequested),
         typeof(Code.Game.Features.Research.TownResearchPurchaseRequested),
@@ -95,6 +104,9 @@ public static class InputComponentsLookup {
         typeof(Code.Game.Input.PointerState),
         typeof(Code.Game.Input.PrimaryClick),
         typeof(Code.Game.Input.ScreenPointerInput),
-        typeof(Code.Game.Input.WorldPointerInput)
+        typeof(Code.Game.Input.WorldPointerInput),
+        typeof(Code.Meta.Features.LevelMap.LevelNodeChooseRequested),
+        typeof(Code.Meta.Features.LevelMap.LevelMapMenuOpenRequested),
+        typeof(Code.Meta.Features.LevelMap.LevelMapMenuCloseRequested)
     };
 }

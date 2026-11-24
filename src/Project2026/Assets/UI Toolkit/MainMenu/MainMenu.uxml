@@ -1,6 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/Global/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=f0b50401ae793a440bdbacc20d05f547&amp;type=3#GlobalStyle"/>
     <Style src="../Global/MenuChrome.uss" />
+    <Style src="LevelMap.uss" />
     <ui:VisualElement name="MainMenuCanvas" picking-mode="Ignore" class="main-menu-canvas">
         <ui:Label text="The Last Castle" name="Title" picking-mode="Ignore" class="titleText main-menu-title"/>
         <ui:VisualElement name="MainMenu" picking-mode="Ignore" class="hide menu-fade">
@@ -24,6 +25,19 @@
                     </ui:Button>
                 </ui:VisualElement>
             </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="LevelSelectPanel" picking-mode="Ignore" class="hide menu-fade level-map-screen">
+            <ui:VisualElement name="LevelMapViewport" class="level-map-viewport">
+                <ui:VisualElement name="LevelMapContent" picking-mode="Ignore" class="level-map-content"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="LevelMapHud" picking-mode="Ignore" class="level-map-hud">
+                <ui:VisualElement name="LevelMapStars" picking-mode="Ignore" class="level-map-hud__stars">
+                    <ui:Label name="LevelMapStarsValue" text="0/0" picking-mode="Ignore" class="commonText level-map-hud__value"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Button text="" name="LevelSelectBackButton" class="button commonText menu-choice level-map-back">
+                <ui:Label text="Back" picking-mode="Ignore" class="commonText"/>
+            </ui:Button>
         </ui:VisualElement>
         <ui:VisualElement name="SearchingPopUp" picking-mode="Ignore" class="hide menu-fade menu-search">
             <ui:Label picking-mode="Ignore" text="Searching..." class="commonText"/>
