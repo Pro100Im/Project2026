@@ -21,11 +21,14 @@ namespace Code.Infrastructure.Persistence
         bool IsLevelCompleted(string levelNodeId);
         bool TryGetLevelStars(string levelNodeId, out int stars);
         void CompleteLevel(string levelNodeId, int stars);
+        bool TryGetSeenLevelState(string levelNodeId, out LevelNodeState state);
+        void SetSeenLevelState(string levelNodeId, LevelNodeState state);
 #if UNITY_EDITOR
         void ResetResources();
         void ResetBuildings();
         void ResetResearch();
         void ResetLevels();
+        void ResetSeenLevels();
         void ResetPlayer();
 #endif
         void Flush();

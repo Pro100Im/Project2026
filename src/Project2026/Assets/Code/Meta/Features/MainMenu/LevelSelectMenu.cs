@@ -21,6 +21,10 @@ namespace Code.Meta.UI.MainMenu
         // A clear hole around a flag is centered above the pole base so the banner sits inside it.
         private const float HoleLift = 50f;
 
+        // Lets the panel fade in before the reveal starts.
+        private const float RevealDelay = 0.5f;
+        private const int PuffCount = 6;
+
         [SerializeField] private UIDocument _mainMenuDoc;
 
         private UIService _uiService;
@@ -37,7 +41,10 @@ namespace Code.Meta.UI.MainMenu
 
         private readonly Dictionary<string, Marker> _markers = new(16);
         private readonly List<LevelMapLink> _links = new(16);
+        private readonly List<float> _linkReveal = new(16);
         private readonly List<Vector4> _holes = new(LevelMapClouds.MaxHoles);
+        private LevelMapRevealPlayer _player;
+        private Vector2? _focusOverride;
 
         private Vector2 _mapSize = DefaultMapSize;
         private Vector2 _pan;
@@ -87,6 +94,7 @@ namespace Code.Meta.UI.MainMenu
         public void Hide()
         {
             StopDrag(_dragPointer);
+            _player?.Complete();
             _clouds?.SetRunning(false);
             _uiService.Hide(_panel).Forget();
         }
@@ -114,7 +122,7 @@ namespace Code.Meta.UI.MainMenu
             _clouds?.SetSettings(veil);
         }
 
-        public void SetNode(string id, string title, LevelNodeState state, int stars, Vector2 position)
+        public void SetNode(string id, string title, LevelNodeState state, LevelNodeState seenState, int stars, Vector2 position)
         {
             if (_content == null || string.IsNullOrEmpty(id))
                 return;
@@ -128,17 +136,31 @@ namespace Code.Meta.UI.MainMenu
             }
 
             marker.State = state;
+            marker.SeenState = seenState;
+            marker.Title = title;
+            marker.Stars = stars;
             marker.Position = position;
+            marker.HoleScale = 1f;
+            marker.Grow = 1f;
+            marker.View.SetAppear(1f, 1f);
+            marker.View.SetShake(0f);
             marker.View.Set(title, state, stars);
             marker.View.PlaceAt(position);
         }
 
         public void SetLinks(List<LevelMapLink> links)
         {
+            _player?.Complete();
             _roads?.Set(links);
             _links.Clear();
             _links.AddRange(links);
+            _linkReveal.Clear();
+
+            for (var i = 0; i < links.Count; i++)
+                _linkReveal.Add(1f);
+
             SortMarkers();
+            PlayReveal();
             UpdateClouds();
 
             if (_focusPending)
@@ -170,6 +192,8 @@ namespace Code.Meta.UI.MainMenu
             _clouds = new LevelMapClouds();
             _clouds.SetMapSize(_mapSize);
             _content.Add(_clouds);
+
+            _player = new LevelMapRevealPlayer(_content);
 
             _viewport.RegisterCallback<PointerDownEvent>(OnPointerDown);
             _viewport.RegisterCallback<PointerMoveEvent>(OnPointerMove);
@@ -215,7 +239,8 @@ namespace Code.Meta.UI.MainMenu
             element is LevelMapClouds ? 2 : element is LevelMapMarker ? 1 : 0;
 
         // Clear holes: around every visible flag first, then along visible roads.
-        private void UpdateClouds()
+        // While the reveal plays, flags and roads carry their animation progress in the hole scale.
+        private void UpdateClouds(bool animated = false)
         {
             if (_clouds == null || _veil == null)
                 return;
@@ -227,8 +252,11 @@ namespace Code.Meta.UI.MainMenu
                 if (marker.State == LevelNodeState.Hidden)
                     continue;
 
-                var radius = marker.State == LevelNodeState.Locked ? _veil.PreviewRadius : _veil.RevealRadius;
-                AddHole(marker.Position + new Vector2(0f, -HoleLift), radius);
+                var radius = marker.State == LevelNodeState.Locked
+                    ? _veil.PreviewRadius
+                    : Mathf.Lerp(_veil.PreviewRadius, _veil.RevealRadius, marker.Grow);
+
+                AddHole(marker.Position + new Vector2(0f, -HoleLift), radius, marker.HoleScale);
             }
 
             var step = Mathf.Max(10f, _veil.RoadStep);
@@ -236,19 +264,212 @@ namespace Code.Meta.UI.MainMenu
             for (var i = 0; i < _links.Count; i++)
             {
                 var link = _links[i];
+                var reveal = _linkReveal[i];
                 var samples = Mathf.CeilToInt(Vector2.Distance(link.From, link.To) / step);
 
                 for (var s = 1; s < samples; s++)
-                    AddHole(LevelMapRoads.Point(link.From, link.To, (float)s / samples), _veil.RoadRadius);
+                {
+                    // Clouds part along the road just ahead of the line being drawn.
+                    var along = (float)s / samples;
+                    var scale = reveal >= 1f ? 1f : Mathf.Clamp01((reveal - along + 0.15f) / 0.3f);
+                    AddHole(LevelMapRoads.Point(link.From, link.To, along), _veil.RoadRadius, scale);
+                }
             }
 
-            _clouds.SetHoles(_holes);
+            _clouds.SetHoles(_holes, animated);
         }
 
-        private void AddHole(Vector2 center, float radius)
+        private void AddHole(Vector2 center, float radius, float scale)
         {
             if (_holes.Count < LevelMapClouds.MaxHoles)
-                _holes.Add(new Vector4(center.x, center.y, radius, 0f));
+                _holes.Add(new Vector4(center.x, center.y, radius, scale));
+        }
+
+        // ---- Reveal animation: plays the difference between what the player last saw and now ----
+
+        private static bool IsVisible(LevelNodeState state) => state != LevelNodeState.Hidden;
+
+        private static bool IsNewlyVisible(Marker marker) => !IsVisible(marker.SeenState) && IsVisible(marker.State);
+
+        private void PlayReveal()
+        {
+            _focusOverride = null;
+
+            if (_player == null)
+                return;
+
+            var time = RevealDelay;
+
+            // 1. Flags already on the map that changed: the lock breaks, or the level got beaten.
+            foreach (var marker in _markers.Values)
+            {
+                if (!IsVisible(marker.SeenState) || !IsVisible(marker.State) || marker.SeenState == marker.State)
+                    continue;
+
+                _focusOverride ??= marker.Position;
+                time = PlayStateChange(marker, time);
+            }
+
+            // 2. New flags that no new road leads to (the very first level).
+            var stagger = 0f;
+
+            foreach (var marker in _markers.Values)
+            {
+                if (!IsNewlyVisible(marker) || HasFreshRoadTo(marker.Position))
+                    continue;
+
+                _focusOverride ??= marker.Position;
+                PlayAppear(marker, time + stagger);
+                stagger += 0.2f;
+            }
+
+            if (stagger > 0f)
+                time += 0.8f + stagger;
+
+            // 3. New roads draw in while the clouds part along them.
+            var roads = 0f;
+
+            for (var i = 0; i < _links.Count; i++)
+            {
+                if (!_links[i].Fresh)
+                    continue;
+
+                var index = i;
+                var duration = Mathf.Clamp(Vector2.Distance(_links[i].From, _links[i].To) / 450f, 0.7f, 1.6f);
+                _focusOverride ??= _links[i].To;
+                roads = Mathf.Max(roads, duration);
+
+                _player.Add(time, duration, p =>
+                {
+                    var eased = LevelMapRevealPlayer.EaseInOut(p);
+                    _linkReveal[index] = eased;
+                    _roads.SetProgress(index, eased);
+                    UpdateClouds(true);
+                });
+            }
+
+            time += roads * 0.75f;
+            stagger = 0f;
+
+            // 4. New flags at the end of the new roads.
+            foreach (var marker in _markers.Values)
+            {
+                if (!IsNewlyVisible(marker) || !HasFreshRoadTo(marker.Position))
+                    continue;
+
+                PlayAppear(marker, time + stagger);
+                stagger += 0.2f;
+            }
+
+            _player.Play();
+        }
+
+        private bool HasFreshRoadTo(Vector2 position)
+        {
+            for (var i = 0; i < _links.Count; i++)
+            {
+                if (_links[i].Fresh && _links[i].To == position)
+                    return true;
+            }
+
+            return false;
+        }
+
+        // Clouds open over the flag, then it pops in.
+        private void PlayAppear(Marker marker, float at)
+        {
+            marker.View.SetAnimating();
+
+            _player.Add(at, 0.9f, p =>
+            {
+                marker.HoleScale = LevelMapRevealPlayer.EaseOut(p);
+                UpdateClouds(true);
+            });
+
+            _player.Add(at + 0.45f, 0.4f,
+                p => marker.View.SetAppear(Mathf.Clamp01(p * 2f), Mathf.LerpUnclamped(0.6f, 1f, LevelMapRevealPlayer.BackOut(p))),
+                () => marker.View.Set(marker.Title, marker.State, marker.Stars));
+        }
+
+        // Shows the old look first. A lock shakes and breaks (with a puff of cloud) and the clearing
+        // widens; any change ends with a little punch into the new look. Returns when the next may start.
+        private float PlayStateChange(Marker marker, float at)
+        {
+            marker.View.Set(marker.Title, marker.SeenState, marker.Stars);
+            marker.View.SetAnimating();
+
+            if (marker.SeenState == LevelNodeState.Locked)
+            {
+                marker.Grow = 0f;
+                _player.Add(at, 0.4f, p => marker.View.SetShake(Mathf.Sin(p * Mathf.PI * 6f) * 8f * (1f - p)));
+                at += 0.4f;
+
+                _player.Add(at, 1f, p =>
+                {
+                    marker.Grow = LevelMapRevealPlayer.EaseOut(p);
+                    UpdateClouds(true);
+                });
+
+                var position = marker.Position;
+                _player.At(at, () => SpawnPuffs(position));
+            }
+
+            _player.At(at, () =>
+            {
+                marker.View.Set(marker.Title, marker.State, marker.Stars);
+                marker.View.SetAnimating();
+            });
+
+            _player.Add(at, 0.35f,
+                p => marker.View.SetAppear(1f, 1f + 0.2f * Mathf.Sin(p * Mathf.PI)),
+                () => marker.View.Set(marker.Title, marker.State, marker.Stars));
+
+            return at + 0.3f;
+        }
+
+        // A few square bits of cloud fly off the banner and fade out (when a lock breaks).
+        private void SpawnPuffs(Vector2 position)
+        {
+            if (_content == null || _clouds == null || _clouds.parent != _content)
+                return;
+
+            var pixel = _veil != null ? Mathf.Max(1f, _veil.PixelSize) : 2f;
+            var light = _veil != null ? _veil.Light : Color.white;
+            var mid = _veil != null ? _veil.Mid : Color.white;
+            var origin = position + new Vector2(0f, -70f);
+            var start = Time.unscaledTime;
+
+            for (var i = 0; i < PuffCount; i++)
+            {
+                var size = pixel * (4 + i % 3);
+                var angle = (i + 0.3f) / PuffCount * Mathf.PI * 2f;
+                var direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+                var from = origin - Vector2.one * size * 0.5f;
+
+                var puff = new VisualElement { pickingMode = PickingMode.Ignore };
+                puff.AddToClassList("level-map-puff");
+                puff.style.width = size;
+                puff.style.height = size;
+                puff.style.backgroundColor = i % 2 == 0 ? light : mid;
+                puff.style.translate = new Translate(from.x, from.y);
+                _content.Insert(_content.IndexOf(_clouds), puff);
+
+                // Own little schedule: the puffs run on their own clock, not the reveal timeline.
+                puff.schedule.Execute(timer =>
+                {
+                    var p = Mathf.Clamp01((Time.unscaledTime - start) / 0.55f);
+                    var offset = direction * (14f + 46f * LevelMapRevealPlayer.EaseOut(p));
+                    puff.style.translate = new Translate(from.x + offset.x, from.y + offset.y);
+                    puff.style.opacity = 1f - p * p;
+                }).Every(16).Until(() =>
+                {
+                    if (Time.unscaledTime - start < 0.55f)
+                        return false;
+
+                    puff.RemoveFromHierarchy();
+                    return true;
+                });
+            }
         }
 
         // Center the camera on the newest playable level (or the last beaten one).
@@ -271,7 +492,7 @@ namespace Code.Meta.UI.MainMenu
                     fallback = marker.Position;
             }
 
-            var focus = target ?? fallback ?? _mapSize * 0.5f;
+            var focus = _focusOverride ?? target ?? fallback ?? _mapSize * 0.5f;
             _pan = size * 0.5f - focus;
             _focusPending = false;
             ApplyPan();
@@ -360,7 +581,14 @@ namespace Code.Meta.UI.MainMenu
         {
             public readonly LevelMapMarker View;
             public LevelNodeState State;
+            public LevelNodeState SeenState;
+            public string Title;
+            public int Stars;
             public Vector2 Position;
+
+            // Reveal animation progress, 1 when idle.
+            public float HoleScale = 1f;
+            public float Grow = 1f;
 
             public Marker(LevelMapMarker view) => View = view;
         }

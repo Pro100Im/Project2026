@@ -35,8 +35,8 @@
                     <ui:Label name="LevelMapStarsValue" text="0/0" picking-mode="Ignore" class="commonText level-map-hud__value"/>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:Button text="" name="LevelSelectBackButton" class="button commonText menu-choice level-map-back">
-                <ui:Label text="Back" picking-mode="Ignore" class="commonText"/>
+            <ui:Button text="" name="LevelSelectBackButton" class="hud-gear level-map-back">
+                <ui:Image picking-mode="Ignore" name="Icon" class="hud-gear__icon menu-icon-exit"/>
             </ui:Button>
         </ui:VisualElement>
         <ui:VisualElement name="SearchingPopUp" picking-mode="Ignore" class="hide menu-fade menu-search">

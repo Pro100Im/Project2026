@@ -63,12 +63,11 @@
     bottom: 0;
 }
 
-/* A cloud sprite from the pack floating over the veil; fades out near clearings. */
-.level-map-drift-cloud {
+/* Square bit of cloud flying off a flag whose lock breaks. */
+.level-map-puff {
     position: absolute;
-    background-size: 100% 100%;
-    transition-property: opacity;
-    transition-duration: 0.4s;
+    left: 0;
+    top: 0;
 }
 
 .level-marker__stars {
@@ -126,11 +125,9 @@
     color: rgb(255, 238, 200);
 }
 
-.button.menu-choice.level-map-back {
+/* Back arrow in the top-left corner, same look as the town exit button (hud-gear). */
+.hud-gear.level-map-back {
     position: absolute;
-    left: 32px;
-    bottom: 24px;
-    width: 220px;
-    height: 84px;
-    margin: 0;
+    left: 0;
+    top: 0;
 }

@@ -10,12 +10,14 @@ namespace Code.Meta.UI.MainMenu
         public readonly Vector2 From;
         public readonly Vector2 To;
         public readonly bool Passed;
+        public readonly bool Fresh;
 
-        public LevelMapLink(Vector2 from, Vector2 to, bool passed)
+        public LevelMapLink(Vector2 from, Vector2 to, bool passed, bool fresh = false)
         {
             From = from;
             To = to;
             Passed = passed;
+            Fresh = fresh;
         }
     }
 
@@ -60,7 +62,24 @@ namespace Code.Meta.UI.MainMenu
             Add(_title);
 
             this.AddManipulator(new Clickable(onClick));
+
+            // Pops and shakes pivot on the pole base, not the element center.
+            style.transformOrigin = new TransformOrigin(Anchor.x, Anchor.y);
+            _flag.style.transformOrigin = new TransformOrigin(Length.Percent(50f), Length.Percent(100f));
         }
+
+        /// <summary>Reveal animation: 0 = invisible and small, 1 = normal.</summary>
+        public void SetAppear(float opacity, float scale)
+        {
+            style.opacity = opacity;
+            style.scale = new Scale(new Vector2(scale, scale));
+        }
+
+        /// <summary>Unlock animation: the banner wobbles on its pole.</summary>
+        public void SetShake(float degrees) => _flag.style.rotate = new Rotate(new Angle(degrees, AngleUnit.Degree));
+
+        /// <summary>Blocks clicks while an animation is playing; <see cref="Set"/> restores it.</summary>
+        public void SetAnimating() => pickingMode = PickingMode.Ignore;
 
         public void Set(string title, LevelNodeState state, int stars)
         {
@@ -304,6 +323,7 @@ namespace Code.Meta.UI.MainMenu
         private static readonly Color Fresh = new(0.28f, 0.18f, 0.10f, 0.6f);
 
         private readonly List<LevelMapLink> _links = new(16);
+        private readonly List<float> _progress = new(16);
         private readonly Vector2[] _points = new Vector2[Samples + 1];
 
         public LevelMapRoads()
@@ -317,6 +337,21 @@ namespace Code.Meta.UI.MainMenu
         {
             _links.Clear();
             _links.AddRange(links);
+            _progress.Clear();
+
+            for (var i = 0; i < links.Count; i++)
+                _progress.Add(1f);
+
+            MarkDirtyRepaint();
+        }
+
+        /// <summary>How much of a road is drawn, from its start (0..1). Used to draw a new road in.</summary>
+        public void SetProgress(int index, float progress)
+        {
+            if (index < 0 || index >= _progress.Count)
+                return;
+
+            _progress[index] = Mathf.Clamp01(progress);
             MarkDirtyRepaint();
         }
 
@@ -329,16 +364,21 @@ namespace Code.Meta.UI.MainMenu
             for (var i = 0; i < _links.Count; i++)
             {
                 var link = _links[i];
+                if (_progress[i] <= 0f)
+                    continue;
+
+                // The partial curve is the same geometry, so dashes stay put while the road grows.
                 p.strokeColor = link.Passed ? Passed : Fresh;
-                Sample(link.From, link.To);
+                Sample(link.From, link.To, _progress[i]);
                 StrokeDashed(p);
             }
         }
 
-        private void Sample(Vector2 from, Vector2 to)
+        // Samples the first part of the curve, up to 'until'.
+        private void Sample(Vector2 from, Vector2 to, float until)
         {
             for (var i = 0; i <= Samples; i++)
-                _points[i] = Point(from, to, (float)i / Samples);
+                _points[i] = Point(from, to, until * i / Samples);
         }
 
         /// <summary>A point on the road curve: quadratic, bent sideways, always to the same side for a given direction.</summary>

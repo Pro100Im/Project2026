@@ -263,6 +263,46 @@ namespace Code.Infrastructure.Persistence
             MarkDirty();
         }
 
+        public bool TryGetSeenLevelState(string levelNodeId, out LevelNodeState state)
+        {
+            var seen = FindSeen(levelNodeId);
+            state = seen != null ? (LevelNodeState)seen.State : LevelNodeState.Hidden;
+            return seen != null;
+        }
+
+        public void SetSeenLevelState(string levelNodeId, LevelNodeState state)
+        {
+            if (string.IsNullOrEmpty(levelNodeId))
+                return;
+
+            var seen = FindSeen(levelNodeId);
+
+            if (seen == null)
+                _save.Campaign.Seen.Add(new LevelSeenData { Id = levelNodeId, State = (int)state });
+            else if (seen.State != (int)state)
+                seen.State = (int)state;
+            else
+                return;
+
+            MarkDirty();
+        }
+
+        private LevelSeenData FindSeen(string levelNodeId)
+        {
+            if (string.IsNullOrEmpty(levelNodeId))
+                return null;
+
+            var seen = _save.Campaign.Seen;
+
+            for (var i = 0; i < seen.Count; i++)
+            {
+                if (seen[i].Id == levelNodeId)
+                    return seen[i];
+            }
+
+            return null;
+        }
+
         private LevelProgressData FindLevel(string levelNodeId)
         {
             if (string.IsNullOrEmpty(levelNodeId))
@@ -314,10 +354,22 @@ namespace Code.Infrastructure.Persistence
 
         public void ResetLevels()
         {
-            if (_save.Campaign.Levels.Count == 0)
+            if (_save.Campaign.Levels.Count == 0 && _save.Campaign.Seen.Count == 0)
                 return;
 
             _save.Campaign.Levels.Clear();
+            _save.Campaign.Seen.Clear();
+            MarkDirty();
+            Flush();
+        }
+
+        // Forget what the player saw on the map: reveal animations play again, progress stays.
+        public void ResetSeenLevels()
+        {
+            if (_save.Campaign.Seen.Count == 0)
+                return;
+
+            _save.Campaign.Seen.Clear();
             MarkDirty();
             Flush();
         }
@@ -326,9 +378,10 @@ namespace Code.Infrastructure.Persistence
         {
             SetTownResources(0, 0, 0, 0, 0);
 
-            if (_save.Campaign.Levels.Count > 0)
+            if (_save.Campaign.Levels.Count > 0 || _save.Campaign.Seen.Count > 0)
             {
                 _save.Campaign.Levels.Clear();
+                _save.Campaign.Seen.Clear();
                 MarkDirty();
             }
 
@@ -405,6 +458,7 @@ namespace Code.Infrastructure.Persistence
             _save.Town.UnitSlots ??= new List<UnitSlotProgressData>(UnitRoster.SlotCount);
             _save.Campaign ??= new CampaignProgressData();
             _save.Campaign.Levels ??= new List<LevelProgressData>(8);
+            _save.Campaign.Seen ??= new List<LevelSeenData>(8);
 
             var mutated = MigrateCompletedLevels();
 

@@ -42,6 +42,33 @@ namespace Code.Infrastructure.Editor
 
             save.Campaign.Levels.Clear();
             save.Campaign.CompletedLevels = null;
+            save.Campaign.Seen?.Clear();
+            storage.Save(UserProgressService.SaveKey, save);
+        }
+
+        // Keeps completed levels; only the map reveal / unlock animations will play again.
+        [MenuItem("Tools/Levels/Reset Seen Levels", false, 21)]
+        private static void ResetSeenLevels()
+        {
+            if (TryGetLiveProgress(out var progress))
+            {
+                progress.ResetSeenLevels();
+
+                // Re-read on the next render of the open map; it replays the reveal.
+                var menu = Contexts.sharedInstance.meta.GetGroup(MetaMatcher.LevelMapMenu).GetSingleEntity();
+
+                if (menu != null)
+                    menu.isLevelMapDirty = true;
+
+                return;
+            }
+
+            var storage = new JsonFileStorageService();
+
+            if (!storage.TryLoad<UserSaveData>(UserProgressService.SaveKey, out var save) || save?.Campaign?.Seen == null)
+                return;
+
+            save.Campaign.Seen.Clear();
             storage.Save(UserProgressService.SaveKey, save);
         }
 

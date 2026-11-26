@@ -7,7 +7,7 @@ namespace Code.Meta.UI.MainMenu
 {
     /// <summary>
     /// Pixel-art cloud veil over the world map (Tiny Swords style). Covers the whole map content,
-    /// leaves clearings where it is told to, and floats a few of the pack's cloud sprites over the veil.
+    /// leaves clearings where it is told to, and gently breathes while the map is open.
     /// Passive: no game logic here.
     /// </summary>
     public sealed class LevelMapClouds : VisualElement
@@ -16,7 +16,7 @@ namespace Code.Meta.UI.MainMenu
 
         // The clearing field is smooth, a coarse texture is enough for it.
         private const float FieldStep = 8f;
-        // Drifting sprites move every frame; the breathing veil is redrawn at about 30 fps.
+        // The breathing veil (and an opening clearing) is redrawn at about 30 fps.
         private const long FrameMs = 16;
         private const float VeilFrame = 1f / 30f;
         private const int FieldPass = 0;
@@ -38,7 +38,6 @@ namespace Code.Meta.UI.MainMenu
         private static readonly int BreathSpeedId = Shader.PropertyToID("_BreathSpeed");
 
         private readonly Vector4[] _holes = new Vector4[MaxHoles];
-        private readonly List<DriftCloud> _drifters = new(8);
         private readonly IVisualElementScheduledItem _tick;
 
         private int _holeCount;
@@ -48,7 +47,6 @@ namespace Code.Meta.UI.MainMenu
         private RenderTexture _field;
         private RenderTexture _clouds;
         private bool _fieldDirty = true;
-        private float _lastTime = -1f;
         private float _lastVeilTime = -1f;
 
         public LevelMapClouds()
@@ -71,7 +69,6 @@ namespace Code.Meta.UI.MainMenu
             _settings = settings;
             style.display = settings != null ? DisplayStyle.Flex : DisplayStyle.None;
             _fieldDirty = true;
-            BuildDrifters();
             Redraw();
         }
 
@@ -82,11 +79,11 @@ namespace Code.Meta.UI.MainMenu
 
             _mapSize = size;
             _fieldDirty = true;
-            BuildDrifters();
             Redraw();
         }
 
-        public void SetHoles(List<Vector4> holes)
+        /// <summary>Holes are (x, y, radius, scale 0..1). Animated: redrawn on the next frame, not now.</summary>
+        public void SetHoles(List<Vector4> holes, bool animated = false)
         {
             _holeCount = Mathf.Min(holes.Count, MaxHoles);
 
@@ -94,14 +91,14 @@ namespace Code.Meta.UI.MainMenu
                 _holes[i] = holes[i];
 
             _fieldDirty = true;
-            Redraw();
-            UpdateDrifters(0f);
+
+            if (!animated)
+                Redraw();
+
         }
 
         public void SetRunning(bool running)
         {
-            _lastTime = -1f;
-
             if (running)
                 _tick.Resume();
             else
@@ -125,12 +122,11 @@ namespace Code.Meta.UI.MainMenu
         private void Tick(TimerState timer)
         {
             var now = Time.unscaledTime;
-            var dt = _lastTime < 0f ? 0f : Mathf.Min(now - _lastTime, 0.1f);
-            _lastTime = now;
 
-            UpdateDrifters(dt);
+            // A clearing is opening (reveal animation) or the edge breathes: redraw at the veil rate.
+            var animated = _fieldDirty || (_settings != null && _settings.BreathAmount > 0f);
 
-            if (_settings != null && _settings.BreathAmount > 0f && now - _lastVeilTime >= VeilFrame)
+            if (animated && now - _lastVeilTime >= VeilFrame)
                 Redraw();
         }
 
@@ -178,104 +174,6 @@ namespace Code.Meta.UI.MainMenu
             Mathf.Max(1, Mathf.RoundToInt(_mapSize.x / step)),
             Mathf.Max(1, Mathf.RoundToInt(_mapSize.y / step)));
 
-        // ---- Drifting sprites ----
-
-        private void BuildDrifters()
-        {
-            for (var i = 0; i < _drifters.Count; i++)
-                _drifters[i].View.RemoveFromHierarchy();
-
-            _drifters.Clear();
-
-            if (_settings == null || _mapSize.x <= 0f || _settings.DriftClouds == null || _settings.DriftClouds.Length == 0)
-                return;
-
-            var random = new System.Random(2026);
-            var scale = _settings.PixelSize * _settings.DriftCloudScale;
-            var textures = _settings.DriftClouds;
-
-            for (var i = 0; i < _settings.DriftCloudCount; i++)
-            {
-                var texture = textures[i % textures.Length];
-
-                if (texture == null)
-                    continue;
-
-                var size = new Vector2(texture.width, texture.height) * scale;
-                var view = new VisualElement { pickingMode = PickingMode.Ignore };
-                view.AddToClassList("level-map-drift-cloud");
-                view.style.width = size.x;
-                view.style.height = size.y;
-                view.style.backgroundImage = texture;
-                view.style.opacity = 0f;
-                Add(view);
-
-                _drifters.Add(new DriftCloud(view, size)
-                {
-                    Position = new Vector2(
-                        (float)random.NextDouble() * (_mapSize.x + size.x) - size.x,
-                        (float)random.NextDouble() * (_mapSize.y - size.y * 0.5f) - size.y * 0.25f)
-                });
-            }
-
-            UpdateDrifters(0f);
-        }
-
-        private void UpdateDrifters(float dt)
-        {
-            if (_settings == null)
-                return;
-
-            for (var i = 0; i < _drifters.Count; i++)
-            {
-                var drifter = _drifters[i];
-                drifter.Position.x += _settings.DriftSpeed * dt;
-
-                if (drifter.Position.x > _mapSize.x)
-                    drifter.Position.x = -drifter.Size.x;
-
-                // Sub-pixel position: snapping to the art grid at this speed reads as stutter.
-                drifter.View.style.translate = new Translate(drifter.Position.x, drifter.Position.y);
-
-                var visible = OverVeil(drifter);
-
-                if (visible != drifter.Visible)
-                {
-                    drifter.Visible = visible;
-                    drifter.View.style.opacity = visible ? 1f : 0f;
-                }
-            }
-        }
-
-        // The pack's cloud art fills roughly the middle of the texture; all of it must sit over the veil.
-        private bool OverVeil(DriftCloud drifter)
-        {
-            var margin = _settings.PuffSize * 0.5f;
-            var center = drifter.Position + drifter.Size * 0.5f;
-            var half = new Vector2(drifter.Size.x * 0.35f, drifter.Size.y * 0.25f);
-
-            return Clear(center) > margin
-                && Clear(center + new Vector2(-half.x, -half.y)) > margin
-                && Clear(center + new Vector2(half.x, -half.y)) > margin
-                && Clear(center + new Vector2(-half.x, half.y)) > margin
-                && Clear(center + new Vector2(half.x, half.y)) > margin;
-        }
-
-        // CPU twin of the shader's clearing field (without the smoothing): > 0 under the clouds.
-        private float Clear(Vector2 point)
-        {
-            var distance = float.MaxValue;
-
-            for (var i = 0; i < _holeCount; i++)
-            {
-                var hole = _holes[i];
-                distance = Mathf.Min(distance, Vector2.Distance(point, new Vector2(hole.x, hole.y)) - hole.z);
-            }
-
-            var edge = Mathf.Min(Mathf.Min(point.x, _mapSize.x - point.x), Mathf.Min(point.y, _mapSize.y - point.y));
-            return Mathf.Max(distance, _settings.BorderWidth - edge);
-        }
-
         // ---- Render textures ----
 
         private static bool Ensure(ref RenderTexture texture, Vector2Int size, RenderTextureFormat format, FilterMode filter)
@@ -306,20 +204,6 @@ namespace Code.Meta.UI.MainMenu
             texture.Release();
             Object.Destroy(texture);
             texture = null;
-        }
-
-        private sealed class DriftCloud
-        {
-            public readonly VisualElement View;
-            public readonly Vector2 Size;
-            public Vector2 Position;
-            public bool Visible;
-
-            public DriftCloud(VisualElement view, Vector2 size)
-            {
-                View = view;
-                Size = size;
-            }
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Code.Infrastructure.Persistence
 {
     public class UserSaveData
     {
-        public const int CurrentVersion = 4;
+        public const int CurrentVersion = 5;
 
         public int Version = CurrentVersion;
         public string UserId;
@@ -52,6 +52,9 @@ namespace Code.Infrastructure.Persistence
     {
         public List<LevelProgressData> Levels = new(8);
 
+        // The state each map node had when the player last saw it, so map reveal animations play once.
+        public List<LevelSeenData> Seen = new(8);
+
         // Version 3 stored only completion. Migrated into Levels on load.
         public List<string> CompletedLevels;
     }
@@ -60,6 +63,12 @@ namespace Code.Infrastructure.Persistence
     {
         public string Id;
         public int Stars;
+    }
+
+    public class LevelSeenData
+    {
+        public string Id;
+        public int State;
     }
 
     public class TownBuildingProgressData

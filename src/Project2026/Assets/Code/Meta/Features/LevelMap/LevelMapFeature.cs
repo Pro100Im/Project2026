@@ -13,6 +13,7 @@ namespace Code.Meta.Features.LevelMap
             Add(systems.Create<LevelNodeProgressSystem>());
             Add(systems.Create<LevelNodeStateSystem>());
             Add(systems.Create<LevelMapRenderSystem>());
+            Add(systems.Create<LevelNodeSeenSystem>());
             Add(systems.Create<LevelNodeChooseSystem>());
         }
     }

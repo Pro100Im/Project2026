@@ -15,6 +15,8 @@ namespace Code.Meta.Features.LevelMap
     [Meta] public class LevelNodeCompleted : IComponent { }
     [Meta] public class LevelNodeStateComponent : IComponent { public LevelNodeState Value; }
     [Meta] public class LevelNodeStars : IComponent { public int Value; }
+    // The state the player last saw this node in; the view animates the difference once.
+    [Meta] public class LevelNodeSeenState : IComponent { public LevelNodeState Value; }
 
     [Meta] public class LevelMapMenuComponent : IComponent { public LevelSelectMenu Value; }
     [Meta] public class LevelMapMenuOpened : IComponent { }

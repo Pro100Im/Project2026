@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Code.Meta.Features.LevelMap.Systems
 {
     /// <summary>
-    /// Syncs node completion and stars from the save while the open map is dirty (e.g. right after opening).
+    /// Syncs node completion, stars and the last seen state from the save while the open map is dirty (e.g. right after opening).
     /// </summary>
     public class LevelNodeProgressSystem : IExecuteSystem
     {
@@ -37,6 +37,12 @@ namespace Code.Meta.Features.LevelMap.Systems
 
                 if (!node.hasLevelNodeStars || node.levelNodeStars.Value != stars)
                     node.ReplaceLevelNodeStars(stars);
+
+                // Never seen = was hidden under the clouds.
+                _progress.TryGetSeenLevelState(node.levelNodeId.Value, out var seen);
+
+                if (!node.hasLevelNodeSeenState || node.levelNodeSeenState.Value != seen)
+                    node.ReplaceLevelNodeSeenState(seen);
             }
         }
     }

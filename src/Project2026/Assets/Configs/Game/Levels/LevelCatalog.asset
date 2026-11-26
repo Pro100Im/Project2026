@@ -29,18 +29,6 @@ MonoBehaviour:
     ShadowColor: {r: 0.141176, g: 0.164706, b: 0.231373, a: 0.333333}
     BreathAmount: 0.06
     BreathSpeed: 0.8
-    DriftSpeed: 12
-    DriftClouds:
-    - {fileID: 2800000, guid: 5477e3862c2872b488c006e140fb8d76, type: 3}
-    - {fileID: 2800000, guid: 3e6d1e78dc6eede46a4d20cb11e9ea32, type: 3}
-    - {fileID: 2800000, guid: 6a2462969bc8d0a4797687525ba7a172, type: 3}
-    - {fileID: 2800000, guid: c77b808608edd134abb71679dbbfe9c2, type: 3}
-    - {fileID: 2800000, guid: 83810d047785e3640af5c3e4c5d72137, type: 3}
-    - {fileID: 2800000, guid: a986926812344cf40a0b1ce4f9d492b8, type: 3}
-    - {fileID: 2800000, guid: d0cebd0802468874e8594b17667bbff1, type: 3}
-    - {fileID: 2800000, guid: aca724b026f90da468fdb5ee83de61ba, type: 3}
-    DriftCloudCount: 6
-    DriftCloudScale: 0.5
   _nodes:
   - <Id>k__BackingField: start
     <Title>k__BackingField: Start

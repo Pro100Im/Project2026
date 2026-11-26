@@ -104,13 +104,19 @@ Shader "Project2026/LevelMapClouds"
                     if (i >= count)
                         break;
 
-                    d = SmoothMin(d, length(p - _Holes[i].xy) - _Holes[i].z, 90.0);
+                    // w scales the radius: the reveal animation opens a clearing from 0 to 1.
+                    if (_Holes[i].w <= 0.001)
+                        continue;
+
+                    d = SmoothMin(d, length(p - _Holes[i].xy) - _Holes[i].z * _Holes[i].w, 90.0);
                 }
 
                 // Wavy frame: a straight border would show as straight seams between the puffs.
                 float edge = min(min(p.x, _MapSize.x - p.x), min(p.y, _MapSize.y - p.y));
                 float wave = (Noise(p * 0.008) * 0.65 + Noise(p * 0.021) * 0.35 - 0.5) * _BorderWidth * 0.8;
-                return float4(max(d, _BorderWidth - edge + wave), 0.0, 0.0, 1.0);
+                // Clearings cut through the frame too: a flag near the map edge stays fully visible.
+                float field = d < 0.0 ? d : max(d, _BorderWidth - edge + wave);
+                return float4(field, 0.0, 0.0, 1.0);
             }
             ENDHLSL
         }
@@ -161,10 +167,13 @@ Shader "Project2026/LevelMapClouds"
             // center and radius only, so the breathing below never makes puffs pop in or out:
             // field at the rest center in [fieldMin + radius * fieldMinPerRadius, fieldMax], hash under
             // density, and (thinning) fewer puffs the deeper they sit past thinStart over thinLength.
+            // stacked: overlapping puffs are layered like the pack's sprites, the lower one in front,
+            // so every puff keeps its crescent; otherwise the puff the pixel is deepest inside wins.
             Puff Layer(float2 p, float cell, float rMin, float rMax, float seed,
                        float fieldMin, float fieldMinPerRadius, float fieldMax, float density,
-                       float thinStart, float thinLength)
+                       float thinStart, float thinLength, bool stacked)
             {
+                float bestScore = -1.0e9;
                 Puff best;
                 best.height = -1.0;
                 best.center = 0.0;
@@ -197,7 +206,12 @@ Shader "Project2026/LevelMapClouds"
                         float radius = baseRadius * (1.0 + _BreathAmount * sin(t + phase * 2.0));
                         float height = radius - length(p - center);
 
-                        if (height <= best.height)
+                        if (height <= 0.0)
+                            continue;
+
+                        float score = stacked ? rest.y : height;
+
+                        if (score <= bestScore)
                             continue;
 
                         float field = Field(rest);
@@ -208,6 +222,7 @@ Shader "Project2026/LevelMapClouds"
                         if (thinLength > 0.0 && h.y < saturate((field - thinStart) / thinLength))
                             continue;
 
+                        bestScore = score;
                         best.height = height;
                         best.center = center;
                         best.radius = radius;
@@ -222,19 +237,19 @@ Shader "Project2026/LevelMapClouds"
             // out gradually and uncover the big puffs, so there is no visible border between the two.
             Puff EdgePuffs(float2 p)
             {
-                return Layer(p, _PuffSize, 0.7, 1.0, 0.0, 0.0, 0.2, 100000.0, 1.0, _PuffSize * 1.5, _PuffSize * 3.5);
+                return Layer(p, _PuffSize, 0.7, 1.0, 0.0, 0.0, 0.2, 100000.0, 1.0, _PuffSize * 1.5, _PuffSize * 6.0, false);
             }
 
             // Big puffs filling the inside of the veil.
             Puff BigPuffs(float2 p)
             {
-                return Layer(p, _PuffSize * 2.4, 0.75, 1.05, 11.0, _PuffSize * 0.8, 0.0, 100000.0, 1.0, 0.0, 0.0);
+                return Layer(p, _PuffSize * 1.7, 0.7, 1.0, 11.0, _PuffSize * 0.8, 0.0, 100000.0, 1.0, 0.0, 0.0, true);
             }
 
             // Small loose dots floating just outside the cloud edge.
             Puff Dots(float2 p)
             {
-                return Layer(p, _PuffSize * 0.5, 0.14, 0.26, 23.0, _PuffSize * -1.5, 0.0, _PuffSize * -0.7, 0.35, 0.0, 0.0);
+                return Layer(p, _PuffSize * 0.5, 0.14, 0.26, 23.0, _PuffSize * -1.5, 0.0, _PuffSize * -0.7, 0.35, 0.0, 0.0, false);
             }
 
             bool InCloud(float2 p)
@@ -280,9 +295,9 @@ Shader "Project2026/LevelMapClouds"
                 {
                     Puff big = BigPuffs(p);
 
-                    // Relatively thinner crescent so it is about as many pixels wide as on the small puffs.
+                    // Crescent about as many pixels wide as on the small puffs.
                     if (big.height > 0.0)
-                        return half4(Tone(p, big, field, 0.9), 1.0);
+                        return half4(Tone(p, big, field, 0.88), 1.0);
 
                     // Gaps: light near the edge so no seam shows, mid deeper in.
                     return half4(field < _PuffSize * 1.5 ? _LightColor.rgb : _MidColor.rgb, 1.0);

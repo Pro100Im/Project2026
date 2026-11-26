@@ -60,6 +60,7 @@ namespace Code.Meta.Features.LevelMap.Systems
                     node.levelNodeId.Value,
                     node.levelNodeTitle.Value,
                     state,
+                    Seen(node),
                     node.levelNodeStars.Value,
                     node.levelNodePosition.Value);
 
@@ -87,12 +88,20 @@ namespace Code.Meta.Features.LevelMap.Systems
                 if (parent == null || !IsOpen(parent.levelNodeState.Value))
                     continue;
 
+                // The player has not seen this road yet: the view draws it in.
+                var fresh = !IsOpen(Seen(parent)) || Seen(node) == LevelNodeState.Hidden;
+
                 _links.Add(new LevelMapLink(
                     parent.levelNodePosition.Value,
                     node.levelNodePosition.Value,
-                    parent.isLevelNodeCompleted));
+                    parent.isLevelNodeCompleted,
+                    fresh));
             }
         }
+
+        // No seen record yet means the node was never shown: treat it as still under the clouds.
+        private static LevelNodeState Seen(MetaEntity node) =>
+            node.hasLevelNodeSeenState ? node.levelNodeSeenState.Value : LevelNodeState.Hidden;
 
         private static bool IsOpen(LevelNodeState state) =>
             state == LevelNodeState.Available || state == LevelNodeState.Completed;

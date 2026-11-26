@@ -46,18 +46,6 @@ namespace Code.Game.StaticData.Configs
         [Tooltip("Swell and sway speed.")]
         public float BreathSpeed = 0.8f;
 
-        [Header("Drift")]
-        [Tooltip("Cloud drift speed, map pixels per second.")]
-        public float DriftSpeed = 12f;
-
-        [Tooltip("Whole cloud sprites that float over the veil.")]
-        public Texture2D[] DriftClouds = Array.Empty<Texture2D>();
-
-        [Min(0)] public int DriftCloudCount = 6;
-
-        [Tooltip("A sprite texel is PixelSize x this map pixels.")]
-        [Min(0.1f)] public float DriftCloudScale = 0.5f;
-
         private static Color Rgba(byte r, byte g, byte b, byte a) => new Color32(r, g, b, a);
     }
 }
