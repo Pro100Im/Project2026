@@ -1,4 +1,5 @@
 using Code.Game.Common.Entity;
+using Code.Game.Features.Level;
 using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,13 +12,12 @@ namespace Code.Game.Features.Attack.Systems
         private readonly IGroup<GameEntity> _attacks;
 
         private readonly List<GameEntity> _attacksBuffer = new(86);
-        private readonly HashSet<int> _checkedTargets = new(128);
 
         public RangeAreaAttackHitSystem()
         {
             var gameContext = Contexts.sharedInstance.game;
 
-            _maps = gameContext.GetGroup(GameMatcher.AllOf(GameMatcher.SpatialHash));
+            _maps = gameContext.GetGroup(GameMatcher.Arena);
 
             _attacks = gameContext.GetGroup(GameMatcher
                 .AllOf(
@@ -35,7 +35,7 @@ namespace Code.Game.Features.Attack.Systems
             if (mapEntity == null) 
                 return;
 
-            var spatialHash = mapEntity.spatialHash.Value;
+            var arena = mapEntity.arena.Value;
             var attacks = _attacks.GetEntities(_attacksBuffer);
 
             for (int i = 0; i < attacks.Count; i++)
@@ -45,13 +45,13 @@ namespace Code.Game.Features.Attack.Systems
                 if (attack.trajectoryPathProgress.Value < 1)
                     continue;
 
-                ApplySplashDamage(attack, spatialHash);
+                ApplySplashDamage(attack, arena);
 
                 attack.isDestructed = true;
             }
         }
 
-        private void ApplySplashDamage(GameEntity attack, Dictionary<Vector2Int, List<int>> spatialHash)
+        private void ApplySplashDamage(GameEntity attack, LevelArena arena)
         {
             var mainTarget = GetGameEntityById.Get(attack.targetId.Value);
 
@@ -65,38 +65,33 @@ namespace Code.Game.Features.Attack.Systems
             var sqrSplash = splashRadius * splashRadius;
             var impactPos = attack.targetPoint.Value;
             var originCell = mainTarget.currentCell.Value;
-            var searchRange = Mathf.CeilToInt(splashRadius);
+            var mainTargetId = mainTarget.id.Value;
+            var originMin = arena.CellMin(originCell.x, originCell.y);
+            var searchRange = Mathf.CeilToInt(splashRadius) * arena.CellSize;
 
-            _checkedTargets.Clear();
-            _checkedTargets.Add(mainTarget.id.Value);
+            var candidates = arena.Query(
+                originMin.x - searchRange,
+                originMin.y - searchRange,
+                originMin.x + arena.CellSize + searchRange,
+                originMin.y + arena.CellSize + searchRange);
 
-            for (var x = -searchRange; x <= searchRange; x++)
+            for (var j = 0; j < candidates; j++)
             {
-                for (var y = -searchRange; y <= searchRange; y++)
-                {
-                    var checkPos = new Vector2Int(originCell.x + x, originCell.y + y);
+                var unitId = arena.QueryResults[j];
 
-                    if (spatialHash.TryGetValue(checkPos, out var cellUnits))
-                    {
-                        for (int j = 0; j < cellUnits.Count; j++)
-                        {
-                            var unitId = cellUnits[j];
+                if (unitId == attack.ownerId.Value || unitId == mainTargetId)
+                    continue;
 
-                            if (unitId == attack.ownerId.Value || !_checkedTargets.Add(unitId))
-                                continue;
+                var other = GetGameEntityById.Get(unitId);
 
-                            var other = GetGameEntityById.Get(unitId);
-                            if (other == null || other.isDead || other.team.Value == attack.team.Value)
-                                continue;
+                if (other == null || other.isDead || !other.hasTeam || other.team.Value == attack.team.Value)
+                    continue;
 
-                            var otherPos = other.hasWoldPos ? other.woldPos.Value : (Vector3)other.currentCell.Value;
-                            var distSqr = (otherPos - (Vector3)impactPos).sqrMagnitude;
+                var otherPos = other.hasWoldPos ? other.woldPos.Value : (Vector3)other.currentCell.Value;
+                var distSqr = (otherPos - (Vector3)impactPos).sqrMagnitude;
 
-                            if (distSqr <= sqrSplash)
-                                CreateDamageRequest(attack, unitId, otherPos);
-                        }
-                    }
-                }
+                if (distSqr <= sqrSplash)
+                    CreateDamageRequest(attack, unitId, otherPos);
             }
         }
 

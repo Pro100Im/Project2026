@@ -16,4 +16,5 @@ namespace Code.Game.Features.Level
     [Game] public class SpawnReservedField : IComponent { public HashSet<Vector3Int> Value; }
     [Game] public class FlowFieldDirty : IComponent { }
     [Game] public class SurroundField : IComponent { public Dictionary<Vector3Int, int> Value; }
+    [Game] public class Arena : IComponent { public LevelArena Value; }
 }

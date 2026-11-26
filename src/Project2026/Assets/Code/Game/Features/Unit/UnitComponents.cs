@@ -14,6 +14,7 @@ namespace Code.Game.Features.Unit
     [Game] public class UnitIcon : IComponent { public Sprite Value; }
     [Game] public class UnitSize : IComponent { public Vector2Int Value; }
     [Game] public class UnitAnchorPoint : IComponent { public Vector3 Value; }
+    [Game] public class UnitRadius : IComponent { public float Value; }
 
     [Meta] public class UnitRangeShowed : IComponent { }
     [Meta] public class UnitSelectedView : IComponent { }

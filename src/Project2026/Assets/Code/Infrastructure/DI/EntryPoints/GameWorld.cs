@@ -74,6 +74,8 @@ namespace Code.Infrastructure.DI.EntryPoints
             _gameTickFeature.ClearReactiveSystems();
             _gameTickFeature.TearDown();
 
+            DisposeLevelArena();
+
             Contexts.sharedInstance.game.Reset();
             Contexts.sharedInstance.meta.Reset();
 
@@ -82,6 +84,14 @@ namespace Code.Infrastructure.DI.EntryPoints
             _viewPool.Clear();
 
             _gameTickFeature = null;
+        }
+
+        // Safety net: the level map frees its arena when its view unbinds; this covers a map that never unbound.
+        private static void DisposeLevelArena()
+        {
+            var map = Contexts.sharedInstance.game.GetGroup(GameMatcher.Arena).GetSingleEntity();
+
+            map?.arena.Value?.Dispose();
         }
 
         private void ReleaseAllBoundViews()

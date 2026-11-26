@@ -17,7 +17,6 @@ namespace Code.Game.Features.Target.Systems
         private readonly IGroup<GameEntity> _maps;
 
         private readonly List<GameEntity> _buffer = new(256);
-        private readonly HashSet<int> _processedTargets = new(256);
 
         public SelectCombatTargetSystem()
         {
@@ -32,7 +31,7 @@ namespace Code.Game.Features.Target.Systems
                 GameMatcher.CurrentCell));
 
             _maps = gameContext.GetGroup(GameMatcher.AllOf(
-                GameMatcher.SpatialHash,
+                GameMatcher.Arena,
                 GameMatcher.TilemapMovement,
                 GameMatcher.SurroundField));
         }
@@ -44,7 +43,7 @@ namespace Code.Game.Features.Target.Systems
             if (mapEntity == null)
                 return;
 
-            var spatialHash = mapEntity.spatialHash.Value;
+            var arena = mapEntity.arena.Value;
             var tilemap = mapEntity.tilemapMovement.Value;
             var surroundField = mapEntity.surroundField.Value;
             var attackers = _attackers.GetEntities(_buffer);
@@ -93,43 +92,35 @@ namespace Code.Game.Features.Target.Systems
                 var bestSqrDist = float.MaxValue;
                 var physicalRange = TargetService.GetPhysicalRange(detectionRange);
                 var sqrPhysicalRange = physicalRange * physicalRange;
-                var originCell = GetScanOriginCell(attacker.currentCell.Value, attackOriginPos, tilemap);
-                var iRange = Mathf.CeilToInt(TargetService.GetEffectiveRange(detectionRange)) + 1;
+                var scanHalf = (Mathf.CeilToInt(TargetService.GetEffectiveRange(detectionRange)) + 1.5f) * arena.CellSize;
 
-                _processedTargets.Clear();
+                var candidates = arena.Query(
+                    attackOriginPos.x - scanHalf,
+                    attackOriginPos.y - scanHalf,
+                    attackOriginPos.x + scanHalf,
+                    attackOriginPos.y + scanHalf);
 
-                for (var x = -iRange; x <= iRange; x++)
+                for (var j = 0; j < candidates; j++)
                 {
-                    for (var y = -iRange; y <= iRange; y++)
+                    var targetId = arena.QueryResults[j];
+
+                    if (targetId == attacker.id.Value)
+                        continue;
+
+                    var target = GetGameEntityById.Get(targetId);
+
+                    if (!IsValidCombatTarget(target, myTeam))
+                        continue;
+
+                    var sDist = GetSqrDistToTarget(attackOriginPos, target, tilemap);
+
+                    if (sDist > sqrPhysicalRange)
+                        continue;
+
+                    if (sDist < bestSqrDist)
                     {
-                        var checkPos = new Vector2Int(originCell.x + x, originCell.y + y);
-
-                        if (!spatialHash.TryGetValue(checkPos, out var potentialTargets))
-                            continue;
-
-                        for (var j = 0; j < potentialTargets.Count; j++)
-                        {
-                            var targetId = potentialTargets[j];
-
-                            if (targetId == attacker.id.Value || !_processedTargets.Add(targetId))
-                                continue;
-
-                            var target = GetGameEntityById.Get(targetId);
-
-                            if (!IsValidCombatTarget(target, myTeam))
-                                continue;
-
-                            var sDist = GetSqrDistToTarget(attackOriginPos, target, tilemap);
-
-                            if (sDist > sqrPhysicalRange)
-                                continue;
-
-                            if (sDist < bestSqrDist)
-                            {
-                                bestSqrDist = sDist;
-                                bestTargetId = targetId;
-                            }
-                        }
+                        bestSqrDist = sDist;
+                        bestTargetId = targetId;
                     }
                 }
 
@@ -163,23 +154,6 @@ namespace Code.Game.Features.Target.Systems
                 attacker.ReplaceTargetId(bestTargetId);
                 SyncSurroundToTargetId(attacker, surroundField);
             }
-        }
-
-        private static Vector3Int GetScanOriginCell(
-            Vector3Int attackerCell,
-            Vector2 attackOriginPos,
-            Dictionary<Vector3Int, Vector3> tilemap)
-        {
-            if (!tilemap.TryGetValue(attackerCell, out var cellWorld))
-                return attackerCell;
-
-            var offsetX = attackOriginPos.x - cellWorld.x;
-            var offsetY = attackOriginPos.y - cellWorld.y;
-
-            return new Vector3Int(
-                attackerCell.x + Mathf.RoundToInt(offsetX / TargetService.CellSize),
-                attackerCell.y + Mathf.RoundToInt(offsetY / TargetService.CellSize),
-                attackerCell.z);
         }
 
         private static Vector2 GetAttackOrigin(GameEntity attacker)

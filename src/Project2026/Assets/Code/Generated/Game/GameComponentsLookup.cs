@@ -223,7 +223,11 @@ public static class GameComponentsLookup {
     public const int ActiveLevelNode = 212;
     public const int LevelStars = 213;
 
-    public const int TotalComponents = 214;
+    public const int Arena = 214;
+    public const int SimSlot = 215;
+    public const int UnitRadius = 216;
+
+    public const int TotalComponents = 217;
 
     public static readonly string[] componentNames = {
         "ForcedPause",
@@ -439,7 +443,10 @@ public static class GameComponentsLookup {
         "WaveStartRequsted",
         "Projectile",
         "ActiveLevelNode",
-        "LevelStars"
+        "LevelStars",
+        "Arena",
+        "SimSlot",
+        "UnitRadius"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -656,6 +663,9 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.Wave.WaveStartRequsted),
         typeof(Projectile),
         typeof(Code.Game.Features.LevelLoad.ActiveLevelNode),
-        typeof(Code.Game.Features.LevelLoad.LevelStars)
+        typeof(Code.Game.Features.LevelLoad.LevelStars),
+        typeof(Code.Game.Features.Level.Arena),
+        typeof(Code.Game.Features.Movement.SimSlot),
+        typeof(Code.Game.Features.Unit.UnitRadius)
     };
 }

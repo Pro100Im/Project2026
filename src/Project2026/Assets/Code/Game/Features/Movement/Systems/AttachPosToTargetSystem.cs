@@ -28,7 +28,13 @@ namespace Code.Game.Features.Movement.Systems
                 var follower = entities[i];
                 var targetEntity = GetGameEntityById.Get(follower.targetId.Value);
 
-                if (targetEntity != null && targetEntity.isMoving)
+                if (targetEntity == null)
+                    continue;
+
+                // A simulated unit is drawn between simulation steps, so its followers stick to the drawn position.
+                if (targetEntity.hasSimSlot && targetEntity.hasTransform)
+                    follower.transform.Value.position = targetEntity.transform.Value.position + follower.movementOffset.Value;
+                else if (targetEntity.isMoving)
                     follower.transform.Value.position = targetEntity.woldPos.Value + follower.movementOffset.Value;
             }
         }

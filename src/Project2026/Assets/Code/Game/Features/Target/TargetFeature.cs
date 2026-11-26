@@ -17,10 +17,6 @@ namespace Code.Game.Features.Target
             Add(systemFactory.Create<AssignRallyToCastleSystem>());
             Add(systemFactory.Create<AssignRallySurroundSlotSystem>());
             Add(systemFactory.Create<DefensePatrolSystem>());
-
-            Add(systemFactory.Create<ClearHeldMoveStateSystem>());
-            Add(systemFactory.Create<RequestTargetCellSystem>());
-            Add(systemFactory.Create<SelectTargetCellSystem>());
         }
     }
 }

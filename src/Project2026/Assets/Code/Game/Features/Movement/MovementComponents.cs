@@ -23,6 +23,7 @@ namespace Code.Game.Features.Movement
     [Game] public class MoveWait : IComponent { public float Value; }
     [Game] public class MoveCommit : IComponent { public MoveCommitData Value; }
     [Game] public class Velocity : IComponent { public Vector3 Value; }
+    [Game] public class SimSlot : IComponent { public int Value; }
     [Game] public class Trajectory : IComponent { public AnimationCurve Value; }
     [Game] public class TrajectoryBaseArcHeight : IComponent { public float Value; }
     [Game] public class TrajectoryCurrentArcHeight : IComponent { public float Value; }

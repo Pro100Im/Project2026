@@ -9,8 +9,10 @@ namespace Code.Game.Features.Level
         {
             Add(systemFactory.Create<OccupiedCellSystem>());
             Add(systemFactory.Create<BuildFlowFieldSystem>());
-            Add(systemFactory.Create<ReservedCellSystem>());
-            Add(systemFactory.Create<UpdateSpatialHashSystem>());
+
+            Add(systemFactory.Create<UpdateNavObstaclesSystem>());
+            Add(systemFactory.Create<BuildNavFieldsSystem>());
+            Add(systemFactory.Create<UpdateSpatialGridSystem>());
         }
     }
 }

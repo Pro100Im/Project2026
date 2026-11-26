@@ -48,9 +48,9 @@ namespace Code.Game.Features
 
             Add(systemFactory.Create<TowerFeature>());
 
-            Add(systemFactory.Create<LevelFeature>());
+            // Level grid, targeting and unit movement tick at a fixed step.
+            Add(systemFactory.Create<SimulationFeature>());
 
-            Add(systemFactory.Create<TargetFeature>());
             Add(systemFactory.Create<MovementFeature>());
             Add(systemFactory.Create<AttackFeature>());
             Add(systemFactory.Create<DamageFeature>());

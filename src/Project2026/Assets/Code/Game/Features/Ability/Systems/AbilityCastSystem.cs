@@ -12,7 +12,6 @@ namespace Code.Game.Features.Ability.Systems
         private readonly IGroup<GameEntity> _maps;
 
         private readonly List<GameEntity> _castsBuffer = new(8);
-        private readonly HashSet<int> _checkedTargets = new(128);
 
         public AbilityCastSystem()
         {
@@ -30,9 +29,7 @@ namespace Code.Game.Features.Ability.Systems
                 .NoneOf(GameMatcher.Destructed));
 
             _maps = gameContext.GetGroup(GameMatcher
-                .AllOf(
-                    GameMatcher.SpatialHash,
-                    GameMatcher.TilemapMovement));
+                .AllOf(GameMatcher.Arena));
         }
 
         public void Execute()
@@ -55,34 +52,27 @@ namespace Code.Game.Features.Ability.Systems
 
         private void ApplyAbility(GameEntity cast, GameEntity map)
         {
-            var spatialHash = map.spatialHash.Value;
-            var originCell = FindClosestCell(cast.targetPoint.Value, map.tilemapMovement.Value);
-            var searchRange = Mathf.CeilToInt(cast.abilityRadius.Value);
+            var arena = map.arena.Value;
+            var center = cast.targetPoint.Value;
             var physicalRadius = cast.abilityRadius.Value * TargetService.CellSize;
             var sqrRadius = physicalRadius * physicalRadius;
 
-            _checkedTargets.Clear();
+            // Units are registered by cell footprint while their sprite position is offset from it,
+            // so the search box is padded by a couple of cells.
+            var searchRange = physicalRadius + (arena.CellSize * 2f);
 
-            for (var x = -searchRange; x <= searchRange; x++)
-            {
-                for (var y = -searchRange; y <= searchRange; y++)
-                {
-                    var cell = new Vector2Int(originCell.x + x, originCell.y + y);
+            var candidates = arena.Query(
+                center.x - searchRange,
+                center.y - searchRange,
+                center.x + searchRange,
+                center.y + searchRange);
 
-                    if (!spatialHash.TryGetValue(cell, out var unitIds))
-                        continue;
-
-                    for (var j = 0; j < unitIds.Count; j++)
-                        TryApplyToTarget(cast, unitIds[j], sqrRadius);
-                }
-            }
+            for (var j = 0; j < candidates; j++)
+                TryApplyToTarget(cast, arena.QueryResults[j], sqrRadius);
         }
 
         private void TryApplyToTarget(GameEntity cast, int targetId, float sqrRadius)
         {
-            if (!_checkedTargets.Add(targetId))
-                return;
-
             var target = GetGameEntityById.Get(targetId);
 
             if (target == null || target.isDead || !target.isUnit || !target.hasTeam || !target.hasWoldPos)
@@ -114,25 +104,6 @@ namespace Code.Game.Features.Ability.Systems
                 AbilityTargetType.All => true,
                 _ => false
             };
-        }
-
-        private Vector3Int FindClosestCell(Vector3 point, Dictionary<Vector3Int, Vector3> tilemap)
-        {
-            var closestCell = Vector3Int.zero;
-            var closestDistance = float.MaxValue;
-
-            foreach (var pair in tilemap)
-            {
-                var distance = (pair.Value - point).sqrMagnitude;
-
-                if (distance >= closestDistance)
-                    continue;
-
-                closestDistance = distance;
-                closestCell = pair.Key;
-            }
-
-            return closestCell;
         }
     }
 }
