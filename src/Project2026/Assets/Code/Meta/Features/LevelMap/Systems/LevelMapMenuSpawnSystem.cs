@@ -36,6 +36,7 @@ namespace Code.Meta.Features.LevelMap.Systems
                 return;
 
             menu.AddLevelMapSize(_catalog.MapSize);
+            menu.AddLevelMapVeil(_catalog.Veil ?? new LevelMapVeilSettings());
 
             if (_catalog.MapBackground != null)
                 menu.AddLevelMapBackground(_catalog.MapBackground);

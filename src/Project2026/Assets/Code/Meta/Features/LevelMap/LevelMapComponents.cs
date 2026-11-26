@@ -1,3 +1,4 @@
+using Code.Game.StaticData.Configs;
 using Code.Meta.UI.MainMenu;
 using Entitas;
 using UnityEngine;
@@ -20,15 +21,20 @@ namespace Code.Meta.Features.LevelMap
     [Meta] public class LevelMapDirty : IComponent { }
     [Meta] public class LevelMapSize : IComponent { public Vector2 Value; }
     [Meta] public class LevelMapBackground : IComponent { public Sprite Value; }
+    [Meta] public class LevelMapVeil : IComponent { public LevelMapVeilSettings Value; }
 
     [Input] public class LevelMapMenuOpenRequested : IComponent { }
     [Input] public class LevelMapMenuCloseRequested : IComponent { }
     [Input] public class LevelNodeChooseRequested : IComponent { public string Value; }
 }
 
+/// <summary>
+/// Hidden: under the clouds, not drawn. Locked: visible next step, not playable yet.
+/// </summary>
 public enum LevelNodeState
 {
     Locked,
     Available,
-    Completed
+    Completed,
+    Hidden
 }

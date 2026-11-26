@@ -43,7 +43,7 @@ namespace Code.Meta.Features.LevelMap.Systems
         {
             var node = Find(id);
 
-            if (node == null || node.levelNodeState.Value == LevelNodeState.Locked)
+            if (node == null || !IsPlayable(node.levelNodeState.Value))
                 return;
 
             Contexts.sharedInstance.input.ReplaceSelectedLevel(id);
@@ -56,6 +56,9 @@ namespace Code.Meta.Features.LevelMap.Systems
             LevelMapMenuToggleSystem.SetOpened(menu, false);
             menu.levelMapMenu.Value.NotifyChosen(id);
         }
+
+        private static bool IsPlayable(LevelNodeState state) =>
+            state == LevelNodeState.Available || state == LevelNodeState.Completed;
 
         private MetaEntity Find(string id)
         {

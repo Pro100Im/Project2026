@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Code.Meta.Features.LevelMap.Systems
 {
     /// <summary>
-    /// Pushes the map to the view when the open map is dirty. Locked nodes stay hidden, a road is shown only between revealed nodes.
+    /// Pushes the map to the view when the open map is dirty. Hidden nodes stay under the clouds; a road is shown from an open (available/completed) node to a visible one.
     /// </summary>
     public class LevelMapRenderSystem : IExecuteSystem
     {
@@ -44,6 +44,7 @@ namespace Code.Meta.Features.LevelMap.Systems
             view.SetMap(
                 menu.hasLevelMapSize ? menu.levelMapSize.Value : Vector2.zero,
                 menu.hasLevelMapBackground ? menu.levelMapBackground.Value : null);
+            view.SetVeil(menu.hasLevelMapVeil ? menu.levelMapVeil.Value : null);
 
             var nodes = _nodes.GetEntities(_buffer);
             var stars = 0;
@@ -62,7 +63,7 @@ namespace Code.Meta.Features.LevelMap.Systems
                     node.levelNodeStars.Value,
                     node.levelNodePosition.Value);
 
-                if (state == LevelNodeState.Locked)
+                if (state == LevelNodeState.Hidden)
                     continue;
 
                 AddRoads(node, nodes);
@@ -83,7 +84,7 @@ namespace Code.Meta.Features.LevelMap.Systems
             {
                 var parent = Find(requires[r], nodes);
 
-                if (parent == null || parent.levelNodeState.Value == LevelNodeState.Locked)
+                if (parent == null || !IsOpen(parent.levelNodeState.Value))
                     continue;
 
                 _links.Add(new LevelMapLink(
@@ -92,6 +93,9 @@ namespace Code.Meta.Features.LevelMap.Systems
                     parent.isLevelNodeCompleted));
             }
         }
+
+        private static bool IsOpen(LevelNodeState state) =>
+            state == LevelNodeState.Available || state == LevelNodeState.Completed;
 
         private static MetaEntity Find(string id, List<MetaEntity> nodes)
         {

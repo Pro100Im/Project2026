@@ -1,5 +1,6 @@
 using Code.Game.Common.Entity;
 using Code.Game.Common.UI;
+using Code.Game.StaticData.Configs;
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,9 @@ namespace Code.Meta.UI.MainMenu
     {
         private static readonly Vector2 DefaultMapSize = new(2000f, 1200f);
 
+        // A clear hole around a flag is centered above the pole base so the banner sits inside it.
+        private const float HoleLift = 50f;
+
         [SerializeField] private UIDocument _mainMenuDoc;
 
         private UIService _uiService;
@@ -26,10 +30,14 @@ namespace Code.Meta.UI.MainMenu
         private VisualElement _content;
         private LevelMapBackdrop _backdrop;
         private LevelMapRoads _roads;
+        private LevelMapClouds _clouds;
+        private LevelMapVeilSettings _veil;
         private Label _starsValue;
         private Button _backButton;
 
         private readonly Dictionary<string, Marker> _markers = new(16);
+        private readonly List<LevelMapLink> _links = new(16);
+        private readonly List<Vector4> _holes = new(LevelMapClouds.MaxHoles);
 
         private Vector2 _mapSize = DefaultMapSize;
         private Vector2 _pan;
@@ -72,12 +80,14 @@ namespace Code.Meta.UI.MainMenu
         public void Show()
         {
             _focusPending = true;
+            _clouds?.SetRunning(true);
             _uiService.Show(_panel).Forget();
         }
 
         public void Hide()
         {
             StopDrag(_dragPointer);
+            _clouds?.SetRunning(false);
             _uiService.Hide(_panel).Forget();
         }
 
@@ -94,7 +104,14 @@ namespace Code.Meta.UI.MainMenu
             }
 
             _backdrop?.SetSprite(background);
+            _clouds?.SetMapSize(_mapSize);
             ApplyPan();
+        }
+
+        public void SetVeil(LevelMapVeilSettings veil)
+        {
+            _veil = veil;
+            _clouds?.SetSettings(veil);
         }
 
         public void SetNode(string id, string title, LevelNodeState state, int stars, Vector2 position)
@@ -119,7 +136,10 @@ namespace Code.Meta.UI.MainMenu
         public void SetLinks(List<LevelMapLink> links)
         {
             _roads?.Set(links);
+            _links.Clear();
+            _links.AddRange(links);
             SortMarkers();
+            UpdateClouds();
 
             if (_focusPending)
                 FocusOnFrontier();
@@ -146,6 +166,11 @@ namespace Code.Meta.UI.MainMenu
             _roads = new LevelMapRoads();
             _content.Add(_roads);
 
+            // Above flags and roads; markers are kept below it by SortMarkers.
+            _clouds = new LevelMapClouds();
+            _clouds.SetMapSize(_mapSize);
+            _content.Add(_clouds);
+
             _viewport.RegisterCallback<PointerDownEvent>(OnPointerDown);
             _viewport.RegisterCallback<PointerMoveEvent>(OnPointerMove);
             _viewport.RegisterCallback<PointerUpEvent>(OnPointerUp);
@@ -171,19 +196,59 @@ namespace Code.Meta.UI.MainMenu
             stars.Insert(0, icon);
         }
 
-        // Markers further down the map are drawn over the ones above them.
+        // Backdrop and roads, then markers (further down the map drawn over the ones above), clouds on top.
         private void SortMarkers()
         {
             _content.Sort((a, b) =>
             {
-                var aMarker = a as LevelMapMarker;
-                var bMarker = b as LevelMapMarker;
+                var aLayer = Layer(a);
+                var bLayer = Layer(b);
 
-                if (aMarker == null || bMarker == null)
-                    return aMarker == null ? (bMarker == null ? 0 : -1) : 1;
+                if (aLayer != bLayer)
+                    return aLayer.CompareTo(bLayer);
 
-                return a.style.top.value.value.CompareTo(b.style.top.value.value);
+                return aLayer == 1 ? a.style.top.value.value.CompareTo(b.style.top.value.value) : 0;
             });
+        }
+
+        private static int Layer(VisualElement element) =>
+            element is LevelMapClouds ? 2 : element is LevelMapMarker ? 1 : 0;
+
+        // Clear holes: around every visible flag first, then along visible roads.
+        private void UpdateClouds()
+        {
+            if (_clouds == null || _veil == null)
+                return;
+
+            _holes.Clear();
+
+            foreach (var marker in _markers.Values)
+            {
+                if (marker.State == LevelNodeState.Hidden)
+                    continue;
+
+                var radius = marker.State == LevelNodeState.Locked ? _veil.PreviewRadius : _veil.RevealRadius;
+                AddHole(marker.Position + new Vector2(0f, -HoleLift), radius);
+            }
+
+            var step = Mathf.Max(10f, _veil.RoadStep);
+
+            for (var i = 0; i < _links.Count; i++)
+            {
+                var link = _links[i];
+                var samples = Mathf.CeilToInt(Vector2.Distance(link.From, link.To) / step);
+
+                for (var s = 1; s < samples; s++)
+                    AddHole(LevelMapRoads.Point(link.From, link.To, (float)s / samples), _veil.RoadRadius);
+            }
+
+            _clouds.SetHoles(_holes);
+        }
+
+        private void AddHole(Vector2 center, float radius)
+        {
+            if (_holes.Count < LevelMapClouds.MaxHoles)
+                _holes.Add(new Vector4(center.x, center.y, radius, 0f));
         }
 
         // Center the camera on the newest playable level (or the last beaten one).
@@ -287,6 +352,8 @@ namespace Code.Meta.UI.MainMenu
         {
             if (_backButton != null)
                 _backButton.clickable.clicked -= OnBackClicked;
+
+            _clouds?.Dispose();
         }
 
         private sealed class Marker

@@ -14,6 +14,9 @@ namespace Code.Game.StaticData.Configs
         [Tooltip("World map art. Empty = parchment placeholder.")]
         [field: SerializeField] public Sprite MapBackground { get; private set; }
 
+        [Tooltip("Clouds around the revealed part of the map.")]
+        [field: SerializeField] public LevelMapVeilSettings Veil { get; private set; } = new();
+
         [SerializeField] private LevelNodeDefinition[] _nodes = Array.Empty<LevelNodeDefinition>();
 
         public int Count => _nodes?.Length ?? 0;

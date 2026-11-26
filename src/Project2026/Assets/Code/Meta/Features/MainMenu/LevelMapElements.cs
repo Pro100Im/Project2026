@@ -29,13 +29,11 @@ namespace Code.Meta.UI.MainMenu
         // Stars row (24) + flag pole base (flag height 104 - 6).
         public static readonly Vector2 Anchor = new(Width * 0.5f, 122f);
 
-        private const float BobAmplitude = 5f;
-        private const float BobSpeed = 4f;
+        private const string LockedClass = "level-marker--locked";
 
         private readonly LevelMapStar[] _stars = new LevelMapStar[3];
         private readonly LevelMapFlag _flag;
         private readonly Label _title;
-        private readonly IVisualElementScheduledItem _bob;
 
         public LevelMapMarker(Action onClick)
         {
@@ -62,32 +60,25 @@ namespace Code.Meta.UI.MainMenu
             Add(_title);
 
             this.AddManipulator(new Clickable(onClick));
-
-            _bob = schedule.Execute(Bob).Every(16);
-            _bob.Pause();
         }
 
         public void Set(string title, LevelNodeState state, int stars)
         {
             _title.text = title;
-            style.display = state == LevelNodeState.Locked ? DisplayStyle.None : DisplayStyle.Flex;
+            style.display = state == LevelNodeState.Hidden ? DisplayStyle.None : DisplayStyle.Flex;
+
+            // The next level is shown but can't be picked until a road to it is open.
+            var locked = state == LevelNodeState.Locked;
+            pickingMode = locked ? PickingMode.Ignore : PickingMode.Position;
+            EnableInClassList(LockedClass, locked);
 
             var completed = state == LevelNodeState.Completed;
-            _flag.SetCompleted(completed);
+            _flag.SetState(state);
 
             for (var i = 0; i < _stars.Length; i++)
             {
                 _stars[i].style.visibility = completed ? Visibility.Visible : Visibility.Hidden;
                 _stars[i].SetFilled(i < stars);
-            }
-
-            // A fresh, not yet beaten level bobs to draw the eye.
-            if (state == LevelNodeState.Available)
-                _bob.Resume();
-            else
-            {
-                _bob.Pause();
-                _flag.style.translate = new Translate(0, 0);
             }
         }
 
@@ -95,12 +86,6 @@ namespace Code.Meta.UI.MainMenu
         {
             style.left = point.x - Anchor.x;
             style.top = point.y - Anchor.y;
-        }
-
-        private void Bob(TimerState timer)
-        {
-            var offset = Mathf.Sin(Time.unscaledTime * BobSpeed) * BobAmplitude - BobAmplitude;
-            _flag.style.translate = new Translate(0, offset);
         }
     }
 
@@ -114,21 +99,24 @@ namespace Code.Meta.UI.MainMenu
         private static readonly Color OpenTrim = new(0.98f, 0.86f, 0.55f);
         private static readonly Color DoneBanner = new(0.70f, 0.72f, 0.76f);
         private static readonly Color DoneTrim = new(0.96f, 0.78f, 0.30f);
+        private static readonly Color LockedPole = new(0.32f, 0.29f, 0.27f);
+        private static readonly Color LockedBanner = new(0.40f, 0.44f, 0.52f);
+        private static readonly Color LockedTrim = new(0.66f, 0.68f, 0.72f);
         private static readonly Color Emblem = new(1f, 1f, 1f, 0.85f);
 
-        private bool _completed;
+        private LevelNodeState _state = LevelNodeState.Available;
 
         public LevelMapFlag()
         {
             generateVisualContent += Draw;
         }
 
-        public void SetCompleted(bool completed)
+        public void SetState(LevelNodeState state)
         {
-            if (_completed == completed)
+            if (_state == state)
                 return;
 
-            _completed = completed;
+            _state = state;
             MarkDirtyRepaint();
         }
 
@@ -139,6 +127,10 @@ namespace Code.Meta.UI.MainMenu
             var h = contentRect.height;
             var cx = w * 0.5f;
             var baseY = h - 6f;
+            var completed = _state == LevelNodeState.Completed;
+            var locked = _state == LevelNodeState.Locked;
+            var banner = locked ? LockedBanner : completed ? DoneBanner : OpenBanner;
+            var trim = locked ? LockedTrim : completed ? DoneTrim : OpenTrim;
 
             // Ground shadow.
             p.fillColor = Shadow;
@@ -146,10 +138,10 @@ namespace Code.Meta.UI.MainMenu
             p.Fill();
 
             // Pole.
-            p.fillColor = Pole;
+            p.fillColor = locked ? LockedPole : Pole;
             Rect(p, new Rect(cx - 3f, 8f, 6f, baseY - 8f));
             p.Fill();
-            p.fillColor = _completed ? DoneTrim : OpenTrim;
+            p.fillColor = trim;
             Ellipse(p, new Vector2(cx, 8f), 6f, 6f);
             p.Fill();
 
@@ -166,16 +158,16 @@ namespace Code.Meta.UI.MainMenu
             p.LineTo(new Vector2(cx, top + bh));
             p.LineTo(new Vector2(left, top + bh * 0.62f));
             p.ClosePath();
-            p.fillColor = _completed ? DoneBanner : OpenBanner;
+            p.fillColor = banner;
             p.Fill();
-            p.strokeColor = _completed ? DoneTrim : OpenTrim;
+            p.strokeColor = trim;
             p.lineWidth = 4f;
             p.Stroke();
             p.strokeColor = Outline;
             p.lineWidth = 1.5f;
             p.Stroke();
 
-            // Emblem: crossed swords for open levels, a castle tower for beaten ones.
+            // Emblem: crossed swords for open levels, a castle tower for beaten ones, a padlock for locked.
             p.strokeColor = Emblem;
             p.fillColor = Emblem;
             p.lineWidth = 4f;
@@ -183,7 +175,24 @@ namespace Code.Meta.UI.MainMenu
 
             var ec = new Vector2(cx, top + bh * 0.42f);
 
-            if (_completed)
+            if (locked)
+            {
+                // Shackle.
+                p.lineWidth = 3.5f;
+                p.BeginPath();
+                p.Arc(ec + new Vector2(0f, -3f), 7f, 180f, 360f);
+                p.Stroke();
+
+                // Body with a keyhole cut by the banner color.
+                Rect(p, new Rect(ec.x - 11f, ec.y - 3f, 22f, 17f));
+                p.Fill();
+                p.fillColor = banner;
+                Ellipse(p, ec + new Vector2(0f, 4f), 2.5f, 2.5f);
+                p.Fill();
+                Rect(p, new Rect(ec.x - 1.2f, ec.y + 5f, 2.4f, 5f));
+                p.Fill();
+            }
+            else if (completed)
             {
                 Rect(p, new Rect(ec.x - 11f, ec.y - 8f, 22f, 20f));
                 p.Fill();
@@ -326,19 +335,20 @@ namespace Code.Meta.UI.MainMenu
             }
         }
 
-        // Quadratic curve bent sideways, always to the same side for a given direction.
         private void Sample(Vector2 from, Vector2 to)
+        {
+            for (var i = 0; i <= Samples; i++)
+                _points[i] = Point(from, to, (float)i / Samples);
+        }
+
+        /// <summary>A point on the road curve: quadratic, bent sideways, always to the same side for a given direction.</summary>
+        public static Vector2 Point(Vector2 from, Vector2 to, float t)
         {
             var delta = to - from;
             var normal = new Vector2(-delta.y, delta.x).normalized;
             var control = (from + to) * 0.5f + normal * delta.magnitude * Bend;
-
-            for (var i = 0; i <= Samples; i++)
-            {
-                var t = (float)i / Samples;
-                var u = 1f - t;
-                _points[i] = u * u * from + 2f * u * t * control + t * t * to;
-            }
+            var u = 1f - t;
+            return u * u * from + 2f * u * t * control + t * t * to;
         }
 
         private void StrokeDashed(Painter2D p)

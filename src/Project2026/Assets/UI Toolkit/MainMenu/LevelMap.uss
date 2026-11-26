@@ -46,6 +46,31 @@
     scale: 1.08 1.08;
 }
 
+/* The next level: visible, not playable yet. */
+.level-marker--locked:hover {
+    scale: 1 1;
+}
+
+.level-marker--locked .level-marker__title {
+    opacity: 0.7;
+}
+
+.level-map-clouds {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* A cloud sprite from the pack floating over the veil; fades out near clearings. */
+.level-map-drift-cloud {
+    position: absolute;
+    background-size: 100% 100%;
+    transition-property: opacity;
+    transition-duration: 0.4s;
+}
+
 .level-marker__stars {
     flex-direction: row;
     justify-content: center;

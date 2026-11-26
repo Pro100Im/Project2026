@@ -46,8 +46,9 @@ public static class MetaComponentsLookup {
     public const int LevelMapSize = 35;
     public const int LevelMapBackground = 36;
     public const int LevelMapDirty = 37;
+    public const int LevelMapVeil = 38;
 
-    public const int TotalComponents = 38;
+    public const int TotalComponents = 39;
 
     public static readonly string[] componentNames = {
         "ForcedPause",
@@ -87,7 +88,8 @@ public static class MetaComponentsLookup {
         "LevelNodeStars",
         "LevelMapSize",
         "LevelMapBackground",
-        "LevelMapDirty"
+        "LevelMapDirty",
+        "LevelMapVeil"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -128,6 +130,7 @@ public static class MetaComponentsLookup {
         typeof(Code.Meta.Features.LevelMap.LevelNodeStars),
         typeof(Code.Meta.Features.LevelMap.LevelMapSize),
         typeof(Code.Meta.Features.LevelMap.LevelMapBackground),
-        typeof(Code.Meta.Features.LevelMap.LevelMapDirty)
+        typeof(Code.Meta.Features.LevelMap.LevelMapDirty),
+        typeof(Code.Meta.Features.LevelMap.LevelMapVeil)
     };
 }
