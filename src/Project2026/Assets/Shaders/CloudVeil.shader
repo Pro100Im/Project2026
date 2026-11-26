@@ -1,8 +1,8 @@
-// World map cloud veil in the Tiny Swords pixel-art style: round flat puffs, three tones, flat drop shadow.
+// Cloud veil (world map, research tree) in the Tiny Swords pixel-art style: round flat puffs, three tones, flat drop shadow.
 // Coordinates are map UI pixels (origin top-left, y down), matching LevelNodeDefinition.Position.
 // Pass 0 bakes the clearing field (signed distance to the clear area) into a small float texture.
 // Pass 1 draws the puffs into a point-filtered texture where one texel is one art pixel.
-Shader "Project2026/LevelMapClouds"
+Shader "Project2026/CloudVeil"
 {
     Properties
     {
@@ -115,7 +115,8 @@ Shader "Project2026/LevelMapClouds"
                 float edge = min(min(p.x, _MapSize.x - p.x), min(p.y, _MapSize.y - p.y));
                 float wave = (Noise(p * 0.008) * 0.65 + Noise(p * 0.021) * 0.35 - 0.5) * _BorderWidth * 0.8;
                 // Clearings cut through the frame too: a flag near the map edge stays fully visible.
-                float field = d < 0.0 ? d : max(d, _BorderWidth - edge + wave);
+                float frame = _BorderWidth > 0.0 ? _BorderWidth - edge + wave : -100000.0;
+                float field = d < 0.0 ? d : max(d, frame);
                 return float4(field, 0.0, 0.0, 1.0);
             }
             ENDHLSL

@@ -11,14 +11,14 @@ public partial class MetaEntity {
     public Code.Meta.Features.LevelMap.LevelMapVeil levelMapVeil { get { return (Code.Meta.Features.LevelMap.LevelMapVeil)GetComponent(MetaComponentsLookup.LevelMapVeil); } }
     public bool hasLevelMapVeil { get { return HasComponent(MetaComponentsLookup.LevelMapVeil); } }
 
-    public void AddLevelMapVeil(Code.Game.StaticData.Configs.LevelMapVeilSettings newValue) {
+    public void AddLevelMapVeil(Code.Game.StaticData.Configs.CloudVeilSettings newValue) {
         var index = MetaComponentsLookup.LevelMapVeil;
         var component = (Code.Meta.Features.LevelMap.LevelMapVeil)CreateComponent(index, typeof(Code.Meta.Features.LevelMap.LevelMapVeil));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceLevelMapVeil(Code.Game.StaticData.Configs.LevelMapVeilSettings newValue) {
+    public void ReplaceLevelMapVeil(Code.Game.StaticData.Configs.CloudVeilSettings newValue) {
         var index = MetaComponentsLookup.LevelMapVeil;
         var component = (Code.Meta.Features.LevelMap.LevelMapVeil)CreateComponent(index, typeof(Code.Meta.Features.LevelMap.LevelMapVeil));
         component.Value = newValue;

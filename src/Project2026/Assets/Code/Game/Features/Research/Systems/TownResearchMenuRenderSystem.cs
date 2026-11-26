@@ -1,3 +1,4 @@
+using Code.Game.StaticData.Configs;
 using Code.Meta.Features.Town;
 using Entitas;
 using System.Collections.Generic;
@@ -7,13 +8,15 @@ namespace Code.Game.Features.Research.Systems
 {
     public class TownResearchMenuRenderSystem : ReactiveSystem<TownEntity>
     {
+        private readonly ResearchCatalog _catalog;
         private readonly IGroup<TownEntity> _menus;
         private readonly IGroup<TownEntity> _nodes;
         private readonly List<TownEntity> _buffer = new(32);
         private readonly List<ResearchLink> _links = new(32);
 
-        public TownResearchMenuRenderSystem() : base(Contexts.sharedInstance.town)
+        public TownResearchMenuRenderSystem(ResearchCatalog catalog) : base(Contexts.sharedInstance.town)
         {
+            _catalog = catalog;
             var town = Contexts.sharedInstance.town;
             _menus = town.GetGroup(TownMatcher.TownResearchMenu);
             _nodes = town.GetGroup(TownMatcher
@@ -45,12 +48,14 @@ namespace Code.Game.Features.Research.Systems
             var view = menu.townResearchMenu.Value;
             var nodes = _nodes.GetEntities(_buffer);
             _links.Clear();
+            view.SetVeil(_catalog != null ? _catalog.Veil : null);
 
             for (var i = 0; i < nodes.Count; i++)
             {
                 var node = nodes[i];
                 var position = node.researchNodePosition.Value;
                 var icon = node.hasResearchIcon ? node.researchIcon.Value : null;
+                var revealed = Revealed(node, nodes);
 
                 view.SetNode(
                     node.researchId.Value,
@@ -60,9 +65,11 @@ namespace Code.Game.Features.Research.Systems
                     node.researchCost.Value,
                     node.researchNodeState.Value,
                     position,
-                    !Revealed(node, nodes));
+                    !revealed);
 
-                _links.Add(new ResearchLink(ParentPosition(node, nodes), position, node.researchNodeState.Value == ResearchNodeState.Owned));
+                // A road to a node still under the clouds is not drawn.
+                if (revealed)
+                    _links.Add(new ResearchLink(ParentPosition(node, nodes), position, node.researchNodeState.Value == ResearchNodeState.Owned));
             }
 
             view.SetLinks(_links);

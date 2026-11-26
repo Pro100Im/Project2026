@@ -2,22 +2,28 @@
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
-    margin-top: 24px;
+    margin-top: 12px;
+}
+
+.equipment-slots > .build-slot,
+.equipment-choices > .build-slot {
+    margin: 5px 8px;
 }
 
 .equipment-choices {
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
-    margin-top: 20px;
+    margin-top: 18px;
 }
 
 .equipment-choice:disabled {
-    opacity: 0.45;
+    opacity: 0.5;
 }
 
 .equipment-slot--selected {
-    -unity-background-image-tint-color: rgb(255, 220, 120);
+    -unity-background-image-tint-color: rgb(255, 224, 130);
+    scale: 1.06 1.06;
 }
 
 .equipment-empty {
@@ -27,13 +33,7 @@
 }
 
 .equipment-clear {
-    width: 220px;
-    height: 72px;
-    margin-top: 16px;
-    align-items: center;
-    justify-content: center;
-}
-
-.equipment-clear .commonText {
-    font-size: 28px;
+    width: 230px;
+    height: 98px;
+    margin-top: 14px;
 }

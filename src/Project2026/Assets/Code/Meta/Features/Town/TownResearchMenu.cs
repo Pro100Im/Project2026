@@ -1,5 +1,8 @@
 using Code.Game.Common.Entity;
 using Code.Game.Common.UI;
+using Code.Game.StaticData.Configs;
+using Code.Meta.UI.Common;
+using Code.Meta.UI.MainMenu;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,9 +25,19 @@ namespace Code.Meta.Features.Town
         }
     }
 
+    /// <summary>
+    /// Research tree view, built like the world map: a pannable content with a parchment backdrop,
+    /// dashed roads, round node buttons and the cloud veil over what is not reachable yet.
+    /// Draws what TownResearchMenuRenderSystem tells it and sends requests to the input context.
+    /// </summary>
     public class TownResearchMenu : MonoBehaviour
     {
-        private const float PreferredNodeSize = 76f;
+        private const float NodeSize = 76f;
+        private const float CenterSize = 64f;
+
+        // Free space around the outermost nodes, so the tree can be panned and the clouds have room.
+        private const float ContentMargin = 420f;
+        private const float RoadBend = 0.12f;
 
         private const string OwnedClass = "research-node--owned";
         private const string AvailableClass = "research-node--available";
@@ -37,8 +50,11 @@ namespace Code.Meta.Features.Town
 
         private VisualElement _menu;
         private VisualElement _tree;
-        private ResearchTreeGraph _graph;
-        private ResearchFog _fog;
+        private VisualElement _content;
+        private LevelMapRoads _roads;
+        private CloudVeil _clouds;
+        private CloudVeilSettings _veil;
+        private LevelMapRevealPlayer _player;
         private VisualElement _center;
         private Button _closeButton;
         private VisualElement _detail;
@@ -48,14 +64,21 @@ namespace Code.Meta.Features.Town
         private Label _detailPrice;
         private Button _detailClose;
         private Button _detailBuy;
+        private Label _detailBuyLabel;
 
         private ResearchId _selectedId;
 
         private readonly Dictionary<ResearchId, NodeView> _nodes = new(32);
         private readonly List<ResearchLink> _links = new(32);
-        private readonly List<Vector2> _fogPoints = new(32);
+        private readonly List<LevelMapLink> _roadLinks = new(32);
+        private readonly List<float> _linkReveal = new(32);
+        private readonly List<Vector4> _holes = new(CloudVeil.MaxHoles);
 
+        private Vector2 _contentSize;
+        private Vector2 _origin;
         private Vector2 _pan;
+        private bool _centerPending;
+        private bool _shown;
         private bool _dragging;
         private int _dragPointer = -1;
         private int _visibilityVersion;
@@ -78,36 +101,13 @@ namespace Code.Meta.Features.Town
             _detailPrice = _townScreen.GetLabel("TownResearchDetailPrice");
             _detailClose = _townScreen.GetButton("TownResearchDetailClose");
             _detailBuy = _townScreen.GetButton("TownResearchDetailBuy");
+            _detailBuyLabel = _townScreen.GetLabel("TownResearchDetailBuyLabel");
 
             if (_menu == null || _tree == null || _closeButton == null || _detail == null || _detailClose == null || _detailBuy == null)
                 return;
 
-            _graph = new ResearchTreeGraph();
-            _graph.pickingMode = PickingMode.Ignore;
-            _graph.style.position = Position.Absolute;
-            _graph.style.left = 0f;
-            _graph.style.right = 0f;
-            _graph.style.top = 0f;
-            _graph.style.bottom = 0f;
-            _tree.Insert(0, _graph);
+            BuildTree();
 
-            _fog = new ResearchFog();
-            _tree.Insert(1, _fog);
-
-            _center = new VisualElement();
-            _center.AddToClassList("research-center");
-            _center.pickingMode = PickingMode.Ignore;
-            var centerLabel = new Label("Town") { pickingMode = PickingMode.Ignore };
-            centerLabel.AddToClassList("research-center__label");
-            _center.Add(centerLabel);
-            _tree.Add(_center);
-
-            _tree.pickingMode = PickingMode.Position;
-            _tree.RegisterCallback<GeometryChangedEvent>(_ => ApplyLayout());
-            _tree.RegisterCallback<PointerDownEvent>(OnPointerDown);
-            _tree.RegisterCallback<PointerMoveEvent>(OnPointerMove);
-            _tree.RegisterCallback<PointerUpEvent>(OnPointerUp);
-            _tree.RegisterCallback<PointerCancelEvent>(OnPointerCancel);
             _closeButton.clickable.clicked += CloseRequest;
             _detailClose.clickable.clicked += HideDetail;
             _detailBuy.clickable.clicked += BuySelected;
@@ -122,10 +122,12 @@ namespace Code.Meta.Features.Town
                 return;
 
             _visibilityVersion++;
-            _pan = Vector2.zero;
+            _centerPending = true;
+            _shown = false;
             _menu.style.display = DisplayStyle.Flex;
+            _clouds.SetRunning(true);
             _uIService.Show(_menu).Forget();
-            ApplyLayout();
+            ApplyPan();
         }
 
         public void Hide()
@@ -133,34 +135,50 @@ namespace Code.Meta.Features.Town
             if (_menu == null)
                 return;
 
+            StopDrag(_dragPointer);
+            _player.Complete();
+            _clouds.SetRunning(false);
             HideDetail();
             HideAsync(++_visibilityVersion).Forget();
         }
 
+        public void SetVeil(CloudVeilSettings veil)
+        {
+            if (_clouds == null || _veil == veil)
+                return;
+
+            _veil = veil;
+            _clouds.SetSettings(veil);
+        }
+
         public void SetNode(ResearchId id, string title, string description, Sprite icon, int cost, ResearchNodeState state, Vector2 position, bool veiled)
         {
-            if (_tree == null)
+            if (_content == null)
                 return;
 
             var node = GetOrCreate(id);
+
+            // Uncovered while the player is looking at the tree: the reveal is animated in SetLinks.
+            node.JustRevealed = _shown && node.Known && node.Veiled && !veiled;
+            node.Known = true;
             node.Offset = position;
             node.Title = title;
             node.Description = description;
             node.Cost = cost;
+            node.Price.text = cost.ToString();
             node.State = state;
             node.Veiled = veiled;
+            node.HoleScale = 1f;
             node.Icon.sprite = icon;
-            node.Icon.style.display = veiled || icon == null ? DisplayStyle.None : DisplayStyle.Flex;
+            node.Icon.style.display = icon == null ? DisplayStyle.None : DisplayStyle.Flex;
             node.Button.style.display = veiled ? DisplayStyle.None : DisplayStyle.Flex;
             node.Button.pickingMode = veiled ? PickingMode.Ignore : PickingMode.Position;
+            ClearAppear(node);
 
-            node.Available = state == ResearchNodeState.Available;
-            node.Unaffordable = state == ResearchNodeState.Unaffordable;
             node.Button.EnableInClassList(OwnedClass, state == ResearchNodeState.Owned);
             node.Button.EnableInClassList(AvailableClass, state == ResearchNodeState.Available);
             node.Button.EnableInClassList(LockedClass, state == ResearchNodeState.Locked);
             node.Button.EnableInClassList(UnaffordableClass, state == ResearchNodeState.Unaffordable);
-            ApplyLayout();
 
             if (id != _selectedId)
                 return;
@@ -171,14 +189,57 @@ namespace Code.Meta.Features.Town
                 ShowDetail(node);
         }
 
+        /// <summary>Called last in a render pass: lays the tree out and plays the reveal of new nodes.</summary>
         public void SetLinks(List<ResearchLink> links)
         {
+            if (_content == null)
+                return;
+
+            _player.Complete();
             _links.Clear();
+            _links.AddRange(links);
 
-            for (var i = 0; i < links.Count; i++)
-                _links.Add(links[i]);
+            Layout();
+            PlayReveal();
+            UpdateClouds();
+            _shown = true;
+        }
 
-            ApplyLayout();
+        private void BuildTree()
+        {
+            _tree.Clear();
+            _tree.pickingMode = PickingMode.Position;
+
+            _content = new VisualElement { pickingMode = PickingMode.Ignore };
+            _content.AddToClassList("research-content");
+            _tree.Add(_content);
+
+            var backdrop = new LevelMapBackdrop();
+            backdrop.SetSprite(null);
+            _content.Add(backdrop);
+
+            _roads = new LevelMapRoads { Bend = RoadBend, LineWidth = 5f };
+            _content.Add(_roads);
+
+            _center = new VisualElement { pickingMode = PickingMode.Ignore };
+            _center.AddToClassList("research-center");
+            var centerIcon = new VisualElement { pickingMode = PickingMode.Ignore };
+            centerIcon.AddToClassList("research-center__icon");
+            centerIcon.AddToClassList("menu-icon-house");
+            _center.Add(centerIcon);
+            _content.Add(_center);
+
+            // On top of everything; nodes are inserted below it.
+            _clouds = new CloudVeil();
+            _content.Add(_clouds);
+
+            _player = new LevelMapRevealPlayer(_content);
+
+            _tree.RegisterCallback<GeometryChangedEvent>(_ => ApplyPan());
+            _tree.RegisterCallback<PointerDownEvent>(OnPointerDown);
+            _tree.RegisterCallback<PointerMoveEvent>(OnPointerMove);
+            _tree.RegisterCallback<PointerUpEvent>(OnPointerUp);
+            _tree.RegisterCallback<PointerCancelEvent>(OnPointerCancel);
         }
 
         private NodeView GetOrCreate(ResearchId id)
@@ -186,67 +247,219 @@ namespace Code.Meta.Features.Town
             if (_nodes.TryGetValue(id, out var existing))
                 return existing;
 
-            var button = new Button();
-            button.pickingMode = PickingMode.Position;
+            var button = new Button { pickingMode = PickingMode.Position };
             button.AddToClassList("research-node");
 
             var icon = new Image { pickingMode = PickingMode.Ignore };
             icon.AddToClassList("research-node__icon");
-
             button.Add(icon);
+
+            // Shown by USS on owned nodes only.
+            var star = new LevelMapStar();
+            star.AddToClassList("research-node__star");
+            button.Add(star);
+
+            // Shown by USS while the node can be bought (or is too expensive).
+            var price = new Label { pickingMode = PickingMode.Ignore };
+            price.AddToClassList("research-node__price");
+            button.Add(price);
+
             button.clickable.clicked += () => OpenDetail(id);
+            _content.Insert(_content.IndexOf(_clouds), button);
 
-            _tree.Add(button);
-
-            var node = new NodeView(button, icon);
+            var node = new NodeView(button, icon, price);
             _nodes.Add(id, node);
             return node;
         }
 
-        private void ApplyLayout()
+        // Content covers every node (veiled ones too) plus a margin; the town sits at _origin.
+        private void Layout()
         {
-            if (_tree == null)
-                return;
+            var min = Vector2.zero;
+            var max = Vector2.zero;
 
-            var width = _tree.resolvedStyle.width;
-            var height = _tree.resolvedStyle.height;
-
-            if (float.IsNaN(width) || float.IsNaN(height) || width < 1f || height < 1f)
-                return;
-
-            var center = new Vector2(width * 0.5f, height * 0.5f) + _pan;
-            var half = PreferredNodeSize * 0.5f;
-            var centerSize = PreferredNodeSize * 0.72f;
-
-            foreach (var pair in _nodes)
+            foreach (var node in _nodes.Values)
             {
-                var button = pair.Value.Button;
-                var placed = pair.Value.Offset;
-
-                SetNodeSize(button, PreferredNodeSize);
-                button.style.left = center.x + placed.x - half;
-                button.style.top = center.y + placed.y - half;
+                min = Vector2.Min(min, node.Offset);
+                max = Vector2.Max(max, node.Offset);
             }
 
-            _fogPoints.Clear();
-            _fogPoints.Add(center);
+            var margin = Vector2.one * ContentMargin;
+            var size = max - min + margin * 2f;
+            var origin = margin - min;
 
-            foreach (var pair in _nodes)
+            if (size != _contentSize || origin != _origin)
             {
-                if (pair.Value.Veiled)
+                // Keep the same spot of the tree under the same spot of the screen.
+                _pan += _origin - origin;
+                _contentSize = size;
+                _origin = origin;
+                _content.style.width = size.x;
+                _content.style.height = size.y;
+                _clouds.SetMapSize(size);
+            }
+
+            foreach (var node in _nodes.Values)
+            {
+                var point = _origin + node.Offset;
+                node.Button.style.left = point.x - NodeSize * 0.5f;
+                node.Button.style.top = point.y - NodeSize * 0.5f;
+            }
+
+            _center.style.left = _origin.x - CenterSize * 0.5f;
+            _center.style.top = _origin.y - CenterSize * 0.5f;
+
+            _roadLinks.Clear();
+            _linkReveal.Clear();
+
+            for (var i = 0; i < _links.Count; i++)
+            {
+                var link = _links[i];
+                _roadLinks.Add(new LevelMapLink(_origin + link.From, _origin + link.To, link.Owned));
+                _linkReveal.Add(1f);
+            }
+
+            _roads.Set(_roadLinks);
+            ApplyPan();
+        }
+
+        // Clear holes: the town, every uncovered node, and along the roads between them.
+        private void UpdateClouds(bool animated = false)
+        {
+            if (_veil == null)
+                return;
+
+            _holes.Clear();
+            AddHole(_origin, _veil.RevealRadius, 1f);
+
+            foreach (var node in _nodes.Values)
+            {
+                if (!node.Veiled)
+                    AddHole(_origin + node.Offset, _veil.RevealRadius, node.HoleScale);
+            }
+
+            var step = Mathf.Max(10f, _veil.RoadStep);
+
+            for (var i = 0; i < _roadLinks.Count; i++)
+            {
+                var link = _roadLinks[i];
+                var reveal = _linkReveal[i];
+                var samples = Mathf.CeilToInt(Vector2.Distance(link.From, link.To) / step);
+
+                for (var s = 1; s < samples; s++)
+                {
+                    var along = (float)s / samples;
+                    var scale = reveal >= 1f ? 1f : Mathf.Clamp01((reveal - along + 0.15f) / 0.3f);
+                    AddHole(LevelMapRoads.Point(link.From, link.To, along, RoadBend), _veil.RoadRadius, scale);
+                }
+            }
+
+            _clouds.SetHoles(_holes, animated);
+        }
+
+        private void AddHole(Vector2 center, float radius, float scale)
+        {
+            if (_holes.Count < CloudVeil.MaxHoles)
+                _holes.Add(new Vector4(center.x, center.y, radius, scale));
+        }
+
+        // Nodes uncovered by a purchase: the road draws in, the clouds part, the node pops.
+        private void PlayReveal()
+        {
+            var stagger = 0f;
+
+            foreach (var node in _nodes.Values)
+            {
+                if (!node.JustRevealed)
                     continue;
 
-                pair.Value.Button.BringToFront();
-                _fogPoints.Add(center + pair.Value.Offset);
+                node.JustRevealed = false;
+
+                var revealed = node;
+                var at = stagger;
+                var link = LinkTo(_origin + node.Offset);
+                stagger += 0.12f;
+
+                if (link >= 0)
+                {
+                    _player.Add(at, 0.45f, p =>
+                    {
+                        var eased = LevelMapRevealPlayer.EaseInOut(p);
+                        _linkReveal[link] = eased;
+                        _roads.SetProgress(link, eased);
+                        UpdateClouds(true);
+                    });
+                }
+
+                revealed.Button.pickingMode = PickingMode.Ignore;
+
+                _player.Add(at + 0.2f, 0.6f, p =>
+                {
+                    revealed.HoleScale = LevelMapRevealPlayer.EaseOut(p);
+                    UpdateClouds(true);
+                });
+
+                _player.Add(at + 0.4f, 0.35f,
+                    p =>
+                    {
+                        var scale = Mathf.LerpUnclamped(0.5f, 1f, LevelMapRevealPlayer.BackOut(p));
+                        revealed.Button.style.opacity = Mathf.Clamp01(p * 2f);
+                        revealed.Button.style.scale = new Scale(new Vector2(scale, scale));
+                    },
+                    () =>
+                    {
+                        ClearAppear(revealed);
+                        revealed.Button.pickingMode = PickingMode.Position;
+                    });
             }
 
-            SetNodeSize(_center, centerSize);
-            _center.style.left = center.x - centerSize * 0.5f;
-            _center.style.top = center.y - centerSize * 0.5f;
-            _center.BringToFront();
-            _graph.Set(center, _links);
-            _fog.Redraw(width, height, _fogPoints);
+            _player.Play();
         }
+
+        // Hands scale and opacity back to USS (hover scale, locked opacity).
+        private static void ClearAppear(NodeView node)
+        {
+            node.Button.style.opacity = StyleKeyword.Null;
+            node.Button.style.scale = StyleKeyword.Null;
+        }
+
+        private int LinkTo(Vector2 point)
+        {
+            for (var i = 0; i < _roadLinks.Count; i++)
+            {
+                if (_roadLinks[i].To == point)
+                    return i;
+            }
+
+            return -1;
+        }
+
+        private void ApplyPan()
+        {
+            if (_content == null || _contentSize == Vector2.zero)
+                return;
+
+            var size = _tree.contentRect.size;
+
+            if (float.IsNaN(size.x) || float.IsNaN(size.y) || size.x < 1f || size.y < 1f)
+                return;
+
+            if (_centerPending)
+            {
+                _pan = size * 0.5f - _origin;
+                _centerPending = false;
+            }
+
+            _pan.x = ClampAxis(_pan.x, size.x, _contentSize.x);
+            _pan.y = ClampAxis(_pan.y, size.y, _contentSize.y);
+
+            _content.style.left = _pan.x;
+            _content.style.top = _pan.y;
+        }
+
+        // Content bigger than the window: keep it covering the window. Smaller: center it.
+        private static float ClampAxis(float pan, float viewport, float content) =>
+            content <= viewport ? (viewport - content) * 0.5f : Mathf.Clamp(pan, viewport - content, 0f);
 
         private void OnPointerDown(PointerDownEvent evt)
         {
@@ -264,7 +477,7 @@ namespace Code.Meta.Features.Town
                 return;
 
             _pan += (Vector2)evt.deltaPosition;
-            ApplyLayout();
+            ApplyPan();
         }
 
         private void OnPointerUp(PointerUpEvent evt) => StopDrag(evt.pointerId);
@@ -281,20 +494,6 @@ namespace Code.Meta.Features.Town
 
             if (_tree.HasPointerCapture(pointerId))
                 _tree.ReleasePointer(pointerId);
-        }
-
-        private static void SetNodeSize(VisualElement element, float size)
-        {
-            element.style.width = size;
-            element.style.height = size;
-            element.style.minWidth = size;
-            element.style.minHeight = size;
-            element.style.maxWidth = size;
-            element.style.maxHeight = size;
-            element.style.borderTopLeftRadius = 0f;
-            element.style.borderTopRightRadius = 0f;
-            element.style.borderBottomLeftRadius = 0f;
-            element.style.borderBottomRightRadius = 0f;
         }
 
         private void OpenDetail(ResearchId id)
@@ -318,7 +517,10 @@ namespace Code.Meta.Features.Town
             _detailIcon.sprite = node.Icon.sprite;
             _detailIcon.style.display = node.Icon.sprite == null ? DisplayStyle.None : DisplayStyle.Flex;
             _detailPrice.text = owned ? "Owned" : node.Cost.ToString();
-            _detailBuy.text = owned ? "Owned" : $"Buy {node.Cost}";
+
+            if (_detailBuyLabel != null)
+                _detailBuyLabel.text = owned ? "Owned" : "Buy";
+
             _detailBuy.SetEnabled(node.State == ResearchNodeState.Available);
             _detail.style.display = DisplayStyle.Flex;
             _detail.BringToFront();
@@ -376,156 +578,32 @@ namespace Code.Meta.Features.Town
             if (_detailBuy != null)
                 _detailBuy.clickable.clicked -= BuySelected;
 
-            _fog?.Dispose();
+            _clouds?.Dispose();
         }
 
         private sealed class NodeView
         {
             public readonly Button Button;
             public readonly Image Icon;
+            public readonly Label Price;
             public string Title;
             public string Description;
             public int Cost;
             public ResearchNodeState State;
             public Vector2 Offset;
-            public bool Available;
-            public bool Unaffordable;
             public bool Veiled;
 
-            public NodeView(Button button, Image icon)
+            // Reveal animation state.
+            public bool Known;
+            public bool JustRevealed;
+            public float HoleScale = 1f;
+
+            public NodeView(Button button, Image icon, Label price)
             {
                 Button = button;
                 Icon = icon;
+                Price = price;
             }
-        }
-    }
-
-    public class ResearchTreeGraph : VisualElement
-    {
-        private Vector2 _center;
-        private readonly List<ResearchLink> _links = new(32);
-
-        public ResearchTreeGraph()
-        {
-            generateVisualContent += OnGenerateVisualContent;
-        }
-
-        public void Set(Vector2 center, List<ResearchLink> links)
-        {
-            _center = center;
-            _links.Clear();
-
-            for (var i = 0; i < links.Count; i++)
-                _links.Add(links[i]);
-
-            MarkDirtyRepaint();
-        }
-
-        private void OnGenerateVisualContent(MeshGenerationContext context)
-        {
-            var painter = context.painter2D;
-            painter.lineWidth = 4f;
-            painter.lineCap = LineCap.Round;
-
-            for (var i = 0; i < _links.Count; i++)
-            {
-                var link = _links[i];
-                painter.strokeColor = link.Owned
-                    ? new Color(0.96f, 0.78f, 0.35f, 0.95f)
-                    : new Color(0.45f, 0.34f, 0.22f, 0.7f);
-                painter.BeginPath();
-                painter.MoveTo(_center + link.From);
-                painter.LineTo(_center + link.To);
-                painter.Stroke();
-            }
-        }
-    }
-
-    public sealed class ResearchFog : VisualElement
-    {
-        public const int MaxCircles = 32;
-        public const float Radius = 125f;
-
-        private readonly Vector4[] _circles = new Vector4[MaxCircles];
-
-        private RenderTexture _texture;
-        private Material _material;
-
-        public ResearchFog()
-        {
-            pickingMode = PickingMode.Ignore;
-            style.position = Position.Absolute;
-            style.left = 0f;
-            style.right = 0f;
-            style.top = 0f;
-            style.bottom = 0f;
-            style.backgroundSize = new BackgroundSize(Length.Percent(100f), Length.Percent(100f));
-
-            var shader = Shader.Find("Project2026/ResearchFog");
-
-            if (shader != null)
-                _material = new Material(shader);
-        }
-
-        public void Redraw(float width, float height, List<Vector2> points)
-        {
-            if (_material == null)
-                return;
-
-            var pixelWidth = Mathf.Max(1, Mathf.RoundToInt(width));
-            var pixelHeight = Mathf.Max(1, Mathf.RoundToInt(height));
-            EnsureTexture(pixelWidth, pixelHeight);
-
-            var count = points.Count;
-
-            if (count > MaxCircles)
-                count = MaxCircles;
-
-            for (var i = 0; i < count; i++)
-                _circles[i] = new Vector4(points[i].x, points[i].y, Radius, 0f);
-
-            _material.SetVectorArray("_Circles", _circles);
-            _material.SetFloat("_CircleCount", count);
-            _material.SetVector("_TargetSize", new Vector4(pixelWidth, pixelHeight, 0f, 0f));
-            Graphics.Blit(Texture2D.whiteTexture, _texture, _material);
-            style.backgroundImage = Background.FromRenderTexture(_texture);
-        }
-
-        public void Dispose()
-        {
-            style.backgroundImage = new StyleBackground();
-
-            if (_texture != null)
-            {
-                _texture.Release();
-                UnityEngine.Object.Destroy(_texture);
-                _texture = null;
-            }
-
-            if (_material != null)
-            {
-                UnityEngine.Object.Destroy(_material);
-                _material = null;
-            }
-        }
-
-        private void EnsureTexture(int width, int height)
-        {
-            if (_texture != null && _texture.width == width && _texture.height == height)
-                return;
-
-            if (_texture != null)
-            {
-                _texture.Release();
-                UnityEngine.Object.Destroy(_texture);
-            }
-
-            _texture = new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32)
-            {
-                filterMode = FilterMode.Bilinear,
-                wrapMode = TextureWrapMode.Clamp
-            };
-            _texture.Create();
         }
     }
 }

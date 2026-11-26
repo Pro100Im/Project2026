@@ -10,6 +10,9 @@ namespace Code.Game.StaticData.Configs
         public const string AssetPath = "Assets/Configs/Research/ResearchCatalog.asset";
 
         [field: SerializeField] public float NodeSpacing { get; private set; } = 108f;
+
+        [Tooltip("Clouds over the not yet reachable part of the tree.")]
+        [field: SerializeField] public CloudVeilSettings Veil { get; private set; } = CloudVeilSettings.ForResearch();
         [field: SerializeField] public ResearchBranchDefinition[] Branches { get; private set; }
 
         [field: SerializeField, HideInInspector] public ResearchNodeDefinition[] Nodes { get; private set; }

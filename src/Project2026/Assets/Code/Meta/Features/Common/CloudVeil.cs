@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Code.Meta.UI.MainMenu
+namespace Code.Meta.UI.Common
 {
     /// <summary>
-    /// Pixel-art cloud veil over the world map (Tiny Swords style). Covers the whole map content,
+    /// Pixel-art cloud veil (Tiny Swords style) over a map-like content: the world map, the research tree.
+    /// Covers the whole content,
     /// leaves clearings where it is told to, and gently breathes while the map is open.
     /// Passive: no game logic here.
     /// </summary>
-    public sealed class LevelMapClouds : VisualElement
+    public sealed class CloudVeil : VisualElement
     {
         public const int MaxHoles = 64;
 
@@ -42,20 +43,25 @@ namespace Code.Meta.UI.MainMenu
 
         private int _holeCount;
         private Vector2 _mapSize;
-        private LevelMapVeilSettings _settings;
+        private CloudVeilSettings _settings;
         private Material _material;
         private RenderTexture _field;
         private RenderTexture _clouds;
         private bool _fieldDirty = true;
         private float _lastVeilTime = -1f;
 
-        public LevelMapClouds()
+        public CloudVeil()
         {
             pickingMode = PickingMode.Ignore;
-            AddToClassList("level-map-clouds");
+            // Fills its parent; set here so the element works in any screen without extra USS.
+            style.position = Position.Absolute;
+            style.left = 0f;
+            style.top = 0f;
+            style.right = 0f;
+            style.bottom = 0f;
             style.backgroundSize = new BackgroundSize(Length.Percent(100f), Length.Percent(100f));
 
-            var shader = Shader.Find("Project2026/LevelMapClouds");
+            var shader = Shader.Find("Project2026/CloudVeil");
 
             if (shader != null)
                 _material = new Material(shader) { hideFlags = HideFlags.HideAndDontSave };
@@ -64,7 +70,7 @@ namespace Code.Meta.UI.MainMenu
             _tick.Pause();
         }
 
-        public void SetSettings(LevelMapVeilSettings settings)
+        public void SetSettings(CloudVeilSettings settings)
         {
             _settings = settings;
             style.display = settings != null ? DisplayStyle.Flex : DisplayStyle.None;

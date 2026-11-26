@@ -1,6 +1,7 @@
 using Code.Game.Common.Entity;
 using Code.Game.Common.UI;
 using Code.Game.StaticData.Configs;
+using Code.Meta.UI.Common;
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
@@ -34,15 +35,15 @@ namespace Code.Meta.UI.MainMenu
         private VisualElement _content;
         private LevelMapBackdrop _backdrop;
         private LevelMapRoads _roads;
-        private LevelMapClouds _clouds;
-        private LevelMapVeilSettings _veil;
+        private CloudVeil _clouds;
+        private CloudVeilSettings _veil;
         private Label _starsValue;
         private Button _backButton;
 
         private readonly Dictionary<string, Marker> _markers = new(16);
         private readonly List<LevelMapLink> _links = new(16);
         private readonly List<float> _linkReveal = new(16);
-        private readonly List<Vector4> _holes = new(LevelMapClouds.MaxHoles);
+        private readonly List<Vector4> _holes = new(CloudVeil.MaxHoles);
         private LevelMapRevealPlayer _player;
         private Vector2? _focusOverride;
 
@@ -116,7 +117,7 @@ namespace Code.Meta.UI.MainMenu
             ApplyPan();
         }
 
-        public void SetVeil(LevelMapVeilSettings veil)
+        public void SetVeil(CloudVeilSettings veil)
         {
             _veil = veil;
             _clouds?.SetSettings(veil);
@@ -189,7 +190,7 @@ namespace Code.Meta.UI.MainMenu
             _content.Add(_roads);
 
             // Above flags and roads; markers are kept below it by SortMarkers.
-            _clouds = new LevelMapClouds();
+            _clouds = new CloudVeil();
             _clouds.SetMapSize(_mapSize);
             _content.Add(_clouds);
 
@@ -236,7 +237,7 @@ namespace Code.Meta.UI.MainMenu
         }
 
         private static int Layer(VisualElement element) =>
-            element is LevelMapClouds ? 2 : element is LevelMapMarker ? 1 : 0;
+            element is CloudVeil ? 2 : element is LevelMapMarker ? 1 : 0;
 
         // Clear holes: around every visible flag first, then along visible roads.
         // While the reveal plays, flags and roads carry their animation progress in the hole scale.
@@ -281,7 +282,7 @@ namespace Code.Meta.UI.MainMenu
 
         private void AddHole(Vector2 center, float radius, float scale)
         {
-            if (_holes.Count < LevelMapClouds.MaxHoles)
+            if (_holes.Count < CloudVeil.MaxHoles)
                 _holes.Add(new Vector4(center.x, center.y, radius, scale));
         }
 

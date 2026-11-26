@@ -24,14 +24,6 @@
     top: 0;
 }
 
-.level-map-layer {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-}
-
 /* Marker: stars above, flag in the middle, the pole base sits on the node point. */
 .level-marker {
     position: absolute;
@@ -53,14 +45,6 @@
 
 .level-marker--locked .level-marker__title {
     opacity: 0.7;
-}
-
-.level-map-clouds {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
 }
 
 /* Square bit of cloud flying off a flag whose lock breaks. */

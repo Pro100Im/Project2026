@@ -5,23 +5,31 @@
     <ui:Template name="TownEquipmentMenu" src="project://database/Assets/UI%20Toolkit/Town/TownEquipmentMenu.uxml?fileID=9197481963319205126&amp;guid=f1a2b3c4d5e64789a0b1c2d3e4f50617&amp;type=3#TownEquipmentMenu"/>
     <Style src="project://database/Assets/UI%20Toolkit/Global/GlobalStyle.uss?fileID=7433441132597879392&amp;guid=f0b50401ae793a440bdbacc20d05f547&amp;type=3#GlobalStyle"/>
     <Style src="../Global/MenuChrome.uss" />
+    <Style src="TownChrome.uss" />
     <ui:VisualElement name="TowerCanvas" picking-mode="Ignore" class="screen-root">
         <ui:Instance template="TownBuildMenu" name="TownBuildMenuRoot" picking-mode="Ignore" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;"/>
         <ui:Instance template="TownResearchMenu" name="TownResearchMenuRoot" picking-mode="Ignore" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;"/>
         <ui:Instance template="TownEquipmentMenu" name="TownEquipmentMenuRoot" picking-mode="Ignore" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;"/>
-        <ui:Instance template="TownExchequer" style="position: absolute; right: 0;"/>
+        <ui:Instance template="TownExchequer" picking-mode="Ignore" style="position: absolute; left: 0; top: 0; right: 0;"/>
         <ui:Button text="" name="ExitButton" class="hud-gear">
             <ui:Image picking-mode="Ignore" name="Icon" class="hud-gear__icon menu-icon-exit"/>
         </ui:Button>
-        <ui:Button text="" name="ResearchButton" class="button town-research">
-            <ui:Label text="RESEARCH" picking-mode="Ignore" class="commonText"/>
-        </ui:Button>
-        <ui:Button text="" name="EquipmentButton" class="button town-equipment">
-            <ui:Label text="EQUIP" picking-mode="Ignore" class="commonText"/>
-        </ui:Button>
-        <ui:Button text="" name="TownButton" class="button town-build">
-            <ui:Image picking-mode="Ignore" name="Icon" class="town-build__icon"/>
-            <ui:Label text="BUILD" picking-mode="Ignore" class="commonText"/>
-        </ui:Button>
+        <ui:VisualElement name="TownActions" picking-mode="Ignore" class="town-actions">
+            <ui:Button text="" name="ResearchButton" class="pixel-button town-action">
+                <Code.Meta.UI.Common.NinePiecePanel class="nine--blue"/>
+                <ui:VisualElement picking-mode="Ignore" class="town-action__icon town-icon-research"/>
+                <ui:Label text="RESEARCH" picking-mode="Ignore" class="pixel-button__label"/>
+            </ui:Button>
+            <ui:Button text="" name="TownButton" class="pixel-button town-action town-action--main">
+                <Code.Meta.UI.Common.NinePiecePanel class="nine--red"/>
+                <ui:VisualElement picking-mode="Ignore" class="town-action__icon town-icon-build"/>
+                <ui:Label text="BUILD" picking-mode="Ignore" class="pixel-button__label"/>
+            </ui:Button>
+            <ui:Button text="" name="EquipmentButton" class="pixel-button town-action">
+                <Code.Meta.UI.Common.NinePiecePanel class="nine--blue"/>
+                <ui:VisualElement picking-mode="Ignore" class="town-action__icon town-icon-equip"/>
+                <ui:Label text="EQUIP" picking-mode="Ignore" class="pixel-button__label"/>
+            </ui:Button>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

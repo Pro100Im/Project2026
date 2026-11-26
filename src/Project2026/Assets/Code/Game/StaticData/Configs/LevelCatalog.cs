@@ -15,7 +15,7 @@ namespace Code.Game.StaticData.Configs
         [field: SerializeField] public Sprite MapBackground { get; private set; }
 
         [Tooltip("Clouds around the revealed part of the map.")]
-        [field: SerializeField] public LevelMapVeilSettings Veil { get; private set; } = new();
+        [field: SerializeField] public CloudVeilSettings Veil { get; private set; } = new();
 
         [SerializeField] private LevelNodeDefinition[] _nodes = Array.Empty<LevelNodeDefinition>();
 

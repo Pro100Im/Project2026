@@ -1,0 +1,255 @@
+/* Shared look of the town screen, built from the Tiny Swords UI sheets. */
+
+/* ---- 9-piece backgrounds (see NinePiecePanel.cs). Generated from the sheets' sprite ids. ---- */
+.nine--paper {
+    --nine-0: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/RegularPaper.png?fileID=-5362988147635624668&guid=a0dd19651c1cbd4428bc194c7daa1c2d&type=3#RegularPaper_0");
+    --nine-1: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/RegularPaper.png?fileID=98452754876638009&guid=a0dd19651c1cbd4428bc194c7daa1c2d&type=3#RegularPaper_1");
+    --nine-2: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/RegularPaper.png?fileID=3897734946540809218&guid=a0dd19651c1cbd4428bc194c7daa1c2d&type=3#RegularPaper_2");
+    --nine-3: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/RegularPaper.png?fileID=5788049718142669355&guid=a0dd19651c1cbd4428bc194c7daa1c2d&type=3#RegularPaper_3");
+    --nine-4: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/RegularPaper.png?fileID=-8582144049506258272&guid=a0dd19651c1cbd4428bc194c7daa1c2d&type=3#RegularPaper_4");
+    --nine-5: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/RegularPaper.png?fileID=1239301207029399486&guid=a0dd19651c1cbd4428bc194c7daa1c2d&type=3#RegularPaper_5");
+    --nine-6: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/RegularPaper.png?fileID=-3547821964201192611&guid=a0dd19651c1cbd4428bc194c7daa1c2d&type=3#RegularPaper_6");
+    --nine-7: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/RegularPaper.png?fileID=7162296141767044361&guid=a0dd19651c1cbd4428bc194c7daa1c2d&type=3#RegularPaper_7");
+    --nine-8: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/RegularPaper.png?fileID=-8640408667980648964&guid=a0dd19651c1cbd4428bc194c7daa1c2d&type=3#RegularPaper_8");
+}
+
+.nine--dark {
+    --nine-0: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/SpecialPaper.png?fileID=-3662080559894829788&guid=0cda3e4094f50df43a5d1bed04215979&type=3#SpecialPaper_0");
+    --nine-1: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/SpecialPaper.png?fileID=-3528550575293366639&guid=0cda3e4094f50df43a5d1bed04215979&type=3#SpecialPaper_1");
+    --nine-2: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/SpecialPaper.png?fileID=-559158166968446499&guid=0cda3e4094f50df43a5d1bed04215979&type=3#SpecialPaper_2");
+    --nine-3: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/SpecialPaper.png?fileID=-3425989083507711834&guid=0cda3e4094f50df43a5d1bed04215979&type=3#SpecialPaper_3");
+    --nine-4: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/SpecialPaper.png?fileID=-7541358502943136439&guid=0cda3e4094f50df43a5d1bed04215979&type=3#SpecialPaper_4");
+    --nine-5: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/SpecialPaper.png?fileID=-2500842349237177605&guid=0cda3e4094f50df43a5d1bed04215979&type=3#SpecialPaper_5");
+    --nine-6: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/SpecialPaper.png?fileID=4353327290290636131&guid=0cda3e4094f50df43a5d1bed04215979&type=3#SpecialPaper_6");
+    --nine-7: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/SpecialPaper.png?fileID=-7738430037826034828&guid=0cda3e4094f50df43a5d1bed04215979&type=3#SpecialPaper_7");
+    --nine-8: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Papers/SpecialPaper.png?fileID=-4761550643975672150&guid=0cda3e4094f50df43a5d1bed04215979&type=3#SpecialPaper_8");
+}
+
+.nine--wood {
+    --nine-0: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Wood%20Table/WoodTable.png?fileID=1456634771012968291&guid=85eede4e62ffc744e90ac8a89aca0f5c&type=3#WoodTable_0");
+    --nine-1: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Wood%20Table/WoodTable.png?fileID=-2984624457334693161&guid=85eede4e62ffc744e90ac8a89aca0f5c&type=3#WoodTable_1");
+    --nine-2: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Wood%20Table/WoodTable.png?fileID=7553826016581799804&guid=85eede4e62ffc744e90ac8a89aca0f5c&type=3#WoodTable_2");
+    --nine-3: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Wood%20Table/WoodTable.png?fileID=-565612253562943241&guid=85eede4e62ffc744e90ac8a89aca0f5c&type=3#WoodTable_3");
+    --nine-4: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Wood%20Table/WoodTable.png?fileID=3108243940215872247&guid=85eede4e62ffc744e90ac8a89aca0f5c&type=3#WoodTable_4");
+    --nine-5: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Wood%20Table/WoodTable.png?fileID=3492093076585841537&guid=85eede4e62ffc744e90ac8a89aca0f5c&type=3#WoodTable_5");
+    --nine-6: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Wood%20Table/WoodTable.png?fileID=-2246418273884473086&guid=85eede4e62ffc744e90ac8a89aca0f5c&type=3#WoodTable_6");
+    --nine-7: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Wood%20Table/WoodTable.png?fileID=-5544660823759752318&guid=85eede4e62ffc744e90ac8a89aca0f5c&type=3#WoodTable_7");
+    --nine-8: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Wood%20Table/WoodTable.png?fileID=3887476063807763688&guid=85eede4e62ffc744e90ac8a89aca0f5c&type=3#WoodTable_8");
+    --nine-scale: 0.5;
+}
+
+.nine--blue {
+    --nine-0: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigBlueButton_Regular.png?fileID=-1949353702184251499&guid=9fe53f48b91123a4f8dc25f5f77f46c4&type=3#BigBlueButton_Regular_0");
+    --nine-1: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigBlueButton_Regular.png?fileID=-8725503236033547036&guid=9fe53f48b91123a4f8dc25f5f77f46c4&type=3#BigBlueButton_Regular_1");
+    --nine-2: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigBlueButton_Regular.png?fileID=6989699430646796906&guid=9fe53f48b91123a4f8dc25f5f77f46c4&type=3#BigBlueButton_Regular_2");
+    --nine-3: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigBlueButton_Regular.png?fileID=5119494457924714752&guid=9fe53f48b91123a4f8dc25f5f77f46c4&type=3#BigBlueButton_Regular_3");
+    --nine-4: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigBlueButton_Regular.png?fileID=-4122424148886225823&guid=9fe53f48b91123a4f8dc25f5f77f46c4&type=3#BigBlueButton_Regular_4");
+    --nine-5: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigBlueButton_Regular.png?fileID=-1221525689955778191&guid=9fe53f48b91123a4f8dc25f5f77f46c4&type=3#BigBlueButton_Regular_5");
+    --nine-6: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigBlueButton_Regular.png?fileID=1078221391828244337&guid=9fe53f48b91123a4f8dc25f5f77f46c4&type=3#BigBlueButton_Regular_6");
+    --nine-7: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigBlueButton_Regular.png?fileID=4035496608011157673&guid=9fe53f48b91123a4f8dc25f5f77f46c4&type=3#BigBlueButton_Regular_7");
+    --nine-8: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigBlueButton_Regular.png?fileID=7517541412985448489&guid=9fe53f48b91123a4f8dc25f5f77f46c4&type=3#BigBlueButton_Regular_8");
+}
+
+.nine--red {
+    --nine-0: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigRedButton_Regular.png?fileID=-2595442491627172692&guid=fb41ef3404dbb154eac2d46ec8f9445e&type=3#BigRedButton_Regular_0");
+    --nine-1: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigRedButton_Regular.png?fileID=-1154290438257337675&guid=fb41ef3404dbb154eac2d46ec8f9445e&type=3#BigRedButton_Regular_1");
+    --nine-2: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigRedButton_Regular.png?fileID=7546687717628063387&guid=fb41ef3404dbb154eac2d46ec8f9445e&type=3#BigRedButton_Regular_2");
+    --nine-3: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigRedButton_Regular.png?fileID=1399470472197620026&guid=fb41ef3404dbb154eac2d46ec8f9445e&type=3#BigRedButton_Regular_3");
+    --nine-4: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigRedButton_Regular.png?fileID=-643288847931846842&guid=fb41ef3404dbb154eac2d46ec8f9445e&type=3#BigRedButton_Regular_4");
+    --nine-5: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigRedButton_Regular.png?fileID=-8230944254047789737&guid=fb41ef3404dbb154eac2d46ec8f9445e&type=3#BigRedButton_Regular_5");
+    --nine-6: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigRedButton_Regular.png?fileID=-2564250544821480763&guid=fb41ef3404dbb154eac2d46ec8f9445e&type=3#BigRedButton_Regular_6");
+    --nine-7: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigRedButton_Regular.png?fileID=2602757174432705238&guid=fb41ef3404dbb154eac2d46ec8f9445e&type=3#BigRedButton_Regular_7");
+    --nine-8: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Buttons/BigRedButton_Regular.png?fileID=-3441542177121162553&guid=fb41ef3404dbb154eac2d46ec8f9445e&type=3#BigRedButton_Regular_8");
+}
+
+.nine--ribbon-blue {
+    --nine-0: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Ribbons/BigRibbons.png?fileID=-4892212827595964496&guid=aaca5dee9039b2f4d9da4b316e81ed26&type=3#BigRibbons_0");
+    --nine-1: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Ribbons/BigRibbons.png?fileID=351974544103463365&guid=aaca5dee9039b2f4d9da4b316e81ed26&type=3#BigRibbons_1");
+    --nine-2: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Ribbons/BigRibbons.png?fileID=-7536648891223242269&guid=aaca5dee9039b2f4d9da4b316e81ed26&type=3#BigRibbons_2");
+    --nine-scale: 0.8;
+}
+
+.nine--ribbon-red {
+    --nine-0: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Ribbons/BigRibbons.png?fileID=1064086505449676317&guid=aaca5dee9039b2f4d9da4b316e81ed26&type=3#BigRibbons_3");
+    --nine-1: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Ribbons/BigRibbons.png?fileID=-5222043051815097015&guid=aaca5dee9039b2f4d9da4b316e81ed26&type=3#BigRibbons_4");
+    --nine-2: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Ribbons/BigRibbons.png?fileID=7388606491961418501&guid=aaca5dee9039b2f4d9da4b316e81ed26&type=3#BigRibbons_5");
+    --nine-scale: 0.8;
+}
+
+.nine--ribbon-yellow {
+    --nine-0: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Ribbons/BigRibbons.png?fileID=-5681883222114246646&guid=aaca5dee9039b2f4d9da4b316e81ed26&type=3#BigRibbons_6");
+    --nine-1: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Ribbons/BigRibbons.png?fileID=4548267888105415737&guid=aaca5dee9039b2f4d9da4b316e81ed26&type=3#BigRibbons_7");
+    --nine-2: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Ribbons/BigRibbons.png?fileID=-4724587223178234472&guid=aaca5dee9039b2f4d9da4b316e81ed26&type=3#BigRibbons_8");
+    --nine-scale: 0.8;
+}
+
+/* ---- Buttons ---- */
+.pixel-button {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-height: 98px;
+    margin: 0;
+    /* The bottom of the sprite is the button's lip, the face sits above it. */
+    padding: 0 26px 16px 26px;
+    border-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+    transition-property: scale, translate;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-out-cubic;
+}
+
+.pixel-button:hover,
+.pixel-button:active,
+.pixel-button:focus,
+.pixel-button:disabled {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.pixel-button:hover:enabled {
+    scale: 1.04 1.04;
+}
+
+.pixel-button:active:enabled {
+    scale: 1 1;
+    translate: 0 4px;
+}
+
+.pixel-button:active:enabled .nine__piece {
+    -unity-background-image-tint-color: rgb(205, 205, 215);
+}
+
+.pixel-button:disabled {
+    opacity: 1;
+}
+
+.pixel-button:disabled .nine__piece {
+    -unity-background-image-tint-color: rgb(150, 150, 150);
+}
+
+.pixel-button:disabled .pixel-button__label {
+    color: rgb(215, 215, 215);
+}
+
+.pixel-button__label {
+    margin: 0;
+    padding: 0;
+    color: rgb(255, 246, 220);
+    font-size: 34px;
+    -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/ThaleahFat%20SDF.asset?fileID=11400000&guid=4f91cd89f157d37449660700b7886222&type=2#ThaleahFat SDF");
+    -unity-text-outline-color: rgb(28, 36, 58);
+    -unity-text-outline-width: 1.5px;
+}
+
+/* ---- Ribbon title, sits on the top edge of a panel ---- */
+.panel-title-row {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -40px;
+    align-items: center;
+}
+
+.ribbon-title {
+    height: 84px;
+    min-width: 340px;
+    padding: 0 96px 10px 96px;
+    align-items: center;
+    justify-content: center;
+}
+
+.ribbon-title__label {
+    margin: 0;
+    padding: 0;
+    color: rgb(255, 246, 220);
+    font-size: 40px;
+    -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/ThaleahFat%20SDF.asset?fileID=11400000&guid=4f91cd89f157d37449660700b7886222&type=2#ThaleahFat SDF");
+    -unity-text-outline-color: rgb(28, 36, 58);
+    -unity-text-outline-width: 1.5px;
+}
+
+/* ---- Resources: one wooden bar in the top-right corner ---- */
+.town-resources {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    height: 108px;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 30px 30px 30px;
+}
+
+.town-resource {
+    flex-direction: row;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.town-resource__icon {
+    width: 46px;
+    height: 46px;
+    margin-right: 6px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.town-resource__value {
+    min-width: 54px;
+    margin: 0;
+    padding: 0;
+    font-size: 36px;
+    -unity-text-align: middle-left;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/ThaleahFat%20SDF.asset?fileID=11400000&guid=4f91cd89f157d37449660700b7886222&type=2#ThaleahFat SDF");
+    -unity-text-outline-color: rgb(40, 22, 12);
+    -unity-text-outline-width: 1.5px;
+}
+
+.res-wood { background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Icons/Icon_02.png?fileID=2800000&guid=4e30bae39ecc4c44f9fe6b924646dff6&type=3#Icon_02"); }
+.res-stone { background-image: url("project://database/Assets/Sources/My/Other/Misc/Rune%20Stone.png?fileID=2800000&guid=e6d5c417c1975dd4ab0783000ef7f95d&type=3#Rune Stone"); }
+.res-crystal { background-image: url("project://database/Assets/Sources/My/Other/Ore%20&%20Gem/Diamond.png?fileID=2800000&guid=33c9e896bd5e7e94cadec9bc8c1c3d59&type=3#Diamond"); }
+.res-knowledge { background-image: url("project://database/Assets/Sources/My/Other/Misc/Book%203.png?fileID=2800000&guid=9486262587cd2c743a5de378c0d39ebe&type=3#Book 3"); }
+.res-gold { background-image: url("project://database/Assets/Sources/My/Other/Misc/Golden%20Coin.png?fileID=2800000&guid=394899dbf2938874ca7d1025f7598406&type=3#Golden Coin"); }
+
+.res-wood-text { color: rgb(226, 160, 122); }
+.res-stone-text { color: rgb(222, 214, 202); }
+.res-crystal-text { color: rgb(158, 215, 255); }
+.res-knowledge-text { color: rgb(190, 160, 255); }
+.res-gold-text { color: rgb(243, 218, 91); }
+
+/* ---- Bottom actions: Research, Build, Equip ---- */
+.town-actions {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 22px;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.town-action {
+    width: 276px;
+    height: 104px;
+    margin: 0 14px;
+}
+
+.town-action--main {
+    width: 316px;
+    height: 120px;
+}
+
+.town-action--main .pixel-button__label {
+    font-size: 40px;
+}
+
+.town-action__icon {
+    width: 54px;
+    height: 54px;
+    margin-right: 10px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.town-icon-build { background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/Terrain/Resources/Tools/Tool_01.png?fileID=2800000&guid=8f22800fe5b2fef4899b45d2a3e5b103&type=3#Tool_01"); }
+.town-icon-research { background-image: url("project://database/Assets/Sources/My/Other/Misc/Book%203.png?fileID=2800000&guid=9486262587cd2c743a5de378c0d39ebe&type=3#Book 3"); }
+.town-icon-equip { background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Icons/Icon_05.png?fileID=2800000&guid=9fd214d87b23d4c45adcbc81b4d58dc3&type=3#Icon_05"); }

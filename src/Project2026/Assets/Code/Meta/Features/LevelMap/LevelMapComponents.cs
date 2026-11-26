@@ -23,7 +23,7 @@ namespace Code.Meta.Features.LevelMap
     [Meta] public class LevelMapDirty : IComponent { }
     [Meta] public class LevelMapSize : IComponent { public Vector2 Value; }
     [Meta] public class LevelMapBackground : IComponent { public Sprite Value; }
-    [Meta] public class LevelMapVeil : IComponent { public LevelMapVeilSettings Value; }
+    [Meta] public class LevelMapVeil : IComponent { public CloudVeilSettings Value; }
 
     [Input] public class LevelMapMenuOpenRequested : IComponent { }
     [Input] public class LevelMapMenuCloseRequested : IComponent { }

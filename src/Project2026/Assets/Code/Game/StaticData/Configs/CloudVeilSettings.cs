@@ -4,10 +4,10 @@ using UnityEngine;
 namespace Code.Game.StaticData.Configs
 {
     /// <summary>
-    /// Pixel-art cloud veil over the world map (Tiny Swords style). Sizes are in map UI pixels.
+    /// Pixel-art cloud veil (Tiny Swords style) over a map-like content. Sizes are in content UI pixels.
     /// </summary>
     [Serializable]
-    public class LevelMapVeilSettings
+    public class CloudVeilSettings
     {
         [Header("Clearings")]
         [Tooltip("Clear area around available and completed levels.")]
@@ -22,7 +22,7 @@ namespace Code.Game.StaticData.Configs
         [Tooltip("Distance between clear points along a road.")]
         public float RoadStep = 70f;
 
-        [Tooltip("Cloud frame along the map edges.")]
+        [Tooltip("Cloud frame along the content edges. 0 = no frame.")]
         public float BorderWidth = 160f;
 
         [Header("Pixel art")]
@@ -45,6 +45,18 @@ namespace Code.Game.StaticData.Configs
 
         [Tooltip("Swell and sway speed.")]
         public float BreathSpeed = 0.8f;
+
+        /// <summary>Defaults for the research tree: small clearings, no frame.</summary>
+        public static CloudVeilSettings ForResearch() => new()
+        {
+            RevealRadius = 92f,
+            PreviewRadius = 92f,
+            RoadRadius = 58f,
+            RoadStep = 40f,
+            BorderWidth = 0f,
+            PuffSize = 38f,
+            ShadowOffset = 12f
+        };
 
         private static Color Rgba(byte r, byte g, byte b, byte a) => new Color32(r, g, b, a);
     }

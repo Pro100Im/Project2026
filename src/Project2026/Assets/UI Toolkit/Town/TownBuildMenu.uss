@@ -6,43 +6,28 @@
     bottom: 0;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.45);
+    background-color: rgba(20, 16, 24, 0.55);
     transition-property: opacity;
     transition-duration: 0.2s;
 }
 
+/* Paper panel; the background is a NinePiecePanel child, the title a ribbon on the top edge. */
 .build-menu-panel {
-    width: 1120px;
-    height: 600px;
-    padding-top: 70px;
-    padding-right: 30px;
-    padding-bottom: 40px;
-    padding-left: 30px;
+    width: 1300px;
+    height: 620px;
+    padding: 76px 48px 48px 48px;
     align-items: center;
-    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Banners/Banner_Slots.png?fileID=2800000&guid=072717bc57c49fe4b8d08208e4b8c83c&type=3#Banner_Slots");
-    -unity-background-scale-mode: stretch-to-fill;
-}
-
-.build-menu-title {
-    position: absolute;
-    top: 18px;
-    left: 0;
-    right: 0;
-    font-size: 44px;
 }
 
 .build-menu-close {
     position: absolute;
-    top: -10px;
-    right: -10px;
+    top: -18px;
+    right: -18px;
     width: 70px;
     height: 70px;
     background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Icons/Icon_09.png?fileID=2800000&guid=a90ab0d79a24370459b8936305e6c969&type=3#Icon_09");
     background-color: rgba(0, 0, 0, 0);
-    border-top-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    border-left-width: 0;
+    border-width: 0;
     -unity-background-scale-mode: scale-to-fit;
     transition-property: scale;
     transition-duration: 0.12s;
@@ -65,33 +50,33 @@
 }
 
 .build-column {
-    width: 116px;
+    width: 132px;
     flex-direction: column;
     align-items: center;
 }
 
+/* A wooden plaque: icon, name, state. */
 .build-slot {
-    width: 108px;
-    height: 150px;
-    margin-top: 4px;
-    margin-right: 0;
-    margin-bottom: 4px;
-    margin-left: 0;
-    padding-top: 6px;
-    padding-right: 4px;
-    padding-bottom: 6px;
-    padding-left: 4px;
+    width: 122px;
+    height: 162px;
+    margin: 5px 0;
+    padding: 10px 6px 12px 6px;
     align-items: center;
     justify-content: space-between;
-    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Cursors/Cursor_04.png?fileID=2800000&guid=434fa6d8f91adba44ba63b4ab1b7c81b&type=3#Cursor_04");
+    background-image: url("project://database/Assets/Sources/Tiny%20Swords%20(Free%20Pack)/Tiny%20Swords%20(Free%20Pack)/UI%20Elements/UI%20Elements/Wood%20Table/WoodTable_Slots.png?fileID=2800000&guid=922213a7128e89d4a9e89e3f1c689ae9&type=3#WoodTable_Slots");
     -unity-background-scale-mode: stretch-to-fill;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
     background-color: rgba(0, 0, 0, 0);
-    border-top-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    border-left-width: 0;
-    transition-property: scale, opacity;
+    border-width: 0;
+    transition-property: scale, opacity, -unity-background-image-tint-color;
     transition-duration: 0.1s;
+}
+
+.build-slot:hover,
+.build-slot:active,
+.build-slot:focus,
+.build-slot:disabled {
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .build-slot:disabled {
@@ -100,35 +85,48 @@
 
 .build-slot:hover:enabled {
     scale: 1.06 1.06;
+    -unity-background-image-tint-color: rgb(255, 236, 210);
+}
+
+.build-slot:active:enabled {
+    scale: 0.98 0.98;
+    -unity-background-image-tint-color: rgb(200, 175, 150);
 }
 
 .build-slot__icon {
-    width: 76px;
-    height: 70px;
+    width: 80px;
+    height: 74px;
     -unity-background-scale-mode: scale-to-fit;
 }
 
+/* Light text on the dark wood. */
+.build-slot .commonText {
+    color: rgb(255, 240, 212);
+    -unity-text-outline-color: rgb(58, 30, 22);
+    -unity-text-outline-width: 1px;
+}
+
 .build-slot__title {
-    font-size: 18px;
+    font-size: 19px;
     white-space: normal;
 }
 
 .build-slot__state {
-    font-size: 16px;
+    font-size: 17px;
 }
 
 .build-slot--built {
-    -unity-background-image-tint-color: rgb(170, 230, 150);
+    -unity-background-image-tint-color: rgb(196, 232, 170);
 }
 
 .build-slot--built .build-slot__state {
-    color: rgb(40, 110, 30);
+    color: rgb(190, 255, 150);
 }
 
 .build-slot--available .build-slot__state {
-    color: rgb(150, 90, 10);
+    color: rgb(255, 214, 96);
 }
 
 .build-slot--locked:disabled {
-    opacity: 0.45;
+    opacity: 0.5;
 }

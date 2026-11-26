@@ -316,11 +316,14 @@ namespace Code.Meta.UI.MainMenu
     {
         private const float Dash = 14f;
         private const float Gap = 10f;
-        private const float Bend = 0.18f;
+        public const float DefaultBend = 0.18f;
         private const int Samples = 48;
 
-        private static readonly Color Passed = new(0.28f, 0.18f, 0.10f, 0.95f);
-        private static readonly Color Fresh = new(0.28f, 0.18f, 0.10f, 0.6f);
+        /// <summary>Sideways bend of a road, fraction of its length.</summary>
+        public float Bend = DefaultBend;
+        public float LineWidth = 6f;
+        public Color Passed = new(0.28f, 0.18f, 0.10f, 0.95f);
+        public Color Fresh = new(0.28f, 0.18f, 0.10f, 0.6f);
 
         private readonly List<LevelMapLink> _links = new(16);
         private readonly List<float> _progress = new(16);
@@ -329,7 +332,12 @@ namespace Code.Meta.UI.MainMenu
         public LevelMapRoads()
         {
             pickingMode = PickingMode.Ignore;
-            AddToClassList("level-map-layer");
+            // Fills its parent; set here so the element works in any screen without extra USS.
+            style.position = Position.Absolute;
+            style.left = 0f;
+            style.top = 0f;
+            style.right = 0f;
+            style.bottom = 0f;
             generateVisualContent += Draw;
         }
 
@@ -358,7 +366,7 @@ namespace Code.Meta.UI.MainMenu
         private void Draw(MeshGenerationContext context)
         {
             var p = context.painter2D;
-            p.lineWidth = 6f;
+            p.lineWidth = LineWidth;
             p.lineCap = LineCap.Round;
 
             for (var i = 0; i < _links.Count; i++)
@@ -378,15 +386,15 @@ namespace Code.Meta.UI.MainMenu
         private void Sample(Vector2 from, Vector2 to, float until)
         {
             for (var i = 0; i <= Samples; i++)
-                _points[i] = Point(from, to, until * i / Samples);
+                _points[i] = Point(from, to, until * i / Samples, Bend);
         }
 
         /// <summary>A point on the road curve: quadratic, bent sideways, always to the same side for a given direction.</summary>
-        public static Vector2 Point(Vector2 from, Vector2 to, float t)
+        public static Vector2 Point(Vector2 from, Vector2 to, float t, float bend = DefaultBend)
         {
             var delta = to - from;
             var normal = new Vector2(-delta.y, delta.x).normalized;
-            var control = (from + to) * 0.5f + normal * delta.magnitude * Bend;
+            var control = (from + to) * 0.5f + normal * delta.magnitude * bend;
             var u = 1f - t;
             return u * u * from + 2f * u * t * control + t * t * to;
         }
@@ -446,7 +454,12 @@ namespace Code.Meta.UI.MainMenu
         public LevelMapBackdrop()
         {
             pickingMode = PickingMode.Ignore;
-            AddToClassList("level-map-layer");
+            // Fills its parent; set here so the element works in any screen without extra USS.
+            style.position = Position.Absolute;
+            style.left = 0f;
+            style.top = 0f;
+            style.right = 0f;
+            style.bottom = 0f;
             generateVisualContent += Draw;
         }
 

@@ -13,6 +13,21 @@ MonoBehaviour:
   m_Name: ResearchCatalog
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.ResearchCatalog
   <NodeSpacing>k__BackingField: 108
+  <Veil>k__BackingField:
+    RevealRadius: 92
+    PreviewRadius: 92
+    RoadRadius: 58
+    RoadStep: 40
+    BorderWidth: 0
+    PixelSize: 2
+    PuffSize: 38
+    ShadowOffset: 12
+    Light: {r: 0.988235, g: 0.996078, b: 0.937255, a: 1}
+    Mid: {r: 0.898039, g: 0.913725, b: 0.803922, a: 1}
+    Dark: {r: 0.858824, g: 0.847059, b: 0.745098, a: 1}
+    ShadowColor: {r: 0.141176, g: 0.164706, b: 0.231373, a: 0.333333}
+    BreathAmount: 0.06
+    BreathSpeed: 0.8
   <Branches>k__BackingField:
   - <Name>k__BackingField: Units
     <Direction>k__BackingField: 4
