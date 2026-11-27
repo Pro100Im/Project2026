@@ -3,8 +3,14 @@ using UnityEngine;
 
 namespace Code.Game.Features.HitReaction
 {
+    /// <summary>
+    /// Flash and punch on hit. One persistent tween per view drives both: it is created once and only restarted
+    /// on every hit, so a hit allocates nothing.
+    /// </summary>
     public class HitReactionView : MonoBehaviour
     {
+        private const float FlashInShare = 0.45f;
+
         private static readonly int FlashAmountId = Shader.PropertyToID("_FlashAmount");
 
         [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -16,16 +22,27 @@ namespace Code.Game.Features.HitReaction
 
         private MaterialPropertyBlock _propertyBlock;
 
-        private Sequence _sequence;
+        // Animates elapsed seconds 0..total; the setter derives flash and punch from it.
+        private Tween _tween;
+        private DG.Tweening.Core.DOGetter<float> _getElapsed;
+        private DG.Tweening.Core.DOSetter<float> _setElapsed;
+        private TweenCallback _onComplete;
+
+        private float _elapsed;
+        private float _flashIn;
+        private float _flashOut;
+        private bool _playing;
+
         private Vector3 _visualRestLocalPosition;
+        private Vector3 _punchedLocalPosition;
         private float _flashAmount;
         private bool _restCached;
-        private bool _isStopping;
 
         private void Awake()
         {
             CacheRest();
             SetFlash(0f);
+            EnsureTween();
         }
 
         public void Play(Vector2 direction)
@@ -34,63 +51,32 @@ namespace Code.Game.Features.HitReaction
                 return;
 
             CacheRest();
-            Stop();
+            EnsureTween();
 
             var worldDirection = direction.sqrMagnitude > 0.0001f ? direction.normalized : Vector2.up;
             var worldOffset = new Vector3(worldDirection.x, worldDirection.y, 0f) * _punchDistance;
             var localOffset = _visual != null ? _visual.InverseTransformVector(worldOffset) : Vector3.zero;
             localOffset.z = 0f;
 
-            var flashInDuration = _flashDuration * 0.45f;
-            var flashOutDuration = Mathf.Max(0.01f, _flashDuration - flashInDuration);
-            var flashIn = DOTween.To(GetFlash, SetFlash, 1f, flashInDuration).SetEase(Ease.OutQuad).Pause();
-            var flashOut = DOTween.To(GetFlash, SetFlash, 0f, flashOutDuration).SetEase(Ease.InQuad).Pause();
-
-            _sequence = DOTween.Sequence().SetUpdate(UpdateType.Manual);
-            _sequence.Append(flashIn);
-            _sequence.Append(flashOut);
-
-            if (_visual != null)
-            {
-                var punchedPosition = _visualRestLocalPosition + localOffset;
-                var punchOut = _visual.DOLocalMove(punchedPosition, _punchOutDuration).SetEase(Ease.OutQuad).Pause();
-                var punchReturn = _visual.DOLocalMove(_visualRestLocalPosition, _punchReturnDuration).SetEase(Ease.OutQuad).Pause();
-
-                _sequence.Insert(0f, punchOut);
-                _sequence.Insert(_punchOutDuration, punchReturn);
-            }
-
-            _sequence.OnComplete(Finish);
+            _punchedLocalPosition = _visualRestLocalPosition + localOffset;
+            _playing = true;
+            _tween.Restart();
         }
 
         public void Tick(float deltaTime)
         {
-            if (_sequence == null || !_sequence.active || deltaTime <= 0f)
+            if (!_playing || deltaTime <= 0f)
                 return;
 
-            _sequence.ManualUpdate(deltaTime, deltaTime);
+            _tween.ManualUpdate(deltaTime, deltaTime);
         }
 
         public void Stop()
         {
-            if (_isStopping)
-                return;
+            if (_tween != null && _tween.active)
+                _tween.Pause();
 
-            _isStopping = true;
-
-            if (_sequence != null)
-            {
-                var sequence = _sequence;
-                _sequence = null;
-                sequence.OnComplete(null);
-
-                if (sequence.active)
-                    sequence.Kill(false);
-            }
-
-            SetFlash(0f);
-            RestoreVisualPosition();
-            _isStopping = false;
+            Finish();
         }
 
         private void OnDisable()
@@ -100,12 +86,86 @@ namespace Code.Game.Features.HitReaction
 
         private void OnDestroy()
         {
-            Stop();
+            _playing = false;
+
+            if (_tween != null && _tween.active)
+                _tween.Kill();
+
+            _tween = null;
+        }
+
+        private void EnsureTween()
+        {
+            if (_tween != null && _tween.active)
+                return;
+
+            _flashIn = _flashDuration * FlashInShare;
+            _flashOut = Mathf.Max(0.01f, _flashDuration - _flashIn);
+
+            var total = Mathf.Max(_flashIn + _flashOut, _punchOutDuration + _punchReturnDuration);
+
+            _getElapsed ??= GetElapsed;
+            _setElapsed ??= SetElapsed;
+            _onComplete ??= Finish;
+
+            _tween = DOTween.To(_getElapsed, _setElapsed, total, total)
+                .From(0f)
+                .SetEase(Ease.Linear)
+                .SetUpdate(UpdateType.Manual)
+                .SetAutoKill(false)
+                .OnComplete(_onComplete)
+                .Pause();
+        }
+
+        private float GetElapsed() => _elapsed;
+
+        private void SetElapsed(float elapsed)
+        {
+            _elapsed = elapsed;
+
+            if (!_playing)
+                return;
+
+            SetFlash(EvaluateFlash(elapsed));
+
+            if (_visual != null && _restCached)
+                _visual.localPosition = EvaluatePunch(elapsed);
+        }
+
+        private float EvaluateFlash(float elapsed)
+        {
+            if (elapsed < _flashIn)
+                return DOVirtual.EasedValue(0f, 1f, elapsed / _flashIn, Ease.OutQuad);
+
+            var outTime = elapsed - _flashIn;
+
+            return outTime < _flashOut
+                ? DOVirtual.EasedValue(1f, 0f, outTime / _flashOut, Ease.InQuad)
+                : 0f;
+        }
+
+        private Vector3 EvaluatePunch(float elapsed)
+        {
+            if (elapsed < _punchOutDuration)
+            {
+                var t = DOVirtual.EasedValue(0f, 1f, elapsed / _punchOutDuration, Ease.OutQuad);
+                return Vector3.LerpUnclamped(_visualRestLocalPosition, _punchedLocalPosition, t);
+            }
+
+            var returnTime = elapsed - _punchOutDuration;
+
+            if (_punchReturnDuration > 0f && returnTime < _punchReturnDuration)
+            {
+                var t = DOVirtual.EasedValue(0f, 1f, returnTime / _punchReturnDuration, Ease.OutQuad);
+                return Vector3.LerpUnclamped(_punchedLocalPosition, _visualRestLocalPosition, t);
+            }
+
+            return _visualRestLocalPosition;
         }
 
         private void Finish()
         {
-            _sequence = null;
+            _playing = false;
             SetFlash(0f);
             RestoreVisualPosition();
         }
@@ -127,8 +187,6 @@ namespace Code.Game.Features.HitReaction
             _visual.localPosition = _visualRestLocalPosition;
         }
 
-        private float GetFlash() => _flashAmount;
-
         private void SetFlash(float amount)
         {
             _flashAmount = amount;
@@ -136,8 +194,7 @@ namespace Code.Game.Features.HitReaction
             if (_spriteRenderer == null)
                 return;
 
-            if (_propertyBlock == null)
-                _propertyBlock = new MaterialPropertyBlock();
+            _propertyBlock ??= new MaterialPropertyBlock();
 
             _spriteRenderer.GetPropertyBlock(_propertyBlock);
             _propertyBlock.SetFloat(FlashAmountId, _flashAmount);

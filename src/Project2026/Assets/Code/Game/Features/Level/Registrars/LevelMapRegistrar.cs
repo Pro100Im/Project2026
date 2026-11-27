@@ -31,10 +31,10 @@ namespace Code.Game.Features.Level.Registrars
             _arena = CreateArena();
             Entity.AddArena(_arena);
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-            Debug.Log($"[LevelArena] {_arena.Width}x{_arena.Height} cells, {_arena.MaxUnits} units: " +
-                $"{_arena.TotalBytes / 1024} KB in one block.");
-#endif
+//#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            //Debug.Log($"[LevelArena] {_arena.Width}x{_arena.Height} cells, {_arena.MaxUnits} units: " +
+                //$"{_arena.TotalBytes / 1024} KB in one block.");
+//#endif
         }
 
         public override void UnregisterComponents()

@@ -11,6 +11,9 @@ namespace Code.Infrastructure.View.Pool
         private const int DefaultCapacity = 16;
         private const int MaxSize = 200;
 
+        private static readonly List<TrailRenderer> TrailsBuffer = new(16);
+        private static readonly List<ParticleSystem> ParticlesBuffer = new(32);
+
         private Transform _root;
         private readonly Dictionary<EntityBehaviour, ObjectPool<EntityBehaviour>> _pools = new(32);
         private readonly Dictionary<EntityBehaviour, EntityBehaviour> _instanceToPrefab = new(128);
@@ -90,13 +93,17 @@ namespace Code.Infrastructure.View.Pool
 
         private static void ResetVisualEffects(EntityBehaviour view)
         {
-            var trails = view.GetComponentsInChildren<TrailRenderer>(true);
-            for (var i = 0; i < trails.Length; i++)
-                trails[i].Clear();
+            // List overloads fill reused buffers instead of allocating an array on every release.
+            view.GetComponentsInChildren(true, TrailsBuffer);
+            for (var i = 0; i < TrailsBuffer.Count; i++)
+                TrailsBuffer[i].Clear();
 
-            var particles = view.GetComponentsInChildren<ParticleSystem>(true);
-            for (var i = 0; i < particles.Length; i++)
-                particles[i].Clear(true);
+            view.GetComponentsInChildren(true, ParticlesBuffer);
+            for (var i = 0; i < ParticlesBuffer.Count; i++)
+                ParticlesBuffer[i].Clear(true);
+
+            TrailsBuffer.Clear();
+            ParticlesBuffer.Clear();
         }
 
         private void OnDestroy(EntityBehaviour view)

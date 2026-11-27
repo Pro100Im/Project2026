@@ -1,4 +1,5 @@
 using Code.Infrastructure.Loading;
+using Code.Infrastructure.Tweens;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
@@ -23,6 +24,8 @@ namespace Code.Infrastructure.DI.EntryPoints
 
         public async void Initialize()
         {
+            TweenCapacity.Apply();
+
             await UniTask.WhenAll(_sceneLoader.Load(_homeScreenSceneName, LoadSceneMode.Additive), _sceneLoader.Load(_townSceneName, LoadSceneMode.Additive));
 
             _sceneLoader.UnLoad(_bootstrupSceneName).Forget();
