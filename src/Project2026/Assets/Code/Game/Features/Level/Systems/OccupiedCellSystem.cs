@@ -1,15 +1,18 @@
 using Entitas;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Code.Game.Features.Level.Systems
 {
+    /// <summary>
+    /// Stamps the footprint of every unit and building into <see cref="LevelArena.Occupant"/>, in place.
+    /// Read by slot picking and spawning to keep footprints apart.
+    /// </summary>
     public class OccupiedCellSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _cells;
         private readonly IGroup<GameEntity> _maps;
 
-        private readonly List<GameEntity> _cellsBuffer = new(512);
+        private readonly List<GameEntity> _cellsBuffer = new(LevelBuffers.DefaultCapacity);
 
         public OccupiedCellSystem()
         {
@@ -21,8 +24,7 @@ namespace Code.Game.Features.Level.Systems
                 GameMatcher.UnitSize,
                 GameMatcher.Id));
 
-            _maps = gameContext.GetGroup(GameMatcher
-                .AllOf(GameMatcher.OccupField));
+            _maps = gameContext.GetGroup(GameMatcher.Arena);
         }
 
         public void Execute()
@@ -32,10 +34,12 @@ namespace Code.Game.Features.Level.Systems
             if (map == null)
                 return;
 
-            var occupField = map.occupField.Value;
-            var cells = _cells.GetEntities(_cellsBuffer);
+            var arena = map.arena.Value;
+            var occupant = arena.Occupant;
+            var cells = _cells.GetEntities(LevelBuffers.Fit(_cellsBuffer, arena));
 
-            occupField.Clear();
+            for (var i = 0; i < arena.CellCount; i++)
+                occupant[i] = 0;
 
             for (var i = 0; i < cells.Count; i++)
             {
@@ -45,16 +49,17 @@ namespace Code.Game.Features.Level.Systems
                     continue;
 
                 var origin = entity.currentCell.Value;
-                var sizeX = entity.unitSize.Value.x;
-                var sizeY = entity.unitSize.Value.y;
+                var size = entity.unitSize.Value;
+                var id = entity.id.Value;
 
-                for (var x = 0; x < sizeX; x++)
+                for (var x = 0; x < size.x; x++)
                 {
-                    for (var y = 0; y < sizeY; y++)
+                    for (var y = 0; y < size.y; y++)
                     {
-                        var cell = new Vector3Int(origin.x + x, origin.y + y, origin.z);
+                        var index = arena.IndexOf(origin.x + x, origin.y + y);
 
-                        occupField[cell] = entity.id.Value;
+                        if (index >= 0)
+                            occupant[index] = id;
                     }
                 }
             }

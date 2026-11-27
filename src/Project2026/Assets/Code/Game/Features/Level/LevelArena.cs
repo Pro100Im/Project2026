@@ -1,5 +1,6 @@
 using System;
 using Unity.Collections;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 namespace Code.Game.Features.Level
@@ -36,8 +37,9 @@ namespace Code.Game.Features.Level
     }
 
     /// <summary>
-    /// All per-level simulation memory. Allocated once when the level map binds and freed when it unbinds;
-    /// nothing in here grows or reallocates while the level runs.
+    /// All per-level simulation memory, cut out of one native block that is allocated when the level map binds
+    /// and freed when it unbinds. Nothing in here grows or reallocates while the level runs: when a budget runs
+    /// out the request is dropped and counted in <see cref="Overflows"/>.
     /// Data only: systems own the logic that fills and reads these arrays.
     /// </summary>
     public sealed class LevelArena : IDisposable
@@ -45,11 +47,14 @@ namespace Code.Game.Features.Level
         public const int Unreachable = int.MaxValue;
         public const int ClearanceClasses = 3;
         public const byte NoDirection = 255;
+        public const int StaticItemsReserve = 64;
 
         private const int BucketCells = 2;
-        private const int StaticItemsReserve = 64;
-        private const int EntriesPerItem = 4;
+
+        // A body up to 3 cells wide spans up to 3 x 3 buckets of 2 cells.
+        private const int EntriesPerItem = 9;
         private const int StaticEntriesReserve = 512;
+        private const int Alignment = 16;
 
         // Offsets of the 8 neighbours. Even indices are straight steps, odd indices are diagonals.
         public static readonly int[] DirX = { 1, 1, 0, -1, -1, -1, 0, 1 };
@@ -75,6 +80,13 @@ namespace Code.Game.Features.Level
         public readonly float CellSize;
         public readonly Vector2 WorldMin;
         public readonly int MaxUnits;
+        public readonly int MaxItems;
+
+        /// <summary>Size of the single native block that holds every array below.</summary>
+        public readonly int TotalBytes;
+
+        /// <summary>How many times a fixed budget ran out this level. Should stay 0.</summary>
+        public int Overflows;
 
         // Navigation grid, one element per cell.
         public NativeArray<byte> Tile;
@@ -156,6 +168,19 @@ namespace Code.Game.Features.Level
         public int FieldCursor;
         public float FieldTimer;
 
+        // Cell claims of the targeting layer: entity id per cell, 0 = none (entity ids start above 0).
+        // Occupant: footprint of every unit and building, rebuilt every simulation step.
+        // SurroundOwner: attack slot claimed by a unit.
+        // SpawnReserved: cells taken by spawns this frame; a cell is reserved while it holds SpawnStamp.
+        public NativeArray<int> Occupant;
+        public NativeArray<int> SurroundOwner;
+        public NativeArray<int> SpawnReserved;
+        public int SpawnStamp = 1;
+
+        private NativeArray<byte> _block;
+        private int _cursor;
+        private bool _measuring;
+        private int _spawnFrame = -1;
         private int _queryStamp;
         private bool _disposed;
 
@@ -169,74 +194,103 @@ namespace Code.Game.Features.Level
             CellSize = cellSize;
             WorldMin = worldMin;
             MaxUnits = maxUnits;
-
-            const Allocator allocator = Allocator.Persistent;
-
-            Tile = new NativeArray<byte>(CellCount, allocator);
-            Blocked = new NativeArray<byte>(CellCount, allocator);
-            Clearance = new NativeArray<byte>(CellCount, allocator);
-            Fit = new NativeArray<byte>(CellCount, allocator);
-
-            var slots = NavField.Count * ClearanceClasses;
-
-            Integration = new NativeArray<int>(slots * CellCount, allocator);
-            FlowDir = new NativeArray<byte>(slots * CellCount, allocator);
-
-            EnemyGoals = new NativeArray<int>(CellCount, allocator);
-            DefenseGoals = new NativeArray<int>(CellCount, allocator);
-
-            // Lazy-deletion heap: a cell is pushed at most once per incoming edge.
-            Heap = new NativeArray<long>((CellCount * 8) + 16, allocator);
+            MaxItems = maxUnits + StaticItemsReserve;
 
             BucketSize = cellSize * BucketCells;
             BucketsX = (width + BucketCells - 1) / BucketCells;
             BucketsY = (height + BucketCells - 1) / BucketCells;
             BucketCount = BucketsX * BucketsY;
 
-            var maxItems = maxUnits + StaticItemsReserve;
+            // Two passes over the same layout: the first one only measures, the second one cuts the views out of
+            // a single allocation. One block per level is one malloc and one free, so levels do not fragment the
+            // native heap.
+            _measuring = true;
+            Layout();
 
-            BucketStart = new NativeArray<int>(BucketCount + 1, allocator);
-            BucketFill = new NativeArray<int>(BucketCount, allocator);
-            Entries = new NativeArray<int>((maxItems * EntriesPerItem) + StaticEntriesReserve, allocator);
-            ItemId = new NativeArray<int>(maxItems, allocator);
-            ItemRange = new NativeArray<BucketRange>(maxItems, allocator);
-            ItemStamp = new NativeArray<int>(maxItems, allocator);
-            QueryResults = new NativeArray<int>(maxItems, allocator);
-            ItemSlot = new NativeArray<int>(maxItems, allocator);
-            QuerySlots = new NativeArray<int>(maxItems, allocator);
+            TotalBytes = _cursor;
+            _block = new NativeArray<byte>(Mathf.Max(TotalBytes, Alignment), Allocator.Persistent);
 
-            UnitAlive = new NativeArray<byte>(maxUnits, allocator);
-            UnitEntityId = new NativeArray<int>(maxUnits, allocator);
-            UnitSeen = new NativeArray<int>(maxUnits, allocator);
-            UnitPos = new NativeArray<Vector2>(maxUnits, allocator);
-            UnitPrevPos = new NativeArray<Vector2>(maxUnits, allocator);
-            UnitVel = new NativeArray<Vector2>(maxUnits, allocator);
-            UnitGoal = new NativeArray<Vector2>(maxUnits, allocator);
-            UnitViewOffset = new NativeArray<Vector2>(maxUnits, allocator);
-            UnitRadius = new NativeArray<float>(maxUnits, allocator);
-            UnitWallRadius = new NativeArray<float>(maxUnits, allocator);
-            UnitSpeed = new NativeArray<float>(maxUnits, allocator);
-            UnitSideTimer = new NativeArray<float>(maxUnits, allocator);
-            UnitStuckTimer = new NativeArray<float>(maxUnits, allocator);
-            UnitPauseTimer = new NativeArray<float>(maxUnits, allocator);
-            UnitDetourTimer = new NativeArray<float>(maxUnits, allocator);
-            UnitIdleTimer = new NativeArray<float>(maxUnits, allocator);
-            UnitFlipTimer = new NativeArray<float>(maxUnits, allocator);
-            UnitMode = new NativeArray<byte>(maxUnits, allocator);
-            UnitField = new NativeArray<byte>(maxUnits, allocator);
-            UnitClearance = new NativeArray<byte>(maxUnits, allocator);
-            UnitMoving = new NativeArray<byte>(maxUnits, allocator);
-            UnitImmovable = new NativeArray<byte>(maxUnits, allocator);
-            UnitSide = new NativeArray<sbyte>(maxUnits, allocator);
-            UnitRethinks = new NativeArray<byte>(maxUnits, allocator);
-            FreeSlots = new NativeArray<int>(maxUnits, allocator);
-            Congestion = new NativeArray<float>(CellCount, allocator);
+            _measuring = false;
+            Layout();
 
             // Stack of free slots, lowest index on top so live units stay packed at the start of the arrays.
             for (var i = 0; i < maxUnits; i++)
                 FreeSlots[i] = maxUnits - 1 - i;
 
             FreeCount = maxUnits;
+        }
+
+        private void Layout()
+        {
+            _cursor = 0;
+
+            var slots = NavField.Count * ClearanceClasses;
+
+            Tile = Take<byte>(CellCount);
+            Blocked = Take<byte>(CellCount);
+            Clearance = Take<byte>(CellCount);
+            Fit = Take<byte>(CellCount);
+
+            Integration = Take<int>(slots * CellCount);
+            FlowDir = Take<byte>(slots * CellCount);
+
+            EnemyGoals = Take<int>(CellCount);
+            DefenseGoals = Take<int>(CellCount);
+
+            // Lazy-deletion heap: a cell is pushed at most once per incoming edge.
+            Heap = Take<long>((CellCount * 8) + 16);
+
+            Congestion = Take<float>(CellCount);
+            Occupant = Take<int>(CellCount);
+            SurroundOwner = Take<int>(CellCount);
+            SpawnReserved = Take<int>(CellCount);
+
+            BucketStart = Take<int>(BucketCount + 1);
+            BucketFill = Take<int>(BucketCount);
+            Entries = Take<int>((MaxItems * EntriesPerItem) + StaticEntriesReserve);
+            ItemId = Take<int>(MaxItems);
+            ItemRange = Take<BucketRange>(MaxItems);
+            ItemStamp = Take<int>(MaxItems);
+            ItemSlot = Take<int>(MaxItems);
+            QueryResults = Take<int>(MaxItems);
+            QuerySlots = Take<int>(MaxItems);
+
+            UnitAlive = Take<byte>(MaxUnits);
+            UnitEntityId = Take<int>(MaxUnits);
+            UnitSeen = Take<int>(MaxUnits);
+            UnitPos = Take<Vector2>(MaxUnits);
+            UnitPrevPos = Take<Vector2>(MaxUnits);
+            UnitVel = Take<Vector2>(MaxUnits);
+            UnitGoal = Take<Vector2>(MaxUnits);
+            UnitViewOffset = Take<Vector2>(MaxUnits);
+            UnitRadius = Take<float>(MaxUnits);
+            UnitWallRadius = Take<float>(MaxUnits);
+            UnitSpeed = Take<float>(MaxUnits);
+            UnitSideTimer = Take<float>(MaxUnits);
+            UnitStuckTimer = Take<float>(MaxUnits);
+            UnitPauseTimer = Take<float>(MaxUnits);
+            UnitDetourTimer = Take<float>(MaxUnits);
+            UnitIdleTimer = Take<float>(MaxUnits);
+            UnitFlipTimer = Take<float>(MaxUnits);
+            UnitMode = Take<byte>(MaxUnits);
+            UnitField = Take<byte>(MaxUnits);
+            UnitClearance = Take<byte>(MaxUnits);
+            UnitMoving = Take<byte>(MaxUnits);
+            UnitImmovable = Take<byte>(MaxUnits);
+            UnitSide = Take<sbyte>(MaxUnits);
+            UnitRethinks = Take<byte>(MaxUnits);
+            FreeSlots = Take<int>(MaxUnits);
+        }
+
+        /// <summary>Next aligned view into the block. While measuring it only advances the cursor.</summary>
+        private NativeArray<T> Take<T>(int length) where T : struct
+        {
+            var bytes = UnsafeUtility.SizeOf<T>() * length;
+            var offset = (_cursor + Alignment - 1) & ~(Alignment - 1);
+
+            _cursor = offset + bytes;
+
+            return _measuring ? default : _block.GetSubArray(offset, bytes).Reinterpret<T>(1);
         }
 
         public void Dispose()
@@ -246,53 +300,28 @@ namespace Code.Game.Features.Level
 
             _disposed = true;
 
-            Tile.Dispose();
-            Blocked.Dispose();
-            Clearance.Dispose();
-            Fit.Dispose();
-            Integration.Dispose();
-            FlowDir.Dispose();
-            EnemyGoals.Dispose();
-            DefenseGoals.Dispose();
-            Heap.Dispose();
-            BucketStart.Dispose();
-            BucketFill.Dispose();
-            Entries.Dispose();
-            ItemId.Dispose();
-            ItemRange.Dispose();
-            ItemStamp.Dispose();
-            QueryResults.Dispose();
-            ItemSlot.Dispose();
-            QuerySlots.Dispose();
-            UnitAlive.Dispose();
-            UnitEntityId.Dispose();
-            UnitSeen.Dispose();
-            UnitPos.Dispose();
-            UnitPrevPos.Dispose();
-            UnitVel.Dispose();
-            UnitGoal.Dispose();
-            UnitViewOffset.Dispose();
-            UnitRadius.Dispose();
-            UnitWallRadius.Dispose();
-            UnitSpeed.Dispose();
-            UnitSideTimer.Dispose();
-            UnitStuckTimer.Dispose();
-            UnitPauseTimer.Dispose();
-            UnitDetourTimer.Dispose();
-            UnitIdleTimer.Dispose();
-            UnitFlipTimer.Dispose();
-            UnitMode.Dispose();
-            UnitField.Dispose();
-            UnitClearance.Dispose();
-            UnitMoving.Dispose();
-            UnitImmovable.Dispose();
-            UnitSide.Dispose();
-            UnitRethinks.Dispose();
-            FreeSlots.Dispose();
-            Congestion.Dispose();
+            // The views share the block, so only the block itself is freed. A view used after this throws
+            // in the editor instead of reading freed memory.
+            if (_block.IsCreated)
+                _block.Dispose();
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            if (Overflows > 0)
+                Debug.LogWarning($"[LevelArena] Level budget ran out {Overflows} times. Raise LevelConfig.MaxUnits.");
+#endif
         }
 
         public bool IsDisposed => _disposed;
+
+        /// <summary>A fixed budget ran out (unit slots, spatial grid, heap): the request is dropped, never grown.</summary>
+        public void NoteOverflow()
+        {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            if (Overflows == 0)
+                Debug.LogWarning("[LevelArena] Level budget exceeded, requests are dropped. Raise LevelConfig.MaxUnits.");
+#endif
+            Overflows++;
+        }
 
         // ---- Unit slots ----
 
@@ -300,7 +329,10 @@ namespace Code.Game.Features.Level
         public int AcquireSlot()
         {
             if (FreeCount == 0)
+            {
+                NoteOverflow();
                 return -1;
+            }
 
             var slot = FreeSlots[--FreeCount];
 
@@ -371,6 +403,10 @@ namespace Code.Game.Features.Level
             return x + (y * Width);
         }
 
+        /// <summary>Tilemap cell coordinates of a cell index.</summary>
+        public Vector3Int CellOf(int index, int z = 0) =>
+            new Vector3Int(OriginX + (index % Width), OriginY + (index / Width), z);
+
         public Vector2 CellCenter(int index)
         {
             var x = index % Width;
@@ -390,8 +426,97 @@ namespace Code.Game.Features.Level
 
         public bool IsWalkable(int index) => index >= 0 && Clearance[index] > 0;
 
+        /// <summary>True for a cell of the level tilemap; buildings standing on it do not matter here.</summary>
+        public bool IsTile(Vector3Int cell)
+        {
+            var index = IndexOf(cell.x, cell.y);
+
+            return index >= 0 && Tile[index] != 0;
+        }
+
+        /// <summary>World centre of a tilemap cell; false for a cell that is not part of the level tilemap.</summary>
+        public bool TryGetCellWorld(Vector3Int cell, out Vector2 center)
+        {
+            var index = IndexOf(cell.x, cell.y);
+
+            if (index < 0 || Tile[index] == 0)
+            {
+                center = default;
+                return false;
+            }
+
+            center = CellCenter(index);
+            return true;
+        }
+
         public static int FieldSlot(int field, int clearanceClass) =>
             (field * ClearanceClasses) + (clearanceClass - 1);
+
+        // ---- Cell claims ----
+
+        public int OccupantAt(Vector3Int cell)
+        {
+            var index = IndexOf(cell.x, cell.y);
+
+            return index >= 0 ? Occupant[index] : 0;
+        }
+
+        public int SurroundOwnerAt(Vector3Int cell)
+        {
+            var index = IndexOf(cell.x, cell.y);
+
+            return index >= 0 ? SurroundOwner[index] : 0;
+        }
+
+        public void ClaimSurround(Vector3Int cell, int unitId)
+        {
+            var index = IndexOf(cell.x, cell.y);
+
+            if (index >= 0)
+                SurroundOwner[index] = unitId;
+        }
+
+        /// <summary>Frees a slot only while it is still held by this unit.</summary>
+        public void ReleaseSurround(Vector3Int cell, int unitId)
+        {
+            var index = IndexOf(cell.x, cell.y);
+
+            if (index >= 0 && SurroundOwner[index] == unitId)
+                SurroundOwner[index] = 0;
+        }
+
+        public void ClearSurround(Vector3Int cell)
+        {
+            var index = IndexOf(cell.x, cell.y);
+
+            if (index >= 0)
+                SurroundOwner[index] = 0;
+        }
+
+        /// <summary>Spawn reservations live for one frame: the first spawn system of a frame drops the old ones.</summary>
+        public void BeginSpawnFrame(int frame)
+        {
+            if (frame == _spawnFrame)
+                return;
+
+            _spawnFrame = frame;
+            SpawnStamp++;
+        }
+
+        public bool IsSpawnReserved(Vector3Int cell)
+        {
+            var index = IndexOf(cell.x, cell.y);
+
+            return index >= 0 && SpawnReserved[index] == SpawnStamp;
+        }
+
+        public void ReserveSpawn(Vector3Int cell)
+        {
+            var index = IndexOf(cell.x, cell.y);
+
+            if (index >= 0)
+                SpawnReserved[index] = SpawnStamp;
+        }
 
         // ---- Spatial grid ----
 
@@ -408,13 +533,19 @@ namespace Code.Game.Features.Level
         public bool GridAdd(int id, int slot, float minX, float minY, float maxX, float maxY)
         {
             if (ItemCount >= ItemId.Length)
+            {
+                NoteOverflow();
                 return false;
+            }
 
             var range = ToBucketRange(minX, minY, maxX, maxY);
             var entries = (range.MaxX - range.MinX + 1) * (range.MaxY - range.MinY + 1);
 
             if (EntryCount + entries > Entries.Length)
+            {
+                NoteOverflow();
                 return false;
+            }
 
             ItemId[ItemCount] = id;
             ItemSlot[ItemCount] = slot;

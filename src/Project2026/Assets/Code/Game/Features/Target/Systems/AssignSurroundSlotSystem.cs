@@ -1,4 +1,5 @@
 using Code.Game.Common.Entity;
+using Code.Game.Features.Level;
 using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Code.Game.Features.Target.Systems
         private readonly IGroup<GameEntity> _units;
         private readonly IGroup<GameEntity> _maps;
 
-        private readonly List<GameEntity> _buffer = new(256);
+        private readonly List<GameEntity> _buffer = new(LevelBuffers.DefaultCapacity);
 
         public AssignSurroundSlotSystem(TargetService targetService)
         {
@@ -36,12 +37,7 @@ namespace Code.Game.Features.Target.Systems
                     GameMatcher.SurroundSlot,
                     GameMatcher.Dead));
 
-            _maps = gameContext.GetGroup(GameMatcher
-                .AllOf(
-                    GameMatcher.TilemapMovement,
-                    GameMatcher.SurroundField,
-                    GameMatcher.OccupField,
-                    GameMatcher.ReservedField));
+            _maps = gameContext.GetGroup(GameMatcher.Arena);
         }
 
         public void Execute()
@@ -51,9 +47,8 @@ namespace Code.Game.Features.Target.Systems
             if (mapEntity == null)
                 return;
 
-            var tilemap = mapEntity.tilemapMovement.Value;
-            var surroundField = mapEntity.surroundField.Value;
-            var units = _units.GetEntities(_buffer);
+            var arena = mapEntity.arena.Value;
+            var units = _units.GetEntities(LevelBuffers.Fit(_buffer, arena));
 
             for (var i = 0; i < units.Count; i++)
             {
@@ -80,15 +75,13 @@ namespace Code.Game.Features.Target.Systems
                         unit.range.Value,
                         unit.unitSize.Value,
                         unit.id.Value,
-                        mapEntity,
-                        tilemap,
-                        surroundField,
+                        arena,
                         out var slot,
                         unit.isRangeAttack,
                         holdFirePosition: unit.isRangeAttack))
                     continue;
 
-                surroundField[slot] = unit.id.Value;
+                arena.ClaimSurround(slot, unit.id.Value);
                 unit.AddSurroundSlot(slot);
                 unit.AddSurroundTargetId(targetId);
             }

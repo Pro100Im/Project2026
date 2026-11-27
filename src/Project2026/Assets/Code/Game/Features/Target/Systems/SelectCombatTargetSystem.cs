@@ -1,4 +1,5 @@
 using Code.Game.Common.Entity;
+using Code.Game.Features.Level;
 using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace Code.Game.Features.Target.Systems
         private readonly IGroup<GameEntity> _attackers;
         private readonly IGroup<GameEntity> _maps;
 
-        private readonly List<GameEntity> _buffer = new(256);
+        private readonly List<GameEntity> _buffer = new(LevelBuffers.DefaultCapacity);
 
         public SelectCombatTargetSystem()
         {
@@ -30,10 +31,7 @@ namespace Code.Game.Features.Target.Systems
                 GameMatcher.Transform,
                 GameMatcher.CurrentCell));
 
-            _maps = gameContext.GetGroup(GameMatcher.AllOf(
-                GameMatcher.Arena,
-                GameMatcher.TilemapMovement,
-                GameMatcher.SurroundField));
+            _maps = gameContext.GetGroup(GameMatcher.Arena);
         }
 
         public void Execute()
@@ -44,9 +42,7 @@ namespace Code.Game.Features.Target.Systems
                 return;
 
             var arena = mapEntity.arena.Value;
-            var tilemap = mapEntity.tilemapMovement.Value;
-            var surroundField = mapEntity.surroundField.Value;
-            var attackers = _attackers.GetEntities(_buffer);
+            var attackers = _attackers.GetEntities(LevelBuffers.Fit(_buffer, arena));
             var frame = Time.frameCount;
 
             for (var i = 0; i < attackers.Count; i++)
@@ -67,17 +63,17 @@ namespace Code.Game.Features.Target.Systems
                     var currentTarget = GetGameEntityById.Get(attacker.targetId.Value);
 
                     if (!IsValidCombatTarget(currentTarget, myTeam)
-                        || GetSqrDistToTarget(attackOriginPos, currentTarget, tilemap) > holdSqr)
+                        || GetSqrDistToTarget(attackOriginPos, currentTarget, arena) > holdSqr)
                     {
                         if (!attacker.isAttacking)
                         {
-                            ReleaseSurroundIfOwned(attacker, surroundField);
+                            ReleaseSurroundIfOwned(attacker, arena);
                             attacker.RemoveTargetId();
                         }
                     }
                     else
                     {
-                        SyncSurroundToTargetId(attacker, surroundField);
+                        SyncSurroundToTargetId(attacker, arena);
                     }
                 }
 
@@ -112,7 +108,7 @@ namespace Code.Game.Features.Target.Systems
                     if (!IsValidCombatTarget(target, myTeam))
                         continue;
 
-                    var sDist = GetSqrDistToTarget(attackOriginPos, target, tilemap);
+                    var sDist = GetSqrDistToTarget(attackOriginPos, target, arena);
 
                     if (sDist > sqrPhysicalRange)
                         continue;
@@ -138,7 +134,7 @@ namespace Code.Game.Features.Target.Systems
 
                     if (IsValidCombatTarget(currentTarget, myTeam))
                     {
-                        var currentSqr = GetSqrDistToTarget(attackOriginPos, currentTarget, tilemap);
+                        var currentSqr = GetSqrDistToTarget(attackOriginPos, currentTarget, arena);
 
                         if (bestSqrDist > currentSqr * SwitchCloserRatio)
                             continue;
@@ -149,10 +145,10 @@ namespace Code.Game.Features.Target.Systems
                 }
 
                 if (attacker.hasTargetId && attacker.targetId.Value != bestTargetId)
-                    ReleaseSurroundIfOwned(attacker, surroundField);
+                    ReleaseSurroundIfOwned(attacker, arena);
 
                 attacker.ReplaceTargetId(bestTargetId);
-                SyncSurroundToTargetId(attacker, surroundField);
+                SyncSurroundToTargetId(attacker, arena);
             }
         }
 
@@ -176,16 +172,16 @@ namespace Code.Game.Features.Target.Systems
                 && target.hasCurrentCell;
         }
 
-        private static float GetSqrDistToTarget(Vector2 attackOriginPos, GameEntity target, Dictionary<Vector3Int, Vector3> tilemap)
+        private static float GetSqrDistToTarget(Vector2 attackOriginPos, GameEntity target, LevelArena arena)
         {
-            var targetPoint = TargetService.GetClosestPoint(target, tilemap, attackOriginPos);
+            var targetPoint = TargetService.GetClosestPoint(target, arena, attackOriginPos);
             var dx = attackOriginPos.x - targetPoint.x;
             var dy = attackOriginPos.y - targetPoint.y;
 
             return (dx * dx) + (dy * dy);
         }
 
-        private static void SyncSurroundToTargetId(GameEntity attacker, Dictionary<Vector3Int, int> surroundField)
+        private static void SyncSurroundToTargetId(GameEntity attacker, LevelArena arena)
         {
             if (!attacker.hasSurroundSlot || !attacker.hasSurroundTargetId || !attacker.hasTargetId)
                 return;
@@ -193,10 +189,10 @@ namespace Code.Game.Features.Target.Systems
             if (attacker.surroundTargetId.Value == attacker.targetId.Value)
                 return;
 
-            ReleaseSurroundIfOwned(attacker, surroundField);
+            ReleaseSurroundIfOwned(attacker, arena);
         }
 
-        private static void ReleaseSurroundIfOwned(GameEntity unit, Dictionary<Vector3Int, int> surroundField)
+        private static void ReleaseSurroundIfOwned(GameEntity unit, LevelArena arena)
         {
             if (!unit.hasSurroundSlot)
             {
@@ -209,8 +205,7 @@ namespace Code.Game.Features.Target.Systems
             var slot = unit.surroundSlot.Value;
             var unitId = unit.id.Value;
 
-            if (surroundField.TryGetValue(slot, out var ownerId) && ownerId == unitId)
-                surroundField.Remove(slot);
+            arena.ReleaseSurround(slot, unitId);
 
             unit.RemoveSurroundSlot();
 

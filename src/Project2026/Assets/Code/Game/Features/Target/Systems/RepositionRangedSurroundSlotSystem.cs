@@ -1,4 +1,5 @@
 using Code.Game.Common.Entity;
+using Code.Game.Features.Level;
 using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Code.Game.Features.Target.Systems
         private readonly IGroup<GameEntity> _units;
         private readonly IGroup<GameEntity> _maps;
 
-        private readonly List<GameEntity> _buffer = new(128);
+        private readonly List<GameEntity> _buffer = new(LevelBuffers.DefaultCapacity);
 
         public RepositionRangedSurroundSlotSystem(TargetService targetService)
         {
@@ -34,12 +35,7 @@ namespace Code.Game.Features.Target.Systems
                     GameMatcher.Dead,
                     GameMatcher.Attacking));
 
-            _maps = gameContext.GetGroup(GameMatcher
-                .AllOf(
-                    GameMatcher.TilemapMovement,
-                    GameMatcher.SurroundField,
-                    GameMatcher.OccupField,
-                    GameMatcher.ReservedField));
+            _maps = gameContext.GetGroup(GameMatcher.Arena);
         }
 
         public void Execute()
@@ -49,9 +45,8 @@ namespace Code.Game.Features.Target.Systems
             if (mapEntity == null)
                 return;
 
-            var tilemap = mapEntity.tilemapMovement.Value;
-            var surroundField = mapEntity.surroundField.Value;
-            var units = _units.GetEntities(_buffer);
+            var arena = mapEntity.arena.Value;
+            var units = _units.GetEntities(LevelBuffers.Fit(_buffer, arena));
 
             for (var i = 0; i < units.Count; i++)
             {
@@ -65,7 +60,7 @@ namespace Code.Game.Features.Target.Systems
                 var currentSlot = unit.surroundSlot.Value;
 
                 if (currentCell != currentSlot
-                    && TryHoldCurrentFiringCell(unit, target, currentCell, currentSlot, mapEntity, tilemap, surroundField))
+                    && TryHoldCurrentFiringCell(unit, target, currentCell, currentSlot, arena))
                     continue;
 
                 if (unit.isAttackAvailable)
@@ -82,13 +77,13 @@ namespace Code.Game.Features.Target.Systems
                 var currentRing = TargetService.GetFootprintRing(currentSlot, size, minX, minY, maxX, maxY);
                 var insideMinRing = currentRing < TargetService.GetRangedMinRing(unit.range.Value);
 
-                if (!insideMinRing && !TargetService.IsTooCloseForRanged(unit, target, tilemap))
+                if (!insideMinRing && !TargetService.IsTooCloseForRanged(unit, target, arena))
                     continue;
 
-                if (!tilemap.TryGetValue(currentSlot, out var currentSlotWorld))
+                if (!arena.TryGetCellWorld(currentSlot, out var currentSlotWorld))
                     continue;
 
-                var currentSqrDist = TargetService.GetSqrDistanceToTarget(currentSlotWorld, target, tilemap);
+                var currentSqrDist = TargetService.GetSqrDistanceToTarget(currentSlotWorld, target, arena);
 
                 if (!_targetService.TryPickSurroundSlot(
                         unit.currentCell.Value,
@@ -96,9 +91,7 @@ namespace Code.Game.Features.Target.Systems
                         unit.range.Value,
                         unit.unitSize.Value,
                         unit.id.Value,
-                        mapEntity,
-                        tilemap,
-                        surroundField,
+                        arena,
                         out var newSlot,
                         preferMaxRange: true))
                     continue;
@@ -106,19 +99,19 @@ namespace Code.Game.Features.Target.Systems
                 if (newSlot == currentSlot)
                     continue;
 
-                if (!tilemap.TryGetValue(newSlot, out var newSlotWorld))
+                if (!arena.TryGetCellWorld(newSlot, out var newSlotWorld))
                     continue;
 
-                var newSqrDist = TargetService.GetSqrDistanceToTarget(newSlotWorld, target, tilemap);
+                var newSqrDist = TargetService.GetSqrDistanceToTarget(newSlotWorld, target, arena);
 
                 if (newSqrDist <= currentSqrDist)
                     continue;
 
-                if (!TargetService.CanFireFromCell(newSlot, target, unit.range.Value, size, tilemap))
+                if (!TargetService.CanFireFromCell(newSlot, target, unit.range.Value, size, arena))
                     continue;
 
-                surroundField.Remove(currentSlot);
-                surroundField[newSlot] = unit.id.Value;
+                arena.ClearSurround(currentSlot);
+                arena.ClaimSurround(newSlot, unit.id.Value);
                 unit.ReplaceSurroundSlot(newSlot);
             }
         }
@@ -128,16 +121,14 @@ namespace Code.Game.Features.Target.Systems
             GameEntity target,
             Vector3Int currentCell,
             Vector3Int currentSlot,
-            GameEntity mapEntity,
-            Dictionary<Vector3Int, Vector3> tilemap,
-            Dictionary<Vector3Int, int> surroundField)
+            LevelArena arena)
         {
-            if (!tilemap.TryGetValue(currentCell, out var currentWorld)
-                || !tilemap.TryGetValue(currentSlot, out var slotWorld))
+            if (!arena.TryGetCellWorld(currentCell, out var currentWorld)
+                || !arena.TryGetCellWorld(currentSlot, out var slotWorld))
                 return false;
 
-            var currentSqrDist = TargetService.GetSqrDistanceToTarget(currentWorld, target, tilemap);
-            var slotSqrDist = TargetService.GetSqrDistanceToTarget(slotWorld, target, tilemap);
+            var currentSqrDist = TargetService.GetSqrDistanceToTarget(currentWorld, target, arena);
+            var slotSqrDist = TargetService.GetSqrDistanceToTarget(slotWorld, target, arena);
 
             if (slotSqrDist >= currentSqrDist)
                 return false;
@@ -147,18 +138,16 @@ namespace Code.Game.Features.Target.Systems
                     target,
                     unit.range.Value,
                     unit.unitSize.Value,
-                    tilemap))
+                    arena))
                 return false;
 
-            if (!TargetService.CanFitSlot(currentCell, unit.unitSize.Value, unit.id.Value, mapEntity))
+            if (!TargetService.CanFitSlot(currentCell, unit.unitSize.Value, unit.id.Value, arena))
                 return false;
 
             var unitId = unit.id.Value;
 
-            if (surroundField.TryGetValue(currentSlot, out var ownerId) && ownerId == unitId)
-                surroundField.Remove(currentSlot);
-
-            surroundField[currentCell] = unitId;
+            arena.ReleaseSurround(currentSlot, unitId);
+            arena.ClaimSurround(currentCell, unitId);
             unit.ReplaceSurroundSlot(currentCell);
             return true;
         }

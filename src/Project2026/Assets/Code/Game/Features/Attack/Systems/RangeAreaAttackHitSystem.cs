@@ -11,7 +11,7 @@ namespace Code.Game.Features.Attack.Systems
         private readonly IGroup<GameEntity> _maps;
         private readonly IGroup<GameEntity> _attacks;
 
-        private readonly List<GameEntity> _attacksBuffer = new(86);
+        private readonly List<GameEntity> _attacksBuffer = new(Code.Game.Features.Level.LevelBuffers.DefaultCapacity);
 
         public RangeAreaAttackHitSystem()
         {

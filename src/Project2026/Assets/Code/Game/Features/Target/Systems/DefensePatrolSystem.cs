@@ -1,4 +1,5 @@
 using Code.Game.Common.Time;
+using Code.Game.Features.Level;
 using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
@@ -15,8 +16,7 @@ namespace Code.Game.Features.Target.Systems
         private readonly IGroup<GameEntity> _patrolState;
         private readonly IGroup<GameEntity> _maps;
 
-        private readonly List<GameEntity> _buffer = new(256);
-        private readonly List<Vector3Int> _candidates = new(64);
+        private readonly List<GameEntity> _buffer = new(LevelBuffers.DefaultCapacity);
 
         public DefensePatrolSystem(ITimeService timeService)
         {
@@ -49,12 +49,7 @@ namespace Code.Game.Features.Target.Systems
                     GameMatcher.DefensePatrolWait,
                     GameMatcher.DefensePatrolCell));
 
-            _maps = gameContext.GetGroup(GameMatcher
-                .AllOf(
-                    GameMatcher.DefenseIntegrationFields,
-                    GameMatcher.OccupField,
-                    GameMatcher.ReservedField,
-                    GameMatcher.TilemapMovement));
+            _maps = gameContext.GetGroup(GameMatcher.Arena);
         }
 
         public void Execute()
@@ -64,6 +59,10 @@ namespace Code.Game.Features.Target.Systems
 
             if (mapEntity == null)
                 return;
+
+            var arena = mapEntity.arena.Value;
+
+            LevelBuffers.Fit(_buffer, arena);
 
             var castleThreatened = castle != null && castle.isCastleUnderAttack;
             ClearInterruptedPatrol(castleThreatened);
@@ -84,6 +83,7 @@ namespace Code.Game.Features.Target.Systems
                 var size = unit.unitSize.Value;
                 var unitId = unit.id.Value;
                 var idleDuration = unit.defensePatrolIdleDuration.Value;
+                var fieldOffset = DefenseFieldOffset(arena, unit);
 
                 if (unit.hasDefensePatrolCell)
                 {
@@ -96,7 +96,7 @@ namespace Code.Game.Features.Target.Systems
                     continue;
                 }
 
-                if (!IsOnDefenseGoal(mapEntity, size, cell))
+                if (!IsOnDefenseGoal(arena, fieldOffset, cell))
                     continue;
 
                 if (!unit.hasDefensePatrolWait)
@@ -115,7 +115,7 @@ namespace Code.Game.Features.Target.Systems
 
                 unit.RemoveDefensePatrolWait();
 
-                if (!TryPickPatrolCell(unit, cell, size, unitId, mapEntity, out var patrolCell))
+                if (!TryPickPatrolCell(arena, fieldOffset, cell, size, unitId, out var patrolCell))
                 {
                     unit.AddDefensePatrolWait(idleDuration);
                     continue;
@@ -148,39 +148,68 @@ namespace Code.Game.Features.Target.Systems
             }
         }
 
-        private static bool IsOnDefenseGoal(GameEntity map, Vector2Int size, Vector3Int cell)
+        /// <summary>
+        /// Offset of the defense field the unit walks: the one of its own clearance class while it is in the
+        /// simulation, otherwise the one that fits its footprint.
+        /// </summary>
+        private static int DefenseFieldOffset(LevelArena arena, GameEntity unit)
         {
-            if (!map.defenseIntegrationFields.Value.TryGetValue(size, out var integration))
-                return false;
+            int clearance;
 
-            return integration.TryGetValue(cell, out var cost) && cost == 0;
+            if (unit.hasSimSlot)
+            {
+                clearance = arena.UnitClearance[unit.simSlot.Value];
+            }
+            else
+            {
+                var size = unit.unitSize.Value;
+                clearance = Mathf.Clamp(Mathf.Max(size.x, size.y), 1, LevelArena.ClearanceClasses);
+            }
+
+            clearance = Mathf.Clamp(clearance, 1, LevelArena.ClearanceClasses);
+
+            return LevelArena.FieldSlot(NavField.DefensePost, clearance) * arena.CellCount;
         }
 
-        private bool TryPickPatrolCell(GameEntity unit, Vector3Int currentCell, Vector2Int size, int unitId, GameEntity map, out Vector3Int patrolCell)
+        /// <summary>A defense post is a footprint position the field was seeded from: cost 0.</summary>
+        private static bool IsOnDefenseGoal(LevelArena arena, int fieldOffset, Vector3Int cell)
+        {
+            var index = arena.IndexOf(cell.x, cell.y);
+
+            return index >= 0 && arena.Integration[fieldOffset + index] == 0;
+        }
+
+        /// <summary>Uniform random pick among free defense posts, without collecting them first.</summary>
+        private static bool TryPickPatrolCell(
+            LevelArena arena,
+            int fieldOffset,
+            Vector3Int currentCell,
+            Vector2Int size,
+            int unitId,
+            out Vector3Int patrolCell)
         {
             patrolCell = default;
 
-            if (!map.defenseIntegrationFields.Value.TryGetValue(size, out var integration))
-                return false;
+            var currentIndex = arena.IndexOf(currentCell.x, currentCell.y);
+            var count = 0;
 
-            _candidates.Clear();
-
-            foreach (var entry in integration)
+            for (var index = 0; index < arena.CellCount; index++)
             {
-                if (entry.Value != 0 || entry.Key == currentCell)
+                if (index == currentIndex || arena.Integration[fieldOffset + index] != 0)
                     continue;
 
-                if (!TargetService.CanFitSlot(entry.Key, size, unitId, map))
+                var cell = arena.CellOf(index, currentCell.z);
+
+                if (!TargetService.CanFitSlot(cell, size, unitId, arena))
                     continue;
 
-                _candidates.Add(entry.Key);
+                count++;
+
+                if (Random.Range(0, count) == 0)
+                    patrolCell = cell;
             }
 
-            if (_candidates.Count == 0)
-                return false;
-
-            patrolCell = _candidates[Random.Range(0, _candidates.Count)];
-            return true;
+            return count > 0;
         }
     }
 }

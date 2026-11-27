@@ -22,7 +22,7 @@ namespace Code.Infrastructure.DI.EntryPoints
         private readonly ITimeService _timeService;
 
         private GameTickFeature _gameTickFeature;
-        private readonly List<GameEntity> _viewReleaseBuffer = new(128);
+        private readonly List<GameEntity> _viewReleaseBuffer = new(Code.Game.Features.Level.LevelBuffers.DefaultCapacity);
 
         public GameWorld(
             TransitionScreen transitionScreen,
@@ -79,6 +79,10 @@ namespace Code.Infrastructure.DI.EntryPoints
             Contexts.sharedInstance.game.Reset();
             Contexts.sharedInstance.meta.Reset();
 
+            // Removed components wait in Entitas pools with their last values (spawn maps, entity configs...):
+            // drop them so nothing from the finished level stays reachable.
+            Contexts.sharedInstance.game.ClearComponentPools();
+
             EntityIdentifier.Reset();
             _timeService.StartTime();
             _viewPool.Clear();
@@ -91,7 +95,11 @@ namespace Code.Infrastructure.DI.EntryPoints
         {
             var map = Contexts.sharedInstance.game.GetGroup(GameMatcher.Arena).GetSingleEntity();
 
-            map?.arena.Value?.Dispose();
+            if (map == null)
+                return;
+
+            map.arena.Value?.Dispose();
+            map.arena.Value = null;
         }
 
         private void ReleaseAllBoundViews()

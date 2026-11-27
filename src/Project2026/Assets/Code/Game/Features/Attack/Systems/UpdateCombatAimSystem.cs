@@ -1,4 +1,5 @@
 using Code.Game.Common.Entity;
+using Code.Game.Features.Level;
 using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Code.Game.Features.Attack.Systems
         private readonly IGroup<GameEntity> _aimers;
         private readonly IGroup<GameEntity> _maps;
 
-        private readonly List<GameEntity> _buffer = new(256);
+        private readonly List<GameEntity> _buffer = new(LevelBuffers.DefaultCapacity);
 
         public UpdateCombatAimSystem()
         {
@@ -28,7 +29,7 @@ namespace Code.Game.Features.Attack.Systems
                     GameMatcher.TrajectoryMovement,
                     GameMatcher.Dead));
 
-            _maps = gameContext.GetGroup(GameMatcher.AllOf(GameMatcher.TilemapMovement));
+            _maps = gameContext.GetGroup(GameMatcher.Arena);
         }
 
         public void Execute()
@@ -38,8 +39,8 @@ namespace Code.Game.Features.Attack.Systems
             if (mapEntity == null)
                 return;
 
-            var tilemap = mapEntity.tilemapMovement.Value;
-            var aimers = _aimers.GetEntities(_buffer);
+            var arena = mapEntity.arena.Value;
+            var aimers = _aimers.GetEntities(LevelBuffers.Fit(_buffer, arena));
 
             for (var i = 0; i < aimers.Count; i++)
             {
@@ -54,7 +55,7 @@ namespace Code.Game.Features.Attack.Systems
                 if (aimer.hasUnitAnchorPoint)
                     attackOriginPos += aimer.unitAnchorPoint.Value;
 
-                var targetPoint = TargetService.GetClosestPoint(target, tilemap, attackOriginPos);
+                var targetPoint = TargetService.GetClosestPoint(target, arena, attackOriginPos);
 
                 aimer.ReplaceAttackerPoint(attackOriginPos);
                 aimer.ReplaceTargetPoint(targetPoint);

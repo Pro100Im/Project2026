@@ -1,12 +1,15 @@
 using Code.Game.StaticData.Configs;
 using Code.Infrastructure.View.Registrars;
-using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace Code.Game.Features.Level.Registrars
 {
+    /// <summary>
+    /// Binds the level map: reads the tilemaps once and builds the <see cref="LevelArena"/>, the only per-level
+    /// simulation memory. The arena is freed when the map unbinds.
+    /// </summary>
     public class LevelMapRegistrar : EntityComponentRegistrar
     {
         [SerializeField] private Tilemap _tilemap;
@@ -23,69 +26,25 @@ namespace Code.Game.Features.Level.Registrars
 
         public override void RegisterComponents()
         {
-            var dictionary = new Dictionary<Vector3Int, Vector3>();
-            var bounds = _tilemap.cellBounds;
+            DisposeArena();
 
-            foreach (var pos in bounds.allPositionsWithin)
-            {
-                var tile = _tilemap.GetTile(pos);
-
-                if (tile == null)
-                    continue;
-
-                var worldPos = _tilemap.GetCellCenterWorld(pos);
-
-                dictionary[pos] = worldPos;
-            }
-
-            var flowTargets = CollectTileCells(_flowTargets);
-            var defenseTargets = CollectTileCells(_defenseTargets);
-
-            Entity.AddTilemapMovement(dictionary);
-            Entity.AddFlowFields(new());
-            Entity.AddTargetFlow(flowTargets);
-            Entity.AddIntegrationFields(new());
-            Entity.AddDefenseFlowFields(new());
-            Entity.AddDefenseFlow(defenseTargets);
-            Entity.AddDefenseIntegrationFields(new());
-            Entity.AddOccupField(new());
-            Entity.AddReservedField(new());
-            Entity.AddSpawnReservedField(new());
-            Entity.AddSurroundField(new());
-            Entity.isFlowFieldDirty = true;
-
-            _arena = CreateArena(dictionary, flowTargets, defenseTargets);
+            _arena = CreateArena();
             Entity.AddArena(_arena);
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            Debug.Log($"[LevelArena] {_arena.Width}x{_arena.Height} cells, {_arena.MaxUnits} units: " +
+                $"{_arena.TotalBytes / 1024} KB in one block.");
+#endif
         }
 
         public override void UnregisterComponents()
         {
-            if (Entity.hasTilemapMovement)
-                Entity.RemoveTilemapMovement();
-            if (Entity.hasFlowFields)
-                Entity.RemoveFlowFields();
-            if (Entity.hasTargetFlow)
-                Entity.RemoveTargetFlow();
-            if (Entity.hasIntegrationFields)
-                Entity.RemoveIntegrationFields();
-            if (Entity.hasDefenseFlowFields)
-                Entity.RemoveDefenseFlowFields();
-            if (Entity.hasDefenseFlow)
-                Entity.RemoveDefenseFlow();
-            if (Entity.hasDefenseIntegrationFields)
-                Entity.RemoveDefenseIntegrationFields();
-            if (Entity.hasOccupField)
-                Entity.RemoveOccupField();
-            if (Entity.hasReservedField)
-                Entity.RemoveReservedField();
-            if (Entity.hasSpawnReservedField)
-                Entity.RemoveSpawnReservedField();
-            if (Entity.hasSurroundField)
-                Entity.RemoveSurroundField();
             if (Entity.hasArena)
+            {
+                // Removed components go back to the Entitas pool: do not let the pooled one keep the arena alive.
+                Entity.arena.Value = null;
                 Entity.RemoveArena();
-
-            Entity.isFlowFieldDirty = false;
+            }
 
             DisposeArena();
         }
@@ -102,10 +61,7 @@ namespace Code.Game.Features.Level.Registrars
         /// Allocates every per-level simulation array once. The grid covers the walkable tilemap and both goal
         /// tilemaps plus a one-cell wall border, so a walkable cell always has all 8 neighbours inside the grid.
         /// </summary>
-        private LevelArena CreateArena(
-            Dictionary<Vector3Int, Vector3> walkable,
-            List<Vector3Int> flowTargets,
-            List<Vector3Int> defenseTargets)
+        private LevelArena CreateArena()
         {
             const int padding = 1;
 
@@ -115,8 +71,8 @@ namespace Code.Game.Features.Level.Registrars
             var maxX = bounds.xMax;
             var maxY = bounds.yMax;
 
-            Encapsulate(flowTargets, ref minX, ref minY, ref maxX, ref maxY);
-            Encapsulate(defenseTargets, ref minX, ref minY, ref maxX, ref maxY);
+            Encapsulate(_flowTargets, ref minX, ref minY, ref maxX, ref maxY);
+            Encapsulate(_defenseTargets, ref minX, ref minY, ref maxX, ref maxY);
 
             var origin = new Vector3Int(minX, minY, 0);
             var originCenter = _tilemap.GetCellCenterWorld(origin);
@@ -132,27 +88,36 @@ namespace Code.Game.Features.Level.Registrars
                 new Vector2(originCenter.x - border, originCenter.y - border),
                 ResolveMaxUnits());
 
-            foreach (var cell in walkable.Keys)
+            foreach (var cell in bounds.allPositionsWithin)
             {
+                if (_tilemap.GetTile(cell) == null)
+                    continue;
+
                 var index = arena.IndexOf(cell.x, cell.y);
 
                 if (index >= 0)
                     arena.Tile[index] = 1;
             }
 
-            arena.EnemyGoalCount = CopyGoals(arena, flowTargets, arena.EnemyGoals);
-            arena.DefenseGoalCount = CopyGoals(arena, defenseTargets, arena.DefenseGoals);
+            arena.EnemyGoalCount = CopyGoals(arena, _flowTargets, arena.EnemyGoals);
+            arena.DefenseGoalCount = CopyGoals(arena, _defenseTargets, arena.DefenseGoals);
 
             return arena;
         }
 
-        private static int CopyGoals(LevelArena arena, List<Vector3Int> cells, NativeArray<int> goals)
+        private static int CopyGoals(LevelArena arena, Tilemap tilemap, NativeArray<int> goals)
         {
+            if (tilemap == null)
+                return 0;
+
             var count = 0;
 
-            for (var i = 0; i < cells.Count; i++)
+            foreach (var cell in tilemap.cellBounds.allPositionsWithin)
             {
-                var index = arena.IndexOf(cells[i].x, cells[i].y);
+                if (tilemap.GetTile(cell) == null)
+                    continue;
+
+                var index = arena.IndexOf(cell.x, cell.y);
 
                 if (index >= 0 && count < goals.Length)
                     goals[count++] = index;
@@ -161,11 +126,15 @@ namespace Code.Game.Features.Level.Registrars
             return count;
         }
 
-        private static void Encapsulate(List<Vector3Int> cells, ref int minX, ref int minY, ref int maxX, ref int maxY)
+        private static void Encapsulate(Tilemap tilemap, ref int minX, ref int minY, ref int maxX, ref int maxY)
         {
-            for (var i = 0; i < cells.Count; i++)
+            if (tilemap == null)
+                return;
+
+            foreach (var cell in tilemap.cellBounds.allPositionsWithin)
             {
-                var cell = cells[i];
+                if (tilemap.GetTile(cell) == null)
+                    continue;
 
                 minX = Mathf.Min(minX, cell.x);
                 minY = Mathf.Min(minY, cell.y);
@@ -183,32 +152,12 @@ namespace Code.Game.Features.Level.Registrars
                 : LevelConfig.DefaultMaxUnits;
         }
 
-        private static List<Vector3Int> CollectTileCells(Tilemap tilemap)
-        {
-            var cells = new List<Vector3Int>();
-
-            if (tilemap == null)
-                return cells;
-
-            var bounds = tilemap.cellBounds;
-
-            foreach (var pos in bounds.allPositionsWithin)
-            {
-                if (tilemap.GetTile(pos) == null)
-                    continue;
-
-                cells.Add(pos);
-            }
-
-            return cells;
-        }
-
         private void OnDrawGizmosSelected()
         {
             DrawTargetGizmos(_flowTargets, Color.red);
             DrawTargetGizmos(_defenseTargets, Color.blue);
 
-            if (_drawArena && _arena != null)
+            if (_drawArena && _arena != null && !_arena.IsDisposed)
                 DrawArenaGizmos(_arena);
         }
 

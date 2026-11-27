@@ -19,7 +19,7 @@ namespace Code.Game.Features.Movement.Systems
         private readonly IGroup<GameEntity> _newUnits;
         private readonly IGroup<GameEntity> _simUnits;
 
-        private readonly List<GameEntity> _buffer = new(1024);
+        private readonly List<GameEntity> _buffer = new(LevelBuffers.DefaultCapacity);
 
         public SyncSimUnitsSystem()
         {
@@ -58,7 +58,7 @@ namespace Code.Game.Features.Movement.Systems
 
             arena.SyncStamp++;
 
-            var units = _simUnits.GetEntities(_buffer);
+            var units = _simUnits.GetEntities(LevelBuffers.Fit(_buffer, arena));
 
             for (var i = 0; i < units.Count; i++)
             {
@@ -83,7 +83,7 @@ namespace Code.Game.Features.Movement.Systems
                     arena.ReleaseSlot(slot);
             }
 
-            units = _newUnits.GetEntities(_buffer);
+            units = _newUnits.GetEntities(LevelBuffers.Fit(_buffer, arena));
 
             for (var i = 0; i < units.Count; i++)
             {

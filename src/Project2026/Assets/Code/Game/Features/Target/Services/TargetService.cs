@@ -1,4 +1,5 @@
 ﻿using Code.Game.Features.Attack;
+using Code.Game.Features.Level;
 using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
@@ -88,12 +89,12 @@ namespace Code.Game.Features.Target.Services
 
         public static Vector2 GetClosestPoint(
             GameEntity target,
-            Dictionary<Vector3Int, Vector3> tilemap,
+            LevelArena arena,
             Vector2 fromPoint)
         {
             var boundsPoint = GetClosestPoint(target, fromPoint);
 
-            if (!TryGetFootprintClosestPoint(target, tilemap, fromPoint, out var footprintPoint))
+            if (!TryGetFootprintClosestPoint(target, arena, fromPoint, out var footprintPoint))
                 return boundsPoint;
 
             var boundsDx = fromPoint.x - boundsPoint.x;
@@ -109,7 +110,7 @@ namespace Code.Game.Features.Target.Services
 
         private static bool TryGetFootprintClosestPoint(
             GameEntity target,
-            Dictionary<Vector3Int, Vector3> tilemap,
+            LevelArena arena,
             Vector2 fromPoint,
             out Vector2 closest)
         {
@@ -128,8 +129,8 @@ namespace Code.Game.Features.Target.Services
             var minCell = new Vector3Int(minX, minY, 0);
             var maxCell = new Vector3Int(maxX, maxY, 0);
 
-            if (!tilemap.TryGetValue(minCell, out var minWorld)
-                || !tilemap.TryGetValue(maxCell, out var maxWorld))
+            if (!arena.TryGetCellWorld(minCell, out var minWorld)
+                || !arena.TryGetCellWorld(maxCell, out var maxWorld))
                 return false;
 
             var half = CellSize * 0.5f;
@@ -180,14 +181,14 @@ namespace Code.Game.Features.Target.Services
         public static bool IsTooCloseForRanged(
             GameEntity unit,
             GameEntity target,
-            Dictionary<Vector3Int, Vector3> tilemap)
+            LevelArena arena)
         {
             var unitPos = unit.woldPos.Value;
 
             if (unit.hasUnitAnchorPoint)
                 unitPos += unit.unitAnchorPoint.Value;
 
-            var closest = GetClosestPoint(target, tilemap, unitPos);
+            var closest = GetClosestPoint(target, arena, unitPos);
             var dx = unitPos.x - closest.x;
             var dy = unitPos.y - closest.y;
             var minSafe = GetRangedMinSafePhysical(unit.range.Value);
@@ -198,9 +199,9 @@ namespace Code.Game.Features.Target.Services
         public static float GetSqrDistanceToTarget(
             Vector3 worldPos,
             GameEntity target,
-            Dictionary<Vector3Int, Vector3> tilemap)
+            LevelArena arena)
         {
-            var closest = GetClosestPoint(target, tilemap, worldPos);
+            var closest = GetClosestPoint(target, arena, worldPos);
             var dx = worldPos.x - closest.x;
             var dy = worldPos.y - closest.y;
 
@@ -212,7 +213,7 @@ namespace Code.Game.Features.Target.Services
             GameEntity target,
             float range,
             Vector2Int size,
-            Dictionary<Vector3Int, Vector3> tilemap)
+            LevelArena arena)
         {
             GetFootprint(target, out var minX, out var minY, out var maxX, out var maxY);
 
@@ -221,7 +222,7 @@ namespace Code.Game.Features.Target.Services
             if (ring < 1)
                 return false;
 
-            if (!TryGetClosestFootprintSqrDistance(unitCell, size, target, tilemap, out var sqrDist))
+            if (!TryGetClosestFootprintSqrDistance(unitCell, size, target, arena, out var sqrDist))
                 return false;
 
             var physicalRange = GetPhysicalRange(range);
@@ -229,7 +230,7 @@ namespace Code.Game.Features.Target.Services
             return sqrDist <= physicalRange * physicalRange;
         }
 
-        private readonly List<Vector3Int> _slotCandidatesBuffer = new(64);
+        private readonly List<Vector3Int> _slotCandidatesBuffer = new(1024);
 
         public bool TryPickSurroundSlot(
             Vector3Int unitCell,
@@ -237,9 +238,7 @@ namespace Code.Game.Features.Target.Services
             float range,
             Vector2Int size,
             int unitId,
-            GameEntity map,
-            Dictionary<Vector3Int, Vector3> tilemap,
-            Dictionary<Vector3Int, int> surroundField,
+            LevelArena arena,
             out Vector3Int bestSlot,
             bool preferMaxRange = false,
             bool holdFirePosition = false)
@@ -256,9 +255,7 @@ namespace Code.Game.Features.Target.Services
                 range,
                 size,
                 unitId,
-                map,
-                tilemap,
-                surroundField,
+                arena,
                 out bestSlot,
                 preferMaxRange,
                 holdFirePosition);
@@ -274,9 +271,7 @@ namespace Code.Game.Features.Target.Services
             float range,
             Vector2Int size,
             int unitId,
-            GameEntity map,
-            Dictionary<Vector3Int, Vector3> tilemap,
-            Dictionary<Vector3Int, int> surroundField,
+            LevelArena arena,
             out Vector3Int bestSlot,
             bool preferMaxRange = false,
             bool holdFirePosition = false)
@@ -291,8 +286,8 @@ namespace Code.Game.Features.Target.Services
             GetOriginBlockedAabb(minX, minY, maxX, maxY, size, out var bMinX, out var bMinY, out var bMaxX, out var bMaxY);
 
             if (holdFirePosition
-                && CanFireFromCell(unitCell, target, range, size, tilemap)
-                && CanFitSlot(unitCell, size, unitId, map))
+                && CanFireFromCell(unitCell, target, range, size, arena)
+                && CanFitSlot(unitCell, size, unitId, arena))
             {
                 bestSlot = unitCell;
                 return true;
@@ -308,9 +303,7 @@ namespace Code.Game.Features.Target.Services
                     range,
                     size,
                     unitId,
-                    map,
-                    tilemap,
-                    surroundField,
+                    arena,
                     preferMaxRange,
                     out bestSlot))
                 return true;
@@ -332,9 +325,7 @@ namespace Code.Game.Features.Target.Services
                         sqrPhysicalRange,
                         size,
                         unitId,
-                        map,
-                        tilemap,
-                        surroundField,
+                        arena,
                         collectAllRings: false,
                         sameSideOnly: true,
                         sideCenterX,
@@ -364,9 +355,7 @@ namespace Code.Game.Features.Target.Services
                     sqrPhysicalRange,
                     size,
                     unitId,
-                    map,
-                    tilemap,
-                    surroundField,
+                    arena,
                     collectAllRings: false,
                     sameSideOnly: true,
                     sideCenterX,
@@ -387,9 +376,7 @@ namespace Code.Game.Features.Target.Services
                 sqrPhysicalRange,
                 size,
                 unitId,
-                map,
-                tilemap,
-                surroundField,
+                arena,
                 collectAllRings: true,
                 sameSideOnly: false,
                 sideCenterX: 0f,
@@ -407,9 +394,7 @@ namespace Code.Game.Features.Target.Services
             float range,
             Vector2Int size,
             int unitId,
-            GameEntity map,
-            Dictionary<Vector3Int, Vector3> tilemap,
-            Dictionary<Vector3Int, int> surroundField,
+            LevelArena arena,
             bool preferMaxRange,
             out Vector3Int bestSlot)
         {
@@ -421,10 +406,10 @@ namespace Code.Game.Features.Target.Services
                 return false;
 
             // Occupying the cell has priority: steal a foreign surround claim on our own cell.
-            if (!CanFitSlot(unitCell, size, unitId, map))
+            if (!CanFitSlot(unitCell, size, unitId, arena))
                 return false;
 
-            if (!TryGetClosestFootprintSqrDistance(unitCell, size, target, tilemap, out var sqrDist))
+            if (!TryGetClosestFootprintSqrDistance(unitCell, size, target, arena, out var sqrDist))
                 return false;
 
             var physicalRange = GetPhysicalRange(range);
@@ -460,9 +445,7 @@ namespace Code.Game.Features.Target.Services
             float sqrPhysicalRange,
             Vector2Int size,
             int unitId,
-            GameEntity map,
-            Dictionary<Vector3Int, Vector3> tilemap,
-            Dictionary<Vector3Int, int> surroundField,
+            LevelArena arena,
             bool collectAllRings,
             bool sameSideOnly,
             float sideCenterX,
@@ -498,19 +481,21 @@ namespace Code.Game.Features.Target.Services
 
                         var candidate = new Vector3Int(x, y, 0);
 
-                        if (!tilemap.ContainsKey(candidate))
+                        if (!arena.IsTile(candidate))
                             continue;
 
-                        if (!TryGetClosestFootprintSqrDistance(candidate, size, target, tilemap, out var sqrDist))
+                        if (!TryGetClosestFootprintSqrDistance(candidate, size, target, arena, out var sqrDist))
                             continue;
 
                         if (sqrDist > sqrPhysicalRange)
                             continue;
 
-                        if (surroundField.TryGetValue(candidate, out var ownerId) && ownerId != unitId)
+                        var ownerId = arena.SurroundOwnerAt(candidate);
+
+                        if (ownerId != 0 && ownerId != unitId)
                             continue;
 
-                        if (!CanFitSlot(candidate, size, unitId, map))
+                        if (!CanFitSlot(candidate, size, unitId, arena))
                             continue;
 
                         if (sameSideOnly && !IsSameSide(unitCell, candidate, sideCenterX, sideCenterY))
@@ -557,7 +542,7 @@ namespace Code.Game.Features.Target.Services
             Vector3Int origin,
             Vector2Int size,
             GameEntity target,
-            Dictionary<Vector3Int, Vector3> tilemap,
+            LevelArena arena,
             out float sqrDist)
         {
             sqrDist = float.MaxValue;
@@ -569,10 +554,10 @@ namespace Code.Game.Features.Target.Services
                 {
                     var cell = new Vector3Int(origin.x + x, origin.y + y, 0);
 
-                    if (!tilemap.TryGetValue(cell, out var cellWorldPos))
+                    if (!arena.TryGetCellWorld(cell, out var cellWorldPos))
                         continue;
 
-                    var targetPoint = GetClosestPoint(target, tilemap, cellWorldPos);
+                    var targetPoint = GetClosestPoint(target, arena, cellWorldPos);
                     var dx = cellWorldPos.x - targetPoint.x;
                     var dy = cellWorldPos.y - targetPoint.y;
                     var cellSqr = (dx * dx) + (dy * dy);
@@ -587,25 +572,20 @@ namespace Code.Game.Features.Target.Services
             return found;
         }
 
-        public static bool CanFitSlot(Vector3Int origin, Vector2Int size, int unitId, GameEntity map)
+        public static bool CanFitSlot(Vector3Int origin, Vector2Int size, int unitId, LevelArena arena)
         {
-            var tilemap = map.tilemapMovement.Value;
-            var occupField = map.occupField.Value;
-            var reservedField = map.reservedField.Value;
-
             for (var x = 0; x < size.x; x++)
             {
                 for (var y = 0; y < size.y; y++)
                 {
                     var checkPos = new Vector3Int(origin.x + x, origin.y + y, 0);
 
-                    if (!tilemap.ContainsKey(checkPos))
+                    if (!arena.IsTile(checkPos))
                         return false;
 
-                    if (occupField.TryGetValue(checkPos, out var occId) && occId != unitId)
-                        return false;
+                    var occupant = arena.OccupantAt(checkPos);
 
-                    if (reservedField.TryGetValue(checkPos, out var resId) && resId != unitId)
+                    if (occupant != 0 && occupant != unitId)
                         return false;
                 }
             }

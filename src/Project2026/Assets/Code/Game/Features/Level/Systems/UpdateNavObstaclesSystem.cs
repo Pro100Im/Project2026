@@ -12,7 +12,7 @@ namespace Code.Game.Features.Level.Systems
         private readonly IGroup<GameEntity> _maps;
         private readonly IGroup<GameEntity> _statics;
 
-        private readonly List<GameEntity> _buffer = new(64);
+        private readonly List<GameEntity> _buffer = new(LevelBuffers.DefaultCapacity);
 
         public UpdateNavObstaclesSystem()
         {
@@ -38,7 +38,7 @@ namespace Code.Game.Features.Level.Systems
                 return;
 
             var arena = map.arena.Value;
-            var statics = _statics.GetEntities(_buffer);
+            var statics = _statics.GetEntities(LevelBuffers.Fit(_buffer, arena));
             var signature = GetSignature(statics);
 
             if (!arena.ObstaclesDirty && signature == arena.ObstacleSignature)

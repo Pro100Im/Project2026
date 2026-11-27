@@ -1,4 +1,5 @@
 using Code.Game.Common.Entity;
+using Code.Game.Features.Level;
 using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Code.Game.Features.Movement.Systems
         private readonly IGroup<GameEntity> _projectiles;
         private readonly IGroup<GameEntity> _maps;
 
-        private readonly List<GameEntity> _buffer = new(86);
+        private readonly List<GameEntity> _buffer = new(LevelBuffers.DefaultCapacity);
 
         public UpdateProjectileAimSystem()
         {
@@ -22,7 +23,7 @@ namespace Code.Game.Features.Movement.Systems
                 GameMatcher.AttackerPoint,
                 GameMatcher.TargetPoint));
 
-            _maps = gameContext.GetGroup(GameMatcher.AllOf(GameMatcher.TilemapMovement));
+            _maps = gameContext.GetGroup(GameMatcher.Arena);
         }
 
         public void Execute()
@@ -32,7 +33,7 @@ namespace Code.Game.Features.Movement.Systems
             if (mapEntity == null)
                 return;
 
-            var tilemap = mapEntity.tilemapMovement.Value;
+            var arena = mapEntity.arena.Value;
             var projectiles = _projectiles.GetEntities(_buffer);
 
             for (var i = 0; i < projectiles.Count; i++)
@@ -44,7 +45,7 @@ namespace Code.Game.Features.Movement.Systems
                     continue;
 
                 var firePoint = projectile.attackerPoint.Value;
-                var targetPoint = TargetService.GetClosestPoint(target, tilemap, firePoint);
+                var targetPoint = TargetService.GetClosestPoint(target, arena, firePoint);
 
                 projectile.ReplaceTargetPoint(targetPoint);
             }

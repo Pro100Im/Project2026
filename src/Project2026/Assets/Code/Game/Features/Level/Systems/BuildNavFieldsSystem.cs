@@ -241,7 +241,10 @@ namespace Code.Game.Features.Level.Systems
             var heap = arena.Heap;
 
             if (arena.HeapCount >= heap.Length)
+            {
+                arena.NoteOverflow();
                 return;
+            }
 
             var item = ((long)cost << 32) | (uint)cell;
             var index = arena.HeapCount++;

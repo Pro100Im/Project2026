@@ -1,3 +1,4 @@
+using Code.Game.Features.Level;
 using Code.Game.Common.Time;
 using Entitas;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace Code.Game.Features.Movement.Systems
         private readonly IGroup<GameEntity> _maps;
         private readonly IGroup<GameEntity> _units;
 
-        private readonly List<GameEntity> _buffer = new(1024);
+        private readonly List<GameEntity> _buffer = new(LevelBuffers.DefaultCapacity);
 
         public InterpolateUnitViewSystem(ITimeService timeService)
         {
@@ -40,7 +41,7 @@ namespace Code.Game.Features.Movement.Systems
 
             var arena = map.arena.Value;
             var alpha = Mathf.Clamp01(_timeService.SimulationAlpha);
-            var units = _units.GetEntities(_buffer);
+            var units = _units.GetEntities(LevelBuffers.Fit(_buffer, arena));
 
             for (var i = 0; i < units.Count; i++)
             {

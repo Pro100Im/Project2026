@@ -1,3 +1,4 @@
+using Code.Game.Features.Level;
 using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
@@ -13,8 +14,8 @@ namespace Code.Game.Features.Target.Systems
         private readonly IGroup<GameEntity> _rallyingDefenders;
         private readonly IGroup<GameEntity> _maps;
 
-        private readonly List<GameEntity> _buffer = new(256);
-        private readonly List<GameEntity> _castleThreatEnemies = new(32);
+        private readonly List<GameEntity> _buffer = new(LevelBuffers.DefaultCapacity);
+        private readonly List<GameEntity> _castleThreatEnemies = new(LevelBuffers.DefaultCapacity);
 
         public AssignRallySurroundSlotSystem(TargetService targetService)
         {
@@ -50,12 +51,7 @@ namespace Code.Game.Features.Target.Systems
                     GameMatcher.SurroundSlot,
                     GameMatcher.Dead));
 
-            _maps = gameContext.GetGroup(GameMatcher
-                .AllOf(
-                    GameMatcher.TilemapMovement,
-                    GameMatcher.SurroundField,
-                    GameMatcher.OccupField,
-                    GameMatcher.ReservedField));
+            _maps = gameContext.GetGroup(GameMatcher.Arena);
         }
 
         public void Execute()
@@ -67,11 +63,11 @@ namespace Code.Game.Features.Target.Systems
                 return;
 
             var castleId = castle.id.Value;
-            var tilemap = mapEntity.tilemapMovement.Value;
-            var surroundField = mapEntity.surroundField.Value;
+            var arena = mapEntity.arena.Value;
 
+            LevelBuffers.Fit(_castleThreatEnemies, arena);
             _castleThreatEnemies.Clear();
-            var enemies = _enemies.GetEntities(_buffer);
+            var enemies = _enemies.GetEntities(LevelBuffers.Fit(_buffer, arena));
 
             for (var i = 0; i < enemies.Count; i++)
             {
@@ -93,7 +89,7 @@ namespace Code.Game.Features.Target.Systems
             if (_castleThreatEnemies.Count == 0)
                 return;
 
-            var defenders = _rallyingDefenders.GetEntities(_buffer);
+            var defenders = _rallyingDefenders.GetEntities(LevelBuffers.Fit(_buffer, arena));
 
             for (var i = 0; i < defenders.Count; i++)
             {
@@ -138,15 +134,13 @@ namespace Code.Game.Features.Target.Systems
                         range,
                         size,
                         defenderId,
-                        mapEntity,
-                        tilemap,
-                        surroundField,
+                        arena,
                         out var slot,
                         defender.isRangeAttack,
                         holdFirePosition: defender.isRangeAttack))
                     continue;
 
-                surroundField[slot] = defenderId;
+                arena.ClaimSurround(slot, defenderId);
 
                 defender.AddSurroundSlot(slot);
                 defender.AddSurroundTargetId(bestEnemy.id.Value);

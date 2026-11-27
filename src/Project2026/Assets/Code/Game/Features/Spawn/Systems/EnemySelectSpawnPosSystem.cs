@@ -1,4 +1,5 @@
 using Code.Game.Common.Random;
+using Code.Game.Features.Level;
 using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace Code.Game.Features.Spawn.Systems
         private readonly IGroup<GameEntity> _maps;
 
         private readonly List<GameEntity> _spawnMapsBuffer = new(8);
-        private readonly List<GameEntity> _enemiesBuffer = new(124);
+        private readonly List<GameEntity> _enemiesBuffer = new(LevelBuffers.DefaultCapacity);
 
         public EnemySelectSpawnPosSystem(IRandomService random)
         {
@@ -32,12 +33,7 @@ namespace Code.Game.Features.Spawn.Systems
                     GameMatcher.SpawnMap,
                     GameMatcher.Enemy));
 
-            _maps = gameContext.GetGroup(GameMatcher
-                .AllOf(
-                    GameMatcher.OccupField,
-                    GameMatcher.ReservedField,
-                    GameMatcher.SpawnReservedField,
-                    GameMatcher.TilemapMovement));
+            _maps = gameContext.GetGroup(GameMatcher.Arena);
         }
 
         public void Execute()
@@ -47,13 +43,11 @@ namespace Code.Game.Features.Spawn.Systems
             if (map == null)
                 return;
 
-            var occupField = map.occupField.Value;
-            var reservedField = map.reservedField.Value;
-            var spawnReservedField = map.spawnReservedField.Value;
-            var tilemap = map.tilemapMovement.Value;
+            var arena = map.arena.Value;
             var spawnMaps = _spawnMaps.GetEntities(_spawnMapsBuffer);
 
-            spawnReservedField.Clear();
+            arena.BeginSpawnFrame(Time.frameCount);
+            LevelBuffers.Fit(_enemiesBuffer, arena);
 
             for (var i = 0; i < spawnMaps.Count; i++)
             {
@@ -65,7 +59,7 @@ namespace Code.Game.Features.Spawn.Systems
                 {
                     var enemy = enemies[j];
 
-                    if (enemy.hasSpawnPosition) 
+                    if (enemy.hasSpawnPosition)
                         continue;
 
                     var size = enemy.unitSize.Value;
@@ -79,7 +73,7 @@ namespace Code.Game.Features.Spawn.Systems
                         var cell = kvp.Key;
                         var worldPos = kvp.Value;
 
-                        if (!CanFit(cell, size, occupField, reservedField, spawnReservedField, tilemap))
+                        if (!SpawnCells.CanFit(arena, cell, size))
                             continue;
 
                         count++;
@@ -97,45 +91,8 @@ namespace Code.Game.Features.Spawn.Systems
                         enemy.AddSpawnPosition(chosenPos);
                         enemy.AddCurrentCell(chosenCell);
 
-                        ReserveCells(chosenCell, size, spawnReservedField);
+                        SpawnCells.Reserve(arena, chosenCell, size);
                     }
-                }
-            }
-        }
-
-        private bool CanFit(Vector3Int origin, Vector2Int size, Dictionary<Vector3Int, int> occupied, Dictionary<Vector3Int, int> reserved,
-                            HashSet<Vector3Int> spawnReserved, Dictionary<Vector3Int, Vector3> tilemap)
-        {
-            for (var x = 0; x < size.x; x++)
-            {
-                for (var y = 0; y < size.y; y++)
-                {
-                    var checkCell = new Vector3Int(origin.x + x, origin.y + y, origin.z);
-
-                    if (!tilemap.ContainsKey(checkCell)) 
-                        return false;
-
-                    if (occupied.ContainsKey(checkCell)) 
-                        return false;
-
-                    if (reserved.ContainsKey(checkCell)) 
-                        return false;
-
-                    if (spawnReserved.Contains(checkCell)) 
-                        return false;
-                }
-            }
-
-            return true;
-        }
-
-        private void ReserveCells(Vector3Int origin, Vector2Int size, HashSet<Vector3Int> reserved)
-        {
-            for (var x = 0; x < size.x; x++)
-            {
-                for (var y = 0; y < size.y; y++)
-                {
-                    reserved.Add(new Vector3Int(origin.x + x, origin.y + y, origin.z));
                 }
             }
         }

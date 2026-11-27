@@ -22167,7 +22167,6 @@ GameObject:
   - component: {fileID: 1164965742023372429}
   - component: {fileID: 2776653248854107313}
   - component: {fileID: 7232720822673177156}
-  - component: {fileID: 6976399838680568247}
   m_Layer: 0
   m_Name: LevelTileMap
   m_TagString: Untagged
@@ -22249,23 +22248,6 @@ MonoBehaviour:
   _tilemap: {fileID: 2163112866042365845}
   _flowTargets: {fileID: 5186808350697380654}
   _defenseTargets: {fileID: 714962307486164147}
---- !u!114 &6976399838680568247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8168861860005466192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 860ced88496615f419e7da42488e3ca8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Code.Infrastructure.Helpers.FlowFieldDebugView
-  _tilemap: {fileID: 2163112866042365845}
-  _debugSize: {x: 1, y: 1}
-  _showVectors: 1
-  _showCosts: 1
-  _vectorLength: 0.4
 --- !u!1 &8297734106920444070
 GameObject:
   m_ObjectHideFlags: 0

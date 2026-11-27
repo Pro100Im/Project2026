@@ -19,7 +19,7 @@ namespace Code.Game.Features.Movement.Systems
         private readonly IGroup<GameEntity> _maps;
         private readonly IGroup<GameEntity> _simUnits;
 
-        private readonly List<GameEntity> _buffer = new(1024);
+        private readonly List<GameEntity> _buffer = new(LevelBuffers.DefaultCapacity);
 
         public ApplySimUnitsSystem(ITimeService timeService)
         {
@@ -45,7 +45,7 @@ namespace Code.Game.Features.Movement.Systems
 
             var arena = map.arena.Value;
             var deltaTime = _timeService.DeltaTime;
-            var units = _simUnits.GetEntities(_buffer);
+            var units = _simUnits.GetEntities(LevelBuffers.Fit(_buffer, arena));
 
             for (var i = 0; i < units.Count; i++)
             {

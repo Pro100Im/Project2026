@@ -1,4 +1,5 @@
 using Code.Game.Common.Entity;
+using Code.Game.Features.Level;
 using Code.Game.Features.Target.Services;
 using Entitas;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Code.Game.Features.Target.Systems
         private readonly IGroup<GameEntity> _units;
         private readonly IGroup<GameEntity> _maps;
 
-        private readonly List<GameEntity> _buffer = new(256);
+        private readonly List<GameEntity> _buffer = new(LevelBuffers.DefaultCapacity);
 
         public ReleaseSurroundSlotSystem()
         {
@@ -25,10 +26,7 @@ namespace Code.Game.Features.Target.Systems
                     GameMatcher.Id,
                     GameMatcher.UnitSize));
 
-            _maps = gameContext.GetGroup(GameMatcher
-                .AllOf(
-                    GameMatcher.SurroundField,
-                    GameMatcher.TilemapMovement));
+            _maps = gameContext.GetGroup(GameMatcher.Arena);
         }
 
         public void Execute()
@@ -38,9 +36,8 @@ namespace Code.Game.Features.Target.Systems
             if (mapEntity == null)
                 return;
 
-            var surroundField = mapEntity.surroundField.Value;
-            var tilemap = mapEntity.tilemapMovement.Value;
-            var units = _units.GetEntities(_buffer);
+            var arena = mapEntity.arena.Value;
+            var units = _units.GetEntities(LevelBuffers.Fit(_buffer, arena));
 
             for (var i = 0; i < units.Count; i++)
             {
@@ -51,7 +48,7 @@ namespace Code.Game.Features.Target.Systems
 
                 if (!shouldRelease)
                 {
-                    if (!surroundField.TryGetValue(slot, out var ownerId) || ownerId != unitId)
+                    if (arena.SurroundOwnerAt(slot) != unitId)
                     {
                         shouldRelease = true;
                     }
@@ -63,9 +60,9 @@ namespace Code.Game.Features.Target.Systems
                         {
                             shouldRelease = true;
                         }
-                        else if (!IsCellInAttackRange(unit, target, tilemap, slot))
+                        else if (!IsCellInAttackRange(unit, target, arena, slot))
                         {
-                            if (!TryReanchorSlot(unit, target, tilemap, surroundField))
+                            if (!TryReanchorSlot(unit, target, arena))
                                 shouldRelease = true;
                         }
                     }
@@ -74,8 +71,7 @@ namespace Code.Game.Features.Target.Systems
                 if (!shouldRelease)
                     continue;
 
-                if (surroundField.TryGetValue(slot, out var currentOwner) && currentOwner == unitId)
-                    surroundField.Remove(slot);
+                arena.ReleaseSurround(slot, unitId);
 
                 var releasedTargetId = unit.surroundTargetId.Value;
 
@@ -95,11 +91,7 @@ namespace Code.Game.Features.Target.Systems
             }
         }
 
-        private static bool TryReanchorSlot(
-            GameEntity unit,
-            GameEntity target,
-            Dictionary<Vector3Int, Vector3> tilemap,
-            Dictionary<Vector3Int, int> surroundField)
+        private static bool TryReanchorSlot(GameEntity unit, GameEntity target, LevelArena arena)
         {
             if (!unit.hasCurrentCell)
                 return false;
@@ -109,16 +101,13 @@ namespace Code.Game.Features.Target.Systems
             if (currentCell == unit.surroundSlot.Value)
                 return false;
 
-            if (!IsCellInAttackRange(unit, target, tilemap, currentCell))
+            if (!IsCellInAttackRange(unit, target, arena, currentCell))
                 return false;
 
             var unitId = unit.id.Value;
-            var oldSlot = unit.surroundSlot.Value;
 
-            if (surroundField.TryGetValue(oldSlot, out var ownerId) && ownerId == unitId)
-                surroundField.Remove(oldSlot);
-
-            surroundField[currentCell] = unitId;
+            arena.ReleaseSurround(unit.surroundSlot.Value, unitId);
+            arena.ClaimSurround(currentCell, unitId);
             unit.ReplaceSurroundSlot(currentCell);
             return true;
         }
@@ -126,7 +115,7 @@ namespace Code.Game.Features.Target.Systems
         private static bool IsCellInAttackRange(
             GameEntity unit,
             GameEntity target,
-            Dictionary<Vector3Int, Vector3> tilemap,
+            LevelArena arena,
             Vector3Int cell)
         {
             if (!target.hasCurrentCell)
@@ -151,10 +140,10 @@ namespace Code.Game.Features.Target.Systems
                 {
                     var footprintCell = new Vector3Int(cell.x + x, cell.y + y, 0);
 
-                    if (!tilemap.TryGetValue(footprintCell, out var cellWorld))
+                    if (!arena.TryGetCellWorld(footprintCell, out var cellWorld))
                         continue;
 
-                    var closest = TargetService.GetClosestPoint(target, tilemap, cellWorld);
+                    var closest = TargetService.GetClosestPoint(target, arena, cellWorld);
                     var dx = cellWorld.x - closest.x;
                     var dy = cellWorld.y - closest.y;
                     var cellSqr = (dx * dx) + (dy * dy);

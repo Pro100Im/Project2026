@@ -13,7 +13,7 @@ namespace Code.Game.Features.Level.Systems
         private readonly IGroup<GameEntity> _targetables;
         private readonly IGroup<GameEntity> _maps;
 
-        private readonly List<GameEntity> _buffer = new(512);
+        private readonly List<GameEntity> _buffer = new(LevelBuffers.DefaultCapacity);
 
         public UpdateSpatialGridSystem()
         {
@@ -37,7 +37,7 @@ namespace Code.Game.Features.Level.Systems
                 return;
 
             var arena = map.arena.Value;
-            var targetables = _targetables.GetEntities(_buffer);
+            var targetables = _targetables.GetEntities(LevelBuffers.Fit(_buffer, arena));
 
             arena.GridBegin();
 
