@@ -107,7 +107,7 @@ namespace Code.Infrastructure.Editor
             };
             importer.textureSettings = new SpriteAtlasTextureSettings
             {
-                filterMode = FilterMode.Bilinear,
+                filterMode = FilterMode.Point,
                 generateMipMaps = false,
                 readable = false,
                 sRGB = true,

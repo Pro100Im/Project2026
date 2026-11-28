@@ -26,6 +26,7 @@ Shader "Project2026/DigitsSdf"
             #pragma fragment Frag
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
 
             TEXTURE2D(_MainTex);
             SAMPLER(sampler_MainTex);
@@ -55,6 +56,10 @@ Shader "Project2026/DigitsSdf"
                 Varyings o;
                 o.positionCS = TransformObjectToHClip(input.positionOS);
                 o.color = input.color;
+                // Vertex colors are sRGB (Color32 from config, like SpriteRenderer.color); the pipeline is linear.
+                #if !defined(UNITY_COLORSPACE_GAMMA)
+                o.color.rgb = SRGBToLinear(o.color.rgb);
+                #endif
                 o.uv = input.uv;
                 return o;
             }

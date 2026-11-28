@@ -21,6 +21,7 @@ Shader "Project2026/OverlayColor"
             #pragma fragment Frag
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
 
             struct Attributes
             {
@@ -42,6 +43,10 @@ Shader "Project2026/OverlayColor"
                 Varyings o;
                 o.positionCS = TransformObjectToHClip(input.positionOS);
                 o.color = input.color;
+                // Vertex colors are sRGB (Color32 from config, like SpriteRenderer.color); the pipeline is linear.
+                #if !defined(UNITY_COLORSPACE_GAMMA)
+                o.color.rgb = SRGBToLinear(o.color.rgb);
+                #endif
                 return o;
             }
 
