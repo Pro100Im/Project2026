@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae26e8939e34bff90355e42af60f9eb, type: 3}
+  m_Name: BattleOverlayConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Code.Game.StaticData.Configs.BattleOverlayConfig
+  <HpBarMaterial>k__BackingField: {fileID: 2100000, guid: d432d60159124392ac315a6783d918c9, type: 2}
+  <HpBarSortingOrder>k__BackingField: 9
+  <HpBarFrontColor>k__BackingField: {r: 0.9960785, g: 0.2392157, b: 0.2392157, a: 1}
+  <HpBarBackFillColor>k__BackingField: {r: 1, g: 0.9215687, b: 0.8039216, a: 1}
+  <HpBarBackColor>k__BackingField: {r: 0.2264151, g: 0.14635496, b: 0.11000357, a: 1}
+  <DigitsMaterial>k__BackingField: {fileID: 2100000, guid: 7ab7a32bd5c04c31a373324eaabf0aea, type: 2}
+  <Font>k__BackingField: {fileID: 11400000, guid: 605608e3e774d644e90f9c07eda5ba53, type: 2}
+  <TextSortingOrder>k__BackingField: 50
+  <FontSize>k__BackingField: 5
+  <Duration>k__BackingField: 1.4
+  <FloatDistance>k__BackingField: 1
+  <MaxTexts>k__BackingField: 256
+  <GlyphPadding>k__BackingField: 5

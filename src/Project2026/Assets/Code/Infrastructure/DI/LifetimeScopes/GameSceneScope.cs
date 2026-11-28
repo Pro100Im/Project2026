@@ -14,6 +14,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
     public class GameSceneScope : LifetimeScope
     {
         [SerializeField] private FloatingTextConfig _floatingTextConfig;
+        [SerializeField] private BattleOverlayConfig _battleOverlayConfig;
         [SerializeField] private Transform _levelRoot;
 
         protected override void Configure(IContainerBuilder builder)
@@ -43,6 +44,7 @@ namespace Code.Infrastructure.DI.LifetimeScopes
         private void BindGameConfigs(IContainerBuilder builder)
         {
             builder.RegisterInstance(_floatingTextConfig).AsSelf();
+            builder.RegisterInstance(_battleOverlayConfig).AsSelf();
         }
     }
 }

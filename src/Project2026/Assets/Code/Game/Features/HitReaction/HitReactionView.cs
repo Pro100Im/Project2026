@@ -5,13 +5,12 @@ namespace Code.Game.Features.HitReaction
 {
     /// <summary>
     /// Flash and punch on hit. One persistent tween per view drives both: it is created once and only restarted
-    /// on every hit, so a hit allocates nothing.
+    /// on every hit, so a hit allocates nothing. The flash swaps the renderer to a shared flash-step material
+    /// (<see cref="HitFlashMaterials"/>) instead of a MaterialPropertyBlock, so idle units keep batching.
     /// </summary>
     public class HitReactionView : MonoBehaviour
     {
         private const float FlashInShare = 0.45f;
-
-        private static readonly int FlashAmountId = Shader.PropertyToID("_FlashAmount");
 
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Transform _visual;
@@ -20,7 +19,8 @@ namespace Code.Game.Features.HitReaction
         [SerializeField] private float _punchOutDuration = 0.04f;
         [SerializeField] private float _punchReturnDuration = 0.08f;
 
-        private MaterialPropertyBlock _propertyBlock;
+        private Material _baseMaterial;
+        private Material _currentMaterial;
 
         // Animates elapsed seconds 0..total; the setter derives flash and punch from it.
         private Tween _tween;
@@ -35,13 +35,12 @@ namespace Code.Game.Features.HitReaction
 
         private Vector3 _visualRestLocalPosition;
         private Vector3 _punchedLocalPosition;
-        private float _flashAmount;
         private bool _restCached;
 
         private void Awake()
         {
             CacheRest();
-            SetFlash(0f);
+            CacheBaseMaterial();
             EnsureTween();
         }
 
@@ -187,18 +186,29 @@ namespace Code.Game.Features.HitReaction
             _visual.localPosition = _visualRestLocalPosition;
         }
 
+        private void CacheBaseMaterial()
+        {
+            if (_baseMaterial != null || _spriteRenderer == null)
+                return;
+
+            _baseMaterial = _spriteRenderer.sharedMaterial;
+            _currentMaterial = _baseMaterial;
+        }
+
         private void SetFlash(float amount)
         {
-            _flashAmount = amount;
-
             if (_spriteRenderer == null)
                 return;
 
-            _propertyBlock ??= new MaterialPropertyBlock();
+            CacheBaseMaterial();
 
-            _spriteRenderer.GetPropertyBlock(_propertyBlock);
-            _propertyBlock.SetFloat(FlashAmountId, _flashAmount);
-            _spriteRenderer.SetPropertyBlock(_propertyBlock);
+            var material = HitFlashMaterials.Get(_baseMaterial, amount);
+
+            if (ReferenceEquals(material, _currentMaterial))
+                return;
+
+            _currentMaterial = material;
+            _spriteRenderer.sharedMaterial = material;
         }
     }
 }

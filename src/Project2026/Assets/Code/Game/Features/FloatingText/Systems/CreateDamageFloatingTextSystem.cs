@@ -44,6 +44,7 @@ namespace Code.Game.Features.FloatingText.Systems
                 text.AddFloatingTextColor(_config.DamageColor);
                 text.isDamageFloatingText = true;
                 text.AddSpawnPosition(spawnPos);
+                text.AddFloatingTextAge(0f); // drawn by FloatingTextRenderSystem (batched), no view
 
                 for (var j = 0; j < _config.Text.Properties.Length; j++)
                     _config.Text.Properties[j].Apply(text);

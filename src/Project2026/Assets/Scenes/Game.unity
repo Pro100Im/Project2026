@@ -186,6 +186,7 @@ MonoBehaviour:
   - {fileID: 1454892664}
   - {fileID: 1642830682}
   _floatingTextConfig: {fileID: 11400000, guid: c46d905cd184c3d45973f27e29a3634a, type: 2}
+  _battleOverlayConfig: {fileID: 11400000, guid: 1794048c00034c348889d3a809ce40b0, type: 2}
   _levelRoot: {fileID: 31463234}
 --- !u!4 &1085809923
 Transform:

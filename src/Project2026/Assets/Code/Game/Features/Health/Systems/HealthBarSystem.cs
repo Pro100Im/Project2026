@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace Code.Game.Features.Health.Systems
 {
+    /// <summary>
+    /// Pushes the owner's health into its HP bar fill when it changes; the back fill then catches up
+    /// (HpBarBackFillSystem). The bar is drawn by HpBarRenderSystem.
+    /// </summary>
     public class HealthBarSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _hpBars;
@@ -15,6 +19,7 @@ namespace Code.Game.Features.Health.Systems
             _hpBars = Contexts.sharedInstance.game.GetGroup(GameMatcher
                 .AllOf(
                     GameMatcher.HpBar,
+                    GameMatcher.HpBarFill,
                     GameMatcher.OwnerId,
                     GameMatcher.CurrentHealth));
         }
@@ -28,13 +33,25 @@ namespace Code.Game.Features.Health.Systems
                 var hpBarEntity = hpBars[i];
                 var owner = GetGameEntityById.Get(hpBarEntity.ownerId.Value);
 
+                if (owner == null || !owner.hasCurrentHealth || !owner.hasMaxHealth)
+                {
+                    hpBarEntity.isDestructed = true;
+                    continue;
+                }
+
                 if (hpBarEntity.currentHealth.Value == owner.currentHealth.Value)
                     continue;
 
-                var healthRatio = (float)owner.currentHealth.Value / owner.maxHealth.Value;
-                var hpBarView = hpBarEntity.hpBar.Value;
+                var healthRatio = owner.maxHealth.Value > 0
+                    ? (float)owner.currentHealth.Value / owner.maxHealth.Value
+                    : 0f;
 
-                hpBarView.SetHp(healthRatio);
+                // Mutated in place: render data, nothing reacts to it.
+                var fill = hpBarEntity.hpBarFill;
+                fill.Value.BackFrom = fill.Value.BackFill;
+                fill.Value.Fill = healthRatio < 0f ? 0f : healthRatio;
+                fill.Value.Elapsed = 0f;
+
                 hpBarEntity.ReplaceCurrentHealth(owner.currentHealth.Value);
 
                 if (hpBarEntity.currentHealth.Value <= 0)

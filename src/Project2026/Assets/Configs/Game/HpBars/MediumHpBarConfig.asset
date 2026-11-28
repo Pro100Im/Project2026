@@ -25,10 +25,14 @@ MonoBehaviour:
         <Mode>k__BackingField: 0
         <Offset>k__BackingField: {x: 0, y: 0.7, z: 0}
     - rid: 8171215579295776849
-      type: {class: ViewPrefabProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
+      type: {class: HpBarShapeProperty, ns: Code.Game.StaticData.Property, asm: Assembly-CSharp}
       data:
         <Mode>k__BackingField: 0
-        <Prefab>k__BackingField: {fileID: 2238861304701913438, guid: 4a356d44723836145be75457b4a66ff9, type: 3}
+        <Shape>k__BackingField:
+          Width: 0.58
+          Height: 0.023
+          Border: 0.0015
+          BackDelay: 0.45
     - rid: 8171215579295776850
       type: {class: IdentifierProperty, ns: Code.Game.StaticData.Data, asm: Assembly-CSharp}
       data:

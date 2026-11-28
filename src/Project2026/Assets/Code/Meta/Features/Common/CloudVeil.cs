@@ -17,9 +17,10 @@ namespace Code.Meta.UI.Common
 
         // The clearing field is smooth, a coarse texture is enough for it.
         private const float FieldStep = 8f;
-        // The breathing veil (and an opening clearing) is redrawn at about 30 fps.
+        // An opening clearing is redrawn at about 30 fps; the idle breathing edge is slow, 15 fps is enough.
         private const long FrameMs = 16;
         private const float VeilFrame = 1f / 30f;
+        private const float BreathFrame = 1f / 15f;
         private const int FieldPass = 0;
         private const int CloudPass = 1;
 
@@ -127,12 +128,23 @@ namespace Code.Meta.UI.Common
 
         private void Tick(TimerState timer)
         {
+            // Hidden (display none / invisible / detached): no GPU work at all.
+            if (panel == null || !visible || resolvedStyle.display == DisplayStyle.None)
+                return;
+
             var now = Time.unscaledTime;
 
-            // A clearing is opening (reveal animation) or the edge breathes: redraw at the veil rate.
-            var animated = _fieldDirty || (_settings != null && _settings.BreathAmount > 0f);
+            // A clearing is opening (reveal animation): veil rate. Only the edge breathes: the slower breath rate.
+            float frame;
 
-            if (animated && now - _lastVeilTime >= VeilFrame)
+            if (_fieldDirty)
+                frame = VeilFrame;
+            else if (_settings != null && _settings.BreathAmount > 0f)
+                frame = BreathFrame;
+            else
+                return;
+
+            if (now - _lastVeilTime >= frame)
                 Redraw();
         }
 

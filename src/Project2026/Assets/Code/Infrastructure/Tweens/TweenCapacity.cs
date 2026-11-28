@@ -11,14 +11,15 @@ namespace Code.Infrastructure.Tweens
     {
         public const int MinUnits = 500;
 
-        // HitReactionView + HpBarView.
-        public const int TweenersPerUnit = 2;
+        // HitReactionView. HP bars are batched and animated by systems (HpBarBackFillSystem), no tween.
+        public const int TweenersPerUnit = 1;
 
         // Unit views parked inactive in the view pool still own their tweens.
         public const int PooledUnitViews = 500;
 
-        // One persistent tween per floating text view (pool keeps up to 200 per prefab).
-        public const int FloatingTexts = 300;
+        // Battle damage numbers are batched (FloatingTextRenderSystem), no tween. Only the Town still uses
+        // FloatingTextView (one persistent tween per pooled view).
+        public const int FloatingTexts = 64;
 
         // Range view, UI and one-off tweens.
         public const int TweenersReserve = 200;

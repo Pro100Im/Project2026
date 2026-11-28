@@ -9,6 +9,7 @@ using Code.Game.Features.Debaffs;
 using Code.Game.Features.Duration;
 using Code.Game.Features.Effect;
 using Code.Game.Features.Exchequer;
+using Code.Game.Features.FloatingText;
 using Code.Game.Features.Health;
 using Code.Game.Features.HitReaction;
 using Code.Game.Features.Level;
@@ -57,6 +58,7 @@ namespace Code.Game.Features
             Add(systemFactory.Create<HitReactionFeature>());
 
             Add(systemFactory.Create<HealthFeature>());
+            Add(systemFactory.Create<FloatingTextFeature>());
             Add(systemFactory.Create<DeathFeature>());
 
             Add(systemFactory.Create<RewardFeature>());

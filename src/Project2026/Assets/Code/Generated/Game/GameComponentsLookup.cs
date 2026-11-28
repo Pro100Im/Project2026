@@ -213,8 +213,10 @@ public static class GameComponentsLookup {
     public const int Arena = 201;
     public const int SimSlot = 202;
     public const int UnitRadius = 203;
+    public const int HpBarFill = 204;
+    public const int FloatingTextAge = 205;
 
-    public const int TotalComponents = 204;
+    public const int TotalComponents = 206;
 
     public static readonly string[] componentNames = {
         "ForcedPause",
@@ -420,7 +422,9 @@ public static class GameComponentsLookup {
         "LevelStars",
         "Arena",
         "SimSlot",
-        "UnitRadius"
+        "UnitRadius",
+        "HpBarFill",
+        "FloatingTextAge"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -627,6 +631,8 @@ public static class GameComponentsLookup {
         typeof(Code.Game.Features.LevelLoad.LevelStars),
         typeof(Code.Game.Features.Level.Arena),
         typeof(Code.Game.Features.Movement.SimSlot),
-        typeof(Code.Game.Features.Unit.UnitRadius)
+        typeof(Code.Game.Features.Unit.UnitRadius),
+        typeof(Code.Game.Features.Health.HpBarFill),
+        typeof(Code.Game.Features.FloatingText.FloatingTextAge)
     };
 }

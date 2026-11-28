@@ -84,8 +84,37 @@ namespace Code.Game.Features.Target.Services
 
         public static Vector2 GetClosestPoint(GameEntity target, Vector2 fromPoint) =>
             target.hasBounds
-                ? (Vector2)target.bounds.Value.bounds.ClosestPoint(fromPoint)
+                ? ClosestPointOnSprite(target.bounds.Value, fromPoint)
                 : (Vector2)target.woldPos.Value;
+
+        /// <summary>
+        /// Closest point on the sprite's world rect, computed from sprite.bounds and the transform. The bounds
+        /// renderer is kept disabled (it is never drawn), and Renderer.bounds is not maintained for disabled
+        /// renderers, so it must not be used here. Assumes no rotation, which holds for all bounds sprites.
+        /// </summary>
+        private static Vector2 ClosestPointOnSprite(SpriteRenderer renderer, Vector2 fromPoint)
+        {
+            var transform = renderer.transform;
+            var sprite = renderer.sprite;
+
+            if (sprite == null)
+                return transform.position;
+
+            var local = sprite.bounds;
+            var scale = transform.lossyScale;
+            var centerX = renderer.flipX ? -local.center.x : local.center.x;
+            var centerY = renderer.flipY ? -local.center.y : local.center.y;
+            var position = transform.position;
+
+            var cx = position.x + (centerX * scale.x);
+            var cy = position.y + (centerY * scale.y);
+            var ex = Mathf.Abs(local.extents.x * scale.x);
+            var ey = Mathf.Abs(local.extents.y * scale.y);
+
+            return new Vector2(
+                Mathf.Clamp(fromPoint.x, cx - ex, cx + ex),
+                Mathf.Clamp(fromPoint.y, cy - ey, cy + ey));
+        }
 
         public static Vector2 GetClosestPoint(
             GameEntity target,

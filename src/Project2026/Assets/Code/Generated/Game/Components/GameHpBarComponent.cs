@@ -11,14 +11,14 @@ public partial class GameEntity {
     public Code.Game.Features.Health.HpBar hpBar { get { return (Code.Game.Features.Health.HpBar)GetComponent(GameComponentsLookup.HpBar); } }
     public bool hasHpBar { get { return HasComponent(GameComponentsLookup.HpBar); } }
 
-    public void AddHpBar(Code.Game.Features.Health.HpBarView newValue) {
+    public void AddHpBar(Code.Game.Features.Health.HpBarShape newValue) {
         var index = GameComponentsLookup.HpBar;
         var component = (Code.Game.Features.Health.HpBar)CreateComponent(index, typeof(Code.Game.Features.Health.HpBar));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceHpBar(Code.Game.Features.Health.HpBarView newValue) {
+    public void ReplaceHpBar(Code.Game.Features.Health.HpBarShape newValue) {
         var index = GameComponentsLookup.HpBar;
         var component = (Code.Game.Features.Health.HpBar)CreateComponent(index, typeof(Code.Game.Features.Health.HpBar));
         component.Value = newValue;

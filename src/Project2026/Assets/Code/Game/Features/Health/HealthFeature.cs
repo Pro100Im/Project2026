@@ -8,6 +8,9 @@ namespace Code.Game.Features.Health
         public HealthFeature(ISystemFactory systemFactory)
         {
             Add(systemFactory.Create<HealthBarSystem>());
+            Add(systemFactory.Create<HpBarBackFillSystem>());
+            // After MovementFeature (InterpolateUnitViewSystem): bars follow the drawn unit position.
+            Add(systemFactory.Create<HpBarRenderSystem>());
         }
     }
 }
